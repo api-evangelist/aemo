@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: HubMessageManagement
+  description: "## Introduction\nThe HubMessageManagement API is a B2B SMP APIs used retrieve the current list of stop files for all participants or for a specific participant (using alerts) resource. \n\nParticipants can use this resource to: \n1. Ensure technical requirements required to connect to e-Hub are validated (for example, appropriate network ports are open). Participants can utilise this function to ensure their systems can connect to e-Hub using their SSL certificates and API keys.\n2. Determine if the e-Hub system is operational (ping-pong test).\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  version: '1.0'
+servers:
+  - url: https://api-prd.aemo.local/ws/HubMessageManagement
+paths: { }
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: x-eHub-APIKey
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - { }
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

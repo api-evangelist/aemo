@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: B2MMessagingPull
+  description: "## Introduction\n The B2MMessagingPull push-pull API supports inbound submitMessages, submitMessageAcknowledgements, getMessages, and getQueueMetaData endpoints and suits low volume exchange of messages. \n\n Participants using B2MMessagingPull are responsible for implementing the polling logic to poll their Participant Hub Queue to retrieve new messages, similar to batch programs used to poll their outbox using FTP. \n\n Implementation of a Participant API Gateway is not required for B2MMessagingPull but the speed of message delivery is slower compared to the B2BMessagingAsync API.\n\n The response is sent in the calling thread."
+  version: v1
+servers:
+  - url: https://api-prd.aemo.local/NEMRetail/B2MMessagingPull
+paths: { }
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - { }
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

@@ -1,0 +1,592 @@
+aid: aemo
+name: AEMO
+review:
+  question: >-
+    Australia transplanted the exact statutory machinery that made fifty banks publish
+    one identical API — the Consumer Data Right, the ACCC, the Treasury Data Standards
+    Body — into energy, and put AEMO at the centre of it as the gateway. Did the
+    mandate replicate? And separately: what does the system operator actually publish
+    to a developer who is not a market participant?
+  answer: >-
+    The mandate replicated as CONTRACT and as INFRASTRUCTURE, and did not replicate as
+    PRODUCT. AEMO's CDR secondary-data-holder surface is real, live and standards-shaped
+    — but the two things that made Australian banking legible to an outsider are both
+    absent here. In banking every data holder runs an unauthenticated Product Reference
+    Data endpoint an anonymous developer can call; AEMO's CDR endpoints, including the
+    discovery endpoints the standard says are unauthenticated, sit behind mutual TLS on
+    a port that refuses anonymous clients at the handshake. And in banking the data
+    holder is the bank; in energy the retailer is the primary data holder and AEMO is a
+    secondary data holder that serves only registered Financially Responsible Market
+    Participants, not accredited data recipients directly — so an ACCC accreditation
+    alone does not get you in. Meanwhile the surface AEMO gives away for free is the one
+    nobody mandated: 171 directories of NEM and WEM market data, downloadable by anyone.
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  developerPortalConfirmed: true
+  cdrRegisterEntryConfirmed: false
+  cdrLiveEndpointConfirmed: partial
+  specProvenance: mixed — 74 AEMO-published APIM exports (empty) + 2 DSB CDS standards
+  specScopeNote: |
+    76 OpenAPI documents were harvested into openapi/ on 2026-07-27 and every one parses.
+    They come from two different places and mean two very different things:
+
+      1. 74 documents named openapi/aemo-<apiId>-openapi.yml were exported anonymously
+         from AEMO's own Azure API Management developer portal via
+         GET https://dev.aemo.com.au/developer/apis/{apiId}?export=true&format=openapi&api-version=2022-04-01-preview
+         Every export returned HTTP 200 and every one is OpenAPI 3.0.1. ALL 74 DECLARE
+         paths: {} — zero operations, zero schemas, zero examples. The servers block in
+         every one names an internal, non-resolvable host: api-prd.aemo.local (66
+         documents) or api-gwy-prd.aemo.local (19 documents). They carry a real title,
+         a real and sometimes very rich description (the TLS Certificate Management
+         document alone runs 8.4 KB of prose covering rate limits, quotas, URM entities
+         and production base URLs), and apiKey security schemes — and nothing callable.
+         The alternative export formats were checked and are identical: format=openapi-link
+         and format=swagger-link both return a SAS-signed Azure blob URL, and the blob
+         (CDR.yaml, 617 bytes) is byte-equivalent to the inline export.
+      2. Two documents, openapi/aemo-cds-energy-api-openapi.yml (CDR Energy API 1.36.0,
+         OpenAPI 3.0.3, 18 paths) and openapi/aemo-cds-common-api-openapi.yml (CDR Common
+         API 1.36.0, 4 paths), are the shared Treasury Data Standards Body Consumer Data
+         Standards contracts that AEMO's CDR endpoints conform to. Downloaded verbatim
+         from consumerdatastandardsaustralia.github.io on 2026-07-27 (HTTP 200) and
+         converted JSON to YAML without content changes. These are NOT AEMO-authored.
+
+    Total declared paths across all 76 files: 22 — all 22 from the two DSB standards, none
+    from AEMO. The operations are not lost, they are just not in the specs: the portal's
+    own operations endpoint,
+    GET https://dev.aemo.com.au/developer/apis/{apiId}/operations?api-version=2022-04-01-preview,
+    returns HTTP 200 anonymously and enumerates 771 real operations with methods, URL
+    templates and descriptions across the 74 APIs. AEMO knows its own contract; it simply
+    does not ship it in the artifact it advertises as "API Reference (OpenAPI Spec)".
+
+mandate:
+  regime: cdr-energy
+  regimeVerbatim: >-
+    The Australian Consumer Data Right, established under Part IVD of the Competition and
+    Consumer Act 2010, was designated to the energy sector and is administered by the ACCC
+    with the API contracts written by the Treasury Data Standards Body — identical statute,
+    identical regulator, identical standards body to the banking regime. AEMO's role in it
+    is structurally different from a bank's. Retailers are the PRIMARY data holders. AEMO
+    is the designated SECONDARY data holder and the sector's gateway: it holds the
+    settlement-grade data no retailer has — NMI standing data, the national Distributed
+    Energy Resource register, and up to twenty-four months of interval meter data that may
+    predate the consumer's current retailer — and serves it under the Shared Responsibility
+    Data Request provisions of the standards.
+  status: live-implemented
+  statusVerbatim: >-
+    Live-implemented, but the evidence is infrastructural and documentary rather than a
+    payload. Recorded honestly: NO CDR response body was retrieved, because none can be
+    retrieved anonymously by design. What was verified is (a) AEMO publicly and
+    specifically documents the six CDR secondary-data-holder operations, naming production
+    and pre-production base URLs for both internet and MarketNet entry, (b) those six
+    operations are enumerated with real HTTP methods and URL templates in AEMO's own live
+    API catalogue and map one-to-one onto the DSB Consumer Data Standards energy service
+    point resources, and (c) the production gateway host is up, listening, and presenting
+    a valid AEMO-owned TLS certificate while rejecting anonymous clients — which is exactly
+    what a live mTLS-protected CDR endpoint looks like from outside. This is not a press
+    release and not a compliance page. It is also not a 200.
+  howVerified:
+  - step: AEMO publicly documents the CDR secondary data holder APIs
+    probe: GET https://dev.aemo.com.au/CDR
+    result: HTTP 200
+    finding: >-
+      Anonymous, no login. States that the CDR APIs "allow Registered Financially
+      Responsible Market Participants (FRMPs) to service API requests for AEMO data from
+      Accredited Data Recipients" and that they "consist of a set of APIs defined by the
+      Consumer Data Standards Body (DSB) for energy secondary data holders", linking to
+      https://consumerdatastandardsaustralia.github.io/standards/#energy-secondary-dh-apis.
+      Names six operations — getServicePoints, getServicePointDetail, getDERForServicePoint,
+      getDERForSpecificServicePoints, getUsageForServicePoint (up to 24 months of meter
+      data for a single NMI), getUsageForSpecificServicePoints — and publishes four base
+      URLs verbatim:
+        Internet Pre-Production  https://nem-apis.preprod.wgw.aemo.com.au/NEMRetail/cds-au/v1/secondary/energy/{resource}
+        MarketNet Pre-Production https://apis.preprod.marketnet.net.au:9319/NEMRetail/cds-au/v1/secondary/energy/{resource}
+        Internet Production      https://apis.prod.aemo.com.au:9319/NEMRetail/cds-au/v1/secondary/energy/{resource}
+        MarketNet Production     https://apis.prod.marketnet.net.au:9319/NEMRetail/cds-au/v1/secondary/energy/{resource}
+  - step: The operations are real and standards-shaped, not marketing
+    probe: GET https://dev.aemo.com.au/developer/apis/cdr/operations?api-version=2022-04-01-preview
+    result: HTTP 200
+    finding: >-
+      Six operations returned anonymously with methods and URL templates:
+      GET /electricity/servicepoints/{servicePointId}/der,
+      POST /electricity/servicepoints/der,
+      GET /electricity/servicepoints/{servicePointId},
+      POST /electricity/servicepoints,
+      GET /electricity/servicepoints/{servicePointId}/usage,
+      POST /electricity/servicepoints/usage.
+      Every one of the six corresponds to a path in the DSB CDR Energy API 1.36.0 document
+      harvested into openapi/aemo-cds-energy-api-openapi.yml
+      (/energy/electricity/servicepoints and its {servicePointId}, /usage and /der
+      variants). The companion API "CDR Common" returns two operations, GET /status and
+      GET /outages, under path prefix NEMRetail/cds-au/v1/discovery — the mandated CDS
+      discovery pair.
+  - step: The production gateway is live and demands a client certificate
+    probe: openssl s_client -connect apis.prod.aemo.com.au:9319
+    result: TCP connect succeeded; TLS alert 40 (handshake_failure) after server certificate
+    finding: >-
+      apis.prod.aemo.com.au resolves to 202.44.77.87 and port 9319 accepts TCP. The server
+      presents a valid DigiCert-issued certificate
+      "C=AU, ST=Victoria, L=Melbourne, O=Australian Energy Market Operator Limited,
+      CN=FBS-Prod-Hub.aemo.com.au" (valid 2026-06-11 to 2026-12-26) and then terminates the
+      handshake because no client certificate was offered. curl returns exit 35 / HTTP 000.
+      The second public gateway, partner.api.aemo.com.au (20.53.73.2, port 443), behaves
+      identically behind an Extended Validation certificate issued to "Australian Energy
+      Market Operator Limited, serialNumber=072 010 327". Both hosts are AEMO's, both are
+      up, both are mutual-TLS gated. apis.preprod.aemo.com.au (202.44.77.88) and
+      apis.prod.marketnet.net.au (146.178.211.87) also resolve.
+  - step: The internet pre-production CDR host exists but refuses anonymous callers
+    probe: GET https://nem-apis.preprod.wgw.aemo.com.au/NEMRetail/cds-au/v1/discovery/status
+    result: HTTP 403
+    finding: >-
+      Resolves through Akamai (edgekey.net, 23.48.224.202) and answers 403 rather than 404
+      or a DNS failure — the route exists, the caller is rejected. Contrast with a retailer
+      such as Alinta Energy, whose CDR discovery/status is a plain anonymous HTTP 200.
+  negativeFindings:
+  - >-
+    AEMO IS NOT IN THE PUBLIC CDR REGISTER as an energy data holder brand. GET
+    https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary (x-v 1)
+    returned HTTP 200 with 84 energy brands and AEMO is not among them. This is correct
+    and expected — the register lists primary data holder brands, and secondary data
+    holders are not brands — but it means the single strongest artefact available for a
+    retailer (a register entry with a publicBaseUri) does not exist for AEMO. Recorded so
+    the absence is never read as non-compliance, and never read as verification either.
+  - >-
+    No CDR payload of any kind was retrieved. Every production and pre-production CDR base
+    URL AEMO publishes was probed anonymously and none returned a body. Under the standards
+    the discovery status and outages endpoints are unauthenticated; AEMO's are nevertheless
+    unreachable without a client certificate, so even the free half of the contract is
+    closed here.
+  - >-
+    No anonymous OpenID Connect discovery document is served anywhere on AEMO's estate.
+    GET https://aemo.com.au/.well-known/openid-configuration returned HTTP 404 and
+    https://api.aemo.com.au/.well-known/openid-configuration returned HTTP 404.
+    dev.aemo.com.au publishes an /oauth documentation page (HTTP 200) and the APIM
+    catalogue carries an "oauth-v1" API with one operation, but no issuer metadata is
+    published anonymously.
+  - >-
+    The AEMO corporate site is behind a WAF that refuses automated clients. https://aemo.com.au/,
+    https://www.aemo.com.au/, and every path probed beneath them — /developers, /api, /docs,
+    /data, /openapi.json, /swagger.json, /api-docs, the CDR programme page
+    /initiatives/major-programs/cdr-at-aemo, /energy-systems/electricity/cdr-at-aemo/about-cdr
+    and /energy-systems/registration — all returned HTTP 403 to curl with browser and default
+    user agents. Those pages are known to exist and are linked from AEMO's own developer
+    portal, but their contents could not be fetched and are therefore not quoted here.
+    Nothing in this profile depends on them: the developer portal, NEMWeb, the WA data
+    portal and the visualisations API are all on separate hosts that answer freely.
+  - >-
+    The nemweb.com.au and aemo.com.au apex hosts return 403 at the root while their content
+    paths return 200 — https://nemweb.com.au/ is 403 but https://nemweb.com.au/Reports/Current/
+    is 200. The 403 is a root-level block, not an access control on the data.
+
+dataStandard:
+  name: CDR Consumer Data Standards (Energy) — Energy Secondary Data Holder APIs
+  version: 1.36.0
+  publisher: Treasury Data Standards Body, Australia
+  url: https://consumerdatastandardsaustralia.github.io/standards/#energy-secondary-dh-apis
+  conformance: >-
+    AEMO's six CDR operations map one-to-one onto the DSB energy service point resources,
+    and AEMO states the conformance explicitly on its own developer portal. AEMO also
+    discloses a deliberate deviation: "As permitted under provisions for Shared
+    Responsibility Data Requests, additional mandatory parameters have been specified under
+    API request headers to allow for AEMO security protocols." So the contract is the
+    standard plus AEMO-specific mandatory headers — conformant, but not byte-for-byte
+    interchangeable the way the banking Product Reference Data endpoints are.
+  otherStandardsFound: >-
+    None. No Green Button, no ESPI, no OCPP, no OCPI, no OpenADR, no IEEE 2030.5 and no
+    IEC CIM 61968/61970 reference was found anywhere on dev.aemo.com.au, nemweb.com.au,
+    data.wa.aemo.com.au or visualisations.aemo.com.au. AEMO's non-CDR data shapes are its
+    own: the MMS Data Model for NEM CSV reports, MSATS/aseXML for retail market messaging,
+    and the WEMDE dispatch schemas for Western Australia. The market-data half of AEMO is
+    standardised only by AEMO.
+
+consumerVsMarketDataSplit:
+  consumerDataApi:
+    exists: true
+    verified: >-
+      Documented, catalogued and infrastructurally live; no payload obtainable anonymously
+      and none obtainable by an ACCC accreditation alone.
+    surface: >-
+      Six operations under /NEMRetail/cds-au/v1/secondary/energy — service point standing
+      data for one or many NMIs, distributed energy resource records for one or many NMIs,
+      and up to 24 months of interval meter data for one or many NMIs — plus two discovery
+      operations under /NEMRetail/cds-au/v1/discovery.
+    reachableAnonymously: false
+    whoCanActuallyCallIt: >-
+      Registered Financially Responsible Market Participants — that is, retailers. AEMO's
+      portal is explicit: the CDR APIs let FRMPs "service API requests for AEMO data from
+      Accredited Data Recipients". The accredited data recipient never touches AEMO. It
+      asks the retailer, and the retailer asks AEMO. This is the gateway model the ACCC
+      chose for energy, and it is the single largest architectural divergence from banking.
+    note: >-
+      The consequence is that in energy there is no such thing as an independent developer
+      reaching the operator's consumer data. Even full ACCC accreditation buys you a
+      conversation with a retailer, not with AEMO.
+  marketDataOpen:
+    exists: true
+    verified: fully — anonymous HTTP 200 downloads confirmed on three separate hosts
+    surface: >-
+      (1) NEMWeb, https://nemweb.com.au/Reports/ — 103 live report directories under
+      /Reports/Current/ and 68 more under /Reports/Archive/, covering dispatch, dispatch
+      SCADA, trading interval prices, bidding (Bidmove_Complete), billing and settlements,
+      marginal loss factors, market notices, PASA reliability forecasts, network
+      constraints and rooftop PV. A sample dispatch file downloaded at HTTP 200, 18,252
+      bytes, zero credentials. (2) The NEM dashboard JSON API,
+      https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY — HTTP 200
+      anonymously, five-minute regional spot price, demand, scheduled and semi-scheduled
+      generation, net interchange and per-interconnector flows with limits, the full FCAS
+      price set, and market notices; POST /5MIN with {"timeScale":["5MIN"]} returns the
+      rolling five-minute series. (3) The WA market data portal,
+      https://data.wa.aemo.com.au/public/ — HTTP 200, WEMDE dispatch outputs, ST and MT
+      PASA, DSP, capacity and outages.
+    note: >-
+      This is one of the most open market-data surfaces published by any system operator
+      anywhere, and none of it is mandated by the Consumer Data Right. It exists because
+      the National Electricity Rules require AEMO to publish market information, and
+      because a transparent spot market cannot function otherwise. It is also almost
+      entirely un-APIfied: bulk zipped CSV over a directory listing, and one undocumented
+      dashboard endpoint.
+  theFinding: >-
+    AEMO is the sharpest possible statement of the sector's split, because both halves are
+    extreme and they run in opposite directions to the banking analogy. The half nobody
+    mandated is wide open: 171 directories of settlement-grade market data that any
+    stranger can download without a key, plus a live anonymous JSON feed of five-minute
+    prices and interconnector flows. The half that a statute, a regulator and a standards
+    body were pointed at is the most closed surface in this study: mutual TLS on a
+    non-standard port, an AEMO-signed client certificate, MSATS user rights, a Participant
+    ID, and a structural rule that the accredited third party the CDR exists to empower is
+    not even allowed to be the caller. The mandate replicated the CONTRACT — the Consumer
+    Data Standards energy schemas are real and AEMO conforms to them. It did not replicate
+    the PRODUCT — because in banking the mandate forced open a public, anonymous,
+    self-describing endpoint at every data holder, and in energy the equivalent endpoint at
+    the gateway is behind mTLS and the equivalent open data lives at a different regulator
+    entirely (the AER's Energy Made Easy platform serves retailers' plan catalogues, not
+    AEMO). A mandate is portable. An open developer surface is not.
+
+accessGate:
+  gate: accredited-only
+  whatADeveloperMustDo: >-
+    To read AEMO's market data: nothing. Open https://nemweb.com.au/Reports/Current/ and
+    download. Same for https://data.wa.aemo.com.au/public/ and for
+    GET https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY. No key,
+    no account, no licence agreement, no registration, no rate-limit challenge encountered.
+    To read AEMO's API documentation: nothing either — dev.aemo.com.au serves its whole
+    catalogue, all 74 API descriptions, all 771 operations and all 74 OpenAPI exports to an
+    anonymous client. To CALL any of those 74 APIs: (1) be a Registered Participant with
+    AEMO in the NEM, the WEM, or a gas market, which means going through AEMO's formal
+    registration process and holding a Participant ID; (2) hold an MSATS user ID with the
+    specific Participant User Rights Management entity for the API granted by your
+    organisation's participant administrator; (3) obtain an AEMO-signed TLS client
+    certificate, issued by AEMO's own certificate authorities (AEMO-ICA-MARKET G1 for
+    production, AEMO-ICA-TEST G1 for non-production) through the Markets Portal or a
+    Participant Portal request; (4) register for API access and be onboarded into
+    Pre-Production, complete AEMO's development and testing requirements there, then be
+    promoted to Production. AEMO's own portal calls step 3-4 "Get Accredited: complete the
+    relevant forms and tests required by AEMO to become an accredited participant." There
+    is no self-serve key, no free tier, no sandbox for non-participants, and — critically —
+    ACCC accreditation as a CDR data recipient does not qualify you, because AEMO serves
+    the retailer, not the recipient.
+  developerPortal:
+    exists: true
+    url: https://dev.aemo.com.au/
+    confirmed: true
+    note: >-
+      A real, live, anonymously readable Azure API Management developer portal, HTTP 200 on
+      every page probed: / (home), /apis, /api-docs (the full catalogue), /CDR, /CDR-Common,
+      /working-with-aemo-apis, /urm-username-password, /oauth, /postman, /standards, /terms,
+      /signup, /signin, /faqs and ~40 per-API documentation pages. Its unauthenticated
+      management-plane endpoints are open too: /config.json returns the APIM service
+      identity, /developer/apis?api-version=2022-04-01-preview returns all 74 APIs with
+      descriptions, path prefixes and subscription-key parameter names, and
+      /developer/apis/{id}/operations returns each API's real operations. This is a
+      genuine self-serve READ surface attached to a fully gated CALL surface.
+
+authModel:
+  marketData: >-
+    None. NEMWeb, the WA public data tree and the visualisations report API are all
+    unauthenticated anonymous HTTP GET (plus one anonymous POST for the 5MIN series).
+  developerPortalRead: >-
+    None. The whole catalogue, including the OpenAPI exports and the operations listings,
+    is served to anonymous clients.
+  participantApis: >-
+    Layered, and every layer is required. (1) Mutual TLS with an AEMO-signed X.509v3 client
+    certificate — this is the outer wall, and it is what makes apis.prod.aemo.com.au:9319
+    and partner.api.aemo.com.au return TLS alert 40 to anonymous callers. (2) HTTP Basic
+    authentication carrying an MSATS URM username and password, Base64-encoded, per AEMO's
+    /urm-username-password page — the identity is a market participant user, not a
+    developer account. (3) An APIM subscription key on some APIs, sent as either the
+    Ocp-Apim-Subscription-Key header or a subscription-key query parameter (the CDR and
+    most e-Hub APIs), or as x-eHub-APIKey (B2BMessaging, HubMessageManagement,
+    P2PMessagingSync, GasBB Reporting Public Data), or as x-aemo-api-key (TLS Certificate
+    Management) — the header name varies by API and is recorded in each harvested export.
+    (4) Per-entity authorisation through Participant User Rights Management, e.g. the
+    TLS_CERTIFICATE_MANAGEMENT entity with Read or Delete privileges. An OAuth API
+    (oauth-v1, one operation, path prefix oauth/v1) exists in the catalogue and an /oauth
+    documentation page is published, but no anonymous OIDC discovery document is served, so
+    the issuer, endpoints and scopes could not be captured and are not asserted here.
+  cdrSpecific: >-
+    The Consumer Data Standards mandate a FAPI-profiled OAuth2/OIDC model between accredited
+    data recipients and primary data holders. AEMO sits behind that boundary as the
+    secondary data holder, and its own leg is secured with AEMO's participant mTLS and URM
+    credentials plus "additional mandatory parameters specified under API request headers to
+    allow for AEMO security protocols" — AEMO's words. The consumer-consent layer is
+    enforced by the retailer, not by AEMO.
+
+homeMarket:
+  country: Australia
+  role: Independent electricity and gas system and market operator
+  regulators: >-
+    AEMC (rule maker), AER (economic regulator and retail market, operator of Energy Made
+    Easy), ACCC (Consumer Data Right), ERA in Western Australia. AEMO is regulated, not a
+    regulator.
+  marketsOperated:
+  - National Electricity Market (NEM) — Queensland, New South Wales, ACT, Victoria, South Australia, Tasmania
+  - Wholesale Electricity Market (WEM) — South West Interconnected System, Western Australia
+  - Victorian Declared Wholesale Gas Market and gas retail markets
+  - Gas Supply Hubs and the Gas Bulletin Board (east coast and Western Australia)
+  - MSATS metering and retail settlement registry; the national DER Register
+  position: >-
+    The centre of the value chain and a participant in none of it. AEMO owns no generation,
+    no network and no customers; it dispatches, prices, settles and forecasts, and it holds
+    the metering and DER records that make consumer energy data sharing possible at all.
+    That is exactly why the CDR designated it as the sector's gateway, and exactly why its
+    consumer surface is closed to everyone except the retailers it settles with.
+
+transports:
+- protocol: REST
+  scheme: https
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  documented: false
+  verified: true
+  anonymous: true
+  note: >-
+    Undocumented JSON API behind AEMO's public NEM dashboard. GET ELEC_NEM_SUMMARY returned
+    HTTP 200; POST 5MIN with {"timeScale":["5MIN"]} returned HTTP 200. Recorded as a
+    verified public endpoint, not as a supported product.
+- protocol: HTTP file feed
+  scheme: https
+  baseURL: https://nemweb.com.au/Reports
+  documented: true
+  verified: true
+  anonymous: true
+  note: 103 current + 68 archive directories of zipped CSV. Not a REST API. Schemas described by the MMS Data Model.
+- protocol: HTTP file feed
+  scheme: https
+  baseURL: https://data.wa.aemo.com.au/public
+  documented: true
+  verified: true
+  anonymous: true
+  note: Western Australian WEM equivalent — WEMDE outputs, PASA, DSP, capacity, outages.
+- protocol: REST over mutual TLS
+  scheme: https
+  baseURL: https://apis.prod.aemo.com.au:9319
+  documented: true
+  verified: host live, client certificate required
+  anonymous: false
+  note: >-
+    The e-Hub production gateway, CN=FBS-Prod-Hub.aemo.com.au. Carries the CDR secondary
+    data holder APIs under /NEMRetail/cds-au/v1/secondary/energy and CDR Common under
+    /NEMRetail/cds-au/v1/discovery.
+- protocol: REST over mutual TLS
+  scheme: https
+  baseURL: https://partner.api.aemo.com.au
+  documented: true
+  verified: host live, client certificate required
+  anonymous: false
+  note: >-
+    The partner API gateway, EV certificate CN=partner.api.aemo.com.au. Documented base for
+    TLS Certificate Management (/v1/TLSCertificateManagement).
+- protocol: REST (management plane, read-only)
+  scheme: https
+  baseURL: https://dev.aemo.com.au/developer
+  documented: false
+  verified: true
+  anonymous: true
+  note: >-
+    Azure APIM developer-portal data plane. /developer/apis, /developer/apis/{id},
+    /developer/apis/{id}/operations and the export endpoints all return HTTP 200 to
+    anonymous clients with api-version=2022-04-01-preview.
+
+endpointsConfirmed:
+- GET https://dev.aemo.com.au/ (HTTP 200, live public developer portal)
+- GET https://dev.aemo.com.au/api-docs (HTTP 200, full API catalogue, ~40 documented APIs listed by family)
+- GET https://dev.aemo.com.au/CDR (HTTP 200, CDR secondary data holder docs incl. 4 base URLs and 6 operations)
+- GET https://dev.aemo.com.au/CDR-Common (HTTP 200)
+- GET https://dev.aemo.com.au/config.json (HTTP 200, APIM service SSVC-API-APP-PRD-APIM-AUE, mgmt-api-prd.aemo.com.au)
+- GET https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview (HTTP 200, 74 APIs, 48,900 bytes)
+- GET https://dev.aemo.com.au/developer/apis/cdr/operations?api-version=2022-04-01-preview (HTTP 200, 6 operations)
+- GET https://dev.aemo.com.au/developer/apis/{id}?export=true&format=openapi&api-version=2022-04-01-preview (HTTP 200 for all 74 ids)
+- GET https://dev.aemo.com.au/developer/apis/cdr?export=true&format=openapi-link&... (HTTP 200, SAS blob link; blob fetch HTTP 200, 617 bytes, identical content)
+- GET https://dev.aemo.com.au/postman (HTTP 200)
+- GET https://dev.aemo.com.au/standards (HTTP 200)
+- GET https://dev.aemo.com.au/working-with-aemo-apis (HTTP 200)
+- GET https://dev.aemo.com.au/urm-username-password (HTTP 200)
+- GET https://dev.aemo.com.au/oauth (HTTP 200)
+- GET https://dev.aemo.com.au/signup (HTTP 200)
+- GET https://dev.aemo.com.au/terms (HTTP 200)
+- GET https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY (HTTP 200, JSON, 5 regions + FCAS prices + 10 market notices)
+- POST https://visualisations.aemo.com.au/aemo/apps/api/report/5MIN body {"timeScale":["5MIN"]} (HTTP 200, JSON series)
+- GET https://nemweb.com.au/Reports/Current/ (HTTP 200, 103 report directories)
+- GET https://nemweb.com.au/Reports/Archive/ (HTTP 200, 68 archive directories)
+- GET https://nemweb.com.au/Reports/CURRENT/DispatchIS_Reports/PUBLIC_DISPATCHIS_202607252230_0000000529244762.zip (HTTP 200, 18,252 bytes, anonymous)
+- GET https://nemweb.com.au/Reports/Current/GBB/ (HTTP 200, Gas Bulletin Board reports)
+- GET https://data.wa.aemo.com.au/public/ (HTTP 200)
+- GET https://data.wa.aemo.com.au/public/market-data/ (HTTP 200, capo/dsp/mt-pasa/outages/st-pasa/wemde)
+- GET https://gbbwa.aemo.com.au/ (HTTP 200, WA Gas Bulletin Board web application)
+- GET https://markets-portal-help.docs.public.aemo.com.au/Content/API_Reference/API_introduction.htm (HTTP 200)
+- GET https://documenter.getpostman.com/view/10032049/2s93CNNDaK (HTTP 200, AEMO CDR Postman documentation)
+- GET https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary (HTTP 200, 84 brands, AEMO absent — correctly, as a secondary data holder)
+- GET https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_energy.json (HTTP 200, 403,771 bytes)
+- GET https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_common.json (HTTP 200, 58,667 bytes)
+- TCP/TLS apis.prod.aemo.com.au:9319 (connect OK; AEMO DigiCert cert CN=FBS-Prod-Hub.aemo.com.au; TLS alert 40, client certificate required)
+- TCP/TLS partner.api.aemo.com.au:443 (connect OK; AEMO DigiCert EV cert; TLS alert 40, client certificate required)
+
+endpointsProbedAndNotFound:
+- GET https://aemo.com.au/ and https://www.aemo.com.au/ (HTTP 403, site-wide WAF, browser and default user agents)
+- GET https://aemo.com.au/developers, /api, /docs, /data, /openapi.json, /swagger.json, /api-docs (all HTTP 403, same WAF)
+- GET https://aemo.com.au/.well-known/security.txt (HTTP 404)
+- GET https://aemo.com.au/.well-known/openid-configuration (HTTP 404)
+- GET https://aemo.com.au/initiatives/major-programs/cdr-at-aemo (HTTP 403 — page known to exist, linked from dev.aemo.com.au, content not retrievable)
+- GET https://www.aemo.com.au/energy-systems/electricity/cdr-at-aemo/about-cdr (HTTP 403)
+- GET https://www.aemo.com.au/energy-systems/registration (HTTP 403)
+- GET https://api.aemo.com.au/ and /openapi.json, /swagger.json, /api-docs, /docs, /v1, /.well-known/openid-configuration (all HTTP 404 — host answers, nothing published)
+- GET https://developer.aemo.com.au/, https://developers.aemo.com.au/, https://docs.aemo.com.au/, https://data.aemo.com.au/ (HTTP 000, DNS did not resolve — the portal is dev.aemo.com.au, not developer.)
+- GET https://dev.aemo.com.au/openapi.json and /swagger.json and /publish.json (HTTP 404)
+- GET https://nemweb.com.au/ and https://www.nemweb.com.au/ (HTTP 403 at the apex; content paths beneath are HTTP 200)
+- GET https://apis.prod.aemo.com.au:9319/NEMRetail/cds-au/v1/discovery/status (HTTP 000, curl exit 35, mTLS handshake failure)
+- GET https://apis.prod.aemo.com.au:9319/NEMRetail/cds-au/v1/discovery/outages (HTTP 000, curl exit 35)
+- GET https://partner.api.aemo.com.au/v1/TLSCertificateManagement (HTTP 000, curl exit 35)
+- GET https://apis.preprod.aemo.com.au:9319/NEMRetail/cds-au/v1/discovery/status (HTTP 000, curl exit 35)
+- GET https://nem-apis.preprod.wgw.aemo.com.au/NEMRetail/cds-au/v1/discovery/status (HTTP 403)
+- GET https://apis.aemo.com.au:9319/... (HTTP 000, DNS NXDOMAIN — the host named in AEMO's TLS certificate prose does not resolve; only apis.prod.aemo.com.au does)
+- GET https://gbbwa.aemo.com.au/api/v1/... and five other candidate API paths (HTTP 404 — the WA Gas Bulletin Board is a web application, no public API discoverable)
+- GET https://visualisations.aemo.com.au/aemo/apps/api/report/NEM_DASHBOARD, /DAILY_REGION_SUMMARY, /NEM_DASHBOARD_PRICE_DEMAND, /UNIT_SOLUTION, /NEXT_DAY_ACTUAL, /AGGREGATE_PRICE_AND_DEMAND, /ELEC_INTERCONNECTOR_FLOWS (all HTTP 404 — only ELEC_NEM_SUMMARY and 5MIN were found)
+- GET https://mgmt-api-prd.aemo.com.au/.../apis?api-version=2022-04-01-preview (HTTP 401 — the APIM management plane itself is protected; only the portal proxy at dev.aemo.com.au/developer is open)
+- GET https://api.github.com/orgs/aemo (HTTP 404). https://github.com/aemo is HTTP 200 but is an unrelated individual account "aeMo" with 0 public repositories. No AEMO GitHub organisation was found; none is claimed here.
+
+sources:
+- url: https://dev.aemo.com.au/
+  type: DeveloperPortal
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    AEMO's public API developer portal, Azure API Management. Fully readable anonymously.
+    Home page states the flow plainly: View Documentation, Get Accredited, Go Live.
+- url: https://dev.aemo.com.au/api-docs
+  type: Documentation
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    The API Catalogue, filterable by Electricity, Gas, Retail, Wholesale, Authentication,
+    Gas Bulletin Board (GBB), Gas Supply Hub (GSH), Distributed Energy Resource (DER),
+    Consumer Data Platform (CDP), Consumer Data Right (CDR) and WEM.
+- url: https://dev.aemo.com.au/CDR
+  type: ConsumerDataRight
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    The primary evidence for the mandate finding. Names the six secondary data holder
+    operations, four environment base URLs, and the URM + TLS certificate security model.
+- url: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
+  type: APIReference
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    74 APIs with ids, names, descriptions, gateway path prefixes, protocols and
+    subscription-key parameter names. Source of every apis[] entry in this profile.
+- url: https://dev.aemo.com.au/developer/apis/{id}/operations?api-version=2022-04-01-preview
+  type: APIReference
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    771 operations across the 74 APIs, anonymously readable. Largest counts:
+    pre-balancing-reports-v8 (73), pre-balancing-reports-v7 and v7.1 (71 each),
+    pre-balancing-reports-v6 (70), rcm-ops-external-v1 (50), submission-v1 (37),
+    der-consumer-registration-v1 (31), gasbb-reporting-public-data (29), report-v1 (22).
+- url: https://dev.aemo.com.au/developer/apis/{id}?export=true&format=openapi&api-version=2022-04-01-preview
+  type: OpenAPI
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    Source of the 74 files openapi/aemo-*-openapi.yml. All HTTP 200, all OpenAPI 3.0.1,
+    all with paths: {} and internal .aemo.local servers. Harvested verbatim.
+- url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_energy.json
+  type: OpenAPI
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    Source of openapi/aemo-cds-energy-api-openapi.yml. CDR Energy API 1.36.0, OpenAPI 3.0.3,
+    18 paths — including the six /energy/electricity/servicepoints resources AEMO serves as
+    secondary data holder. Converted JSON to YAML verbatim. NOT AEMO-authored.
+- url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_common.json
+  type: OpenAPI
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    Source of openapi/aemo-cds-common-api-openapi.yml. CDR Common API 1.36.0, 4 paths
+    including the discovery status and outages pair AEMO exposes as "CDR Common".
+- url: https://nemweb.com.au/Reports/Current/
+  type: DataFeed
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    103 open report directories. The open half of the split, and the reason
+    market_data_open is true.
+- url: https://data.wa.aemo.com.au/public/
+  type: DataFeed
+  fetched: '2026-07-27'
+  status: 200
+  note: Western Australian WEM open data tree, anonymous.
+- url: https://visualisations.aemo.com.au/aemo/apps/api/report/ELEC_NEM_SUMMARY
+  type: APIReference
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    Anonymous live JSON — five-minute regional prices, demand, generation mix,
+    interconnector flows and limits, FCAS prices, market notices. Undocumented.
+- url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+  type: Registry
+  fetched: '2026-07-27'
+  status: 200
+  note: >-
+    84 energy data holder brands. AEMO is absent, correctly — secondary data holders are
+    not register brands. Recorded so the absence is not misread in either direction.
+- url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+  type: PostmanCollection
+  fetched: '2026-07-27'
+  status: 200
+  note: AEMO's published Postman documentation, linked from the CDR page.
+- url: https://markets-portal-help.docs.public.aemo.com.au/Content/API_Reference/API_introduction.htm
+  type: Documentation
+  fetched: '2026-07-27'
+  status: 200
+  note: The WEM Markets Portal API help, a second public documentation estate alongside dev.aemo.com.au.
+- url: https://aemo.com.au/initiatives/major-programs/cdr-at-aemo
+  type: ConsumerDataRight
+  fetched: '2026-07-27'
+  status: 403
+  note: >-
+    AEMO's corporate CDR programme page. Known to exist and linked from AEMO's own developer
+    portal, but the whole corporate estate returns 403 to automated clients, so its contents
+    are not quoted and nothing in this profile depends on it.
+
+actions:
+  openapiHarvested: true
+  openapiCount: 76
+  openapiCountProviderAuthored: 74
+  openapiCountStandardsBody: 2
+  openapiTotalDeclaredPaths: 22
+  openapiTotalDeclaredPathsFromAemo: 0
+  apisListed: 77
+  apisYmlCreated: true
+  reason: >-
+    AEMO is the control case this study needed, and it answers the question in the
+    negative. Australia proved a statutory data mandate is transplantable — the Consumer
+    Data Standards energy schemas exist, AEMO conforms to them, and the gateway is live
+    behind a real certificate. It also proved that transplanting the mandate does not
+    transplant the outcome. What made banking legible was an anonymous, self-describing,
+    standards-identical endpoint at every data holder. Energy has no such thing: the
+    gateway's endpoints are mTLS-only, the accredited recipient is architecturally
+    forbidden from calling them, and the operator's 74 published OpenAPI documents contain
+    zero operations between them. And the surface that IS open — 171 directories of
+    dispatch, price and settlement data, plus a live five-minute JSON feed — was never
+    mandated by the CDR at all. It exists because a spot market needs transparency to
+    clear. Openness here is a market-design artefact, not a regulatory one.

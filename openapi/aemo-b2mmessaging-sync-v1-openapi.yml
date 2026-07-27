@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: B2MMessagingSync
+  description: "## Introduction\nThe B2MMessagingSync API supports generateC1Report, generateC4Report, getMSATSLimits,NMIDiscovery, getNMIDetail, getParticipantSystemStatus, and getMeterData endpoints.The API participant pushes their outgoing message to the e-Hub and the e-Hub pushes the message to the API recipient.The message delivery occurs synchronously where the participant sends the message to the e-Hub and AEMO immediately sends the response (such as MACKs,TACKs, or responses) in the same thread to the Participant's Gateway."
+  version: v1
+servers:
+  - url: https://api-prd.aemo.local/NEMRetail/B2MMessagingSync
+paths: { }
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: x-apikey
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - { }
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]

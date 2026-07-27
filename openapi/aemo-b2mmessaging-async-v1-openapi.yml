@@ -1,0 +1,22 @@
+openapi: 3.0.1
+info:
+  title: B2MMessagingAsync
+  description: "## Introduction\n The B2MMessagingAsync push-push API supports inbound submitMessages, submitMessageAcknowledgements, and getQueueMetaData endpoints and suits a high volume exchange of messages. \n Participants push their outgoing message to the e-Hub and the e-Hub pushes the message to the Participants Gateway. The message delivery occurs  asynchronously, where the initiator sends the message to the e-Hub and expects the outcome (such as MACKs, TACKs, or responses) in a different API call. The response, sent later, is sent to the Participants Gateway."
+  version: v1
+servers:
+  - url: https://api-prd.aemo.local/NEMRetail/B2MMessagingAsync
+paths: { }
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
+security:
+  - { }
+  - apiKeyHeader: [ ]
+  - apiKeyQuery: [ ]
