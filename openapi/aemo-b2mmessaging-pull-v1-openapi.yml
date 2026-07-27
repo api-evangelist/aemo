@@ -1,11 +1,275 @@
 openapi: 3.0.1
 info:
   title: B2MMessagingPull
-  description: "## Introduction\n The B2MMessagingPull push-pull API supports inbound submitMessages, submitMessageAcknowledgements, getMessages, and getQueueMetaData endpoints and suits low volume exchange of messages. \n\n Participants using B2MMessagingPull are responsible for implementing the polling logic to poll their Participant Hub Queue to retrieve new messages, similar to batch programs used to poll their outbox using FTP. \n\n Implementation of a Participant API Gateway is not required for B2MMessagingPull but the speed of message delivery is slower compared to the B2BMessagingAsync API.\n\n The response is sent in the calling thread."
+  description: "## Introduction\n The B2MMessagingPull push-pull API supports inbound submitMessages,\
+    \ submitMessageAcknowledgements, getMessages, and getQueueMetaData endpoints and suits low volume\
+    \ exchange of messages. \n\n Participants using B2MMessagingPull are responsible for implementing\
+    \ the polling logic to poll their Participant Hub Queue to retrieve new messages, similar to batch\
+    \ programs used to poll their outbox using FTP. \n\n Implementation of a Participant API Gateway is\
+    \ not required for B2MMessagingPull but the speed of message delivery is slower compared to the B2BMessagingAsync\
+    \ API.\n\n The response is sent in the calling thread."
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/b2mmessaging-pull-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMRetail/B2MMessagingPull
-paths: { }
+- url: https://api-prd.aemo.local/NEMRetail/B2MMessagingPull
+paths:
+  /getMessages:
+    get:
+      operationId: getMessages
+      summary: Get Messages
+      tags:
+      - B2MMessagingPull
+      description: Retrieve messages queued in the Participant Hub Queue
+      parameters:
+      - name: messageContextID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: message Context ID
+      - name: transactionGroup
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Transaction Group
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: basic auth
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /getQueueMetaData:
+    get:
+      operationId: getQueueMetaData
+      summary: Get Queue MetaData
+      tags:
+      - B2MMessagingPull
+      description: Retrieve details of messages queued in the Participant Hub Queue
+      parameters:
+      - name: transactionGroup
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Transaction Group
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submitMessageAcknowledgements:
+    post:
+      operationId: submitMessageAcknowledgements
+      summary: Submit Message Acknowledgements
+      tags:
+      - B2MMessagingPull
+      description: Submit messages acknowledgements to AEMO’s market systems
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + "_"+[FromParticipantID]{1,10}
+          + "_" + [0-9_a-z]{1,18}.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Basic Auth
+      requestBody:
+        content:
+          application/xml:
+            example: <SubmitMessageAcknowledgementsPostRequest-5></SubmitMessageAcknowledgementsPostRequest-5>
+        description: Payload
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submitMessages:
+    post:
+      operationId: submitMessages
+      summary: Submit Messages
+      tags:
+      - B2MMessagingPull
+      description: Submit messages and transaction acknowledgements to AEMO’s market systems
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + "_"+[FromParticipantID]{1,10}
+          + "_" + [0-9_a-z]{1,18}.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Basic Auth
+      requestBody:
+        content:
+          application/xml:
+            example: <SubmitMessagesPostRequest></SubmitMessagesPostRequest>
+        description: Payload
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +281,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: B2MMessagingPull
+  description: Introduction

@@ -2,9 +2,1364 @@ openapi: 3.0.1
 info:
   title: Balancing Submission v2
   version: v2
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/balancing-submission-v2/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/balancing/submissions
-paths: { }
+- url: https://api-prd.aemo.local/WEM/balancing/submissions
+paths:
+  /?soapAction=uploadBalancingStandingSubmission:
+    post:
+      operationId: uploadBalancingStandingSubmission
+      summary: uploadBalancingStandingSubmission
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadBalancingStandingSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadBalancingStandingSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission>\r\n        <resourceSubmission resourceName=\"resourceName1\" action=\"\
+              SUBMIT\" effectiveTradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"0\" startHour=\"0\" startInterval=\"1\" endHour=\"\
+              0\" endInterval=\"1\">\r\n            <tranche price=\"MAX\" quantity=\"-999999.999\" maxRamp=\"\
+              -999999.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              1\" quantity=\"RPQTY\" maxRamp=\"999999.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.999\" maxRamp=\"-999999.899\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.899\" maxRamp=\"-999999.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.999\" startHour=\"23\" startInterval=\"2\" endHour=\"\
+              23\" endInterval=\"2\">\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.899\" maxRamp=\"-999999.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.9\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.799\" maxRamp=\"-999999.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.999\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.799\" maxRamp=\"-999999.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950335\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.699\" maxRamp=\"-999999.399\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.699\" maxRamp=\"-999999.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n  \
+              \        <supplyCurve unavailable=\"-999999.899\" startHour=\"22\" startInterval=\"1\" endHour=\"\
+              22\" endInterval=\"1\">\r\n            <tranche price=\"0.8\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999999.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999999.599\" maxRamp=\"-999999.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"1.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999999.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\
+              \n            <tranche price=\"MIN\" quantity=\"999999.599\" maxRamp=\"-999999.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.899\"\
+              \ startHour=\"2\" startInterval=\"2\" endHour=\"2\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.499\" maxRamp=\"-999998.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.499\" maxRamp=\"-999998.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.7\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.399\" maxRamp=\"-999998.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \   </resourceSubmission>\r\n        <resourceSubmission resourceName=\"resourceName2\"\
+              \ action=\"CANCEL\" effectiveTradingDate=\"0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"-999999.799\" startHour=\"21\" startInterval=\"\
+              1\" endHour=\"21\" endInterval=\"1\">\r\n            <tranche price=\"1.3\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.399\" maxRamp=\"-999998.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.299\" maxRamp=\"-999998.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999998.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.799\"\
+              \ startHour=\"3\" startInterval=\"2\" endHour=\"3\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.299\" maxRamp=\"-999998.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"0.6\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.199\" maxRamp=\"-999998.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"1.4\" quantity=\"RPQTY\" maxRamp=\"999998.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999999.199\" maxRamp=\"-999998.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999999.699\"\
+              \ startHour=\"20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950335\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.099\" maxRamp=\"-999998.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999998.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999999.099\" maxRamp=\"-999998.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.5\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.699\"\
+              \ startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.999\" maxRamp=\"-999997.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"1.5\" quantity=\"RPQTY\" maxRamp=\"999997.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.999\" maxRamp=\"-999997.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.899\" maxRamp=\"-999997.799\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve\
+              \ unavailable=\"-999999.599\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999997.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MIN\" quantity=\"999998.899\" maxRamp=\"-999997.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.4\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.799\" maxRamp=\"-999997.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"1.6\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName3\" action=\"SUBMIT\" effectiveTradingDate=\"9999-12-31\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <supplyCurve unavailable=\"999999.599\"\
+              \ startHour=\"5\" startInterval=\"2\" endHour=\"5\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.799\" maxRamp=\"-999997.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.699\" maxRamp=\"-999997.399\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999998.699\" maxRamp=\"-999997.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.499\" startHour=\"18\" startInterval=\"1\" endHour=\"\
+              18\" endInterval=\"1\">\r\n            <tranche price=\"0.3\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.599\" maxRamp=\"-999997.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.7\" quantity=\"\
+              RPQTY\" maxRamp=\"999997.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999998.599\" maxRamp=\"-999997.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.499\"\
+              \ startHour=\"6\" startInterval=\"2\" endHour=\"6\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.499\" maxRamp=\"-999996.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999996.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999998.499\" maxRamp=\"-999996.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.2\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.399\" maxRamp=\"-999996.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.399\" startHour=\"17\" startInterval=\"1\" endHour=\"\
+              17\" endInterval=\"1\">\r\n            <tranche price=\"1.8\" quantity=\"RPQTY\" maxRamp=\"\
+              999996.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.399\" maxRamp=\"-999996.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999996.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.299\" maxRamp=\"-999996.599\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999996.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.399\"\
+              \ startHour=\"7\" startInterval=\"2\" endHour=\"7\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.299\" maxRamp=\"-999996.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"0.1\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999996.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.199\" maxRamp=\"-999996.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"1.9\" quantity=\"RPQTY\" maxRamp=\"999996.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.199\" maxRamp=\"-999996.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" effectiveTradingDate=\"1899-11-30\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <supplyCurve unavailable=\"-999999.299\"\
+              \ startHour=\"16\" startInterval=\"1\" endHour=\"16\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999996.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.099\" maxRamp=\"-999996.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999996.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n   \
+              \         <tranche price=\"MIN\" quantity=\"999998.099\" maxRamp=\"-999996.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.0\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.299\"\
+              \ startHour=\"8\" startInterval=\"2\" endHour=\"8\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.999\" maxRamp=\"-999995.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"2.0\" quantity=\"RPQTY\" maxRamp=\"999995.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.999\" maxRamp=\"-999995.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.899\" maxRamp=\"-999995.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.199\" startHour=\"15\" startInterval=\"1\" endHour=\"\
+              15\" endInterval=\"1\">\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.899\" maxRamp=\"-999995.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-0.1\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.799\" maxRamp=\"-999995.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"2.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.199\"\
+              \ startHour=\"9\" startInterval=\"2\" endHour=\"9\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.799\" maxRamp=\"-999995.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999997.699\" maxRamp=\"-999995.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.699\" maxRamp=\"-999995.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.099\" startHour=\"14\" startInterval=\"1\" endHour=\"\
+              14\" endInterval=\"1\">\r\n            <tranche price=\"-0.2\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n   \
+              \         <tranche price=\"MAX\" quantity=\"-999997.599\" maxRamp=\"-999995.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999995.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999997.599\" maxRamp=\"-999995.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName5\" action=\"SUBMIT\" effectiveTradingDate=\"1900-02-02\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <supplyCurve unavailable=\"999999.099\"\
+              \ startHour=\"10\" startInterval=\"2\" endHour=\"10\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MAX\" quantity=\"-999997.499\" maxRamp=\"-999994.999\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999994.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.499\" maxRamp=\"-999994.899\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"-0.3\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.399\" maxRamp=\"-999994.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n  \
+              \        <supplyCurve unavailable=\"-999998.999\" startHour=\"13\" startInterval=\"1\" endHour=\"\
+              13\" endInterval=\"1\">\r\n            <tranche price=\"2.3\" quantity=\"RPQTY\" maxRamp=\"\
+              999994.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.399\" maxRamp=\"-999994.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.299\" maxRamp=\"-999994.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999994.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.999\"\
+              \ startHour=\"11\" startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MIN\" quantity=\"999997.299\" maxRamp=\"-999994.499\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-0.4\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999994.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999997.199\" maxRamp=\"-999994.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"2.4\" quantity=\"\
+              RPQTY\" maxRamp=\"999994.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\
+              \n            <tranche price=\"MIN\" quantity=\"999997.199\" maxRamp=\"-999994.299\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve\
+              \ unavailable=\"-999998.899\" startHour=\"12\" startInterval=\"1\" endHour=\"12\" endInterval=\"\
+              1\">\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999994.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999997.099\" maxRamp=\"-999994.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999994.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.099\" maxRamp=\"-999994.099\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-0.5\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.899\"\
+              \ startHour=\"12\" startInterval=\"2\" endHour=\"12\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MAX\" quantity=\"-999996.999\" maxRamp=\"-999993.999\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.5\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999993.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999996.999\" maxRamp=\"-999993.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999993.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999996.899\" maxRamp=\"-999993.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \    </resourceSubmission>\r\n      </submission>\r\n      <discard_file_on_error>true</discard_file_on_error>\r\
+              \n    </uploadBalancingStandingSubmission>\r\n  </Body>\r\n</Envelope>"
+        description: uploadBalancingStandingSubmission
+      responses:
+        '200':
+          description: uploadBalancingStandingSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadBalancingStandingSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <validation_result\
+                \ documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n \
+                \       <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </uploadBalancingStandingSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=uploadBalancingStandingSubmissionDocuments:
+    post:
+      operationId: uploadBalancingStandingSubmissionDocuments
+      summary: uploadBalancingStandingSubmissionDocuments
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadBalancingStandingSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadBalancingStandingSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>submission_documents1</submission_documents>\r\n      <discard_file_on_error>true</discard_file_on_error>\r\
+              \n    </uploadBalancingStandingSubmissionDocuments>\r\n  </Body>\r\n</Envelope>"
+        description: uploadBalancingStandingSubmissionDocuments
+      responses:
+        '200':
+          description: uploadBalancingStandingSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadBalancingStandingSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\"\
+                >\r\n      <validation_result documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"\
+                1900-01-01T01:01:01\">\r\n        <validationDocumentTags message=\"message1\" tagType=\"\
+                INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"\
+                xpath2\" messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </uploadBalancingStandingSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=uploadBalancingVariationSubmission:
+    post:
+      operationId: uploadBalancingVariationSubmission
+      summary: uploadBalancingVariationSubmission
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadBalancingVariationSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadBalancingVariationSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" tradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"0\" startHour=\"0\" startInterval=\"1\" endHour=\"\
+              0\" endInterval=\"1\">\r\n            <tranche price=\"MAX\" quantity=\"-999999.999\" maxRamp=\"\
+              -999999.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              1\" quantity=\"RPQTY\" maxRamp=\"999999.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.999\" maxRamp=\"-999999.899\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.899\" maxRamp=\"-999999.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.999\" startHour=\"23\" startInterval=\"2\" endHour=\"\
+              23\" endInterval=\"2\">\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.899\" maxRamp=\"-999999.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.9\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.799\" maxRamp=\"-999999.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.999\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.799\" maxRamp=\"-999999.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950335\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.699\" maxRamp=\"-999999.399\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.699\" maxRamp=\"-999999.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n  \
+              \        <supplyCurve unavailable=\"-999999.899\" startHour=\"22\" startInterval=\"1\" endHour=\"\
+              22\" endInterval=\"1\">\r\n            <tranche price=\"0.8\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999999.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999999.599\" maxRamp=\"-999999.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"1.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999999.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\
+              \n            <tranche price=\"MIN\" quantity=\"999999.599\" maxRamp=\"-999999.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.899\"\
+              \ startHour=\"2\" startInterval=\"2\" endHour=\"2\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.499\" maxRamp=\"-999998.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.499\" maxRamp=\"-999998.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.7\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.399\" maxRamp=\"-999998.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \   </resourceSubmission>\r\n        <resourceSubmission resourceName=\"resourceName2\"\
+              \ action=\"CANCEL\" tradingDate=\"0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"-999999.799\" startHour=\"21\" startInterval=\"\
+              1\" endHour=\"21\" endInterval=\"1\">\r\n            <tranche price=\"1.3\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.399\" maxRamp=\"-999998.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.299\" maxRamp=\"-999998.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999998.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.799\"\
+              \ startHour=\"3\" startInterval=\"2\" endHour=\"3\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.299\" maxRamp=\"-999998.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"0.6\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.199\" maxRamp=\"-999998.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"1.4\" quantity=\"RPQTY\" maxRamp=\"999998.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999999.199\" maxRamp=\"-999998.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999999.699\"\
+              \ startHour=\"20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950335\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.099\" maxRamp=\"-999998.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999998.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999999.099\" maxRamp=\"-999998.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.5\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.699\"\
+              \ startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.999\" maxRamp=\"-999997.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"1.5\" quantity=\"RPQTY\" maxRamp=\"999997.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.999\" maxRamp=\"-999997.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.899\" maxRamp=\"-999997.799\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve\
+              \ unavailable=\"-999999.599\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999997.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MIN\" quantity=\"999998.899\" maxRamp=\"-999997.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.4\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.799\" maxRamp=\"-999997.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"1.6\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName3\" action=\"SUBMIT\" tradingDate=\"9999-12-31\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"999999.599\" startHour=\"5\" startInterval=\"\
+              2\" endHour=\"5\" endInterval=\"2\">\r\n            <tranche price=\"MIN\" quantity=\"999998.799\"\
+              \ maxRamp=\"-999997.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n      \
+              \      <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999998.699\" maxRamp=\"-999997.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999998.699\" maxRamp=\"-999997.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.499\" startHour=\"18\" startInterval=\"1\" endHour=\"\
+              18\" endInterval=\"1\">\r\n            <tranche price=\"0.3\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.599\" maxRamp=\"-999997.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.7\" quantity=\"\
+              RPQTY\" maxRamp=\"999997.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999998.599\" maxRamp=\"-999997.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.499\"\
+              \ startHour=\"6\" startInterval=\"2\" endHour=\"6\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.499\" maxRamp=\"-999996.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999996.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999998.499\" maxRamp=\"-999996.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.2\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.399\" maxRamp=\"-999996.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.399\" startHour=\"17\" startInterval=\"1\" endHour=\"\
+              17\" endInterval=\"1\">\r\n            <tranche price=\"1.8\" quantity=\"RPQTY\" maxRamp=\"\
+              999996.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.399\" maxRamp=\"-999996.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999996.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.299\" maxRamp=\"-999996.599\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999996.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.399\"\
+              \ startHour=\"7\" startInterval=\"2\" endHour=\"7\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.299\" maxRamp=\"-999996.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"0.1\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999996.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.199\" maxRamp=\"-999996.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"1.9\" quantity=\"RPQTY\" maxRamp=\"999996.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.199\" maxRamp=\"-999996.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" tradingDate=\"1899-11-30\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"-999999.299\" startHour=\"16\" startInterval=\"\
+              1\" endHour=\"16\" endInterval=\"1\">\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.099\" maxRamp=\"-999996.199\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999996.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999998.099\" maxRamp=\"-999996.099\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.0\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.299\"\
+              \ startHour=\"8\" startInterval=\"2\" endHour=\"8\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.999\" maxRamp=\"-999995.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"2.0\" quantity=\"RPQTY\" maxRamp=\"999995.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.999\" maxRamp=\"-999995.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.899\" maxRamp=\"-999995.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.199\" startHour=\"15\" startInterval=\"1\" endHour=\"\
+              15\" endInterval=\"1\">\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.899\" maxRamp=\"-999995.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-0.1\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.799\" maxRamp=\"-999995.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"2.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.199\"\
+              \ startHour=\"9\" startInterval=\"2\" endHour=\"9\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.799\" maxRamp=\"-999995.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999997.699\" maxRamp=\"-999995.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.699\" maxRamp=\"-999995.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.099\" startHour=\"14\" startInterval=\"1\" endHour=\"\
+              14\" endInterval=\"1\">\r\n            <tranche price=\"-0.2\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n   \
+              \         <tranche price=\"MAX\" quantity=\"-999997.599\" maxRamp=\"-999995.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999995.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999997.599\" maxRamp=\"-999995.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName5\" action=\"SUBMIT\" tradingDate=\"1900-02-02\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"999999.099\" startHour=\"10\" startInterval=\"\
+              2\" endHour=\"10\" endInterval=\"2\">\r\n            <tranche price=\"MAX\" quantity=\"\
+              -999997.499\" maxRamp=\"-999994.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\
+              \n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\" maxRamp=\"\
+              999994.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.499\" maxRamp=\"-999994.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-0.3\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.399\" maxRamp=\"-999994.799\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999998.999\"\
+              \ startHour=\"13\" startInterval=\"1\" endHour=\"13\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"2.3\" quantity=\"RPQTY\" maxRamp=\"999994.799\" fuelType=\"NON_LIQUID\"\
+              \ ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.399\"\
+              \ maxRamp=\"-999994.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n        \
+              \    <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.299\" maxRamp=\"-999994.599\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999994.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \     </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.999\" startHour=\"11\"\
+              \ startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.299\" maxRamp=\"-999994.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"-0.4\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.199\" maxRamp=\"-999994.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"2.4\" quantity=\"RPQTY\" maxRamp=\"999994.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.199\" maxRamp=\"-999994.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999998.899\"\
+              \ startHour=\"12\" startInterval=\"1\" endHour=\"12\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.099\" maxRamp=\"-999994.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"\
+              RPQTY\" maxRamp=\"999994.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999997.099\" maxRamp=\"-999994.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-0.5\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.899\"\
+              \ startHour=\"12\" startInterval=\"2\" endHour=\"12\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MAX\" quantity=\"-999996.999\" maxRamp=\"-999993.999\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.5\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999993.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999996.999\" maxRamp=\"-999993.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999993.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999996.899\" maxRamp=\"-999993.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \    </resourceSubmission>\r\n      </submission_documents>\r\n      <allow_gate_closure_violation>true</allow_gate_closure_violation>\r\
+              \n      <discard_file_on_error>true</discard_file_on_error>\r\n    </uploadBalancingVariationSubmission>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: uploadBalancingVariationSubmission
+      responses:
+        '200':
+          description: uploadBalancingVariationSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadBalancingVariationSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <validation_result\
+                \ documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n \
+                \       <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </uploadBalancingVariationSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=uploadBalancingVariationSubmissionDocuments:
+    post:
+      operationId: uploadBalancingVariationSubmissionDocuments
+      summary: uploadBalancingVariationSubmissionDocuments
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadBalancingVariationSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadBalancingVariationSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>submission_documents1</submission_documents>\r\n      <allow_gate_closure_violation>true</allow_gate_closure_violation>\r\
+              \n      <discard_file_on_error>true</discard_file_on_error>\r\n    </uploadBalancingVariationSubmissionDocuments>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: uploadBalancingVariationSubmissionDocuments
+      responses:
+        '200':
+          description: uploadBalancingVariationSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadBalancingVariationSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\"\
+                >\r\n      <validation_result documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"\
+                1900-01-01T01:01:01\">\r\n        <validationDocumentTags message=\"message1\" tagType=\"\
+                INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"\
+                xpath2\" messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </uploadBalancingVariationSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateBalancingStandingSubmission:
+    post:
+      operationId: validateBalancingStandingSubmission
+      summary: validateBalancingStandingSubmission
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateBalancingStandingSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateBalancingStandingSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" effectiveTradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"0\" startHour=\"0\" startInterval=\"1\" endHour=\"\
+              0\" endInterval=\"1\">\r\n            <tranche price=\"MAX\" quantity=\"-999999.999\" maxRamp=\"\
+              -999999.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              1\" quantity=\"RPQTY\" maxRamp=\"999999.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.999\" maxRamp=\"-999999.899\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.899\" maxRamp=\"-999999.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.999\" startHour=\"23\" startInterval=\"2\" endHour=\"\
+              23\" endInterval=\"2\">\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.899\" maxRamp=\"-999999.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.9\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.799\" maxRamp=\"-999999.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.999\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.799\" maxRamp=\"-999999.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950335\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.699\" maxRamp=\"-999999.399\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.699\" maxRamp=\"-999999.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n  \
+              \        <supplyCurve unavailable=\"-999999.899\" startHour=\"22\" startInterval=\"1\" endHour=\"\
+              22\" endInterval=\"1\">\r\n            <tranche price=\"0.8\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999999.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999999.599\" maxRamp=\"-999999.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"1.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999999.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\
+              \n            <tranche price=\"MIN\" quantity=\"999999.599\" maxRamp=\"-999999.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.899\"\
+              \ startHour=\"2\" startInterval=\"2\" endHour=\"2\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.499\" maxRamp=\"-999998.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.499\" maxRamp=\"-999998.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.7\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.399\" maxRamp=\"-999998.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \   </resourceSubmission>\r\n        <resourceSubmission resourceName=\"resourceName2\"\
+              \ action=\"CANCEL\" effectiveTradingDate=\"0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"-999999.799\" startHour=\"21\" startInterval=\"\
+              1\" endHour=\"21\" endInterval=\"1\">\r\n            <tranche price=\"1.3\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.399\" maxRamp=\"-999998.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.299\" maxRamp=\"-999998.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999998.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.799\"\
+              \ startHour=\"3\" startInterval=\"2\" endHour=\"3\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.299\" maxRamp=\"-999998.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"0.6\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.199\" maxRamp=\"-999998.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"1.4\" quantity=\"RPQTY\" maxRamp=\"999998.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999999.199\" maxRamp=\"-999998.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999999.699\"\
+              \ startHour=\"20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950335\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.099\" maxRamp=\"-999998.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999998.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999999.099\" maxRamp=\"-999998.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.5\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.699\"\
+              \ startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.999\" maxRamp=\"-999997.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"1.5\" quantity=\"RPQTY\" maxRamp=\"999997.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.999\" maxRamp=\"-999997.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.899\" maxRamp=\"-999997.799\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve\
+              \ unavailable=\"-999999.599\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999997.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MIN\" quantity=\"999998.899\" maxRamp=\"-999997.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.4\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.799\" maxRamp=\"-999997.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"1.6\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName3\" action=\"SUBMIT\" effectiveTradingDate=\"9999-12-31\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <supplyCurve unavailable=\"999999.599\"\
+              \ startHour=\"5\" startInterval=\"2\" endHour=\"5\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.799\" maxRamp=\"-999997.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.699\" maxRamp=\"-999997.399\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999998.699\" maxRamp=\"-999997.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.499\" startHour=\"18\" startInterval=\"1\" endHour=\"\
+              18\" endInterval=\"1\">\r\n            <tranche price=\"0.3\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.599\" maxRamp=\"-999997.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.7\" quantity=\"\
+              RPQTY\" maxRamp=\"999997.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999998.599\" maxRamp=\"-999997.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.499\"\
+              \ startHour=\"6\" startInterval=\"2\" endHour=\"6\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.499\" maxRamp=\"-999996.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999996.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999998.499\" maxRamp=\"-999996.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.2\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.399\" maxRamp=\"-999996.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.399\" startHour=\"17\" startInterval=\"1\" endHour=\"\
+              17\" endInterval=\"1\">\r\n            <tranche price=\"1.8\" quantity=\"RPQTY\" maxRamp=\"\
+              999996.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.399\" maxRamp=\"-999996.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999996.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.299\" maxRamp=\"-999996.599\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999996.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.399\"\
+              \ startHour=\"7\" startInterval=\"2\" endHour=\"7\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.299\" maxRamp=\"-999996.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"0.1\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999996.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.199\" maxRamp=\"-999996.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"1.9\" quantity=\"RPQTY\" maxRamp=\"999996.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.199\" maxRamp=\"-999996.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" effectiveTradingDate=\"1899-11-30\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <supplyCurve unavailable=\"-999999.299\"\
+              \ startHour=\"16\" startInterval=\"1\" endHour=\"16\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999996.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.099\" maxRamp=\"-999996.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999996.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n   \
+              \         <tranche price=\"MIN\" quantity=\"999998.099\" maxRamp=\"-999996.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.0\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.299\"\
+              \ startHour=\"8\" startInterval=\"2\" endHour=\"8\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.999\" maxRamp=\"-999995.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"2.0\" quantity=\"RPQTY\" maxRamp=\"999995.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.999\" maxRamp=\"-999995.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.899\" maxRamp=\"-999995.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.199\" startHour=\"15\" startInterval=\"1\" endHour=\"\
+              15\" endInterval=\"1\">\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.899\" maxRamp=\"-999995.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-0.1\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.799\" maxRamp=\"-999995.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"2.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.199\"\
+              \ startHour=\"9\" startInterval=\"2\" endHour=\"9\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.799\" maxRamp=\"-999995.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999997.699\" maxRamp=\"-999995.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.699\" maxRamp=\"-999995.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.099\" startHour=\"14\" startInterval=\"1\" endHour=\"\
+              14\" endInterval=\"1\">\r\n            <tranche price=\"-0.2\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n   \
+              \         <tranche price=\"MAX\" quantity=\"-999997.599\" maxRamp=\"-999995.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999995.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999997.599\" maxRamp=\"-999995.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName5\" action=\"SUBMIT\" effectiveTradingDate=\"1900-02-02\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <supplyCurve unavailable=\"999999.099\"\
+              \ startHour=\"10\" startInterval=\"2\" endHour=\"10\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MAX\" quantity=\"-999997.499\" maxRamp=\"-999994.999\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999994.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.499\" maxRamp=\"-999994.899\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"-0.3\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.399\" maxRamp=\"-999994.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n  \
+              \        <supplyCurve unavailable=\"-999998.999\" startHour=\"13\" startInterval=\"1\" endHour=\"\
+              13\" endInterval=\"1\">\r\n            <tranche price=\"2.3\" quantity=\"RPQTY\" maxRamp=\"\
+              999994.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.399\" maxRamp=\"-999994.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.299\" maxRamp=\"-999994.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999994.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.999\"\
+              \ startHour=\"11\" startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MIN\" quantity=\"999997.299\" maxRamp=\"-999994.499\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-0.4\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999994.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999997.199\" maxRamp=\"-999994.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"2.4\" quantity=\"\
+              RPQTY\" maxRamp=\"999994.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\
+              \n            <tranche price=\"MIN\" quantity=\"999997.199\" maxRamp=\"-999994.299\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve\
+              \ unavailable=\"-999998.899\" startHour=\"12\" startInterval=\"1\" endHour=\"12\" endInterval=\"\
+              1\">\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999994.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999997.099\" maxRamp=\"-999994.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999994.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.099\" maxRamp=\"-999994.099\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-0.5\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.899\"\
+              \ startHour=\"12\" startInterval=\"2\" endHour=\"12\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MAX\" quantity=\"-999996.999\" maxRamp=\"-999993.999\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.5\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999993.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999996.999\" maxRamp=\"-999993.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999993.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999996.899\" maxRamp=\"-999993.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \    </resourceSubmission>\r\n      </submission_documents>\r\n      <discard_file_on_error>true</discard_file_on_error>\r\
+              \n    </validateBalancingStandingSubmission>\r\n  </Body>\r\n</Envelope>"
+        description: validateBalancingStandingSubmission
+      responses:
+        '200':
+          description: validateBalancingStandingSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateBalancingStandingSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <validation_result\
+                \ documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n \
+                \       <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </validateBalancingStandingSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateBalancingStandingSubmissionDocuments:
+    post:
+      operationId: validateBalancingStandingSubmissionDocuments
+      summary: validateBalancingStandingSubmissionDocuments
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateBalancingStandingSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateBalancingStandingSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>submission_documents1</submission_documents>\r\n      <discard_file_on_error>true</discard_file_on_error>\r\
+              \n    </validateBalancingStandingSubmissionDocuments>\r\n  </Body>\r\n</Envelope>"
+        description: validateBalancingStandingSubmissionDocuments
+      responses:
+        '200':
+          description: validateBalancingStandingSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateBalancingStandingSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\"\
+                >\r\n      <validation_result documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"\
+                1900-01-01T01:01:01\">\r\n        <validationDocumentTags message=\"message1\" tagType=\"\
+                INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"\
+                xpath2\" messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </validateBalancingStandingSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateBalancingVariationSubmission:
+    post:
+      operationId: validateBalancingVariationSubmission
+      summary: validateBalancingVariationSubmission
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateBalancingVariationSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateBalancingVariationSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" tradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"0\" startHour=\"0\" startInterval=\"1\" endHour=\"\
+              0\" endInterval=\"1\">\r\n            <tranche price=\"MAX\" quantity=\"-999999.999\" maxRamp=\"\
+              -999999.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              1\" quantity=\"RPQTY\" maxRamp=\"999999.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.999\" maxRamp=\"-999999.899\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.899\" maxRamp=\"-999999.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.999\" startHour=\"23\" startInterval=\"2\" endHour=\"\
+              23\" endInterval=\"2\">\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.899\" maxRamp=\"-999999.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.9\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.799\" maxRamp=\"-999999.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.999\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.799\" maxRamp=\"-999999.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950335\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.699\" maxRamp=\"-999999.399\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999999.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999999.699\" maxRamp=\"-999999.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n  \
+              \        <supplyCurve unavailable=\"-999999.899\" startHour=\"22\" startInterval=\"1\" endHour=\"\
+              22\" endInterval=\"1\">\r\n            <tranche price=\"0.8\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999999.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999999.599\" maxRamp=\"-999999.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"1.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999999.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\
+              \n            <tranche price=\"MIN\" quantity=\"999999.599\" maxRamp=\"-999999.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999999.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.899\"\
+              \ startHour=\"2\" startInterval=\"2\" endHour=\"2\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.499\" maxRamp=\"-999998.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.499\" maxRamp=\"-999998.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.7\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.399\" maxRamp=\"-999998.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \   </resourceSubmission>\r\n        <resourceSubmission resourceName=\"resourceName2\"\
+              \ action=\"CANCEL\" tradingDate=\"0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"-999999.799\" startHour=\"21\" startInterval=\"\
+              1\" endHour=\"21\" endInterval=\"1\">\r\n            <tranche price=\"1.3\" quantity=\"\
+              RPQTY\" maxRamp=\"999998.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999999.399\" maxRamp=\"-999998.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950335\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999999.299\" maxRamp=\"-999998.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950335\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999998.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.799\"\
+              \ startHour=\"3\" startInterval=\"2\" endHour=\"3\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999999.299\" maxRamp=\"-999998.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"0.6\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.199\" maxRamp=\"-999998.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"1.4\" quantity=\"RPQTY\" maxRamp=\"999998.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999999.199\" maxRamp=\"-999998.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999999.699\"\
+              \ startHour=\"20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950335\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999998.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999999.099\" maxRamp=\"-999998.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950335\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999998.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999999.099\" maxRamp=\"-999998.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.5\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999998.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.699\"\
+              \ startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.999\" maxRamp=\"-999997.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"1.5\" quantity=\"RPQTY\" maxRamp=\"999997.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.999\" maxRamp=\"-999997.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.899\" maxRamp=\"-999997.799\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve\
+              \ unavailable=\"-999999.599\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999997.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MIN\" quantity=\"999998.899\" maxRamp=\"-999997.699\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"0.4\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.799\" maxRamp=\"-999997.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"1.6\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName3\" action=\"SUBMIT\" tradingDate=\"9999-12-31\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"999999.599\" startHour=\"5\" startInterval=\"\
+              2\" endHour=\"5\" endInterval=\"2\">\r\n            <tranche price=\"MIN\" quantity=\"999998.799\"\
+              \ maxRamp=\"-999997.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n      \
+              \      <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n      \
+              \      <tranche price=\"MAX\" quantity=\"-999998.699\" maxRamp=\"-999997.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999997.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999998.699\" maxRamp=\"-999997.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.499\" startHour=\"18\" startInterval=\"1\" endHour=\"\
+              18\" endInterval=\"1\">\r\n            <tranche price=\"0.3\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999997.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.599\" maxRamp=\"-999997.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"1.7\" quantity=\"\
+              RPQTY\" maxRamp=\"999997.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999998.599\" maxRamp=\"-999997.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999997.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.499\"\
+              \ startHour=\"6\" startInterval=\"2\" endHour=\"6\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.499\" maxRamp=\"-999996.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999996.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999998.499\" maxRamp=\"-999996.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"0.2\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.399\" maxRamp=\"-999996.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.399\" startHour=\"17\" startInterval=\"1\" endHour=\"\
+              17\" endInterval=\"1\">\r\n            <tranche price=\"1.8\" quantity=\"RPQTY\" maxRamp=\"\
+              999996.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.399\" maxRamp=\"-999996.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999996.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999998.299\" maxRamp=\"-999996.599\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999996.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.399\"\
+              \ startHour=\"7\" startInterval=\"2\" endHour=\"7\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999998.299\" maxRamp=\"-999996.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"0.1\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999996.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999998.199\" maxRamp=\"-999996.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"1.9\" quantity=\"RPQTY\" maxRamp=\"999996.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999998.199\" maxRamp=\"-999996.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" tradingDate=\"1899-11-30\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"-999999.299\" startHour=\"16\" startInterval=\"\
+              1\" endHour=\"16\" endInterval=\"1\">\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999998.099\" maxRamp=\"-999996.199\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999996.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MIN\" quantity=\"999998.099\" maxRamp=\"-999996.099\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"0.0\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999996.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.299\"\
+              \ startHour=\"8\" startInterval=\"2\" endHour=\"8\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.999\" maxRamp=\"-999995.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"2.0\" quantity=\"RPQTY\" maxRamp=\"999995.999\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.999\" maxRamp=\"-999995.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.899\" maxRamp=\"-999995.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n          </supplyCurve>\r\n     \
+              \     <supplyCurve unavailable=\"-999999.199\" startHour=\"15\" startInterval=\"1\" endHour=\"\
+              15\" endInterval=\"1\">\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.799\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.899\" maxRamp=\"-999995.699\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-0.1\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999997.799\" maxRamp=\"-999995.599\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"2.1\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999999.199\"\
+              \ startHour=\"9\" startInterval=\"2\" endHour=\"9\" endInterval=\"2\">\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.799\" maxRamp=\"-999995.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MAX\" quantity=\"-999997.699\" maxRamp=\"-999995.399\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\"\
+              \ quantity=\"RPQTY\" maxRamp=\"999995.399\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.699\" maxRamp=\"-999995.299\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \      <supplyCurve unavailable=\"-999999.099\" startHour=\"14\" startInterval=\"1\" endHour=\"\
+              14\" endInterval=\"1\">\r\n            <tranche price=\"-0.2\" quantity=\"MAXCAP_MINUS_RPQTY\"\
+              \ maxRamp=\"999995.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n   \
+              \         <tranche price=\"MAX\" quantity=\"-999997.599\" maxRamp=\"-999995.199\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.2\" quantity=\"\
+              RPQTY\" maxRamp=\"999995.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999997.599\" maxRamp=\"-999995.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999995.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName5\" action=\"SUBMIT\" tradingDate=\"1900-02-02\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <supplyCurve unavailable=\"999999.099\" startHour=\"10\" startInterval=\"\
+              2\" endHour=\"10\" endInterval=\"2\">\r\n            <tranche price=\"MAX\" quantity=\"\
+              -999997.499\" maxRamp=\"-999994.999\" fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\
+              \n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\" maxRamp=\"\
+              999994.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MIN\" quantity=\"999997.499\" maxRamp=\"-999994.899\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"-0.3\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.399\" maxRamp=\"-999994.799\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999998.999\"\
+              \ startHour=\"13\" startInterval=\"1\" endHour=\"13\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"2.3\" quantity=\"RPQTY\" maxRamp=\"999994.799\" fuelType=\"NON_LIQUID\"\
+              \ ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"MIN\" quantity=\"999997.399\"\
+              \ maxRamp=\"-999994.699\" fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n        \
+              \    <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.699\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.299\" maxRamp=\"-999994.599\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999994.599\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \     </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.999\" startHour=\"11\"\
+              \ startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.299\" maxRamp=\"-999994.499\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"-0.4\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.499\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.199\" maxRamp=\"-999994.399\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              OTHER\" />\r\n            <tranche price=\"2.4\" quantity=\"RPQTY\" maxRamp=\"999994.399\"\
+              \ fuelType=\"NON_LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"\
+              MIN\" quantity=\"999997.199\" maxRamp=\"-999994.299\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"-999998.899\"\
+              \ startHour=\"12\" startInterval=\"1\" endHour=\"12\" endInterval=\"1\">\r\n           \
+              \ <tranche price=\"-79228162514264337593543950334\" quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"\
+              999994.299\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche\
+              \ price=\"MAX\" quantity=\"-999997.099\" maxRamp=\"-999994.199\" fuelType=\"LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n            <tranche price=\"79228162514264337593543950334\" quantity=\"\
+              RPQTY\" maxRamp=\"999994.199\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"LFAS\" />\r\n\
+              \            <tranche price=\"MIN\" quantity=\"999997.099\" maxRamp=\"-999994.099\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n            <tranche price=\"-0.5\" quantity=\"\
+              MAXCAP_MINUS_RPQTY\" maxRamp=\"999994.099\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              COMTEST\" />\r\n          </supplyCurve>\r\n          <supplyCurve unavailable=\"999998.899\"\
+              \ startHour=\"12\" startInterval=\"2\" endHour=\"12\" endInterval=\"2\">\r\n           \
+              \ <tranche price=\"MAX\" quantity=\"-999996.999\" maxRamp=\"-999993.999\" fuelType=\"LIQUID\"\
+              \ ancillaryPurpose=\"LFAS\" />\r\n            <tranche price=\"2.5\" quantity=\"RPQTY\"\
+              \ maxRamp=\"999993.999\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n     \
+              \       <tranche price=\"MIN\" quantity=\"999996.999\" maxRamp=\"-999993.899\" fuelType=\"\
+              LIQUID\" ancillaryPurpose=\"COMTEST\" />\r\n            <tranche price=\"-79228162514264337593543950334\"\
+              \ quantity=\"MAXCAP_MINUS_RPQTY\" maxRamp=\"999993.899\" fuelType=\"NON_LIQUID\" ancillaryPurpose=\"\
+              LFAS\" />\r\n            <tranche price=\"MAX\" quantity=\"-999996.899\" maxRamp=\"-999993.799\"\
+              \ fuelType=\"LIQUID\" ancillaryPurpose=\"OTHER\" />\r\n          </supplyCurve>\r\n    \
+              \    </resourceSubmission>\r\n      </submission_documents>\r\n      <allow_gate_closure_violation>true</allow_gate_closure_violation>\r\
+              \n      <discard_file_on_error>true</discard_file_on_error>\r\n    </validateBalancingVariationSubmission>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: validateBalancingVariationSubmission
+      responses:
+        '200':
+          description: validateBalancingVariationSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateBalancingVariationSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <validation_result\
+                \ documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n \
+                \       <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </validateBalancingVariationSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateBalancingVariationSubmissionDocuments:
+    post:
+      operationId: validateBalancingVariationSubmissionDocuments
+      summary: validateBalancingVariationSubmissionDocuments
+      tags:
+      - Balancing Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateBalancingVariationSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateBalancingVariationSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <submission_name>submission_name1</submission_name>\r\
+              \n      <submission_documents>submission_documents1</submission_documents>\r\n      <allow_gate_closure_violation>true</allow_gate_closure_violation>\r\
+              \n      <discard_file_on_error>true</discard_file_on_error>\r\n    </validateBalancingVariationSubmissionDocuments>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: validateBalancingVariationSubmissionDocuments
+      responses:
+        '200':
+          description: validateBalancingVariationSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateBalancingVariationSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\"\
+                >\r\n      <validation_result documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"\
+                1900-01-01T01:01:01\">\r\n        <validationDocumentTags message=\"message1\" tagType=\"\
+                INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"\
+                xpath2\" messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </validation_result>\r\n    </validateBalancingVariationSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
 components:
   securitySchemes:
     apiKeyHeader:
@@ -16,6 +1371,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Balancing Submission v2
+  description: Balancing Submission v2

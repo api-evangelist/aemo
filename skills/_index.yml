@@ -1,0 +1,116 @@
+generated: '2026-07-27'
+method: generated
+source: openapi/ (76 documents, 798 operations) + conventions/, errors/, authentication/, asyncapi/
+description: 'Packaged Agent Skills for AEMO''s marquee API flows. Every step is grounded in an operationId verified
+  to exist verbatim in openapi/, and every skill carries the AEMO-specific operating rules an agent needs: the layered
+  auth model, the participant identity headers, the absence of any idempotency contract, the undocumented throttle,
+  and the market-safety constraints on submission and outage operations. AEMO publishes no AGENTS.md or skill files
+  of its own — these are generated.'
+skill_count: 7
+skills:
+- file: aemo-cdr-energy-data-sharing.md
+  name: Read Consumer Data Right energy data from AEMO
+  description: Use AEMO's Consumer Data Right secondary data holder APIs to read energy plans, service points, usage,
+    DER and account data under the Consumer Data Standards.
+  api: openapi/aemo-cds-energy-api-openapi.yml
+  operations:
+  - listEnergyPlans
+  - getEnergyPlanDetail
+  - listElectricityServicePoints
+  - getElectricityServicePointDetail
+  - getElectricityServicePointUsage
+  - listElectricityUsageForServicePoints
+  - getElectricityDERForServicePoint
+  - listElectricityDERForSpecificServicePoints
+  - listEnergyAccounts
+  - getEnergyAccountDetail
+  - getStatus
+  - getOutages
+- file: aemo-der-register-installation.md
+  name: Maintain DER Register installation and NMI records
+  description: Create, read, update and audit distributed energy resource (DER) records against AEMO's DER Register
+    for the NEM and the WEM.
+  api: openapi/aemo-der-register-installation-v2-openapi.yml
+  operations:
+  - retrieveDERInstallationRecords
+  - retrieveDERInstallationRecord
+  - retrieveDERInstallationHistory
+  - createDERInstallationRecord
+  - updateDERInstallationRecord
+  - createsANewNMIRecord
+  - returnsTheCurrentNMIDetails
+  - updatesANMIRecord
+- file: aemo-ehub-b2b-messaging.md
+  name: Exchange B2B and B2M messages through the AEMO e-Hub
+  description: Send, receive and acknowledge aseXML business documents through AEMO's e-Hub, using either the asynchronous
+    push model or the polling model.
+  api: openapi/aemo-b2bmessaging-async-v1-openapi.yml
+  operations:
+  - submitAB2BMessage
+  - determineWhatMessagesAreInTheEHubQueue
+  - submitMessageAcknowledgement
+  - deleteMessageAcknowledgement
+  - submitMessages
+  - submitMessageAcknowledgements
+  - getQueueMetaData
+  - getAlert
+  - getAlerts
+  - getStatusOfCoreEHubApplications
+- file: aemo-gas-bulletin-board-reports.md
+  name: Pull Gas Bulletin Board reports
+  description: Retrieve AEMO Gas Bulletin Board public reporting data — nominations, forecasts, production and flow,
+    capacity outlooks and secondary capacity trades.
+  api: openapi/aemo-report-v1-openapi.yml
+  operations:
+  - dailyFacilitiesReport
+  - dailyReportForNominationAndForecastData
+  - dailyReportForProductionFlowAndStorage
+  - dailyReportForProductionAndUsageAtEachConnectionPoint
+  - dailyReportForCapacityOutlookForTheMediumTerm
+  - adhocReportOnStates
+  - adhocReportForLinepackCapacityAdequacy
+  - adhocReportForStandingNameplateCapacity
+  - adhocReportOnUncontractedCapacityOutlookOnPipelinesAndStorageFacilities
+  - adhocReportPipelineNodeTransfer
+  - weeklyReportOnSecondaryPipelineCapacityAvailableForSaleOnBBPipelines
+  - weeklyReportOnSecondaryPipelineCapacityTrades
+  - dailyReportWithListOfRegisteredParticipants
+- file: aemo-manage-network-outages.md
+  name: Lodge and manage network and generator outages
+  description: Create, inspect, update and withdraw outages in AEMO's Outage Management System from a network operator
+    or generator perspective.
+  api: openapi/aemo-outage-management-external-v1-openapi.yml
+  operations:
+  - retrieveOutageFromOutageManagement
+  - getParticularOutage
+  - retrieveLatestOutageStatusForNetworkOperator
+  - createANewNetworkOutageInOutageManagementSystem
+  - createANewGeneratorOutageInOutageManagementSystem
+  - updateExistingNetworkOutageInOutageManagementSystem
+  - withdrawExistingNetworkOutageInOutageManagementSystem
+  - withdrawExistingNetworkOutagesInOutageManagementSystem
+- file: aemo-submit-nem-dispatch-bids.md
+  name: Submit and verify NEM dispatch bids and offers
+  description: Submit Energy, FCAS or MNSP bids and offers into AEMO's National Electricity Market dispatch process,
+    then read them back to confirm what AEMO holds.
+  api: openapi/aemo-bidding-v1-openapi.yml
+  operations:
+  - submitBids
+  - getBid
+  - getBids
+  - getSubmission
+  - getSubmissions
+- file: aemo-tls-certificate-lifecycle.md
+  name: Manage AEMO-signed TLS client certificates
+  description: Self-manage the AEMO-signed TLS certificates a participant needs to connect to the e-Hub — list,
+    download, generate, reissue, renew and revoke.
+  api: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+  operations:
+  - getTheScopeForAUser
+  - getAllCertificateOrders
+  - getDetailsOnACertificateOrder
+  - createANewCertificate
+  - downloadACertificate
+  - reissueACertificate
+  - renewACertificate
+  - revokeACertificate

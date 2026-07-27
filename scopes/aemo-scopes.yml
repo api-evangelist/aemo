@@ -1,0 +1,58 @@
+generated: '2026-07-27'
+method: searched
+source: https://login.aemo.com.au/login.aemo.com.au/v2.0/.well-known/openid-configuration?p=B2C_1A_DERR_SIGNUPSIGNIN
+docs: https://dev.aemo.com.au/oauth
+description: >-
+  AEMO's OpenAPI documents declare only APIM subscription keys, so no oauth2 security scheme
+  is derivable from the specs. AEMO does however run two real OAuth surfaces. The e-Hub gateway
+  issues client_credentials bearer tokens at api.aemo.com.au/oauth/v1/token and publishes no
+  scope vocabulary at all — authorisation is carried by the participant's URM permissions and
+  APIM product subscription rather than by scopes. The DER Register consumer-registration API
+  authenticates end users through an Azure AD B2C user flow whose OpenID Connect discovery
+  document advertises the `openid` scope; the published DERR authorize request additionally
+  requests `offline_access`.
+schemes:
+  - name: e-Hub OAuth 2.0 (client credentials)
+    type: oauth2
+    source: https://dev.aemo.com.au/oauth
+    flows:
+      - flow: clientCredentials
+        tokenUrl: https://api.aemo.com.au/oauth/v1/token?grant_type=client_credentials
+        preproductionTokenUrl: https://api.preprod.wgw.aemo.com.au/oauth/v1/token?grant_type=client_credentials
+        scopes_documented: false
+        note: >-
+          Client ID and secret are sent as an HTTP Basic Authorization header. The token response
+          returns transactionID, access_token and access_token_expires_in. AEMO documents no scope
+          parameter and no scope vocabulary for this flow.
+  - name: DER Register consumer registration (Azure AD B2C, OIDC)
+    type: openIdConnect
+    source: well-known/aemo-derr-openid-configuration.json
+    issuer: https://login.aemo.com.au/51b4c181-bc43-439c-8cd4-a3249e0c7f2b/v2.0/
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://login.aemo.com.au/login.aemo.com.au/oauth2/v2.0/authorize?p=b2c_1a_derr_signupsignin
+        tokenUrl: https://login.aemo.com.au/login.aemo.com.au/oauth2/v2.0/token?p=b2c_1a_derr_signupsignin
+scopes:
+  - scope: openid
+    description: >-
+      Standard OpenID Connect scope. The only value in `scopes_supported` of the DERR Azure AD B2C
+      discovery document.
+    flows: [authorizationCode]
+    sources: [well-known/aemo-derr-openid-configuration.json]
+  - scope: offline_access
+    description: >-
+      Requested alongside `openid` in AEMO's published DERR installer-portal authorize URL so the
+      client can obtain a refresh token (the API exposes a refreshExpiredAccessToken operation).
+    flows: [authorizationCode]
+    sources:
+      - openapi/aemo-der-consumer-registration-v1-openapi.yml
+      - https://login.aemo.com.au/login.aemo.com.au/oauth2/v2.0/authorize?p=B2C_1A_DERR_SIGNUPSIGNIN
+authorization_model:
+  primary: >-
+    Authorisation on AEMO's participant APIs is not scope-based. Access is granted by (1) formal
+    onboarding of the participant to an APIM product, which yields a subscription key, and
+    (2) per-user rights in URM/MSATS, administered by the participant's own administrator. An
+    authenticated user without the right URM permission receives HTTP 422.
+  references:
+    - https://dev.aemo.com.au/urm-username-password
+    - https://dev.aemo.com.au/faqs

@@ -6,9 +6,4223 @@ info:
     name: AEMO Real Time Market Submissions Team
     email: wa.operations@aemo.com.au
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/rtms-external-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission
-paths: { }
+- url: https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission
+paths:
+  /consolidated:
+    get:
+      operationId: aPIEndpointThatHandlesRetrievingBatchedConsolidatedDispatchIntervalsForMultipleFacilitiesMarketsAndTradingDays
+      summary: API endpoint that handles retrieving batched consolidated dispatch intervals for multiple
+        facilities, markets and Trading Days
+      tags:
+      - RTMS
+      description: Retrieves the consolidated view of submissions for all or specific facilities within
+        a date range (not greater than 10 days).
+      parameters:
+      - name: TradingDayFrom
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339). From Trading Day (YYYY-MM-DD) inclusive
+      - name: TradingDayTo
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339). To Trading Day (YYYY-MM-DD) inclusive
+      - name: Facilities
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma Separated Values (CSV) list of facilitie(s)
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Data is available for the date range. Include all facilities owned and applicable
+                    markets.
+                  value:
+                    transactionId: 5511acad-87e8-4e74-be75-0e477dd4e5aa
+                    asAt: '2022-03-16T08:23:46Z'
+                    data:
+                    - applicability:
+                      - tradingDate: '2022-12-05'
+                        dispatchIntervalFrom: 1
+                        dispatchIntervalTo: 19
+                      - tradingDate: '2022-12-06'
+                        dispatchIntervalFrom: 1
+                        dispatchIntervalTo: 288
+                      facility: MyTestFacility1
+                      marketService: Energy
+                      submissionId: b0260932-a61f-4faf-a309-8f61e800976b
+                      submissionType: Variation
+                      submissionCode: OTHER
+                      submissionDateTime: '2022-11-21T03:28:46Z'
+                      energy:
+                        unconstrainedInjectionForecast: 16
+                        unconstrainedWithdrawalForecast: 0
+                        maxInjectionCapacity: 16
+                        maxWithdrawalCapacity: 0
+                        inflexibleFlag: 'NO'
+                        maxUpwardRampRate: 3
+                        maxDownwardRampRate: 3
+                        fsip: ''
+                        tranches:
+                        - tranche: 1
+                          price: MIN
+                          quantity: 0.1
+                          noticeTime: ''
+                          capacityType: IN-SERVICE
+                          fuelType: NON-LIQUID
+                        - tranche: 2
+                          price: MAX
+                          quantity: 15.9
+                          noticeTime: ''
+                          capacityType: IN-SERVICE
+                          fuelType: NON-LIQUID
+                      ess: ''
+                      dsp: ''
+                    - applicability:
+                      - tradingDate: '2022-12-05'
+                        dispatchIntervalFrom: 20
+                        dispatchIntervalTo: 38
+                      facility: MyTestFacility2
+                      marketService: RegulationRaise
+                      submissionId: b0260932-a61f-4faf-a309-8f61e800976b
+                      submissionType: Standing
+                      submissionCode: ''
+                      submissionDateTime: '2022-11-21T03:28:46Z'
+                      energy: ''
+                      ess:
+                        maximumCapacity: 59.4
+                        enablementMinimum: 10
+                        enablementMaximum: 30
+                        lowBreakpoint: 15
+                        highBreakpoint: 25
+                        tranches:
+                        - tranche: 1
+                          price: '-100.99'
+                          quantity: 29.4
+                          noticeTime: ''
+                          capacityType: IN-SERVICE
+                          fuelType: NON-LIQUID
+                        - tranche: 2
+                          price: '-50.35'
+                          quantity: 30
+                          noticeTime: ''
+                          capacityType: IN-SERVICE
+                          fuelType: NON-LIQUID
+                      dsp: ''
+                example2:
+                  summary: No data available for the specified parameters, or data not accessible to the
+                    participant
+                  value:
+                    transactionId: 6013c15d-1d59-4f11-9e5b-3a21c5034c7a
+                    data: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: One or more mandatory parameters is missing
+                  value:
+                    transactionId: 650e2d1e-1473-452a-a544-7f6911da39f8
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: tradingdayfrom
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: tradingdayto
+                example2:
+                  summary: Specified Trading Day is in the wrong format
+                  value:
+                    transactionId: c8d3a0f4-5b2e-4787-8e23-26f8df3effdb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as yyyy-MM-dd without time information
+                      source:
+                        parameter: tradingdayfrom=2021-11-26T08:00
+                example3:
+                  summary: The specified day range exceeding 10 days
+                  value:
+                    transactionId: 6f0b6dcb-756c-4cfd-8a78-b9b6a63a8da3
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Query dates range must be within 10 days
+                      source:
+                        parameter: tradingdayfrom=2023-01-01&tradingdayto=2023-01-11
+                example4:
+                  summary: The specified day range is invalid
+                  value:
+                    transactionId: 6f0b6dcb-756c-4cfd-8a78-b9b6a63a8da3
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: '''tradingdayto'' must not be before ''tradingdayfrom'''
+                      source:
+                        parameter: tradingdayfrom=2023-01-11&tradingdayto=2023-01-10
+                example5:
+                  summary: The specified value for a parameter is empty (even if optional)
+                  value:
+                    transactionId: d5cf2f1e-9827-42ee-a5bd-18936b083d29
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Value for parameter facilities must be specified
+                      source:
+                        parameter: facilities=
+                example6:
+                  summary: A parameter has been specified more than once
+                  value:
+                    transactionId: 2425e75b-3f12-495b-870f-d87465549e46
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Duplicated parameter key is received
+                      source:
+                        parameter: facilities
+                example7:
+                  summary: A specified parameter not allowed
+                  value:
+                    transactionId: 119c0c93-cae7-431e-9dd6-7b1cb3780995
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Parameter is not allowed
+                      source:
+                        parameter: marketservice
+                example8:
+                  summary: One or more specified facilities does not exsit
+                  value:
+                    transactionId: ce4b0b41-a33b-4abb-9130-f2f0190f3a05
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: one or more facilities does not exist
+                      source:
+                        parameter: facilities=1,2,3
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /consolidated/dsp:
+    get:
+      operationId: aPIEndpointThatHandlesSearchingTheDSPConsolidatedDispatchIntervalsUsingTheProvidedSearchCriteria
+      summary: API endpoint that handles searching the DSP consolidated dispatch intervals using the provided
+        search criteria.
+      tags:
+      - RTMS
+      description: Retrieves the consolidated view of submissions for a specific Trading Day, Market Service
+        and Facility. This endpoint is limited to the Energy Market Service and DSP Facilities.
+      parameters:
+      - name: TradingDay
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339). Returns the consolidated view of submissions
+          made for the specified Trading Day (YYYY-MM-DD). The Trading Day can be in the past or in the
+          future. Future dates are limited to the Acceptance Horizon window.
+      - name: Facility
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Returns the consolidated view of submissions made for the specified Facility. Facility
+          must be a DSP Facility
+      - name: MarketService
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Energy
+          - RegulationRaise
+          - RegulationLower
+          - ContingencyRaise
+          - ContingencyLower
+          - RoCoF
+        description: This parameter must be set to 'Energy'. Returns the consolidated view of submissions
+          made for the Energy Market Service.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: The specified combination of parameters returns data
+                  value:
+                    transactionId: 9d44a32c-13f6-4e24-a39f-f4b04d7aec6b
+                    asAt: '2022-03-16T08:30:17Z'
+                    data:
+                    - tradingDay: '2022-03-23'
+                      dispatchIntervalNo: '0288-01-01'
+                      dispatchIntervalTimeFrom: '2023-03-23'
+                      dispatchIntervalTimeTo: '2023-03-23'
+                      dspUnconstrainedWithdrawalQuantity: 25
+                      dspConstrainedWithdrawalQuantity: 25
+                      submissionType: Variation
+                      submissionDateTime: '2022-03-16T08:29:40Z'
+                example2:
+                  summary: No data available for the specified parameters, or data not accessible to the
+                    participant
+                  value:
+                    transactionId: 6013c15d-1d59-4f11-9e5b-3a21c5034c7a
+                    data: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: One or more mandatory parameters is missing
+                  value:
+                    transactionId: 650e2d1e-1473-452a-a544-7f6911da39f8
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: tradingday
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: marketservice
+                example2:
+                  summary: Specified Trading Day is in the wrong format
+                  value:
+                    transactionId: c8d3a0f4-5b2e-4787-8e23-26f8df3effdb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as YYYY-MM-DD without time information
+                      source:
+                        parameter: tradingday=2021-11-26T08:00
+                example3:
+                  summary: The specified Trading Day is beyond the Acceptance Horizon
+                  value:
+                    transactionId: 6f0b6dcb-756c-4cfd-8a78-b9b6a63a8da3
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date must be on or before 2021-12-29
+                      source:
+                        parameter: tradingday=2021-12-30
+                example4:
+                  summary: The specified value for a parameter is empty
+                  value:
+                    transactionId: d5cf2f1e-9827-42ee-a5bd-18936b083d29
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: facility
+                example5:
+                  summary: A parameter has been specified more than once
+                  value:
+                    transactionId: 2425e75b-3f12-495b-870f-d87465549e46
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Duplicated parameter key is received
+                      source:
+                        parameter: marketservice
+                example6:
+                  summary: A specified parameter not allowed
+                  value:
+                    transactionId: 119c0c93-cae7-431e-9dd6-7b1cb3780995
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Parameter is not allowed
+                      source:
+                        parameter: random
+                example7:
+                  summary: Specified value for marketService is not one of the allowable values
+                  value:
+                    transactionId: ecd00830-fb75-44f3-b5ad-9aac7d34d51d
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: Energy'
+                      source:
+                        parameter: marketservice=rocof
+                example8:
+                  summary: Specified facility is not a DSP
+                  value:
+                    transactionId: db88d0ae-e32a-4422-887f-045aa032509e
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: must be a DSP facility
+                      source:
+                        parameter: facility=SCHEDULED_FACILITY_NAME
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /consolidated/energy:
+    get:
+      operationId: aPIEndpointThatHandlesSearchingTheEnergyConsolidatedDispatchIntervalsUsingTheProvidedSearchCriteria
+      summary: API endpoint that handles searching the Energy consolidated dispatch intervals using the
+        provided search criteria.
+      tags:
+      - RTMS
+      description: Retrieves the consolidated view of submissions for a specific Trading Day, Market Service
+        and Facility. This endpoint is limited to the Energy Market Service and non-DSP Facilities.
+      parameters:
+      - name: TradingDay
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339). Returns the consolidated view of submissions
+          made for the specified Trading Day (YYYY-MM-DD). The Trading Day can be in the past or in the
+          future. Future dates are limited to the Acceptance Horizon window.
+      - name: Facility
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Returns the consolidated view of submissions made for the specified Facility. Facility
+          must be a non-DSP Facility
+      - name: MarketService
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Energy
+          - RegulationRaise
+          - RegulationLower
+          - ContingencyRaise
+          - ContingencyLower
+          - RoCoF
+        description: This parameter must be set to 'Energy'. Returns the consolidated view of submissions
+          made for the Energy Market Service.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Data is available for the specified combination of parameters
+                  value:
+                    transactionId: 3de99d04-d347-4381-a4d6-62b19ef3e66e
+                    asAt: '2022-03-16T08:19:56Z'
+                    data:
+                    - tradingDay: '2022-03-21'
+                      dispatchIntervalNo: '0288-01-01'
+                      dispatchIntervalTimeFrom: '2023-03-23'
+                      dispatchIntervalTimeTo: '2023-03-23'
+                      unconstrainedInjectionForecast: 30
+                      unconstrainedWithdrawalForecast: 0
+                      maxInjectionCapacity: 30
+                      maxWithdrawalCapacity: 0
+                      inflexibleFlag: false
+                      maxUpwardRampRate: 8
+                      maxDownwardRampRate: 8
+                      fsip:
+                        minimumLoad: 0.001
+                        t1: 1
+                        t2: 1
+                        t3: 1
+                        t4: 1
+                      tranches:
+                      - tranche: 1
+                        price: MIN
+                        quantity: 5
+                        noticeTime: ''
+                        capacityType: IN-SERVICE
+                        fuelType: NON-LIQUID
+                      - tranche: 2
+                        price: '-25.00'
+                        quantity: 10
+                        noticeTime: 5
+                        capacityType: AVAILABLE
+                        fuelType: NON-LIQUID
+                      - tranche: 3
+                        price: '103.00'
+                        quantity: 10
+                        noticeTime: 5
+                        capacityType: AVAILABLE
+                        fuelType: NON-LIQUID
+                      - tranche: 4
+                        price: MAX
+                        quantity: 5
+                        noticeTime: 5
+                        capacityType: AVAILABLE
+                        fuelType: NON-LIQUID
+                      submissionType: Variation
+                      submissionDateTime: '2022-03-16T08:16:09Z'
+                example2:
+                  summary: No data available for the specified parameters, or data not accessible to the
+                    participant
+                  value:
+                    transactionId: 6013c15d-1d59-4f11-9e5b-3a21c5034c7a
+                    data: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: One or more mandatory parameters is missing
+                  value:
+                    transactionId: 650e2d1e-1473-452a-a544-7f6911da39f8
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: tradingday
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: marketservice
+                example2:
+                  summary: The specified Trading Day is in the wrong format
+                  value:
+                    transactionId: c8d3a0f4-5b2e-4787-8e23-26f8df3effdb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as YYYY-MM-DD without time information
+                      source:
+                        parameter: tradingday=2021-11-26T08:00
+                example3:
+                  summary: The specified Trading Day is beyond the Acceptance Horizon
+                  value:
+                    transactionId: 6f0b6dcb-756c-4cfd-8a78-b9b6a63a8da3
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date must be on or before 2021-12-29
+                      source:
+                        parameter: tradingday=2021-12-30
+                example4:
+                  summary: The specified value for a parameter is empty
+                  value:
+                    transactionId: d5cf2f1e-9827-42ee-a5bd-18936b083d29
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: facility
+                example5:
+                  summary: A parameter has been specified more than once
+                  value:
+                    transactionId: 2425e75b-3f12-495b-870f-d87465549e46
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Duplicated parameter key is received
+                      source:
+                        parameter: marketservice
+                example6:
+                  summary: A specified parameter not allowed
+                  value:
+                    transactionId: 119c0c93-cae7-431e-9dd6-7b1cb3780995
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Parameter is not allowed
+                      source:
+                        parameter: random
+                example7:
+                  summary: Specified value for marketService is not one of the allowable values
+                  value:
+                    transactionId: ecd00830-fb75-44f3-b5ad-9aac7d34d51d
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: Energy'
+                      source:
+                        parameter: marketservice=rocof
+                example8:
+                  summary: Specified facility is a DSP
+                  value:
+                    transactionId: 41f08392-033c-49ea-aa83-8110f960eb54
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: must not be a DSP facility
+                      source:
+                        parameter: facility=DSP_FACILITY_NAME
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /consolidated/ess:
+    get:
+      operationId: aPIEndpointThatHandlesSearchingTheESSConsolidatedDispatchIntervalsUsingTheProvidedSearchCriteria
+      summary: API endpoint that handles searching the ESS consolidated dispatch intervals using the provided
+        search criteria.
+      tags:
+      - RTMS
+      description: Retrieves the consolidated view of submissions for a specific Trading Day, Market Service
+        and Facility. This endpoint is limited to the ESS Market Services (Regulation Raise/Lower, Contingency
+        Raise/Lower, RoCoF) and non-DSP Facilities.
+      parameters:
+      - name: TradingDay
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339). Returns the consolidated view of submissions
+          made for the specified Trading Day (YYYY-MM-DD). The Trading Day can be in the past or in the
+          future. Future dates are limited to the Acceptance Horizon window.
+      - name: Facility
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Returns the consolidated view of submissions made for the specified Facility. Facility
+          must be a non-DSP Facility
+      - name: MarketService
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - Energy
+          - RegulationRaise
+          - RegulationLower
+          - ContingencyRaise
+          - ContingencyLower
+          - RoCoF
+        description: 'Returns the consolidated view of submissions made for the specified Market Service.
+          Only ESS Market Services are accepted: ''regulationRaise'', or ''regulationLower'', or  ''contingencyRaise'',
+          or ''contingencyLower'', or ''rocof'''
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Data is available for the specified combination of parameters
+                  value:
+                    transactionId: 5511acad-87e8-4e74-be75-0e477dd4e5aa
+                    asAt: '2022-03-16T08:23:46Z'
+                    data:
+                    - tradingDay: '2022-03-21'
+                      dispatchIntervalNo: '0288-01-01'
+                      dispatchIntervalTimeFrom: '2023-03-23'
+                      dispatchIntervalTimeTo: '2023-03-23'
+                      maximumCapacity: 23.1
+                      enablementMinimum: 10
+                      enablementMaximum: 15
+                      lowBreakpoint: 25
+                      highBreakpoint: 30
+                      tranches:
+                      - tranche: 1
+                        price: '-10.00'
+                        quantity: 5
+                        noticeTime: ''
+                        capacityType: IN-SERVICE
+                        fuelType: NON-LIQUID
+                      - tranche: 2
+                        price: '10.00'
+                        quantity: 5
+                        noticeTime: 1
+                        capacityType: IN-SERVICE
+                        fuelType: NON-LIQUID
+                      - tranche: 3
+                        price: '25.00'
+                        quantity: 5
+                        noticeTime: 1
+                        capacityType: IN-SERVICE
+                        fuelType: NON-LIQUID
+                      - tranche: 4
+                        price: '35.15'
+                        quantity: 5
+                        noticeTime: ''
+                        capacityType: IN-SERVICE
+                        fuelType: NON-LIQUID
+                      - tranche: 5
+                        price: MAX
+                        quantity: 3.1
+                        noticeTime: ''
+                        capacityType: IN-SERVICE
+                        fuelType: NON-LIQUID
+                      submissionType: Variation
+                      submissionDateTime: '2022-03-16T08:16:09Z'
+                example2:
+                  summary: No data available for the specified parameters, or data not accessible to the
+                    participant
+                  value:
+                    transactionId: 6013c15d-1d59-4f11-9e5b-3a21c5034c7a
+                    data: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: One or more mandatory parameters is missing
+                  value:
+                    transactionId: 650e2d1e-1473-452a-a544-7f6911da39f8
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: tradingday
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: marketservice
+                example2:
+                  summary: Specified Trading Day is in the wrong format
+                  value:
+                    transactionId: c8d3a0f4-5b2e-4787-8e23-26f8df3effdb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as YYYY-MM-DD without time information
+                      source:
+                        parameter: tradingday=2021-11-26T08:00
+                example3:
+                  summary: The specified Trading Day is beyond the Acceptance Horizon
+                  value:
+                    transactionId: 6f0b6dcb-756c-4cfd-8a78-b9b6a63a8da3
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date must be on or before 2021-12-29
+                      source:
+                        parameter: tradingday=2021-12-30
+                example4:
+                  summary: The specified value for a parameter is empty
+                  value:
+                    transactionId: d5cf2f1e-9827-42ee-a5bd-18936b083d29
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Mandatory parameter value is missing
+                      source:
+                        parameter: facility
+                example5:
+                  summary: A parameter has been specified more than once
+                  value:
+                    transactionId: 2425e75b-3f12-495b-870f-d87465549e46
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Duplicated parameter key is received
+                      source:
+                        parameter: marketservice
+                example6:
+                  summary: A specified parameter not allowed
+                  value:
+                    transactionId: 119c0c93-cae7-431e-9dd6-7b1cb3780995
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Parameter is not allowed
+                      source:
+                        parameter: random
+                example7:
+                  summary: Specified value for marketService is not one of the allowable values
+                  value:
+                    transactionId: ce4b0b41-a33b-4abb-9130-f2f0190f3a05
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: RegulationRaise, RegulationLower,
+                        ContingencyRaise, ContingencyLower, Rocof'
+                      source:
+                        parameter: marketservice=energy
+                example8:
+                  summary: Specified facility is a DSP
+                  value:
+                    transactionId: 41f08392-033c-49ea-aa83-8110f960eb54
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: must not be a DSP facility
+                      source:
+                        parameter: facility=FACILITY_NAME
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /submissions/dsp/waitForResult:
+    post:
+      operationId: createANewDSPSubmissionByEmbeddedTheDSPSubmissionJSONInTheRequestAndWaitForTheValidationToCompleteBlockingCall
+      summary: "Create a new DSP submission by embedded the DSP submission JSON in the request and wait\
+        \ for the\r\nvalidation to complete (blocking call)."
+      tags:
+      - RTMS
+      description: "Submits one RTM Submission for DSP facilities and wait for the validation response.\
+        \ \nThere is a timeout of 30 seconds applied to this endpoint. If the call times out before validation\
+        \ process is complete, a submission status of SUBMITTED is returned"
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json:
+            example:
+              submission:
+                standing:
+                  comment: string
+                  submissionReason: string
+                  effectiveTradingDateFrom: string
+                  effectiveDispatchIntervalFrom: 0
+                  daysOfTheWeek:
+                  - dayOfWeek: MON
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          dspUnconstrainedWithdrawalQuantity: 0
+                          dspConstrainedWithdrawalQuantity: 0
+                variation:
+                  comment: string
+                  submissionCode: OUTAGE
+                  submissionReason: string
+                  tradingDays:
+                  - dateFrom: string
+                    dateTo: string
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          dspUnconstrainedWithdrawalQuantity: 0
+                          dspConstrainedWithdrawalQuantity: 0
+              referenceId: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Submission processed successfully (status = rejected)
+                  value:
+                    transactionId: c6dcf605-6041-4f93-a140-3eb2f875c34c
+                    data:
+                      submissionId: 87348cc1-5a30-4fdc-84a5-5e248ba4c81f
+                      submissionStatus: Rejected
+                      submissionDateTime: '2021-11-10T07:10:24Z'
+                    errors:
+                    - code: SDS001
+                      title: Validation Error
+                      detail: Combination of Effective Trading Date From and Effective Dispatch Interval
+                        From must be in the future
+                      source: ''
+                    - code: SDS012
+                      title: Validation Error
+                      detail: 'Combination of Effective Trading Date From and Effective Dispatch Interval
+                        From must be after RTM Start '
+                      source: ''
+                    warnings: []
+                example2:
+                  summary: Submission processed successfully (status = rejected, with warnings)
+                  value:
+                    transactionId: 8c4a85b9-c733-4898-bacf-437ad5212bc8
+                    data:
+                      submissionId: dfc8d71b-d36d-4853-aa38-07ff90ce99e1
+                      submissionStatus: Rejected
+                      submissionDateTime: '2021-11-12T03:12:34Z'
+                    errors:
+                    - code: DS011
+                      title: Validation Error
+                      detail: Facility Code for Trading Days 2021/11/12 - 2021/11/12 is invalid/not found
+                      source: ''
+                    warnings:
+                    - code: DS014
+                      message: There are Gate Closure violations within the submission.
+                example3:
+                  summary: Submission processed successfully (Status = valid)
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    data:
+                      submissionId: b86e713f-56c7-4f55-a8b4-c253b3a00d81
+                      submissionStatus: VALID
+                      submissionDateTime: '2021-07-01T09:35:22Z'
+                    errors: []
+                    warnings: []
+                example4:
+                  summary: Processing failed due to system error
+                  value:
+                    transactionId: 67c0dbbc-ca19-4c66-aede-9bb541afa404
+                    data:
+                      submissionId: c953647e-ed6f-4724-b5b9-54261cf10fde
+                      submissionStatus: Failed
+                      submissionDateTime: '2021-11-18T02:16:59Z'
+                    errors: []
+                    warnings: []
+                example5:
+                  summary: Timeout, submission still being processed
+                  value:
+                    transactionId: ffa3c38c-5590-42f7-99c9-61381796b944
+                    data:
+                      submissionId: f6a1c5a5-0af3-463c-a5b8-75ac7f55fd0b
+                      submissionStatus: Submitted
+                      submissionDateTime: '2021-11-17T07:04:47Z'
+                    errors: []
+                    warnings: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: The specified referenceId is longer than the allowable length
+                  value:
+                    transactionId: 8d49ad97-b75e-4cee-938f-2216ed77468b
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Reference ID must be 100 characters or less
+                      source:
+                        parameter: referenceid=submission123456789_...
+                example2:
+                  summary: API Payload is not in valid JSON format
+                  value:
+                    transactionId: 4955aa5c-b8f0-4ccf-b89f-1ac18b9f183a
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content is not a valid JSON
+                      source: ''
+                example3:
+                  summary: API payload is in JSON format submission is missing
+                  value:
+                    transactionId: 4955aa5c-b8f0-4ccf-b89f-1ac18b9f183a
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submitted Payload is not valid - Property 'submission' is missing
+                      source: ''
+                example4:
+                  summary: Submission content is blank
+                  value:
+                    transactionId: 489136f7-cbf5-4bee-8af1-738028a05f2c
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content must not be empty or null
+                      source: ''
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication Failed
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /submissions/waitForResult:
+    post:
+      operationId: createANewSubmissionByEmbeddedTheSubmissionJSONInTheRequestAndWaitForTheValidationToCompleteBlockingCall
+      summary: "Create a new submission by embedded the submission JSON in the request and wait for the\r\
+        \nvalidation to complete (blocking call)."
+      tags:
+      - RTMS
+      description: "Submits one RTM Submission and wait for the validation response. \nThere is a timeout\
+        \ of 30 seconds applied to this endpoint. If the call times out before validation process is complete,\
+        \ a submission status of SUBMITTED is returned"
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json:
+            example:
+              referenceId: string
+              submission:
+                standing:
+                  comment: string
+                  submissionReason: string
+                  effectiveTradingDateFrom: string
+                  effectiveDispatchIntervalFrom: 0
+                  daysOfTheWeek:
+                  - dayOfWeek: MON
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          unconstrainedInjectionForecast: 0
+                          unconstrainedWithdrawalForecast: 0
+                          maxInjectionCapacity: 0
+                          maxWithdrawalCapacity: 0
+                          inflexibleFlag: 'YES'
+                          maxUpwardRampRate: 0
+                          maxDownwardRampRate: 0
+                          fsip:
+                            t1: 0
+                            t2: 0
+                            t3: 0
+                            t4: 0
+                            minimumLoad: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    rocof:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                variation:
+                  comment: string
+                  submissionCode: PLANNED_OUTAGE
+                  submissionReason: string
+                  allowGateClosureViolation: 'YES'
+                  tradingDays:
+                  - dateFrom: string
+                    dateTo: string
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          unconstrainedInjectionForecast: 0
+                          unconstrainedWithdrawalForecast: 0
+                          maxInjectionCapacity: 0
+                          maxWithdrawalCapacity: 0
+                          inflexibleFlag: 'YES'
+                          maxUpwardRampRate: 0
+                          maxDownwardRampRate: 0
+                          fsip:
+                            t1: 0
+                            t2: 0
+                            t3: 0
+                            t4: 0
+                            minimumLoad: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    rocof:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Submission processed successfully (status = rejected)
+                  value:
+                    transactionId: 9e6aa189-75dc-40b6-b9a1-ccf40cf905dd
+                    data:
+                      submissionId: c192b6a1-7eb5-47c3-b079-8ef6bcbd2e32
+                      submissionStatus: Rejected
+                      submissionDateTime: '2021-11-24T02:46:48Z'
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: String '' does not validate against format 'date'. Path 'variation.tradingDays[0].dateFrom'.
+                      source: ''
+                    warnings: []
+                example2:
+                  summary: Submission processed successfully (status = rejected, with warnings)
+                  value:
+                    transactionId: 7996c4b8-8e72-4a77-a09f-b8e7b135334f
+                    data:
+                      submissionId: bbd66a24-aafc-46e6-97cb-27ccef8c1bcf
+                      submissionStatus: Rejected
+                      submissionDateTime: '2021-11-24T02:54:46Z'
+                    errors:
+                    - code: EN035
+                      title: Validation Error
+                      detail: Maximum Upward Ramp-Rate for Trading Days 2021/11/25 - 2021/11/25, Market
+                        Service=Energy, Facility FACILITY_NAME, Dispatch Intervals 97 - 288 must be lower
+                        than Standing Emergency Ramp Up Rate for Facility FACILITY_NAME
+                      source: ''
+                    warnings:
+                    - code: EN034
+                      message: Maximum Upward Ramp-Rate for Trading Days 2021/11/25 - 2021/11/25, Market
+                        Service=Energy, Facility FACILITY_NAME, Dispatch Intervals 97 - 288 should not
+                        be greater than Standing Normal Ramp Up Rate for Facility FACILITY_NAME
+                example3:
+                  summary: Submission processed successfully (Status = valid)
+                  value:
+                    transactionId: 0d995b37-5218-486d-997a-4aeda9ead51b
+                    data:
+                      submissionId: c7aab898-0cbd-4bc2-a344-14bc154619e5
+                      submissionStatus: Valid
+                      submissionDateTime: '2021-12-01T05:51:03Z'
+                    errors: []
+                    warnings: []
+                example4:
+                  summary: Processing failed due to system error
+                  value:
+                    transactionId: d33bb4e7-cc02-4a82-9a47-dc00ae668272
+                    data:
+                      submissionId: c2334977-ee73-4a17-abba-4a3c38a4fe4f
+                      submissionStatus: Failed
+                      submissionDateTime: '2021-12-01T07:57:28Z'
+                    errors:
+                    - code: ERR001
+                      title: Error
+                      detail: A System Error has occurred. Please re-submit.
+                      source: ''
+                    warnings: []
+                example5:
+                  summary: Timeout, submission still being processed
+                  value:
+                    transactionId: ffa3c38c-5590-42f7-99c9-61381796b944
+                    data:
+                      submissionId: f6a1c5a5-0af3-463c-a5b8-75ac7f55fd0b
+                      submissionStatus: Submitted
+                      submissionDateTime: '2021-11-17T07:04:47Z'
+                    errors: []
+                    warnings: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: The specified referenceId is longer than the allowable length
+                  value:
+                    transactionId: 8d49ad97-b75e-4cee-938f-2216ed77468b
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Reference ID must be 100 characters or less
+                      source:
+                        parameter: referenceid=submission123456789_...
+                example2:
+                  summary: API payload is in JSON format submission is missing
+                  value:
+                    transactionId: 4955aa5c-b8f0-4ccf-b89f-1ac18b9f183a
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submitted Payload is not valid - Property 'submission' is missing
+                      source: ''
+                example3:
+                  summary: API Payload is not in valid JSON format
+                  value:
+                    transactionId: 4955aa5c-b8f0-4ccf-b89f-1ac18b9f183a
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content is not a valid JSON
+                      source: ''
+                example4:
+                  summary: Submission content is blank
+                  value:
+                    transactionId: 489136f7-cbf5-4bee-8af1-738028a05f2c
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content must not be empty or null
+                      source: ''
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication Failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /submissions:
+    post:
+      operationId: createANewSubmissionByProvidingTheSubmissionDataAsAJsonEmbeddedInTheRequest
+      summary: Create a new submission by providing the submission data as a json embedded in the request.
+      tags:
+      - RTMS
+      description: Submits one RTM Submission asynchronously.
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json:
+            example:
+              referenceId: string
+              submission:
+                standing:
+                  comment: string
+                  submissionReason: string
+                  effectiveTradingDateFrom: string
+                  effectiveDispatchIntervalFrom: 0
+                  daysOfTheWeek:
+                  - dayOfWeek: MON
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          unconstrainedInjectionForecast: 0
+                          unconstrainedWithdrawalForecast: 0
+                          maxInjectionCapacity: 0
+                          maxWithdrawalCapacity: 0
+                          inflexibleFlag: 'YES'
+                          maxUpwardRampRate: 0
+                          maxDownwardRampRate: 0
+                          fsip:
+                            t1: 0
+                            t2: 0
+                            t3: 0
+                            t4: 0
+                            minimumLoad: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    rocof:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                variation:
+                  comment: string
+                  submissionCode: PLANNED_OUTAGE
+                  submissionReason: string
+                  allowGateClosureViolation: 'YES'
+                  tradingDays:
+                  - dateFrom: string
+                    dateTo: string
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          unconstrainedInjectionForecast: 0
+                          unconstrainedWithdrawalForecast: 0
+                          maxInjectionCapacity: 0
+                          maxWithdrawalCapacity: 0
+                          inflexibleFlag: 'YES'
+                          maxUpwardRampRate: 0
+                          maxDownwardRampRate: 0
+                          fsip:
+                            t1: 0
+                            t2: 0
+                            t3: 0
+                            t4: 0
+                            minimumLoad: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    regulationLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyRaise:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    contingencyLower:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+                    rocof:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          maximumCapacity: 0
+                          enablementMinimum: 0
+                          lowBreakpoint: 0
+                          highBreakpoint: 0
+                          enablementMaximum: 0
+                          tranches:
+                          - tranche: 0
+                            fuelType: LIQUID
+                            quantity: 0
+                            price: {}
+                            capacityType: AVAILABLE
+                            noticeTime: 0
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example:
+                  summary: Submission received successfully by RTMS
+                  value:
+                    transactionId: 8d49ad97-b75e-4cee-938f-2216ed77468b
+                    data:
+                      submissionId: 2c825647-fd89-46a4-8dce-5937b45ca745
+                      submissionStatus: Submitted
+                      submissionDateTime: '2021-11-18T02:32:44Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: API Payload is not in valid JSON format
+                  value:
+                    transactionId: 8cbe073a-d5a0-4a92-bee8-ea0cf4318eea
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content is not a valid JSON
+                      source: ''
+                example2:
+                  summary: API payload is in JSON format but submission is missing
+                  value:
+                    transactionId: c3a4e357-0e31-461e-a871-8f23ef27ca41
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submitted Payload is not valid - Property 'submission' is missing
+                      source: ''
+                example3:
+                  summary: Submission content is blank
+                  value:
+                    transactionId: 489136f7-cbf5-4bee-8af1-738028a05f2c
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content must not be empty or null
+                      source: ''
+                example4:
+                  summary: The specified referenceId is longer than the allowable length
+                  value:
+                    transactionId: 8d49ad97-b75e-4cee-938f-2216ed77468b
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Reference ID must be 100 characters or less
+                      source:
+                        parameter: referenceid=submission123456789_...
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication Failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+    get:
+      operationId: getAListOfSubmissionsPagedUseTheQueryParametersToRefineAndApplyASearchCriteria
+      summary: Get a list of submissions (paged). Use the query parameters to refine and apply a search
+        criteria.
+      tags:
+      - RTMS
+      description: 'Retrieves historical submissions based on various parameters. Results are paged with
+        default page size of 500 unless specified otherwise. For data older than 35 days of the query
+        date the following filters will not be available: GateClosureViolation, Facility, MarketService,
+        TradingDay.'
+      parameters:
+      - name: submittedFrom
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339).
+      - name: submittedTo
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339).
+      - name: submissionType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Standing
+          - Variation
+          - Invalid
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Submitted
+          - Rejected
+          - Valid
+          - Failed
+      - name: statusUpdatedSince
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339).
+      - name: facility
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: marketService
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Energy
+          - RegulationRaise
+          - RegulationLower
+          - ContingencyRaise
+          - ContingencyLower
+          - RoCoF
+      - name: tradingDay
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date (as full-date in RFC3339).
+      - name: hasGateClosureViolation
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: referenceId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: uploadedBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: The resulting list of submissions that matches the query.
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Parameters specified correctly or none specified
+                  value:
+                    transactionId: 91d22c58-1296-41f8-a9e4-f3d18d64c98a
+                    data:
+                    - submissionId: 590ad2fe-6ce7-402c-9a60-280763b270cd
+                      submissionDateTime: '2021-11-22T11:36:00Z'
+                      referenceId: SUB01
+                      participant: PARTICIPANT
+                      uploadedBy: USERNAME
+                      submissionType: Standing
+                      submissionStatus: Valid
+                      totalIntervals: 4032
+                      marketServices: 2
+                      facilities: 1
+                      totalIntervalsGateClosure: 0
+                      rowNum: 1
+                      totalRows: 3
+                    warnings:
+                    - code: INFO
+                      message: Showing only 1/3 records. Please refine your search filter or fetch more
+                        records by calling the submissions API with ?pageSize=500&page=2
+                example2:
+                  summary: Specified value for status is 'submitted'
+                  value:
+                    transactionId: 723f1a6a-90f5-4e20-980f-bc157c5bd3ed
+                    data:
+                    - submissionId: 6df86f8c-1e68-4d35-9606-bc6752c8838e
+                      submissionDateTime: '2021-12-02T04:55:37Z'
+                      referenceId: SUB01
+                      participant: PARTICIPANT
+                      uploadedBy: USERNAME
+                      submissionType: Variation
+                      submissionStatus: Submitted
+                      rowNum: 1
+                      totalRows: 1
+                example3:
+                  summary: Specified facility, user, or referenceId does not exist or belongs to another
+                    participant
+                  value:
+                    transactionId: e7d33a92-b8a1-4c3d-a11b-25edaf570bb6
+                    data: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Specified value for submittedFrom is in the wrong format
+                  value:
+                    transactionId: 02bc8aa5-b114-4f2c-9a86-0156fc3daecb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as YYYY-MM-DD without time information
+                      source:
+                        parameter: submittedfrom=2021-11-13T08:00
+                example2:
+                  summary: Specified value for submittedTo is in the wrong format
+                  value:
+                    transactionId: 02bc8aa5-b114-4f2c-9a86-0156fc3daecb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as YYYY-MM-DD without time information
+                      source:
+                        parameter: submittedto=2021-11-13T08:00
+                example3:
+                  summary: No value specified for submittedTo when submittedFrom is specified
+                  value:
+                    transactionId: 66245c08-25c2-4b77-b6cf-344e0c7e2279
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: '''submittedto'' is required when ''submittedfrom'' is specified'
+                      source:
+                        parameter: submittedto
+                example4:
+                  summary: No value specified for submittedFrom when submittedTo is specified
+                  value:
+                    transactionId: 66245c08-25c2-4b77-b6cf-344e0c7e2279
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: '''submittedfrom'' is required when ''submittedto'' is specified'
+                      source:
+                        parameter: submittedfrom
+                example5:
+                  summary: Specified value for submittedTo is more than 30 days after specified value
+                    for submittedFrom
+                  value:
+                    transactionId: d6fec39d-22ea-45b2-8d05-30f0ec17458a
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Query dates range must be within 30 days
+                      source:
+                        parameter: submittedfrom=2021-11-01&submittedto=2021-12-01
+                example6:
+                  summary: Specified value for submittedFrom is before specified value for submittedTo
+                  value:
+                    transactionId: 70c79caa-639c-4929-8c1e-2327e6f7d895
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: '''submittedto'' must not be before ''submittedfrom'''
+                      source:
+                        parameter: submittedfrom=2021-11-01&submittedto=2021-10-31
+                example7:
+                  summary: Specified value for submissionType is not one of the allowable values
+                  value:
+                    transactionId: cb69c31c-75b7-47fa-a140-925519139793
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: Standing, Variation, Invalid'
+                      source:
+                        parameter: submissiontype=Valid
+                example8:
+                  summary: Specified value for status is not one of the allowable values
+                  value:
+                    transactionId: 45d102b9-4a5a-41e2-85d7-9609931715b6
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: Submitted, Valid, Rejected,
+                        Failed'
+                      source:
+                        parameter: status=accepted
+                example9:
+                  summary: Specified value for statusUpdatedSince is in the wrong format
+                  value:
+                    transactionId: 3b45d936-985f-41b6-9fac-cfcf367e5f1b
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Datetime needs to be formatted according to ISO8601 format with time information
+                      source:
+                        parameter: statusupdatedsince
+                example10:
+                  summary: Specified Value for marketService is not one of the allowable values
+                  value:
+                    transactionId: ceb95ee3-d845-42f8-9b0a-71776c6403e9
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: ContingencyLower, ContingencyRaise,
+                        Energy, RegulationLower, RegulationRaise, Rocof'
+                      source:
+                        parameter: marketservice=regulation_lower
+                example11:
+                  summary: Specified value for tradingDay is in the wrong format
+                  value:
+                    transactionId: a5b74fd6-a52d-4e77-acf1-0eb354d32250
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Date needs to be formatted as YYYY-MM-DD without time information
+                      source:
+                        parameter: tradingday=2021-11-23 08:00
+                example12:
+                  summary: Specified value for hasGateClosureViolation is not one of the allowable values
+                  value:
+                    transactionId: 549f7736-90c4-41d8-ba90-f7e10dc69bfb
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: true, false'
+                      source:
+                        parameter: hasgateclosureviolation=Yes
+                example13:
+                  summary: A value is specified for hasGateClosureViolation when the specified value for
+                    submissionStatus is not 'valid'
+                  value:
+                    transactionId: 8c7aef18-dc9a-4567-9356-5d42f581a436
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: When 'HasGateClosureViolation' is specified, the only status which may be
+                        specified is Valid
+                      source:
+                        parameter: hasgateclosureviolation&status
+                example14:
+                  summary: The specified referenceId is longer than the allowable length
+                  value:
+                    transactionId: 9cee04af-3b0b-42d4-8e10-c8a840a20ef5
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Reference ID must be 100 characters or less
+                      source:
+                        parameter: referenceid=submission123456789_...
+                example15:
+                  summary: A specified parameter not allowed
+                  value:
+                    transactionId: e6641ec2-b459-4fb9-b907-25cddf2237f2
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Parameter is not allowed
+                      source:
+                        parameter: submissionstatus
+                example16:
+                  summary: The specified value for a parameter is missing or blank
+                  value:
+                    transactionId: ceb95ee3-d845-42f8-9b0a-71776c6403e9
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Value for parameter referenceid must be specified
+                      source:
+                        parameter: referenceid=
+                example17:
+                  summary: A parameter has been specified more than once
+                  value:
+                    transactionId: f86fd16f-8fe3-4ded-95f2-57d2d2b2f24a
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Duplicated parameter key is received
+                      source:
+                        parameter: submissiontype
+                example18:
+                  summary: The specified value for statusUpdatedSince is in the wrong format
+                  value:
+                    transactionId: 3edf449a-372a-4133-894f-144d754ac15a
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Datetime needs to be formatted according to ISO8601 format with time information
+                      source:
+                        parameter: statusupdatedsince
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /submissions/dsp:
+    post:
+      operationId: createANewSubmissionByProvidingTheSubmissionDataAsAJsonEmbeddedInTheRequest2
+      summary: Create a new submission by providing the submission data as a json embedded in the request.
+      tags:
+      - RTMS
+      description: Submits one RTM DSP Submission asynchronously.
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json:
+            example:
+              submission:
+                standing:
+                  comment: string
+                  submissionReason: string
+                  effectiveTradingDateFrom: string
+                  effectiveDispatchIntervalFrom: 0
+                  daysOfTheWeek:
+                  - dayOfWeek: MON
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          dspUnconstrainedWithdrawalQuantity: 0
+                          dspConstrainedWithdrawalQuantity: 0
+                variation:
+                  comment: string
+                  submissionCode: OUTAGE
+                  submissionReason: string
+                  tradingDays:
+                  - dateFrom: string
+                    dateTo: string
+                    energy:
+                      facilities:
+                      - facilityCode: string
+                        dispatchIntervals:
+                        - dispatchIntervalFrom: 0
+                          dispatchIntervalTo: 0
+                          dspUnconstrainedWithdrawalQuantity: 0
+                          dspConstrainedWithdrawalQuantity: 0
+              referenceId: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                data:
+                  submissionId: b86e713f-56c7-4f55-a8b4-c253b3a00d81
+                  submissionStatus: Submitted
+                  submissionDateTime: '2021-07-01T12:30:00Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: The specified referenceId is longer than the allowable length
+                  value:
+                    transactionId: 8d49ad97-b75e-4cee-938f-2216ed77468b
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Reference ID must be 100 characters or less
+                      source:
+                        parameter: referenceid=submission123456789_...
+                example2:
+                  summary: API Payload is not in valid JSON format
+                  value:
+                    transactionId: 4955aa5c-b8f0-4ccf-b89f-1ac18b9f183a
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content is not a valid JSON
+                      source: ''
+                example3:
+                  summary: API payload is in JSON format submission is missing
+                  value:
+                    transactionId: 4955aa5c-b8f0-4ccf-b89f-1ac18b9f183a
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submitted Payload is not valid - Property 'submission' is missing
+                      source: ''
+                example4:
+                  summary: Submission content is blank
+                  value:
+                    transactionId: 489136f7-cbf5-4bee-8af1-738028a05f2c
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: Submission content must not be empty or null
+                      source: ''
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication Failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /health/basic:
+    get:
+      operationId: getTheBasicHealthStatusOfTheAPI
+      summary: Get the basic health status of the API
+      tags:
+      - RTMS
+      description: Get the basic health status of the API
+      responses:
+        '200':
+          description: '200'
+  /submissions/{submissionId}/raw:
+    get:
+      operationId: getTheDataForASubmissionAsReceivedFromTheParticipant
+      summary: Get the data for a submission as received from the participant.
+      tags:
+      - RTMS
+      description: Retrieves the original submission sent by the Market Participant.
+      parameters:
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Format - uuid.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Specified submission
+                  value:
+                    variation:
+                      comment: This is an example of JSON file variation submission
+                      submissionCode: PLANNED_OUTAGE
+                      submissionReason: Facility TEST_SSF on planned outage
+                      allowGateClosureViolation: 'YES'
+                      tradingDays:
+                      - dateFrom: '2021-11-03'
+                        dateTo: '2021-11-03'
+                        energy:
+                          facilities:
+                          - facilityCode: TEST_SSF
+                            dispatchIntervals:
+                            - dispatchIntervalFrom: 74
+                              dispatchIntervalTo: 80
+                              unconstrainedInjectionForecast: 50
+                              unconstrainedWithdrawalForecast: 0
+                              maxInjectionCapacity: 50
+                              maxWithdrawalCapacity: 0
+                              inflexibleFlag: 'NO'
+                              maxUpwardRampRate: 25
+                              maxDownwardRampRate: 25
+                              tranches:
+                              - tranche: 1
+                                fuelType: NON-LIQUID
+                                quantity: 20
+                                price: -50.4
+                                capacityType: IN-SERVICE
+                              - tranche: 2
+                                fuelType: NON-LIQUID
+                                quantity: 30
+                                price: 15.25
+                                capacityType: IN-SERVICE
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: No records found matching the criteria.
+          content:
+            application/json:
+              examples:
+                example:
+                  summary: The specified submissionId does not exist or is not accessible to the participant
+                  value:
+                    transactionId: 43ac0019-d143-4ceb-bc04-d79f25fdebe0
+                    errors:
+                    - code: ERR404
+                      title: Record Not Found
+                      detail: No records found or insufficient permission
+                      source: ''
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /submissions/{submissionId}:
+    get:
+      operationId: getTheDetailsForAGivenSubmission
+      summary: Get the details for a given submission.
+      tags:
+      - RTMS
+      description: Retrieves a specific submission based on submissionId. Details of the requested submission
+        are included in the response.
+      parameters:
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Format - uuid.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Specified submission is in valid status
+                  value:
+                    transactionId: 84393b45-0e40-48d4-b456-d1175e187b26
+                    data:
+                      submissionId: 82d01d70-e3d0-4268-8277-31b90251d1a4
+                      referenceId: ''
+                      submissionDateTime: '2021-11-11T04:54:52Z'
+                      uploadedBy: USERNAME
+                      submissionType: Variation
+                      submissionStatus: Valid
+                      totalIntervals: 576
+                      marketServices: 2
+                      facilities: 1
+                      totalIntervalsGateClosure: 0
+                      submission: {}
+                example2:
+                  summary: Specified submission is in status other than valid
+                  value:
+                    transactionId: 5c7adcf4-3170-4985-b83b-f21e02e36f61
+                    data:
+                      submissionId: eb0de606-c810-4324-bf93-2b5907f14586
+                      referenceId: '12345'
+                      submissionDateTime: '2021-11-26T07:22:27Z'
+                      uploadedBy: USERNAME
+                      submissionType: Variation
+                      submissionStatus: Submitted
+                      submission: {}
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: No records found matching the criteria
+          content:
+            application/json:
+              examples:
+                example:
+                  summary: The specified submissionId does not exist or is not accessible to the participant
+                  value:
+                    transactionId: 43ac0019-d143-4ceb-bc04-d79f25fdebe0
+                    errors:
+                    - code: ERR404
+                      title: Record Not Found
+                      detail: No records found or insufficient permission
+                      source: ''
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /health:
+    get:
+      operationId: getTheHealthStatusOfTheAPI
+      summary: Get the health status of the API
+      tags:
+      - RTMS
+      description: Get the health status of the API
+      responses:
+        '200':
+          description: '200'
+  /submissions/{submissionId}/status:
+    get:
+      operationId: getTheStatusForAGivenSubmission
+      summary: Get the status for a given submission.
+      tags:
+      - RTMS
+      description: Retrieves the submission status for a given submission. If the status is REJECTED or
+        FAILED, a list of error messages and warnings is included in the response. Warnings, if any, are
+        also included in the response when the submission status is VALID
+      parameters:
+      - name: submissionId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Format - uuid.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Specified submission is in valid status
+                  value:
+                    transactionId: 196da8cf-c4da-40e3-b72d-ffd5efdd5068
+                    data:
+                      submissionId: 590ad2fe-6ce7-402c-9a60-280763b270cd
+                      submissionStatus: Valid
+                      submissionDateTime: '2021-11-22T11:36:00Z'
+                    errors: []
+                    warnings: []
+                example2:
+                  summary: Specified submission is in rejected status, with structural errors
+                  value:
+                    transactionId: 536095ec-acfa-4f65-a55d-49e576c6fd46
+                    data:
+                      submissionId: 2e375f44-0a5e-45d1-bf6f-6eaa70b38780
+                      submissionStatus: Rejected
+                      submissionDateTime: '2021-11-24T06:53:14Z'
+                    errors:
+                    - code: ST001
+                      title: Validation Error
+                      detail: 'Value "PLANNED_OUTAG" is not defined in enum. Path ''variation.submissionCode''.
+
+                        Value "YAS QUEEN" is not defined in enum. Path ''variation.allowGateClosureViolation''.'
+                      source: ''
+                    warnings: []
+                example3:
+                  summary: Specified submission is in rejected status, with business errors and warnings
+                  value:
+                    transactionId: befb515c-baa7-454a-94c3-ac7d15c1707a
+                    data:
+                      submissionId: 657add9c-418e-4aad-9f41-20f3a64dd096
+                      submissionStatus: Rejected
+                      submissionDateTime: '2021-11-24T07:01:18Z'
+                    errors:
+                    - code: C036
+                      title: Validation Error
+                      detail: Tranche prices must increase monotonically.
+                      source: ''
+                    - code: EN024
+                      title: Validation Error
+                      detail: Quantity submitted for Trading Days 2021-11-24 - 2021-11-24, Market Service=Energy,
+                        Facility FACILITY_NAME, Dispatch Intervals 151 - 151 does not equal the Max Withdrawal
+                        Capacity specified for the Interval(s).
+                      source: ''
+                    warnings:
+                    - code: EN032
+                      message: Maximum Withdrawal Capacity submitted for Trading Days 2021/11/24 - 2021/11/24,
+                        Market Service=Energy, Facility FACILITY_NAME, Dispatch Intervals 151 - 151 exceeds
+                        Standing Withdrawal Capacity of Facility FACILITY_NAME
+                example4:
+                  summary: Specified submission is in submitted or failed status
+                  value:
+                    transactionId: 5091501c-9387-4675-9d61-a4413d9c88a6
+                    data:
+                      submissionId: 08f49ef3-cefb-4b04-9315-f745b9d15860
+                      submissionStatus: Submitted
+                      submissionDateTime: '2021-11-24T07:23:05Z'
+                    errors: []
+                    warnings: []
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure.
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: No records found matching the criteria.
+          content:
+            application/json:
+              examples:
+                example:
+                  summary: The specified submissionId does not exist or is not accessible to the participant
+                  value:
+                    transactionId: 43ac0019-d143-4ceb-bc04-d79f25fdebe0
+                    errors:
+                    - code: ERR404
+                      title: Record Not Found
+                      detail: No records found or insufficient permission
+                      source: ''
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /gateClosureViolation:
+    get:
+      operationId: thisResourceListsAllTheDispatchIntervalsSubmittedWithinGateClosureTheDataReturnedCanBeQueriedBasedOnCriteriaSpecifiedByOneOrMoreQueryParameters
+      summary: "This resource lists all the Dispatch Intervals submitted within Gate Closure. The data\
+        \ returned can be\r\nqueried based on criteria specified by one or more query parameters."
+      tags:
+      - RTMS
+      description: Retrieves a list of Dispatch Intervals submitted within Gate Closure.
+      parameters:
+      - name: DateTimeFrom
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339). Filter the Dispatch Intervals after
+          the datetimeoffset (YYYY-MM-DDTHH:mm:ss+08:00) selected submitted within Gate Closure. Defaults
+          to 24 hours in the past. Note that when offset is specified, the plus sign '+' must be URL encoded
+          to '%2B'. If offset is not specified, it will be treated as +8.
+      - name: DateTimeTo
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Format - date-time (as date-time in RFC3339). Filter the Dispatch Intervals up until
+          the datetimeoffset (YYYY-MM-DDTHH:mm:ss+08:00) selected submitted within Gate Closure. Defaults
+          to now.
+
+          If specified, dateTimeTo must be greater than dateTimeFrom (date component limited to 30 days
+          from dateTimeFrom). Note that when offset is specified, the plus sign ''+'' must be URL encoded
+          to ''%2B''. If offset is not specified, it will be treated as +8.'
+      - name: Facility
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filters Gate Closure Violations for the specified Registered Facility.
+      - name: MarketService
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Energy
+          - RegulationRaise
+          - RegulationLower
+          - ContingencyRaise
+          - ContingencyLower
+          - RoCoF
+        description: 'Filters Gate Closure Violations for the specified Market Service: ''energy'', ''regulationRaise'',
+          ''regulationLower'', ''contingencyRaise'', ''contingencyLower'', or ''rocof'''
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Parameters correctly specified and Gate Closure Violations exist
+                  value:
+                    transactionId: 703a67b3-3108-41de-93a8-25abfdf7237b
+                    data:
+                    - submissionId: 6e4140f1-5273-4ea8-ad6b-f782469bfd1d
+                      referenceId: GCV_TEST
+                      tradingDay: '2021-11-23'
+                      dispatchIntervalFrom: '2023-03-23'
+                      dispatchIntervalTo: '2023-03-23'
+                      participant: PARTICIPANT
+                      facility: FACILITY_NAME
+                      marketService: ContingencyLower
+                      submissionDateTime: '2021-11-23T03:01:34Z'
+                      submittedPrice: -10.00,10.00,25.00,35.15,MAX
+                      submittedQty: 5.000,5.000,5.000,5.000,3.000
+                      uploadedBy: USERNAME
+                example2:
+                  summary: The specified combination of parameters return no data, or the facility does
+                    not exist, or the facility is inaccessible to the participant for all or part of the
+                    specified dates
+                  value:
+                    transactionId: 2bfa5e43-655b-48bf-bf1a-98b28c34c7eb
+                    data: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                example1:
+                  summary: Specified value for dateTimeFrom is in the wrong format
+                  value:
+                    transactionId: 8a381056-a461-4917-ae96-e242f4a40c45
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Datetime needs to be formatted according to ISO8601 format with time information
+                      source:
+                        parameter: datetimefrom
+                example2:
+                  summary: Specified value for dateTimeTo is in the wrong format
+                  value:
+                    transactionId: 8a381056-a461-4917-ae96-e242f4a40c45
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Datetime needs to be formatted according to ISO8601 format with time information
+                      source:
+                        parameter: datetimeto
+                example3:
+                  summary: Specified value for dateTimeTo is more than 30 days after specified value for
+                    dateTimeFrom
+                  value:
+                    transactionId: 3cc5f5af-6b62-4b19-88a8-5c72c7ed7a82
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Query datetimes range must be within 30 days
+                      source:
+                        parameter: datetimefrom=2021-11-01T08:00&datetimeto=2021-12-01T08:01
+                example4:
+                  summary: Specified value for dateTimeTo before or equal to the specified value for dateTimeFrom
+                  value:
+                    transactionId: 0ac90aef-5677-4d9b-a0ca-380511c08279
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: '''datetimeto'' must be greater than ''datetimefrom'''
+                      source:
+                        parameter: datetimefrom=2021-11-10T08:00&datetimeto=2021-10-10T08:00
+                example5:
+                  summary: No value specified for dateTimeTo when dateTimeFrom is specified
+                  value:
+                    transactionId: a590d735-8dbf-43ee-b44d-1027fb8331af
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: '''datetimeto'' is required when ''datetimefrom'' is specified'
+                      source:
+                        parameter: datetimeto
+                example6:
+                  summary: Specified value for marketService is not one of the allowable values
+                  value:
+                    transactionId: ceb95ee3-d845-42f8-9b0a-71776c6403e9
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: 'The given value is not one of the valid options: ContingencyLower, ContingencyRaise,
+                        Energy, RegulationLower, RegulationRaise, Rocof'
+                      source:
+                        parameter: marketservice=regulation_lower
+                example7:
+                  summary: The specified value for a parameter is missing or blank
+                  value:
+                    transactionId: ff2162ed-b53d-4592-a6c2-65749dbb5c79
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Value for parameter datetimefrom must be specified
+                      source:
+                        parameter: datetimefrom=
+                example8:
+                  summary: A parameter has been specified more than once
+                  value:
+                    transactionId: 764a0520-3802-4afc-96e5-af09e46231e8
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Duplicated parameter key is received
+                      source:
+                        parameter: facility
+                example9:
+                  summary: A specified parameter not allowed
+                  value:
+                    transactionId: b1b598d9-9826-4adf-9bcd-e05eb9383924
+                    errors:
+                    - code: ERR400
+                      title: Bad Request
+                      detail: Parameter is not allowed
+                      source:
+                        parameter: random
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: API Authentication failure
+          content:
+            application/json:
+              examples:
+                failedToAuthenticate:
+                  value:
+                    transactionId: e1ef1e6d-2945-4d42-a2e4-977dcc922079
+                    errors:
+                    - code: ERR401
+                      title: Authentication Failure
+                      detail: Failed to authenticate the credentials provided for this request.
+                      source: ''
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                applicationProcessingError:
+                  value:
+                    transactionId: 1ac9b0dc-94fc-42ec-9e8e-be7e6d5a1fa3
+                    errors:
+                    - code: ERR500
+                      title: Application processing error
+                      detail: System error occur, please try again later
+                      source: ''
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
 components:
   securitySchemes:
     apiKeyHeader:
@@ -20,6 +4234,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: RTMS
+  description: The WEM-Reform API for Real-Time Market submissions available to all Market Participants.

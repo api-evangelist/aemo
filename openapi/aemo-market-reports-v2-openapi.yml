@@ -2,9 +2,81 @@ openapi: 3.0.1
 info:
   title: Market Reports v2
   version: v2
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/market-reports-v2/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/market
-paths: { }
+- url: https://api-prd.aemo.local/WEM/market
+paths:
+  /?soapAction=getMarketAdvisories:
+    post:
+      operationId: getMarketAdvisories
+      summary: getMarketAdvisories
+      tags:
+      - Market Reports v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getMarketAdvisories
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getMarketAdvisories xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/market/2.0\">\r\n      <trading_date_range>\r\n\
+              \        <startDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</startDate>\r\
+              \n        <endDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</endDate>\r\
+              \n      </trading_date_range>\r\n    </getMarketAdvisories>\r\n  </Body>\r\n</Envelope>"
+        description: getMarketAdvisories
+      responses:
+        '200':
+          description: getMarketAdvisoriesResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <getMarketAdvisoriesResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/market/2.0\">\r\n      <market_advisories_report>\r\
+                \n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\r\
+                \n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\r\
+                \n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\r\
+                \n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\r\
+                \n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+                \       <trading_date_range>\r\n            <startDate>1900-01-01</startDate>\r\n    \
+                \        <endDate>1900-01-01</endDate>\r\n          </trading_date_range>\r\n        </reportArguments>\r\
+                \n        <rows id=\"1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n     \
+                \     <vnetwork_action>vnetwork_action1</vnetwork_action>\r\n          <network_action>network_action1</network_action>\r\
+                \n          <vmp_action>vmp_action1</vmp_action>\r\n          <mp_action>mp_action1</mp_action>\r\
+                \n          <imo_action>imo_action1</imo_action>\r\n          <situation_details>situation_details1</situation_details>\r\
+                \n          <release_date>1900-01-01T01:01:01</release_date>\r\n          <market_advisory_type>market_advisory_type1</market_advisory_type>\r\
+                \n        </rows>\r\n        <rows id=\"-9223372036854775807\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >\r\n          <vnetwork_action>vnetwork_action2</vnetwork_action>\r\n          <network_action>network_action2</network_action>\r\
+                \n          <vmp_action>vmp_action2</vmp_action>\r\n          <mp_action>mp_action2</mp_action>\r\
+                \n          <imo_action>imo_action2</imo_action>\r\n          <situation_details>situation_details2</situation_details>\r\
+                \n          <release_date>0001-01-01T00:00:00</release_date>\r\n          <market_advisory_type>market_advisory_type2</market_advisory_type>\r\
+                \n        </rows>\r\n        <rows id=\"9223372036854775807\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >\r\n          <vnetwork_action>vnetwork_action3</vnetwork_action>\r\n          <network_action>network_action3</network_action>\r\
+                \n          <vmp_action>vmp_action3</vmp_action>\r\n          <mp_action>mp_action3</mp_action>\r\
+                \n          <imo_action>imo_action3</imo_action>\r\n          <situation_details>situation_details3</situation_details>\r\
+                \n          <release_date>9999-12-31T23:59:59.9999999</release_date>\r\n          <market_advisory_type>market_advisory_type3</market_advisory_type>\r\
+                \n        </rows>\r\n        <rows id=\"0\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >\r\n          <vnetwork_action>vnetwork_action4</vnetwork_action>\r\n          <network_action>network_action4</network_action>\r\
+                \n          <vmp_action>vmp_action4</vmp_action>\r\n          <mp_action>mp_action4</mp_action>\r\
+                \n          <imo_action>imo_action4</imo_action>\r\n          <situation_details>situation_details4</situation_details>\r\
+                \n          <release_date>1899-11-30T01:01:01</release_date>\r\n          <market_advisory_type>market_advisory_type4</market_advisory_type>\r\
+                \n        </rows>\r\n        <rows id=\"2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >\r\n          <vnetwork_action>vnetwork_action5</vnetwork_action>\r\n          <network_action>network_action5</network_action>\r\
+                \n          <vmp_action>vmp_action5</vmp_action>\r\n          <mp_action>mp_action5</mp_action>\r\
+                \n          <imo_action>imo_action5</imo_action>\r\n          <situation_details>situation_details5</situation_details>\r\
+                \n          <release_date>1900-02-02T01:01:01</release_date>\r\n          <market_advisory_type>market_advisory_type5</market_advisory_type>\r\
+                \n        </rows>\r\n      </market_advisories_report>\r\n    </getMarketAdvisoriesResponse>\r\
+                \n  </Body>\r\n</Envelope>"
 components:
   securitySchemes:
     apiKeyHeader:
@@ -16,6 +88,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Market Reports v2
+  description: Market Reports v2

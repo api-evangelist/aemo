@@ -2,9 +2,1403 @@ openapi: 3.0.1
 info:
   title: Balancing Reports v2.3
   version: v2.3
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-3/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/balancing
-paths: { }
+- url: https://api-prd.aemo.local/WEM/balancing
+paths:
+  /?soapAction=getBalancingMeritOrders:
+    post:
+      operationId: getBalancingMeritOrders
+      summary: getBalancingMeritOrders
+      tags:
+      - Balancing Reports v2.3
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getBalancingMeritOrders
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getBalancingMeritOrders xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <source_type>FORECAST</source_type>\r\
+              \n      <trading_date_interval_range>\r\n        <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </start_date_interval>\r\
+              \n        <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+              \       <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </end_date_interval>\r\n\
+              \      </trading_date_interval_range>\r\n      <participant_name>participant1</participant_name>\r\
+              \n    </getBalancingMeritOrders>\r\n  </Body>\r\n</Envelope>"
+        description: getBalancingMeritOrders
+      responses:
+        '200':
+          description: getBalancingMeritOrdersResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <getBalancingMeritOrdersResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <balancing_merit_orders_report>\r\
+                \n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\r\
+                \n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\r\
+                \n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\r\
+                \n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\r\
+                \n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+                \       <source_type>FORECAST</source_type>\r\n          <trading_date_interval_range>\r\
+                \n            <start_date_interval>\r\n              <trade_date>1900-01-01</trade_date>\r\
+                \n              <delivery_hour>0</delivery_hour>\r\n              <delivery_interval>1</delivery_interval>\r\
+                \n            </start_date_interval>\r\n            <end_date_interval>\r\n          \
+                \    <trade_date>1900-01-01</trade_date>\r\n              <delivery_hour>0</delivery_hour>\r\
+                \n              <delivery_interval>1</delivery_interval>\r\n            </end_date_interval>\r\
+                \n          </trading_date_interval_range>\r\n          <participant_name>participant1</participant_name>\r\
+                \n        </reportArguments>\r\n        <source_type xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >FORECAST</source_type>\r\n        <trading_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >\r\n          <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+                \n          <delivery_interval>1</delivery_interval>\r\n          <bmo_item>\r\n     \
+                \       <rank>1</rank>\r\n            <participant_name>participant1</participant_name>\r\
+                \n            <resource_name>resource_name1</resource_name>\r\n            <price>1</price>\r\
+                \n            <quantity>-999999.999</quantity>\r\n            <ancillary_purpose>OTHER</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>999</rank>\r\n  \
+                \          <participant_name>participant2</participant_name>\r\n            <resource_name>resource_name2</resource_name>\r\
+                \n            <price>-79228162514264337593543950335</price>\r\n            <quantity>999999.999</quantity>\r\
+                \n            <ancillary_purpose>LFAS</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>2</rank>\r\n            <participant_name>participant3</participant_name>\r\
+                \n            <resource_name>resource_name3</resource_name>\r\n            <price>79228162514264337593543950335</price>\r\
+                \n            <quantity>-999999.899</quantity>\r\n            <ancillary_purpose>COMTEST</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>998</rank>\r\n  \
+                \          <participant_name>participant4</participant_name>\r\n            <resource_name>resource_name4</resource_name>\r\
+                \n            <price>0.9</price>\r\n            <quantity>999999.899</quantity>\r\n  \
+                \          <ancillary_purpose>OTHER</ancillary_purpose>\r\n          </bmo_item>\r\n \
+                \         <bmo_item>\r\n            <rank>3</rank>\r\n            <participant_name>participant5</participant_name>\r\
+                \n            <resource_name>resource_name5</resource_name>\r\n            <price>1.1</price>\r\
+                \n            <quantity>-999999.799</quantity>\r\n            <ancillary_purpose>LFAS</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n        </trading_interval>\r\n        <trading_interval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <trade_date>0001-01-01</trade_date>\r\
+                \n          <delivery_hour>23</delivery_hour>\r\n          <delivery_interval>2</delivery_interval>\r\
+                \n          <bmo_item>\r\n            <rank>997</rank>\r\n            <participant_name>participant6</participant_name>\r\
+                \n            <resource_name>resource_name6</resource_name>\r\n            <price>-79228162514264337593543950335</price>\r\
+                \n            <quantity>999999.799</quantity>\r\n            <ancillary_purpose>COMTEST</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>4</rank>\r\n    \
+                \        <participant_name>participant7</participant_name>\r\n            <resource_name>resource_name7</resource_name>\r\
+                \n            <price>79228162514264337593543950335</price>\r\n            <quantity>-999999.699</quantity>\r\
+                \n            <ancillary_purpose>OTHER</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>996</rank>\r\n            <participant_name>participant8</participant_name>\r\
+                \n            <resource_name>resource_name8</resource_name>\r\n            <price>0.8</price>\r\
+                \n            <quantity>999999.699</quantity>\r\n            <ancillary_purpose>LFAS</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>5</rank>\r\n    \
+                \        <participant_name>participant9</participant_name>\r\n            <resource_name>resource_name9</resource_name>\r\
+                \n            <price>1.2</price>\r\n            <quantity>-999999.599</quantity>\r\n \
+                \           <ancillary_purpose>COMTEST</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>995</rank>\r\n            <participant_name>participan10</participant_name>\r\
+                \n            <resource_name>resource_name10</resource_name>\r\n            <price>-79228162514264337593543950335</price>\r\
+                \n            <quantity>999999.599</quantity>\r\n            <ancillary_purpose>OTHER</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n        </trading_interval>\r\n        <trading_interval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <trade_date>9999-12-31</trade_date>\r\
+                \n          <delivery_hour>1</delivery_hour>\r\n          <delivery_interval>2</delivery_interval>\r\
+                \n          <bmo_item>\r\n            <rank>6</rank>\r\n            <participant_name>participan11</participant_name>\r\
+                \n            <resource_name>resource_name11</resource_name>\r\n            <price>79228162514264337593543950335</price>\r\
+                \n            <quantity>-999999.499</quantity>\r\n            <ancillary_purpose>LFAS</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>994</rank>\r\n  \
+                \          <participant_name>participan12</participant_name>\r\n            <resource_name>resource_name12</resource_name>\r\
+                \n            <price>0.7</price>\r\n            <quantity>999999.499</quantity>\r\n  \
+                \          <ancillary_purpose>COMTEST</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>7</rank>\r\n            <participant_name>participan13</participant_name>\r\
+                \n            <resource_name>resource_name13</resource_name>\r\n            <price>1.3</price>\r\
+                \n            <quantity>-999999.399</quantity>\r\n            <ancillary_purpose>OTHER</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>993</rank>\r\n  \
+                \          <participant_name>participan14</participant_name>\r\n            <resource_name>resource_name14</resource_name>\r\
+                \n            <price>-79228162514264337593543950335</price>\r\n            <quantity>999999.399</quantity>\r\
+                \n            <ancillary_purpose>LFAS</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>8</rank>\r\n            <participant_name>participan15</participant_name>\r\
+                \n            <resource_name>resource_name15</resource_name>\r\n            <price>79228162514264337593543950335</price>\r\
+                \n            <quantity>-999999.299</quantity>\r\n            <ancillary_purpose>COMTEST</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n        </trading_interval>\r\n        <trading_interval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <trade_date>1899-11-30</trade_date>\r\
+                \n          <delivery_hour>22</delivery_hour>\r\n          <delivery_interval>1</delivery_interval>\r\
+                \n          <bmo_item>\r\n            <rank>992</rank>\r\n            <participant_name>participan16</participant_name>\r\
+                \n            <resource_name>resource_name16</resource_name>\r\n            <price>0.6</price>\r\
+                \n            <quantity>999999.299</quantity>\r\n            <ancillary_purpose>OTHER</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>9</rank>\r\n    \
+                \        <participant_name>participan17</participant_name>\r\n            <resource_name>resource_name17</resource_name>\r\
+                \n            <price>1.4</price>\r\n            <quantity>-999999.199</quantity>\r\n \
+                \           <ancillary_purpose>LFAS</ancillary_purpose>\r\n          </bmo_item>\r\n \
+                \         <bmo_item>\r\n            <rank>991</rank>\r\n            <participant_name>participan18</participant_name>\r\
+                \n            <resource_name>resource_name18</resource_name>\r\n            <price>-79228162514264337593543950335</price>\r\
+                \n            <quantity>999999.199</quantity>\r\n            <ancillary_purpose>COMTEST</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>10</rank>\r\n   \
+                \         <participant_name>participan19</participant_name>\r\n            <resource_name>resource_name19</resource_name>\r\
+                \n            <price>79228162514264337593543950335</price>\r\n            <quantity>-999999.099</quantity>\r\
+                \n            <ancillary_purpose>OTHER</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>990</rank>\r\n            <participant_name>participan20</participant_name>\r\
+                \n            <resource_name>resource_name20</resource_name>\r\n            <price>0.5</price>\r\
+                \n            <quantity>999999.099</quantity>\r\n            <ancillary_purpose>LFAS</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n        </trading_interval>\r\n        <trading_interval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <trade_date>1900-02-02</trade_date>\r\
+                \n          <delivery_hour>2</delivery_hour>\r\n          <delivery_interval>2</delivery_interval>\r\
+                \n          <bmo_item>\r\n            <rank>11</rank>\r\n            <participant_name>participan21</participant_name>\r\
+                \n            <resource_name>resource_name21</resource_name>\r\n            <price>1.5</price>\r\
+                \n            <quantity>-999998.999</quantity>\r\n            <ancillary_purpose>COMTEST</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>989</rank>\r\n  \
+                \          <participant_name>participan22</participant_name>\r\n            <resource_name>resource_name22</resource_name>\r\
+                \n            <price>-79228162514264337593543950334</price>\r\n            <quantity>999998.999</quantity>\r\
+                \n            <ancillary_purpose>OTHER</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>12</rank>\r\n            <participant_name>participan23</participant_name>\r\
+                \n            <resource_name>resource_name23</resource_name>\r\n            <price>79228162514264337593543950334</price>\r\
+                \n            <quantity>-999998.899</quantity>\r\n            <ancillary_purpose>LFAS</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n          <bmo_item>\r\n            <rank>988</rank>\r\n  \
+                \          <participant_name>participan24</participant_name>\r\n            <resource_name>resource_name24</resource_name>\r\
+                \n            <price>0.4</price>\r\n            <quantity>999998.899</quantity>\r\n  \
+                \          <ancillary_purpose>COMTEST</ancillary_purpose>\r\n          </bmo_item>\r\n\
+                \          <bmo_item>\r\n            <rank>13</rank>\r\n            <participant_name>participan25</participant_name>\r\
+                \n            <resource_name>resource_name25</resource_name>\r\n            <price>1.6</price>\r\
+                \n            <quantity>-999998.799</quantity>\r\n            <ancillary_purpose>OTHER</ancillary_purpose>\r\
+                \n          </bmo_item>\r\n        </trading_interval>\r\n      </balancing_merit_orders_report>\r\
+                \n    </getBalancingMeritOrdersResponse>\r\n  </Body>\r\n</Envelope>"
+  /?soapAction=getBalancingPrices:
+    post:
+      operationId: getBalancingPrices
+      summary: getBalancingPrices
+      tags:
+      - Balancing Reports v2.3
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getBalancingPrices
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getBalancingPrices xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <price_type>FORECAST</price_type>\r\
+              \n      <trading_date_range>\r\n        <startDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >1900-01-01</startDate>\r\n        <endDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >1900-01-01</endDate>\r\n      </trading_date_range>\r\n    </getBalancingPrices>\r\n  </Body>\r\
+              \n</Envelope>"
+        description: getBalancingPrices
+      responses:
+        '200':
+          description: getBalancingPricesResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <getBalancingPricesResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.3\">\r\n      <balancing_prices_report>\r\
+                \n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\r\
+                \n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\r\
+                \n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\r\
+                \n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\r\
+                \n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.5\">\r\n   \
+                \       <price_type>FORECAST</price_type>\r\n          <trading_date_range>\r\n      \
+                \      <startDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</startDate>\r\
+                \n            <endDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</endDate>\r\
+                \n          </trading_date_range>\r\n        </reportArguments>\r\n        <rows id=\"\
+                1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.5\">\r\n          <trade_date xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</trade_date>\r\n          <delivery_hour\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">0</delivery_hour>\r\n          <delivery_interval\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1</delivery_interval>\r\n       \
+                \   <price>1</price>\r\n          <load>-999999.999</load>\r\n          <non_scheduled_generation>-999999.999</non_scheduled_generation>\r\
+                \n          <mp_forecast_aggr_mw>-999999.999</mp_forecast_aggr_mw>\r\n          <forecast_nsg_source>SYSTEM_MANAGEMENT</forecast_nsg_source>\r\
+                \n          <forecast_spare_capacity_mw>-999999.999</forecast_spare_capacity_mw>\r\n \
+                \         <provisional_spare_capacity_using_ex_ante_mw>-999999.999</provisional_spare_capacity_using_ex_ante_mw>\r\
+                \n          <provisional_spare_capacity_using_ex_post_mw>-999999.999</provisional_spare_capacity_using_ex_post_mw>\r\
+                \n        </rows>\r\n        <rows id=\"-9223372036854775807\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.5\"\
+                >\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">0001-01-01</trade_date>\r\
+                \n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">23</delivery_hour>\r\
+                \n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">2</delivery_interval>\r\
+                \n          <price>-79228162514264337593543950335</price>\r\n          <load>999999.999</load>\r\
+                \n          <non_scheduled_generation>999999.999</non_scheduled_generation>\r\n      \
+                \    <mp_forecast_aggr_mw>999999.999</mp_forecast_aggr_mw>\r\n          <forecast_nsg_source>SUBMISSIONS</forecast_nsg_source>\r\
+                \n          <forecast_spare_capacity_mw>999999.999</forecast_spare_capacity_mw>\r\n  \
+                \        <provisional_spare_capacity_using_ex_ante_mw>999999.999</provisional_spare_capacity_using_ex_ante_mw>\r\
+                \n          <provisional_spare_capacity_using_ex_post_mw>999999.999</provisional_spare_capacity_using_ex_post_mw>\r\
+                \n        </rows>\r\n        <rows id=\"9223372036854775807\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.5\"\
+                >\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">9999-12-31</trade_date>\r\
+                \n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1</delivery_hour>\r\
+                \n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">2</delivery_interval>\r\
+                \n          <price>79228162514264337593543950335</price>\r\n          <load>-999999.899</load>\r\
+                \n          <non_scheduled_generation>-999999.899</non_scheduled_generation>\r\n     \
+                \     <mp_forecast_aggr_mw>-999999.899</mp_forecast_aggr_mw>\r\n          <forecast_nsg_source>SYSTEM_MANAGEMENT</forecast_nsg_source>\r\
+                \n          <forecast_spare_capacity_mw>-999999.899</forecast_spare_capacity_mw>\r\n \
+                \         <provisional_spare_capacity_using_ex_ante_mw>-999999.899</provisional_spare_capacity_using_ex_ante_mw>\r\
+                \n          <provisional_spare_capacity_using_ex_post_mw>-999999.899</provisional_spare_capacity_using_ex_post_mw>\r\
+                \n        </rows>\r\n        <rows id=\"0\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.5\"\
+                >\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1899-11-30</trade_date>\r\
+                \n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">22</delivery_hour>\r\
+                \n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1</delivery_interval>\r\
+                \n          <price>0.9</price>\r\n          <load>999999.899</load>\r\n          <non_scheduled_generation>999999.899</non_scheduled_generation>\r\
+                \n          <mp_forecast_aggr_mw>999999.899</mp_forecast_aggr_mw>\r\n          <forecast_nsg_source>SUBMISSIONS</forecast_nsg_source>\r\
+                \n          <forecast_spare_capacity_mw>999999.899</forecast_spare_capacity_mw>\r\n  \
+                \        <provisional_spare_capacity_using_ex_ante_mw>999999.899</provisional_spare_capacity_using_ex_ante_mw>\r\
+                \n          <provisional_spare_capacity_using_ex_post_mw>999999.899</provisional_spare_capacity_using_ex_post_mw>\r\
+                \n        </rows>\r\n        <rows id=\"2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.5\"\
+                >\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-02-02</trade_date>\r\
+                \n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">2</delivery_hour>\r\
+                \n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">2</delivery_interval>\r\
+                \n          <price>1.1</price>\r\n          <load>-999999.799</load>\r\n          <non_scheduled_generation>-999999.799</non_scheduled_generation>\r\
+                \n          <mp_forecast_aggr_mw>-999999.799</mp_forecast_aggr_mw>\r\n          <forecast_nsg_source>SYSTEM_MANAGEMENT</forecast_nsg_source>\r\
+                \n          <forecast_spare_capacity_mw>-999999.799</forecast_spare_capacity_mw>\r\n \
+                \         <provisional_spare_capacity_using_ex_ante_mw>-999999.799</provisional_spare_capacity_using_ex_ante_mw>\r\
+                \n          <provisional_spare_capacity_using_ex_post_mw>-999999.799</provisional_spare_capacity_using_ex_post_mw>\r\
+                \n        </rows>\r\n      </balancing_prices_report>\r\n    </getBalancingPricesResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=getBalancingQuantityPrices:
+    post:
+      operationId: getBalancingQuantityPrices
+      summary: getBalancingQuantityPrices
+      tags:
+      - Balancing Reports v2.3
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getBalancingQuantityPrices
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getBalancingQuantityPrices xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <source_type>FORECAST</source_type>\r\
+              \n      <trading_date_interval_range>\r\n        <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </start_date_interval>\r\
+              \n        <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+              \       <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </end_date_interval>\r\n\
+              \      </trading_date_interval_range>\r\n      <participant_name>participant1</participant_name>\r\
+              \n      <resource_name>resource_name1</resource_name>\r\n    </getBalancingQuantityPrices>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: getBalancingQuantityPrices
+      responses:
+        '200':
+          description: getBalancingQuantityPricesResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <getBalancingQuantityPricesResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <balancing_quantity_prices_report>\r\
+                \n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\r\
+                \n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\r\
+                \n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\r\
+                \n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\r\
+                \n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+                \       <source_type>FORECAST</source_type>\r\n          <trading_date_interval_range>\r\
+                \n            <start_date_interval>\r\n              <trade_date>1900-01-01</trade_date>\r\
+                \n              <delivery_hour>0</delivery_hour>\r\n              <delivery_interval>1</delivery_interval>\r\
+                \n            </start_date_interval>\r\n            <end_date_interval>\r\n          \
+                \    <trade_date>1900-01-01</trade_date>\r\n              <delivery_hour>0</delivery_hour>\r\
+                \n              <delivery_interval>1</delivery_interval>\r\n            </end_date_interval>\r\
+                \n          </trading_date_interval_range>\r\n          <participant_name>participant1</participant_name>\r\
+                \n          <resource_name>resource_name1</resource_name>\r\n        </reportArguments>\r\
+                \n        <trading_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n  \
+                \        <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+                \n          <delivery_interval>1</delivery_interval>\r\n          <participant>\r\n  \
+                \          <participant_name>participant1</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name1</resource_name>\r\n              <quantity>-999999.999</quantity>\r\
+                \n              <price>1</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name2</resource_name>\r\n              <quantity>999999.999</quantity>\r\
+                \n              <price>-79228162514264337593543950335</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name3</resource_name>\r\
+                \n              <quantity>-999999.899</quantity>\r\n              <price>79228162514264337593543950335</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name4</resource_name>\r\
+                \n              <quantity>999999.899</quantity>\r\n              <price>0.9</price>\r\n\
+                \            </resource>\r\n            <resource>\r\n              <resource_name>resource_name5</resource_name>\r\
+                \n              <quantity>-999999.799</quantity>\r\n              <price>1.1</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participant2</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name6</resource_name>\r\n              <quantity>999999.799</quantity>\r\
+                \n              <price>-79228162514264337593543950335</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name7</resource_name>\r\
+                \n              <quantity>-999999.699</quantity>\r\n              <price>79228162514264337593543950335</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name8</resource_name>\r\
+                \n              <quantity>999999.699</quantity>\r\n              <price>0.8</price>\r\n\
+                \            </resource>\r\n            <resource>\r\n              <resource_name>resource_name9</resource_name>\r\
+                \n              <quantity>-999999.599</quantity>\r\n              <price>1.2</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name10</resource_name>\r\
+                \n              <quantity>999999.599</quantity>\r\n              <price>-79228162514264337593543950335</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participant3</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name11</resource_name>\r\n              <quantity>-999999.499</quantity>\r\
+                \n              <price>79228162514264337593543950335</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name12</resource_name>\r\
+                \n              <quantity>999999.499</quantity>\r\n              <price>0.7</price>\r\n\
+                \            </resource>\r\n            <resource>\r\n              <resource_name>resource_name13</resource_name>\r\
+                \n              <quantity>-999999.399</quantity>\r\n              <price>1.3</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name14</resource_name>\r\
+                \n              <quantity>999999.399</quantity>\r\n              <price>-79228162514264337593543950335</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name15</resource_name>\r\
+                \n              <quantity>-999999.299</quantity>\r\n              <price>79228162514264337593543950335</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participant4</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name16</resource_name>\r\n              <quantity>999999.299</quantity>\r\
+                \n              <price>0.6</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name17</resource_name>\r\n              <quantity>-999999.199</quantity>\r\
+                \n              <price>1.4</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name18</resource_name>\r\n              <quantity>999999.199</quantity>\r\
+                \n              <price>-79228162514264337593543950335</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name19</resource_name>\r\
+                \n              <quantity>-999999.099</quantity>\r\n              <price>79228162514264337593543950335</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name20</resource_name>\r\
+                \n              <quantity>999999.099</quantity>\r\n              <price>0.5</price>\r\n\
+                \            </resource>\r\n          </participant>\r\n          <participant>\r\n  \
+                \          <participant_name>participant5</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name21</resource_name>\r\n              <quantity>-999998.999</quantity>\r\
+                \n              <price>1.5</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name22</resource_name>\r\n              <quantity>999998.999</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name23</resource_name>\r\
+                \n              <quantity>-999998.899</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name24</resource_name>\r\
+                \n              <quantity>999998.899</quantity>\r\n              <price>0.4</price>\r\n\
+                \            </resource>\r\n            <resource>\r\n              <resource_name>resource_name25</resource_name>\r\
+                \n              <quantity>-999998.799</quantity>\r\n              <price>1.6</price>\r\
+                \n            </resource>\r\n          </participant>\r\n        </trading_interval>\r\
+                \n        <trading_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n  \
+                \        <trade_date>0001-01-01</trade_date>\r\n          <delivery_hour>23</delivery_hour>\r\
+                \n          <delivery_interval>2</delivery_interval>\r\n          <participant>\r\n  \
+                \          <participant_name>participant6</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name26</resource_name>\r\n              <quantity>999998.799</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name27</resource_name>\r\
+                \n              <quantity>-999998.699</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name28</resource_name>\r\
+                \n              <quantity>999998.699</quantity>\r\n              <price>0.3</price>\r\n\
+                \            </resource>\r\n            <resource>\r\n              <resource_name>resource_name29</resource_name>\r\
+                \n              <quantity>-999998.599</quantity>\r\n              <price>1.7</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name30</resource_name>\r\
+                \n              <quantity>999998.599</quantity>\r\n              <price>-79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participant7</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name31</resource_name>\r\n              <quantity>-999998.499</quantity>\r\
+                \n              <price>79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name32</resource_name>\r\
+                \n              <quantity>999998.499</quantity>\r\n              <price>0.2</price>\r\n\
+                \            </resource>\r\n            <resource>\r\n              <resource_name>resource_name33</resource_name>\r\
+                \n              <quantity>-999998.399</quantity>\r\n              <price>1.8</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name34</resource_name>\r\
+                \n              <quantity>999998.399</quantity>\r\n              <price>-79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name35</resource_name>\r\
+                \n              <quantity>-999998.299</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participant8</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name36</resource_name>\r\n              <quantity>999998.299</quantity>\r\
+                \n              <price>0.1</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name37</resource_name>\r\n              <quantity>-999998.199</quantity>\r\
+                \n              <price>1.9</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name38</resource_name>\r\n              <quantity>999998.199</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name39</resource_name>\r\
+                \n              <quantity>-999998.099</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name40</resource_name>\r\
+                \n              <quantity>999998.099</quantity>\r\n              <price>0.0</price>\r\n\
+                \            </resource>\r\n          </participant>\r\n          <participant>\r\n  \
+                \          <participant_name>participant9</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name41</resource_name>\r\n              <quantity>-999997.999</quantity>\r\
+                \n              <price>2.0</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name42</resource_name>\r\n              <quantity>999997.999</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name43</resource_name>\r\
+                \n              <quantity>-999997.899</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name44</resource_name>\r\
+                \n              <quantity>999997.899</quantity>\r\n              <price>-0.1</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name45</resource_name>\r\
+                \n              <quantity>-999997.799</quantity>\r\n              <price>2.1</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan10</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name46</resource_name>\r\n              <quantity>999997.799</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name47</resource_name>\r\
+                \n              <quantity>-999997.699</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name48</resource_name>\r\
+                \n              <quantity>999997.699</quantity>\r\n              <price>-0.2</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name49</resource_name>\r\
+                \n              <quantity>-999997.599</quantity>\r\n              <price>2.2</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name50</resource_name>\r\
+                \n              <quantity>999997.599</quantity>\r\n              <price>-79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n          </participant>\r\n        </trading_interval>\r\
+                \n        <trading_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n  \
+                \        <trade_date>9999-12-31</trade_date>\r\n          <delivery_hour>1</delivery_hour>\r\
+                \n          <delivery_interval>2</delivery_interval>\r\n          <participant>\r\n  \
+                \          <participant_name>participan11</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name51</resource_name>\r\n              <quantity>-999997.499</quantity>\r\
+                \n              <price>79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name52</resource_name>\r\
+                \n              <quantity>999997.499</quantity>\r\n              <price>-0.3</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name53</resource_name>\r\
+                \n              <quantity>-999997.399</quantity>\r\n              <price>2.3</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name54</resource_name>\r\
+                \n              <quantity>999997.399</quantity>\r\n              <price>-79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name55</resource_name>\r\
+                \n              <quantity>-999997.299</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan12</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name56</resource_name>\r\n              <quantity>999997.299</quantity>\r\
+                \n              <price>-0.4</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name57</resource_name>\r\n              <quantity>-999997.199</quantity>\r\
+                \n              <price>2.4</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name58</resource_name>\r\n              <quantity>999997.199</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name59</resource_name>\r\
+                \n              <quantity>-999997.099</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name60</resource_name>\r\
+                \n              <quantity>999997.099</quantity>\r\n              <price>-0.5</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan13</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name61</resource_name>\r\n              <quantity>-999996.999</quantity>\r\
+                \n              <price>2.5</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name62</resource_name>\r\n              <quantity>999996.999</quantity>\r\
+                \n              <price>-79228162514264337593543950334</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name63</resource_name>\r\
+                \n              <quantity>-999996.899</quantity>\r\n              <price>79228162514264337593543950334</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name64</resource_name>\r\
+                \n              <quantity>999996.899</quantity>\r\n              <price>-0.6</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name65</resource_name>\r\
+                \n              <quantity>-999996.799</quantity>\r\n              <price>2.6</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan14</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name66</resource_name>\r\n              <quantity>999996.799</quantity>\r\
+                \n              <price>-79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name67</resource_name>\r\
+                \n              <quantity>-999996.699</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name68</resource_name>\r\
+                \n              <quantity>999996.699</quantity>\r\n              <price>-0.7</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name69</resource_name>\r\
+                \n              <quantity>-999996.599</quantity>\r\n              <price>2.7</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name70</resource_name>\r\
+                \n              <quantity>999996.599</quantity>\r\n              <price>-79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan15</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name71</resource_name>\r\n              <quantity>-999996.499</quantity>\r\
+                \n              <price>79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name72</resource_name>\r\
+                \n              <quantity>999996.499</quantity>\r\n              <price>-0.8</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name73</resource_name>\r\
+                \n              <quantity>-999996.399</quantity>\r\n              <price>2.8</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name74</resource_name>\r\
+                \n              <quantity>999996.399</quantity>\r\n              <price>-79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name75</resource_name>\r\
+                \n              <quantity>-999996.299</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n          </participant>\r\n        </trading_interval>\r\
+                \n        <trading_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n  \
+                \        <trade_date>1899-11-30</trade_date>\r\n          <delivery_hour>22</delivery_hour>\r\
+                \n          <delivery_interval>1</delivery_interval>\r\n          <participant>\r\n  \
+                \          <participant_name>participan16</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name76</resource_name>\r\n              <quantity>999996.299</quantity>\r\
+                \n              <price>-0.9</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name77</resource_name>\r\n              <quantity>-999996.199</quantity>\r\
+                \n              <price>2.9</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name78</resource_name>\r\n              <quantity>999996.199</quantity>\r\
+                \n              <price>-79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name79</resource_name>\r\
+                \n              <quantity>-999996.099</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name80</resource_name>\r\
+                \n              <quantity>999996.099</quantity>\r\n              <price>-1.0</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan17</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name81</resource_name>\r\n              <quantity>-999995.999</quantity>\r\
+                \n              <price>3.0</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name82</resource_name>\r\n              <quantity>999995.999</quantity>\r\
+                \n              <price>-79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name83</resource_name>\r\
+                \n              <quantity>-999995.899</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name84</resource_name>\r\
+                \n              <quantity>999995.899</quantity>\r\n              <price>-1.1</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name85</resource_name>\r\
+                \n              <quantity>-999995.799</quantity>\r\n              <price>3.1</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan18</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name86</resource_name>\r\n              <quantity>999995.799</quantity>\r\
+                \n              <price>-79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name87</resource_name>\r\
+                \n              <quantity>-999995.699</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name88</resource_name>\r\
+                \n              <quantity>999995.699</quantity>\r\n              <price>-1.2</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name89</resource_name>\r\
+                \n              <quantity>-999995.599</quantity>\r\n              <price>3.2</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name90</resource_name>\r\
+                \n              <quantity>999995.599</quantity>\r\n              <price>-79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan19</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name91</resource_name>\r\n              <quantity>-999995.499</quantity>\r\
+                \n              <price>79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name92</resource_name>\r\
+                \n              <quantity>999995.499</quantity>\r\n              <price>-1.3</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name93</resource_name>\r\
+                \n              <quantity>-999995.399</quantity>\r\n              <price>3.3</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name94</resource_name>\r\
+                \n              <quantity>999995.399</quantity>\r\n              <price>-79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name95</resource_name>\r\
+                \n              <quantity>-999995.299</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan20</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name96</resource_name>\r\n              <quantity>999995.299</quantity>\r\
+                \n              <price>-1.4</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name97</resource_name>\r\n              <quantity>-999995.199</quantity>\r\
+                \n              <price>3.4</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name98</resource_name>\r\n              <quantity>999995.199</quantity>\r\
+                \n              <price>-79228162514264337593543950333</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name99</resource_name>\r\
+                \n              <quantity>-999995.099</quantity>\r\n              <price>79228162514264337593543950333</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name100</resource_name>\r\
+                \n              <quantity>999995.099</quantity>\r\n              <price>-1.5</price>\r\
+                \n            </resource>\r\n          </participant>\r\n        </trading_interval>\r\
+                \n        <trading_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n  \
+                \        <trade_date>1900-02-02</trade_date>\r\n          <delivery_hour>2</delivery_hour>\r\
+                \n          <delivery_interval>2</delivery_interval>\r\n          <participant>\r\n  \
+                \          <participant_name>participan21</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name101</resource_name>\r\n              <quantity>-999994.999</quantity>\r\
+                \n              <price>3.5</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name102</resource_name>\r\n              <quantity>999994.999</quantity>\r\
+                \n              <price>-79228162514264337593543950332</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name103</resource_name>\r\
+                \n              <quantity>-999994.899</quantity>\r\n              <price>79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name104</resource_name>\r\
+                \n              <quantity>999994.899</quantity>\r\n              <price>-1.6</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name105</resource_name>\r\
+                \n              <quantity>-999994.799</quantity>\r\n              <price>3.6</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan22</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name106</resource_name>\r\n              <quantity>999994.799</quantity>\r\
+                \n              <price>-79228162514264337593543950332</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name107</resource_name>\r\
+                \n              <quantity>-999994.699</quantity>\r\n              <price>79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name108</resource_name>\r\
+                \n              <quantity>999994.699</quantity>\r\n              <price>-1.7</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name109</resource_name>\r\
+                \n              <quantity>-999994.599</quantity>\r\n              <price>3.7</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name110</resource_name>\r\
+                \n              <quantity>999994.599</quantity>\r\n              <price>-79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan23</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name111</resource_name>\r\n              <quantity>-999994.499</quantity>\r\
+                \n              <price>79228162514264337593543950332</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name112</resource_name>\r\
+                \n              <quantity>999994.499</quantity>\r\n              <price>-1.8</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name113</resource_name>\r\
+                \n              <quantity>-999994.399</quantity>\r\n              <price>3.8</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name114</resource_name>\r\
+                \n              <quantity>999994.399</quantity>\r\n              <price>-79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name115</resource_name>\r\
+                \n              <quantity>-999994.299</quantity>\r\n              <price>79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan24</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name116</resource_name>\r\n              <quantity>999994.299</quantity>\r\
+                \n              <price>-1.9</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name117</resource_name>\r\n              <quantity>-999994.199</quantity>\r\
+                \n              <price>3.9</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name118</resource_name>\r\n              <quantity>999994.199</quantity>\r\
+                \n              <price>-79228162514264337593543950332</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name119</resource_name>\r\
+                \n              <quantity>-999994.099</quantity>\r\n              <price>79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name120</resource_name>\r\
+                \n              <quantity>999994.099</quantity>\r\n              <price>-2.0</price>\r\
+                \n            </resource>\r\n          </participant>\r\n          <participant>\r\n \
+                \           <participant_name>participan25</participant_name>\r\n            <resource>\r\
+                \n              <resource_name>resource_name121</resource_name>\r\n              <quantity>-999993.999</quantity>\r\
+                \n              <price>4.0</price>\r\n            </resource>\r\n            <resource>\r\
+                \n              <resource_name>resource_name122</resource_name>\r\n              <quantity>999993.999</quantity>\r\
+                \n              <price>-79228162514264337593543950332</price>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resource_name>resource_name123</resource_name>\r\
+                \n              <quantity>-999993.899</quantity>\r\n              <price>79228162514264337593543950332</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name124</resource_name>\r\
+                \n              <quantity>999993.899</quantity>\r\n              <price>-2.1</price>\r\
+                \n            </resource>\r\n            <resource>\r\n              <resource_name>resource_name125</resource_name>\r\
+                \n              <quantity>-999993.799</quantity>\r\n              <price>4.1</price>\r\
+                \n            </resource>\r\n          </participant>\r\n        </trading_interval>\r\
+                \n      </balancing_quantity_prices_report>\r\n    </getBalancingQuantityPricesResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=getBalancingSubmissions:
+    post:
+      operationId: getBalancingSubmissions
+      summary: getBalancingSubmissions
+      tags:
+      - Balancing Reports v2.3
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getBalancingSubmissions
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getBalancingSubmissions xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.0\">\r\n      <trading_date_interval_range>\r\
+              \n        <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n \
+              \         <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </start_date_interval>\r\
+              \n        <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+              \       <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </end_date_interval>\r\n\
+              \      </trading_date_interval_range>\r\n      <file_type>EFFECTIVE</file_type>\r\n    \
+              \  <participant_name>participant1</participant_name>\r\n      <resource_name>resource_name1</resource_name>\r\
+              \n    </getBalancingSubmissions>\r\n  </Body>\r\n</Envelope>"
+        description: getBalancingSubmissions
+      responses:
+        '200':
+          description: getBalancingSubmissionsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <Message>Generated Sample is too large.</Message>\r\n  </Body>\r\n\
+                </Envelope>"
+  /?soapAction=getMarketProportion:
+    post:
+      operationId: getMarketProportion
+      summary: getMarketProportion
+      tags:
+      - Balancing Reports v2.3
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getMarketProportion
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getMarketProportion xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.2\">\r\n      <sourceType>FORECAST</sourceType>\r\
+              \n      <marketType>BALANCING</marketType>\r\n      <tradingDateIntervalRange>\r\n     \
+              \   <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n       \
+              \   <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\n\
+              \          <delivery_interval>1</delivery_interval>\r\n        </start_date_interval>\r\n\
+              \        <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n    \
+              \      <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </end_date_interval>\r\n\
+              \      </tradingDateIntervalRange>\r\n    </getMarketProportion>\r\n  </Body>\r\n</Envelope>"
+        description: getMarketProportion
+      responses:
+        '200':
+          description: getMarketProportionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <getMarketProportionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.2\">\r\n      <marketProportionsReport>\r\
+                \n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\r\
+                \n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\r\
+                \n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\r\
+                \n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\r\
+                \n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.2\">\r\n   \
+                \       <tradingDateIntervalRange>\r\n            <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >\r\n              <trade_date>1900-01-01</trade_date>\r\n              <delivery_hour>0</delivery_hour>\r\
+                \n              <delivery_interval>1</delivery_interval>\r\n            </start_date_interval>\r\
+                \n            <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\
+                \n              <trade_date>1900-01-01</trade_date>\r\n              <delivery_hour>0</delivery_hour>\r\
+                \n              <delivery_interval>1</delivery_interval>\r\n            </end_date_interval>\r\
+                \n          </tradingDateIntervalRange>\r\n          <sourceType>FORECAST</sourceType>\r\
+                \n          <marketType>BALANCING</marketType>\r\n        </reportArguments>\r\n     \
+                \   <tradingInterval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.2\">\r\n         \
+                \ <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</trade_date>\r\
+                \n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">0</delivery_hour>\r\
+                \n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1</delivery_interval>\r\
+                \n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\n\
+                \            <portfolioPercentage>0.000</portfolioPercentage>\r\n            <ippPercentage>0.000</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_UP</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950335</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950335</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_DOWN</marketType>\r\
+                \n            <portfolioPercentage>0.100</portfolioPercentage>\r\n            <ippPercentage>0.100</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>ALL</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950335</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950335</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\
+                \n            <portfolioPercentage>0.200</portfolioPercentage>\r\n            <ippPercentage>0.200</ippPercentage>\r\
+                \n          </marketProportions>\r\n        </tradingInterval>\r\n        <tradingInterval\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.2\">\r\n          <trade_date xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">0001-01-01</trade_date>\r\n          <delivery_hour\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">23</delivery_hour>\r\n          <delivery_interval\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">2</delivery_interval>\r\n       \
+                \   <marketProportions>\r\n            <marketType>LFAS_UP</marketType>\r\n          \
+                \  <portfolioPercentage>79228162514264337593543950335</portfolioPercentage>\r\n      \
+                \      <ippPercentage>79228162514264337593543950335</ippPercentage>\r\n          </marketProportions>\r\
+                \n          <marketProportions>\r\n            <marketType>LFAS_DOWN</marketType>\r\n\
+                \            <portfolioPercentage>0.300</portfolioPercentage>\r\n            <ippPercentage>0.300</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>ALL</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950335</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950335</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\
+                \n            <portfolioPercentage>0.400</portfolioPercentage>\r\n            <ippPercentage>0.400</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_UP</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950335</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950335</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n        </tradingInterval>\r\n        <tradingInterval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.2\">\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >9999-12-31</trade_date>\r\n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >1</delivery_hour>\r\n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_interval>\r\n          <marketProportions>\r\n            <marketType>LFAS_DOWN</marketType>\r\
+                \n            <portfolioPercentage>0.500</portfolioPercentage>\r\n            <ippPercentage>0.500</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>ALL</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\
+                \n            <portfolioPercentage>0.600</portfolioPercentage>\r\n            <ippPercentage>0.600</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_UP</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_DOWN</marketType>\r\
+                \n            <portfolioPercentage>0.700</portfolioPercentage>\r\n            <ippPercentage>0.700</ippPercentage>\r\
+                \n          </marketProportions>\r\n        </tradingInterval>\r\n        <tradingInterval\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.2\">\r\n          <trade_date xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.0\">1899-11-30</trade_date>\r\n          <delivery_hour\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">22</delivery_hour>\r\n          <delivery_interval\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1</delivery_interval>\r\n       \
+                \   <marketProportions>\r\n            <marketType>ALL</marketType>\r\n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\
+                \n            <portfolioPercentage>0.800</portfolioPercentage>\r\n            <ippPercentage>0.800</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_UP</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_DOWN</marketType>\r\
+                \n            <portfolioPercentage>0.900</portfolioPercentage>\r\n            <ippPercentage>0.900</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>ALL</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n        </tradingInterval>\r\n        <tradingInterval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.2\">\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >1900-02-02</trade_date>\r\n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_hour>\r\n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_interval>\r\n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\
+                \n            <portfolioPercentage>1.000</portfolioPercentage>\r\n            <ippPercentage>1.000</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_UP</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>LFAS_DOWN</marketType>\r\
+                \n            <portfolioPercentage>1.100</portfolioPercentage>\r\n            <ippPercentage>1.100</ippPercentage>\r\
+                \n          </marketProportions>\r\n          <marketProportions>\r\n            <marketType>ALL</marketType>\r\
+                \n            <portfolioPercentage>79228162514264337593543950334</portfolioPercentage>\r\
+                \n            <ippPercentage>79228162514264337593543950334</ippPercentage>\r\n       \
+                \   </marketProportions>\r\n          <marketProportions>\r\n            <marketType>BALANCING</marketType>\r\
+                \n            <portfolioPercentage>1.200</portfolioPercentage>\r\n            <ippPercentage>1.200</ippPercentage>\r\
+                \n          </marketProportions>\r\n        </tradingInterval>\r\n      </marketProportionsReport>\r\
+                \n    </getMarketProportionResponse>\r\n  </Body>\r\n</Envelope>"
+  /?soapAction=getTheoreticalEnergySchedule:
+    post:
+      operationId: getTheoreticalEnergySchedule
+      summary: getTheoreticalEnergySchedule
+      tags:
+      - Balancing Reports v2.3
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getTheoreticalEnergySchedule
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <getTheoreticalEnergySchedule xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.1\">\r\n      <tesType>PROVISIONAL</tesType>\r\
+              \n      <tradingDateIntervalRange>\r\n        <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </start_date_interval>\r\
+              \n        <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n   \
+              \       <trade_date>1900-01-01</trade_date>\r\n          <delivery_hour>0</delivery_hour>\r\
+              \n          <delivery_interval>1</delivery_interval>\r\n        </end_date_interval>\r\n\
+              \      </tradingDateIntervalRange>\r\n      <participantName>participant1</participantName>\r\
+              \n      <resourceName>resourceName1</resourceName>\r\n    </getTheoreticalEnergySchedule>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: getTheoreticalEnergySchedule
+      responses:
+        '200':
+          description: getTheoreticalEnergyScheduleResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <getTheoreticalEnergyScheduleResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/balancing/2.1\">\r\n      <theoreticalEnergyReport>\r\
+                \n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\r\
+                \n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\r\
+                \n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\r\
+                \n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\r\
+                \n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.1\">\r\n   \
+                \       <tesType>PROVISIONAL</tesType>\r\n          <tradingDateIntervalRange>\r\n   \
+                \         <start_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n\
+                \              <trade_date>1900-01-01</trade_date>\r\n              <delivery_hour>0</delivery_hour>\r\
+                \n              <delivery_interval>1</delivery_interval>\r\n            </start_date_interval>\r\
+                \n            <end_date_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\
+                \n              <trade_date>1900-01-01</trade_date>\r\n              <delivery_hour>0</delivery_hour>\r\
+                \n              <delivery_interval>1</delivery_interval>\r\n            </end_date_interval>\r\
+                \n          </tradingDateIntervalRange>\r\n          <participantName>participant1</participantName>\r\
+                \n          <resourceName>resourceName1</resourceName>\r\n        </reportArguments>\r\
+                \n        <tradingInterval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.1\">\r\n   \
+                \       <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</trade_date>\r\
+                \n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">0</delivery_hour>\r\
+                \n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1</delivery_interval>\r\
+                \n          <participant>\r\n            <participantName>participant1</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName1</resourceName>\r\
+                \n              <tesMin>1</tesMin>\r\n              <tesMax>1</tesMax>\r\n           \
+                \   <sentOutCapacity>-999999.999</sentOutCapacity>\r\n              <outage>-999999.999</outage>\r\
+                \n              <availableCapacity>-999999.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName2</resourceName>\r\
+                \n              <tesMin>-999999.999999</tesMin>\r\n              <tesMax>-999999.999999</tesMax>\r\
+                \n              <sentOutCapacity>999999.999</sentOutCapacity>\r\n              <outage>999999.999</outage>\r\
+                \n              <availableCapacity>999999.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName3</resourceName>\r\
+                \n              <tesMin>999999.999999</tesMin>\r\n              <tesMax>999999.999999</tesMax>\r\
+                \n              <sentOutCapacity>-999999.899</sentOutCapacity>\r\n              <outage>-999999.899</outage>\r\
+                \n              <availableCapacity>-999999.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName4</resourceName>\r\
+                \n              <tesMin>0.999999</tesMin>\r\n              <tesMax>0.999999</tesMax>\r\
+                \n              <sentOutCapacity>999999.899</sentOutCapacity>\r\n              <outage>999999.899</outage>\r\
+                \n              <availableCapacity>999999.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName5</resourceName>\r\
+                \n              <tesMin>1.000001</tesMin>\r\n              <tesMax>1.000001</tesMax>\r\
+                \n              <sentOutCapacity>-999999.799</sentOutCapacity>\r\n              <outage>-999999.799</outage>\r\
+                \n              <availableCapacity>-999999.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant2</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName6</resourceName>\r\
+                \n              <tesMin>-999999.999998</tesMin>\r\n              <tesMax>-999999.999998</tesMax>\r\
+                \n              <sentOutCapacity>999999.799</sentOutCapacity>\r\n              <outage>999999.799</outage>\r\
+                \n              <availableCapacity>999999.799</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName7</resourceName>\r\
+                \n              <tesMin>999999.999998</tesMin>\r\n              <tesMax>999999.999998</tesMax>\r\
+                \n              <sentOutCapacity>-999999.699</sentOutCapacity>\r\n              <outage>-999999.699</outage>\r\
+                \n              <availableCapacity>-999999.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName8</resourceName>\r\
+                \n              <tesMin>0.999998</tesMin>\r\n              <tesMax>0.999998</tesMax>\r\
+                \n              <sentOutCapacity>999999.699</sentOutCapacity>\r\n              <outage>999999.699</outage>\r\
+                \n              <availableCapacity>999999.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName9</resourceName>\r\
+                \n              <tesMin>1.000002</tesMin>\r\n              <tesMax>1.000002</tesMax>\r\
+                \n              <sentOutCapacity>-999999.599</sentOutCapacity>\r\n              <outage>-999999.599</outage>\r\
+                \n              <availableCapacity>-999999.599</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName10</resourceName>\r\
+                \n              <tesMin>-999999.999997</tesMin>\r\n              <tesMax>-999999.999997</tesMax>\r\
+                \n              <sentOutCapacity>999999.599</sentOutCapacity>\r\n              <outage>999999.599</outage>\r\
+                \n              <availableCapacity>999999.599</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant3</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName11</resourceName>\r\
+                \n              <tesMin>999999.999997</tesMin>\r\n              <tesMax>999999.999997</tesMax>\r\
+                \n              <sentOutCapacity>-999999.499</sentOutCapacity>\r\n              <outage>-999999.499</outage>\r\
+                \n              <availableCapacity>-999999.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName12</resourceName>\r\
+                \n              <tesMin>0.999997</tesMin>\r\n              <tesMax>0.999997</tesMax>\r\
+                \n              <sentOutCapacity>999999.499</sentOutCapacity>\r\n              <outage>999999.499</outage>\r\
+                \n              <availableCapacity>999999.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName13</resourceName>\r\
+                \n              <tesMin>1.000003</tesMin>\r\n              <tesMax>1.000003</tesMax>\r\
+                \n              <sentOutCapacity>-999999.399</sentOutCapacity>\r\n              <outage>-999999.399</outage>\r\
+                \n              <availableCapacity>-999999.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName14</resourceName>\r\
+                \n              <tesMin>-999999.999996</tesMin>\r\n              <tesMax>-999999.999996</tesMax>\r\
+                \n              <sentOutCapacity>999999.399</sentOutCapacity>\r\n              <outage>999999.399</outage>\r\
+                \n              <availableCapacity>999999.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName15</resourceName>\r\
+                \n              <tesMin>999999.999996</tesMin>\r\n              <tesMax>999999.999996</tesMax>\r\
+                \n              <sentOutCapacity>-999999.299</sentOutCapacity>\r\n              <outage>-999999.299</outage>\r\
+                \n              <availableCapacity>-999999.299</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant4</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName16</resourceName>\r\
+                \n              <tesMin>0.999996</tesMin>\r\n              <tesMax>0.999996</tesMax>\r\
+                \n              <sentOutCapacity>999999.299</sentOutCapacity>\r\n              <outage>999999.299</outage>\r\
+                \n              <availableCapacity>999999.299</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName17</resourceName>\r\
+                \n              <tesMin>1.000004</tesMin>\r\n              <tesMax>1.000004</tesMax>\r\
+                \n              <sentOutCapacity>-999999.199</sentOutCapacity>\r\n              <outage>-999999.199</outage>\r\
+                \n              <availableCapacity>-999999.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName18</resourceName>\r\
+                \n              <tesMin>-999999.999995</tesMin>\r\n              <tesMax>-999999.999995</tesMax>\r\
+                \n              <sentOutCapacity>999999.199</sentOutCapacity>\r\n              <outage>999999.199</outage>\r\
+                \n              <availableCapacity>999999.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName19</resourceName>\r\
+                \n              <tesMin>999999.999995</tesMin>\r\n              <tesMax>999999.999995</tesMax>\r\
+                \n              <sentOutCapacity>-999999.099</sentOutCapacity>\r\n              <outage>-999999.099</outage>\r\
+                \n              <availableCapacity>-999999.099</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName20</resourceName>\r\
+                \n              <tesMin>0.999995</tesMin>\r\n              <tesMax>0.999995</tesMax>\r\
+                \n              <sentOutCapacity>999999.099</sentOutCapacity>\r\n              <outage>999999.099</outage>\r\
+                \n              <availableCapacity>999999.099</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant5</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName21</resourceName>\r\
+                \n              <tesMin>1.000005</tesMin>\r\n              <tesMax>1.000005</tesMax>\r\
+                \n              <sentOutCapacity>-999998.999</sentOutCapacity>\r\n              <outage>-999998.999</outage>\r\
+                \n              <availableCapacity>-999998.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName22</resourceName>\r\
+                \n              <tesMin>-999999.999994</tesMin>\r\n              <tesMax>-999999.999994</tesMax>\r\
+                \n              <sentOutCapacity>999998.999</sentOutCapacity>\r\n              <outage>999998.999</outage>\r\
+                \n              <availableCapacity>999998.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName23</resourceName>\r\
+                \n              <tesMin>999999.999994</tesMin>\r\n              <tesMax>999999.999994</tesMax>\r\
+                \n              <sentOutCapacity>-999998.899</sentOutCapacity>\r\n              <outage>-999998.899</outage>\r\
+                \n              <availableCapacity>-999998.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName24</resourceName>\r\
+                \n              <tesMin>0.999994</tesMin>\r\n              <tesMax>0.999994</tesMax>\r\
+                \n              <sentOutCapacity>999998.899</sentOutCapacity>\r\n              <outage>999998.899</outage>\r\
+                \n              <availableCapacity>999998.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName25</resourceName>\r\
+                \n              <tesMin>1.000006</tesMin>\r\n              <tesMax>1.000006</tesMax>\r\
+                \n              <sentOutCapacity>-999998.799</sentOutCapacity>\r\n              <outage>-999998.799</outage>\r\
+                \n              <availableCapacity>-999998.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n        </tradingInterval>\r\n        <tradingInterval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.1\">\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >0001-01-01</trade_date>\r\n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >23</delivery_hour>\r\n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_interval>\r\n          <participant>\r\n            <participantName>participant6</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName26</resourceName>\r\
+                \n              <tesMin>-999999.999993</tesMin>\r\n              <tesMax>-999999.999993</tesMax>\r\
+                \n              <sentOutCapacity>999998.799</sentOutCapacity>\r\n              <outage>999998.799</outage>\r\
+                \n              <availableCapacity>999998.799</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName27</resourceName>\r\
+                \n              <tesMin>999999.999993</tesMin>\r\n              <tesMax>999999.999993</tesMax>\r\
+                \n              <sentOutCapacity>-999998.699</sentOutCapacity>\r\n              <outage>-999998.699</outage>\r\
+                \n              <availableCapacity>-999998.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName28</resourceName>\r\
+                \n              <tesMin>0.999993</tesMin>\r\n              <tesMax>0.999993</tesMax>\r\
+                \n              <sentOutCapacity>999998.699</sentOutCapacity>\r\n              <outage>999998.699</outage>\r\
+                \n              <availableCapacity>999998.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName29</resourceName>\r\
+                \n              <tesMin>1.000007</tesMin>\r\n              <tesMax>1.000007</tesMax>\r\
+                \n              <sentOutCapacity>-999998.599</sentOutCapacity>\r\n              <outage>-999998.599</outage>\r\
+                \n              <availableCapacity>-999998.599</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName30</resourceName>\r\
+                \n              <tesMin>-999999.999992</tesMin>\r\n              <tesMax>-999999.999992</tesMax>\r\
+                \n              <sentOutCapacity>999998.599</sentOutCapacity>\r\n              <outage>999998.599</outage>\r\
+                \n              <availableCapacity>999998.599</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant7</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName31</resourceName>\r\
+                \n              <tesMin>999999.999992</tesMin>\r\n              <tesMax>999999.999992</tesMax>\r\
+                \n              <sentOutCapacity>-999998.499</sentOutCapacity>\r\n              <outage>-999998.499</outage>\r\
+                \n              <availableCapacity>-999998.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName32</resourceName>\r\
+                \n              <tesMin>0.999992</tesMin>\r\n              <tesMax>0.999992</tesMax>\r\
+                \n              <sentOutCapacity>999998.499</sentOutCapacity>\r\n              <outage>999998.499</outage>\r\
+                \n              <availableCapacity>999998.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName33</resourceName>\r\
+                \n              <tesMin>1.000008</tesMin>\r\n              <tesMax>1.000008</tesMax>\r\
+                \n              <sentOutCapacity>-999998.399</sentOutCapacity>\r\n              <outage>-999998.399</outage>\r\
+                \n              <availableCapacity>-999998.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName34</resourceName>\r\
+                \n              <tesMin>-999999.999991</tesMin>\r\n              <tesMax>-999999.999991</tesMax>\r\
+                \n              <sentOutCapacity>999998.399</sentOutCapacity>\r\n              <outage>999998.399</outage>\r\
+                \n              <availableCapacity>999998.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName35</resourceName>\r\
+                \n              <tesMin>999999.999991</tesMin>\r\n              <tesMax>999999.999991</tesMax>\r\
+                \n              <sentOutCapacity>-999998.299</sentOutCapacity>\r\n              <outage>-999998.299</outage>\r\
+                \n              <availableCapacity>-999998.299</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant8</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName36</resourceName>\r\
+                \n              <tesMin>0.999991</tesMin>\r\n              <tesMax>0.999991</tesMax>\r\
+                \n              <sentOutCapacity>999998.299</sentOutCapacity>\r\n              <outage>999998.299</outage>\r\
+                \n              <availableCapacity>999998.299</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName37</resourceName>\r\
+                \n              <tesMin>1.000009</tesMin>\r\n              <tesMax>1.000009</tesMax>\r\
+                \n              <sentOutCapacity>-999998.199</sentOutCapacity>\r\n              <outage>-999998.199</outage>\r\
+                \n              <availableCapacity>-999998.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName38</resourceName>\r\
+                \n              <tesMin>-999999.999990</tesMin>\r\n              <tesMax>-999999.999990</tesMax>\r\
+                \n              <sentOutCapacity>999998.199</sentOutCapacity>\r\n              <outage>999998.199</outage>\r\
+                \n              <availableCapacity>999998.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName39</resourceName>\r\
+                \n              <tesMin>999999.999990</tesMin>\r\n              <tesMax>999999.999990</tesMax>\r\
+                \n              <sentOutCapacity>-999998.099</sentOutCapacity>\r\n              <outage>-999998.099</outage>\r\
+                \n              <availableCapacity>-999998.099</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName40</resourceName>\r\
+                \n              <tesMin>0.999990</tesMin>\r\n              <tesMax>0.999990</tesMax>\r\
+                \n              <sentOutCapacity>999998.099</sentOutCapacity>\r\n              <outage>999998.099</outage>\r\
+                \n              <availableCapacity>999998.099</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participant9</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName41</resourceName>\r\
+                \n              <tesMin>1.000010</tesMin>\r\n              <tesMax>1.000010</tesMax>\r\
+                \n              <sentOutCapacity>-999997.999</sentOutCapacity>\r\n              <outage>-999997.999</outage>\r\
+                \n              <availableCapacity>-999997.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName42</resourceName>\r\
+                \n              <tesMin>-999999.999989</tesMin>\r\n              <tesMax>-999999.999989</tesMax>\r\
+                \n              <sentOutCapacity>999997.999</sentOutCapacity>\r\n              <outage>999997.999</outage>\r\
+                \n              <availableCapacity>999997.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName43</resourceName>\r\
+                \n              <tesMin>999999.999989</tesMin>\r\n              <tesMax>999999.999989</tesMax>\r\
+                \n              <sentOutCapacity>-999997.899</sentOutCapacity>\r\n              <outage>-999997.899</outage>\r\
+                \n              <availableCapacity>-999997.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName44</resourceName>\r\
+                \n              <tesMin>0.999989</tesMin>\r\n              <tesMax>0.999989</tesMax>\r\
+                \n              <sentOutCapacity>999997.899</sentOutCapacity>\r\n              <outage>999997.899</outage>\r\
+                \n              <availableCapacity>999997.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName45</resourceName>\r\
+                \n              <tesMin>1.000011</tesMin>\r\n              <tesMax>1.000011</tesMax>\r\
+                \n              <sentOutCapacity>-999997.799</sentOutCapacity>\r\n              <outage>-999997.799</outage>\r\
+                \n              <availableCapacity>-999997.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan10</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName46</resourceName>\r\
+                \n              <tesMin>-999999.999988</tesMin>\r\n              <tesMax>-999999.999988</tesMax>\r\
+                \n              <sentOutCapacity>999997.799</sentOutCapacity>\r\n              <outage>999997.799</outage>\r\
+                \n              <availableCapacity>999997.799</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName47</resourceName>\r\
+                \n              <tesMin>999999.999988</tesMin>\r\n              <tesMax>999999.999988</tesMax>\r\
+                \n              <sentOutCapacity>-999997.699</sentOutCapacity>\r\n              <outage>-999997.699</outage>\r\
+                \n              <availableCapacity>-999997.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName48</resourceName>\r\
+                \n              <tesMin>0.999988</tesMin>\r\n              <tesMax>0.999988</tesMax>\r\
+                \n              <sentOutCapacity>999997.699</sentOutCapacity>\r\n              <outage>999997.699</outage>\r\
+                \n              <availableCapacity>999997.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName49</resourceName>\r\
+                \n              <tesMin>1.000012</tesMin>\r\n              <tesMax>1.000012</tesMax>\r\
+                \n              <sentOutCapacity>-999997.599</sentOutCapacity>\r\n              <outage>-999997.599</outage>\r\
+                \n              <availableCapacity>-999997.599</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName50</resourceName>\r\
+                \n              <tesMin>-999999.999987</tesMin>\r\n              <tesMax>-999999.999987</tesMax>\r\
+                \n              <sentOutCapacity>999997.599</sentOutCapacity>\r\n              <outage>999997.599</outage>\r\
+                \n              <availableCapacity>999997.599</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n        </tradingInterval>\r\n        <tradingInterval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.1\">\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >9999-12-31</trade_date>\r\n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >1</delivery_hour>\r\n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_interval>\r\n          <participant>\r\n            <participantName>participan11</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName51</resourceName>\r\
+                \n              <tesMin>999999.999987</tesMin>\r\n              <tesMax>999999.999987</tesMax>\r\
+                \n              <sentOutCapacity>-999997.499</sentOutCapacity>\r\n              <outage>-999997.499</outage>\r\
+                \n              <availableCapacity>-999997.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName52</resourceName>\r\
+                \n              <tesMin>0.999987</tesMin>\r\n              <tesMax>0.999987</tesMax>\r\
+                \n              <sentOutCapacity>999997.499</sentOutCapacity>\r\n              <outage>999997.499</outage>\r\
+                \n              <availableCapacity>999997.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName53</resourceName>\r\
+                \n              <tesMin>1.000013</tesMin>\r\n              <tesMax>1.000013</tesMax>\r\
+                \n              <sentOutCapacity>-999997.399</sentOutCapacity>\r\n              <outage>-999997.399</outage>\r\
+                \n              <availableCapacity>-999997.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName54</resourceName>\r\
+                \n              <tesMin>-999999.999986</tesMin>\r\n              <tesMax>-999999.999986</tesMax>\r\
+                \n              <sentOutCapacity>999997.399</sentOutCapacity>\r\n              <outage>999997.399</outage>\r\
+                \n              <availableCapacity>999997.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName55</resourceName>\r\
+                \n              <tesMin>999999.999986</tesMin>\r\n              <tesMax>999999.999986</tesMax>\r\
+                \n              <sentOutCapacity>-999997.299</sentOutCapacity>\r\n              <outage>-999997.299</outage>\r\
+                \n              <availableCapacity>-999997.299</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan12</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName56</resourceName>\r\
+                \n              <tesMin>0.999986</tesMin>\r\n              <tesMax>0.999986</tesMax>\r\
+                \n              <sentOutCapacity>999997.299</sentOutCapacity>\r\n              <outage>999997.299</outage>\r\
+                \n              <availableCapacity>999997.299</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName57</resourceName>\r\
+                \n              <tesMin>1.000014</tesMin>\r\n              <tesMax>1.000014</tesMax>\r\
+                \n              <sentOutCapacity>-999997.199</sentOutCapacity>\r\n              <outage>-999997.199</outage>\r\
+                \n              <availableCapacity>-999997.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName58</resourceName>\r\
+                \n              <tesMin>-999999.999985</tesMin>\r\n              <tesMax>-999999.999985</tesMax>\r\
+                \n              <sentOutCapacity>999997.199</sentOutCapacity>\r\n              <outage>999997.199</outage>\r\
+                \n              <availableCapacity>999997.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName59</resourceName>\r\
+                \n              <tesMin>999999.999985</tesMin>\r\n              <tesMax>999999.999985</tesMax>\r\
+                \n              <sentOutCapacity>-999997.099</sentOutCapacity>\r\n              <outage>-999997.099</outage>\r\
+                \n              <availableCapacity>-999997.099</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName60</resourceName>\r\
+                \n              <tesMin>0.999985</tesMin>\r\n              <tesMax>0.999985</tesMax>\r\
+                \n              <sentOutCapacity>999997.099</sentOutCapacity>\r\n              <outage>999997.099</outage>\r\
+                \n              <availableCapacity>999997.099</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan13</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName61</resourceName>\r\
+                \n              <tesMin>1.000015</tesMin>\r\n              <tesMax>1.000015</tesMax>\r\
+                \n              <sentOutCapacity>-999996.999</sentOutCapacity>\r\n              <outage>-999996.999</outage>\r\
+                \n              <availableCapacity>-999996.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName62</resourceName>\r\
+                \n              <tesMin>-999999.999984</tesMin>\r\n              <tesMax>-999999.999984</tesMax>\r\
+                \n              <sentOutCapacity>999996.999</sentOutCapacity>\r\n              <outage>999996.999</outage>\r\
+                \n              <availableCapacity>999996.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName63</resourceName>\r\
+                \n              <tesMin>999999.999984</tesMin>\r\n              <tesMax>999999.999984</tesMax>\r\
+                \n              <sentOutCapacity>-999996.899</sentOutCapacity>\r\n              <outage>-999996.899</outage>\r\
+                \n              <availableCapacity>-999996.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName64</resourceName>\r\
+                \n              <tesMin>0.999984</tesMin>\r\n              <tesMax>0.999984</tesMax>\r\
+                \n              <sentOutCapacity>999996.899</sentOutCapacity>\r\n              <outage>999996.899</outage>\r\
+                \n              <availableCapacity>999996.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName65</resourceName>\r\
+                \n              <tesMin>1.000016</tesMin>\r\n              <tesMax>1.000016</tesMax>\r\
+                \n              <sentOutCapacity>-999996.799</sentOutCapacity>\r\n              <outage>-999996.799</outage>\r\
+                \n              <availableCapacity>-999996.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan14</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName66</resourceName>\r\
+                \n              <tesMin>-999999.999983</tesMin>\r\n              <tesMax>-999999.999983</tesMax>\r\
+                \n              <sentOutCapacity>999996.799</sentOutCapacity>\r\n              <outage>999996.799</outage>\r\
+                \n              <availableCapacity>999996.799</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName67</resourceName>\r\
+                \n              <tesMin>999999.999983</tesMin>\r\n              <tesMax>999999.999983</tesMax>\r\
+                \n              <sentOutCapacity>-999996.699</sentOutCapacity>\r\n              <outage>-999996.699</outage>\r\
+                \n              <availableCapacity>-999996.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName68</resourceName>\r\
+                \n              <tesMin>0.999983</tesMin>\r\n              <tesMax>0.999983</tesMax>\r\
+                \n              <sentOutCapacity>999996.699</sentOutCapacity>\r\n              <outage>999996.699</outage>\r\
+                \n              <availableCapacity>999996.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName69</resourceName>\r\
+                \n              <tesMin>1.000017</tesMin>\r\n              <tesMax>1.000017</tesMax>\r\
+                \n              <sentOutCapacity>-999996.599</sentOutCapacity>\r\n              <outage>-999996.599</outage>\r\
+                \n              <availableCapacity>-999996.599</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName70</resourceName>\r\
+                \n              <tesMin>-999999.999982</tesMin>\r\n              <tesMax>-999999.999982</tesMax>\r\
+                \n              <sentOutCapacity>999996.599</sentOutCapacity>\r\n              <outage>999996.599</outage>\r\
+                \n              <availableCapacity>999996.599</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan15</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName71</resourceName>\r\
+                \n              <tesMin>999999.999982</tesMin>\r\n              <tesMax>999999.999982</tesMax>\r\
+                \n              <sentOutCapacity>-999996.499</sentOutCapacity>\r\n              <outage>-999996.499</outage>\r\
+                \n              <availableCapacity>-999996.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName72</resourceName>\r\
+                \n              <tesMin>0.999982</tesMin>\r\n              <tesMax>0.999982</tesMax>\r\
+                \n              <sentOutCapacity>999996.499</sentOutCapacity>\r\n              <outage>999996.499</outage>\r\
+                \n              <availableCapacity>999996.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName73</resourceName>\r\
+                \n              <tesMin>1.000018</tesMin>\r\n              <tesMax>1.000018</tesMax>\r\
+                \n              <sentOutCapacity>-999996.399</sentOutCapacity>\r\n              <outage>-999996.399</outage>\r\
+                \n              <availableCapacity>-999996.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName74</resourceName>\r\
+                \n              <tesMin>-999999.999981</tesMin>\r\n              <tesMax>-999999.999981</tesMax>\r\
+                \n              <sentOutCapacity>999996.399</sentOutCapacity>\r\n              <outage>999996.399</outage>\r\
+                \n              <availableCapacity>999996.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName75</resourceName>\r\
+                \n              <tesMin>999999.999981</tesMin>\r\n              <tesMax>999999.999981</tesMax>\r\
+                \n              <sentOutCapacity>-999996.299</sentOutCapacity>\r\n              <outage>-999996.299</outage>\r\
+                \n              <availableCapacity>-999996.299</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n        </tradingInterval>\r\n        <tradingInterval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.1\">\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >1899-11-30</trade_date>\r\n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >22</delivery_hour>\r\n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >1</delivery_interval>\r\n          <participant>\r\n            <participantName>participan16</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName76</resourceName>\r\
+                \n              <tesMin>0.999981</tesMin>\r\n              <tesMax>0.999981</tesMax>\r\
+                \n              <sentOutCapacity>999996.299</sentOutCapacity>\r\n              <outage>999996.299</outage>\r\
+                \n              <availableCapacity>999996.299</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName77</resourceName>\r\
+                \n              <tesMin>1.000019</tesMin>\r\n              <tesMax>1.000019</tesMax>\r\
+                \n              <sentOutCapacity>-999996.199</sentOutCapacity>\r\n              <outage>-999996.199</outage>\r\
+                \n              <availableCapacity>-999996.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName78</resourceName>\r\
+                \n              <tesMin>-999999.999980</tesMin>\r\n              <tesMax>-999999.999980</tesMax>\r\
+                \n              <sentOutCapacity>999996.199</sentOutCapacity>\r\n              <outage>999996.199</outage>\r\
+                \n              <availableCapacity>999996.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName79</resourceName>\r\
+                \n              <tesMin>999999.999980</tesMin>\r\n              <tesMax>999999.999980</tesMax>\r\
+                \n              <sentOutCapacity>-999996.099</sentOutCapacity>\r\n              <outage>-999996.099</outage>\r\
+                \n              <availableCapacity>-999996.099</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName80</resourceName>\r\
+                \n              <tesMin>0.999980</tesMin>\r\n              <tesMax>0.999980</tesMax>\r\
+                \n              <sentOutCapacity>999996.099</sentOutCapacity>\r\n              <outage>999996.099</outage>\r\
+                \n              <availableCapacity>999996.099</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan17</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName81</resourceName>\r\
+                \n              <tesMin>1.000020</tesMin>\r\n              <tesMax>1.000020</tesMax>\r\
+                \n              <sentOutCapacity>-999995.999</sentOutCapacity>\r\n              <outage>-999995.999</outage>\r\
+                \n              <availableCapacity>-999995.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName82</resourceName>\r\
+                \n              <tesMin>-999999.999979</tesMin>\r\n              <tesMax>-999999.999979</tesMax>\r\
+                \n              <sentOutCapacity>999995.999</sentOutCapacity>\r\n              <outage>999995.999</outage>\r\
+                \n              <availableCapacity>999995.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName83</resourceName>\r\
+                \n              <tesMin>999999.999979</tesMin>\r\n              <tesMax>999999.999979</tesMax>\r\
+                \n              <sentOutCapacity>-999995.899</sentOutCapacity>\r\n              <outage>-999995.899</outage>\r\
+                \n              <availableCapacity>-999995.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName84</resourceName>\r\
+                \n              <tesMin>0.999979</tesMin>\r\n              <tesMax>0.999979</tesMax>\r\
+                \n              <sentOutCapacity>999995.899</sentOutCapacity>\r\n              <outage>999995.899</outage>\r\
+                \n              <availableCapacity>999995.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName85</resourceName>\r\
+                \n              <tesMin>1.000021</tesMin>\r\n              <tesMax>1.000021</tesMax>\r\
+                \n              <sentOutCapacity>-999995.799</sentOutCapacity>\r\n              <outage>-999995.799</outage>\r\
+                \n              <availableCapacity>-999995.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan18</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName86</resourceName>\r\
+                \n              <tesMin>-999999.999978</tesMin>\r\n              <tesMax>-999999.999978</tesMax>\r\
+                \n              <sentOutCapacity>999995.799</sentOutCapacity>\r\n              <outage>999995.799</outage>\r\
+                \n              <availableCapacity>999995.799</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName87</resourceName>\r\
+                \n              <tesMin>999999.999978</tesMin>\r\n              <tesMax>999999.999978</tesMax>\r\
+                \n              <sentOutCapacity>-999995.699</sentOutCapacity>\r\n              <outage>-999995.699</outage>\r\
+                \n              <availableCapacity>-999995.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName88</resourceName>\r\
+                \n              <tesMin>0.999978</tesMin>\r\n              <tesMax>0.999978</tesMax>\r\
+                \n              <sentOutCapacity>999995.699</sentOutCapacity>\r\n              <outage>999995.699</outage>\r\
+                \n              <availableCapacity>999995.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName89</resourceName>\r\
+                \n              <tesMin>1.000022</tesMin>\r\n              <tesMax>1.000022</tesMax>\r\
+                \n              <sentOutCapacity>-999995.599</sentOutCapacity>\r\n              <outage>-999995.599</outage>\r\
+                \n              <availableCapacity>-999995.599</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName90</resourceName>\r\
+                \n              <tesMin>-999999.999977</tesMin>\r\n              <tesMax>-999999.999977</tesMax>\r\
+                \n              <sentOutCapacity>999995.599</sentOutCapacity>\r\n              <outage>999995.599</outage>\r\
+                \n              <availableCapacity>999995.599</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan19</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName91</resourceName>\r\
+                \n              <tesMin>999999.999977</tesMin>\r\n              <tesMax>999999.999977</tesMax>\r\
+                \n              <sentOutCapacity>-999995.499</sentOutCapacity>\r\n              <outage>-999995.499</outage>\r\
+                \n              <availableCapacity>-999995.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName92</resourceName>\r\
+                \n              <tesMin>0.999977</tesMin>\r\n              <tesMax>0.999977</tesMax>\r\
+                \n              <sentOutCapacity>999995.499</sentOutCapacity>\r\n              <outage>999995.499</outage>\r\
+                \n              <availableCapacity>999995.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName93</resourceName>\r\
+                \n              <tesMin>1.000023</tesMin>\r\n              <tesMax>1.000023</tesMax>\r\
+                \n              <sentOutCapacity>-999995.399</sentOutCapacity>\r\n              <outage>-999995.399</outage>\r\
+                \n              <availableCapacity>-999995.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName94</resourceName>\r\
+                \n              <tesMin>-999999.999976</tesMin>\r\n              <tesMax>-999999.999976</tesMax>\r\
+                \n              <sentOutCapacity>999995.399</sentOutCapacity>\r\n              <outage>999995.399</outage>\r\
+                \n              <availableCapacity>999995.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName95</resourceName>\r\
+                \n              <tesMin>999999.999976</tesMin>\r\n              <tesMax>999999.999976</tesMax>\r\
+                \n              <sentOutCapacity>-999995.299</sentOutCapacity>\r\n              <outage>-999995.299</outage>\r\
+                \n              <availableCapacity>-999995.299</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan20</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName96</resourceName>\r\
+                \n              <tesMin>0.999976</tesMin>\r\n              <tesMax>0.999976</tesMax>\r\
+                \n              <sentOutCapacity>999995.299</sentOutCapacity>\r\n              <outage>999995.299</outage>\r\
+                \n              <availableCapacity>999995.299</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName97</resourceName>\r\
+                \n              <tesMin>1.000024</tesMin>\r\n              <tesMax>1.000024</tesMax>\r\
+                \n              <sentOutCapacity>-999995.199</sentOutCapacity>\r\n              <outage>-999995.199</outage>\r\
+                \n              <availableCapacity>-999995.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName98</resourceName>\r\
+                \n              <tesMin>-999999.999975</tesMin>\r\n              <tesMax>-999999.999975</tesMax>\r\
+                \n              <sentOutCapacity>999995.199</sentOutCapacity>\r\n              <outage>999995.199</outage>\r\
+                \n              <availableCapacity>999995.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName99</resourceName>\r\
+                \n              <tesMin>999999.999975</tesMin>\r\n              <tesMax>999999.999975</tesMax>\r\
+                \n              <sentOutCapacity>-999995.099</sentOutCapacity>\r\n              <outage>-999995.099</outage>\r\
+                \n              <availableCapacity>-999995.099</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName100</resourceName>\r\
+                \n              <tesMin>0.999975</tesMin>\r\n              <tesMax>0.999975</tesMax>\r\
+                \n              <sentOutCapacity>999995.099</sentOutCapacity>\r\n              <outage>999995.099</outage>\r\
+                \n              <availableCapacity>999995.099</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n        </tradingInterval>\r\n        <tradingInterval xmlns=\"\
+                http://wems.imowa.com.au/xml/ns/wems/1.1\">\r\n          <trade_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >1900-02-02</trade_date>\r\n          <delivery_hour xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_hour>\r\n          <delivery_interval xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                >2</delivery_interval>\r\n          <participant>\r\n            <participantName>participan21</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName101</resourceName>\r\
+                \n              <tesMin>1.000025</tesMin>\r\n              <tesMax>1.000025</tesMax>\r\
+                \n              <sentOutCapacity>-999994.999</sentOutCapacity>\r\n              <outage>-999994.999</outage>\r\
+                \n              <availableCapacity>-999994.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName102</resourceName>\r\
+                \n              <tesMin>-999999.999974</tesMin>\r\n              <tesMax>-999999.999974</tesMax>\r\
+                \n              <sentOutCapacity>999994.999</sentOutCapacity>\r\n              <outage>999994.999</outage>\r\
+                \n              <availableCapacity>999994.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName103</resourceName>\r\
+                \n              <tesMin>999999.999974</tesMin>\r\n              <tesMax>999999.999974</tesMax>\r\
+                \n              <sentOutCapacity>-999994.899</sentOutCapacity>\r\n              <outage>-999994.899</outage>\r\
+                \n              <availableCapacity>-999994.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName104</resourceName>\r\
+                \n              <tesMin>0.999974</tesMin>\r\n              <tesMax>0.999974</tesMax>\r\
+                \n              <sentOutCapacity>999994.899</sentOutCapacity>\r\n              <outage>999994.899</outage>\r\
+                \n              <availableCapacity>999994.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName105</resourceName>\r\
+                \n              <tesMin>1.000026</tesMin>\r\n              <tesMax>1.000026</tesMax>\r\
+                \n              <sentOutCapacity>-999994.799</sentOutCapacity>\r\n              <outage>-999994.799</outage>\r\
+                \n              <availableCapacity>-999994.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan22</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName106</resourceName>\r\
+                \n              <tesMin>-999999.999973</tesMin>\r\n              <tesMax>-999999.999973</tesMax>\r\
+                \n              <sentOutCapacity>999994.799</sentOutCapacity>\r\n              <outage>999994.799</outage>\r\
+                \n              <availableCapacity>999994.799</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName107</resourceName>\r\
+                \n              <tesMin>999999.999973</tesMin>\r\n              <tesMax>999999.999973</tesMax>\r\
+                \n              <sentOutCapacity>-999994.699</sentOutCapacity>\r\n              <outage>-999994.699</outage>\r\
+                \n              <availableCapacity>-999994.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName108</resourceName>\r\
+                \n              <tesMin>0.999973</tesMin>\r\n              <tesMax>0.999973</tesMax>\r\
+                \n              <sentOutCapacity>999994.699</sentOutCapacity>\r\n              <outage>999994.699</outage>\r\
+                \n              <availableCapacity>999994.699</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName109</resourceName>\r\
+                \n              <tesMin>1.000027</tesMin>\r\n              <tesMax>1.000027</tesMax>\r\
+                \n              <sentOutCapacity>-999994.599</sentOutCapacity>\r\n              <outage>-999994.599</outage>\r\
+                \n              <availableCapacity>-999994.599</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName110</resourceName>\r\
+                \n              <tesMin>-999999.999972</tesMin>\r\n              <tesMax>-999999.999972</tesMax>\r\
+                \n              <sentOutCapacity>999994.599</sentOutCapacity>\r\n              <outage>999994.599</outage>\r\
+                \n              <availableCapacity>999994.599</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan23</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName111</resourceName>\r\
+                \n              <tesMin>999999.999972</tesMin>\r\n              <tesMax>999999.999972</tesMax>\r\
+                \n              <sentOutCapacity>-999994.499</sentOutCapacity>\r\n              <outage>-999994.499</outage>\r\
+                \n              <availableCapacity>-999994.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName112</resourceName>\r\
+                \n              <tesMin>0.999972</tesMin>\r\n              <tesMax>0.999972</tesMax>\r\
+                \n              <sentOutCapacity>999994.499</sentOutCapacity>\r\n              <outage>999994.499</outage>\r\
+                \n              <availableCapacity>999994.499</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName113</resourceName>\r\
+                \n              <tesMin>1.000028</tesMin>\r\n              <tesMax>1.000028</tesMax>\r\
+                \n              <sentOutCapacity>-999994.399</sentOutCapacity>\r\n              <outage>-999994.399</outage>\r\
+                \n              <availableCapacity>-999994.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName114</resourceName>\r\
+                \n              <tesMin>-999999.999971</tesMin>\r\n              <tesMax>-999999.999971</tesMax>\r\
+                \n              <sentOutCapacity>999994.399</sentOutCapacity>\r\n              <outage>999994.399</outage>\r\
+                \n              <availableCapacity>999994.399</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName115</resourceName>\r\
+                \n              <tesMin>999999.999971</tesMin>\r\n              <tesMax>999999.999971</tesMax>\r\
+                \n              <sentOutCapacity>-999994.299</sentOutCapacity>\r\n              <outage>-999994.299</outage>\r\
+                \n              <availableCapacity>-999994.299</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan24</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName116</resourceName>\r\
+                \n              <tesMin>0.999971</tesMin>\r\n              <tesMax>0.999971</tesMax>\r\
+                \n              <sentOutCapacity>999994.299</sentOutCapacity>\r\n              <outage>999994.299</outage>\r\
+                \n              <availableCapacity>999994.299</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName117</resourceName>\r\
+                \n              <tesMin>1.000029</tesMin>\r\n              <tesMax>1.000029</tesMax>\r\
+                \n              <sentOutCapacity>-999994.199</sentOutCapacity>\r\n              <outage>-999994.199</outage>\r\
+                \n              <availableCapacity>-999994.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName118</resourceName>\r\
+                \n              <tesMin>-999999.999970</tesMin>\r\n              <tesMax>-999999.999970</tesMax>\r\
+                \n              <sentOutCapacity>999994.199</sentOutCapacity>\r\n              <outage>999994.199</outage>\r\
+                \n              <availableCapacity>999994.199</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName119</resourceName>\r\
+                \n              <tesMin>999999.999970</tesMin>\r\n              <tesMax>999999.999970</tesMax>\r\
+                \n              <sentOutCapacity>-999994.099</sentOutCapacity>\r\n              <outage>-999994.099</outage>\r\
+                \n              <availableCapacity>-999994.099</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName120</resourceName>\r\
+                \n              <tesMin>0.999970</tesMin>\r\n              <tesMax>0.999970</tesMax>\r\
+                \n              <sentOutCapacity>999994.099</sentOutCapacity>\r\n              <outage>999994.099</outage>\r\
+                \n              <availableCapacity>999994.099</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n          <participant>\r\n            <participantName>participan25</participantName>\r\
+                \n            <resource>\r\n              <resourceName>resourceName121</resourceName>\r\
+                \n              <tesMin>1.000030</tesMin>\r\n              <tesMax>1.000030</tesMax>\r\
+                \n              <sentOutCapacity>-999993.999</sentOutCapacity>\r\n              <outage>-999993.999</outage>\r\
+                \n              <availableCapacity>-999993.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName122</resourceName>\r\
+                \n              <tesMin>-999999.999969</tesMin>\r\n              <tesMax>-999999.999969</tesMax>\r\
+                \n              <sentOutCapacity>999993.999</sentOutCapacity>\r\n              <outage>999993.999</outage>\r\
+                \n              <availableCapacity>999993.999</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName123</resourceName>\r\
+                \n              <tesMin>999999.999969</tesMin>\r\n              <tesMax>999999.999969</tesMax>\r\
+                \n              <sentOutCapacity>-999993.899</sentOutCapacity>\r\n              <outage>-999993.899</outage>\r\
+                \n              <availableCapacity>-999993.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName124</resourceName>\r\
+                \n              <tesMin>0.999969</tesMin>\r\n              <tesMax>0.999969</tesMax>\r\
+                \n              <sentOutCapacity>999993.899</sentOutCapacity>\r\n              <outage>999993.899</outage>\r\
+                \n              <availableCapacity>999993.899</availableCapacity>\r\n            </resource>\r\
+                \n            <resource>\r\n              <resourceName>resourceName125</resourceName>\r\
+                \n              <tesMin>1.000031</tesMin>\r\n              <tesMax>1.000031</tesMax>\r\
+                \n              <sentOutCapacity>-999993.799</sentOutCapacity>\r\n              <outage>-999993.799</outage>\r\
+                \n              <availableCapacity>-999993.799</availableCapacity>\r\n            </resource>\r\
+                \n          </participant>\r\n        </tradingInterval>\r\n      </theoreticalEnergyReport>\r\
+                \n    </getTheoreticalEnergyScheduleResponse>\r\n  </Body>\r\n</Envelope>"
 components:
   securitySchemes:
     apiKeyHeader:
@@ -16,6 +1410,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Balancing Reports v2.3
+  description: Balancing Reports v2.3

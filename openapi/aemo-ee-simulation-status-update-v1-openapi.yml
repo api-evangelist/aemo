@@ -1,11 +1,142 @@
 openapi: 3.0.1
 info:
   title: EE Simulation Status Update
-  description: "## Introduction\nEE Simulation Status Update APIs are used by EE to submit the simulation status update"
+  description: '## Introduction
+
+    EE Simulation Status Update APIs are used by EE to submit the simulation status update'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/ee-simulation-status-update-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ee-simulation-status-update
-paths: { }
+- url: https://api-prd.aemo.local/ee-simulation-status-update
+paths:
+  /token:
+    post:
+      operationId: requestAToken
+      summary: Request a Token
+      tags:
+      - EE Simulation Status Update
+      description: Request for a New Token.  This request uses API Key Details as BasicAuth as the Authentication
+        Method.
+      parameters:
+      - name: grant_type
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - client_credentials
+        description: Should always be 'client_credentials'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Client Id and Client Secret as Basic Auth
+      responses:
+        '200':
+          description: Succesfully generated token
+          content:
+            application/json:
+              example: "{\r\n  \"transactionID\": \"b85a35f8-f741-40ac-a701-a8cfebb25669\",\r\n  \"acess_token\"\
+                : \"Gy3TJkeHAC3bDxO2YBp\",\r\n  \"access_token_expires_in\": \"3599\"\r\n}"
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example: "{\r\n  \"code\": 401,\r\n  \"title\": \"Unauthorized\",\r\n  \"detail\": \"Authorization\
+                \ failed\",\r\n  \"source\": \"API Gateway\"\r\n}"
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example: "{\r\n  \"code\": 405,\r\n  \"title\": \"Method Not Allowed\",\r\n  \"detail\"\
+                : \"Input request HTTP method is <Invalid Method passed>, but operation accepts only [<Valid\
+                \ Method>]\",\r\n  \"source\": \"\"\r\n}"
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example: "{\r\n  \"code\": 500,\r\n  \"title\": \"Internal Server Error\",\r\n  \"detail\"\
+                : \"Internal Server Error\",\r\n  \"source\": \"\"\r\n}"
+  /postSimulationData:
+    post:
+      operationId: submitSimulationStatusUpdateForOperationalNonOperationalModelFromEEEnergyExemplar
+      summary: Submit Simulation Status Update for operational/non-operational model from EE (EnergyExemplar)
+      tags:
+      - EE Simulation Status Update
+      description: EE is required to send the simulation status update as a response for the simulations
+        submitted from AEMO.
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Bearer <access_token>
+      requestBody:
+        content:
+          application/json:
+            example:
+              executionId: f24566e1-7b2d-4396-a02e-20a79530d983
+              id: 470d89b8-2513-4f70-94a9-16a9b9b8fcd5
+              studyId: 7793747a-bc42-437c-ad48-1b4ed6eb308f
+              status: CompletedSuccess
+              tags:
+              - name: runType
+                value: NonOperational
+              sentDate: '2020-09-14T19:24:33.5608098Z'
+        description: Submit simulation status update for operational/non-operational data
+      responses:
+        '200':
+          description: Submit simulation status update - Success
+          content:
+            application/json:
+              example:
+                transactionID: 0283d8d0-32a6-45d8-949b-3aa7173ef1d7
+                data:
+                  ResponseTimeStamp: '2018-07-09T00:23:42Z'
+                  ResponseText: Submit simulation status update successful
+                errors: []
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect OR user account is locked out.
+          content:
+            application/json:
+              example:
+                transactionID: '1234567890'
+                data: ''
+                errors:
+                - code: '401'
+                  title: Unauthorized
+                  detail: Authorization failed
+                  source: API Gateway
+        '404':
+          description: This response is provided when a resource missing from URL or incorrect URL.
+          content:
+            application/json:
+              example:
+                transactionID: '1234567890'
+                data: ''
+                errors:
+                - code: '404'
+                  title: Not Found
+                  detail: Resource not found at wrong-resource
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or API/downstream service is not available or Malformed payload.
+          content:
+            application/json:
+              example:
+                transactionID: '1234567890'
+                data: ''
+                errors:
+                - code: '500'
+                  title: InternalServerError
+                  detail: An unexpected error has occurred
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +148,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: EE Simulation Status Update
+  description: Introduction

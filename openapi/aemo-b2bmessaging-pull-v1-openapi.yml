@@ -1,11 +1,372 @@
 openapi: 3.0.1
 info:
   title: B2BMessagingPull
-  description: "The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between the participants in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving participant can poll the e-Hub, ‘pull’ and process the messages that are queued.\n\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: 'The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between
+    the participants in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving
+    participant can poll the e-Hub, ‘pull’ and process the messages that are queued.
+
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/b2bmessaging-pull-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/B2BMessagingPull
-paths: { }
+- url: https://api-prd.aemo.local/ws/B2BMessagingPull
+paths:
+  /messageAcknowledgements:
+    delete:
+      operationId: deleteMessageAcknowledgement
+      summary: Delete Message Acknowledgement
+      tags:
+      - B2BMessagingPull
+      description: Participants opting-in for Pull API are required to notify the e-Hub that the message
+        acknowledgement was successfully received and processed. This notification will delete the message
+        acknowledgement message in the e-Hub queue.
+      parameters:
+      - name: initiatingParticipantID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ParticipantID of the Participant invoking the API
+      - name: messageContextID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: This should be set to the messageContextID of the message acknowledgement (MACK)
+          that is being requested to be deleted from the e-Hub queue.
+      responses:
+        '200':
+          description: aseXML hub Acknowledgement (status = ‘Accept’) will be sent
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not POST
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+    post:
+      operationId: submitMessageAcknowledgement
+      summary: Submit Message Acknowledgement
+      tags:
+      - B2BMessagingPull
+      description: "Purpose - Acknowledge a received message. Detail - For every message, a message acknowledgment\
+        \ is generated (with the exception of messages containing message acknowledgements). A BusinessReceipt\
+        \ has two possible implementations -\n  • MessageAcknowledgement.\n  • Event, errors are reported\
+        \ via Event elements.\n  \n  \nIf a message is rejected, no receipt identifier is required with\
+        \ the acknowledgement.\n\nThis resource will be used when Participants are required to send Message\
+        \ Acknowledgement in the HTTP request. messageContextID should be set to the messageContextID\
+        \ of the original message that is to be acknowledged. \n\nIn order that the sender receive timely\
+        \ acknowledgement of message delivery, the receiver should respond immediately to each aseXML\
+        \ message with a message acknowledgement.\n\n<b> Note: If a Participant is required to send a\
+        \ transaction message or transaction acknowledgement message, ‘/messages’ resource is to be used.\
+        \ If a Participant is required to send ‘message acknowledgements’ in the request payload, then\
+        \ ‘/messageAcknowledgements’ resource is to be used.</b>"
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: "Message ID defined by the Participant. \nThe messageContextID is used in the following\
+          \ ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the\
+          \ contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient\
+          \ is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files\
+          \ is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned\
+          \ where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat\
+          \ of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10}\
+          \ + \"_\" + [0-9_a-z]{1,18} </b>"
+      requestBody:
+        content:
+          application/xml:
+            example: <MessageAcknowledgement> <initiatingMessageID>3453535315</initiatingMessageID> <receiptID>OR-REC-1234</receiptID>
+              <receiptDate>10/15/2004 1:02:35 AM</receiptDate> <MessageStatus>Accept</MessageStatus> <duplicate>No</duplicate>
+              <Event> <EventClass>Message</EventClass> <EventSeverity>Information</EventSeverity> <EventCode
+              description="string" /> <KeyInfo>string</KeyInfo> <Context>string</Context> <Explanation>string</Explanation>
+              <EventSupportedVersions> <Version>string</Version> </EventSupportedVersions> </Event> </MessageAcknowledgement>
+        description: An example of a message acknowledgement is given below.  For more xml payload examples;
+          Download the Postman collection.
+      responses:
+        '200':
+          description: aseXML hub Acknowledgement (status = ‘Accept’) will be sent
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not POST
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+  /queues:
+    get:
+      operationId: returnsTheMetaDataOfMessagesInTheEHubQueueOrTheAseXMLMessagesQueuedAwaitingDeliveryToTheRecipientInitiatorOfThisAPI
+      summary: Returns the meta-data of messages in the e-Hub queue (or) the aseXML messages queued awaiting
+        delivery to the Recipient (initiator of this API).
+      tags:
+      - B2BMessagingPull
+      description: Returns meta-data of messages in e-Hub queue for the participant initiating the API
+        request.
+      parameters:
+      - name: messageContextID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "If maxResults and messageContextID are passed, the API will attempt to retrieve\
+          \ (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed,\
+          \ the API will retrieve the meta data of the message(s) matching the messageContextID. \n\n\
+          Note- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404\
+          \ stating that the requested resource does not exist."
+      - name: transactionGroup
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - MTRD
+          - MRSR
+          - SORD
+          - CUST
+          - SITE
+          - OWNP
+          - OWNX
+          - NPNX
+          - PTPE
+        description: "If maxResults & transactionGroup are populated API will pull the message(s) matching\
+          \ the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup\
+          \ is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup\
+          \ \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code\
+          \ of 500 stating that transaction group is invalid"
+      - name: priority
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Low
+          - Medium
+          - High
+        description: If maxResults & priority are populated API will pull the message(s) matching the
+          priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed
+          (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If
+          an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority
+          is invalid
+      - name: maxResults
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "The ‘/queues’ resource could be used in two ways\n-  To identify the meta data of\
+          \ messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue\
+          \ If maxResults query string parameter is not passed, then the e-Hub will provide a list of\
+          \ messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated;\
+          \ the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub\
+          \ queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub\
+          \ queue will be deleted only when the Participant has successfully responded with a corresponding\
+          \ MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always\
+          \ retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future\
+          \ where Participants can specify the number of aseXML messages to pull from the e-Hub queue."
+      - name: initiatingParticipantID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ParticipantID of the Participant invoking the API
+      responses:
+        '200':
+          description: aseXML message listing the messages & its meta data in the e-Hub queue.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not POST
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+  /messages:
+    post:
+      operationId: submitAB2BMessage
+      summary: Submit a B2B message
+      tags:
+      - B2BMessagingPull
+      description: Submit a B2B message.
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: "Message ID defined by the Participant. \nThe messageContextID is used in the following\
+          \ ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the\
+          \ contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient\
+          \ is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files\
+          \ is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned\
+          \ where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat\
+          \ of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10}\
+          \ + \"_\" + [0-9_a-z]{1,18} </b>"
+      requestBody:
+        content:
+          application/xml:
+            example: <aseaseXML> <xmlns_x003A_ase>urn:aseXML:r38</xmlns_x003A_ase> <xmlns_x003A_xsi>http://www.w3.org/2001/XMLSchema-instance</xmlns_x003A_xsi>
+              <xsi_x003A_schemaLocation>urn:aseXML:r38 http://www.nemmco.com.au/aseXML/schemas/r38/aseXML_r38.xsd</xsi_x003A_schemaLocation>
+              <Header> <From>ENERGYCO1</From> <To>INTEGP</To> <MessageID>hsmdh_hsm_20070216123200123</MessageID>
+              <MessageDate>10/14/2005 3:02:35 PM</MessageDate> <TransactionGroup>CATS</TransactionGroup>
+              <TransactionPriority>High</TransactionPriority> <SecurityContext>string</SecurityContext>
+              <EnergyMarket>AATELEC</EnergyMarket> </Header> <Transactions> <Transaction initiatingTransactionID="string">
+              <transactionID>3453535315</transactionID> <transactionDate>10/15/2004 1:02:35 AM</transactionDate>
+              <MeterDataNotification> <version>r25</version> <RecordCount>string</RecordCount> <CSVConsumptionData>string</CSVConsumptionData>
+              <CSVIntervalData>string</CSVIntervalData> <MeterReadingGroup> <MeterReadingGroupType>NMI</MeterReadingGroupType>
+              <MeterReadingGroupId>string</MeterReadingGroupId> </MeterReadingGroup> </MeterDataNotification>
+              <ServiceOrderRequest> <version>r36</version> <ActionType>New</ActionType> <ServiceOrderHeader>
+              <NMI checksum="0" /> <Address>string</Address> <ServiceOrderTypeBase /> <ServiceOrderNumber>string</ServiceOrderNumber>
+              <ServiceProviderReference>string</ServiceProviderReference> </ServiceOrderHeader> <ServicePoint>
+              <Address>string</Address> <AccessDetails>string</AccessDetails> <SiteHazard> <Code>string</Code>
+              <Description>string</Description> </SiteHazard> <MelwayGridReference>string</MelwayGridReference>
+              <GasMeterDogCode>Bluff</GasMeterDogCode> <GasMeterPosition>BA</GasMeterPosition> </ServicePoint>
+              <ContactDetail> <ContactName>string</ContactName> <ContactNumber>string</ContactNumber>
+              </ContactDetail> <CustomerDetail> <PersonName> <PersonNameType>LGL</PersonNameType> <NameTitle>string</NameTitle>
+              <GivenName>string</GivenName> <FamilyName>string</FamilyName> <NameSuffix>string</NameSuffix>
+              </PersonName> <BusinessName> <BusinessNameTypeCode>OTH</BusinessNameTypeCode> </BusinessName>
+              <ContactName>string</ContactName> <PostalAddress>string</PostalAddress> <PhoneNumber>string</PhoneNumber>
+              <EmailAddress>string</EmailAddress> </CustomerDetail> <Co-ordinatingContactDetail>string</Co-ordinatingContactDetail>
+              <AppointmentDetail> <Reference>string</Reference> <ScheduledDate>string</ScheduledDate>
+              <AppointmentDateTime> <Date>string</Date> <Time>string</Time> </AppointmentDateTime> </AppointmentDetail>
+              <ServiceOrderRequestData> <SpecialInstructions>string</SpecialInstructions> <NMIStandingData>string</NMIStandingData>
+              </ServiceOrderRequestData> <NotifiedParties> <PartyIdentifier description="string"> <context>ABN</context>
+              </PartyIdentifier> </NotifiedParties> </ServiceOrderRequest> <ServiceOrderResponse> <version>r36</version>
+              <ResponseType>Initial</ResponseType> <ServiceOrderHeader> <NMI checksum="0" /> <Address>string</Address>
+              <ServiceOrderTypeBase /> <ServiceOrderNumber>string</ServiceOrderNumber> <ServiceProviderReference>string</ServiceProviderReference>
+              </ServiceOrderHeader> <ContactDetail> <ContactName>string</ContactName> <ContactNumber>string</ContactNumber>
+              </ContactDetail> <AppointmentDetail> <Reference>string</Reference> <ScheduledDate>string</ScheduledDate>
+              <AppointmentDateTime> <Date>string</Date> <Time>string</Time> </AppointmentDateTime> </AppointmentDetail>
+              <ServiceOrderNotificationData> <SpecialNotes>string</SpecialNotes> <NMIStandingData>string</NMIStandingData>
+              </ServiceOrderNotificationData> <Event> <EventClass>Message</EventClass> <EventSeverity>Information</EventSeverity>
+              <EventCode description="string" /> <KeyInfo>string</KeyInfo> <Context>string</Context> <Explanation>string</Explanation>
+              <EventSupportedVersions> <Version>string</Version> </EventSupportedVersions> </Event> </ServiceOrderResponse>
+              <CustomerDetailsRequest> <version>r32</version> <NMI checksum="0" /> <RequestReason>Returned
+              Mail</RequestReason> <SpecialComments> <CommentLine>33433434</CommentLine> </SpecialComments>
+              </CustomerDetailsRequest> <CustomerDetailsNotification> <version>r36</version> <CustomerData>
+              <NMI checksum="0" /> <CustomerDetail> <PersonName> <PersonNameType>LGL</PersonNameType>
+              <NameTitle>string</NameTitle> <GivenName>string</GivenName> <FamilyName>string</FamilyName>
+              <NameSuffix>string</NameSuffix> </PersonName> <BusinessName> <BusinessNameTypeCode>OTH</BusinessNameTypeCode>
+              </BusinessName> <ContactName>string</ContactName> <PostalAddress>string</PostalAddress>
+              <PhoneNumber>string</PhoneNumber> <EmailAddress>string</EmailAddress> </CustomerDetail>
+              <SensitiveLoadType>Life Support</SensitiveLoadType> <MovementType>Update</MovementType>
+              <LastModifiedDateTime>string</LastModifiedDateTime> <ConcessionCard> <RebateType>Pension
+              Card</RebateType> <Number>string</Number> <FromDate>string</FromDate> <ToDate>string</ToDate>
+              </ConcessionCard> </CustomerData> </CustomerDetailsNotification> <AmendMeterRouteDetails>
+              <version>r19</version> <AmendSiteAccessDetails>string</AmendSiteAccessDetails> <SiteAddressDetails>
+              <NMI checksum="0" /> <Address>string</Address> <LastModifiedDateTime>string</LastModifiedDateTime>
+              <CustomerType>Industrial</CustomerType> </SiteAddressDetails> <CSVAmendSiteAddressDetails>string</CSVAmendSiteAddressDetails>
+              <CSVAmendScheduledReadingDay>string</CSVAmendScheduledReadingDay> </AmendMeterRouteDetails>
+              <SiteAccessRequest> <version>r36</version> <NMI checksum="0" /> <Reason>string</Reason>
+              <SpecialComments> <CommentLine>33433434</CommentLine> </SpecialComments> </SiteAccessRequest>
+              <MeterDataVerifyRequest> <version>r9</version> <VerifyRequestData>string</VerifyRequestData>
+              </MeterDataVerifyRequest> <MeterDataMissingNotification> <version>r14</version> <MissingMeterData>string</MissingMeterData>
+              <CSVMissingMeterData>string</CSVMissingMeterData> </MeterDataMissingNotification> <RemoteServiceRequest>
+              <version>r36</version> <RemoteServiceData> <RequestID>string</RequestID> <NMI checksum="0"
+              /> <MeterSerialNumbers> <MeterSerialNumber>string</MeterSerialNumber> </MeterSerialNumbers>
+              <ServiceType>string</ServiceType> <RequestCode>string</RequestCode> <ResponseFormat>string</ResponseFormat>
+              <FromDateTime>string</FromDateTime> <ToDateTime>string</ToDateTime> <UserDefData> <UserDef1>string</UserDef1>
+              <UserDef2>string</UserDef2> <UserDef3>string</UserDef3> <UserDef4>string</UserDef4> <UserDef5>string</UserDef5>
+              <UserDef6>string</UserDef6> <UserDef7>string</UserDef7> <UserDef8>string</UserDef8> <UserDef9>string</UserDef9>
+              <UserDef10>string</UserDef10> </UserDefData> </RemoteServiceData> </RemoteServiceRequest>
+              <RemoteServiceResponse> <version>r36</version> <RemoteServiceData> <RequestID>string</RequestID>
+              <NMI checksum="0" /> <MeterSerialNumbers> <MeterSerialNumber>string</MeterSerialNumber>
+              </MeterSerialNumbers> <ServiceType>string</ServiceType> <RequestCode>string</RequestCode>
+              <ResponseFormat>string</ResponseFormat> <FromDateTime>string</FromDateTime> <ToDateTime>string</ToDateTime>
+              <UserDefData> <UserDef1>string</UserDef1> <UserDef2>string</UserDef2> <UserDef3>string</UserDef3>
+              <UserDef4>string</UserDef4> <UserDef5>string</UserDef5> <UserDef6>string</UserDef6> <UserDef7>string</UserDef7>
+              <UserDef8>string</UserDef8> <UserDef9>string</UserDef9> <UserDef10>string</UserDef10> </UserDefData>
+              </RemoteServiceData> <RemoteServiceResponseData> <ResponsePayload> <RecordCount>string</RecordCount>
+              <PayloadContent /> </ResponsePayload> <Event> <EventClass>Message</EventClass> <EventSeverity>Information</EventSeverity>
+              <EventCode description="string" /> <KeyInfo>string</KeyInfo> <Context>string</Context> <Explanation>string</Explanation>
+              <EventSupportedVersions> <Version>string</Version> </EventSupportedVersions> </Event> <Product>string</Product>
+              </RemoteServiceResponseData> </RemoteServiceResponse> <OneWayNotification> <version>r25</version>
+              <CSVNotificationDetail>string</CSVNotificationDetail> </OneWayNotification> <NoticeOfMeteringWorks>
+              <version>r36</version> <NoticeOfWorksID>string</NoticeOfWorksID> <NMIStandingData>string</NMIStandingData>
+              <GeographicCoordinate>string</GeographicCoordinate> <WorksDetail> <WorkType>string</WorkType>
+              <FieldWorkCompleteDateTime>string</FieldWorkCompleteDateTime> <TotalInstalledMeters>0</TotalInstalledMeters>
+              <TotalInstalledNetworkDevices>0</TotalInstalledNetworkDevices> <TotalInstalledControlEquipment>0</TotalInstalledControlEquipment>
+              <TotalInstalledTransformers>0</TotalInstalledTransformers> <TotalRemovedMeters>0</TotalRemovedMeters>
+              <TotalRemovedOther>0</TotalRemovedOther> <NewEquipment> <InstalledMeterEquipment>string</InstalledMeterEquipment>
+              <InstalledNetworkDevices>string</InstalledNetworkDevices> <InstalledControlEquipment>string</InstalledControlEquipment>
+              <InstalledTransformers>string</InstalledTransformers> </NewEquipment> <RemovedMeteringEquipments>
+              <RemovedMeteringEquipment> <RemovedEquipmentType>string</RemovedEquipmentType> <MeteringEquipment>string</MeteringEquipment>
+              </RemovedMeteringEquipment> </RemovedMeteringEquipments> </WorksDetail> <Notes>string</Notes>
+              </NoticeOfMeteringWorks> <NotifiedParty> <version>r36</version> <ServiceOrderHeader> <NMI
+              checksum="0" /> <Address>string</Address> <ServiceOrderTypeBase /> <ServiceOrderNumber>string</ServiceOrderNumber>
+              <ServiceProviderReference>string</ServiceProviderReference> </ServiceOrderHeader> <ServiceRequestor>string</ServiceRequestor>
+              <ServiceProvider>string</ServiceProvider> <ScheduledDate>string</ScheduledDate> <ActualDateTime>string</ActualDateTime>
+              <NotificationStatus>SO Requested</NotificationStatus> <NotificationPayload> <TransactionNotified>string</TransactionNotified>
+              <TransAckNotified>string</TransAckNotified> <MsgAckNotified>string</MsgAckNotified> </NotificationPayload>
+              </NotifiedParty> <PlannedInterruptionNotification> <version>r36</version> <NMI checksum="0"
+              /> <StartDate>string</StartDate> <StartTime>string</StartTime> <EndDate>string</EndDate>
+              <Duration>string</Duration> <ReasonForInter>string</ReasonForInter> <Notes>string</Notes>
+              </PlannedInterruptionNotification> <MeterFaultAndIssueNotification> <version>r36</version>
+              <NMI checksum="0" /> <DateIdentified>string</DateIdentified> <StartDate>string</StartDate>
+              <StartTime>string</StartTime> <EndDate>string</EndDate> <Duration>string</Duration> <SupplyOn>string</SupplyOn>
+              <SupplyOff>string</SupplyOff> <MeterSerialNumbers> <MeterSerialNumber>string</MeterSerialNumber>
+              </MeterSerialNumbers> <ReasonForNotice>string</ReasonForNotice> <Notes>string</Notes> </MeterFaultAndIssueNotification>
+              <LifeSupportNotification> <version>r38</version> <LifeSupportData> <NMI>string</NMI> <SiteAddress>string</SiteAddress>
+              <UpdateReason>Update</UpdateReason> <RegistrationOwner>string</RegistrationOwner> <LifeSupportStatus>Registered
+              - No Medical Confirmation</LifeSupportStatus> <DateRequired>string</DateRequired> <LifeSupportEquipmentType>Oxygen
+              Concentrator</LifeSupportEquipmentType> <CustomerDetail> <PersonName> <PersonNameType>LGL</PersonNameType>
+              <NameTitle>string</NameTitle> <GivenName>string</GivenName> <FamilyName>string</FamilyName>
+              <NameSuffix>string</NameSuffix> </PersonName> <BusinessName> <BusinessNameTypeCode>OTH</BusinessNameTypeCode>
+              </BusinessName> <ContactName>string</ContactName> <PostalAddress>string</PostalAddress>
+              <PhoneNumber>string</PhoneNumber> <EmailAddress>string</EmailAddress> </CustomerDetail>
+              <ContactMethod>Postal Address</ContactMethod> <SpecialNotes>string</SpecialNotes> <LastModifiedDateTime>string</LastModifiedDateTime>
+              </LifeSupportData> </LifeSupportNotification> <LifeSupportRequest> <version>r38</version>
+              <NMI checksum="0" /> <LifeSupportRequestReason>Confirm Life Support</LifeSupportRequestReason>
+              <SpecialComments> <CommentLine>33433434</CommentLine> </SpecialComments> </LifeSupportRequest>
+              </Transaction> </Transactions> </aseaseXML>
+        description: An example of a message is given below.  For more xml payload examples; Download
+          the Postman collection.
+      responses:
+        '200':
+          description: aseXML hub Acknowledgement (status = ‘Accept’) will be sent
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not POST
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +378,11 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: B2BMessagingPull
+  description: The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between
+    the participants in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving
+    participant can poll the e-Hub, ‘pull’ and process the messages that are queued.

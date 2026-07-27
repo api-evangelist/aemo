@@ -1,0 +1,107 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview (Azure API Management
+  catalogue, live), https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management,
+  openapi/ (76 documents)
+description: >-
+  AEMO versions its APIs in Azure API Management version sets, exposes the version in the gateway
+  path, and manages change through a scheduled, market-wide IT change and release programme rather
+  than through a developer-facing API changelog. There is no api.status page, no published SLA or
+  uptime target for the API gateway, and no Sunset/Deprecation header policy. Machine-readable
+  service health for the Consumer Data Right APIs is available as an API of its own — the CDS
+  Common discovery endpoints getStatus and getOutages.
+
+versioning:
+  scheme: uri-path
+  mechanism: >-
+    Each API is registered in APIM with an apiVersion bound to an apiVersionSetId; the version
+    appears in the gateway path (for example /WEM/lfas/v2, /NEMRetail/cds-au/v1,
+    /NEMWholesale/bidding).
+  concurrent_versions_published: true
+  examples:
+    - product: System Management Reports
+      versions: [v2, v2.1, v2.2, v2.3, v2.4, v2.5, v2.6]
+    - product: Pre-Balancing Reports
+      versions: [v6, v7, v7.1, v8]
+    - product: Balancing Reports
+      versions: [v2, v2.1, v2.2, v2.3, v2.4, v2.5]
+    - product: WEMDE DispatchCase / DispatchSolution
+      versions: [v1, v2]
+    - product: Hub Message Management
+      versions: [v1, v2]
+    - product: DER Register (NMI / Installation)
+      versions: [v1, v2]
+  content_negotiation:
+    applies_to: Consumer Data Right energy APIs
+    headers: [x-v, x-min-v]
+    standard: Consumer Data Standards Australia
+    docs: https://consumerdatastandardsaustralia.github.io/standards/
+  catalogue: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
+
+deprecation:
+  policy_url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
+  policy_summary: >-
+    AEMO retires and changes market IT interfaces through its IT change and release management
+    programme, which publishes a fortnightly forward schedule of planned IT changes and change
+    (outage/maintenance) windows to market participants, alongside the status history of AEMO's
+    business services. Superseded API versions remain published in the developer-portal catalogue
+    alongside their replacements rather than being removed on a fixed clock.
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No operation in any of the 76 OpenAPI documents is flagged `deprecated: true`, and no Sunset or
+    Deprecation response header is documented anywhere in the catalogue.
+  verification: >-
+    The IT change and release management page is confirmed to exist and to carry the forward change
+    schedule; the aemo.com.au WAF answers automated clients with HTTP 403, so the page could not be
+    fetched directly during this run.
+
+status_page:
+  url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
+  type: change-and-release-schedule
+  detail: >-
+    AEMO's participant-facing equivalent of a status page. It publishes the forward schedule of
+    planned IT changes and maintenance windows and the status history of AEMO's business services.
+  machine_readable:
+    - name: CDS Common discovery status
+      operation: openapi/aemo-cds-common-api-openapi.yml#getStatus
+      path: /discovery/status
+      description: Health-check status for the AEMO Consumer Data Right APIs.
+    - name: CDS Common discovery outages
+      operation: openapi/aemo-cds-common-api-openapi.yml#getOutages
+      path: /discovery/outages
+      description: Planned outages for the AEMO Consumer Data Right APIs.
+    - name: CDR Common (AEMO e-Hub) status
+      operation: openapi/aemo-cdr-common-openapi.yml#getStatus
+    - name: CDR Common (AEMO e-Hub) outages
+      operation: openapi/aemo-cdr-common-openapi.yml#getOutages
+    - name: Participant system status
+      operation: openapi/aemo-b2mmessaging-sync-v1-openapi.yml#getParticipantSystemStatus
+  market_notices:
+    url: https://aemo.com.au/market-notices?marketNoticeFacets=MARKET+SYSTEMS
+    detail: >-
+      Market Notices filtered to MARKET SYSTEMS is where AEMO announces market-systems service
+      interruptions and their resolution. Note aemo.com.au/robots.txt disallows /market-notices
+      for crawlers.
+
+sla:
+  published: false
+  uptime_target: null
+  note: >-
+    No API-level service level agreement or uptime commitment is published on the developer portal
+    or in the API Acceptable Use Policy. Availability obligations for AEMO market systems sit in
+    the market procedures rather than in a developer-facing SLA.
+
+support:
+  channel: AEMO Information and Support Hub
+  email: supporthub@aemo.com.au
+  phone: '1300 236 600'
+  url: https://dev.aemo.com.au/contact-us
+  faq: https://dev.aemo.com.au/faqs
+
+cross_references:
+  changelog: changelog/aemo-changelog.yml
+  conventions: conventions/aemo-conventions.yml

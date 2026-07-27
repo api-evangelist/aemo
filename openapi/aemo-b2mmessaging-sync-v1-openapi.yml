@@ -1,11 +1,665 @@
 openapi: 3.0.1
 info:
   title: B2MMessagingSync
-  description: "## Introduction\nThe B2MMessagingSync API supports generateC1Report, generateC4Report, getMSATSLimits,NMIDiscovery, getNMIDetail, getParticipantSystemStatus, and getMeterData endpoints.The API participant pushes their outgoing message to the e-Hub and the e-Hub pushes the message to the API recipient.The message delivery occurs synchronously where the participant sends the message to the e-Hub and AEMO immediately sends the response (such as MACKs,TACKs, or responses) in the same thread to the Participant's Gateway."
+  description: '## Introduction
+
+    The B2MMessagingSync API supports generateC1Report, generateC4Report, getMSATSLimits,NMIDiscovery,
+    getNMIDetail, getParticipantSystemStatus, and getMeterData endpoints.The API participant pushes their
+    outgoing message to the e-Hub and the e-Hub pushes the message to the API recipient.The message delivery
+    occurs synchronously where the participant sends the message to the e-Hub and AEMO immediately sends
+    the response (such as MACKs,TACKs, or responses) in the same thread to the Participant''s Gateway.'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/b2mmessaging-sync-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMRetail/B2MMessagingSync
-paths: { }
+- url: https://api-prd.aemo.local/NEMRetail/B2MMessagingSync
+paths:
+  /generateC1Report:
+    get:
+      operationId: generateC1Report
+      summary: generateC1Report
+      tags:
+      - B2MMessagingSync
+      description: This resource provide C1 report for the requested table name
+      parameters:
+      - name: transactionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction Id
+      - name: tableName
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Table Name
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "Format - yyyy-MM-dd'T'hh-mm-ss+10:00. \nFrom Date"
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "Format - yyyy-MM-dd'T'hh-mm-ss+10:00. \nTo Date"
+      - name: lastSequenceNumber
+        in: query
+        required: true
+        schema:
+          type: number
+        description: Last Sequence Number
+      - name: maximumRows
+        in: query
+        required: true
+        schema:
+          type: number
+        description: Maximum Rows
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format application/zip or text/xml; aseXML_version={"version"} for
+          example "r43" or "r42"
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Basic username:password(Base64 encoding of the URM username and password)
+      responses:
+        '200':
+          description: Success response with aseXml response payload.
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response  payload.
+  /generateC4Report:
+    get:
+      operationId: generateC4Report
+      summary: generateC4Report
+      tags:
+      - B2MMessagingSync
+      description: This resource provide Single NMI Master (C4) report
+      parameters:
+      - name: transactionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction Id
+      - name: NMI
+        in: query
+        required: true
+        schema:
+          type: string
+        description: nmi number
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "Format - YYYY-MM-DD. \nFrom Date"
+      - name: toDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "Format - YYYY-MM-DD. \nTo Date"
+      - name: asatDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: "Format - YYYY-MM-DD. \nAsat Date"
+      - name: roleId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Role Id
+      - name: inittransid
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Init Trans id
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with aseXml response payload.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+  /getMeterRead:
+    get:
+      operationId: getMeterRead
+      summary: getMeterRead
+      tags:
+      - B2MMessagingSync
+      description: This resource allow to search for and retrieve metering data loaded into the Enterprise
+        MDM
+      parameters:
+      - name: NMI
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - YYYY-MM-DD. Start Date of the meter data request period (inclusive).
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Format - YYYY-MM-DD. End Date of the meter data request period (inclusive).
+      - name: meterType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "Allowed values are\t'I' - Interval , 'C' - Consumption (Basic)"
+      - name: meterData
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "Allowed values are\t'AO' - Current readings, 'AH' - Current and historical readings"
+      - name: asAtDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - YYYY-MM-DD hh:mi:ss:000. Provides the ability for the consumer to request
+          metering data 'as at' a point in time.
+      - name: intervalLength
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Relevant only for interval data. Defines the resolution that the meter reads should
+          be returned in. Possible values are '30' or 'SD'.
+      - name: activeEnergy
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Applicable to interval data only. Possible values are 'N' or 'Y'.
+      - name: AEMOSubs
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Applicable to interval data only. Possible values are 'N' or 'Y'.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: for this interface this value must be set to 'NEM'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with json response payload.
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+  /getMSATSLimits:
+    get:
+      operationId: getMSATSLimits
+      summary: getMSATSLimits
+      tags:
+      - B2MMessagingSync
+      description: This resource provide the current status of MSATS Limits.If the participant is a member
+        of a group then the limits are the group limits, otherwise they are the participant limits
+      parameters:
+      - name: transactionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction Id
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with aseXml response payload.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+  /getNMIDetail:
+    get:
+      operationId: getNMIDetail
+      summary: getNMIDetail
+      tags:
+      - B2MMessagingSync
+      description: This resource provide details of a specified NMI. Based on input parameters returns
+        NMI Detail or Role Data
+      parameters:
+      - name: checksum
+        in: query
+        required: true
+        schema:
+          type: string
+        description: checksum
+      - name: transactionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction Id
+      - name: nmi
+        in: query
+        required: true
+        schema:
+          type: string
+        description: nmi number
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+        description: type
+      - name: reason
+        in: query
+        required: false
+        schema:
+          type: string
+        description: reason
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with aseXml response payload.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+  /getParticipantSystemStatus:
+    get:
+      operationId: getParticipantSystemStatus
+      summary: getParticipantSystemStatus
+      tags:
+      - B2MMessagingSync
+      description: This resource provide the current participant system status
+      parameters:
+      - name: transactionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction Id
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with aseXml response payload.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+  /NMIDiscovery:
+    get:
+      operationId: nMIDiscovery
+      summary: NMIDiscovery
+      tags:
+      - B2MMessagingSync
+      description: This resource provide a list of NMIs matching the search criteria
+      parameters:
+      - name: transactionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Transaction Id
+      - name: jurisdictionCode
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Jurisdiction Code
+      - name: deliveryPointIdentifier
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Required if searching by DPID
+      - name: meterSerialNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Required if searching by meter serial number
+      - name: buildingOrPropertyName
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Building Or Property Name
+      - name: locationDescriptor
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Location Descriptor
+      - name: lotNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Lot Number
+      - name: flatOrUnitType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Flat Or Unit Type
+      - name: flatOrUnitNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Flat Or Unit Number
+      - name: floorOrLevelType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Floor Or Level Type
+      - name: floorOrLevelNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Floor Or Level Number
+      - name: houseNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: House Number
+      - name: houseNumberSuffix
+        in: query
+        required: false
+        schema:
+          type: string
+        description: House Number Suffix
+      - name: streetName
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Street Name
+      - name: streetSuffix
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Street Suffix
+      - name: streetType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Street Type
+      - name: postcode
+        in: query
+        required: false
+        schema:
+          type: string
+        description: postcode
+      - name: stateOrTerritory
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Required if searching by address
+      - name: suburbOrPlaceOrLocality
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Suburb Or Place Or Locality
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with aseXml response payload.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+        '401':
+          description: Unauthorized. No response payload.
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +671,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: B2MMessagingSync
+  description: Introduction

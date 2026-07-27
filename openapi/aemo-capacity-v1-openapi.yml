@@ -1,11 +1,1660 @@
 openapi: 3.0.1
 info:
   title: Capacity
-  description: "\n## Introduction\nThe Capacity API is used by facility operators and trading participants to submit and receive data relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform (CTP) and Day-Ahead Auction (DAA) market systems.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '
+
+    ## Introduction
+
+    The Capacity API is used by facility operators and trading participants to submit and receive data
+    relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform (CTP) and
+    Day-Ahead Auction (DAA) market systems.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/capacity-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/gsh/capacity
-paths: { }
+- url: https://api-prd.aemo.local/ws/gsh/capacity
+paths:
+  /reportTransportationServicePointRegister:
+    get:
+      operationId: getAListOfAllTheServicePointsZonesAndPipelineSegments
+      summary: Get a list of all the service points, zones and pipeline segments
+      tags:
+      - Capacity
+      description: The report contains list of all the service points (receipt and delivery points), zones
+        and pipeline segments currently registered under Part 24 of the Rules, for the capacity transfer
+        and day ahead auction.
+      parameters:
+      - name: ComponentType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ZONE
+          - SEGMENT
+          - SERVICE_POINT
+          - NOTIONAL_POINT
+          - PARK_SERVICE
+        description: Type of component
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse with the Transportation facilities report
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a6e
+                data:
+                  Zones:
+                  - ZoneId: 20001
+                    ZoneName: Zone 1
+                    ZoneType: Pipeline Receipt
+                    ZoneDescription: Some sort of description
+                    ForAuctionPublication: 'Yes'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - ZoneId: 20002
+                    ZoneName: Zone 2
+                    ZoneType: Pipeline Delivery
+                    ZoneDescription: Some sort of description
+                    ForAuctionPublication: 'Yes'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  Segments:
+                  - FacilityId: 100001
+                    FacilityName: Moomba to Adelaide Pipeline System
+                    SegmentId: 30001
+                    SegmentName: Segment 1
+                    SegmentType: Forward Haul
+                    FromId: 20001
+                    FromName: Zone 1
+                    ToId: 30001
+                    ToName: Zone 2
+                    ForAuctionPublication: 'Yes'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - FacilityId: 100001
+                    FacilityName: Moomba to Adelaide Pipeline System
+                    SegmentId: 30001
+                    SegmentName: Segment 1
+                    SegmentType: Forward Haul
+                    FromId: 20002
+                    FromName: Zone 22
+                    ToId: 30002
+                    ToName: Zone 33
+                    ForAuctionPublication: 'Yes'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  ServicePoints:
+                  - FacilityId: 100001
+                    FacilityName: Moomba to Adelaide Pipeline System
+                    ServicePointId: 50001
+                    ServicePointName: SP 1
+                    ServicePointType: Forward Haul Receipt Point
+                    ServicePointDescription: Some description
+                    NotionalPoint: 'Yes'
+                    ZoneId: 20002
+                    ZoneName: Zone 2
+                    GBBConnectionPointId: 150001
+                    GBBConnectionPointName: Moomba Gas Plant
+                    ForAuctionPublication: 'Yes'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - FacilityId: 100001
+                    FacilityName: Moomba to Adelaide Pipeline System
+                    ServicePointId: 50001
+                    ServicePointName: SP 1
+                    ServicePointType: Forward Haul Receipt Point
+                    ServicePointDescription: Some description
+                    NotionalPoint: 'Yes'
+                    ZoneId: 20002
+                    ZoneName: Zone 2
+                    GBBConnectionPointId: 150001
+                    GBBConnectionPointName: Moomba Gas Plant
+                    ForAuctionPublication: 'Yes'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  NotionalPoints:
+                  - ServicePointId: 500001
+                    ServicePointName: SP 1
+                    PhysicalPointName: SP 2
+                    GBBConnectionPointId: '150001'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - ServicePointId: 500001
+                    ServicePointName: SP 1
+                    PhysicalPointName: SP 3
+                    GBBConnectionPointId: '150002'
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  ParkServices:
+                  - ParkProductName: Park Service 1
+                    ParkServicePointId: 500001
+                    ParkServicePointName: SP 1
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - ParkProductName: Park Service 23
+                    ParkServicePointId: 500022
+                    ParkServicePointName: SP 22
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-05-01T02:23:45Z'
+                errors: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /reportRegisteredParticipants:
+    get:
+      operationId: getAllParticipantsCurrentlyRegisteredInTheGSHCTPAndDAAMarkets
+      summary: Get all participants currently registered in the GSH, CTP and DAA markets.
+      tags:
+      - Capacity
+      description: The report contains the registration details of all participants currently registered
+        in the GSH, CTP and DAA markets.
+      parameters:
+      - name: Markets
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse with registered participants report
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a3d
+                data:
+                  Participants:
+                  - Market: Gas Supply Hub
+                    ParticipantId: '74'
+                    ParticipantCode: ES584
+                    OrganisationName: AGL
+                    OrganisationCode: AG256
+                    TradingName: AGL Hydro Partnership
+                    HeadOfficeAddressLine1: 50 Collins St
+                    HeadOfficeAddressLine2: Melbourne
+                    HeadOfficeAddressLine3: VIC
+                    HeadOfficeAddressLine4: '3001'
+                    PhoneNumber: 03 9658 7000
+                    FaxNumber: 03 9658 7589
+                    ABN: '456874258'
+                    ARBN: '125874569'
+                    ACN: '569845214'
+                    Classifications: Facility Operator
+                    AgentId: 123
+                    AgentName: Star Energy Pty Ltd
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - Market: Gas Supply Hub
+                    ParticipantId: '56'
+                    ParticipantCode: ORRE
+                    OrganisationName: Origin Energy Retail Ltd
+                    OrganisationCode: ORIGINRETAIL
+                    TradingName: Origin Energy Retail Ltd
+                    HeadOfficeAddressLine1: Level 45
+                    HeadOfficeAddressLine2: 264-278 George Street
+                    HeadOfficeAddressLine3: Sydney
+                    HeadOfficeAddressLine4: NSW 2000
+                    PhoneNumber: 0295035209
+                    FaxNumber: 0292524066
+                    ABN: '22078868425'
+                    ARBN: ''
+                    ACN: '78868425'
+                    Classifications: Trader
+                    AgentId: 123
+                    AgentName: Star Energy Pty Ltd
+                    LastChanged: '2018-05-01T02:23:45Z'
+                errors: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /contractDetails:
+    post:
+      operationId: provideAListOfValidShipperContractsForAFacility
+      summary: Provide a list of valid shipper contracts for a facility.
+      tags:
+      - Capacity
+      description: 'Each submission must contain the full set of shipper contracts that are valid beyond
+        the submission date in accordance with the Procedures.
+
+        On submission of this data, the system replaces all contract details previously submitted by the
+        facility operator with the contents of the new submission.
+
+        This information is used by shippers to select an appropriate contract for a capacity product
+        prior to trading.
+
+        STTM contract references must be firm i.e. must be a Priority 1 registered facility service.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                FacilityId: 530001
+                ParticipantId: '13'
+                ServiceReference: SR00000001
+                ServiceReferenceDescription: ID for service in easterly direction
+                STTMContractReference: RS0000011
+                ContractType: TRADE
+                StartDate: '2018-05-01T12:00:00Z'
+                EndDate: '2018-05-01T12:00:00Z'
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /capacityTransferStatus:
+    post:
+      operationId: provideAStatusOfCapacityTransferForEachCapacityTransferNotice
+      summary: Provide a status of capacity transfer for each capacity transfer notice.
+      tags:
+      - Capacity
+      description: 'Provide a status of capacity transfer for each capacity transfer notice.
+
+
+        Partial submissions are accepted. This allows facility operators to submit interim PENDING statuses
+        for transfers that have failed.
+
+
+        Facility operators are responsible for pro-rating capacity quantities where applicable i.e. if
+        there is a shipper capacity shortfall.
+
+
+        Facility operators may continue to submit this transaction beyond the cut-off time for the purposes
+        of updating the invalid quantity and reason.
+
+
+        Changes to day ahead capacity transfer transaction status and confirmed capacity quantity will
+        be ignored after the day ahead transfer cut-off time.
+
+
+        Changes to D-2 and ‘bundled products’ forward traded capacity transfer transaction status and
+        confirmed capacity quantity will be ignored after the forward traded capacity transfer cut-off
+        time.
+
+
+        Changes to D-3 (and beyond) forward traded capacity transaction status and confirmed capacity
+        quantity will be accepted for up to 24 hours after the forward traded capacity transfer cut-off
+        time.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                CapacityTransferId: 10001
+                TransactionStatus: TRANSFERRED
+                ConfirmedCapacityQuantity: 96
+                Reason: PIPELINE_CONSTRAINED
+                InvalidQuantity: 30
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /auctionServiceCurtailmentNotice:
+    post:
+      operationId: provideAEMOWithNoticeOfAnAuctionServiceCurtailmentOnAnAuctionFacilityDuringAGasDay
+      summary: Provide AEMO with notice of an auction service curtailment on an auction facility during
+        a gas day.
+      tags:
+      - Capacity
+      description: Provide AEMO with notice of an auction service curtailment on an auction facility during
+        a gas day.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                FacilityId: 530001
+                AuctionService: FORWARD_HAUL
+                Curtailed: 'true'
+                Material: 'true'
+                Description: Why the curtailment has occurred
+                EffectiveDateTime: '2018-05-01T12:00:00Z'
+                GasDate: '2018-05-01T12:00:00Z'
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /zoneCurtailmentInformation:
+    post:
+      operationId: provideAEMOWithNoticeOfCurtailedShipperNominationsAgainstSecondaryFirmRights
+      summary: Provide AEMO with notice of curtailed shipper nominations against secondary firm rights.
+      tags:
+      - Capacity
+      description: Provide AEMO with notice of curtailed shipper nominations against secondary firm rights.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                FacilityId: 530001
+                ServicePointId: 3001
+                GasDate: '2018-05-01T12:00:00Z'
+                CurtailedQuantity: 455
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /reportShipperCapacityTransferNotification:
+    get:
+      operationId: provideConfirmationToFacilityOperatorThatShipperIsNotifiedOfACapacityTransferOutcome
+      summary: Provide confirmation to facility operator that shipper is notified of a capacity transfer
+        outcome.
+      tags:
+      - Capacity
+      description: 'Provide confirmation to facility operator that shipper is notified of a capacity transfer
+        outcome.
+
+        Failed capacity transfer can be due to-
+
+
+        - Facility operator system failure preventing the capacity transfer in their system.
+
+
+        - Facility operator system rejects the capacity transfer due to an issue with the contract specified.
+
+
+        - AEMO system failure preventing the capacity transfer in the STTM or DWGM system.
+
+
+        - AEMO STTM or DWGM system rejects the capacity transfer due to an issue with the STTM registered
+        facility service (CRN) or DWGM accreditation reference specified.
+
+
+        Park product transfers are identified by empty zone details and identical receipt and delivery
+        points.'
+      parameters:
+      - name: FromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: One calendar month from request date
+      - name: ToGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Request date
+      - name: ChangedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Changed After Date
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse Shipper Capacity Transfer report
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a2d
+                data:
+                  CapacityTransfers:
+                  - CapacityTransferId: 10001
+                    GasDate: '2018-05-01T02:00:00Z'
+                    ParticipantId: '13'
+                    ParticipantCode: SE584
+                    ParticipantName: Star Energy
+                    FacilityId: 530001
+                    FacilityName: VIC Pipeline
+                    ServiceReference: SR00000001
+                    STTMContractReference: RS00011
+                    DWGMAccreditationReference: ''
+                    ReceiptPointId: 1001
+                    ReceiptPointName: Echuca
+                    DeliveryPointId: 2001
+                    DeliveryPointName: Melbourne
+                    ReceiptZoneId: 3001
+                    ReceiptZoneName: Echuca Zone
+                    DeliveryZoneId: 4001
+                    DeliveryZoneName: Melbourne Zone
+                    Status: TRANSFERRED
+                    System: SERVICE_PROVIDER
+                    Reason: ''
+                    TransactionCompletedFlag: 'Yes'
+                    OverallQuantityChange: -345
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - CapacityTransferId: 10002
+                    GasDate: '2018-05-01T02:00:00Z'
+                    ParticipantId: '13'
+                    ParticipantCode: SE584
+                    ParticipantName: Star Energy
+                    FacilityId: 530001
+                    FacilityName: VIC Pipeline
+                    ServiceReference: SR00000002
+                    STTMContractReference: RS00022
+                    DWGMAccreditationReference: MIRN002
+                    ReceiptPointId: 1001
+                    ReceiptPointName: Echuca
+                    DeliveryPointId: 2001
+                    DeliveryPointName: Melbourne
+                    ReceiptZoneId: 3001
+                    ReceiptZoneName: Echuca Zone
+                    DeliveryZoneId: 4001
+                    DeliveryZoneName: Melbourne Zone
+                    Status: PENDING
+                    System: SERVICE_PROVIDER
+                    Reason: BUYER_INVALID_CONTRACT
+                    TransactionCompletedFlag: 'Yes'
+                    OverallQuantityChange: -345
+                    LastChanged: '2018-05-01T02:23:45Z'
+                errors: ''
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /auctionSettlementQuantities:
+    post:
+      operationId: provideTheActualAuctionQuantitiesAndFinalNominationsAfterTheEndOfEachGasDay
+      summary: Provide the actual auction quantities and final nominations after the end of each gas day.
+      tags:
+      - Capacity
+      description: 'Provide the actual auction quantities and final nominations after the end of each
+        gas day.
+
+        This information is required by AEMO for settlement purposes.
+
+
+        If multiple submissions are received by AEMO, the data received in the latest submission prior
+        to the cut-off time is used for indicative or final settlements.
+
+
+        Auction quantity is used for settlements if data is not received by the cut-off time'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                AuctionTransactionId: 10001
+                RevisedAuctionQuantity: 100
+                Reason: PIPELINE_CONSTRAINED
+                FinalScheduledQuantity: 100
+      responses:
+        '200':
+          description: Successful reponse with Facilites report
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /auctionQuantities:
+    post:
+      operationId: provideTheAuctionQuantitiesAvailableForTheDayAheadAuction
+      summary: Provide the auction quantities available for the day ahead auction.
+      tags:
+      - Capacity
+      description: Provide the auction quantities available for the day ahead auction. A submission may
+        include one or more facilities. A full set of product components must be provided for each facility
+        included in a submission. For example, if two facilities are included in one submission, one facility
+        has a full set of limits specified and the other does not, the entire submission will be rejected.
+        If multiple submissions are received by AEMO, the data received in the latest submission for each
+        facility prior to the cut-off time is used as input into the auction.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                AuctionDate: '2018-05-01T12:00:00Z'
+                GasDate: '2018-05-01T12:00:00Z'
+                FacilityId: 530001
+                LimitId: 3001
+                LimitQuantity: 230
+                TransitionalRightsQuantity: 120
+                OperationalOverride: 'true'
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /reportAuctionResults:
+    get:
+      operationId: provideTheCapacityQuantityWonByShippersAtAuction
+      summary: Provide the capacity quantity won by shippers at auction.
+      tags:
+      - Capacity
+      description: 'Provide the capacity quantity won by shippers at auction.
+
+
+        Facility operators use this data to assign capacity of auction services to shippers.
+
+
+        Facility operators that have an active facility in the auction will receive this report, regardless
+        of whether there is any auction quantity won on their facility.
+
+
+        Auction participants that have an active bid in the auction will receive this report, regardless
+        of whether they win any capacity in the auction.'
+      parameters:
+      - name: FacilityId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The unique AEMO defined Facility identifier.
+      - name: FromAuctionDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: From Auction Date
+      - name: ToAuctionDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: To Auction Date
+      - name: FromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: One calendar month from request date
+      - name: ToGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Request date
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse with report on capacity quantity won at auction
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a7d
+                data:
+                  AuctionRun:
+                  - AuctionDate: '2018-05-01T02:23:45Z'
+                    GasDate: '2018-05-02T02:23:45Z'
+                    AuctionRunDatetime: '2018-05-01T02:23:45Z'
+                    ParticipantId: '584'
+                    ParticipantCode: STAR
+                    LastChanged: '2018-05-01T12:23:45Z'
+                  AuctionResults:
+                  - AuctionTransactionId: 10001
+                    AuctionDate: '2018-04-30T02:00:00Z'
+                    FacilityId: 530001
+                    FacilityName: VIC Pipeline
+                    ParticipantId: '13'
+                    ParticipantCode: STAR
+                    ParticipantName: Star Energy
+                    ServiceReference: SR00000001
+                    ReceiptPointId: 1001
+                    ReceiptPointName: Echuca
+                    RPDWGMReference: 23 200001PC
+                    DeliveryPointId: 2001
+                    DeliveryPointName: Melbourne
+                    DPDWGMReference: ''
+                    AuctionQuantityWon: 100
+                    GasDate: '2018-05-01T02:00:00Z'
+                    ProductPrice: 3.15
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - AuctionTransactionId: 10002
+                    AuctionDate: '2018-04-30T02:00:00Z'
+                    FacilityId: 530001
+                    FacilityName: VIC Pipeline
+                    ParticipantId: '13'
+                    ParticipantCode: STAR
+                    ParticipantName: Star Energy
+                    ServiceReference: SR00000002
+                    ReceiptPointId: 1002
+                    ReceiptPointName: Mildura
+                    RPDWGMReference: 23 200001PC
+                    DeliveryPointId: 2002
+                    DeliveryPointName: Echuca
+                    DPDWGMReference: ''
+                    AuctionQuantityWon: 45
+                    GasDate: '2018-05-01T02:00:00Z'
+                    ProductPrice: 5.22
+                    LastChanged: '2018-05-01T02:23:45Z'
+                errors: ''
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /reportCapacityTransferNotice:
+    get:
+      operationId: providesTheCapacityQuantityAdjustmentRequiredForAShipperContract
+      summary: Provides the capacity quantity adjustment required for a shipper contract.
+      tags:
+      - Capacity
+      description: 'Provide the capacity quantity adjustment required for a shipper contract.
+
+
+        Facility operators use this data to update the capacity quantity on the relevant shipper contracts
+        in their own systems.
+
+
+        Each published version of the data contains both the incremental adjustment quantity and the cumulative/overall
+        adjustment quantity that must be applied to a shipper’s contracted capacity quantity, on the same
+        day that this report is published.
+
+
+        Park product transfers are identified by empty zone details and identical receipt and delivery
+        points.'
+      parameters:
+      - name: FacilityId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The unique AEMO defined Facility identifier.
+      - name: ChangedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Changed After Date
+      - name: FromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: One calendar month from request date
+      - name: ToGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Request date
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse with report on capacity transfer notice
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a1d
+                data:
+                  CapacityTransfers:
+                  - CapacityTransferId: 10001
+                    CapacityTransferGroupId: 201
+                    FacilityId: 530001
+                    FacilityName: VIC Pipeline
+                    ParticipantId: '13'
+                    ParticipantName: Star Energy
+                    ServiceReference: SR00000001
+                    STTMContractReference: RS0001
+                    ReceiptPointId: 1001
+                    ReceiptPointName: Echuca
+                    DeliveryPointId: 2001
+                    DeliveryPointName: Melbourne
+                    ReceiptZoneId: 3001
+                    ReceiptZoneName: Echuca Zone
+                    DeliveryZoneId: 4001
+                    DeliveryZoneName: Melbourne Zone
+                    GasDate: '2018-05-19T02:00:00Z'
+                    IncrementalQuantityChange: 100
+                    OverallQuantityChange: 100
+                    LastChanged: '2018-05-01T02:23:45Z'
+                  - CapacityTransferId: 10002
+                    CapacityTransferGroupId: 201
+                    FacilityId: 530001
+                    FacilityName: VIC Pipeline
+                    ParticipantId: '13'
+                    ParticipantName: Star Energy
+                    ServiceReference: SR00000002
+                    STTMContractReference: RS0002
+                    ReceiptPointId: 1002
+                    ReceiptPointName: Mildura
+                    DeliveryPointIdDeliveryPointID: 2002
+                    DeliveryPointName: Echuca
+                    ReceiptZoneId: 3002
+                    ReceiptZoneName: Mildura Zone
+                    DeliveryZoneId: 4002
+                    DeliveryZoneName: Echuca Zone
+                    GasDate: '2018-05-24T02:00:00Z'
+                    IncrementalQuantityChange: -200
+                    OverallQuantityChange: 0
+                    LastChanged: '2018-05-01T02:23:45Z'
+                errors: ''
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /reportTransportationFacilityRegister:
+    get:
+      operationId: theReportContainsAListOfAllTheFacilities
+      summary: The report contains a list of all the facilities
+      tags:
+      - Capacity
+      description: The report contains a list of all the facilities currently registered under Part 24
+        of the Rules, for the capacity transfer and day ahead auction.
+      parameters:
+      - name: OperatorIds
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The unique identifier of the Facility Operator that operates the facility.
+      - name: FacilityId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The unique AEMO defined Facility identifier.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse with the Transportation facilities report
+          content:
+            application/json:
+              example:
+                transactionId: c631b30e-2ce1-4647-946f-be2d04291107
+                data:
+                  Facilities:
+                  - FacilityId: 530001
+                    FacilityName: MAPS
+                    FacilityDescription: Moomba to Adelaide Pipeline System
+                    FacilityType: Pipeline
+                    OperatorId: '584'
+                    OperatorName: Epic Energy
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-02-02T02:23:45Z'
+                  - FacilityId: 540001
+                    FacilityName: MSP
+                    FacilityDescription: Moomba to Sydney Pipeline
+                    FacilityType: Pipeline
+                    OperatorId: '590'
+                    OperatorName: APA
+                    EffectiveDate: '2018-02-28T02:00:00Z'
+                    VersionDatetime: '2018-02-01T02:23:45Z'
+                    LastChanged: '2018-02-02T02:23:45Z'
+                errors: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /reportCapacityTransferAndAuctionNotice:
+    get:
+      operationId: theReportNotifiesParticipantsWhenTheMarketDelayOrCancellationProcessIsTriggered
+      summary: The report notifies participants when the market delay or cancellation process is triggered.
+      tags:
+      - Capacity
+      description: The report notifies participants when the market delay or cancellation process is triggered.
+      parameters:
+      - name: FacilityId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: The unique AEMO defined Facility identifier.
+      - name: Markets
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The market that has triggered the notice, for example CTP or DAA.
+      - name: ChangedAfter
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Changed After Date
+      - name: FromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: One calendar month from request date
+      - name: ToGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Request date
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful reponse with report on market delay or cancellation
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a4d
+                data:
+                  Notices:
+                  - NoticeId: 123
+                    NoticeDate: '2018-04-30T02:34:56Z'
+                    GasDate: '2018-04-30T02:00:00Z'
+                    FacilityId: ''
+                    FacilityName: ''
+                    Market: CTP
+                    NoticeType: Delay
+                    Description: Market has been delayed by 2 hours due to system issue
+                    LastChanged: '2018-05-01T02:23:45Z'
+                errors: ''
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource is missing from the URL or the URL
+            is incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +1666,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Capacity
+  description: Capacity

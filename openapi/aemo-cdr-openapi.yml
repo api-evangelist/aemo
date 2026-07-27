@@ -1,11 +1,1144 @@
 openapi: 3.0.1
 info:
   title: CDR
-  description: "## Introduction\nThe Consumer Data Right (CDR) APIs allow Registered Financially Responsible Market Participants (FRMPs) to service API requests for AEMO data from Accredited Data Recipients."
+  description: '## Introduction
+
+    The Consumer Data Right (CDR) APIs allow Registered Financially Responsible Market Participants (FRMPs)
+    to service API requests for AEMO data from Accredited Data Recipients.'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/cdr/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy
-paths: { }
+- url: https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy
+paths:
+  /electricity/servicepoints/{servicePointId}/der:
+    get:
+      operationId: getDERForServicePoint
+      summary: Get DER For Service Point
+      tags:
+      - CDR
+      description: Obtain a list of DER data from a particular service point
+      parameters:
+      - name: servicePointId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: nmi
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Details the expected content type of the response.
+      - name: Accept-Encoding
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Specifies the encoding support for the response.
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: x-v
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Version of the API supported by AEMO. E.g 1
+      - name: x-min-v
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Minimum version of the API supported by AEMO that can be accepted.  E.g. 1
+      - name: x-fapi-interaction-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The x-fapi-interaction-id is supplied for end to end tracing. If the ADR has not
+          populated this on their API call to the retailer, the retailer must generate a unique value
+          to pass through to AEMO.
+      - name: x-cds-arrangement
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Arrangement ID for the consent that the request is being made under to be used for
+          tracing and audit purposes. AEMO will not validate the consent associated with the arrangement.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Base64 encoding of the URM username and password, concatenated with a colon.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  servicePointId: string
+                  approvedCapacity: 0
+                  availablePhasesCount: 0
+                  installedPhasesCount: 0
+                  islandableInstallation: string
+                  hasCentralProtectionControl: false
+                  protectionMode:
+                    exportLimitkva: 0
+                    underFrequencyProtection: 0
+                    underFrequencyProtectionDelay: 0
+                    overFrequencyProtection: 0
+                    overFrequencyProtectionDelay: 0
+                    underVoltageProtection: 0
+                    underVoltageProtectionDelay: 0
+                    overVoltageProtection: 0
+                    overVoltageProtectionDelay: 0
+                    sustainedOverVoltage: 0
+                    sustainedOverVoltageDelay: 0
+                    frequencyRateOfChange: 0
+                    voltageVectorShift: 0
+                    interTripScheme: string
+                    neutralVoltageDisplacement: 0
+                  acConnections:
+                  - connectionIdentifier: 0
+                    count: 0
+                    equipmentType: INVERTER
+                    manufacturerName: string
+                    inverterSeries: string
+                    inverterModelNumber: string
+                    commissioningDate: string
+                    status: ACTIVE
+                    inverterDeviceCapacity: 0
+                    derDevices:
+                    - deviceIdentifier: 0
+                      count: 0
+                      manufacturer: string
+                      modelNumber: string
+                      status: ACTIVE
+                      type: FOSSIL
+                      subtype: string
+                      nominalRatedCapacity: 0
+                      nominalStorageCapacity: 0
+                links:
+                  self: string
+                meta: {}
+        '400':
+          description: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response
+            and error codes that may be returned for this API.<br/><a href>https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+          content:
+            application/json:
+              example:
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+        '401':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: Invalid Username or Password
+        '403':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                error 1:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: X-initiatingParticipantId is not valid or No CDR permission associated with
+                    this account
+        '405':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: 'Input request HTTP method is POST but operation /electricity/servicepoints/1234567890/der
+                    accepts only: [GET]'
+        '429':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Too many requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+        '500':
+          description: The following error codes MUST be supported:<br/><li>500 - Service Unavailable</li>
+          content:
+            application/json:
+              example:
+                errors:
+                - code: 'urn:au-cds:error:cds-all:GeneralError/Unexpected '
+                  title: Unexpected Error encountered/Internal Server Error
+                  detail: Unexpected error encountered
+  /electricity/servicepoints/der:
+    post:
+      operationId: getDERForSpecificServicePoints
+      summary: Get DER For Specific Service Points
+      tags:
+      - CDR
+      description: Obtain DER data for a specific set of service points
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page of results being requested (standard pagination)
+      - name: page-size
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page size. Default is 25 (standard pagination). Maximum page size of 1000 results.
+      - name: continuation-token
+        in: query
+        required: false
+        schema:
+          type: string
+        description: For Internal AEMO pagination purpose
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Details the expected content type of the response.
+      - name: Accept-Encoding
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Specifies the encoding support for the response.
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: x-v
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Version of the API supported by AEMO. E.g 1
+      - name: x-min-v
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Minimum version of the API supported by AEMO that can be accepted.  E.g. 1
+      - name: x-fapi-interaction-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The x-fapi-interaction-id is supplied for end to end tracing. If the ADR has not
+          populated this on their API call to the retailer, the retailer must generate a unique value
+          to pass through to AEMO.
+      - name: x-cds-arrangement
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Arrangement ID for the consent that the request is being made under to be used for
+          tracing and audit purposes. AEMO will not validate the consent associated with the arrangement.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Base64 encoding of the URM username and password, concatenated with a colon.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  derRecords:
+                  - servicePointId: string
+                    approvedCapacity: 0
+                    availablePhasesCount: 0
+                    installedPhasesCount: 0
+                    islandableInstallation: string
+                    hasCentralProtectionControl: false
+                    protectionMode:
+                      exportLimitkva: 0
+                      underFrequencyProtection: 0
+                      underFrequencyProtectionDelay: 0
+                      overFrequencyProtection: 0
+                      overFrequencyProtectionDelay: 0
+                      underVoltageProtection: 0
+                      underVoltageProtectionDelay: 0
+                      overVoltageProtection: 0
+                      overVoltageProtectionDelay: 0
+                      sustainedOverVoltage: 0
+                      sustainedOverVoltageDelay: 0
+                      frequencyRateOfChange: 0
+                      voltageVectorShift: 0
+                      interTripScheme: string
+                      neutralVoltageDisplacement: 0
+                    acConnections:
+                    - connectionIdentifier: 0
+                      count: 0
+                      equipmentType: INVERTER
+                      manufacturerName: string
+                      inverterSeries: string
+                      inverterModelNumber: string
+                      commissioningDate: string
+                      status: ACTIVE
+                      inverterDeviceCapacity: 0
+                      derDevices:
+                      - deviceIdentifier: 0
+                        count: 0
+                        manufacturer: string
+                        modelNumber: string
+                        status: ACTIVE
+                        type: FOSSIL
+                        subtype: string
+                        nominalRatedCapacity: 0
+                        nominalStorageCapacity: 0
+                links:
+                  self: string
+                  first: string
+                  prev: string
+                  next: string
+                  last: string
+                meta:
+                  totalRecords: 0
+                  totalPages: 0
+        '400':
+          description: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response
+            and error codes that may be returned for this API.<br/><a href>https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+          content:
+            application/json:
+              example:
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+        '401':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: Invalid Username or Password
+        '403':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                error 1:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: X-initiatingParticipantId is not valid or No CDR permission associated with
+                    this account
+        '405':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: 'Input request HTTP method is GET but operation /electricity/servicepoints/der
+                    accepts only: [POST]'
+        '429':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Too many requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+        '500':
+          description: The following error codes MUST be supported:<br/><li>500 - Service Unavailable</li>
+          content:
+            application/json:
+              example:
+                errors:
+                - code: 'urn:au-cds:error:cds-all:GeneralError/Unexpected '
+                  title: Unexpected Error encountered/Internal Server Error
+                  detail: Unexpected error encountered
+  /electricity/servicepoints/{servicePointId}:
+    get:
+      operationId: getServicePointDetail
+      summary: Get Service Point Detail
+      tags:
+      - CDR
+      description: Obtain standingData details for the requested Service point
+      parameters:
+      - name: servicePointId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: nmi
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Details the expected content type of the response.
+      - name: Accept-Encoding
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Specifies the encoding support for the response.
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: x-v
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Version of the API supported by AEMO. e.g 1
+      - name: x-min-v
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Minimum version of the API supported by AEMO that can be accepted.  e.g. 1
+      - name: x-fapi-interaction-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The x-fapi-interaction-id is supplied for end to end tracing. If the ADR has not
+          populated this on their API call to the retailer, the retailer must generate a unique value
+          to pass through to AEMO.
+      - name: x-cds-arrangement
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Arrangement ID for the consent that the request is being made under to be used for
+          tracing and audit purposes. AEMO will not validate the consent associated with the arrangement.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Base64 encoding of the URM username and password, concatenated with a colon.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  servicePointId: string
+                  nationalMeteringId: string
+                  servicePointClassification: EXTERNAL_PROFILE
+                  servicePointStatus: ACTIVE
+                  jurisdictionCode: ALL
+                  isGenerator: true
+                  validFromDate: string
+                  lastUpdateDateTime: string
+                  consumerProfile:
+                    classification: BUSINESS
+                    threshold: LOW
+                  distributionLossFactor:
+                    code: string
+                    description: string
+                    lossValue: string
+                  relatedParticipants:
+                  - party: string
+                    role: FRMP
+                  location:
+                    addressUType: paf
+                    simple:
+                      mailingName: string
+                      addressLine1: string
+                      addressLine2: string
+                      addressLine3: string
+                      postcode: string
+                      city: string
+                      state: string
+                      country: AUS
+                    paf:
+                      dpid: string
+                      thoroughfareNumber1: 0
+                      thoroughfareNumber1Suffix: string
+                      thoroughfareNumber2: 0
+                      thoroughfareNumber2Suffix: string
+                      flatUnitType: string
+                      flatUnitNumber: string
+                      floorLevelType: string
+                      floorLevelNumber: string
+                      lotNumber: string
+                      buildingName1: string
+                      buildingName2: string
+                      streetName: string
+                      streetType: string
+                      streetSuffix: string
+                      postalDeliveryType: string
+                      postalDeliveryNumber: 0
+                      postalDeliveryNumberPrefix: string
+                      postalDeliveryNumberSuffix: string
+                      localityName: string
+                      postcode: string
+                      state: string
+                  meters:
+                  - meterId: string
+                    specifications:
+                      status: CURRENT
+                      installationType: BASIC
+                      manufacturer: string
+                      model: string
+                      readType: string
+                      nextScheduledReadDate: string
+                    registers:
+                    - registerId: string
+                      registerSuffix: string
+                      averagedDailyLoad: 0
+                      registerConsumptionType: INTERVAL
+                      networkTariffCode: string
+                      unitOfMeasure: string
+                      timeOfDay: ALLDAY
+                      multiplier: 0
+                      controlledLoad: true
+                      consumptionType: ACTUAL
+                links:
+                  self: string
+                meta: {}
+        '400':
+          description: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response
+            and error codes that may be returned for this API.<br/><a href>https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+          content:
+            application/json:
+              example:
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+        '401':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: Invalid Username or Password
+        '403':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                error 1:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: X-initiatingParticipantId is not valid or No CDR permission associated with
+                    this account
+        '405':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: 'Input request HTTP method is GET but operation /electricity/servicepoints accepts
+                    only: [POST]'
+        '429':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Too many requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+        '500':
+          description: The following error codes MUST be supported:<br/><li>500 - Service Unavailable</li>
+          content:
+            application/json:
+              example:
+                errors:
+                - code: 'urn:au-cds:error:cds-all:GeneralError/Unexpected '
+                  title: Unexpected Error encountered/Internal Server Error
+                  detail: Unexpected error encountered
+  /electricity/servicepoints:
+    post:
+      operationId: getServicePoints
+      summary: Get Service Points
+      tags:
+      - CDR
+      description: Obtain StandigData details for the specific set of service points.
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page of results being requested (standard pagination)
+      - name: page-size
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page size. Default is 25 (standard pagination). Maximum page size of 1000 results.
+      - name: continuation-token
+        in: query
+        required: false
+        schema:
+          type: string
+        description: For Internal AEMO pagination purpose
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Details the expected content type of the response.
+      - name: Accept-Encoding
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Specifies the encoding support for the response.
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: x-v
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Version of the API supported by AEMO. e.g 1
+      - name: x-min-v
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Minimum version of the API supported by AEMO that can be accepted.  e.g. 1
+      - name: x-fapi-interaction-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The x-fapi-interaction-id is supplied for end to end tracing. If the ADR has not
+          populated this on their API call to the retailer, the retailer must generate a unique value
+          to pass through to AEMO.
+      - name: x-cds-arrangement
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Arrangement ID for the consent that the request is being made under to be used for
+          tracing and audit purposes. AEMO will not validate the consent associated with the arrangement.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Base64 encoding of the URM username and password, concatenated with a colon.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  servicePoints:
+                  - servicePointId: string
+                    nationalMeteringId: string
+                    servicePointClassification: EXTERNAL_PROFILE
+                    servicePointStatus: ACTIVE
+                    jurisdictionCode: ALL
+                    isGenerator: true
+                    validFromDate: string
+                    lastUpdateDateTime: string
+                    consumerProfile:
+                      classification: BUSINESS
+                      threshold: LOW
+                links:
+                  self: string
+                  first: string
+                  prev: string
+                  next: string
+                  last: string
+                meta:
+                  totalRecords: 0
+                  totalPages: 0
+        '400':
+          description: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response
+            and error codes that may be returned for this API.<br/><a href>https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+          content:
+            application/json:
+              example:
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+        '401':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: Invalid Username or Password
+        '403':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                error 1:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: X-initiatingParticipantId is not valid or No CDR permission associated with
+                    this account
+        '405':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: 'Input request HTTP method is POST but operation /electricity/servicepoints/1234567890
+                    accepts only: [GET]'
+        '429':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Too many requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+        '500':
+          description: The following error codes MUST be supported:<br/><li>500 - Service Unavailable</li>
+          content:
+            application/json:
+              example:
+                errors:
+                - code: 'urn:au-cds:error:cds-all:GeneralError/Unexpected '
+                  title: Unexpected Error encountered/Internal Server Error
+                  detail: Unexpected error encountered
+  /electricity/servicepoints/{servicePointId}/usage:
+    get:
+      operationId: getUsageForServicePoint
+      summary: Get Usage For Service Point
+      tags:
+      - CDR
+      description: Obtain a list of electricity usage data from a particular service point.
+      parameters:
+      - name: servicePointId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: nmi
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page of results being requested (standard pagination)
+      - name: page-size
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page size. Default is 25 (standard pagination). Maximum page size of 1000 results.
+      - name: continuation-token
+        in: query
+        required: false
+        schema:
+          type: string
+        description: For Internal AEMO pagination purpose
+      - name: oldest-date
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Oldest date data is to be returned for. Should be no earlier than current date minus
+          24 months. If not provided, current date minus 24 months is assumed.
+      - name: newest-date
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Newest date data is to be returned for. Must be greater than current date minus 24
+          months. If not provided, current date is assumed.
+      - name: interval-reads
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Interval read values,FULL or 30MIN.Default value is NONE if no value provided.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Details the expected content type of the response.
+      - name: Accept-Encoding
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Specifies the encoding support for the response.
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: x-v
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Version of the API supported by AEMO. e.g 1
+      - name: x-min-v
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Minimum version of the API supported by AEMO that can be accepted.  e.g. 1
+      - name: x-fapi-interaction-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The x-fapi-interaction-id is supplied for end to end tracing. If the ADR has not
+          populated this on their API call to the retailer, the retailer must generate a unique value
+          to pass through to AEMO.
+      - name: x-cds-arrangement
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Arrangement ID for the consent that the request is being made under to be used for
+          tracing and audit purposes. AEMO will not validate the consent associated with the arrangement.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Base64 encoding of the URM username and password, concatenated with a colon.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  reads:
+                  - servicePointId: string
+                    registerId: string
+                    registerSuffix: string
+                    meterID: string
+                    controlledLoad: true
+                    readStartDate: string
+                    readEndDate: string
+                    unitOfMeasure: string
+                    readUType: basicRead
+                    basicRead:
+                      quality: ACTUAL
+                      value: 0
+                    intervalRead:
+                      readIntervalLength: 0
+                      aggregateValue: 0
+                      intervalReads:
+                      - quality: ACTUAL
+                        value: 0
+                      readQualities:
+                      - startInterval: 0
+                        endInterval: 0
+                        quality: SUBSTITUTE
+                links:
+                  self: 0
+                  first: 0
+                  prev: 0
+                  next: 0
+                  last: 0
+                meta:
+                  totalRecords: 0
+                  totalPages: 0
+        '400':
+          description: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response
+            and error codes that may be returned for this API.<br/><a href>https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+          content:
+            application/json:
+              example:
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+        '401':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: Invalid Username or Password
+        '403':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                error 1:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: X-initiatingParticipantId is not valid or No CDR permission associated with
+                    this account
+        '405':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: 'Input request HTTP method is POST but operation /electricity/servicepoints/1234567890/usage
+                    accepts only: [GET]'
+        '429':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Too many requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+        '500':
+          description: The following error codes MUST be supported:<br/><li>500 - Service Unavailable</li>
+          content:
+            application/json:
+              example:
+                errors:
+                - code: 'urn:au-cds:error:cds-all:GeneralError/Unexpected '
+                  title: Unexpected Error encountered/Internal Server Error
+                  detail: Unexpected error encountered
+  /electricity/servicepoints/usage:
+    post:
+      operationId: getUsageForSpecificServicePoints
+      summary: Get Usage For Specific Service Points
+      tags:
+      - CDR
+      description: Obtain the electricity usage data for a specific set of service points.
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page of results being requested (standard pagination)
+      - name: page-size
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Page size. Default is 25 (standard pagination). Maximum page size of 1000 results.
+      - name: continuation-token
+        in: query
+        required: false
+        schema:
+          type: string
+        description: For Internal AEMO pagination purpose
+      - name: oldest-date
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Oldest date data is to be returned for. Should be no earlier than current date minus
+          24 months. If not provided, current date minus 24 months is assumed.
+      - name: newest-date
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Newest date data is to be returned for. Must be greater than current date minus 24
+          months. If not provided, current date is assumed.
+      - name: interval-reads
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Interval read values,FULL or 30MIN.Default value is NONE if no value provided.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Details the expected content type of the response.
+      - name: Accept-Encoding
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Specifies the encoding support for the response.
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: x-v
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Version of the API supported by AEMO. e.g 1
+      - name: x-min-v
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Minimum version of the API supported by AEMO that can be accepted.  e.g. 1
+      - name: x-fapi-interaction-id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The x-fapi-interaction-id is supplied for end to end tracing. If the ADR has not
+          populated this on their API call to the retailer, the retailer must generate a unique value
+          to pass through to AEMO.
+      - name: x-cds-arrangement
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Arrangement ID for the consent that the request is being made under to be used for
+          tracing and audit purposes. AEMO will not validate the consent associated with the arrangement.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Base64 encoding of the URM username and password, concatenated with a colon.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                data:
+                  reads:
+                  - servicePointId: string
+                    registerId: string
+                    registerSuffix: string
+                    meterID: string
+                    controlledLoad: true
+                    readStartDate: string
+                    readEndDate: string
+                    unitOfMeasure: string
+                    readUType: basicRead
+                    basicRead:
+                      quality: ACTUAL
+                      value: 0
+                    intervalRead:
+                      readIntervalLength: 0
+                      aggregateValue: 0
+                      intervalReads:
+                      - quality: ACTUAL
+                        value: 0
+                      readQualities:
+                      - startInterval: 0
+                        endInterval: 0
+                        quality: SUBSTITUTE
+                links:
+                  self: 0
+                  first: 0
+                  prev: 0
+                  next: 0
+                  last: 0
+                meta:
+                  totalRecords: 0
+                  totalPages: 0
+        '400':
+          description: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response
+            and error codes that may be returned for this API.<br/><a href>https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+          content:
+            application/json:
+              example:
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+        '401':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: Invalid Username or Password
+        '403':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                error 1:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: X-initiatingParticipantId is not valid or No CDR permission associated with
+                    this account
+        '405':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Expected error encountered
+                  detail: 'Input request HTTP method is GET but operation /electricity/servicepoints/usage
+                    accepts only: [POST]'
+        '429':
+          description: Expected error encountered
+          content:
+            application/json:
+              example:
+                errors:
+                - code: urn:au-cds:error:cds-all:GeneralError/Expected
+                  title: Too many requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+        '500':
+          description: The following error codes MUST be supported:<br/><li>500 - Service Unavailable</li>
+          content:
+            application/json:
+              example:
+                errors:
+                - code: 'urn:au-cds:error:cds-all:GeneralError/Unexpected '
+                  title: Unexpected Error encountered/Internal Server Error
+                  detail: Unexpected error encountered
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +1150,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: CDR
+  description: Introduction

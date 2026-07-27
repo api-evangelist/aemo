@@ -1,11 +1,214 @@
 openapi: 3.0.1
 info:
   title: BlindUpdate
-  description: "## Introduction\n The BlindUpdateTool API supports Upload of blind update Data by participants facing API's to backend MSATS systems , Download processed Blind Update file, List of all the Blind Update files uploaded by the Participants. \n Participants will access the BlindUpdateTool tab from the Browser which invokes the respective process in the API Management. Uploading the Blind Update File happens which will receive a response from backend Native API after basic validation.Asynchronously, the uploaded file will be processed in the backend and listed with a status in the participants screen.Processed blindupdate files can be downloaded from the screen."
+  description: "## Introduction\n The BlindUpdateTool API supports Upload of blind update Data by participants\
+    \ facing API's to backend MSATS systems , Download processed Blind Update file, List of all the Blind\
+    \ Update files uploaded by the Participants. \n Participants will access the BlindUpdateTool tab from\
+    \ the Browser which invokes the respective process in the API Management. Uploading the Blind Update\
+    \ File happens which will receive a response from backend Native API after basic validation.Asynchronously,\
+    \ the uploaded file will be processed in the backend and listed with a status in the participants\
+    \ screen.Processed blindupdate files can be downloaded from the screen."
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/blindupdate-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMRetail/BlindUpdate
-paths: { }
+- url: https://api-prd.aemo.local/NEMRetail/BlindUpdate
+paths:
+  /downloadFile:
+    get:
+      operationId: downloadFile
+      summary: Download File
+      tags:
+      - BlindUpdate
+      description: Download the selected procossed BlindUpdate CSV File
+      parameters:
+      - name: payloadResponseId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: when present, it only lists blind update responses for the given payloadResponseId.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Basic Auth
+      responses:
+        '200':
+          description: Download file response
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submissionList:
+    get:
+      operationId: submissionList
+      summary: Submission List
+      tags:
+      - BlindUpdate
+      description: Retrieve the BlindUpdate files submitted list for the Participant
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: when present, it only lists blind update responses for the given status.
+      - name: submissionFromDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: when present, it only lists blind update responses from the given date.  submissionFromDate.
+      - name: submissionToDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: when present, it only lists blind update responses to the given date. submissionToDate.
+      - name: participantMessageId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: when present, it only lists blind update responses for the given MessageId.
+      - name: butRunId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: when present, it only lists blind update responses for the given butRunId.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Basic Auth
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Identifies which content types (expressed as MIME types), the client is able to understand
+          – application/json
+      responses:
+        '200':
+          description: Get Submission Lists Response
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submission:
+    post:
+      operationId: uploadCSVFile
+      summary: Upload CSV File
+      tags:
+      - BlindUpdate
+      description: Upload blind update CSV file to AEMO’s market systems
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Basic Auth
+      - name: Content-Type
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - text/csv
+        description: specifies that the posted request data is in Text format – text/csv
+      responses:
+        '200':
+          description: File upload Response
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +220,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: BlindUpdate
+  description: Introduction

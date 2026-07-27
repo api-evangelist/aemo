@@ -1,11 +1,70 @@
 openapi: 3.0.1
 info:
   title: P2PMessagingSync
-  description: "## Introduction\nThe P2PMessagingSync API is a B2B SMP APIs used to exchange the following Peer-to-Peer information via the e-Hub:\n- Free-form information\n- Documents (also called Attachments). The P2PMessagingSync API supports exchange of the following attachment types (configurable): pdf, csv, jpeg, jpe, jpg, gif, zip & txt. In future, this API will support additional attachment types.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '## Introduction
+
+    The P2PMessagingSync API is a B2B SMP APIs used to exchange the following Peer-to-Peer information
+    via the e-Hub:
+
+    - Free-form information
+
+    - Documents (also called Attachments). The P2PMessagingSync API supports exchange of the following
+    attachment types (configurable): pdf, csv, jpeg, jpe, jpg, gif, zip & txt. In future, this API will
+    support additional attachment types.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/p2pmessaging-sync-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/P2PMessagingSync
-paths: { }
+- url: https://api-prd.aemo.local/ws/P2PMessagingSync
+paths:
+  /messages:
+    post:
+      operationId: usedToExchangeFreeFormDataAndOrAttachments
+      summary: Used to exchange free-form data and/or attachments
+      tags:
+      - P2PMessagingSync
+      description: Used to exchange free-form data and/or attachments
+      parameters:
+      - name: messageContextID.
+        in: header
+        required: true
+        schema:
+          type: string
+        description: "Message ID defined by the Participant. \nThe messageContextID is used in the following\
+          \ ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the\
+          \ contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient\
+          \ is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files\
+          \ is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned\
+          \ where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat\
+          \ of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10}\
+          \ + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange\
+          \ free form information and/or attachments between the participants</b>"
+      responses:
+        '200':
+          description: aseXML hub Acknowledgement (status = ‘Accept’) will be sent
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not POST
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +76,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: P2PMessagingSync
+  description: Introduction

@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Common API
+  version: 1.0.0
+extends: openapi/aemo-cds-common-api-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the enrichment artifacts that describe this API.
+  update:
+    x-apievangelist-provider: aemo
+    x-apievangelist-enriched: '2026-07-27'
+    x-apievangelist-artifacts:
+      authentication: authentication/aemo-authentication.yml
+      conventions: conventions/aemo-conventions.yml
+      errors: errors/aemo-error-codes.yml
+      lifecycle: lifecycle/aemo-lifecycle.yml
+      rate_limits: rate-limits/aemo-rate-limits.yml
+      conformance: conformance/aemo-conformance.yml
+      vocabulary: vocabulary/aemo-glossary.yml
+      agentic_access: agentic-access/aemo-agentic-access.yml
+- target: $.info
+  description: Record the measured contract shape of this document as harvested.
+  update:
+    x-apievangelist-contract:
+      operations: 4
+      operations_with_description: 4
+      operations_with_response_examples: 0
+      soap_action_operations: 0
+      components_schemas: 27
+      idempotency_key: false

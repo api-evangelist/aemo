@@ -1,0 +1,1891 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/aemo-cds-energy-api-openapi.yml, openapi/aemo-cds-common-api-openapi.yml
+description: Entity-relationship graph derived from AEMO's Consumer Data Right energy contract — the only part of
+  the AEMO estate that ships reusable components.schemas. The 74 e-Hub APIs exported from AEMO's Azure API Management
+  portal publish operations, parameters and response examples but no named schema components, so no entity graph
+  is derivable from them; their payload shapes are carried as inline response examples in openapi/ and, for the
+  WEM SOAP surface, as aseXML documents defined outside OpenAPI.
+root_entities:
+- EnergyAccount
+- EnergyServicePoint
+- EnergyPlan
+- EnergyInvoice
+- EnergyBillingTransaction
+- CommonCustomer
+id_reference_fields:
+- entity: EnergyAccountBaseV2
+  field: accountId
+- entity: EnergyBalanceListResponse_data_balances
+  field: accountId
+- entity: EnergyBillingDemandTransactionV3
+  field: invoiceNumber
+- entity: EnergyBillingDemandTransactionV3
+  field: servicePointId
+- entity: EnergyBillingOnceOffTransaction
+  field: invoiceNumber
+- entity: EnergyBillingOnceOffTransaction
+  field: servicePointId
+- entity: EnergyBillingOtherTransaction
+  field: invoiceNumber
+- entity: EnergyBillingOtherTransaction
+  field: servicePointId
+- entity: EnergyBillingTransactionV3
+  field: accountId
+- entity: EnergyBillingUsageTransactionV2
+  field: invoiceNumber
+- entity: EnergyBillingUsageTransactionV2
+  field: servicePointId
+- entity: EnergyDerRecord
+  field: servicePointId
+- entity: EnergyInvoice
+  field: accountId
+- entity: EnergyInvoice
+  field: invoiceNumber
+- entity: EnergyPlan
+  field: planId
+- entity: EnergyServicePointV2
+  field: servicePointId
+- entity: EnergyUsageRead
+  field: servicePointId
+entity_count: 152
+relationship_count: 184
+entities:
+- name: CommonEmailAddress
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - address
+  - purpose
+- name: CommonOrganisation
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 15
+  required:
+  - agentLastName
+  - agentRole
+  - businessName
+  - organisationType
+- name: CommonOrganisationDetailV2
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 0
+- name: CommonOrganisationDetailV2_allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 1
+  required:
+  - physicalAddresses
+- name: CommonPAFAddress
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 22
+  description: Australian address formatted according to the file format defined by the [PAF file format](https://auspost.com.au/content/dam/auspost_corp/media/documents/australia-post-data-guide.pdf).
+    Required if _addressUType_ is set to `paf`.
+  required:
+  - localityName
+  - postcode
+  - state
+- name: CommonPerson
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 8
+  required:
+  - lastName
+  - middleNames
+- name: CommonPersonDetailV2
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 0
+- name: CommonPersonDetailV2_allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - emailAddresses
+  - phoneNumbers
+  - physicalAddresses
+- name: CommonPhoneNumber
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 7
+  required:
+  - fullNumber
+  - number
+  - purpose
+- name: CommonPhysicalAddress
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - addressUType
+- name: CommonPhysicalAddressWithPurpose
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 0
+- name: CommonPhysicalAddressWithPurpose_allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 1
+  required:
+  - purpose
+- name: CommonSimpleAddress
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 8
+  description: Required if _addressUType_ is set to `simple`.
+  required:
+  - addressLine1
+  - city
+  - state
+- name: DiscoveryOutage
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 4
+  required:
+  - duration
+  - explanation
+  - outageTime
+- name: EnergyAccountBaseV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - accountId
+- name: EnergyAccountDetailResponseV4
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyAccountDetailV4
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: EnergyAccountDetailV4_allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: The array of plans containing service points and associated plan details.
+  required:
+  - plans
+- name: EnergyAccountDetailV4_allOf_authorisedContacts
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - lastName
+- name: EnergyAccountDetailV4_allOf_planDetail
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  description: Detail on the plan applicable to this account. Mandatory if _openStatus_ is `OPEN`.
+  required:
+  - fuelType
+- name: EnergyAccountDetailV4_allOf_plans
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - servicePointIds
+- name: EnergyAccountId
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+  description: A unique identifier for an Energy account, generated according to [CDR ID Permanence](#id-permanence)
+    requirements.
+- name: EnergyAccountListResponseV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyAccountListResponseV2_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - accounts
+- name: EnergyAccountV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: EnergyAccountV2_allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: The array of plans containing service points and associated plan details.
+  required:
+  - plans
+- name: EnergyAccountV2_allOf_planOverview
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  description: Mandatory if _openStatus_ is `OPEN`.
+  required:
+  - startDate
+- name: EnergyAccountV2_allOf_plans
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - servicePointIds
+- name: EnergyBalanceListResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyBalanceListResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - balances
+- name: EnergyBalanceListResponse_data_balances
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - accountId
+  - balance
+- name: EnergyBalanceResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyBalanceResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - balance
+- name: EnergyBillingDemandTransactionV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 12
+  required:
+  - amount
+  - endDate
+  - rate
+  - startDate
+  - timeOfUseType
+- name: EnergyBillingListResponseV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyBillingListResponseV3_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - transactions
+- name: EnergyBillingOnceOffTransaction
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 4
+  required:
+  - amount
+  - description
+- name: EnergyBillingOtherTransaction
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 9
+  required:
+  - amount
+  - description
+- name: EnergyBillingPaymentTransaction
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - amount
+  - method
+- name: EnergyBillingTransactionV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 9
+  required:
+  - accountId
+  - executionDateTime
+  - transactionUType
+- name: EnergyBillingUsageTransactionV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 12
+  required:
+  - amount
+  - endDate
+  - startDate
+  - timeOfUseType
+  - usage
+- name: EnergyBillingUsageTransactionV2_adjustments
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - amount
+  - description
+- name: EnergyBillingUsageTransactionV2_calculationFactors
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - type
+  - value
+- name: EnergyConcession
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 10
+  required:
+  - displayName
+  - type
+- name: EnergyConcessionsResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyConcessionsResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - concessions
+- name: EnergyDaysEnum
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: EnergyDerDetailResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyDerListResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyDerListResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - derRecords
+- name: EnergyDerRecord
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 8
+  required:
+  - acConnections
+  - approvedCapacity
+  - availablePhasesCount
+  - installedPhasesCount
+  - islandableInstallation
+  - servicePointId
+- name: EnergyDerRecord_acConnections
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 10
+  required:
+  - commissioningDate
+  - connectionIdentifier
+  - count
+  - derDevices
+  - status
+- name: EnergyDerRecord_derDevices
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 9
+  required:
+  - count
+  - deviceIdentifier
+  - nominalRatedCapacity
+  - type
+- name: EnergyDerRecord_protectionMode
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 15
+  description: Required only when the _hasCentralProtectionControl_ flag is set to `true`. One or more of the object
+    fields will be provided to describe the protection modes in place.
+- name: EnergyInvoice
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 14
+  required:
+  - accountId
+  - balanceAtIssue
+  - invoiceNumber
+  - issueDate
+  - paymentStatus
+  - servicePoints
+- name: EnergyInvoiceAccountCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  description: Object contains account level charges and credits related to electricity usage.
+  required:
+  - totalCharges
+  - totalDiscounts
+- name: EnergyInvoiceElectricityUsageCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  required:
+  - totalGenerationCredits
+  - totalOnceOffCharges
+  - totalOnceOffDiscounts
+  - totalUsageCharges
+- name: EnergyInvoiceGasUsageCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  required:
+  - totalGenerationCredits
+  - totalOnceOffCharges
+  - totalOnceOffDiscounts
+  - totalUsageCharges
+- name: EnergyInvoiceGasUsageCharges_otherCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - amount
+  - description
+- name: EnergyInvoiceListResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyInvoiceListResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - invoices
+- name: EnergyInvoice_payOnTimeDiscount
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  description: A discount for on time payment.
+  required:
+  - date
+  - discountAmount
+- name: EnergyInvoice_period
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  description: Object containing the start and end date for the period covered by the invoice. Mandatory if any
+    usage or demand based charges are included in the invoice.
+  required:
+  - endDate
+  - startDate
+- name: EnergyPaymentSchedule
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  required:
+  - paymentScheduleUType
+- name: EnergyPaymentScheduleResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyPaymentScheduleResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - paymentSchedules
+- name: EnergyPaymentSchedule_cardDebit
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  description: Represents a regular credit card payment schedule. Mandatory if _paymentScheduleUType_ is set to
+    `cardDebit`.
+  required:
+  - calculationType
+  - cardScheme
+  - paymentFrequency
+- name: EnergyPaymentSchedule_digitalWallet
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  description: Represents a regular payment from a digital wallet. Mandatory if _paymentScheduleUType_ is set to
+    `digitalWallet`.
+  required:
+  - calculationType
+  - identifier
+  - name
+  - paymentFrequency
+  - provider
+  - type
+- name: EnergyPaymentSchedule_directDebit
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  description: Represents a regular direct debit from a specified bank account. Mandatory if _paymentScheduleUType_
+    is set to `directDebit`.
+  required:
+  - calculationType
+  - paymentFrequency
+- name: EnergyPaymentSchedule_manualPayment
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: Represents a manual payment schedule where the customer pays in response to a delivered statement.
+    Mandatory if _paymentScheduleUType_ is set to `manualPayment`.
+  required:
+  - billFrequency
+- name: EnergyPlan
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 14
+  required:
+  - brand
+  - brandName
+  - fuelType
+  - lastUpdated
+  - planId
+  - type
+- name: EnergyPlanContractFullV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: EnergyPlanContractFullV3_allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  required:
+  - billFrequency
+- name: EnergyPlanContractV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 16
+  required:
+  - isFixed
+  - paymentOption
+  - pricingModel
+  - tariffPeriod
+- name: EnergyPlanContractV3_intrinsicGreenPower
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: Describes intrinsic green power for the plan. If present then the plan includes a percentage of green
+    power in the base plan. Should not be present for gas contracts.
+  required:
+  - greenPercentage
+- name: EnergyPlanControlledLoadV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  required:
+  - displayName
+  - rateBlockUType
+- name: EnergyPlanControlledLoadV2_singleRate
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  description: Object representing a single controlled load rate. Required if _rateBlockUType_ is `singleRate`.
+  required:
+  - displayName
+  - rates
+- name: EnergyPlanControlledLoadV2_singleRate_rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - unitPrice
+- name: EnergyPlanControlledLoadV2_timeOfUse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+- name: EnergyPlanControlledLoadV2_timeOfUseRates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 7
+  required:
+  - displayName
+  - rates
+  - timeOfUse
+  - type
+- name: EnergyPlanDetailV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: EnergyPlanDetailV3_allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+- name: EnergyPlanDetailV3_allOf_meteringCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - displayName
+  - minimumValue
+- name: EnergyPlanDiscounts
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 10
+  required:
+  - displayName
+  - methodUType
+  - type
+- name: EnergyPlanDiscounts_fixedAmount
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: Required if _methodUType_ is `fixedAmount`.
+  required:
+  - amount
+- name: EnergyPlanDiscounts_percentOfBill
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: Required if _methodUType_ is `percentOfBill`.
+  required:
+  - rate
+- name: EnergyPlanDiscounts_percentOfUse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  description: Required if _methodUType_ is `percentOfUse`.
+  required:
+  - rate
+- name: EnergyPlanDiscounts_percentOverThreshold
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  description: Required if _methodUType_ is `percentOverThreshold`.
+  required:
+  - rate
+  - usageAmount
+- name: EnergyPlanEligibility
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - information
+  - type
+- name: EnergyPlanFees
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - term
+  - type
+- name: EnergyPlanGreenPowerCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - displayName
+  - scheme
+  - tiers
+  - type
+- name: EnergyPlanGreenPowerCharges_tiers
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - percentGreen
+- name: EnergyPlanId
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+  description: The unique identifier for the Energy plan.
+- name: EnergyPlanIncentives
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 4
+  required:
+  - category
+  - description
+  - displayName
+- name: EnergyPlanListResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyPlanListResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - plans
+- name: EnergyPlanResponseV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyPlanSolarFeedInTariffV3
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 9
+  required:
+  - displayName
+  - payerType
+  - scheme
+  - tariffUType
+- name: EnergyPlanSolarFeedInTariffV3_singleTariff
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  description: Represents a constant tariff. Mandatory if _tariffUType_ is set to `singleTariff`.
+  required:
+  - rates
+- name: EnergyPlanSolarFeedInTariffV3_singleTariff_rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - unitPrice
+- name: EnergyPlanSolarFeedInTariffV3_timeVariations
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - days
+- name: EnergyPlanSolarFeedInTariffV3_timeVaryingTariffs
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - displayName
+  - timeVariations
+- name: EnergyPlanTariffPeriodV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 12
+  required:
+  - displayName
+  - endDate
+  - rateBlockUType
+  - startDate
+- name: EnergyPlanTariffPeriodV2_bandedDailySupplyCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - unitPrice
+- name: EnergyPlanTariffPeriodV2_demandCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 11
+  required:
+  - amount
+  - chargePeriod
+  - displayName
+  - endTime
+  - measurementPeriod
+  - startTime
+- name: EnergyPlanTariffPeriodV2_singleRate
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  description: Object representing a single rate. Required if _rateBlockUType_ is `singleRate`.
+  required:
+  - displayName
+  - rates
+- name: EnergyPlanTariffPeriodV2_timeOfUse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - days
+  - endTime
+  - startTime
+- name: EnergyPlanTariffPeriodV2_timeOfUseRates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  required:
+  - displayName
+  - rates
+  - timeOfUse
+  - type
+- name: EnergyPlan_additionalInformation
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  description: Object that contains links to additional information on specific topics.
+- name: EnergyPlan_geography
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  description: Describes the geographical area that the plan is available for. If absent then it is assumed the
+    plan is not geographically limited.
+  required:
+  - distributors
+- name: EnergyServicePointDetailResponseV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: EnergyServicePointDetailV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: EnergyServicePointDetailV2_allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 4
+  required:
+  - distributionLossFactor
+  - location
+  - relatedParticipants
+- name: EnergyServicePointDetailV2_allOf_distributionLossFactor
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - code
+  - description
+  - lossValue
+- name: EnergyServicePointDetailV2_allOf_meters
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - meterId
+  - specifications
+- name: EnergyServicePointDetailV2_allOf_registers
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 10
+  required:
+  - registerConsumptionType
+  - registerId
+- name: EnergyServicePointDetailV2_allOf_relatedParticipants
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - party
+  - role
+- name: EnergyServicePointDetailV2_allOf_specifications
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 6
+  description: Technical characteristics of the meter.
+  required:
+  - installationType
+  - status
+- name: EnergyServicePointId
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+  description: A unique identifier for an Energy service point, generated according to [CDR ID Permanence](#id-permanence)
+    requirements.
+- name: EnergyServicePointListResponseV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyServicePointListResponseV2_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - servicePoints
+- name: EnergyServicePointV2
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 10
+  required:
+  - jurisdictionCode
+  - lastUpdateDateTime
+  - nationalMeteringId
+  - servicePointClassification
+  - servicePointId
+  - servicePointStatus
+  - validFromDate
+- name: EnergyServicePointV2_consumerProfile
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+- name: EnergyUsageListResponse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+  - meta
+- name: EnergyUsageListResponse_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - reads
+- name: EnergyUsageRead
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 11
+  required:
+  - readStartDate
+  - readUType
+  - registerSuffix
+  - servicePointId
+- name: EnergyUsageRead_basicRead
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  description: Mandatory if _readUType_ is set to `basicRead`.
+  required:
+  - value
+- name: EnergyUsageRead_intervalRead
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 4
+  description: Mandatory if _readUType_ is set to `intervalRead`.
+  required:
+  - aggregateValue
+- name: EnergyUsageRead_intervalRead_readQualities
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 3
+  required:
+  - endInterval
+  - quality
+  - startInterval
+- name: ErrorV2
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 4
+  required:
+  - code
+  - detail
+  - title
+- name: ErrorV2_meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 1
+  description: Additional data for customised error codes.
+- name: Links
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 1
+  required:
+  - self
+- name: LinksPaginated
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 5
+  required:
+  - self
+- name: MeasureUnitEnum
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: Meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 0
+- name: MetaPaginated
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - totalPages
+  - totalRecords
+- name: PrimaryErrorV1
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 0
+- name: PrimaryErrorV1_allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+- name: PrimaryResponseErrorListV1
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - errors
+- name: RequestAccountIdListV1
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - data
+- name: RequestAccountIdListV1_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - accountIds
+- name: RequestServicePointIdListV1
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 2
+  required:
+  - data
+- name: RequestServicePointIdListV1_data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  field_count: 1
+  required:
+  - servicePointIds
+- name: ResponseCommonCustomer
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: ResponseCommonCustomerDetailV2
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: ResponseCommonCustomerDetailV2_data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - customerUType
+- name: ResponseCommonCustomer_data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - customerUType
+- name: ResponseCommonDiscoveryStatus
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: ResponseCommonDiscoveryStatus_data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 5
+  required:
+  - status
+  - updateTime
+- name: ResponseDiscoveryOutagesList
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 3
+  required:
+  - data
+  - links
+- name: ResponseDiscoveryOutagesList_data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 1
+  required:
+  - outages
+- name: ResponseErrorListV2
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  field_count: 1
+  required:
+  - errors
+relationships:
+- from: CommonOrganisationDetailV2
+  to: CommonOrganisation
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonOrganisationDetailV2
+  to: CommonOrganisationDetailV2_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonOrganisationDetailV2_allOf
+  to: CommonPhysicalAddressWithPurpose
+  type: has_many
+  via: physicalAddresses
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPersonDetailV2
+  to: CommonPerson
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPersonDetailV2
+  to: CommonPersonDetailV2_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPersonDetailV2_allOf
+  to: CommonEmailAddress
+  type: has_many
+  via: emailAddresses
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPersonDetailV2_allOf
+  to: CommonPhoneNumber
+  type: has_many
+  via: phoneNumbers
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPersonDetailV2_allOf
+  to: CommonPhysicalAddressWithPurpose
+  type: has_many
+  via: physicalAddresses
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPhysicalAddress
+  to: CommonPAFAddress
+  type: has_one
+  via: paf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: CommonPhysicalAddress
+  to: CommonPAFAddress
+  type: has_one
+  via: paf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPhysicalAddress
+  to: CommonSimpleAddress
+  type: has_one
+  via: simple
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: CommonPhysicalAddress
+  to: CommonSimpleAddress
+  type: has_one
+  via: simple
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPhysicalAddressWithPurpose
+  to: CommonPhysicalAddress
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: CommonPhysicalAddressWithPurpose
+  to: CommonPhysicalAddressWithPurpose_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: EnergyAccountDetailResponseV4
+  to: EnergyAccountDetailV4
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailResponseV4
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailResponseV4
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4
+  to: EnergyAccountBaseV2
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4
+  to: EnergyAccountDetailV4_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4_allOf
+  to: EnergyAccountDetailV4_allOf_plans
+  type: has_many
+  via: plans
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4_allOf_planDetail
+  to: EnergyPlanDetailV3_allOf_meteringCharges
+  type: has_many
+  via: meteringCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4_allOf_plans
+  to: EnergyAccountDetailV4_allOf_authorisedContacts
+  type: has_many
+  via: authorisedContacts
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4_allOf_plans
+  to: EnergyAccountDetailV4_allOf_planDetail
+  type: has_one
+  via: planDetail
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4_allOf_plans
+  to: EnergyAccountV2_allOf_planOverview
+  type: has_one
+  via: planOverview
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountDetailV4_allOf_plans
+  to: EnergyServicePointId
+  type: has_many
+  via: servicePointIds
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountListResponseV2
+  to: EnergyAccountListResponseV2_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountListResponseV2
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountListResponseV2
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountListResponseV2_data
+  to: EnergyAccountV2
+  type: has_many
+  via: accounts
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountV2
+  to: EnergyAccountBaseV2
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountV2
+  to: EnergyAccountV2_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountV2_allOf
+  to: EnergyAccountV2_allOf_plans
+  type: has_many
+  via: plans
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountV2_allOf_plans
+  to: EnergyAccountV2_allOf_planOverview
+  type: has_one
+  via: planOverview
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyAccountV2_allOf_plans
+  to: EnergyServicePointId
+  type: has_many
+  via: servicePointIds
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceListResponse
+  to: EnergyBalanceListResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceListResponse
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceListResponse
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceListResponse_data
+  to: EnergyBalanceListResponse_data_balances
+  type: has_many
+  via: balances
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceResponse
+  to: EnergyBalanceResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceResponse
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBalanceResponse
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingDemandTransactionV3
+  to: EnergyBillingUsageTransactionV2_adjustments
+  type: has_many
+  via: adjustments
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingDemandTransactionV3
+  to: EnergyBillingUsageTransactionV2_calculationFactors
+  type: has_many
+  via: calculationFactors
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingListResponseV3
+  to: EnergyBillingListResponseV3_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingListResponseV3
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingListResponseV3
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingListResponseV3_data
+  to: EnergyBillingTransactionV3
+  type: has_many
+  via: transactions
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingOtherTransaction
+  to: EnergyBillingUsageTransactionV2_adjustments
+  type: has_many
+  via: adjustments
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingOtherTransaction
+  to: EnergyBillingUsageTransactionV2_calculationFactors
+  type: has_many
+  via: calculationFactors
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingUsageTransactionV2
+  to: EnergyBillingUsageTransactionV2_adjustments
+  type: has_many
+  via: adjustments
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyBillingUsageTransactionV2
+  to: EnergyBillingUsageTransactionV2_calculationFactors
+  type: has_many
+  via: calculationFactors
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyConcessionsResponse
+  to: EnergyConcessionsResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyConcessionsResponse
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyConcessionsResponse
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyConcessionsResponse_data
+  to: EnergyConcession
+  type: has_many
+  via: concessions
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerDetailResponse
+  to: EnergyDerRecord
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerDetailResponse
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerDetailResponse
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerListResponse
+  to: EnergyDerListResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerListResponse
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerListResponse
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerListResponse_data
+  to: EnergyDerRecord
+  type: has_many
+  via: derRecords
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerRecord
+  to: EnergyDerRecord_acConnections
+  type: has_many
+  via: acConnections
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerRecord
+  to: EnergyDerRecord_protectionMode
+  type: has_one
+  via: protectionMode
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyDerRecord_acConnections
+  to: EnergyDerRecord_derDevices
+  type: has_many
+  via: derDevices
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoice
+  to: EnergyInvoiceAccountCharges
+  type: has_one
+  via: accountCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoice
+  to: EnergyInvoice_payOnTimeDiscount
+  type: has_one
+  via: payOnTimeDiscount
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoice
+  to: EnergyInvoice_period
+  type: has_one
+  via: period
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoiceElectricityUsageCharges
+  to: EnergyInvoiceGasUsageCharges_otherCharges
+  type: has_many
+  via: otherCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoiceGasUsageCharges
+  to: EnergyInvoiceGasUsageCharges_otherCharges
+  type: has_many
+  via: otherCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoiceListResponse
+  to: EnergyInvoiceListResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoiceListResponse
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoiceListResponse
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyInvoiceListResponse_data
+  to: EnergyInvoice
+  type: has_many
+  via: invoices
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentSchedule
+  to: EnergyPaymentSchedule_cardDebit
+  type: has_one
+  via: cardDebit
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentSchedule
+  to: EnergyPaymentSchedule_digitalWallet
+  type: has_one
+  via: digitalWallet
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentSchedule
+  to: EnergyPaymentSchedule_directDebit
+  type: has_one
+  via: directDebit
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentSchedule
+  to: EnergyPaymentSchedule_manualPayment
+  type: has_one
+  via: manualPayment
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentScheduleResponse
+  to: EnergyPaymentScheduleResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentScheduleResponse
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentScheduleResponse
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPaymentScheduleResponse_data
+  to: EnergyPaymentSchedule
+  type: has_many
+  via: paymentSchedules
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlan
+  to: EnergyPlan_additionalInformation
+  type: has_one
+  via: additionalInformation
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlan
+  to: EnergyPlan_geography
+  type: has_one
+  via: geography
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlan
+  to: EnergyPlanId
+  type: has_one
+  via: planId
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractFullV3
+  to: EnergyPlanContractFullV3_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractFullV3
+  to: EnergyPlanContractV3
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanControlledLoadV2
+  type: has_many
+  via: controlledLoad
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanDiscounts
+  type: has_many
+  via: discounts
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanEligibility
+  type: has_many
+  via: eligibility
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanFees
+  type: has_many
+  via: fees
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanGreenPowerCharges
+  type: has_many
+  via: greenPowerCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanIncentives
+  type: has_many
+  via: incentives
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanContractV3_intrinsicGreenPower
+  type: has_one
+  via: intrinsicGreenPower
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanSolarFeedInTariffV3
+  type: has_many
+  via: solarFeedInTariff
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanContractV3
+  to: EnergyPlanTariffPeriodV2
+  type: has_many
+  via: tariffPeriod
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanControlledLoadV2
+  to: EnergyPlanControlledLoadV2_singleRate
+  type: has_one
+  via: singleRate
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanControlledLoadV2
+  to: EnergyPlanControlledLoadV2_timeOfUseRates
+  type: has_many
+  via: timeOfUseRates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanControlledLoadV2_singleRate
+  to: EnergyPlanControlledLoadV2_singleRate_rates
+  type: has_many
+  via: rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanControlledLoadV2_timeOfUse
+  to: EnergyDaysEnum
+  type: has_many
+  via: days
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanControlledLoadV2_timeOfUseRates
+  to: EnergyPlanControlledLoadV2_singleRate_rates
+  type: has_many
+  via: rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanControlledLoadV2_timeOfUseRates
+  to: EnergyPlanControlledLoadV2_timeOfUse
+  type: has_many
+  via: timeOfUse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDetailV3
+  to: EnergyPlan
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDetailV3
+  to: EnergyPlanDetailV3_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDetailV3_allOf
+  to: EnergyPlanDetailV3_allOf_meteringCharges
+  type: has_many
+  via: meteringCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDiscounts
+  to: EnergyPlanDiscounts_fixedAmount
+  type: has_one
+  via: fixedAmount
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDiscounts
+  to: EnergyPlanDiscounts_percentOfBill
+  type: has_one
+  via: percentOfBill
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDiscounts
+  to: EnergyPlanDiscounts_percentOfUse
+  type: has_one
+  via: percentOfUse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanDiscounts
+  to: EnergyPlanDiscounts_percentOverThreshold
+  type: has_one
+  via: percentOverThreshold
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanGreenPowerCharges
+  to: EnergyPlanGreenPowerCharges_tiers
+  type: has_many
+  via: tiers
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanListResponse
+  to: EnergyPlanListResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanListResponse
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanListResponse
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanListResponse_data
+  to: EnergyPlan
+  type: has_many
+  via: plans
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanResponseV3
+  to: EnergyPlanDetailV3
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanResponseV3
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanResponseV3
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanSolarFeedInTariffV3
+  to: EnergyPlanSolarFeedInTariffV3_singleTariff
+  type: has_one
+  via: singleTariff
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanSolarFeedInTariffV3
+  to: EnergyPlanSolarFeedInTariffV3_timeVaryingTariffs
+  type: has_many
+  via: timeVaryingTariffs
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanSolarFeedInTariffV3_singleTariff
+  to: EnergyPlanSolarFeedInTariffV3_singleTariff_rates
+  type: has_many
+  via: rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanSolarFeedInTariffV3_timeVariations
+  to: EnergyDaysEnum
+  type: has_many
+  via: days
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanSolarFeedInTariffV3_timeVaryingTariffs
+  to: EnergyPlanSolarFeedInTariffV3_singleTariff_rates
+  type: has_many
+  via: rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanSolarFeedInTariffV3_timeVaryingTariffs
+  to: EnergyPlanSolarFeedInTariffV3_timeVariations
+  type: has_many
+  via: timeVariations
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2
+  to: EnergyPlanTariffPeriodV2_bandedDailySupplyCharges
+  type: has_many
+  via: bandedDailySupplyCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2
+  to: EnergyPlanTariffPeriodV2_demandCharges
+  type: has_many
+  via: demandCharges
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2
+  to: EnergyPlanTariffPeriodV2_singleRate
+  type: has_one
+  via: singleRate
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2
+  to: EnergyPlanTariffPeriodV2_timeOfUseRates
+  type: has_many
+  via: timeOfUseRates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2_demandCharges
+  to: EnergyDaysEnum
+  type: has_many
+  via: days
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2_singleRate
+  to: EnergyPlanControlledLoadV2_singleRate_rates
+  type: has_many
+  via: rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2_timeOfUse
+  to: EnergyDaysEnum
+  type: has_many
+  via: days
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2_timeOfUseRates
+  to: EnergyPlanControlledLoadV2_singleRate_rates
+  type: has_many
+  via: rates
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyPlanTariffPeriodV2_timeOfUseRates
+  to: EnergyPlanTariffPeriodV2_timeOfUse
+  type: has_many
+  via: timeOfUse
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailResponseV2
+  to: EnergyServicePointDetailV2
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailResponseV2
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailResponseV2
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2
+  to: EnergyServicePointDetailV2_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2
+  to: EnergyServicePointV2
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2_allOf
+  to: EnergyServicePointDetailV2_allOf_distributionLossFactor
+  type: has_one
+  via: distributionLossFactor
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2_allOf
+  to: EnergyServicePointDetailV2_allOf_meters
+  type: has_many
+  via: meters
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2_allOf
+  to: EnergyServicePointDetailV2_allOf_relatedParticipants
+  type: has_many
+  via: relatedParticipants
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2_allOf_meters
+  to: EnergyServicePointDetailV2_allOf_registers
+  type: has_many
+  via: registers
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointDetailV2_allOf_meters
+  to: EnergyServicePointDetailV2_allOf_specifications
+  type: has_one
+  via: specifications
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointListResponseV2
+  to: EnergyServicePointListResponseV2_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointListResponseV2
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointListResponseV2
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointListResponseV2_data
+  to: EnergyServicePointV2
+  type: has_many
+  via: servicePoints
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyServicePointV2
+  to: EnergyServicePointV2_consumerProfile
+  type: has_one
+  via: consumerProfile
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageListResponse
+  to: EnergyUsageListResponse_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageListResponse
+  to: LinksPaginated
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageListResponse
+  to: MetaPaginated
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageListResponse_data
+  to: EnergyUsageRead
+  type: has_many
+  via: reads
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageRead
+  to: EnergyUsageRead_basicRead
+  type: has_one
+  via: basicRead
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageRead
+  to: EnergyUsageRead_intervalRead
+  type: has_one
+  via: intervalRead
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: EnergyUsageRead_intervalRead
+  to: EnergyUsageRead_intervalRead_readQualities
+  type: has_many
+  via: readQualities
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: ErrorV2
+  to: ErrorV2_meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: ErrorV2
+  to: ErrorV2_meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: PrimaryErrorV1
+  to: ErrorV2
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: PrimaryErrorV1
+  to: PrimaryErrorV1_allOf
+  type: composes
+  via: allOf
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: PrimaryResponseErrorListV1
+  to: PrimaryErrorV1
+  type: has_many
+  via: errors
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: RequestAccountIdListV1
+  to: RequestAccountIdListV1_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: RequestAccountIdListV1
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: RequestAccountIdListV1_data
+  to: EnergyAccountId
+  type: has_many
+  via: accountIds
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: RequestServicePointIdListV1
+  to: RequestServicePointIdListV1_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: RequestServicePointIdListV1
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: RequestServicePointIdListV1_data
+  to: EnergyServicePointId
+  type: has_many
+  via: servicePointIds
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: ResponseCommonCustomer
+  to: ResponseCommonCustomer_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomer
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomer
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomerDetailV2
+  to: ResponseCommonCustomerDetailV2_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomerDetailV2
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomerDetailV2
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomerDetailV2_data
+  to: CommonOrganisationDetailV2
+  type: has_one
+  via: organisation
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomerDetailV2_data
+  to: CommonPersonDetailV2
+  type: has_one
+  via: person
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomer_data
+  to: CommonOrganisation
+  type: has_one
+  via: organisation
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonCustomer_data
+  to: CommonPerson
+  type: has_one
+  via: person
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonDiscoveryStatus
+  to: ResponseCommonDiscoveryStatus_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonDiscoveryStatus
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseCommonDiscoveryStatus
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseDiscoveryOutagesList
+  to: ResponseDiscoveryOutagesList_data
+  type: has_one
+  via: data
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseDiscoveryOutagesList
+  to: Links
+  type: has_one
+  via: links
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseDiscoveryOutagesList
+  to: Meta
+  type: has_one
+  via: meta
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseDiscoveryOutagesList_data
+  to: DiscoveryOutage
+  type: has_many
+  via: outages
+  spec: openapi/aemo-cds-common-api-openapi.yml
+- from: ResponseErrorListV2
+  to: ErrorV2
+  type: has_many
+  via: errors
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+- from: ResponseErrorListV2
+  to: ErrorV2
+  type: has_many
+  via: errors
+  spec: openapi/aemo-cds-common-api-openapi.yml

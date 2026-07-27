@@ -1,11 +1,399 @@
 openapi: 3.0.1
 info:
   title: MeterExemption
-  description: The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage metering exemptions within MSATS.
+  description: The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage
+    metering exemptions within MSATS.
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/meterexemption-external-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMRetail/v1/meterExemption
-paths: { }
+- url: https://api-prd.aemo.local/NEMRetail/v1/meterExemption
+paths:
+  /exemptionDetails:
+    get:
+      operationId: exemptionDetails
+      summary: Exemption Details
+      tags:
+      - MeterExemption
+      description: "Get meter exemption details for a specified meter exemption, including:<br>\n- Participant\
+        \ contact details \n- Meter exemption details \n- Meter exemption history \n- Meter exemption\
+        \ NMI list. \n If the NMI is not specified:\n    - In the csv file, it returns the whole NMI list.\n\
+        \    - In json format, it returns up to 1000 NMIs."
+      parameters:
+      - name: meterExemptionId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The meter exemption ID
+      - name: NMI
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The NMI to retrieve. The NMI must be part of the Meter Exemption
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - application/json
+          - text/csv
+          default: application/json
+        description: Identifies content types accepted by the client. application/json (default) or text/csv
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the initiating Participant. Example value = P01
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Identifies the market. Set to NEM
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: base64 encoded Participant User username and password
+      - name: X-transactionID
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Unique identifier for each request
+      responses:
+        '200':
+          description: Request processed successfully.
+          content:
+            application/json:
+              example:
+                transactionId: 12345-abcd-27
+                data:
+                  participantContact:
+                    contactName: John Smith
+                    phoneNumber: 0123456789
+                    email: john.smith@company.com
+                  meterExemption:
+                    meterExemptionId: '123456789012345'
+                    participantId: NEMMCO
+                    startDate: '2023-07-25'
+                    endDate: '2024-02-29'
+                    status: REVIEW
+                    statusDate: '2023-07-25'
+                    exemptionDate: '2023-07-01'
+                    exemptionCategory: MALFUNCTION
+                    exemptionType: DEFECTIVE
+                    exemptionNature: ACCESS
+                    actionTaken: Actions that were taken..
+                    actionReason: Reason for raising exemption and other relevant information....
+                    docProvided: Y
+                    extendCount: '0'
+                  meterExemptionHistory:
+                  - status: REVIEW
+                    statusDate: '2023-07-25'
+                  meterExemptionNMIs:
+                  - NMI: '1234567890'
+                    status: NEW
+                    planDate: '2023-12-22'
+                    substitutionReq: Y
+                    substitutionMethod: 45
+                  - NMI: '1234567891'
+                    status: NEW
+                    planDate: '2023-12-22'
+                    substitutionReq: Y
+                    substitutionMethod: 45
+                  - NMI: '1234567892'
+                    status: NEW
+                    planDate: '2023-12-22'
+                    substitutionReq: Y
+                    substitutionMethod: 45
+            text/csv:
+              example: ''
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              example: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              example: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              example: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              example: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              example: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              example: {}
+  /exemptionList:
+    get:
+      operationId: exemptionList
+      summary: Exemption List
+      tags:
+      - MeterExemption
+      description: Returns a list of meter exemptions based on the query parameters.The response format
+        is defined in the Accept header.<br> When the content type is:<br> - application/json, up to 1000
+        meter exemptions records are returned <br>- text/csv, up to 75,000 meter exemption records are
+        returned
+      parameters:
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Retrieves a list of meter exemptions for a given status. There are two status values,
+          one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED,
+          RESOLVED, REVIEW
+      - name: meterExemptionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The meter exemption for the given ID
+      - name: meterExemptionFromDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The meter exemptions list from a given date. Format YYYY-MM-DD
+      - name: meterExemptionToDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The meter exemptions list to a given date. Format YYYY-MM-DD
+      - name: NMI
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Returns meter exemptions for the given NMI
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          enum:
+          - application/json
+          - text/csv
+          default: application/json
+        description: Identifies content types accepted by the client. application/json (default) or text/csv
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the initiating Participant. Example value = P01
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Identifies the market. Set to NEM
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: base64 encoded Participant User username and password
+      - name: X-transactionID
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Unique identifier for each request
+      responses:
+        '200':
+          description: Request processed successfully
+          content:
+            application/json:
+              example:
+                transactionId: adb4g8ed0-bdf5-5574-ad41-a20d8f1b2503
+                data:
+                  meterExemptions:
+                  - meterExemptionId: '123456789012345'
+                    exemptionDate: '2023-09-04'
+                    createDate: '2023-10-16'
+                    age: '0'
+                    endDate: '2026-08-11'
+                    status: REJECTED
+                    nmiQuantity: '3'
+                    participantId: MYMC
+            text/csv:
+              example: ''
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              example: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              example: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              example: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              example: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              example: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              example: {}
+  /submitExemption:
+    post:
+      operationId: submitExemption
+      summary: submitExemption
+      tags:
+      - MeterExemption
+      description: 'Submits or updates a meter exemption. <br> A submission consists of two parts: <br>
+        1. Meter exemption details - JSON payload. <br> 2. NMI list – csv or JSON payload.'
+      parameters:
+      - name: action
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE
+      - name: meterExemptionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The meter exemption ID to update
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the initiating Participant. Example value = P01
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Identifies the market. Set to NEM
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: base64 encoded Participant User username and password
+      - name: X-transactionID
+        in: header
+        required: false
+        schema:
+          type: string
+        description: Unique identifier for each request
+      requestBody:
+        content:
+          multipart/form-data:
+            schema: {}
+          application/json example:
+            example:
+              me_Key_Name:
+                meterExemption:
+                  exemptionDate: '2025-07-01'
+                  endDate: '2025-07-31'
+                  exemptionCategory: MALFUNCTION
+                  exemptionType: FAMILY
+                  exemptionNature: WC_METER
+                  actionTaken: a
+                  actionReason: ''
+                  docProvided: N
+              nmi_Key_Name:
+                meterExemptionNMIs:
+                - action: NEW
+                  NMI: '6001120305'
+                  planDate: '2025-07-30'
+                  substitutionReq: Y
+                  substitutionMethod: '56'
+        description: Multipart/form-data request
+      responses:
+        '200':
+          description: Request processed successfully.
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  meterExemptionId: '123456789012345'
+                  meterExemptionStatus: REVIEW
+                  payloadResponseStatus: Accept
+                  payloadResponseMessage: 'NMIs submitted: 3 Total NMIs in the exemption: 3 Live NMIs
+                    in the exemption: 0'
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              example: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              example: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              example: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              example: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              example: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              example: {}
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +405,10 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: MeterExemption
+  description: The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage
+    metering exemptions within MSATS.

@@ -2,9 +2,213 @@ openapi: 3.0.1
 info:
   title: WEM Attributes Report
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/attributes-report-external-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/v1/attributes
-paths: { }
+- url: https://api-prd.aemo.local/WEM/v1/attributes
+paths:
+  /{tradingDate}:
+    get:
+      operationId: getAListOfAttributesByDate
+      summary: Get a list of attributes by date
+      tags:
+      - WEM Attributes Report
+      description: Get a list of attributes by date
+      parameters:
+      - name: tradingDate
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339).
+      responses:
+        '200':
+          description: List of attributes
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+              - name: string
+                description: string
+                value: 0
+                unit: string
+            text/json:
+              example:
+              - name: string
+                description: string
+                value: 0
+                unit: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: null
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: null
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: null
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: null
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /current:
+    get:
+      operationId: getAListOfAttributesForToday
+      summary: Get a list of attributes for today
+      tags:
+      - WEM Attributes Report
+      description: Get a list of attributes for today
+      responses:
+        '200':
+          description: List of attributes
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+              - name: string
+                description: string
+                value: 0
+                unit: string
+            text/json:
+              example:
+              - name: string
+                description: string
+                value: 0
+                unit: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: null
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: null
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: null
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: null
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
 components:
   securitySchemes:
     apiKeyHeader:
@@ -16,6 +220,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: WEM Attributes Report
+  description: WEM Attributes Report

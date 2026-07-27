@@ -1,0 +1,108 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview (API descriptions) and the
+  harvested operations in openapi/aemo-b2bmessaging-*, openapi/aemo-b2mmessaging-*,
+  openapi/aemo-p2pmessaging-sync-v1-openapi.yml, openapi/aemo-hubmsgmgt-*
+spec_type: none
+description: >-
+  AEMO publishes NO AsyncAPI document. It does operate a real asynchronous, server-to-participant
+  message-delivery surface: the e-Hub. AEMO's own API descriptions call the async APIs "push-push"
+  — the participant pushes an outgoing message to the e-Hub and the e-Hub pushes the message on to
+  the participant's own Gateway endpoint, asynchronously, with acknowledgements flowing back. A
+  polling variant ("push-pull") is offered for lower-volume participants who would rather poll
+  their hub queue. This artifact captures that delivery surface as it is documented; no AsyncAPI
+  channels, schemas or bindings have been invented.
+
+delivery_models:
+  - id: push-push
+    name: Asynchronous push to the participant gateway
+    apis:
+      - openapi/aemo-b2bmessaging-async-v1-openapi.yml
+      - openapi/aemo-b2mmessaging-async-v1-openapi.yml
+    description: >-
+      Participants push their outgoing message to the e-Hub and the e-Hub pushes the message to the
+      participant's Gateway. Delivery is asynchronous — the initiator does not wait for the business
+      response. Suits high-volume message exchange.
+    participant_hosted_endpoint: true
+    transport: HTTPS
+    payload: aseXML business documents
+  - id: push-pull
+    name: Participant polls its hub queue
+    apis:
+      - openapi/aemo-b2bmessaging-pull-v1-openapi.yml
+      - openapi/aemo-b2mmessaging-pull-v1-openapi.yml
+    description: >-
+      Participants implement their own polling logic against their Participant Hub Queue to retrieve
+      new messages, similar to a batch program. Suits low-volume exchange.
+    participant_hosted_endpoint: false
+    transport: HTTPS
+    payload: aseXML business documents
+  - id: sync
+    name: Synchronous exchange through the e-Hub
+    apis:
+      - openapi/aemo-b2bmessaging-sync-v1-openapi.yml
+      - openapi/aemo-b2mmessaging-sync-v1-openapi.yml
+      - openapi/aemo-p2pmessaging-sync-v1-openapi.yml
+    description: >-
+      The participant pushes the message to the e-Hub and the e-Hub pushes it to the recipient
+      synchronously; the business response returns on the same call.
+    transport: HTTPS
+    payload: aseXML business documents
+
+operations:
+  - operation: openapi/aemo-b2bmessaging-async-v1-openapi.yml#determineWhatMessagesAreInTheEHubQueue
+    path: GET /queues
+    role: queue-inspection
+    description: Returns metadata of messages in the e-Hub queue for the initiating participant.
+  - operation: openapi/aemo-b2bmessaging-async-v1-openapi.yml#submitAB2BMessage
+    path: POST /messages
+    role: publish
+    description: Submit a B2B message for asynchronous delivery.
+  - operation: openapi/aemo-b2bmessaging-async-v1-openapi.yml#submitMessageAcknowledgement
+    path: POST /messageAcknowledgements
+    role: acknowledge
+    description: >-
+      Acknowledge a received message. Every message generates a message acknowledgement, with
+      documented exceptions.
+  - operation: openapi/aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+    path: GET /getQueueMetaData
+    role: queue-inspection
+    description: Retrieve details of messages queued in the Participant Hub Queue.
+  - operation: openapi/aemo-b2mmessaging-async-v1-openapi.yml#submitMessages
+    path: POST /submitMessages
+    role: publish
+    description: Submit messages and transaction acknowledgements to AEMO's market systems.
+  - operation: openapi/aemo-b2mmessaging-async-v1-openapi.yml#submitMessageAcknowledgements
+    path: POST /submitMessageAcknowledgements
+    role: acknowledge
+    description: Submit message acknowledgements to AEMO's market systems.
+  - operation: openapi/aemo-p2pmessaging-sync-v1-openapi.yml#usedToExchangeFreeFormDataAndOrAttachments
+    path: POST /messages
+    role: publish
+    description: Participant-to-participant exchange of free-form data and/or attachments.
+  - operation: openapi/aemo-hubmsgmgt-v2-openapi.yml#getAlerts
+    path: GET /getAlerts
+    role: alert-retrieval
+    description: Receive B2B and B2M stop-file alerts.
+
+alerts:
+  - name: B2B / B2M stop file alerts
+    api: openapi/aemo-hubmsgmgt-v2-openapi.yml
+    retrieval: pull (GET /getAlerts)
+    description: >-
+      Current list of B2B and B2M stop files — the e-Hub's operational signal that message flow to
+      or from a participant has been halted.
+
+gaps:
+  - No AsyncAPI (or any machine-readable event) document is published for the e-Hub.
+  - >-
+    The participant-hosted gateway endpoint that receives pushed messages is specified in the e-Hub
+    connection procedures rather than in a callback definition in the OpenAPI documents, so no
+    OpenAPI `callbacks` object exists to derive from.
+  - No event/message catalogue with per-message schemas is published; payload structure is defined
+    by the aseXML schemas maintained outside the API documentation.
+
+cross_references:
+  conventions: conventions/aemo-conventions.yml
+  authentication: authentication/aemo-authentication.yml

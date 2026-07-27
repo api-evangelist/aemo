@@ -1,0 +1,184 @@
+generated: '2026-07-27'
+method: derived
+source: >-
+  Derived from the 76 OpenAPI documents in openapi/ (798 operations) plus AEMO's published
+  developer-portal guidance at https://dev.aemo.com.au/working-with-aemo-apis,
+  https://dev.aemo.com.au/oauth and https://dev.aemo.com.au/faqs.
+description: >-
+  AEMO does not operate one uniform REST API. It operates three overlapping conventions:
+  (1) the e-Hub participant APIs behind Azure API Management — RESTful JSON and SOAP/aseXML
+  pass-through operations, subscription key plus TLS client certificate plus URM or OAuth,
+  participant identity carried in X-market / X-initiatingParticipantID headers; (2) the
+  Consumer Data Right (CDR) energy APIs, which follow the Consumer Data Standards Australia
+  contract exactly — x-v / x-min-v version negotiation, x-fapi-* headers, page / page-size
+  pagination, a links + meta envelope and the CDS error object; and (3) unauthenticated public
+  data feeds (NEMWeb, WA market data, the NEM data dashboard JSON) with no versioning contract
+  at all. These conventions are documented here as observed, not as a single published style guide —
+  AEMO publishes no cross-API design guide.
+
+authentication:
+  style: layered
+  summary: >-
+    APIM subscription key (header or query) at the gateway, plus an AEMO-signed TLS client
+    certificate, plus a caller identity — URM username/password as HTTP Basic, an OAuth 2.0
+    client_credentials bearer token, or Azure AD B2C OIDC for the DER Register consumer API.
+  artifact: authentication/aemo-authentication.yml
+
+identity_headers:
+  - name: X-market
+    occurrences: 139
+    variants: [x-market]
+    description: The market the request applies to, e.g. NEM.
+  - name: X-initiatingParticipantID
+    occurrences: 121
+    variants: [x-initiatingParticipantId, X-initiatingParticipantId, x-initiatingParticipantID, X-InitiatingParticipantID]
+    description: >-
+      The AEMO participant ID initiating the request, e.g. P01. Note the inconsistent casing
+      across APIs — five spellings of the same header appear across the catalogue.
+  - name: X-transactionId
+    occurrences: 14
+    variants: [X-transactionID]
+    description: Caller-supplied transaction correlation identifier on some e-Hub operations.
+  - name: messageContextID
+    occurrences: 9
+    description: e-Hub message context correlation identifier.
+
+versioning:
+  scheme: uri-path-and-version-set
+  detail: >-
+    Each API is registered in Azure API Management with an apiVersion (v1, v2, v2.1 …) bound to a
+    version set, and the version appears in the gateway path (e.g. /WEM/lfas/v2,
+    /NEMRetail/cds-au/v1). Several products publish multiple concurrent versioned documents —
+    system-management-reports v2 through v2.6, pre-balancing-reports v6 through v8,
+    balancing-reports v2 through v2.5 — each as its own catalogue entry.
+  header_negotiation:
+    applies_to: Consumer Data Right energy APIs
+    headers:
+      - name: x-v
+        occurrences: 35
+        description: The version of the CDS endpoint the client requests.
+      - name: x-min-v
+        occurrences: 35
+        description: The minimum CDS endpoint version the client will accept.
+    standard: Consumer Data Standards Australia
+    docs: https://consumerdatastandardsaustralia.github.io/standards/
+  artifact: lifecycle/aemo-lifecycle.yml
+
+pagination:
+  applies_to: Consumer Data Right energy APIs (Consumer Data Standards contract)
+  style: page-number
+  request_params:
+    - name: page
+      in: query
+      occurrences: 22
+      description: 1-based page number.
+    - name: page-size
+      in: query
+      occurrences: 20
+      description: Records per page.
+  response_fields:
+    - meta.totalRecords
+    - meta.totalPages
+    - links.self
+    - links.first
+    - links.prev
+    - links.next
+    - links.last
+  note: >-
+    The e-Hub participant APIs do not use a shared pagination convention. Report-style
+    operations bound results with explicit date-range query parameters instead
+    (for example oldest-date / newest-date, FromGasDate / ToGasDate,
+    dispatchIntervalStartDate / dispatchIntervalEndDate, tradingDayFrom / tradingDayTo).
+
+filtering:
+  style: explicit-query-parameters
+  common_windows:
+    - [FromGasDate, ToGasDate]
+    - [dispatchIntervalStartDate, dispatchIntervalEndDate]
+    - [tradingDayFrom, tradingDayTo]
+    - [oldest-date, newest-date]
+  note: No generic filter, sort, expand, sparse-fieldset or metadata convention is published.
+
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency contract is published. No Idempotency-Key (or equivalent) header or parameter
+    appears anywhere in the 798 operations, and the developer portal documents none. Submission
+    operations (bidding, balancing submissions, DER records, B2B/B2M messages) are made safe to
+    retry by carrying caller-supplied correlation identifiers — X-transactionId,
+    messageContextID, offerTimeStamp — and by acknowledgement operations, not by an
+    idempotency key. Treat writes as non-idempotent.
+
+error_handling:
+  envelope: varies-by-family
+  families:
+    - name: e-Hub participant APIs
+      shape: >-
+        JSON body with a transactionId and a data object; error responses are documented per
+        status code in the operation, with prose descriptions rather than a machine-readable
+        problem type.
+      rfc9457: false
+    - name: Consumer Data Right energy APIs
+      shape: >-
+        Consumer Data Standards error object — errors[] of {code, title, detail, meta} —
+        with the mandatory CDS error codes enumerated per status.
+      rfc9457: false
+      standard: Consumer Data Standards Australia
+    - name: SOAP / aseXML pass-through operations
+      shape: SOAP fault inside the aseXML envelope.
+      rfc9457: false
+  artifact: errors/aemo-error-codes.yml
+
+rate_limiting:
+  documented: true
+  numeric_limits_published: false
+  signalling: >-
+    HTTP 429 is documented on 240+ operations across the catalogue, with descriptions including
+    "This response is provided when the throttling limits are reached", "Too many request", and
+    "Too Many Requests. Number of inbound requests exceeded the throttle limit". No published
+    quota values, no documented X-RateLimit-* or Retry-After response headers.
+  artifact: rate-limits/aemo-rate-limits.yml
+
+content_types:
+  media_types:
+    - application/json
+    - text/xml
+    - application/xml
+  note: >-
+    A large share of the WEM (Wholesale Electricity Market) surface is SOAP over HTTPS carrying
+    aseXML payloads, exposed through APIM as POST to a base path with a required soapAction query
+    parameter. Those operations appear in openapi/ with the literal APIM URL template so each
+    published soapAction survives as a distinct operation.
+
+transport_security:
+  https_only: true
+  mutual_tls: true
+  networks:
+    - name: Internet
+      description: Most e-Hub APIs are reachable over the public internet with an AEMO-signed TLS certificate.
+    - name: MarketNet
+      description: AEMO's private participant network; some APIs are reachable over MarketNet.
+  artifact: security/aemo-domain-security.yml
+
+public_data_conventions:
+  - name: NEMWeb
+    baseURL: https://nemweb.com.au/Reports
+    style: directory listing of zipped CSV report files; no versioning, no auth, no JSON contract.
+  - name: WA market data
+    baseURL: https://data.wa.aemo.com.au/public
+    style: directory listing of public WEM/GBB data files.
+  - name: NEM data dashboard JSON
+    baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+    style: >-
+      Undocumented JSON endpoints backing the public dashboard. AEMO's robots.txt explicitly
+      disallows /aemo/apps/api/report for all crawlers, so treat it as an unsupported internal
+      surface rather than a product.
+
+cross_references:
+  authentication: authentication/aemo-authentication.yml
+  scopes: scopes/aemo-scopes.yml
+  errors: errors/aemo-error-codes.yml
+  lifecycle: lifecycle/aemo-lifecycle.yml
+  rate_limits: rate-limits/aemo-rate-limits.yml
+  conformance: conformance/aemo-conformance.yml
+  vocabulary: vocabulary/aemo-glossary.yml

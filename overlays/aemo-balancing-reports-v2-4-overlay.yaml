@@ -1,0 +1,56 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Balancing Reports v2.4
+  version: 1.0.0
+extends: openapi/aemo-balancing-reports-v2-4-openapi.yml
+actions:
+- target: $.servers
+  description: Replace AEMO's internal api-prd.aemo.local server with the reachable production and pre-production
+    gateway entry points AEMO documents at https://dev.aemo.com.au/oauth, combined with this API's published Azure
+    API Management path.
+  update:
+  - url: https://api.aemo.com.au/WEM/balancing
+    description: Production e-Hub API gateway.
+  - url: https://api.preprod.wgw.aemo.com.au/WEM/balancing
+    description: Pre-production e-Hub API gateway.
+- target: $.info
+  description: Record API Evangelist provenance and the enrichment artifacts that describe this API.
+  update:
+    x-apievangelist-provider: aemo
+    x-apievangelist-enriched: '2026-07-27'
+    x-apievangelist-artifacts:
+      authentication: authentication/aemo-authentication.yml
+      conventions: conventions/aemo-conventions.yml
+      errors: errors/aemo-error-codes.yml
+      lifecycle: lifecycle/aemo-lifecycle.yml
+      rate_limits: rate-limits/aemo-rate-limits.yml
+      conformance: conformance/aemo-conformance.yml
+      vocabulary: vocabulary/aemo-glossary.yml
+      agentic_access: agentic-access/aemo-agentic-access.yml
+- target: $.info
+  description: Bind this document to its source entry in AEMO’s Azure API Management catalogue.
+  update:
+    x-apievangelist-source:
+      apim_api_id: balancing-reports-v2-4
+      catalogue: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
+      operations: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-4/operations?api-version=2022-04-01-preview
+      reference: https://dev.aemo.com.au/api-docs
+      gateway_path: WEM/balancing
+      note: AEMO’s openapi-link export ships an empty paths object; the operations, parameters, headers, responses
+        and examples in this document were harvested from AEMO’s own developer-portal operations endpoints.
+- target: $.info
+  description: Record the measured contract shape of this document as harvested.
+  update:
+    x-apievangelist-contract:
+      operations: 6
+      operations_with_description: 0
+      operations_with_response_examples: 6
+      soap_action_operations: 6
+      components_schemas: 0
+      idempotency_key: false
+- target: $.info
+  description: Flag that this API is a SOAP pass-through exposed through Azure API Management.
+  update:
+    x-apievangelist-style: soap-passthrough
+    x-apievangelist-note: Operations are differentiated by a soapAction query parameter on a shared base path, so
+      path keys carry the literal APIM URL template. Payloads are aseXML inside a SOAP envelope.

@@ -1,12 +1,2296 @@
 openapi: 3.0.1
 info:
   title: TLS Certificate Mgmt v1
-  description: "The TLS Certificate Management API allows authorised participants to self-manage their AEMO-signed TLS certificates. This API provides the following features:\n- Retrieve a list of your AEMO-signed TLS certificates and orders\n- Download a specific TLS certificate\n- Generate a new TLS certificate\n- Reissue a TLS certificate\n- Renew a soon-to-expire TLS certificate\n- Revoke a TLS certificate\n    \n\n# Status\nThis documentation presents the TLS Certificate Management API evolving design. It is updated as the technical requirements are streamlined.\n# Assumed knowledge\n- RESTful API practices and JSON basics.\n    \n\n# Prerequisites\nBefore you can use the TLS Certificate Management API you must:\n1. Have a Participant ID. If your company is a Registered Participant, it is set up during the registration process. Have a Participant ID with an effective date of registration.\n2. Have a user ID and password with access rights provided by your company's participant administrator. For details, see user rights access below.\n3. Have an AEMO-signed [TLS certificate](https://portal.aemo.com.au/help/Content/API%20Reference/Manage%20TLS%20Certificates.html). If you need to get an AEMO-signed TLS certificate for the first time you can do this through the [Markets Portal](https://portal.prod.nemnet.net.au), or raise a request for a TLS certificate through the [Participant Portal](https://aemo.service-now.com/participantportal/).\n    \n\n# API portal and Open API Specification\n[TLS Certificate Management Open API Specification](https://dev.aemo.com.au/api-details#api=tls-certificate-mgmt-v1)\n# Authentication and Authorization methods\n## TLS Certificates\nThis API is protected by MTLS authentication. A valid AEMO-signed TLS certificate is required to access this API. See Prerequisites above on how to get an AEMO-signed TLS certificate for the first time.\n## User rights access\nParticipant administrators provide access to the TLS Certificate Management API using the **TLS_CERTIFICATE_MANAGEMENT** entity. See the [User Rights Management](https://portal.prod.nemnet.net.au/help/Content/UserRightsManagement/URM.htm) guide (URM) for details on managing URM functions.\n\nUsers must be assigned rights that have access to the entity **TLS_CERTIFICATE_MANAGEMENT**. The API allows two privileges (access levels) of access rights for that entity:\n- **Delete right** - all endpoints are available to users with the Delete right.\n- **Read right** - all GET endpoints are available to users under this right. Users with this right cannot create, revoke, reissue or renew TLS certificates. Rights created with Create and Update only have access to Read right features.\n    \n\nWhen calling this API, your username must be subscribed to a valid right under the **TLS_CERTIFICATE_MANAGEMENT** entity. You authorize your identity using Base64 encoding of your username and password, separated by a colon, in the Basic Auth header. For example:\n\n`Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==`\n# Throttling and quotas\nTo control traffic, AEMO implements Throttling on all API Endpoint requests. Also, some endpoints have a specific quota of requests. If a Participant ID requests exceed the Throttling limit a HTTP 429 or 422 response returns. For more details, see the examples under each request. <table>\n    <tr>\n        <td>Endpoint</td>\n        <td>Limits</td>\n    </tr>\n    <tr>\n        <td>All endpoints</td>\n        <td>6 requests per minute per participantId.\n        <br>The participantId is identified from the X-InitiatingParticipantID request header parameter.\n        <br>The API has a general spike-arrest limit of 6 requests per minute per participantId. This is imposed across all endpoints of the API.</td>\n    </tr>\n    <tr>\n        <td>POST `all endpoints`</td>\n        <td>10 requests per month per participantId.\n        <br>The participantId is identified from the X-InitiatingParticipantID request header parameter.\n        <br>For each participantId there are only 20 POST requests that can be made to the API per month.</td>\n    </tr>\n    <tr>\n        <td>GET `all endpoints`</td>\n        <td>60 requests per month per participantId.\n        <br>The participantId is identified from the X-InitiatingParticipantID request header parameter.\n        <br>For each participantId there are only 60 GET requests that can be made to the API per month.</td>\n    </tr>\n    <tr>\n        <td>POST `/certificates`</td>\n        <td>1 request per participantId per environment.    \n        <br>The participantId is identified from the `X-InitiatingParticipantID` request header parameter.\n        <br>The environment is identified from the value of the environment key in the request body.\n        <br>A participantId can only have one set of TLS certificates (one PreProd certificate and one Prod certificate).\n        <br>This restriction is due to costs associated with providing TLS certificates. If more than one certificate is required to differentiate system access to AEMO systems you can use the `/order/{order-id}/reissue` endpoint.\n        <br>Participants systems must manage this Throttling limit because if you submit multiple JSON requests for the same participantId at the same time, AEMO may reject some.</td>\n    </tr>\n</table>\n\n# Response codes\nFor detailed examples of response codes see the provided example under each request.\n# URLs\nThe API is available over the internet on the following base URLs:\n<table>\n  <tr>\n      <td><b>Environment</b></td>\n      <td><b>Base URL</b></td>\n  </tr>\n  <tr>\n      <td>PreProduction</td>\n      <td><a href=\"https://partner.api.preprod.aemo.com.au/v1/TLSCertificateManagement\">https://partner.api.preprod.aemo.com.au/v1/TLSCertificateManagement</a></td>\n  </tr>\n  <tr>\n      <td>Production</td>\n      <td><a href=\"https://partner.api.aemo.com.au/v1/TLSCertificateManagement\">https://partner.api.aemo.com.au/v1/TLSCertificateManagement</a></td>\n  </tr>\n</table>\n\n\n## Environment details\n### PreProduction\nTLS Certificates created in the PreProduction environment will be suffixed with \"MOCK\" in the commonName, and are mock certificates only. These certificates will automatically expire after 3-days and are not usable for accessing any AEMO systems.\n### Production\nTLS Certificates created in the Production environment will be suffixed with either \"PROD\" or \"NONPROD\" in the commonName depending on the environment entered in the API request. These certificates will automatically expire after 3-years and are used for accessing MTLS-protected AEMO systems (both PreProduction and Production systems).\n\nNONPROD certificates can only be used for accessing AEMO Non-Production systems (for example APIs on; [https://partner.api.preprod.aemo.com.au](https://partner.api.preprod.aemo.com.au), [https://apis.preprod.aemo.com.au:9319](https://apis.preprod.aemo.com.au:9319), or [https://apis.preprod.marketnet.net.au:9319](https://apis.preprod.marketnet.net.au:9319)). You will need to use the PreProd certificate to access AEMO Non-Production environments that are MTLS protected. The NONPORD certificate will be issued by the certificate authority AEMO-ICA-TEST G1.\n\nPROD certificates can only be used for accessing AEMO Production systems (for example APIs on; [https://partner.api.aemo.com.au](https://partner.api.aemo.com.au), [https://apis.aemo.com.au:9319](https://apis.aemo.com.au:9319), or [https://apis.marketnet.net.au:9319](https://apis.marketnet.net.au:9319)). You will need to use the Prod certificate to access AEMO Production environments that are MTLS protected. The PROD certificate will be issued by the certificate authority AEMO-ICA-MARKET G1.\n\n# Glossary\n- CA - Certificate Authority\n- PKI - Public Key Infrastructure\n- TLS - Transport Layer Security\n- X.509v3 - The specific TLS certificate standard used by AEMO"
+  description: "The TLS Certificate Management API allows authorised participants to self-manage their\
+    \ AEMO-signed TLS certificates. This API provides the following features:\n- Retrieve a list of your\
+    \ AEMO-signed TLS certificates and orders\n- Download a specific TLS certificate\n- Generate a new\
+    \ TLS certificate\n- Reissue a TLS certificate\n- Renew a soon-to-expire TLS certificate\n- Revoke\
+    \ a TLS certificate\n    \n\n# Status\nThis documentation presents the TLS Certificate Management\
+    \ API evolving design. It is updated as the technical requirements are streamlined.\n# Assumed knowledge\n\
+    - RESTful API practices and JSON basics.\n    \n\n# Prerequisites\nBefore you can use the TLS Certificate\
+    \ Management API you must:\n1. Have a Participant ID. If your company is a Registered Participant,\
+    \ it is set up during the registration process. Have a Participant ID with an effective date of registration.\n\
+    2. Have a user ID and password with access rights provided by your company's participant administrator.\
+    \ For details, see user rights access below.\n3. Have an AEMO-signed [TLS certificate](https://portal.aemo.com.au/help/Content/API%20Reference/Manage%20TLS%20Certificates.html).\
+    \ If you need to get an AEMO-signed TLS certificate for the first time you can do this through the\
+    \ [Markets Portal](https://portal.prod.nemnet.net.au), or raise a request for a TLS certificate through\
+    \ the [Participant Portal](https://aemo.service-now.com/participantportal/).\n    \n\n# API portal\
+    \ and Open API Specification\n[TLS Certificate Management Open API Specification](https://dev.aemo.com.au/api-details#api=tls-certificate-mgmt-v1)\n\
+    # Authentication and Authorization methods\n## TLS Certificates\nThis API is protected by MTLS authentication.\
+    \ A valid AEMO-signed TLS certificate is required to access this API. See Prerequisites above on how\
+    \ to get an AEMO-signed TLS certificate for the first time.\n## User rights access\nParticipant administrators\
+    \ provide access to the TLS Certificate Management API using the **TLS_CERTIFICATE_MANAGEMENT** entity.\
+    \ See the [User Rights Management](https://portal.prod.nemnet.net.au/help/Content/UserRightsManagement/URM.htm)\
+    \ guide (URM) for details on managing URM functions.\n\nUsers must be assigned rights that have access\
+    \ to the entity **TLS_CERTIFICATE_MANAGEMENT**. The API allows two privileges (access levels) of access\
+    \ rights for that entity:\n- **Delete right** - all endpoints are available to users with the Delete\
+    \ right.\n- **Read right** - all GET endpoints are available to users under this right. Users with\
+    \ this right cannot create, revoke, reissue or renew TLS certificates. Rights created with Create\
+    \ and Update only have access to Read right features.\n    \n\nWhen calling this API, your username\
+    \ must be subscribed to a valid right under the **TLS_CERTIFICATE_MANAGEMENT** entity. You authorize\
+    \ your identity using Base64 encoding of your username and password, separated by a colon, in the\
+    \ Basic Auth header. For example:\n\n`Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==`\n# Throttling\
+    \ and quotas\nTo control traffic, AEMO implements Throttling on all API Endpoint requests. Also, some\
+    \ endpoints have a specific quota of requests. If a Participant ID requests exceed the Throttling\
+    \ limit a HTTP 429 or 422 response returns. For more details, see the examples under each request.\
+    \ <table>\n    <tr>\n        <td>Endpoint</td>\n        <td>Limits</td>\n    </tr>\n    <tr>\n   \
+    \     <td>All endpoints</td>\n        <td>6 requests per minute per participantId.\n        <br>The\
+    \ participantId is identified from the X-InitiatingParticipantID request header parameter.\n     \
+    \   <br>The API has a general spike-arrest limit of 6 requests per minute per participantId. This\
+    \ is imposed across all endpoints of the API.</td>\n    </tr>\n    <tr>\n        <td>POST `all endpoints`</td>\n\
+    \        <td>10 requests per month per participantId.\n        <br>The participantId is identified\
+    \ from the X-InitiatingParticipantID request header parameter.\n        <br>For each participantId\
+    \ there are only 20 POST requests that can be made to the API per month.</td>\n    </tr>\n    <tr>\n\
+    \        <td>GET `all endpoints`</td>\n        <td>60 requests per month per participantId.\n    \
+    \    <br>The participantId is identified from the X-InitiatingParticipantID request header parameter.\n\
+    \        <br>For each participantId there are only 60 GET requests that can be made to the API per\
+    \ month.</td>\n    </tr>\n    <tr>\n        <td>POST `/certificates`</td>\n        <td>1 request per\
+    \ participantId per environment.    \n        <br>The participantId is identified from the `X-InitiatingParticipantID`\
+    \ request header parameter.\n        <br>The environment is identified from the value of the environment\
+    \ key in the request body.\n        <br>A participantId can only have one set of TLS certificates\
+    \ (one PreProd certificate and one Prod certificate).\n        <br>This restriction is due to costs\
+    \ associated with providing TLS certificates. If more than one certificate is required to differentiate\
+    \ system access to AEMO systems you can use the `/order/{order-id}/reissue` endpoint.\n        <br>Participants\
+    \ systems must manage this Throttling limit because if you submit multiple JSON requests for the same\
+    \ participantId at the same time, AEMO may reject some.</td>\n    </tr>\n</table>\n\n# Response codes\n\
+    For detailed examples of response codes see the provided example under each request.\n# URLs\nThe\
+    \ API is available over the internet on the following base URLs:\n<table>\n  <tr>\n      <td><b>Environment</b></td>\n\
+    \      <td><b>Base URL</b></td>\n  </tr>\n  <tr>\n      <td>PreProduction</td>\n      <td><a href=\"\
+    https://partner.api.preprod.aemo.com.au/v1/TLSCertificateManagement\">https://partner.api.preprod.aemo.com.au/v1/TLSCertificateManagement</a></td>\n\
+    \  </tr>\n  <tr>\n      <td>Production</td>\n      <td><a href=\"https://partner.api.aemo.com.au/v1/TLSCertificateManagement\"\
+    >https://partner.api.aemo.com.au/v1/TLSCertificateManagement</a></td>\n  </tr>\n</table>\n\n\n## Environment\
+    \ details\n### PreProduction\nTLS Certificates created in the PreProduction environment will be suffixed\
+    \ with \"MOCK\" in the commonName, and are mock certificates only. These certificates will automatically\
+    \ expire after 3-days and are not usable for accessing any AEMO systems.\n### Production\nTLS Certificates\
+    \ created in the Production environment will be suffixed with either \"PROD\" or \"NONPROD\" in the\
+    \ commonName depending on the environment entered in the API request. These certificates will automatically\
+    \ expire after 3-years and are used for accessing MTLS-protected AEMO systems (both PreProduction\
+    \ and Production systems).\n\nNONPROD certificates can only be used for accessing AEMO Non-Production\
+    \ systems (for example APIs on; [https://partner.api.preprod.aemo.com.au](https://partner.api.preprod.aemo.com.au),\
+    \ [https://apis.preprod.aemo.com.au:9319](https://apis.preprod.aemo.com.au:9319), or [https://apis.preprod.marketnet.net.au:9319](https://apis.preprod.marketnet.net.au:9319)).\
+    \ You will need to use the PreProd certificate to access AEMO Non-Production environments that are\
+    \ MTLS protected. The NONPORD certificate will be issued by the certificate authority AEMO-ICA-TEST\
+    \ G1.\n\nPROD certificates can only be used for accessing AEMO Production systems (for example APIs\
+    \ on; [https://partner.api.aemo.com.au](https://partner.api.aemo.com.au), [https://apis.aemo.com.au:9319](https://apis.aemo.com.au:9319),\
+    \ or [https://apis.marketnet.net.au:9319](https://apis.marketnet.net.au:9319)). You will need to use\
+    \ the Prod certificate to access AEMO Production environments that are MTLS protected. The PROD certificate\
+    \ will be issued by the certificate authority AEMO-ICA-MARKET G1.\n\n# Glossary\n- CA - Certificate\
+    \ Authority\n- PKI - Public Key Infrastructure\n- TLS - Transport Layer Security\n- X.509v3 - The\
+    \ specific TLS certificate standard used by AEMO"
   termsOfService: https://dev.aemo.com.au/terms
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/tls-certificate-mgmt-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/v1/TlsCertificateMgmt
-paths: { }
+- url: https://api-prd.aemo.local/v1/TlsCertificateMgmt
+paths:
+  /certificates:
+    post:
+      operationId: createANewCertificate
+      summary: Create a new certificate
+      tags:
+      - TLS Certificate Mgmt v1
+      description: "Generate a new certificate and a new order by providing a valid Certificate Signing\
+        \ Request (CSR) and an environment (`non-prod` or `production`) in the request body. This certificate\
+        \ is created under your Participant ID.\n        \nGenerating the CSR depends on your server and\
+        \ operating system. For more information, see [CSR requirements](https://portal.aemo.com.au/help/Content/TLSCertificateManagement/CSR%20requirements.html)."
+      parameters:
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      requestBody:
+        content:
+          application/json:
+            example:
+              csr: '-----BEGIN CERTIFICATE REQUEST----- MIIDFjCCAf4CAQAwgbkxCzAJBgNVBAYTAkFVMREwDwYDVQQIDAhDb3JjYWlnaDES
+                MBAGA1UEBwwJRGVpcyBNdWluMSIwIAYDVQQKDBlTb25yYWkgQ29uc3VsdGluZyBQ dHkgTHRkMSYwJAYDVQQLDB1HZXQgeW91ciBBUEkgcHJvZ3JhbSBvbiB0cmFjazEU
+                MBIGA1UEAwwLU09OUkFJLVByb2QxITAfBgkqhkiG9w0BCQEWEmluZm9Ac29ucmFp LmNvbS5hdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKpMFG4WhHKX
+                G6yyY//sDzgW1WujgtJLhWu32uWtH0l4VDEOSNgFTszKfpSfmblf5WOpxR5eqM52 Fy0/yNqAclUWVSqKK7QDbWVsd8wdOfmAD9d3Ex7xQvouLtNGOyo2JEXwryULeM65
+                D9Vu+grxVN55vhUUHA3Xt9dYBb+M/gplwt/t5KswgtuaDzktW+X407QwAmy/RYsU Jf/nDdPyna+/0z3ByprzgYaA4gaKOZMGjq3nrBIR7iO0AQbmo6R1Pv1k+kduue2S
+                WCQkiA9y6RLxzM/Sg9wUO9uNK0A+5v0TKQm8gDweISdH60DRGSHgC4int5ncbE5j 2/ZSxtJpxl8CAwEAAaAXMBUGCSqGSIb3DQEJAjEIDAZTb25yYWkwDQYJKoZIhvcN
+                AQELBQADggEBAJek88Bm7LLYHbI9ft99ibR8l1wSCKhrdvJcyNjhnriMe+X62nq3 vxb32nPPilA0c541zbOlOlFcxlh5jk9FB/csuYNGGiQfkXHSS51IidDQFp20O2cl
+                nFAl3lsLMZrEE8Cu1r+7AYEOrKTN8Qj76uejPzLpmBEGje5lo5XqDEryBoyg4DDa Va++leYdxbPwoTCTzsTDoZsVEikGjD6MVT3eMNwXEe334v6T3dJlWNSpTJvgA8qr
+                OC31BRhiAjCIJ0H7yPcacZ8wE6n/iI/9QOPgPITHOSl51YNM8Spl74MG49A1PTfj hnoEsWrXPakyOfUYDIZmbhMe+L50sfqyfEg=
+                -----END CERTIFICATE REQUEST-----'
+              usage: production
+        description: Used to send the CSR to AEMO. CSR must NOT have the challenge password set and must
+          have a key size of 2048 bits RSA with a SHA-2 signature algorithm
+      responses:
+        '201':
+          description: A successful response with confirmation of Certificate creation, and the TLS certificate
+            itself
+          content:
+            application/json:
+              example:
+                transactionId: b6fb4e11-627a-4837-9632-e116dcb83882
+                data:
+                  detail: Your order and certificate has been successfully created.
+                  orderId: '356515923'
+                  certificateId: '357749310'
+                  certificateCommonName: EASTENGY-Prod
+                  certificate: "-----BEGIN CERTIFICATE-----\r\nMIIFVjCCBD6gAwIBAgIQDipm2I0uCGYERjhEAFrBxDANBgkqhkiG9w0BAQsFADBT\r\
+                    \nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMS0wKwYDVQQDEyRE\r\naWdpQ2VydCBUZXN0IFNIQTIgSW50ZXJtZWRpYXRlIENBLTEwHhcNMjMwMjAyMDAw\r\
+                    \nMDAwWhcNMjMwMjA0MjM1OTU5WjBqMQswCQYDVQQGEwJBVTERMA8GA1UECBMIVmlj\r\ndG9yaWExEjAQBgNVBAcTCU1lbGJvdXJuZTENMAsGA1UEChMEQUVNTzElMCMGA1UE\r\
+                    \nAwwcRE9ETy1TSVRfMjAyMzAyMDJhX0FQSV9QMjMwNDCCASIwDQYJKoZIhvcNAQEB\r\nBQADggEPADCCAQoCggEBAJ61Inyu2u6P6C2wFDIQgQUpIiXXWdhSo/1hMPEU5RXZ\r\
+                    \niserktfVcZUuF+2tQ6ma4IOiRtgRGl9k/KsuJmd+5fPbsyaqsrDT/QnM65KXTlq9\r\nKkybd4TY3WFfv1BCEsC8E72EN3JMrD1GyouscnwyvUDRvktwrENjCon4Ig99g9md\r\
+                    \nkMbS01lBD+3Auw8j/sbfD5T5q9hi5VtUszQ409FwIxmSwmGZTS2rSMFBH3Ms+Ld3\r\n8HaaB6UbPNks85gqMWgzZpAlu9kYXnRbhf5cTjW7bPOO8wdUWeNEXWMjB4XGerIP\r\
+                    \nLeyy3l/MchBEaDxDZ85cC7WZb49XzptC+3bhGih6qmcCAwEAAaOCAg0wggIJMB8G\r\nA1UdIwQYMBaAFNZN+TlgbHPDIvWtMAwvoNXKdUoqMB0GA1UdDgQWBBQRBbe3DpKB\r\
+                    \nRVCzzaUfVQ5EGnxNqjAnBgNVHREEIDAeghxET0RPLVNJVF8yMDIzMDIwMmFfQVBJ\r\nX1AyMzA0MA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYB\r\
+                    \nBQUHAwIwgZMGA1UdHwSBizCBiDBCoECgPoY8aHR0cDovL2NybDMuZGlnaWNlcnQu\r\nY29tL0RpZ2lDZXJ0VGVzdFNIQTJJbnRlcm1lZGlhdGVDQTEuY3JsMEKgQKA+hjxo\r\
+                    \ndHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRUZXN0U0hBMkludGVybWVk\r\naWF0ZUNBMS5jcmwwQgYDVR0gBDswOTA3BgpghkgBhv1sYwEBMCkwJwYIKwYBBQUH\r\
+                    \nAgEWG2h0dHA6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCBhgYIKwYBBQUHAQEEejB4\r\nMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wUAYIKwYBBQUH\r\
+                    \nMAKGRGh0dHA6Ly9jYWNlcnRzLnRlc3QuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VGVz\r\ndFNIQTJJbnRlcm1lZGlhdGVDQTEuY3J0MAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN\r\
+                    \nAQELBQADggEBADzp62eRimkv4Xk5rs8zKpm1C0ACjDqNKI3+yZyHNnsqeJl/UbEU\r\nsy9xJ96scAAk3TEdSOzCQIDrN8buNz/BtMWr0YhAyOCmjhoO+sEetRUddWruSHlO\r\
+                    \neAh5y3HW9bu2fmcN03pLC4LawRKBGNTPZ4GYYhlw23Pw0OToQEylEU+XmKC0dsQO\r\nhBv1Qsu9laJf3Rets/5Y0QfpfwrE12Y1vv6hM8PlEQqGTAuToRC9uVJ2ZgH2wCn0\r\
+                    \n0OL/zk9SONI5ApqzTr6nJF7PwpqdTjUOnvKbISrd164WpnJixfzD0zT8vkYMZiA9\r\nJdX4NKBeYZrfE+O1IJTY4EoE6OvoHsjFslE=\r\
+                    \n-----END CERTIFICATE-----\r\n"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '413':
+          description: Content Too Large
+          content:
+            application/json:
+              examples:
+                '413.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '413'
+                      title: Content Too Large
+                      details: Maximum allowed size for the request body is 10485760 bytes (10 MB). This
+                        request has size of 16MB
+        '422':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '422.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '422'
+                      title: Unprocessable Entity
+                      details: 'Requested certificate orders exceeds allowed quota. '
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /certificates/{certificate-id}/download:
+    get:
+      operationId: downloadACertificate
+      summary: Download a certificate
+      tags:
+      - TLS Certificate Mgmt v1
+      description: Download a certificate, and the certificate chain, returned in PEM format.
+      parameters:
+      - name: certificate-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The specific ID of a Certificate
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      responses:
+        '200':
+          description: A successful response with details on your specified certificate
+          content:
+            application/x-pem-file:
+              examples:
+                pem-response:
+                  value: '-----BEGIN CERTIFICATE----- MIIFPDCCBCSgAwIBAgIQCg5bHWn9d4Kv7kPbcgZv0DANBgkqhkiG9w0BAQsFADBP
+                    MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMSkwJwYDVQQDEyBE aWdpQ2VydCBUTFMgUlNBIFNIQTI1NiAyMDIwIENBMTAeFw0yMjA4MDgwMDAwMDBa
+                    Fw0yMjA5MDYyMzU5NTlaMGsxCzAJBgNVBAYTAkFVMRUwEwYDVQQHEwxCdXJ3b29k IEVhc3QxIjAgBgNVBAoTGVNvbnJhaSBDb25zdWx0aW5nIFB0eSBMdGQxITAfBgNV
+                    BAMTGGFwaXguc29ucmFpY29uc3VsdGluZy5pbzCCASIwDQYJKoZIhvcNAQEBBQAD ggEPADCCAQoCggEBANINNwHwCM+KviG8Higu+ywXaHRPqpc1t8Y2rwxCl2QxCNqp
+                    FbKLgWol4VB3WnzH79qJyxkxNIMKqN5l0UNmSPhk37DtJ2kAjqSZ06X3Mg/lt6pr /3tfF2FA2x1ILsVrha2l9hGU7ZpDC1ZGn5GlPCYwOaHQj25EholDb9G7VVbNcp0F
+                    GJoiuNX5LR2b76I74YdhM7fJlyAW2ZVSd914zsC9s8WTCZi73XRDIWUAbrGUEv1d MSVvVdUR97sFhPtlO8fHMbJ/PhVZlTUy9gBgsFCg85aPFusds7rDgq9OsFSQ/+jk
+                    zAYoAcjS4WJVen3pkpwfYrLwPAeyZgIc+z/KlMECAwEAAaOCAfYwggHyMB8GA1Ud IwQYMBaAFLdrouqoqoSMeeq02g+YssWVdrn0MB0GA1UdDgQWBBRAnk6HE6dwhJ1D
+                    TH8LAYhLvIKPDTAjBgNVHREEHDAaghhhcGl4LnNvbnJhaWNvbnN1bHRpbmcuaW8w DgYDVR0PAQH/BAQDAgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjCB
+                    jwYDVR0fBIGHMIGEMECgPqA8hjpodHRwOi8vY3JsMy5kaWdpY2VydC5jb20vRGln aUNlcnRUTFNSU0FTSEEyNTYyMDIwQ0ExLTQuY3JsMECgPqA8hjpodHRwOi8vY3Js
+                    NC5kaWdpY2VydC5jb20vRGlnaUNlcnRUTFNSU0FTSEEyNTYyMDIwQ0ExLTQuY3Js MD4GA1UdIAQ3MDUwMwYGZ4EMAQICMCkwJwYIKwYBBQUHAgEWG2h0dHA6Ly93d3cu
+                    ZGlnaWNlcnQuY29tL0NQUzB/BggrBgEFBQcBAQRzMHEwJAYIKwYBBQUHMAGGGGh0 dHA6Ly9vY3NwLmRpZ2ljZXJ0LmNvbTBJBggrBgEFBQcwAoY9aHR0cDovL2NhY2Vy
+                    dHMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VExTUlNBU0hBMjU2MjAyMENBMS0xLmNy dDAJBgNVHRMEAjAAMA0GCSqGSIb3DQEBCwUAA4IBAQB7PrwXehYsvFIg2MfDtgfV
+                    LZIMQrXPhsgoY2fe/Wa6RNml1APzl3+nJverpkjYprh/McJ0Cvw+mtAbD2MGPVDU XtVxptPLiT/6FRUcROVOWaGoBPLyXaRKQd5M7oL2DrPTr1MvJ4l3SU9myXiYgDsg
+                    udz3I8ULS+c9nyHAyII/nDE/w1YFVNz7s+UBUqfw8eXcvjnfFDrS0mutgqD35fun RDXwpdynbs63mmikzrm67oOFiUP81yPyfDYBpLH9UYKf3ZP2xhBvSj91HS9VtiTz
+                    4rgQzYaDix45fXRcqtmt8IAlnyxOIB1ujm8jF4SVW1wKK9wSEUmXKjaJarsTKR40 -----END CERTIFICATE-----'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /orders:
+    get:
+      operationId: getAllCertificateOrders
+      summary: Get all certificate orders
+      tags:
+      - TLS Certificate Mgmt v1
+      description: Get all the certificate orders for a particular participant ID.
+      parameters:
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      responses:
+        '200':
+          description: A successful response with confirmation of Certificate creation
+          content:
+            application/json:
+              examples:
+                orders:
+                  value:
+                    transactionId: 309c0812-4369-470a-9531-30b6f1e10c29
+                    data:
+                      orders:
+                      - orderId: '21584450'
+                        orderStatus: issued
+                        certificates:
+                        - category: primary
+                          certificateId: '22359918'
+                          thumbprint: 01C089A65CEA57F0B5746DCE397B968DB24F72E7
+                          serialNumber: 0DA5072281B2E5CAF390E8CD22E98CA1
+                          commonName: EASTENGY-Prod
+                          caName: DigiCert Test SHA2 Intermediate CA-1
+                          status: issued
+                          validTill: '2023-02-23'
+                      - orderId: '317073731'
+                        orderStatus: issued
+                        certificates:
+                        - category: primary
+                          certificateId: '319535729'
+                          thumbprint: 5314B47FFD513BCFB40CA1577B197C684893EA83
+                          serialNumber: 19D625ED37B35D897F3AF9CACA5EBA14
+                          commonName: EASTENGY-PreProd
+                          caName: DigiCert Test SHA2 Intermediate CA-1
+                          status: issued
+                          validTill: '2025-12-02'
+                        - category: duplicate
+                          certificateId: '319554386'
+                          thumbprint: F2F8953D1CA8817B28EAD11F4AC8CF6F125EB65A
+                          serialNumber: 0425F3BE28275AADB57DED0318F5ED79
+                          commonName: EASTENGY-PreProd
+                          caName: DigiCert Test SHA2 Intermediate CA-1
+                          status: revoked
+                          validTill: '2025-12-02'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /orders/{order-id}:
+    get:
+      operationId: getDetailsOnACertificateOrder
+      summary: Get details on a certificate order
+      tags:
+      - TLS Certificate Mgmt v1
+      description: Get all the certificates (including expired, revoked, renewed and reissued certificates)
+        associated with a particular order for a Participant ID.
+      parameters:
+      - name: order-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The specific order ID of a Certificate
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      responses:
+        '200':
+          description: A successful response with details on the order
+          content:
+            application/json:
+              example:
+                transactionId: 309c0812-4369-470a-9531-30b6f1e10c29
+                data:
+                  orders:
+                  - orderId: '21584450'
+                    orderStatus: issued
+                    certificates:
+                    - category: primary
+                      certificateId: 22359918
+                      thumbprint: 01C089A65CEA57F0B5746DCE397B968DB24F72E7
+                      serialNumber: 0DA5072281B2E5CAF390E8CD22E98CA1
+                      commonName: EASTENGY-Prod
+                      caName: DigiCert Test SHA2 Intermediate CA-1
+                      status: issued
+                      validTill: '2023-02-23'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /scope:
+    get:
+      operationId: getTheScopeForAUser
+      summary: Get the scope for a user
+      tags:
+      - TLS Certificate Mgmt v1
+      description: Get a users scope from their given SessionID. This will provide basic information on
+        whether the user has the TLS_CERTIFICATE_MANAGEMENT entity assigned, the specific ParticipantID
+        associated with that entity, and the rights the user has for that entity (e.g. RUCD)
+      parameters:
+      - name: X-SS-ID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ss-id (SessionId) of the user in either long or short format. This is usually
+          found in the `ss-id` cookie.
+      responses:
+        '200':
+          description: A successful response with details on the user's scope
+          content:
+            application/json:
+              examples:
+                scope-response:
+                  value:
+                    transactionId: 126361cc-414e-47d1-bbdb-f54a476eecb0
+                    data:
+                      scope: TLS_CERTIFICATE_MANAGEMENT|EASTENGY|RUCD
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /orders/{order-id}/reissue:
+    post:
+      operationId: reissueACertificate
+      summary: Reissue a certificate
+      tags:
+      - TLS Certificate Mgmt v1
+      description: "Reissue a certificate. A certificate reissue creates a new certificate with a new\
+        \ CSR. By providing a CSR, a reissued certificate uses the private key for that CSR.\n       \
+        \ \nTo reissue a certificate, you must provide a `csr` and `certificateCommonName` in the request\
+        \ body, where the `certificateCommonName` is associated with the order-id in the request path.\n\
+        \        \nThe reissued certificate is the primary certificate on the order (certificate renewals\
+        \ use the primary certificate for renewal). It has the same expiry date as the original certificate\
+        \ on the order.\n        \nMultiple reissues of the same certificate can be made."
+      parameters:
+      - name: order-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The specific order ID of a Certificate
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      requestBody:
+        content:
+          application/json:
+            example:
+              csr: '-----BEGIN CERTIFICATE REQUEST----- MIIDFjCCAf4CAQAwgbkxCzAJBgNVBAYTAkFVMREwDwYDVQQIDAhDb3JjYWlnaDES
+                MBAGA1UEBwwJRGVpcyBNdWluMSIwIAYDVQQKDBlTb25yYWkgQ29uc3VsdGluZyBQ dHkgTHRkMSYwJAYDVQQLDB1HZXQgeW91ciBBUEkgcHJvZ3JhbSBvbiB0cmFjazEU
+                MBIGA1UEAwwLU09OUkFJLVByb2QxITAfBgkqhkiG9w0BCQEWEmluZm9Ac29ucmFp LmNvbS5hdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKpMFG4WhHKX
+                G6yyY//sDzgW1WujgtJLhWu32uWtH0l4VDEOSNgFTszKfpSfmblf5WOpxR5eqM52 Fy0/yNqAclUWVSqKK7QDbWVsd8wdOfmAD9d3Ex7xQvouLtNGOyo2JEXwryULeM65
+                D9Vu+grxVN55vhUUHA3Xt9dYBb+M/gplwt/t5KswgtuaDzktW+X407QwAmy/RYsU Jf/nDdPyna+/0z3ByprzgYaA4gaKOZMGjq3nrBIR7iO0AQbmo6R1Pv1k+kduue2S
+                WCQkiA9y6RLxzM/Sg9wUO9uNK0A+5v0TKQm8gDweISdH60DRGSHgC4int5ncbE5j 2/ZSxtJpxl8CAwEAAaAXMBUGCSqGSIb3DQEJAjEIDAZTb25yYWkwDQYJKoZIhvcN
+                AQELBQADggEBAJek88Bm7LLYHbI9ft99ibR8l1wSCKhrdvJcyNjhnriMe+X62nq3 vxb32nPPilA0c541zbOlOlFcxlh5jk9FB/csuYNGGiQfkXHSS51IidDQFp20O2cl
+                nFAl3lsLMZrEE8Cu1r+7AYEOrKTN8Qj76uejPzLpmBEGje5lo5XqDEryBoyg4DDa Va++leYdxbPwoTCTzsTDoZsVEikGjD6MVT3eMNwXEe334v6T3dJlWNSpTJvgA8qr
+                OC31BRhiAjCIJ0H7yPcacZ8wE6n/iI/9QOPgPITHOSl51YNM8Spl74MG49A1PTfj hnoEsWrXPakyOfUYDIZmbhMe+L50sfqyfEg=
+                -----END CERTIFICATE REQUEST-----'
+              certificateCommonName: EASTENGY-Prod
+        description: Used to send the CSR to AEMO and confirm the common name on the original certificate.
+      responses:
+        '201':
+          description: A successful response with confirmation of Certificate creation
+          content:
+            application/json:
+              example:
+                transactionId: afd8846b-5bec-4fd6-8129-4490fda4edfd
+                data:
+                  detail: Your certificate reissue has been successfully created.
+                  orderId: '234113242'
+                  certificateId: '362201381'
+                  certificateCommonName: EASTENGY-PreProd
+                  certificate: "-----BEGIN CERTIFICATE-----\r\nMIIFVjCCBD6gAwIBAgIQAln2HSH5UGV2JtbTjlzhlDANBgkqhkiG9w0BAQsFADBT\r\
+                    \nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMS0wKwYDVQQDEyRE\r\naWdpQ2VydCBUZXN0IFNIQTIgSW50ZXJtZWRpYXRlIENBLTEwHhcNMjMwMjA4MDAw\r\
+                    \nMDAwWhcNMjMwMjEwMjM1OTU5WjBqMQswCQYDVQQGEwJBVTERMA8GA1UECBMIVmlj\r\ndG9yaWExEjAQBgNVBAcTCU1lbGJvdXJuZTENMAsGA1UEChMEQUVNTzElMCMGA1UE\r\
+                    \nAwwcRE9ETy1TSVRfMjAyMzAyMDhhX0FQSV9QMjMwNDCCASIwDQYJKoZIhvcNAQEB\r\nBQADggEPADCCAQoCggEBAPcpvJxpRxvPUk4/r9SVS+ug+tZAmtzFFF4zC0R0G1vX\r\
+                    \nZebF1mz+nMSQ+RNmIFRVVMrVmERVVMm6Yiez9XPnD9hhZtHgJMffQBK0gtnOHBvn\r\nn1BYsfYySG0f9wBeVxDqr69KRsrZu2mvEMqJb3Nmgp9WpjtbupFn1rozRgb2WC7H\r\
+                    \nqhA2G6Dl+H3FNjtN10L8C6YVmTMxXmQF5GpUdCk1wOSNDy0GKZVuHAKGeL7nr0ul\r\nP4+wgQji5Z8VpH+V9X/t6bIkGzpx9CHMElg3seGsdvlwa9N2jlOOsBhvv+xnqf7f\r\
+                    \nmzBSkPLklTe6Rhtkay96Hgn+J8G7UbXVjPlGuU6MsYcCAwEAAaOCAg0wggIJMB8G\r\nA1UdIwQYMBaAFNZN+TlgbHPDIvWtMAwvoNXKdUoqMB0GA1UdDgQWBBT8WjtXJc3J\r\
+                    \nByY8V1raHO85Rin3JDAnBgNVHREEIDAeghxET0RPLVNJVF8yMDIzMDIwOGFfQVBJ\r\nX1AyMzA0MA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYB\r\
+                    \nBQUHAwIwgZMGA1UdHwSBizCBiDBCoECgPoY8aHR0cDovL2NybDMuZGlnaWNlcnQu\r\nY29tL0RpZ2lDZXJ0VGVzdFNIQTJJbnRlcm1lZGlhdGVDQTEuY3JsMEKgQKA+hjxo\r\
+                    \ndHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRUZXN0U0hBMkludGVybWVk\r\naWF0ZUNBMS5jcmwwQgYDVR0gBDswOTA3BgpghkgBhv1sYwEBMCkwJwYIKwYBBQUH\r\
+                    \nAgEWG2h0dHA6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCBhgYIKwYBBQUHAQEEejB4\r\nMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wUAYIKwYBBQUH\r\
+                    \nMAKGRGh0dHA6Ly9jYWNlcnRzLnRlc3QuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VGVz\r\ndFNIQTJJbnRlcm1lZGlhdGVDQTEuY3J0MAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN\r\
+                    \nAQELBQADggEBAHB/6x2nG+pOdt34Q/tJ+MWGl+TkvSIgGjn8McL1sZUnKdSxfMOW\r\nDDcHNh7n3mJ+V8G0NNw0DmdlWoI6q9P+wrnQ4j8p0SJVUeXNp6iflsGQoRrw635X\r\
+                    \n5HE7Q4WIbO4TtiVESYY2uC7wcurmFiWqwWW6huaHbF0p6Q60PU6dLU4O7zkrBxEn\r\nITVO09eBJR9wkQHw02tCeNVBC+3SgpjOilgASv3Bfyf9rVJ1taXMdaoq0Lhtgu3r\r\
+                    \nRpjy9tOjg5uLj2qjTv56Ur5mvKBrY3auA2sShEZC0wz6F7/tpHN+Am9LZFJPjl+N\r\nrJIzSCigReuzj18suBX2cS4Wd5PaPnpndNE=\r\
+                    \n-----END CERTIFICATE-----\r\n"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '413':
+          description: Content Too Large
+          content:
+            application/json:
+              examples:
+                '413.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '413'
+                      title: Content Too Large
+                      details: Maximum allowed size for the request body is 10485760 bytes (10 MB). This
+                        request has size of 16MB
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /orders/{order-id}/renewal:
+    post:
+      operationId: renewACertificate
+      summary: Renew a certificate
+      tags:
+      - TLS Certificate Mgmt v1
+      description: "Renew a certificate under an existing order. A renewed certificate will use the CSR\
+        \ for the newest (primary) certificate that was issued under that order. You can only renew a\
+        \ certificate within it's renewal period, which is within 90-days of the certificate expiry.\n\
+        \        \nIf you need to renew a certificate using a new CSR, make a `/renewal` API call first,\
+        \ then a `/reissue` API call with your new CSR."
+      parameters:
+      - name: order-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The specific order ID of a Certificate
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      responses:
+        '201':
+          description: A successful response with confirmation of certificate creation
+          content:
+            application/json:
+              example:
+                transactionId: 0891028a-4849-4809-bd8c-72edea9d884e
+                data:
+                  detail: Your order and certificate has been successfully created.
+                  orderId: '356534400'
+                  certificateId: '357767660'
+                  certificateCommonName: EASTENGY-Preprod
+                  certificate: "-----BEGIN CERTIFICATE-----\r\nMIIFVjCCBD6gAwIBAgIQB6Jb30rdd2dIh1B8WwrTIDANBgkqhkiG9w0BAQsFADBT\r\
+                    \nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMS0wKwYDVQQDEyRE\r\naWdpQ2VydCBUZXN0IFNIQTIgSW50ZXJtZWRpYXRlIENBLTEwHhcNMjMwMjAyMDAw\r\
+                    \nMDAwWhcNMjMwMjA0MjM1OTU5WjBqMQswCQYDVQQGEwJBVTERMA8GA1UECBMIVmlj\r\ndG9yaWExEjAQBgNVBAcTCU1lbGJvdXJuZTENMAsGA1UEChMEQUVNTzElMCMGA1UE\r\
+                    \nAwwcRE9ETy1TSVRfMjAyMzAyMDJhX0FQSV9QMjMwNDCCASIwDQYJKoZIhvcNAQEB\r\nBQADggEPADCCAQoCggEBAJ61Inyu2u6P6C2wFDIQgQUpIiXXWdhSo/1hMPEU5RXZ\r\
+                    \niserktfVcZUuF+2tQ6ma4IOiRtgRGl9k/KsuJmd+5fPbsyaqsrDT/QnM65KXTlq9\r\nKkybd4TY3WFfv1BCEsC8E72EN3JMrD1GyouscnwyvUDRvktwrENjCon4Ig99g9md\r\
+                    \nkMbS01lBD+3Auw8j/sbfD5T5q9hi5VtUszQ409FwIxmSwmGZTS2rSMFBH3Ms+Ld3\r\n8HaaB6UbPNks85gqMWgzZpAlu9kYXnRbhf5cTjW7bPOO8wdUWeNEXWMjB4XGerIP\r\
+                    \nLeyy3l/MchBEaDxDZ85cC7WZb49XzptC+3bhGih6qmcCAwEAAaOCAg0wggIJMB8G\r\nA1UdIwQYMBaAFNZN+TlgbHPDIvWtMAwvoNXKdUoqMB0GA1UdDgQWBBQRBbe3DpKB\r\
+                    \nRVCzzaUfVQ5EGnxNqjAnBgNVHREEIDAeghxET0RPLVNJVF8yMDIzMDIwMmFfQVBJ\r\nX1AyMzA0MA4GA1UdDwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYB\r\
+                    \nBQUHAwIwgZMGA1UdHwSBizCBiDBCoECgPoY8aHR0cDovL2NybDMuZGlnaWNlcnQu\r\nY29tL0RpZ2lDZXJ0VGVzdFNIQTJJbnRlcm1lZGlhdGVDQTEuY3JsMEKgQKA+hjxo\r\
+                    \ndHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRUZXN0U0hBMkludGVybWVk\r\naWF0ZUNBMS5jcmwwQgYDVR0gBDswOTA3BgpghkgBhv1sYwEBMCkwJwYIKwYBBQUH\r\
+                    \nAgEWG2h0dHA6Ly93d3cuZGlnaWNlcnQuY29tL0NQUzCBhgYIKwYBBQUHAQEEejB4\r\nMCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wUAYIKwYBBQUH\r\
+                    \nMAKGRGh0dHA6Ly9jYWNlcnRzLnRlc3QuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0VGVz\r\ndFNIQTJJbnRlcm1lZGlhdGVDQTEuY3J0MAwGA1UdEwEB/wQCMAAwDQYJKoZIhvcN\r\
+                    \nAQELBQADggEBABFSs3f9BDvrw7/o9YCsOwpJh9M+9Kq8U4t982kmt9UsXJXRg0oI\r\nHQCFhOZZIJIw3yWCMqpzn3eNIyZHAMPXQ5R08IG6b2S/zDroIC9Bi2uwIxS9lVg5\r\
+                    \nfftE5CYT0Nr4EYPmY877PAG54VUoRC4koE4MeB9U9iiVcxuR8/oWrYUm9BuyhKu7\r\nvEVFap3MNF91DF5nU7Xf4exz9NQBUZmYFKoRL3+FuNKUsRVl6Csl0TQhkBXdFpOA\r\
+                    \nhUsAm2ERCu/d7c78EYCYPUWNqz3N7WRj1Gq8DJNmpXvlQdZlMVORIehgf633mYMD\r\nPqU2zqQQJcNM2dEKLM0aUOP4R27CXDu8AC0=\r\
+                    \n-----END CERTIFICATE-----\r\n"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '413':
+          description: Content Too Large
+          content:
+            application/json:
+              examples:
+                '413.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '413'
+                      title: Content Too Large
+                      details: Maximum allowed size for the request body is 10485760 bytes (10 MB). This
+                        request has size of 16MB
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
+  /certificates/{certificate-id}/revoke:
+    post:
+      operationId: revokeACertificate
+      summary: Revoke a certificate
+      tags:
+      - TLS Certificate Mgmt v1
+      description: "Revoke an existing TLS certificate if it�s no longer required or that the certificate�s\
+        \ private key has been compromised. Once revoked, it cannot be used to access AEMO systems.\n\
+        \        \nTo revoke a certificate, you must provide an `orderId` and `certificateCommonName`\
+        \ in the request body that is associated with the certificate-id in the request path."
+      parameters:
+      - name: certificate-id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The specific ID of a Certificate
+      - name: X-InitiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: The API on accepts `application/json` content.
+      requestBody:
+        content:
+          application/json:
+            example:
+              orderId: '234113242'
+              certificateCommonName: EASTENGY-Prod
+        description: Used to confirm the revocation of a certificate by supplying the certificate's order
+          ID and common name.
+      responses:
+        '201':
+          description: A successful response with confirmation of certificate revoking.
+          content:
+            application/json:
+              example:
+                transactionId: 5fec559a-37ea-4dc0-87f1-20d212640faa
+                data:
+                  detail: Your certificate has been revoked successfully.
+                  orderId: 234113242
+                  certificate:
+                    id: '357767660'
+                    commonName: EASTENGY-Prod
+                    status: revoked
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              examples:
+                '400.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Invalid JSON payload.
+                '400.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Missing or invalid header, or query parameter.
+                '400.03':
+                  description: The certificateCommonName provided in the body does not match the existing
+                    order certificateCommonName.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Property: certificateCommonName must match the original certificate.'
+                '400.04':
+                  description: Mismatched certificateId to orderId. The certificate must belong to that
+                    order for a successful request.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: 'Invalid: the ''certificateId'' does not belong to the ''orderId'' provided
+                        in the request.'
+                '400.05':
+                  description: The order has already been renewed.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: Order has already been renewed.
+                '400.06':
+                  description: The certificate in the order has already been revoked.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '400'
+                      title: Bad request
+                      details: already_revoked
+        '401':
+          description: Unauthorised
+          content:
+            application/json:
+              examples:
+                '401.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      details: Invalid or missing credentials, or token.
+        '403':
+          description: Insufficient Privileges
+          content:
+            application/json:
+              examples:
+                '403.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges.
+                '403.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Quota Exceeded
+                      details: Out of call volume quota. Quota will be replenished in 27.18:05:37.
+                '403.03':
+                  description: User is not authorised to manage given certificate order.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Not authorised to manage the provided ID
+                '403.04':
+                  description: Authorisation check failed. Check whether user has valid URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Auth check failed
+                '403.05':
+                  description: Pre-Authorisation check failed. Invalid user, Participant ID or user and
+                    Participant ID combination.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Session-PreAuthorization failed.
+                '403.06':
+                  description: User does not have valid URM rights to complete the request. Check user
+                    URM rights.
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '403'
+                      title: Forbidden
+                      details: Insufficient privileges to complete X.509 certificate request.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                '404.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      details: The specified resource does not exist.
+        '405':
+          description: Invalid Method
+          content:
+            application/json:
+              examples:
+                '405.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '405'
+                      title: Invalid method
+                      details: Input request HTTP method is DELETE, but operation accepts only GET, POST,
+                        PATCH, PUT.
+        '413':
+          description: Content Too Large
+          content:
+            application/json:
+              examples:
+                '413.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '413'
+                      title: Content Too Large
+                      details: Maximum allowed size for the request body is 10485760 bytes (10 MB). This
+                        request has size of 16MB
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              examples:
+                '429.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      details: Exceeded the maximum number of requests within a specified time frame.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              examples:
+                '500.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal system error
+                      details: An internal error has occured.
+                '500.02':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '500'
+                      title: Internal System Error
+                      details: Unexpected Server Error, please report to support!
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              examples:
+                '502.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '502'
+                      title: Bad gateway
+                      details: Bad gateway.
+        '503':
+          description: Service Unavailable
+          content:
+            application/json:
+              examples:
+                '503.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '503'
+                      title: Service unavailable
+                      details: Service unavailable.
+        '504':
+          description: Gateway Timeout
+          content:
+            application/json:
+              examples:
+                '504.01':
+                  value:
+                    transactionId: a5a8873a-5009-4bf2-a61a-f6c3cd9803b6
+                    errors:
+                    - code: '504'
+                      title: Gateway timeout
+                      details: Gateway timeout.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -18,6 +2302,10 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: TLS Certificate Mgmt v1
+  description: 'The TLS Certificate Management API allows authorised participants to self-manage their
+    AEMO-signed TLS certificates. This API provides the following features:'

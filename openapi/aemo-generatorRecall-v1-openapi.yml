@@ -1,11 +1,200 @@
 openapi: 3.0.1
 info:
   title: GeneratorRecall
-  description: "The Generator Recall API is used by generators to send information about recall times into the Generator Recall web-based interface in the EMMS Markets Portal. The system will then transfer the information to a central AEMO database for viewing and reporting by AEMO operators.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: 'The Generator Recall API is used by generators to send information about recall times
+    into the Generator Recall web-based interface in the EMMS Markets Portal. The system will then transfer
+    the information to a central AEMO database for viewing and reporting by AEMO operators.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/generatorRecall-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/GeneratorRecall
-paths: { }
+- url: https://api-prd.aemo.local/ws/GeneratorRecall
+paths:
+  /getRecallPlan:
+    post:
+      operationId: getRecallPlan
+      summary: Get Recall Plan
+      tags:
+      - GeneratorRecall
+      description: Retrieve the latest version of a specified recall plan
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ParticipantId: SNOWY
+              DUID: BLOWERNG
+              OutagePlanId: MMS_GEN_OUT1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              example:
+                data:
+                  OutagePlanId: MMS_GEN_OUT1
+                  DUID: BLOWERNG
+                  SuccessFlag: true
+                  ResponseMessage: Get Recall Plan Entry List action succeeded
+                  RecallEntries:
+                  - StartDate: '2017-10-31T14:00:00Z'
+                    EndDate: '2017-11-01T14:00:00Z'
+                    Stage1RecallMinutesStart: 14400
+                    Stage1RecallMinutesEnd: 18000
+                    Stage1MW: 12
+                    Stage1RecallFlag: IFO
+                    Stage2RecallMinutesStart: 21600
+                    Stage2RecallMinutesEnd: 25200
+                    Stage2MW: 10
+                    Stage2RecallFlag: UNC
+  /listRecallPlans:
+    post:
+      operationId: listRecallPlans
+      summary: List Recall Plans
+      tags:
+      - GeneratorRecall
+      description: Retrieve a list of recall plans, subject to filter criteria
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ParticipantId: SNOWY
+              StartDate: '2017-10-31T14:00:00Z'
+              EndDate: '2017-11-01T14:00:00Z'
+              StationId: SNOWY6
+              DUID: BLOWERNG
+              OutagePlanId: MMS_GEN_OUT1
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              example:
+                data:
+                  SuccessFlag: true
+                  ResponseMessage: Get Recall Plan action succeeded
+                  RecallPlanList:
+                  - StationId: SNOWY6
+                    OutagePlanId: MMS_GEN_OUT1
+                    Stage1Description: “ increased output could be maintained only for 12 hrs
+                    Stage2Description: ''
+                    DUID: BLOWERNG
+                    MinimumStartDate: '2017-10-31T14:00:00Z'
+                    MaximumEndDate: '2017-11-01T14:00:00Z'
+                    VersionDateTime: '2017-11-21T07:14:34Z'
+                    Entries: []
+  /submitRecallPlan:
+    post:
+      operationId: submitRecallPlan
+      summary: Submit Recall Plan
+      tags:
+      - GeneratorRecall
+      description: Submit a new recall plan, or create a new version of an existing recall plan
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ParticipantId: SNOWY
+              OutagePlanId: MMS_GEN_OUT1
+              OutagePlanDescription: string
+              DUID: BLOWERNG
+              RecallPlanEntries:
+              - StartDate: '2017-10-31T14:00:00Z'
+                EndDate: '2017-11-01T14:00:00Z'
+                Stage1RecallMinutesStart: 14400
+                Stage1RecallMinutesEnd: 18000
+                Stage1MW: 12
+                Stage1RecallFlag: IFO
+                Stage2RecallMinutesStart: 21600
+                Stage2RecallMinutesEnd: 25200
+                Stage2MW: 10
+                Stage2RecallFlag: UNC
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              example:
+                data:
+                  SuccessFlag:
+                  - boolean
+                  VersionDateTime:
+                  - datetime
+                  Errors:
+                  - ErrorMessage:
+                    - string
+                    EntryNumber:
+                    - number
+                    EntryField:
+                    - string
+                  - ErrorMessage:
+                    - string
+                    EntryNumber:
+                    - number
+                    EntryField:
+                    - string
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +206,11 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: GeneratorRecall
+  description: The Generator Recall API is used by generators to send information about recall times into
+    the Generator Recall web-based interface in the EMMS Markets Portal. The system will then transfer
+    the information to a central AEMO database for viewing and reporting by AEMO operators.

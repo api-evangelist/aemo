@@ -1,11 +1,400 @@
 openapi: 3.0.1
 info:
   title: Intermittent Generation Availability Submissions
-  description: "## Introduction\nThis API is used for intermittent generation availability submissions. For details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '## Introduction
+
+    This API is used for intermittent generation availability submissions. For details on how to get access
+    and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/opsforecasting-intermittentgen-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/v1/IntermittentGen
-paths: { }
+- url: https://api-prd.aemo.local/v1/IntermittentGen
+paths:
+  /MtPasaAvailability:
+    post:
+      operationId: submitIntermittentGenerationAvailabilityForMTPASA
+      summary: Submit Intermittent Generation availability for MT PASA
+      tags:
+      - Intermittent Generation Availability Submissions
+      description: This API will allow submission of MTPASA Availability
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              mwLimits:
+              - - duid: duid1
+                  date: '2020-12-01'
+                  mwLimit: '53'
+                - duid: duid1
+                  date: '2020-12-02'
+                  mwLimit: '52'
+                - duid: duid1
+                  date: '2020-12-05'
+                  mwLimit: '51'
+                - duid: duid2
+                  date: '2020-12-05'
+                  mwLimit: '51'
+              clusterElements:
+              - - duid: duid1
+                  clusterID: cluster1
+                  date: '2020-12-01'
+                  elementsAvailable: '12'
+                - duid: duid1
+                  clusterID: cluster1
+                  date: '2020-12-02'
+                  elementsAvailable: '13'
+                - duid: duid3
+                  clusterID: cluster1
+                  date: '2020-12-02'
+                  elementsAvailable: '13'
+        description: Intermittent Generation availability Payload
+      responses:
+        '200':
+          description: This response is provided when the payload are validated and saved in the AEMO's
+            systems.
+          content:
+            application/json:
+              example:
+                transactionId: bc1edb34-6b4c-4c65-b6ae-876e05ee545e
+                data:
+                  responseTimeStamp: '2019-06-20T00:52:52Z'
+                  responseText: Submission successful
+                errors: []
+                warnings: []
+        '400':
+          description: '400'
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10938834-1
+                data: ''
+                errors:
+                - code: '400'
+                  source: API Gateway
+                  title: Bad Request
+                  detail: Regex threat/JSON threat detected in request
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect OR user account is locked out.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '401'
+                  source: API Gateway
+                  title: Unauthorized
+                  detail: Authorization failed
+        '403':
+          description: This response is provided when a resource missing from URL or incorrect URL.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '403'
+                  source: ''
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: This response is provided when a resource missing from URL or incorrect URL.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '404'
+                  source: ''
+                  title: Not Found
+                  detail: Resource not found at /guests/session
+        '405':
+          description: This response is provided when the method is not correct.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '405'
+                  source: ''
+                  title: Method Not Allowed
+                  detail: Invalid method for path /guests/sessions
+        '422':
+          description: This response is provided when the method is not correct.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data:
+                  responseTimeStamp: '2021-10-26T10:46:28Z'
+                  responseText: Validation errors were found. Please see errors object for further details.
+                errors:
+                - code: Invalid-Cluster-Elements-Available
+                  source: $.clusterElements[?(@.duid == 'BALDHWF1' && @.clusterId == 'BALDHWF_C1' && @.date=='2021-11-01')]
+                  title: Cluster elements supplied is invalid
+                  detail: Cluster elements value supplied is invalid
+                warnings: []
+        '429':
+          description: Too Many Requests - The Quota/Spike arrest limits have been exceeded
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '429'
+                  source: ''
+                  title: Too Many Requests
+                  detail: The Quota/Spike arrest limits have been exceeded
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '500'
+                  source: ''
+                  title: InternalServerError
+                  detail: An unexpected error has occurred
+        '502':
+          description: Bad Gateway error
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '502'
+                  source: ''
+                  title: Bad Gateway
+                  detail: Bad Gateway
+        '503':
+          description: Service temporarily unavailable
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '503'
+                  source: ''
+                  title: Service Unavailable
+                  detail: Service Unavailable
+  /PdStPasaAvailability:
+    post:
+      operationId: submitIntermittentGenerationAvailabilityForPDSTPASA
+      summary: Submit Intermittent Generation availability for PD ST PASA
+      tags:
+      - Intermittent Generation Availability Submissions
+      description: This API will accept submission of availability for 30-minute intervals, covering PD
+        and STPASA time frames
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              mwLimits:
+              - - duid: duid1
+                  intervalDateTime: '2020-12-01T11:30:00Z'
+                  mwLimit: '53'
+                - duid: duid1
+                  intervalDateTime: '2020-12-02T12:30:00Z'
+                  mwLimit: '52'
+                - duid: duid1
+                  intervalDateTime: '2020-12-03T13:30:00Z'
+                  mwLimit: '51'
+                - duid: duid2
+                  intervalDateTime: '0020-12-02T12:30:00Z'
+                  mwLimit: '52'
+              clusterElements:
+              - - duid1: duid1
+                  clusterId: cluster1
+                  intervaleDateTime: '2020-12-01T12:30:00Z'
+                  elementsAvailable: '12'
+                - duid1: duid1
+                  clusterId: cluster1
+                  intervaleDateTime: '2020-12-02T02:30:00Z'
+                  elementsAvailable: '13'
+                - duid1: duid1
+                  clusterId: cluster1
+                  intervaleDateTime: '2020-12-02T05:30:00Z'
+                  elementsAvailable: '15'
+                - duid1: duid3
+                  clusterId: cluster1
+                  intervaleDateTime: '2020-12-02T05:30:00Z'
+                  elementsAvailable: '15'
+        description: Intermittent Generation availability Payload
+      responses:
+        '200':
+          description: This response is provided when the payload are validated and saved in the AEMO's
+            systems.
+          content:
+            application/json:
+              example:
+                transactionId: bc1edb34-6b4c-4c65-b6ae-876e05ee545e
+                data:
+                  responseTimeStamp: '2019-06-20T00:52:52Z'
+                  responseText: Submission successful
+                errors: []
+                warnings: []
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10938834-1
+                data: ''
+                errors:
+                - code: '400'
+                  source: API Gateway
+                  title: Bad Request
+                  detail: Regex threat/JSON threat detected in request
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect OR user account is locked out.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '401'
+                  source: API Gateway
+                  title: Unauthorized
+                  detail: Authorization failed
+        '404':
+          description: This response is provided when a resource missing from URL or incorrect URL.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '404'
+                  source: ''
+                  title: Not Found
+                  detail: Resource not found at /guests/session
+        '405':
+          description: This response is provided when the method is not correct.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '405'
+                  source: ''
+                  title: Method Not Allowed
+                  detail: Invalid method for path /guests/sessions
+        '422':
+          description: This response is provided when the method is not correct.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: Invalid-Mw-Limit
+                  source: $.mwLimits[?(@.duid == 'BALDHWF1' && @.intervalDateTime=='2022-09-01T05:00:00+10:00')]
+                  title: Mw value supplied is invalid
+                  detail: The Mw Limit value supplied is invalid
+        '429':
+          description: Too Many Requests - The Quota/Spike arrest limits have been exceeded
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '429'
+                  source: ''
+                  title: Too Many Requests
+                  detail: The Quota/Spike arrest limits have been exceeded
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '500'
+                  source: ''
+                  title: InternalServerError
+                  detail: An unexpected error has occurred
+        '502':
+          description: Bad Gateway error
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '502'
+                  source: ''
+                  title: Bad Gateway
+                  detail: Bad Gateway
+        '503':
+          description: Service temporarily unavailable
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '503'
+                  source: ''
+                  title: Service Unavailable
+                  detail: Service Unavailable
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +406,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Intermittent Generation Availability Submissions
+  description: Introduction

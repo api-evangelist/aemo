@@ -1,0 +1,101 @@
+generated: '2026-07-27'
+method: searched
+source: live probes of every AEMO host in apis.yml and every OpenAPI servers[] host
+description: >-
+  Result of probing the RFC 8615 /.well-known/ discovery surface across every public AEMO host.
+  AEMO publishes an RFC 9116 security.txt on the corporate site and an OpenID Connect discovery
+  document for the Azure AD B2C tenant that fronts the DER Register consumer-registration API.
+  No /.well-known/api-catalog, ai-plugin.json, oauth-authorization-server or openid-configuration
+  is published on the developer portal or the API gateway hosts.
+notes:
+  - The corporate site (www.aemo.com.au / aemo.com.au) sits behind a WAF that answers automated
+    clients with HTTP 403 on nearly every path; /.well-known/security.txt is served normally.
+  - nemweb.com.au answers automated clients with HTTP 403 across the board, so its /.well-known/
+    surface could not be established either way.
+hosts:
+  - host: https://www.aemo.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        file: aemo-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://login.aemo.com.au
+    note: Azure AD B2C tenant fronting the DER Register consumer registration API.
+    documents:
+      - path: /login.aemo.com.au/v2.0/.well-known/openid-configuration?p=B2C_1A_DERR_SIGNUPSIGNIN
+        status: 200
+        content_type: application/json
+        file: aemo-derr-openid-configuration.json
+  - host: https://dev.aemo.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://api.aemo.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://visualisations.aemo.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://data.wa.aemo.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://gbbwa.aemo.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://nemweb.com.au
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: WAF blocks automated clients; presence could not be determined.

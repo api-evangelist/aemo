@@ -3,10 +3,576 @@ info:
   title: WEMDE NCESS
   description: ''
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/wemde-ncess-external-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-gwy-prd.aemo.local/WEM/v1/Ncess
-  - url: https://api-prd.aemo.local/WEM/v1/Ncess
-paths: { }
+- url: https://api-gwy-prd.aemo.local/WEM/v1/Ncess
+- url: https://api-prd.aemo.local/WEM/v1/Ncess
+paths:
+  /AEMOProcured/contractDetails?dispatchIntervalFrom={dispatchIntervalFrom}&dispatchIntervalTo={dispatchIntervalTo}:
+    get:
+      operationId: retrievesContractdetailsForTheAEMOProcuredParticipants
+      summary: Retrieves Contractdetails for the AEMOProcured Participants
+      tags:
+      - WEMDE NCESS
+      description: Retrieves Contractdetails for the AEMOProcured Participants
+      parameters:
+      - name: dispatchIntervalFrom
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is
+          optional - api will by default treat incoming time as +08:00'
+      - name: dispatchIntervalTo
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is
+          optional - api will by default treat incoming time as +08:00'
+      - name: participantCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: facilityCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                data:
+                  ncessContractDetails:
+                  - dispatchInterval: string
+                    participantCode: string
+                    facilityCode: string
+                    contractId: string
+                    enablementQuantity: 0
+                    dispatchQuantity: 0
+                    amountPayable: 0
+                errors:
+                - {}
+                warnings:
+                - {}
+                infos:
+                - {}
+                transactionId: string
+            text/json:
+              example:
+                data:
+                  ncessContractDetails:
+                  - dispatchInterval: string
+                    participantCode: string
+                    facilityCode: string
+                    contractId: string
+                    enablementQuantity: 0
+                    dispatchQuantity: 0
+                    amountPayable: 0
+                errors:
+                - {}
+                warnings:
+                - {}
+                infos:
+                - {}
+                transactionId: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '422':
+          description: Client Error
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable or server error
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+  ? /networkOperatorProcured/contractDetails?dispatchIntervalFrom={dispatchIntervalFrom}&dispatchIntervalTo={dispatchIntervalTo}
+  : get:
+      operationId: retrievesContractdetailsForTheNetworkOperatorProcuredParticipants
+      summary: Retrieves Contractdetails for the NetworkOperatorProcured Participants
+      tags:
+      - WEMDE NCESS
+      description: Retrieves Contractdetails for the NetworkOperatorProcured Participants
+      parameters:
+      - name: dispatchIntervalFrom
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is
+          optional - api will by default treat incoming time as +08:00'
+      - name: dispatchIntervalTo
+        in: path
+        required: true
+        schema:
+          type: string
+        description: 'Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is
+          optional - api will by default treat incoming time as +08:00'
+      - name: participantCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                data:
+                  ncessContractDetails:
+                  - dispatchInterval: string
+                    participantCode: string
+                    facilityCode: string
+                    contractId: string
+                    enablementQuantity: 0
+                    dispatchQuantity: 0
+                    amountPayable: 0
+                    constraintEquationId: string
+                    dispatchInstructionInformation:
+                      dispatchInstructionId: string
+                      issueTime: string
+                      ackStatus: true
+                      ackTime: string
+                      sentOutDispatchTarget: 0
+                      sentOutDispatchCap: 0
+                      asGeneratedDispatchTarget: 0
+                      asGeneratedDispatchCap: 0
+                      rampRate: 0
+                      regulationRaiseEnablementQuantity: 0
+                      regulationLowerEnablementQuantity: 0
+                      contingencyRaiseEnablementQuantity: 0
+                      contingencyLowerEnablementQuantity: 0
+                      rocofEnablementQuantity: 0
+                errors:
+                - {}
+                warnings:
+                - {}
+                infos:
+                - {}
+                transactionId: string
+            text/json:
+              example:
+                data:
+                  ncessContractDetails:
+                  - dispatchInterval: string
+                    participantCode: string
+                    facilityCode: string
+                    contractId: string
+                    enablementQuantity: 0
+                    dispatchQuantity: 0
+                    amountPayable: 0
+                    constraintEquationId: string
+                    dispatchInstructionInformation:
+                      dispatchInstructionId: string
+                      issueTime: string
+                      ackStatus: true
+                      ackTime: string
+                      sentOutDispatchTarget: 0
+                      sentOutDispatchCap: 0
+                      asGeneratedDispatchTarget: 0
+                      asGeneratedDispatchCap: 0
+                      rampRate: 0
+                      regulationRaiseEnablementQuantity: 0
+                      regulationLowerEnablementQuantity: 0
+                      contingencyRaiseEnablementQuantity: 0
+                      contingencyLowerEnablementQuantity: 0
+                      rocofEnablementQuantity: 0
+                errors:
+                - {}
+                warnings:
+                - {}
+                infos:
+                - {}
+                transactionId: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '422':
+          description: Client Error
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable or server error
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
 components:
   securitySchemes:
     apiKeyHeader:
@@ -18,6 +584,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: WEMDE NCESS
+  description: WEMDE NCESS

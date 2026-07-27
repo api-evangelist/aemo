@@ -3,9 +3,72 @@ info:
   title: oauth-v1
   description: ''
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/oauth-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/oauth/v1
-paths: { }
+- url: https://api-prd.aemo.local/oauth/v1
+paths:
+  /token:
+    post:
+      operationId: requestAToken
+      summary: Request a Token
+      tags:
+      - oauth-v1
+      description: Request for a New Token.  This request uses API Key Details as BasicAuth as the Authentication
+        Method.
+      parameters:
+      - name: grant_type
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Grant Type
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: client id and client secret
+      responses:
+        '200':
+          description: Succesfully generated token
+          content:
+            application/json:
+              example:
+                transactionID: b85a35f8-f741-40ac-a701-a8cfebb25669
+                acess_token: Gy3TJkeHAC3bDxO2YBp
+                access_token_expires_in: '3599'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                code: 401
+                title: Unauthorized
+                detail: Authorization failed
+                source: API Gateway
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                code: 405
+                title: Method Not Allowed
+                detail: Input request HTTP method is <Invalid Method passed>, but operation accepts only
+                  [<Valid Method>]
+                source: ''
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                code: 500
+                title: Internal Server Error
+                detail: Internal Server Error
+                source: ''
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +80,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: oauth-v1
+  description: oauth-v1

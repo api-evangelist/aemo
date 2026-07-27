@@ -1,11 +1,211 @@
 openapi: 3.0.1
 info:
   title: MT PASA Offers
-  description: "## Introduction\nThe MT PASA Offers API allows Scheduled Generators, Market Customers, Market Network Service Providers, and Integrated Resource Providers to submit their MT PASA Offers for Bi-directional Units (BDU), Scheduled Generation Units (SGU), Scheduled Load Units (SLU), and Scheduled Network Services (SNS). MT PASA Offers are input into the MT PASA process."
+  description: '## Introduction
+
+    The MT PASA Offers API allows Scheduled Generators, Market Customers, Market Network Service Providers,
+    and Integrated Resource Providers to submit their MT PASA Offers for Bi-directional Units (BDU), Scheduled
+    Generation Units (SGU), Scheduled Load Units (SLU), and Scheduled Network Services (SNS). MT PASA
+    Offers are input into the MT PASA process.'
   version: ''
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/mtpasaoffers-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMWholesale/v1/mtpasaoffers
-paths: { }
+- url: https://api-prd.aemo.local/NEMWholesale/v1/mtpasaoffers
+paths:
+  /submission:
+    post:
+      operationId: submitOneOrMoreMTPASAOffers
+      summary: Submit one or more MTPASA Offers.
+      tags:
+      - MT PASA Offers
+      description: The submission endpoint allows participants to submit one or more MTPASA Offers. You
+        provide the Offer details in the Offers array in the JSON schema. Every Submission must supply
+        all required submission level information otherwise AEMO rejects the submission. This endpoint
+        has payload parameters only (no query parameters).
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      requestBody:
+        content:
+          application/json:
+            example:
+              MtpasaOfferFileTrk:
+                Offers:
+                - UnitId: ER01
+                  EffectiveDate: '2023-08-20'
+                  EnergyLimit: 5
+                  Capacity1: 1
+                  unitState1: Noderatings
+                  Recalltime1: ''
+                  Capacity2: 2
+                  unitState2: Noderatings
+                  Recalltime2: ''
+                  Capacity3: 0
+                  unitState3: mothballed
+                  Recalltime3: 3
+                  Capacity4: 0
+                  unitState4: outageplanbasic
+                  Recalltime4: 4
+                  Capacity5: 5
+                  unitState5: Noderatings
+                  Recalltime5: ''
+                  Capacity6: 6
+                  unitState6: Noderatings
+                  Recalltime6: ''
+                  Capacity7: 7
+                  unitState7: Noderatings
+                  Recalltime7: ''
+                  LastChanged: '2023-06-20T01:00:00Z'
+        description: MT PASA offers payload
+      responses:
+        '200':
+          description: This response is provided when the payload are validated and saved in the AEMO's
+            systems.
+          content:
+            application/json:
+              example:
+                transactionId: 38ae4076-44fe-4467-95e1-c2aee8b69924
+                data:
+                  isSuccessful: true
+                  offerDateTime: '2023-08-11T02:24:02Z'
+                  offerErrorInfoList: []
+                errors: []
+                warnings: []
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10938834-1
+                data: ''
+                errors:
+                - code: '400'
+                  source: API Gateway
+                  title: Bad Request
+                  detail: Regex threat/JSON threat detected in request
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '401'
+                  source: API Gateway
+                  title: Unauthorized
+                  detail: Authorization failed
+        '403':
+          description: This response is provided when privileges are insufficient.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '403'
+                  source: ''
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: This response is provided when a resource missing from URL or incorrect URL.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '404'
+                  source: ''
+                  title: Not Found
+                  detail: Resource not found.
+        '405':
+          description: This response is provided when a resource missing from URL or incorrect URL.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '405'
+                  source: ''
+                  title: Method Not Allowed
+                  detail: Invalid method.
+        '422':
+          description: This response is provided when the method is not correct.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '422'
+                  source: ''
+                  title: Unprocessable Entity
+                  detail: Unprocessable Entity.
+        '429':
+          description: Too Many Requests - The Quota/Spike arrest limits have been exceeded.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '429'
+                  source: ''
+                  title: Too Many Requests
+                  detail: The Quota/Spike arrest limits have been exceeded
+        '500':
+          description: This response is provided when any unforeseen error is encountered.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '500'
+                  source: ''
+                  title: InternalServerError
+                  detail: An unexpected error has occurred
+        '502':
+          description: Bad Gateway error.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '502'
+                  source: ''
+                  title: Bad Gateway
+                  detail: Bad Gateway
+        '503':
+          description: Service temporarily unavailable.
+          content:
+            application/json:
+              example:
+                transactionID: 698547280293-a-gsy1-28693-10944574-2
+                data: ''
+                errors:
+                - code: '503'
+                  source: ''
+                  title: Service Unavailable
+                  detail: Service Unavailable
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +217,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: MT PASA Offers
+  description: Introduction

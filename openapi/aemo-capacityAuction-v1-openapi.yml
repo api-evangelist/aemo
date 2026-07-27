@@ -1,11 +1,787 @@
 openapi: 3.0.1
 info:
   title: CapacityAuction
-  description: "\n## Introduction\nThe Capacity Auction API is used by facility operators and trading participants to submit and receive data relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform (CTP) and Day-Ahead Auction (DAA) market systems.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '
+
+    ## Introduction
+
+    The Capacity Auction API is used by facility operators and trading participants to submit and receive
+    data relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform (CTP)
+    and Day-Ahead Auction (DAA) market systems.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/capacityAuction-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/gsh/capacityAuction
-paths: { }
+- url: https://api-prd.aemo.local/ws/gsh/capacityAuction
+paths:
+  /GasFuture:
+    get:
+      operationId: getGSHFutureData
+      summary: Get GSH future data
+      tags:
+      - CapacityAuction
+      description: Allows auction participants to retrieve GSH Physical Gas Future Data
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success response with future data
+          content:
+            application/json:
+              example:
+                transactionId: 296432aa-7cc6-43e5-b611-0c8cbd092748
+                data:
+                  CallSuccessful: true
+                  CallResponseMessage: GSH Physical Gas Future Data Request completed.
+                  ItemList:
+                  - MarketId: GSH
+                    RecordId: 33983
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: PENDING
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-07T10:56:37Z'
+                    LastChanged: '2022-06-07T10:56:37Z'
+                  - MarketId: GSH
+                    RecordId: 33982
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: OVERRIDE
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-07T12:20:07Z'
+                    LastChanged: '2022-06-07T10:56:37Z'
+                errors: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: APIM is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /bidProfile:
+    post:
+      operationId: retrieveASpecificBidProfile
+      summary: Retrieve a specific bid profile
+      tags:
+      - CapacityAuction
+      description: Allows auction participants to retrieve a specific bid profile for a given gas date
+      parameters:
+      - name: GasDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Request date
+      - name: SubmittedAt
+        in: query
+        required: false
+        schema:
+          type: string
+        description: If not supplied, then the latest successful bid submission for each gas date in a
+          specified range is returned.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success reponse with report data
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a8f
+                data:
+                - BidProfileList:
+                  - GasDate: '2018-05-01T12:00:00Z'
+                    SubmittedAt: '2018-05-02T12:00:00Z'
+                    Bids:
+                    - BidId: '2018-05-01T12:00:00Z'
+                      Products:
+                      - FacilityId: 530001
+                        FacilityName: MAP
+                        FacilityDescription: Moomba to Adelaide Pipeline System
+                        AuctionProductTypeId: BACKHAUL
+                        ReceiptPointId: 30001
+                        ReceiptPointName: RP 1
+                        ReceiptPointDWGMCompanyIdReference: 123
+                        ReceiptPointDWGMCompanyNameReference: ABC Trading Pty Ltd
+                        ReceiptPointDWGMMIRNReference: 200001PC
+                        ReceiptPointDWGMDescriptionReference: Connection between A and B
+                        DeliveryPointId: 30002
+                        DeliveryPointName: DP 1
+                        DeliveryPointDWGMCompanyIdReference: 123
+                        DeliveryPointDWGMCompanyNameReference: Clean Energy Pty Ltd
+                        DeliveryPointDWGMMIRNReference: 200002PC
+                        DeliveryPointDWGMDescriptionReference: Connection between X and Y
+                        ServiceReference: SR000001
+                      Steps:
+                      - CumulativeStepQuantity: 123
+                        StepPrice: '2032-04-01'
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /bidSubmissionHistory:
+    post:
+      operationId: retrieveBidSubmissions
+      summary: Retrieve bid submissions
+      tags:
+      - CapacityAuction
+      description: Allows auction participants to retrieve metadata for all successful bid submissions
+        for a given gas date range.
+      parameters:
+      - name: FromGasDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: One calendar month from request date
+      - name: ToGasDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Request date
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success reponse with report data
+          content:
+            application/json:
+              example:
+                transactionId: 27d225a6-6c9a-4081-81dc-eb643fdd2a8f
+                data:
+                - GasDays:
+                  - GasDate: '2018-05-09T02:00:00Z'
+                    Submissions:
+                    - SubmissionTime: '2018-02-23T02:34:45Z'
+                      SubmittingUserId: jsmith
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /bidProfileSubmission:
+    post:
+      operationId: submitBidsForTheDayAheadAuction
+      summary: Submit bids for the Day Ahead Auction.
+      tags:
+      - CapacityAuction
+      description: "Allows auction participants to submit bids for the Day Ahead Auction.\nMultiple bids\
+        \ may be submitted in a single bid profile. However, all bids must pass validation otherwise the\
+        \ entire transaction will be rejected.\nThe latest bid profile submission will be used as the\
+        \ overall current bidding position for the specified date range.\n\n  A previously submitted bid\
+        \ can be cancelled by submitting an empty bid profile for the same gas day."
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+                FromGasDate: '2018-05-01T12:00:00Z'
+                ToGasDate: '2018-05-02T12:00:00Z'
+                Bids:
+                - BidId: '2018-05-01T12:00:00Z'
+                  Products:
+                  - FacilityId: 530001
+                    AuctionProductTypeId: BACKHAUL
+                    ReceiptPointId: 30001
+                    ReceiptPointDWGMCompanyIdReference: 123
+                    ReceiptPointDWGMMIRNReference: 200001PC
+                    DeliveryPointId: 30002
+                    DeliveryPointDWGMCompanyIdReference: 123
+                    DeliveryPointDWGMMIRNReference: 200002PC
+                    ServiceReference: SR000001
+                  Steps:
+                  - CumulativeStepQuantity: 123
+                    StepPrice: '2032-04-01'
+      responses:
+        '200':
+          description: Successful reponse with Facilites report
+          content:
+            application/json:
+              example:
+                Successful reponse with Facilites report - MOCK: ''
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
+  /GasFutureUpload:
+    post:
+      operationId: submitFutureTradeData
+      summary: Submit future trade data
+      tags:
+      - CapacityAuction
+      description: Allows auction participants to submit the GSH Physical Gas Future Data
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: false
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ItemList:
+              - GasFutureId: ASX-AEMO-DEMO-344
+                StartDate: '2022-07-01'
+                EndDate: '2022-07-31'
+                TradeType: BUY
+                Price: '3'
+                Volume: '4'
+      responses:
+        '200':
+          description: Success response with future data
+          content:
+            application/json:
+              example:
+                transactionId: 1ff59f8a-4057-4644-9fec-7aea321c96ee
+                data:
+                  CallSuccessful: true
+                  CallResponseMessage: GSH Physical Gas Future Data Request completed.
+                  ItemList:
+                  - MarketId: GSH
+                    RecordId: 33984
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: PENDING
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-08T12:00:29Z'
+                    LastChanged: '2022-06-08T12:00:29Z'
+                  - MarketId: GSH
+                    RecordId: 33983
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: OVERRIDE
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-07T10:56:37Z'
+                    LastChanged: '2022-06-08T12:00:29Z'
+                  - MarketId: GSH
+                    RecordId: 33982
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: OVERRIDE
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-07T12:20:07Z'
+                    LastChanged: '2022-06-07T10:56:37Z'
+                  - MarketId: GSH
+                    RecordId: 33981
+                    ParticipantId: '2012'
+                    GasFutureId: ''
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: SELL
+                    Price: 126
+                    Volume: 126
+                    TradeValue: 15876
+                    Status: FAIL
+                    ValidationMsg: Enter Gas future ID for the final transfer
+                    SubmittedTime: '2022-06-07T12:19:56Z'
+                    LastChanged: '2022-06-07T12:19:56Z'
+                  - MarketId: GSH
+                    RecordId: 33980
+                    ParticipantId: '2012'
+                    GasFutureId: ''
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: SELL
+                    Price: 125
+                    Volume: 125
+                    TradeValue: 15625
+                    Status: FAIL
+                    ValidationMsg: Enter Gas future ID for the final transfer
+                    SubmittedTime: '2022-06-07T12:18:37Z'
+                    LastChanged: '2022-06-07T12:18:37Z'
+                  - MarketId: GSH
+                    RecordId: 33979
+                    ParticipantId: '2012'
+                    GasFutureId: ''
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 123
+                    Volume: 123
+                    TradeValue: 15129
+                    Status: FAIL
+                    ValidationMsg: Enter Gas future ID for the final transfer
+                    SubmittedTime: '2022-06-07T12:15:27Z'
+                    LastChanged: '2022-06-07T12:15:27Z'
+                  - MarketId: GSH
+                    RecordId: 33978
+                    ParticipantId: '2012'
+                    GasFutureId: ''
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 33
+                    Volume: 3333
+                    TradeValue: 109989
+                    Status: FAIL
+                    ValidationMsg: Enter Gas future ID for the final transfer
+                    SubmittedTime: '2022-06-07T12:11:41Z'
+                    LastChanged: '2022-06-07T12:11:41Z'
+                  - MarketId: GSH
+                    RecordId: 33977
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-06-01T12:00:00Z'
+                    EndDate: '2022-06-30T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: FAIL
+                    ValidationMsg: 'Enter a valid start date in the following format : YYYY/MM/DD. e.g:
+                      2022/07/01'
+                    SubmittedTime: '2022-06-07T11:55:54Z'
+                    LastChanged: '2022-06-07T11:55:54Z'
+                  - MarketId: GSH
+                    RecordId: 33976
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-06-01T12:00:00Z'
+                    EndDate: '2022-06-30T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: FAIL
+                    ValidationMsg: 'Enter a valid start date in the following format : YYYY/MM/DD. e.g:
+                      2022/07/01'
+                    SubmittedTime: '2022-06-07T11:55:25Z'
+                    LastChanged: '2022-06-07T11:55:25Z'
+                  - MarketId: GSH
+                    RecordId: 33975
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-06-01T12:00:00Z'
+                    EndDate: '2022-06-30T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: FAIL
+                    ValidationMsg: 'Enter a valid start date in the following format : YYYY/MM/DD. e.g:
+                      2022/07/01'
+                    SubmittedTime: '2022-06-07T11:54:58Z'
+                    LastChanged: '2022-06-07T11:54:58Z'
+                  - MarketId: GSH
+                    RecordId: 33974
+                    ParticipantId: '2012'
+                    GasFutureId: ''
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 222
+                    Volume: 222
+                    TradeValue: 49284
+                    Status: FAIL
+                    ValidationMsg: Enter Gas future ID for the final transfer
+                    SubmittedTime: '2022-06-07T11:49:29Z'
+                    LastChanged: '2022-06-07T11:49:29Z'
+                  - MarketId: GSH
+                    RecordId: 33973
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-DEMO-344
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 3
+                    Volume: 4
+                    TradeValue: 12
+                    Status: OVERRIDE
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-07T11:30:04Z'
+                    LastChanged: '2022-06-07T12:20:07Z'
+                  - MarketId: GSH
+                    RecordId: 33963
+                    ParticipantId: '2012'
+                    GasFutureId: ASX-AEMO-0012
+                    ProductGroupCode: GAS-WAL
+                    ProductTypeCode: Gas - NG Months
+                    DeliveryPoint: WAL HP Trade Point
+                    StartDate: '2022-07-01T12:00:00Z'
+                    EndDate: '2022-07-31T12:00:00Z'
+                    TradeType: BUY
+                    Price: 2
+                    Volume: 2
+                    TradeValue: 4
+                    Status: PENDING
+                    ValidationMsg: ''
+                    SubmittedTime: '2022-06-02T10:41:56Z'
+                    LastChanged: '2022-06-02T10:41:56Z'
+                errors: []
+        '400':
+          description: '400'
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorization" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+        '500':
+          description: APIM is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: Exceeds throttling limits OR SSL Certificate authentication validation failed
+          content:
+            application/json:
+              example:
+                Exception: 'Service invocation for API was rejected based on policy violation OR Error
+                  message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate'
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +793,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: CapacityAuction
+  description: CapacityAuction

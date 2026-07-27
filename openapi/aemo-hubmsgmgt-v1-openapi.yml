@@ -1,11 +1,117 @@
 openapi: 3.0.1
 info:
   title: HubMessageManagement
-  description: "## Introduction\nThe HubMessageManagement API is a B2B SMP APIs used retrieve the current list of stop files for all participants or for a specific participant (using alerts) resource. \n\nParticipants can use this resource to: \n1. Ensure technical requirements required to connect to e-Hub are validated (for example, appropriate network ports are open). Participants can utilise this function to ensure their systems can connect to e-Hub using their SSL certificates and API keys.\n2. Determine if the e-Hub system is operational (ping-pong test).\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: "## Introduction\nThe HubMessageManagement API is a B2B SMP APIs used retrieve the current\
+    \ list of stop files for all participants or for a specific participant (using alerts) resource. \n\
+    \nParticipants can use this resource to: \n1. Ensure technical requirements required to connect to\
+    \ e-Hub are validated (for example, appropriate network ports are open). Participants can utilise\
+    \ this function to ensure their systems can connect to e-Hub using their SSL certificates and API\
+    \ keys.\n2. Determine if the e-Hub system is operational (ping-pong test).\n\nFor details on how to\
+    \ get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\"\
+    \ alt=\"View API Docs\" /></a>"
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/hubmsgmgt-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/HubMessageManagement
-paths: { }
+- url: https://api-prd.aemo.local/ws/HubMessageManagement
+paths:
+  /alerts:
+    get:
+      operationId: getAlert
+      summary: Get Alert
+      tags:
+      - HubMessageManagement
+      description: Return Participants that have a B2B Stop file. Returns stop file details for all participants
+        or the requested ParticipantID. Note- This API & resource will be enhanced in future to return
+        the list of B2M stop files
+      parameters:
+      - name: initiatingParticipantID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ParticipantID of the Participant invoking the API Note- If the API keys and certificates
+          issued against the ParticipantID does not match with the ParticipantID passed in the query string,
+          the system will send an exception
+      - name: alertType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: If the value is set to ‘B2BStopFile’, details related to B2B stop files will be sent.
+          In future this parameter will be extended to support the retrieval of B2M stop files. If this
+          parameter is not passed; the e-Hub will default the alertType to ‘B2BStopFile’.
+      - name: queryParticipantID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID.
+          The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID
+          is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested
+          queryParticipantID. If queryParticipantID is not passed it will return the current list of stop
+          files in the market.
+      responses:
+        '200':
+          description: aseXML hub Acknowledgement (status = ‘Accept’) will be sent
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not GET
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+  /ping:
+    get:
+      operationId: getStatusOfCoreEHubApplications
+      summary: Get status of core e-Hub applications
+      tags:
+      - HubMessageManagement
+      description: 'Returns response code to state if the core e-Hub applications are available / operational.
+        This API/resource will be used by the Participants to
+
+        -  Test if the Participant application / gateway is able to establish connectivity with the e-Hub
+        and/or
+
+        - Validate if the SSL configuration / certificates are valid and/or
+
+        - Check if the core e-Hub applications are available'
+      parameters:
+      - name: initiatingParticipantID
+        in: query
+        required: true
+        schema:
+          type: string
+        description: ParticipantID of the Participant invoking the API Note- If the API keys and certificates
+          issued against the ParticipantID does not match with the ParticipantID passed in the query string,
+          the system will send an exception
+      responses:
+        '200':
+          description: Successful Ping i.e. Participant is able to connect to e-Hub, authentication &
+            authorisation is valid and the e-Hub is operational.
+          content:
+            application/xml:
+              schema: {}
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not GET
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Core e-Hub application(s) is unavailable
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +123,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: HubMessageManagement
+  description: Introduction

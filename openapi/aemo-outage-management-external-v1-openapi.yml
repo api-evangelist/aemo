@@ -2,9 +2,2444 @@ openapi: 3.0.1
 info:
   title: Outage Management
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/outage-management-external-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/v1/outageManagement
-paths: { }
+- url: https://api-prd.aemo.local/WEM/v1/outageManagement
+paths:
+  /outageData/generatorOutages:
+    post:
+      operationId: createANewGeneratorOutageInOutageManagementSystem
+      summary: Create a new Generator Outage in Outage Management System
+      tags:
+      - Outage Management
+      description: Submit one Generator Outage synchronously
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+          application/json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+          text/json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+          application/*+json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  outage:
+                    details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData/networkOutages:
+    post:
+      operationId: createANewNetworkOutageInOutageManagementSystem
+      summary: Create a new Network Outage in Outage Management System
+      tags:
+      - Outage Management
+      description: Submit one Network Outage synchronously
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              temporaryRestoration:
+                temporaryRestoredFlag: true
+                restorationPeriods:
+                - pauseInterval: string
+                  recommenceInterval: string
+              equipments:
+                secondaryEquipmentFlag: true
+                equipmentListFlag: EL
+                equipmentList:
+                - equipmentId: string
+              pointsOfIsolation:
+                points:
+                - pointOfIsolation: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              impacts:
+                operationalImpact: string
+                impactsThirdParty: true
+                facilitiesImpacted: string
+                thirdPartyNotified: true
+                scadaChangeFlag: true
+                systemAlterationFlag: true
+              permits:
+                permitType: string
+              limitAdvice:
+                limitAdviceRequired: 'No'
+                limitAdviceDescription: string
+              contactInformation:
+                notifications:
+                - notificationEmailAddress: string
+                additionalDetails: string
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+          application/json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              temporaryRestoration:
+                temporaryRestoredFlag: true
+                restorationPeriods:
+                - pauseInterval: string
+                  recommenceInterval: string
+              equipments:
+                secondaryEquipmentFlag: true
+                equipmentListFlag: EL
+                equipmentList:
+                - equipmentId: string
+              pointsOfIsolation:
+                points:
+                - pointOfIsolation: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              impacts:
+                operationalImpact: string
+                impactsThirdParty: true
+                facilitiesImpacted: string
+                thirdPartyNotified: true
+                scadaChangeFlag: true
+                systemAlterationFlag: true
+              permits:
+                permitType: string
+              limitAdvice:
+                limitAdviceRequired: 'No'
+                limitAdviceDescription: string
+              contactInformation:
+                notifications:
+                - notificationEmailAddress: string
+                additionalDetails: string
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+          text/json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              temporaryRestoration:
+                temporaryRestoredFlag: true
+                restorationPeriods:
+                - pauseInterval: string
+                  recommenceInterval: string
+              equipments:
+                secondaryEquipmentFlag: true
+                equipmentListFlag: EL
+                equipmentList:
+                - equipmentId: string
+              pointsOfIsolation:
+                points:
+                - pointOfIsolation: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              impacts:
+                operationalImpact: string
+                impactsThirdParty: true
+                facilitiesImpacted: string
+                thirdPartyNotified: true
+                scadaChangeFlag: true
+                systemAlterationFlag: true
+              permits:
+                permitType: string
+              limitAdvice:
+                limitAdviceRequired: 'No'
+                limitAdviceDescription: string
+              contactInformation:
+                notifications:
+                - notificationEmailAddress: string
+                additionalDetails: string
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+          application/*+json:
+            example:
+              details:
+                outageType: Forced
+                outageDescription: string
+                forcedOutageNotificationDate: string
+              duration:
+                commencementInterval: string
+                endInterval: string
+              temporaryRestoration:
+                temporaryRestoredFlag: true
+                restorationPeriods:
+                - pauseInterval: string
+                  recommenceInterval: string
+              equipments:
+                secondaryEquipmentFlag: true
+                equipmentListFlag: EL
+                equipmentList:
+                - equipmentId: string
+              pointsOfIsolation:
+                points:
+                - pointOfIsolation: string
+              contingencyPlanInformation:
+                riskOfExtension: High
+                estimatedRecoveryHours: 0
+                estimatedRecoveryMinutes: 0
+                contingencyPlan: string
+              availabilityDeclaration:
+                exemptionAppliesFlag: 'False'
+                exemptionReasons: string
+              associatedOutageDetails:
+                relatedOutages:
+                - outageNumber: 0
+                  relationshipDetails: string
+                switchingRequired: true
+              impacts:
+                operationalImpact: string
+                impactsThirdParty: true
+                facilitiesImpacted: string
+                thirdPartyNotified: true
+                scadaChangeFlag: true
+                systemAlterationFlag: true
+              permits:
+                permitType: string
+              limitAdvice:
+                limitAdviceRequired: 'No'
+                limitAdviceDescription: string
+              contactInformation:
+                notifications:
+                - notificationEmailAddress: string
+                additionalDetails: string
+              serviceReduction:
+                facilityCode: string
+                facilityRAC: 0
+                energy:
+                - technologyTypeCode: string
+                  technologyTypeRAC: 0
+                essentialSystemServices:
+                - serviceType: string
+                  serviceAvailability: In Service
+                  serviceRAC: 0
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  outage:
+                    details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData/{outageNumber}:
+    get:
+      operationId: getParticularOutage
+      summary: Get particular Outage
+      tags:
+      - Outage Management
+      description: Get particular Outage
+      parameters:
+      - name: outageNumber
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Format - int64. Outage Number required to be retrieved
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  outage:
+                    details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData/status:
+    get:
+      operationId: retrieveLatestOutageStatusForNetworkOperator
+      summary: Retrieve Latest Outage Status for Network Operator
+      tags:
+      - Outage Management
+      description: Search and Retrieve Latest Outage Status Update for Network Operator
+      parameters:
+      - name: lastModifiedDateTime
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - yyyy-MM-ddTHH:mm:ss+08:00.
+      - name: endDateTime
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - yyyy-MM-ddTHH:mm:ss+08:00.
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Format - int32.
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Format - int32.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  outages:
+                  - outageNumber: 0
+                    outageVersionNumber: 0
+                    status: string
+                    atRisk: true
+                    ptpPtrRequired: true
+                    respondToParticipant: string
+                    modifiedDateTime: string
+                    modifiedUser: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData:
+    get:
+      operationId: retrieveOutageFromOutageManagement
+      summary: Retrieve Outage from Outage Management
+      tags:
+      - Outage Management
+      description: Search and Retrieve Outage
+      parameters:
+      - name: outageTypes
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: ParticipantCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: facilities
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: outageSource
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Network
+          - Generator
+      - name: outageStatuses
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: periodStart
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - yyyy-MM-ddTHH:mm:ss+08:00.
+      - name: periodEnd
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - yyyy-MM-ddTHH:mm:ss+08:00.
+      - name: outageNumbers
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pageNumber
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Format - int32.
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Format - int32.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  metadata:
+                    page: 0
+                    totalRecordsPerPage: 0
+                    pageCount: 0
+                    totalCount: 0
+                    links:
+                      self: string
+                      first: string
+                      previous: string
+                      next: string
+                      last: string
+                  outages:
+                  - details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData/networkOutages/{outageNumber}:
+    put:
+      operationId: updateExistingNetworkOutageInOutageManagementSystem
+      summary: Update existing Network Outage in Outage Management System
+      tags:
+      - Outage Management
+      description: Update Network Outage synchronously
+      parameters:
+      - name: outageNumber
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Format - int64.
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              networkOutage:
+                details:
+                  outageType: Forced
+                  outageDescription: string
+                  forcedOutageNotificationDate: string
+                duration:
+                  commencementInterval: string
+                  endInterval: string
+                temporaryRestoration:
+                  temporaryRestoredFlag: true
+                  restorationPeriods:
+                  - pauseInterval: string
+                    recommenceInterval: string
+                equipments:
+                  secondaryEquipmentFlag: true
+                  equipmentListFlag: EL
+                  equipmentList:
+                  - equipmentId: string
+                pointsOfIsolation:
+                  points:
+                  - pointOfIsolation: string
+                contingencyPlanInformation:
+                  riskOfExtension: High
+                  estimatedRecoveryHours: 0
+                  estimatedRecoveryMinutes: 0
+                  contingencyPlan: string
+                availabilityDeclaration:
+                  exemptionAppliesFlag: 'False'
+                  exemptionReasons: string
+                associatedOutageDetails:
+                  relatedOutages:
+                  - outageNumber: 0
+                    relationshipDetails: string
+                  switchingRequired: true
+                impacts:
+                  operationalImpact: string
+                  impactsThirdParty: true
+                  facilitiesImpacted: string
+                  thirdPartyNotified: true
+                  scadaChangeFlag: true
+                  systemAlterationFlag: true
+                permits:
+                  permitType: string
+                limitAdvice:
+                  limitAdviceRequired: 'No'
+                  limitAdviceDescription: string
+                contactInformation:
+                  notifications:
+                  - notificationEmailAddress: string
+                  additionalDetails: string
+                serviceReduction:
+                  facilityCode: string
+                  facilityRAC: 0
+                  energy:
+                  - technologyTypeCode: string
+                    technologyTypeRAC: 0
+                  essentialSystemServices:
+                  - serviceType: string
+                    serviceAvailability: In Service
+                    serviceRAC: 0
+          application/json:
+            example:
+              networkOutage:
+                details:
+                  outageType: Forced
+                  outageDescription: string
+                  forcedOutageNotificationDate: string
+                duration:
+                  commencementInterval: string
+                  endInterval: string
+                temporaryRestoration:
+                  temporaryRestoredFlag: true
+                  restorationPeriods:
+                  - pauseInterval: string
+                    recommenceInterval: string
+                equipments:
+                  secondaryEquipmentFlag: true
+                  equipmentListFlag: EL
+                  equipmentList:
+                  - equipmentId: string
+                pointsOfIsolation:
+                  points:
+                  - pointOfIsolation: string
+                contingencyPlanInformation:
+                  riskOfExtension: High
+                  estimatedRecoveryHours: 0
+                  estimatedRecoveryMinutes: 0
+                  contingencyPlan: string
+                availabilityDeclaration:
+                  exemptionAppliesFlag: 'False'
+                  exemptionReasons: string
+                associatedOutageDetails:
+                  relatedOutages:
+                  - outageNumber: 0
+                    relationshipDetails: string
+                  switchingRequired: true
+                impacts:
+                  operationalImpact: string
+                  impactsThirdParty: true
+                  facilitiesImpacted: string
+                  thirdPartyNotified: true
+                  scadaChangeFlag: true
+                  systemAlterationFlag: true
+                permits:
+                  permitType: string
+                limitAdvice:
+                  limitAdviceRequired: 'No'
+                  limitAdviceDescription: string
+                contactInformation:
+                  notifications:
+                  - notificationEmailAddress: string
+                  additionalDetails: string
+                serviceReduction:
+                  facilityCode: string
+                  facilityRAC: 0
+                  energy:
+                  - technologyTypeCode: string
+                    technologyTypeRAC: 0
+                  essentialSystemServices:
+                  - serviceType: string
+                    serviceAvailability: In Service
+                    serviceRAC: 0
+          text/json:
+            example:
+              networkOutage:
+                details:
+                  outageType: Forced
+                  outageDescription: string
+                  forcedOutageNotificationDate: string
+                duration:
+                  commencementInterval: string
+                  endInterval: string
+                temporaryRestoration:
+                  temporaryRestoredFlag: true
+                  restorationPeriods:
+                  - pauseInterval: string
+                    recommenceInterval: string
+                equipments:
+                  secondaryEquipmentFlag: true
+                  equipmentListFlag: EL
+                  equipmentList:
+                  - equipmentId: string
+                pointsOfIsolation:
+                  points:
+                  - pointOfIsolation: string
+                contingencyPlanInformation:
+                  riskOfExtension: High
+                  estimatedRecoveryHours: 0
+                  estimatedRecoveryMinutes: 0
+                  contingencyPlan: string
+                availabilityDeclaration:
+                  exemptionAppliesFlag: 'False'
+                  exemptionReasons: string
+                associatedOutageDetails:
+                  relatedOutages:
+                  - outageNumber: 0
+                    relationshipDetails: string
+                  switchingRequired: true
+                impacts:
+                  operationalImpact: string
+                  impactsThirdParty: true
+                  facilitiesImpacted: string
+                  thirdPartyNotified: true
+                  scadaChangeFlag: true
+                  systemAlterationFlag: true
+                permits:
+                  permitType: string
+                limitAdvice:
+                  limitAdviceRequired: 'No'
+                  limitAdviceDescription: string
+                contactInformation:
+                  notifications:
+                  - notificationEmailAddress: string
+                  additionalDetails: string
+                serviceReduction:
+                  facilityCode: string
+                  facilityRAC: 0
+                  energy:
+                  - technologyTypeCode: string
+                    technologyTypeRAC: 0
+                  essentialSystemServices:
+                  - serviceType: string
+                    serviceAvailability: In Service
+                    serviceRAC: 0
+          application/*+json:
+            example:
+              networkOutage:
+                details:
+                  outageType: Forced
+                  outageDescription: string
+                  forcedOutageNotificationDate: string
+                duration:
+                  commencementInterval: string
+                  endInterval: string
+                temporaryRestoration:
+                  temporaryRestoredFlag: true
+                  restorationPeriods:
+                  - pauseInterval: string
+                    recommenceInterval: string
+                equipments:
+                  secondaryEquipmentFlag: true
+                  equipmentListFlag: EL
+                  equipmentList:
+                  - equipmentId: string
+                pointsOfIsolation:
+                  points:
+                  - pointOfIsolation: string
+                contingencyPlanInformation:
+                  riskOfExtension: High
+                  estimatedRecoveryHours: 0
+                  estimatedRecoveryMinutes: 0
+                  contingencyPlan: string
+                availabilityDeclaration:
+                  exemptionAppliesFlag: 'False'
+                  exemptionReasons: string
+                associatedOutageDetails:
+                  relatedOutages:
+                  - outageNumber: 0
+                    relationshipDetails: string
+                  switchingRequired: true
+                impacts:
+                  operationalImpact: string
+                  impactsThirdParty: true
+                  facilitiesImpacted: string
+                  thirdPartyNotified: true
+                  scadaChangeFlag: true
+                  systemAlterationFlag: true
+                permits:
+                  permitType: string
+                limitAdvice:
+                  limitAdviceRequired: 'No'
+                  limitAdviceDescription: string
+                contactInformation:
+                  notifications:
+                  - notificationEmailAddress: string
+                  additionalDetails: string
+                serviceReduction:
+                  facilityCode: string
+                  facilityRAC: 0
+                  energy:
+                  - technologyTypeCode: string
+                    technologyTypeRAC: 0
+                  essentialSystemServices:
+                  - serviceType: string
+                    serviceAvailability: In Service
+                    serviceRAC: 0
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  outage:
+                    details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData/networkOutages/{outageNumber}/withdraw:
+    put:
+      operationId: withdrawExistingNetworkOutageInOutageManagementSystem
+      summary: Withdraw existing Network Outage in Outage Management System
+      tags:
+      - Outage Management
+      description: Withdraw Network Outage Synchronously
+      parameters:
+      - name: outageNumber
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Format - int64. Outage Number identifying specific Outage
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                  outage:
+                    details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
+  /outageData/networkOutages/bulkWithdraw:
+    put:
+      operationId: withdrawExistingNetworkOutagesInOutageManagementSystem
+      summary: Withdraw existing Network Outages in Outage Management System
+      tags:
+      - Outage Management
+      description: Withdraw Network Outages
+      parameters:
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the Initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The id of the market
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              outages:
+              - 0
+          application/json:
+            example:
+              outages:
+              - 0
+          text/json:
+            example:
+              outages:
+              - 0
+          application/*+json:
+            example:
+              outages:
+              - 0
+      responses:
+        '200':
+          description: 'null'
+          content:
+            application/json:
+              example:
+                data:
+                - outage:
+                    details:
+                      outageNumber: 0
+                      outageVersionNumber: 0
+                      outageType: Forced
+                      outageStatus: Accepted
+                      outageSource: Network
+                      outageDescription: string
+                      firstSubmissionDateTime: string
+                      lastModifiedDateTime: string
+                      lastModifiedUser: string
+                      forcedOutageNotificationDate: string
+                      originator: string
+                    duration:
+                      commencementInterval: string
+                      endInterval: string
+                    equipments:
+                      secondaryEquipmentFlag: true
+                      equipmentListFlag: EL
+                      equipmentList:
+                      - equipmentId: string
+                    serviceReduction:
+                      facilityCode: string
+                      facilityRAC: 0
+                      energy:
+                      - technologyTypeCode: string
+                        technologyTypeRAC: 0
+                      essentialSystemServices:
+                      - serviceType: string
+                        serviceAvailability: In Service
+                        serviceRAC: 0
+                    assessmentInformation:
+                      atRiskFlag: true
+                      responseToParticipant: string
+                    contingencyPlanInformation:
+                      riskOfExtension: High
+                      estimatedRecoveryHours: 0
+                      estimatedRecoveryMinutes: 0
+                      contingencyPlan: string
+                    availabilityDeclaration:
+                      exemptionAppliesFlag: 'False'
+                      exemptionReasons: string
+                    associatedOutageDetails:
+                      relatedOutages:
+                      - outageNumber: 0
+                        relationshipDetails: string
+                      switchingRequired: true
+                    contactInformation:
+                      notifications:
+                      - notificationEmailAddress: string
+                      additionalDetails: string
+                    permissionFlags:
+                      ptpAndPtrRequired: true
+                    temporaryRestoration:
+                      temporaryRestoredFlag: true
+                      restorationPeriods:
+                      - pauseInterval: string
+                        recommenceInterval: string
+                    pointOfIsolation:
+                      points:
+                      - pointOfIsolation: string
+                    impacts:
+                      operationalImpact: string
+                      impactsThirdParty: true
+                      facilitiesImpacted: string
+                      thirdPartyNotified: true
+                      scadaChangeFlag: true
+                      systemAlterationFlag: true
+                    permits:
+                      permitType: string
+                    limitAdvice:
+                      limitAdviceRequired: 'No'
+                      limitAdviceDescription: string
+                    associatedConstraintSets:
+                    - constraintSetId: string
+                    aemoUpdates:
+                      dateTimeOfNotification: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match with participant id associated with
+                    certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match with participant id associated
+                        with certificate
+                      source: ''
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource Not Found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not Found
+                      detail: Resources for the endpoint URI not found. Endpoint URI:<URI>
+                      source: ''
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method Not Allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method Not Allowed
+                      detail: 'Input request HTTP method is <invokedMethod> but operation <operationURI>
+                        accepts only: [<operationMethod>]'
+                      source: ''
+        '413':
+          description: Payload Too Large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload Too Large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload Too Large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> has size of <number of bytes>
+                        bytes
+                      source: ''
+        '429':
+          description: Too many request
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too Many Requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too Many Requests
+                      detail: Number of inbound requests exceeded the throttling limits; try after sometime
+                      source: ''
+        '500':
+          description: Application unavailable
+          content:
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application Unavailable
+                  value: ''
 components:
   securitySchemes:
     apiKeyHeader:
@@ -16,6 +2451,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Outage Management
+  description: Outage Management

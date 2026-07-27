@@ -3,9 +3,855 @@ info:
   title: NEMDispatchBidding
   description: Bidding Service Open API specification
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/bidding-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMWholesale/bidding
-paths: { }
+- url: https://api-prd.aemo.local/NEMWholesale/bidding
+paths:
+  /getBid:
+    get:
+      operationId: getBid
+      summary: getBid
+      tags:
+      - NEMDispatchBidding
+      description: 'Returns an Energy, FCAS, or MNSP bid. It provides details for a specific Bid/Offer,
+        including the interval, day, and submission information. If the parameters match, the specific
+        Bid/Offer details return, otherwise an error displays.
+
+
+        This endpoint only has query parameters.'
+      parameters:
+      - name: offerTimeStamp
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Bid/Offer date and time
+      - name: tradingDate
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The trading day of the Bid/Offer
+      - name: duid
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The Unit or MNSP interconnectorId. A successful MNSP getBid response returns Link
+          IDs in the DUID objects, not Interconnector IDs
+      - name: service
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The Bid/Offer service type, one of, ENERGY, MNSP, RAISE1SEC, RAISE6SEC, RAISE60SEC,
+          RAISE5MIN, RAISEREG, LOWER6SEC, LOWER1SEC, LOWER60SEC, LOWER5MIN, LOWERREG
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value ='P01'
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value ='NEM'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Required Base64 encoding of your URM username and password, concatenated with a colon
+          and a TLS Certificate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  participantId: string
+                  offerTimeStamp: string
+                  transactionId: string
+                  referenceId: string
+                  comments: string
+                  filename: string
+                  authorisedBy: string
+                  status: string
+                  method: string
+                  energyBid:
+                    tradingDate: string
+                    duid: string
+                    direction: string
+                    prices:
+                    - 0
+                    fastStartProfile:
+                      minimumLoad: 0
+                      t1: 0
+                      t2: 0
+                      t3: 0
+                      t4: 0
+                    dailyEnergyConstraint: 0
+                    rebidExplanation:
+                      reason: string
+                      eventTime: string
+                      awareTime: string
+                      decisionTime: string
+                      category: string
+                    energyPeriods:
+                    - periodId: 0
+                      maxAvail: 0
+                      rampUpRate: 0
+                      rampDownRate: 0
+                      recallPeriod: 0
+                      bandAvail:
+                      - 0
+                      pasaAvail: 0
+                      fixedLoad: 0
+                  fcasBid:
+                    tradingDate: string
+                    duid: string
+                    direction: string
+                    prices:
+                    - 0
+                    service: RAISE6SEC
+                    rebidExplanation:
+                      reason: string
+                      eventTime: string
+                      awareTime: string
+                      decisionTime: string
+                      category: string
+                    fcasPeriods:
+                    - periodId: 0
+                      maxAvail: 0
+                      bandAvail:
+                      - 0
+                      enablementMin: 0
+                      lowBreakPoint: 0
+                      highBreakPoint: 0
+                      enablementMax: 0
+                  mnspBid:
+                    interconnectorId: string
+                    tradingDate: string
+                    mnspBidImport:
+                      linkId: string
+                      prices:
+                      - 0
+                      mnspPeriods:
+                      - periodId: 0
+                        maxAvail: 0
+                        rampUpRate: 0
+                        recallPeriod: 0
+                        bandAvail:
+                        - 0
+                        pasaAvail: 0
+                        fixedLoad: 0
+                    mnspBidExport:
+                      linkId: string
+                      prices:
+                      - 0
+                      mnspPeriods:
+                      - periodId: 0
+                        maxAvail: 0
+                        rampUpRate: 0
+                        bandAvail:
+                        - 0
+                        pasaAvail: 0
+                        fixedLoad: 0
+                    rebidExplanation:
+                      reason: string
+                      eventTime: string
+                      awareTime: string
+                      decisionTime: string
+                      category: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response payload.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response payload.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response payload.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response payload.
+        '422':
+          description: This response is provided when there are no bids found.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response payload.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /getBids:
+    get:
+      operationId: getBids
+      summary: getBids
+      tags:
+      - NEMDispatchBidding
+      description: 'Returns one or more Energy, FCAS, or MNSP Bid/Offers (not including interval data).
+        <br>
+
+        Use the following optional query parameters to search for a specific bid or offer:
+
+        - fromTradingDate
+
+        - toTradingDate
+
+        - duid or interconnectorId <br>
+
+        - service
+
+        - includeSuperseded'
+      parameters:
+      - name: fromTradingDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: From Trading Day (inclusive), default is current trading day. Format - date-time
+          (as date-time in RFC3339)
+      - name: toTradingDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Default is fromTradingDate + 7 days. A seven day range is returned. If you need a
+          greater range, submit the getBids endpoint multiple times. For the selected date range when
+          there is no explicit Bid/Offer, the last valid Bid/Offer displays. Format - date-time (as date-time
+          in RFC3339)
+      - name: service
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The Bid/Offer service type, one of, ENERGY, MNSP, RAISE1SEC, RAISE6SEC, RAISE60SEC,
+          RAISE5MIN, RAISEREG, LOWER1SEC, LOWER6SEC, LOWER60SEC, LOWER5MIN, LOWERREG
+      - name: includeSuperseded
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Specifies offers have to be retrieved. FALSE returns current effective bids, TRUE
+          return all versions of bids/offers
+      - name: duid
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Dispatchable Unit identifier recorded in AEMO''s systems. Must be upper case, maxLength:
+          10'
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value:'P01'
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value:'NEM'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Required Base64 encoding of your URM username and password, concatenated with a colon
+          and a TLS Certificate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  bids:
+                  - duid: string
+                    service: string
+                    tradingDate: string
+                    offerTimestamp: string
+                    entryType: string
+                    transactionId: string
+                    referenceId: string
+                    rebidExplanation:
+                      reason: string
+                      eventTime: string
+                      awareTime: string
+                      decisionTime: string
+                      category: string
+                errors:
+                - errorCode: string
+                  fieldName: string
+                  message: string
+                  meta: {}
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response payload.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response payload.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response payload.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response payload.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response payload.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /getSubmission:
+    get:
+      operationId: getSubmission
+      summary: getSubmission
+      tags:
+      - NEMDispatchBidding
+      description: 'Retrieves a previous submission where the requesting participantId is the submitting
+        participantId.<br>
+
+        Provide at least one of the following query parameters, otherwise no results return: <br>
+
+        - transactionId
+
+        - referenceId <br>
+
+
+        This endpoint only has query parameters.'
+      parameters:
+      - name: referenceId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The bid submission's reference identifier. You must provide at least one query parameter
+          in an API call
+      - name: transactionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The bid submission's transaction identifier. You must provide at least one query
+          parameter in an API call
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value ='P01'
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value ='NEM'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Required Base64 encoding of your URM username and password, concatenated with a colon
+          and a TLS Certificate
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  offerTimestamp: string
+                  transactionId: string
+                  referenceId: string
+                  submissionTimeStamp: string
+                  comments: string
+                  filename: string
+                  authorisedBy: string
+                  status: string
+                  method: string
+                  energyBids:
+                  - - tradingDate: string
+                      duid: string
+                      direction: string
+                      prices:
+                      - 0
+                      fastStartProfile:
+                        minimumLoad: 0
+                        t1: 0
+                        t2: 0
+                        t3: 0
+                        t4: 0
+                      dailyEnergyConstraint: 0
+                      rebidExplanation:
+                        reason: string
+                        eventTime: string
+                        awareTime: string
+                        decisionTime: string
+                        category: string
+                      energyPeriods:
+                      - periodId: 0
+                        maxAvail: 0
+                        rampUpRate: 0
+                        rampDownRate: 0
+                        bandAvail:
+                        - 0
+                        pasaAvail: 0
+                        fixedLoad: 0
+                  fcasBids:
+                  - - tradingDate: string
+                      duid: string
+                      direction: string
+                      prices:
+                      - 0
+                      service: RAISE6SEC
+                      rebidExplanation:
+                        reason: string
+                        eventTime: string
+                        awareTime: string
+                        decisionTime: string
+                        category: string
+                      fcasPeriods:
+                      - periodId: 0
+                        maxAvail: 0
+                        bandAvail:
+                        - 0
+                        enablementMin: 0
+                        lowBreakPoint: 0
+                        highBreakPoint: 0
+                        enablementMax: 0
+                  mnspBids:
+                  - - interconnectorId: string
+                      tradingDate: string
+                      mnspBidImport:
+                        linkId: string
+                        prices:
+                        - 0
+                        mnspPeriods:
+                        - periodId: 0
+                          maxAvail: 0
+                          rampUpRate: 0
+                          bandAvail:
+                          - 0
+                          pasaAvail: 0
+                          fixedLoad: 0
+                      mnspBidExport:
+                        linkId: string
+                        prices:
+                        - 0
+                        mnspPeriods:
+                        - periodId: 0
+                          maxAvail: 0
+                          rampUpRate: 0
+                          bandAvail:
+                          - 0
+                          pasaAvail: 0
+                          fixedLoad: 0
+                      rebidExplanation:
+                        reason: string
+                        eventTime: string
+                        awareTime: string
+                        decisionTime: string
+                        category: string
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response payload.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response payload.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response payload.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response payload.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response payload.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /getSubmissions:
+    get:
+      operationId: getSubmissions
+      summary: getSubmissions
+      tags:
+      - NEMDispatchBidding
+      description: "Retrieves a list of accepted submissions where the requesting participantId is the\
+        \ submitting participantId.\n\nUse the following optional query parameters to search for specific\
+        \ submissions: <br>\n- fromTradingDate\n- toTradingDate\n- transactionId\n- fromOfferTimeStamp\n\
+        - toOfferTimeStamp\n- referenceId\n- comments \n<br>\nThis endpoint has query parameters only\
+        \ (no payload parameters)."
+      parameters:
+      - name: fromTradingDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339)
+      - name: toTradingDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339)
+      - name: fromOfferTimestamp
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339)
+      - name: toOfferTimestamp
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339)
+      - name: referenceId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Identifier for a specific bid or offer submission
+      - name: comments
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: transactionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique transaction identifier
+      - name: method
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value ='P01'
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value ='NEM'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                submissions:
+                - participantId: string
+                  offerTimeStamp: string
+                  transactionId: string
+                  referenceId: string
+                  submissionTimeStamp: string
+                  comments: string
+                  filename: string
+                  authorisedBy: string
+                  status: string
+                  method: string
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response payload.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response payload.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response payload.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response payload.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response payload.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submitBids:
+    post:
+      operationId: submitBids
+      summary: submitBids
+      tags:
+      - NEMDispatchBidding
+      description: "Submit one or more Energy, FCAS, or MNSP Bids. It supports: <br>\n- Bids and Offers\
+        \ for multiple Trading Days, DUIDs (Dispatchable Unit or MSNP Interconnector ID), and FCAS Service\
+        \ Type.\n- Provision of Energy, FCAS, and MNSP bids/offers in the same submission.\n- Separate\
+        \ formats for Energy, FCAS, or MNSP bids/offers so you don't need to include unrequired fields.\n\
+        <br>\nYou provide the Bid/Offer details in the energyBids, fcasBids, or mnspBids arrays in the\
+        \ JSON schema.<br> \nThis endpoint has payload parameters only (no query parameters)."
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value:'P01'
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Generated header parameter. Example value:'NEM'
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Required Base64 encoding of your URM username and password, concatenated with a colon
+          and a TLS Certificate
+      requestBody:
+        content:
+          application/json:
+            example:
+              referenceId: rrt-123
+              comments: TEST bid
+              authorisedBy: TOM
+              energyBids:
+              - tradingDate: '2023-06-30'
+                duid: BDU_DG_TAS1
+                direction: LOAD
+                prices:
+                - -1000
+                - 0
+                - 1
+                - 2
+                - 4
+                - 8
+                - 16
+                - 32
+                - 64
+                - 15000
+                fastStartProfile: true
+                dailyEnergyConstraint: 1234.65
+                rebidExplanation: RebidReason.Enum
+                energyPeriods:
+                - periodId: 1
+                  rampUpRate: 100
+                  rampDownRate: 100
+                  recallPeriod: 0
+                  pasaAvail: 0
+                  maxAvail: 0
+                  fixedLoad: 10
+                  energyLimit: 2000
+                  bandAvail:
+                  - 10
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 20
+                  - 0
+                  - 0
+                  - 0
+              - tradingDate: '2023-06-30'
+                duid: BDU_DG_TAS1
+                direction: GEN
+                prices:
+                - -1000
+                - 0
+                - 1
+                - 2
+                - 4
+                - 8
+                - 16
+                - 32
+                - 64
+                - 15000
+                fastStartProfile: true
+                dailyEnergyConstraint: 1234.65
+                rebidExplanation: RebidReason.Enum
+                energyPeriods:
+                - periodId: 1
+                  rampUpRate: 100
+                  rampDownRate: 100
+                  recallPeriod: 0
+                  pasaAvail: 0
+                  maxAvail: 0
+                  fixedLoad: 10
+                  energyLimit: 2000
+                  bandAvail:
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 0
+                  - 5
+                  - 5
+                  - 10
+                  - 10
+              fcasBids:
+              - tradingDate: '2023-05-10'
+                duid: P01S01D1
+                direction: LOAD
+                prices:
+                - 10.1
+                - 20.2
+                - 30.3
+                - 40.4
+                - 50.5
+                - 60.6
+                - 70.7
+                - 80.8
+                - 90.9
+                - 100.5
+                service: RAISEREG
+                fcasPeriods:
+                - periodId: 1
+                  EnablementMin: -66
+                  LowBreakPoint: -66
+                  HighBreakPoint: -130
+                  EnablementMax: -130
+                  MaxAvail: 20
+                  BandAvail:
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 11
+              - tradingDate: '2023-05-10'
+                duid: P01S01D1
+                direction: GEN
+                prices:
+                - 10.1
+                - 20.2
+                - 30.3
+                - 40.4
+                - 50.5
+                - 60.6
+                - 70.7
+                - 80.8
+                - 90.9
+                - 100.5
+                service: RAISEREG
+                fcasPeriods:
+                - periodId: 1
+                  EnablementMin: 66
+                  LowBreakPoint: 66
+                  HighBreakPoint: 130
+                  EnablementMax: 130
+                  MaxAvail: 20
+                  BandAvail:
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 11
+              - tradingDate: '2023-05-10'
+                duid: P01S01D1
+                prices:
+                - 10.1
+                - 20.2
+                - 30.3
+                - 40.4
+                - 50.5
+                - 60.6
+                - 70.7
+                - 80.8
+                - 90.9
+                - 100.5
+                service: RAISE1SEC
+                fcasPeriods:
+                - periodId: 1
+                  EnablementMin: 66
+                  LowBreakPoint: 66
+                  HighBreakPoint: 130
+                  EnablementMax: 130
+                  MaxAvail: 20
+                  BandAvail:
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 10
+                  - 11
+              mnspBids: []
+        description: Payload
+      responses:
+        '200':
+          description: Submit Bids Response
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  participantId: string
+                  offerTimeStamp: string
+                  transactionId: string
+                  referenceId: string
+                  comments: string
+                  filename: string
+                  authorisedBy: string
+                  status: string
+                  method: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response payload.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response payload.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response payload.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response payload.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response payload.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +863,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: NEMDispatchBidding
+  description: Bidding Service Open API specification

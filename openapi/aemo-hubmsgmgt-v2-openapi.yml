@@ -1,11 +1,86 @@
 openapi: 3.0.1
 info:
   title: HubMessageManagementV2
-  description: "## Introduction\n The HubMessageManagement push API retrieves the current list of B2B and B2M stop files. Business transactions are sent as aseXML documents carried as payloads inside the API message and transmitted over HTTPS. \n\nParticipants can also use this API to:\n1. Ensure technical requirements required to connect to the e-Hub are validated (for example, appropriate network ports are open).\n2. Ensure their systems can connect to the e-Hub using their SSL certificates and API keys.\n3. Determine if AEMO's e-Hub is operational (ping-pong test)."
+  description: "## Introduction\n The HubMessageManagement push API retrieves the current list of B2B\
+    \ and B2M stop files. Business transactions are sent as aseXML documents carried as payloads inside\
+    \ the API message and transmitted over HTTPS. \n\nParticipants can also use this API to:\n1. Ensure\
+    \ technical requirements required to connect to the e-Hub are validated (for example, appropriate\
+    \ network ports are open).\n2. Ensure their systems can connect to the e-Hub using their SSL certificates\
+    \ and API keys.\n3. Determine if AEMO's e-Hub is operational (ping-pong test)."
   version: v2
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/hubmsgmgt-v2/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/HubMessageManagement
-paths: { }
+- url: https://api-prd.aemo.local/HubMessageManagement
+paths:
+  /getAlerts:
+    get:
+      operationId: getAlerts
+      summary: Get Alerts
+      tags:
+      - HubMessageManagementV2
+      description: Receive B2B and B2M stop file alerts
+      parameters:
+      - name: alertType
+        in: query
+        required: false
+        schema:
+          type: string
+          default: B2BStopFile
+        description: '''B2BStopFile'' or ''B2MStopFile''. If not provided, default to ''B2BStopFile'''
+      - name: queryParticipantID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Used for B2B alerts only. If provided, the alerts for that particular participant
+          is returned. This value is ignored for B2M alerts.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-transactionID
+        in: header
+        required: false
+        schema:
+          type: string
+        description: unique ID for the transaction
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The API requires the usage of HTTP Basic authentication header to allow access. This
+          is your URM username and password.
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +92,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: HubMessageManagementV2
+  description: Introduction

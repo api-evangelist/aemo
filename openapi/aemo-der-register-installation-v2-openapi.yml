@@ -1,11 +1,1545 @@
 openapi: 3.0.1
 info:
   title: WEM DER Installation V2
-  description: "## Introduction\nWEM DER Installation API enables the Network Operator to create, update, and retrieve the DER Register information details for the DER installations they have submitted to the DER Register database and to view and resolve associated exceptions"
+  description: '## Introduction
+
+    WEM DER Installation API enables the Network Operator to create, update, and retrieve the DER Register
+    information details for the DER installations they have submitted to the DER Register database and
+    to view and resolve associated exceptions'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/der-register-installation-v2/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/v2/der-register
-paths: { }
+- url: https://api-prd.aemo.local/v2/der-register
+paths:
+  /installation:
+    post:
+      operationId: createDERInstallationRecord
+      summary: Create DER installation record
+      tags:
+      - WEM DER Installation V2
+      description: Creates a DER installation record in the DER Register for the first time, when an installation
+        does not already exist for the respective NMI in the DER Register, which includes the information
+        required at the installation, AC Connection and DER Device data levels.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+      responses:
+        '200':
+          description: DER Installation has been successfully created in the DER Register database
+          content:
+            application/json:
+              example:
+                recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '422'
+                  title: <Error title>
+                  detail: <Details of business validation error>
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
+    get:
+      operationId: retrieveDERInstallationRecords
+      summary: Retrieve DER installation records
+      tags:
+      - WEM DER Installation V2
+      description: 'Retrieve DER Installation records by parameter
+
+
+        Retrieves the current versions of one or more DER records.
+
+
+        At least one query parameter must be provided as outlined in the WEM: Distributed Energy Resource
+        (DER) Register Technical Specification (e.g. by NMI, installation stage, equipment type, device
+        type etc).'
+      parameters:
+      - name: nmi
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated list of NMIs. Returns records for the specified NMIs
+      - name: installationStage
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'One of “Confirmed” or “Conditional”
+
+
+          Returns records where the DER Record is:
+
+          Confirmed – both the Connections and Devices are ‘Confirmed’.
+
+          Conditional – at least one Connection or Device is ‘Conditional’'
+      - name: equipmentType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "One of:\n-\tInverter\n-\tOther\n-\tBattery Storage Inverter\n-\tControllable Load\n\
+          -\tHybrid Inverter\n-\tEVSE V2G\n-\tEVSE no V2G\n-\tRotating Machine\n-\tSolar PV Inverter\n\
+          \nReturns records for the specified equipmentType \n\nNote: Unknown_equipment is not supported."
+      - name: deviceType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: "One of:\n-\tSolar PV\n-\tStorage\n-\tControlled load\n-\tCo Tri-generation\n-\t\
+          Fossil\n-\tLiquid fuel\n-\tOther\n-\tSmall hydro / Hydro\n-\tSmall wind / Wind\n-\tWaste to\
+          \ energy\n-\tUnknown_Device\n\nReturns records for the specified deviceType"
+      - name: fromCommissioningDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'A date in the format: yyyy-mm-dd
+
+
+          Returns records where the CommissioningDate is greater than or equal to this value'
+      - name: toCommissioningDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'A date in the format: yyyy-mm-dd, must be
+
+
+          Returns records where the CommissioningDate is less than or equal to this value'
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'A number between 1 and the total number of available pages.
+
+
+          Determines which page of records to return.'
+      - name: pageSize
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'One of: 25, 50 or 100
+
+
+          Determines how many records are returned in the response.'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+              - recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '422'
+                  title: <Error title>
+                  detail: <Details of business validation error>
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
+  /installation/{nmi}/history:
+    get:
+      operationId: retrieveDERInstallationHistory
+      summary: Retrieve DER installation history
+      tags:
+      - WEM DER Installation V2
+      description: "Retrieves the current and historical versions of a DER installation (for a single\
+        \ NMI) including the installation, AC Connection and Device details information. \n\nThe returned\
+        \ records have a recordStartDate and recordEndDate indicating when the record was current."
+      parameters:
+      - name: nmi
+        in: path
+        required: true
+        schema:
+          type: string
+        description: NMI
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+              - recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '422'
+                  title: <Error title>
+                  detail: <Details of business validation error>
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
+  /installation/{nmi}:
+    get:
+      operationId: retrieveDERInstallationRecord
+      summary: Retrieve DER installation record
+      tags:
+      - WEM DER Installation V2
+      description: Retrieves a single DER record for the specified NMI. The returned data is the latest
+        version stored in DER Register
+      parameters:
+      - name: nmi
+        in: path
+        required: true
+        schema:
+          type: string
+        description: NMI
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJhcGk6Ly81YWNlOWE0Ni00MWI0LTRiNjAtOGRmNC0xOWEzMDI4MDgwOWIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zMjBjOTk5ZS0zODc2LTRhZDAtYjQwMS1kMjQxMDY4ZTllNjAvIiwiaWF0IjoxNjM2NDM4MDQ0LCJuYmYiOjE2MzY0MzgwNDQsImV4cCI6MTYzNjQ0MTk0NCwiYWlvIjoiRTJaZ1lQREtpWnhpMkRseHZjV1RpZDFYV2VybEFBPT0iLCJhcHBpZCI6ImMzMWVhNjJlLWM3NTMtNDBjZi1hNDkzLWI5Y2U5OTYzNmVlMSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzMyMGM5OTllLTM4NzYtNGFkMC1iNDAxLWQyNDEwNjhlOWU2MC8iLCJvaWQiOiJhYmY5ZjRlOC04OGY3LTQ2MWItOTg2MC1mMTk2ZGM0ZjI2YmUiLCJyaCI6IjAuQVVJQW5wa01Nblk0MEVxMEFkSkJCbzZlWUM2bUhzTlR4ODlBcEpPNXpwbGpidUZDQUFBLiIsInJvbGVzIjpbIkRlcnIuUmVxdWVzdCJdLCJzdWIiOiJhYmY5ZjRlOC04OGY3LTQ2MWItOTg2MC1mMTk2ZGM0ZjI2YmUiLCJ0aWQiOiIzMjBjOTk5ZS0zODc2LTRhZDAtYjQwMS1kMjQxMDY4ZTllNjAiLCJ1dGkiOiJVRUFoVVNCQlpFLU16bEc2czhKakFBIiwidmVyIjoiMS4wIn0.TO06Jtlg7EUXVmDZVCXSPvvQscR6wE8kYDDkm0zrlykg9IVQnjhvYicVpq60gj50ZfcHmqsyVS7hg0mEa46EKpgI6YDbs-KLA5RIGmqhrLrk7ZEutwZNNBRMKq7zolYdvLFLykK3gpXQ4aHhyOOFgyj43RXujqtRy74-AWhoMZ60L7FzLgGwYsaF6lKlB52SA-1EePAVLSAIYQZ7C7z2hRQVL5ZfUMFMOV_PoYHkxiDUxaNJJwUpFCY--Fuz_1-dVMjUBXlHAZLeyWw58tLJpa3m-gqdjd2afvAw7ElL60VB3X98In6HUDD16ZZ38a7hb_mYaAd-7hmNpBdCXx6YGw
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '422'
+                  title: <Error title>
+                  detail: <Details of business validation error>
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
+    put:
+      operationId: updateDERInstallationRecord
+      summary: Update DER installation record
+      tags:
+      - WEM DER Installation V2
+      description: "Updates a DER Installation record already stored in the DER Register. This may be\
+        \ to:\n\n1.\tUpdate information previously submitted where a change has occurred, is identified\
+        \ as being incomplete, inaccurate or no longer accurate at the installation, AC connection and\
+        \ devices levels.\n\n2.\tTo add new AC connections and/or devices to an already existing DER installation\
+        \ record."
+      parameters:
+      - name: nmi
+        in: path
+        required: true
+        schema:
+          type: string
+        description: NMI to update
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+        description: Update Installation record
+      responses:
+        '200':
+          description: Update Installation record - Success
+          content:
+            application/json:
+              example:
+                recordCreationDate: string:date-time
+                recordUpdateDate: string:date-time
+                nmi: string
+                jobNumber: string
+                approvedCapacity: number
+                loadCapacity: number
+                exportLimitkW: number
+                importLimitKw: number
+                availablePhasesCount: number
+                installedPhasesCount: number
+                islandableInstallation: string
+                centralProtectionControl: string
+                underFrequencyProtection: number
+                underFrequencyProtectionDelay: number
+                overFrequencyProtection: number
+                overFrequencyProtectionDelay: number
+                underVoltageProtection: number
+                underVoltageProtectionDelay: number
+                overVoltageProtection: number
+                overVoltageProtectionDelay: number
+                sustainedOverVoltage: number
+                sustainedOverVoltageDelay: number
+                frequencyRateOfChange: number
+                voltageVectorShift: number
+                interTripScheme: string
+                neutralVoltageDisplacement: number
+                otherProtection: string
+                installerId: string
+                comments: string
+                acConnections:
+                - recordCreationDate: string:date-time
+                  recordUpdateDate: string:date-time
+                  connectionId: number
+                  installationStage: string
+                  recordConfirmedDate: string:date-time
+                  nspConnectionId: string
+                  commissioningDate: string:date
+                  equipmentType: string
+                  count: number
+                  status: string
+                  equipmentInjectionCapacity: number
+                  equipmentWithdrawalCapacity: number
+                  evseOwnershipStatus: string
+                  authorisedAgent: string
+                  managementMethod: string
+                  frequencyRateOfChange: number
+                  voltageVectorShift: number
+                  interTripScheme: string
+                  neutralVoltageDisplacement: number
+                  details:
+                    recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    equipmentSeries: string
+                    equipmentStandard: string
+                    regionSetting: string
+                    additionalRequirements: string
+                    sustainOpOvervoltLimit: number
+                    stopAtOverFreq: number
+                    stopAtUnderFreq: number
+                    dredInverterInteraction: string
+                    invVoltWattRespMode: string
+                    invWattRespV1: number
+                    invWattRespV2: number
+                    invWattRespV3: number
+                    invWattRespV4: number
+                    invWattRespPAtV1: number
+                    invWattRespPAtV2: number
+                    invWattRespPAtV3: number
+                    invWattRespPAtV4: number
+                    invVoltVarRespMode: string
+                    invVarRespV1: number
+                    invVarRespV2: number
+                    invVarRespV3: number
+                    invVarRespV4: number
+                    invVarRespQAtV1: number
+                    invVarRespQAtV2: number
+                    invVarRespQAtV3: number
+                    invVarRespQAtV4: number
+                    invReactivePowerMode: string
+                    invFixReactivePower: number
+                    fixPowerFactorMode: string
+                    fixPowerFactor: number
+                    fixPowerFactorQuad: string
+                    powerRespMode: string
+                    referencePointP1: number
+                    referencePointP2: number
+                    powerFactorAtP1: number
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: number
+                    powerFactorQuadAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: number
+                    reactivePowerRegulation: string
+                    voltageSetPoint: number
+                    voltageSetPointUnit: string
+                    deadband: number
+                    droop: number
+                    baseForDroop: number
+                    reactivePowerSourceLimit: number
+                    reactivePowerSinkLimit: number
+                    reactiveFixPowerFactor: number
+                    reactiveFixPowerFactorQuad: string
+                    generatorRampRate: string
+                    powerRampGradient: number
+                    frequencySensitiveMode: string
+                    frequencyDeadband: number
+                    frequencyDroop: number
+                  devices:
+                  - recordCreationDate: string:date-time
+                    recordUpdateDate: string:date-time
+                    deviceId: number
+                    installationStage: string
+                    recordConfirmedDate: string:date-time
+                    nspDeviceId: string
+                    type: string
+                    comments: string
+                    count: number
+                    status: string
+                    details:
+                      recordCreationDate: string:date-time
+                      recordUpdateDate: string:date-time
+                      manufacturerName: string
+                      modelNumber: string
+                      nominalRatedCapacity: number
+                      nominalLoadCapacity: number
+                      nominalStorageCapacity: number
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '422'
+                  title: <Error title>
+                  detail: <Details of business validation error>
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +1551,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: WEM DER Installation V2
+  description: Introduction

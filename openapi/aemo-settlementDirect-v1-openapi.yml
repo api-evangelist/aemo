@@ -3,9 +3,1088 @@ info:
   title: Settlement Direct
   description: This API supports the various operations performed  in Settlement Direct API
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/settlementDirect-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMWholesale/PublishingDirect
-paths: { }
+- url: https://api-prd.aemo.local/NEMWholesale/PublishingDirect
+paths:
+  /downloadFiles:
+    post:
+      operationId: downloadFiles
+      summary: downloadFiles
+      tags:
+      - Settlement Direct
+      description: downloadFiles
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      requestBody:
+        content:
+          application/json:
+            example:
+              optionalEncryptionKey: string
+              files:
+              - string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/octet-stream:
+              example: {}
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/octet-stream:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/octet-stream:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/octet-stream:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/octet-stream:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/octet-stream:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/octet-stream:
+              schema: {}
+  /getAvailableFiles:
+    get:
+      operationId: getAvailableFiles
+      summary: getAvailableFiles
+      tags:
+      - Settlement Direct
+      description: getAvailableFiles
+      parameters:
+      - name: PublishingTypeId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingCategoryId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingPeriodInstanceIdFrom
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingPeriodInstanceIdTo
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: DeliveryTimeFrom
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: DeliveryTimeTo
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: contactId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Format - int32.
+      - name: publishingBusinessId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingPeriodClassId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: DeliveryChannelId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  files:
+                  - publishingCategoryId: string
+                    publishingTypeId: string
+                    publishingPeriodClassId: string
+                    publishingPeriodInstanceId: string
+                    publishingQueueId: string
+                    fileName: string
+                    fileFormatId: string
+                    deliveryChannelId: string
+                    contactId: string
+                    documentEncryptionKey: string
+                    deliveryTime: string
+                    headerText: string
+                    bodyText: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getCalendars:
+    get:
+      operationId: getCalendars
+      summary: getCalendars
+      tags:
+      - Settlement Direct
+      description: getCalendars
+      parameters:
+      - name: publishingBusinessId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"calendars\": [\r\
+                \n      {\r\n        \"url\": \"string\",\r\n        \"description\": \"string\"\r\n \
+                \     }\r\n    ]\r\n  },\r\n  \"errors\": [\r\n    {\r\n      \"code\": \"string\",\r\n\
+                \      \"title\": \"string\",\r\n      \"detail\": \"string\",\r\n      \"source\": \"\
+                string\"\r\n    }\r\n  ],\r\n  \"warnings\": [\r\n    \"string\"\r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getContacts:
+    get:
+      operationId: getContacts
+      summary: getContacts
+      tags:
+      - Settlement Direct
+      description: getContacts
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  contacts:
+                  - contactId: string
+                    contactSource: string
+                    isActive: true
+                    sourceUpdateTime: string
+                    participantId: string
+                    mobileNumber: string
+                    emailAddress: string
+                    title: string
+                    firstName: string
+                    lastName: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getDeliveryChannels:
+    get:
+      operationId: getDeliveryChannels
+      summary: getDeliveryChannels
+      tags:
+      - Settlement Direct
+      description: getDeliveryChannels
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  channelList:
+                  - channelId: string
+                    description: string
+                    displayPriority: 0
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getDeliveryLogEntries:
+    get:
+      operationId: getDeliveryLogEntries
+      summary: getDeliveryLogEntries
+      tags:
+      - Settlement Direct
+      description: getDeliveryLogEntries
+      parameters:
+      - name: PublishingTypeId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingCategoryId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingPeriodInstanceIdFrom
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingPeriodInstanceIdTo
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: DeliveryTimeFrom
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: DeliveryTimeTo
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: contactId
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Format - int32.
+      - name: publishingBusinessId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingPeriodClassId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: DeliveryChannelId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  logEntries:
+                  - publishingCategoryId: string
+                    publishingTypeId: string
+                    publishingPeriodClassId: string
+                    publishingPeriodInstanceId: string
+                    fileName: string
+                    deliveryChannelId: string
+                    fileFormatId: string
+                    contactId: string
+                    documentEncryptionKey: string
+                    publishingQueueId: string
+                    deliveryTime: string
+                    headerText: string
+                    bodyText: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPublishingCategories:
+    get:
+      operationId: getPublishingCategories
+      summary: getPublishingCategories
+      tags:
+      - Settlement Direct
+      description: getPublishingCategories
+      parameters:
+      - name: publishingBusinessId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"categories\":\
+                \ [\r\n      {\r\n        \"categoryId\": \"string\",\r\n        \"description\": \"string\"\
+                ,\r\n        \"displayPriority\": 0\r\n      }\r\n    ]\r\n  },\r\n  \"errors\": [\r\n\
+                \    {\r\n      \"code\": \"string\",\r\n      \"title\": \"string\",\r\n      \"detail\"\
+                : \"string\",\r\n      \"source\": \"string\"\r\n    }\r\n  ],\r\n  \"warnings\": [\r\n\
+                \    \"string\"\r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPublishingPeriodClasses:
+    get:
+      operationId: getPublishingPeriodClasses
+      summary: getPublishingPeriodClasses
+      tags:
+      - Settlement Direct
+      description: getPublishingPeriodClasses
+      parameters:
+      - name: PublishingTypeId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: PublishingBusinessId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"periodClasses\"\
+                : [\r\n      {\r\n        \"publishingPeriodClassId\": \"string\"\r\n      }\r\n    ]\r\
+                \n  },\r\n  \"errors\": [\r\n    {\r\n      \"code\": \"string\",\r\n      \"title\":\
+                \ \"string\",\r\n      \"detail\": \"string\",\r\n      \"source\": \"string\"\r\n   \
+                \ }\r\n  ],\r\n  \"warnings\": [\r\n    \"string\"\r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPublishingPeriodInstances:
+    get:
+      operationId: getPublishingPeriodInstances
+      summary: getPublishingPeriodInstances
+      tags:
+      - Settlement Direct
+      description: getPublishingPeriodInstances
+      parameters:
+      - name: publishingTypeId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: publishingPeriodClassId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: publishingBusinessId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"periodInstances\"\
+                : [\r\n      {\r\n        \"publishingPeriodInstanceId\": \"string\"\r\n      }\r\n  \
+                \  ]\r\n  },\r\n  \"errors\": [\r\n    {\r\n      \"code\": \"string\",\r\n      \"title\"\
+                : \"string\",\r\n      \"detail\": \"string\",\r\n      \"source\": \"string\"\r\n   \
+                \ }\r\n  ],\r\n  \"warnings\": [\r\n    \"string\"\r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPublishingTypes:
+    get:
+      operationId: getPublishingTypes
+      summary: getPublishingTypes
+      tags:
+      - Settlement Direct
+      description: getPublishingTypes
+      parameters:
+      - name: publishingCategoryId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: publishingBusinessId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"publishingTypes\"\
+                : [\r\n      {\r\n        \"publishingTypeId\": \"string\",\r\n        \"displayPriority\"\
+                : 0,\r\n        \"description\": \"string\"\r\n      }\r\n    ]\r\n  },\r\n  \"errors\"\
+                : [\r\n    {\r\n      \"code\": \"string\",\r\n      \"title\": \"string\",\r\n      \"\
+                detail\": \"string\",\r\n      \"source\": \"string\"\r\n    }\r\n  ],\r\n  \"warnings\"\
+                : [\r\n    \"string\"\r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getUserSubscriptions:
+    get:
+      operationId: getUserSubscriptions
+      summary: getUserSubscriptions
+      tags:
+      - Settlement Direct
+      description: getUserSubscriptions
+      parameters:
+      - name: publishingBusinessId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"subscriptions\"\
+                : [\r\n      {\r\n        \"publishingCategoryId\": \"string\",\r\n        \"publishingTypeId\"\
+                : \"string\",\r\n        \"isPlainTextRequested\": true,\r\n        \"contacts\": [\r\n\
+                \          {\r\n            \"contactId\": \"string\",\r\n            \"deliveryChannels\"\
+                : [\r\n              {\r\n                \"deliveryChannelId\": \"string\",\r\n     \
+                \           \"isSubscribed\": true\r\n              }\r\n            ]\r\n          }\r\
+                \n        ]\r\n      }\r\n    ]\r\n  }\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /publishFiles:
+    post:
+      operationId: publishFiles
+      summary: publishFiles
+      tags:
+      - Settlement Direct
+      description: publishFiles
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      requestBody:
+        content:
+          application/json:
+            example:
+              optionalEncryptionKey: string
+              files:
+              - string
+              publicationMethod: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                - string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /updateUserSubscriptions:
+    post:
+      operationId: updateSubscription
+      summary: updateSubscription
+      tags:
+      - Settlement Direct
+      description: updateSubscription
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      requestBody:
+        content:
+          application/json:
+            example:
+              subscriptions:
+              - publishingCategoryId: string
+                publishingTypeId: string
+                isPlainTextRequested: true
+                contacts:
+                - contactId: string
+                  deliveryChannels:
+                  - deliveryChannelId: string
+                    isSubscribed: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                - string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +1096,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Settlement Direct
+  description: This API supports the various operations performed  in Settlement Direct API

@@ -1,0 +1,76 @@
+generated: '2026-07-27'
+method: searched
+source: https://dev.aemo.com.au/oauth, https://dev.aemo.com.au/api-docs, https://dev.aemo.com.au/faqs
+description: >-
+  AEMO separates a pre-production entry point from production at the gateway hostname, and its
+  Azure API Management developer portal ships the standard interactive "try it" console against
+  each published operation. There are no public test credentials, no magic test identifiers and no
+  self-service sandbox: pre-production access, like production access, is granted only through
+  formal participant onboarding. Nothing below is invented — only the values AEMO publishes.
+
+console:
+  type: interactive-api-console
+  url: https://dev.aemo.com.au/api-docs
+  platform: Azure API Management developer portal
+  detail: >-
+    Every published API has a reference page with an interactive console ("discover APIs, learn how
+    to use them, try them out interactively, and sign up to acquire keys"). Browsing the catalogue
+    and the documentation is anonymous; executing a call requires a subscription key.
+  anonymous_browsing: true
+  machine_readable_catalogue: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
+
+environments:
+  - name: Pre-production
+    host: https://api.preprod.wgw.aemo.com.au
+    token_endpoint: https://api.preprod.wgw.aemo.com.au/oauth/v1/token?grant_type=client_credentials
+    source: https://dev.aemo.com.au/oauth
+    access: Granted through participant onboarding; no self-service signup.
+  - name: Production
+    host: https://api.aemo.com.au
+    token_endpoint: https://api.aemo.com.au/oauth/v1/token?grant_type=client_credentials
+    source: https://dev.aemo.com.au/oauth
+
+credentials:
+  self_service: false
+  test_keys_published: false
+  detail: >-
+    A developer account can be registered at https://dev.aemo.com.au/signup at any time, but a
+    subscription key is only issued after the participant team has completed formal onboarding to
+    the specific API or product, and is delivered by email from AEMO Support. Internal AEMO staff
+    raise a ServiceNow request instead.
+  onboarding: https://aemo.com.au/energy-systems/registration
+  faq: https://dev.aemo.com.au/faqs
+
+test_values:
+  published: false
+  note: >-
+    AEMO publishes no magic test identifiers, test participant IDs, test NMIs or fixture data. The
+    response examples embedded in the OpenAPI documents are APIM-generated placeholders
+    ("string", 0) rather than usable test fixtures.
+
+client_tooling:
+  - name: Postman collection
+    url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+    detail: >-
+      AEMO publishes a Postman collection and documents using Postman to base64-encode URM
+      username/password into the Basic Authorization header.
+  - name: TLS certificate self-service
+    api: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+    detail: >-
+      Participants generate, download, reissue, renew and revoke their own AEMO-signed TLS client
+      certificates through the TLS Certificate Management API rather than through a manual request.
+
+public_unauthenticated_surfaces:
+  note: >-
+    Where a developer needs to exercise real AEMO data without onboarding, the public feeds are the
+    practical substitute for a sandbox.
+  surfaces:
+    - name: NEMWeb public data feed
+      url: https://nemweb.com.au/Reports/Current/
+    - name: WA market data public feed
+      url: https://data.wa.aemo.com.au/public/
+    - name: NEM data dashboard JSON
+      url: https://visualisations.aemo.com.au/aemo/apps/api/report
+      caution: >-
+        Undocumented and disallowed for crawlers in https://aemo.com.au/robots.txt; treat as an
+        unsupported internal surface.

@@ -1,11 +1,190 @@
 openapi: 3.0.1
 info:
   title: SelfForecast
-  description: "## Introduction\nThe Self forecasting API is used by participants who wish to submit their Solar or Wind Forecasts for a DUID to AEMO.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '## Introduction
+
+    The Self forecasting API is used by participants who wish to submit their Solar or Wind Forecasts
+    for a DUID to AEMO.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/selfForecast-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/NEMWholesale/selfForecast
-paths: { }
+- url: https://api-prd.aemo.local/ws/NEMWholesale/selfForecast
+paths:
+  /SubmitDispatchForecast:
+    post:
+      operationId: submitDispatchForecast
+      summary: Submit Dispatch Forecast
+      tags:
+      - SelfForecast
+      description: Use to submit a dispatch self-forecast. AEMO will use the latest of the highest priority
+        number, unsuppressed submissions as an input to dispatch.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+            - RunDateTime: '2017-12-01T12:05:00Z'
+              AuthorisedBy: Someone
+              Comments: This is additional information for a dispatch forecast
+              Forecasts:
+              - Duid: DUID
+                ForecastPriority: 324
+                Model: Model ABC
+                Suppressed: false
+                ParticipantTimeStamp: '2017-12-01T11:58:01Z'
+                IntervalForecast:
+                - IntervalDateTime: '2017-12-01T12:05:00Z'
+                  ForecastPoe50: 3.349
+        description: Payload
+      responses:
+        '200':
+          description: This response is provided when the submitted forecasts are validated and saved
+            in the AEMO's systems.
+          content:
+            application/json:
+              example:
+                transactionID: 0283d8d0-32a6-45d8-949b-3aa7173ef1d7
+                data:
+                  ResponseTimeStamp: '2018-07-09T00:23:42Z'
+                  ResponseText: Forecasts saved successfully
+                errors: []
+        '400':
+          description: This response is provided when the submitted payload cannot be parsed successfully.
+          content:
+            application/json:
+              example: ''
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect OR user account is locked out.
+          content:
+            application/json:
+              example: ''
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+          content:
+            application/json:
+              example: ''
+        '404':
+          description: This response is provided when the resource "SubmitDispatchForecast" missing from
+            URL or incorrect.
+          content:
+            application/json:
+              example: ''
+        '405':
+          description: This response is provided when the method is not POST.
+          content:
+            application/json:
+              example: ''
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header.
+          content:
+            application/json:
+              example: ''
+        '422':
+          description: This response is provided when any of the submitted forecasts fail business validation
+            (for example submitting a forecast with the same DUID and forecast priority in the same second).
+            If any forecast submitted fails validation, then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                transactionID: 77b45bac-299f-41ac-a937-6797b17ebbbc
+                data:
+                  ResponseTimeStamp: '2017-12-02T06:17:24Z'
+                  ResponseText: Submitted request contained validation errors, please see details in the
+                    errors object
+                errors: []
+        '429':
+          description: This response is provided when the throttling limits are reached (40 requests per
+            minute per ParticipantID).
+          content:
+            application/json:
+              example:
+                transactionID: b85a35f8-f741-40ac-a701-a8cfebb25669
+                data: {}
+                errors:
+                - code: '429'
+                  title: Too Many Requests
+                  detail: Number of inbound requests exceeded the throttling limits; try after some time
+                  source: ''
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+          content:
+            application/json:
+              example: ''
+  /Submit5minPDForecast:
+    post:
+      operationId: submitPreDispatchForecast
+      summary: Submit Pre-dispatch Forecast
+      tags:
+      - SelfForecast
+      description: Submit Pre-dispatch Forecast
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'null'
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect OR user account is locked out.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: This response is provided when the resource "Submit5minPDForecast" missing from
+            URL or incorrect.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: This response is provided when the method is not POST.
+          content:
+            application/json:
+              schema: {}
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +196,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: SelfForecast
+  description: Introduction

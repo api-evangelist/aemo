@@ -1,11 +1,77 @@
 openapi: 3.0.1
 info:
   title: IdentityService(v2)
-  description: "## Introduction\nThis API is used by a Participant to update their password for MSATs.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '## Introduction
+
+    This API is used by a Participant to update their password for MSATs.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: v2
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/identityService-v2/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/Common/identityService
-paths: { }
+- url: https://api-prd.aemo.local/ws/Common/identityService
+paths:
+  /ChangePassword:
+    post:
+      operationId: authPost
+      summary: authPost
+      tags:
+      - IdentityService(v2)
+      description: Use this resource to replace your Old MSATs Password with a New Password
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Primary Market Participant ID
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: basic auth
+      requestBody:
+        content:
+          application/json:
+            example:
+              OldPassword: TmVtbWNvMDI=
+              NewPassword: TmVtbWNvMDE=
+      responses:
+        '200':
+          description: If success = true, password changed successfully.  If success = false, Failed changing
+            password, please try again.
+          content:
+            application/json:
+              example:
+                Success: true
+                Message: Successfully changed password
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionID: 713b6588-61d9-4c97-af29-634f41de5deg
+                data: {}
+                errors:
+                - code: '401'
+                  title: Unauthorized
+                  detail: Invalid UserName or Password
+                  source: ''
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +83,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: IdentityService(v2)
+  description: Introduction

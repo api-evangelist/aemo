@@ -1,11 +1,1956 @@
 openapi: 3.0.1
 info:
   title: DER Registration For Account Holders
-  description: "## Introduction\nUsing the DER Registration APIs, Account Holders can\n\n• Submit DER Connection Agreement data.\n\n• Provide AC Connections, and Device details in the same submission"
+  description: '## Introduction
+
+    Using the DER Registration APIs, Account Holders can
+
+
+    • Submit DER Connection Agreement data.
+
+
+    • Provide AC Connections, and Device details in the same submission'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/der-consumer-registration-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration
-paths: { }
+- url: https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration
+paths:
+  /authorize:
+    get:
+      operationId: authorize
+      summary: authorize
+      tags:
+      - DER Registration For Account Holders
+      description: authorize
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+        description: authcode
+      responses:
+        '200':
+          description: 'null'
+  /azureLogout:
+    get:
+      operationId: azureLogout
+      summary: azure Logout
+      tags:
+      - DER Registration For Account Holders
+      description: azure Logout
+      parameters:
+      - name: state
+        in: query
+        required: true
+        schema:
+          type: string
+        description: logout redirect uri
+      responses:
+        '200':
+          description: 'null'
+  /token:
+    post:
+      operationId: generateTokenUsingClientCredentials
+      summary: Generate token using client credentials
+      tags:
+      - DER Registration For Account Holders
+      description: token
+      parameters:
+      - name: grant_type
+        in: query
+        required: true
+        schema:
+          type: string
+        description: grant type
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'null'
+  /getAccessStatus:
+    post:
+      operationId: getAccessStatus
+      summary: Get Access Status
+      tags:
+      - DER Registration For Account Holders
+      description: Get Access Status
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /getDER:
+    post:
+      operationId: getDER
+      summary: Get DER
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by participants to get a complete history of versions for a single
+        DER Record. The returned file size is to be confirmed..
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                derRecords:
+                - nmi: string
+                  jobNumber: string
+        description: Get single DER record.
+      responses:
+        '200':
+          description: Get DER record - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  derRecords:
+                  - nmi: string
+                    jobNumber: string
+                    recordUpdateDate: string
+                    approvedCapacity: 0
+                    availablePhasesCount: 1
+                    installedPhasesCount: 1
+                    islandableInstallation: 'Yes'
+                    centralProtectionControl: 'Yes'
+                    exportLimitkva: 0
+                    underFrequencyProtection: 0
+                    underFrequencyProtectionDelay: 0
+                    overFrequencyProtection: 0
+                    underVoltageProtection: 0
+                    underVoltageProtectionDelay: 0
+                    overVoltageProtection: 0
+                    overVoltageProtectionDelay: 0
+                    sustainedOverVoltage: 0
+                    frequencyRateOfChange: 0
+                    voltageVectorShift: 0
+                    interTripScheme: string
+                    neutralVoltageDisplacement: 0
+                    installerId: string
+                    submitterId: string
+                    submitterClass: NSP
+                    submitMode: Save
+                    accessRequested: true
+                    comments: string
+                    acConnections:
+                    - connectionId: 0
+                      nspConnectionId: string
+                      recordCreationDate: string
+                      recordConfirmedDate: string
+                      recordEndDate: string
+                      commissioningDate: string
+                      installationStage: Initial
+                      equipmentType: Inverter
+                      cecConnectionId: string
+                      count: 0
+                      statusCode: Inactive
+                      frequencyRateOfChange: 0
+                      voltageVectorShift: 0
+                      interTripScheme: string
+                      neutralVoltageDisplacement: 0
+                      details:
+                        dredInverterInteraction: 'Yes'
+                        serialNumbers:
+                        - string
+                        manufacturerName: string
+                        modelNumber: string
+                        inverterSeries: string
+                        inverterStandard: AS4777.2:2015
+                        inverterDeviceCapacity: 0
+                        sustainOpOvervoltLimit: 0
+                        stopAtOverFreq: 0
+                        stopAtUnderFreq: 0
+                        invVoltWattRespMode: Enabled
+                        invWattRespV1: 0
+                        invWattRespV2: 0
+                        invWattRespV3: 0
+                        invWattRespV4: 0
+                        invWattRespPAtV1: 0
+                        invWattRespPAtV2: 0
+                        invWattRespPAtV3: 0
+                        invWattRespPAtV4: 0
+                        invVoltVarRespMode: Enabled
+                        invVarRespV1: 0
+                        invVarRespV2: 0
+                        invVarRespV3: 0
+                        invVarRespV4: 0
+                        invVarRespQAtV1: 0
+                        invVarRespQAtV2: 0
+                        invVarRespQAtV3: 0
+                        invVarRespQAtV4: 0
+                        invReactivePowerMode: Enabled
+                        invFixReactivePower: 0
+                        fixPowerFactorMode: Enabled
+                        fixPowerFactor: 0
+                        fixPowerFactorQuad: Source
+                        powerRespMode: Enabled
+                        referencePointP1: 0
+                        referencePointP2: 0
+                        powerFactorAtP1: 0
+                        powerFactorQuadAtP1: string
+                        powerFactorAtP2: 0
+                        powerFactorQuadAtP2: Source
+                        powerRateLimitMode: Enabled
+                        powerRampRate: 0
+                        reactivePowerRegulation: None
+                        voltageSetPoint: 0
+                        voltageSetPointUnit: string
+                        deadband: 0
+                        droop: 0
+                        baseForDroop: 0
+                        reactivePowerSourceLimit: 0
+                        reactivePowerSinkLimit: 0
+                        reactiveFixPowerFactor: 0
+                        reactiveFixPowerFactorQuad: Source
+                        generatorRampRate: Enabled
+                        powerRampGradient: 0
+                        frequencySensitiveMode: Enabled
+                        frequencyDeadband: 0
+                        frequencyDroop: 0
+                        manufacturerOther: true
+                        modelOther: true
+                        inverterSeriesOther: true
+                      devices:
+                      - deviceId: 0
+                        nspDeviceId: string
+                        recordCreationDate: string
+                        recordCommissioningDate: string
+                        recordConfirmedDate: string
+                        recordEndDate: string
+                        cecDeviceId: string
+                        type: string
+                        subType: string
+                        count: 0
+                        status: Inactive
+                        installationStage: Initial
+                        details:
+                          typeOther: true
+                          subTypeOther: true
+                          manufacturerOther: true
+                          manufacturerName: string
+                          modelOther: true
+                          modelNumber: string
+                          nominalRatedCapacity: 0
+                          nominalStorageCapacity: 0
+                    exceptions:
+                    - exceptionId: 0
+                      code: 0
+                      name: string
+                      affectedAttributes:
+                      - string
+                      details: string
+                      status: Open
+                      deviceId: 0
+                      connectionId: 0
+                      nspAcknowledged: 'Yes'
+                warnings:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /getDERSummary:
+    post:
+      operationId: getDetailsOfASingleOrMultipleDERRecords
+      summary: Get details of a single or multiple DER Records.
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by participants to get a single or multiple DER Records along with
+        their details based on the supplied filters.
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                nmis:
+                - string
+                installerId: string
+                accessRequested: true
+                exceptionCodes:
+                - string
+                modifiedDateFrom: string
+                modifiedDateTo: string
+                submitterClass: NSP
+                acConnection:
+                  equipmentType: string
+                  commissioningDateFrom: string
+                  commissioningDateTo: string
+                  status: string
+                  installationStages:
+                  - string
+                device:
+                  types:
+                  - string
+                  status: string
+                  installationStages:
+                  - string
+        description: Get DER records.
+      responses:
+        '200':
+          description: Get DER summary records - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  derRecords:
+                  - nmi: string
+                    jobNumber: string
+                    recordUpdateDate: string
+                    approvedCapacity: 0
+                    availablePhasesCount: 1
+                    installedPhasesCount: 1
+                    islandableInstallation: 'Yes'
+                    centralProtectionControl: 'Yes'
+                    exportLimitkva: 0
+                    underFrequencyProtection: 0
+                    underFrequencyProtectionDelay: 0
+                    overFrequencyProtection: 0
+                    underVoltageProtection: 0
+                    underVoltageProtectionDelay: 0
+                    overVoltageProtection: 0
+                    overVoltageProtectionDelay: 0
+                    sustainedOverVoltage: 0
+                    frequencyRateOfChange: 0
+                    voltageVectorShift: 0
+                    interTripScheme: string
+                    neutralVoltageDisplacement: 0
+                    installerId: string
+                    submitterId: string
+                    submitterClass: NSP
+                    submitMode: Save
+                    accessRequested: true
+                    comments: string
+                    acConnections:
+                    - connectionId: 0
+                      nspConnectionId: string
+                      recordCreationDate: string
+                      recordConfirmedDate: string
+                      recordEndDate: string
+                      commissioningDate: string
+                      installationStage: Initial
+                      equipmentType: Inverter
+                      cecConnectionId: string
+                      count: 0
+                      statusCode: Inactive
+                      frequencyRateOfChange: 0
+                      voltageVectorShift: 0
+                      interTripScheme: string
+                      neutralVoltageDisplacement: 0
+                      details:
+                        dredInverterInteraction: 'Yes'
+                        serialNumbers:
+                        - string
+                        manufacturerName: string
+                        modelNumber: string
+                        inverterSeries: string
+                        inverterStandard: AS4777.2:2015
+                        inverterDeviceCapacity: 0
+                        sustainOpOvervoltLimit: 0
+                        stopAtOverFreq: 0
+                        stopAtUnderFreq: 0
+                        invVoltWattRespMode: Enabled
+                        invWattRespV1: 0
+                        invWattRespV2: 0
+                        invWattRespV3: 0
+                        invWattRespV4: 0
+                        invWattRespPAtV1: 0
+                        invWattRespPAtV2: 0
+                        invWattRespPAtV3: 0
+                        invWattRespPAtV4: 0
+                        invVoltVarRespMode: Enabled
+                        invVarRespV1: 0
+                        invVarRespV2: 0
+                        invVarRespV3: 0
+                        invVarRespV4: 0
+                        invVarRespQAtV1: 0
+                        invVarRespQAtV2: 0
+                        invVarRespQAtV3: 0
+                        invVarRespQAtV4: 0
+                        invReactivePowerMode: Enabled
+                        invFixReactivePower: 0
+                        fixPowerFactorMode: Enabled
+                        fixPowerFactor: 0
+                        fixPowerFactorQuad: Source
+                        powerRespMode: Enabled
+                        referencePointP1: 0
+                        referencePointP2: 0
+                        powerFactorAtP1: 0
+                        powerFactorQuadAtP1: string
+                        powerFactorAtP2: 0
+                        powerFactorQuadAtP2: Source
+                        powerRateLimitMode: Enabled
+                        powerRampRate: 0
+                        reactivePowerRegulation: None
+                        voltageSetPoint: 0
+                        voltageSetPointUnit: string
+                        deadband: 0
+                        droop: 0
+                        baseForDroop: 0
+                        reactivePowerSourceLimit: 0
+                        reactivePowerSinkLimit: 0
+                        reactiveFixPowerFactor: 0
+                        reactiveFixPowerFactorQuad: Source
+                        generatorRampRate: Enabled
+                        powerRampGradient: 0
+                        frequencySensitiveMode: Enabled
+                        frequencyDeadband: 0
+                        frequencyDroop: 0
+                        manufacturerOther: true
+                        modelOther: true
+                        inverterSeriesOther: true
+                      devices:
+                      - deviceId: 0
+                        nspDeviceId: string
+                        recordCreationDate: string
+                        recordCommissioningDate: string
+                        recordConfirmedDate: string
+                        recordEndDate: string
+                        cecDeviceId: string
+                        type: string
+                        subType: string
+                        count: 0
+                        status: Inactive
+                        installationStage: Initial
+                        details:
+                          typeOther: true
+                          subTypeOther: true
+                          manufacturerOther: true
+                          manufacturerName: string
+                          modelOther: true
+                          modelNumber: string
+                          nominalRatedCapacity: 0
+                          nominalStorageCapacity: 0
+                    exceptions:
+                    - exceptionId: 0
+                      code: 0
+                      name: string
+                      affectedAttributes:
+                      - string
+                      details: string
+                      status: Open
+                      deviceId: 0
+                      connectionId: 0
+                      nspAcknowledged: 'Yes'
+                warnings:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /getExpiryDateStatus:
+    post:
+      operationId: getExpiryDateStatus
+      summary: get Expiry Date Status
+      tags:
+      - DER Registration For Account Holders
+      description: get Expiry Date Status
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /getInverterPreference:
+    get:
+      operationId: getInverterPreference
+      summary: Get Inverter Preference
+      tags:
+      - DER Registration For Account Holders
+      description: Get Inverter Preference
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /getReceipts:
+    post:
+      operationId: getOfAllReceiptsAssociatedWithSingleOrMultipleDERRecords
+      summary: Get of all receipts associated with single or multiple DER Records.
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by participants to get a list of all receipts associated with single
+        or multiple DER Records based on the supplied filter(s).
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                modifiedDateFrom: string
+                modifiedDateTo: string
+                jobReferences:
+                - nmi: string
+                  jobNumber: string
+                  installerId: string
+        description: Get receipts.
+      responses:
+        '200':
+          description: Get receipts - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  receipts:
+                  - nmi: string
+                    jobNumber: string
+                    disclaimer: string
+                    derJobCompleteDate: string
+                    installerId: string
+                    approvedCapacity: 0
+                    confirmationLengthTime: 0
+                    centralProtectionControl: 'Yes'
+                    acConnections:
+                    - connectionId: 0
+                      equipmentType: Inverter
+                      installedCapacity: 0
+                      manufacturerName: string
+                      modelNumber: string
+                    devices:
+                    - deviceId: 0
+                      type: string
+                      installedCapacity: 0
+                      manufacturerName: string
+                      modelNumber: string
+                warnings:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /getPreferences:
+    get:
+      operationId: getPreferences
+      summary: Get Preferences
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by participants to get previously submitted preferences for contact
+        details, Inverter Settings, and notifications based on approved capacity
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: Get preferences - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  contactRole: string
+                  emailAddress: string
+                  phoneNumber: string
+                  notifications:
+                  - minApprovedCapacity: 0
+                    maxApprovedCapacity: 0
+                    approvalRequired: true
+                  inverterSettings:
+                  - minimumCapacity: 0
+                    maximumCapacity: 0
+                    details:
+                      sustainOpOvervoltLimit: 0
+                      stopAtOverFrequency: 0
+                      stopAtUnderFrequency: 0
+                      inverterVoltWattResponseMode: string
+                      inverterWattResponseV1: 0
+                      inverterWattResponseV2: 0
+                      inverterWattResponseV3: 0
+                      inverterWattResponseV4: 0
+                      inverterWattResponsePatV1: 0
+                      inverterWattResponsePatV2: 0
+                      inverterWattResponsePatV3: 0
+                      inverterWattResponsePatV4: 0
+                      inverterVoltVarResponseMode: string
+                      inverterVarResponseV1: 0
+                      inverterVarResponseV2: 0
+                      inverterVarResponseV3: 0
+                      inverterVarResponseV4: 0
+                      inverterVarResponseQatV1: 0
+                      inverterVarResponseQatV2: 0
+                      inverterVarResponseQatV3: 0
+                      inverterVarResponseQatV4: 0
+                      inverterReactivePowerMode: string
+                      inverterFixedReactivePower: 0
+                      fixedPowerFactorMode: string
+                      fixedPowerFactor: 0
+                      fixedPowerFactorQuadrant: string
+                      powerResponseMode: string
+                      referencePointP1: 0
+                      referencePointP2: 0
+                      powerFactorAtP1: 0
+                      powerFactorQuadrantAtP1: string
+                      powerFactorAtP2: 0
+                      powerFactorQuadrantAtP2: string
+                      powerRateLimitMode: string
+                      powerRampRate: 0
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /getReceiptsUI:
+    post:
+      operationId: getReceiptsUI
+      summary: Get Receipts UI
+      tags:
+      - DER Registration For Account Holders
+      description: Get Receipts UI
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /getRequestStatus:
+    post:
+      operationId: getRequestStatus
+      summary: Get Request Status
+      tags:
+      - DER Registration For Account Holders
+      description: Get Request Status
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /grantJobAccess:
+    post:
+      operationId: grantJobAccessToAccountHolder
+      summary: Grant Job Access to Account holder
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by participants to grant/block job access to Account-holders.
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                nmi: string
+                jobNumber: string
+                accessGranted: true
+        description: Grant/block job access.
+      responses:
+        '200':
+          description: Grant Job Accsess - Success
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /InverterData:
+    get:
+      operationId: inverterData
+      summary: Inverter Data
+      tags:
+      - DER Registration For Account Holders
+      description: Inverter Data
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listDeviceSubType/{deviceType}:
+    get:
+      operationId: listDeviceSubType
+      summary: list Device SubType
+      tags:
+      - DER Registration For Account Holders
+      description: list Device SubType
+      parameters:
+      - name: deviceType
+        in: path
+        required: true
+        schema:
+          type: string
+        description: deviceType
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listInverterManufacture:
+    get:
+      operationId: listInverterManufacture
+      summary: list Inverter Manufacture
+      tags:
+      - DER Registration For Account Holders
+      description: list Inverter Manufacture
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listInverterModels:
+    get:
+      operationId: listInverterModels
+      summary: list Inverter Models
+      tags:
+      - DER Registration For Account Holders
+      description: list Inverter Models
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listInverterSeries:
+    get:
+      operationId: listInverterSeries
+      summary: list Inverter Series
+      tags:
+      - DER Registration For Account Holders
+      description: list Inverter Series
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listManufactureDetails:
+    get:
+      operationId: listManufactureDetails
+      summary: List Manufacture Details
+      tags:
+      - DER Registration For Account Holders
+      description: List Manufacture Details
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listManufactureModels:
+    get:
+      operationId: listManufactureModels
+      summary: List Manufacture Models
+      tags:
+      - DER Registration For Account Holders
+      description: List Manufacture Models
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /listDeviceTypes:
+    get:
+      operationId: listOfDeviceTypes
+      summary: List of Device Types
+      tags:
+      - DER Registration For Account Holders
+      description: List of Device Types
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /initiateLogin:
+    get:
+      operationId: loginAPI
+      summary: Login API
+      tags:
+      - DER Registration For Account Holders
+      description: This API will re-direct the user to the login page where the user can register or login(if
+        already registered). After successful login the user will be re-directed to the ‘replyURL’ passed
+        in the request with authorization code and nonce as query parameters.
+      parameters:
+      - name: scopes
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Should always be 'DERR_INSTALLER'
+      - name: replyURL
+        in: query
+        required: true
+        schema:
+          type: string
+        description: URL where the user has to be redirected after successful login
+      - name: nonce
+        in: query
+        required: true
+        schema:
+          type: string
+        description: GUID generated by the application
+      - name: codeChallenge
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Base64 URL-encoded SHA-256 hash of the code verifier
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionID: string
+                access_token: string
+                access_token_expires_in: string
+                id_token: string
+                refresh_token: string
+                refresh_token_expires_in: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /logout:
+    get:
+      operationId: logout
+      summary: logout
+      tags:
+      - DER Registration For Account Holders
+      description: logout
+      responses:
+        '200':
+          description: 'null'
+  /refreshAccessToken:
+    post:
+      operationId: refreshExpiredAccessToken
+      summary: Refresh Expired Access Token
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by Account-holders to get a new access token when the existing access
+        token has expired.
+      parameters:
+      - name: grant_type
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - refresh_token
+        description: Should always be 'refresh_token'
+      - name: refresh_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: refresh token from the requestAccessToken API response
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionID: string
+                access_token: string
+                access_token_expires_in: string
+                id_token: string
+                refresh_token: string
+                refresh_token_expires_in: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /requestJobAccess:
+    post:
+      operationId: requestAccessToAJob
+      summary: Request access to a job
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by Account-holders to request access to a job on the DER web interface,
+        using the NMI as an identifier.
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                nmi: string
+                jobNumber: string
+        description: Grant/block job access.
+      responses:
+        '200':
+          description: Request Job Accsess - Success
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /requestAccessToken:
+    post:
+      operationId: requestAccessToken
+      summary: Request Access Token
+      tags:
+      - DER Registration For Account Holders
+      description: This API will return access token, Id token and refresh token after successful authentication
+      parameters:
+      - name: grant_type
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - authorization_code
+        description: Should always be 'authorization_code'
+      - name: redirect_uri
+        in: header
+        required: true
+        schema:
+          type: string
+        description: the application URL
+      - name: nonce
+        in: header
+        required: true
+        schema:
+          type: string
+        description: GUID generated by the application
+      - name: code
+        in: header
+        required: true
+        schema:
+          type: string
+        description: authorization code returned as part of login process
+      - name: code_verifier
+        in: header
+        required: true
+        schema:
+          type: string
+        description: random URL-safe string generated by the application
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionID: string
+                access_token: string
+                access_token_expires_in: string
+                id_token: string
+                refresh_token: string
+                refresh_token_expires_in: string
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /submitDER:
+    post:
+      operationId: submitASingleDERRecord
+      summary: Submit a Single DER Record
+      tags:
+      - DER Registration For Account Holders
+      description: Participants can submit a single DER Record data at any stage of the process. They
+        can also use this API to Submit Connection Agreement, Update an existing DER record and Resolve
+        exceptions.
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                nmi: string
+                jobNumber: string
+                approvedCapacity: 0
+                availablePhasesCount: 1
+                installedPhasesCount: 1
+                islandableInstallation: 'Yes'
+                centralProtectionControl: 'Yes'
+                exportLimitkva: 0
+                underFrequencyProtection: 0
+                underFrequencyProtectionDelay: 0
+                overFrequencyProtection: 0
+                overFrequencyProtectionDelay: 0
+                underVoltageProtection: 0
+                underVoltageProtectionDelay: 0
+                overVoltageProtection: 0
+                overVoltageProtectionDelay: 0
+                sustainedOverVoltage: 0
+                sustainedOverVoltageDelay: 0
+                frequencyRateOfChange: 0
+                voltageVectorShift: 0
+                interTripScheme: string
+                neutralVoltageDisplacement: 0
+                installerId: string
+                submitMode: Save
+                comments: string
+                acConnections:
+                - connectionId: 0
+                  nspConnectionId: string
+                  recordCreationDate: string
+                  recordConfirmedDate: string
+                  recordEndDate: string
+                  commissioningDate: string
+                  installationStage: Initial
+                  equipmentType: Inverter
+                  cecConnectionId: string
+                  count: 0
+                  statusCode: Inactive
+                  frequencyRateOfChange: 0
+                  voltageVectorShift: 0
+                  interTripScheme: string
+                  neutralVoltageDisplacement: 0
+                  details:
+                    dredInverterInteraction: 'Yes'
+                    serialNumbers:
+                    - string
+                    manufacturerName: string
+                    modelNumber: string
+                    inverterSeries: string
+                    inverterStandard: AS4777.2:2015
+                    inverterDeviceCapacity: 0
+                    sustainOpOvervoltLimit: 0
+                    stopAtOverFreq: 0
+                    stopAtUnderFreq: 0
+                    invVoltWattRespMode: Enabled
+                    invWattRespV1: 0
+                    invWattRespV2: 0
+                    invWattRespV3: 0
+                    invWattRespV4: 0
+                    invWattRespPAtV1: 0
+                    invWattRespPAtV2: 0
+                    invWattRespPAtV3: 0
+                    invWattRespPAtV4: 0
+                    invVoltVarRespMode: Enabled
+                    invVarRespV1: 0
+                    invVarRespV2: 0
+                    invVarRespV3: 0
+                    invVarRespV4: 0
+                    invVarRespQAtV1: 0
+                    invVarRespQAtV2: 0
+                    invVarRespQAtV3: 0
+                    invVarRespQAtV4: 0
+                    invReactivePowerMode: Enabled
+                    invFixReactivePower: 0
+                    fixPowerFactorMode: Enabled
+                    fixPowerFactor: 0
+                    fixPowerFactorQuad: Source
+                    powerRespMode: Enabled
+                    referencePointP1: 0
+                    referencePointP2: 0
+                    powerFactorAtP1: 0
+                    powerFactorQuadAtP1: string
+                    powerFactorAtP2: 0
+                    powerFactorQuadAtP2: Source
+                    powerRateLimitMode: Enabled
+                    powerRampRate: 0
+                    reactivePowerRegulation: None
+                    voltageSetPoint: 0
+                    voltageSetPointUnit: string
+                    deadband: 0
+                    droop: 0
+                    baseForDroop: 0
+                    reactivePowerSourceLimit: 0
+                    reactivePowerSinkLimit: 0
+                    reactiveFixPowerFactor: 0
+                    reactiveFixPowerFactorQuad: Source
+                    generatorRampRate: Enabled
+                    powerRampGradient: 0
+                    frequencySensitiveMode: Enabled
+                    frequencyDeadband: 0
+                    frequencyDroop: 0
+                    manufacturerOther: true
+                    modelOther: true
+                    inverterSeriesOther: true
+                  devices:
+                  - deviceId: 0
+                    nspDeviceId: string
+                    recordCreationDate: string
+                    recordCommissioningDate: string
+                    recordConfirmedDate: string
+                    recordEndDate: string
+                    cecDeviceId: string
+                    type: string
+                    subType: string
+                    count: 0
+                    status: Inactive
+                    installationStage: Initial
+                    details:
+                      typeOther: true
+                      subTypeOther: true
+                      manufacturerOther: true
+                      manufacturerName: string
+                      modelOther: true
+                      modelNumber: string
+                      nominalRatedCapacity: 0
+                      nominalStorageCapacity: 0
+                exceptions:
+                - exceptionId: 0
+                  nspAcknowledged: 'Yes'
+        description: Submit a DER Record.
+      responses:
+        '200':
+          description: Added DER Data - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  nmi: string
+                  jobNumber: string
+                  recordUpdateDate: string
+                  approvedCapacity: 0
+                  availablePhasesCount: 1
+                  installedPhasesCount: 1
+                  islandableInstallation: 'Yes'
+                  centralProtectionControl: 'Yes'
+                  exportLimitkva: 0
+                  underFrequencyProtection: 0
+                  underFrequencyProtectionDelay: 0
+                  overFrequencyProtection: 0
+                  underVoltageProtection: 0
+                  underVoltageProtectionDelay: 0
+                  overVoltageProtection: 0
+                  overVoltageProtectionDelay: 0
+                  sustainedOverVoltage: 0
+                  frequencyRateOfChange: 0
+                  voltageVectorShift: 0
+                  interTripScheme: string
+                  neutralVoltageDisplacement: 0
+                  installerId: string
+                  submitterId: string
+                  submitterClass: NSP
+                  submitMode: Save
+                  comments: string
+                  acConnections:
+                  - connectionId: 0
+                    nspConnectionId: string
+                    recordCreationDate: string
+                    recordConfirmedDate: string
+                    recordEndDate: string
+                    commissioningDate: string
+                    cecConnectionId: string
+                    installationStage: Initial
+                    equipmentType: Inverter
+                    count: 0
+                    statusCode: Inactive
+                    frequencyRateOfChange: 0
+                    voltageVectorShift: 0
+                    interTripScheme: string
+                    neutralVoltageDisplacement: 0
+                    details:
+                      dredInverterInteraction: 'Yes'
+                      serialNumbers:
+                      - string
+                      manufacturerName: string
+                      modelNumber: string
+                      inverterSeries: string
+                      inverterStandard: AS4777.2:2015
+                      inverterDeviceCapacity: 0
+                      sustainOpOvervoltLimit: 0
+                      stopAtOverFreq: 0
+                      stopAtUnderFreq: 0
+                      invVoltWattRespMode: Enabled
+                      invWattRespV1: 0
+                      invWattRespV2: 0
+                      invWattRespV3: 0
+                      invWattRespV4: 0
+                      invWattRespPAtV1: 0
+                      invWattRespPAtV2: 0
+                      invWattRespPAtV3: 0
+                      invWattRespPAtV4: 0
+                      invVoltVarRespMode: Enabled
+                      invVarRespV1: 0
+                      invVarRespV2: 0
+                      invVarRespV3: 0
+                      invVarRespV4: 0
+                      invVarRespQAtV1: 0
+                      invVarRespQAtV2: 0
+                      invVarRespQAtV3: 0
+                      invVarRespQAtV4: 0
+                      invReactivePowerMode: Enabled
+                      invFixReactivePower: 0
+                      fixPowerFactorMode: Enabled
+                      fixPowerFactor: 0
+                      fixPowerFactorQuad: Source
+                      powerRespMode: Enabled
+                      referencePointP1: 0
+                      referencePointP2: 0
+                      powerFactorAtP1: 0
+                      powerFactorQuadAtP1: string
+                      powerFactorAtP2: 0
+                      powerFactorQuadAtP2: Source
+                      powerRateLimitMode: Enabled
+                      powerRampRate: 0
+                      reactivePowerRegulation: None
+                      voltageSetPoint: 0
+                      voltageSetPointUnit: string
+                      deadband: 0
+                      droop: 0
+                      baseForDroop: 0
+                      reactivePowerSourceLimit: 0
+                      reactivePowerSinkLimit: 0
+                      reactiveFixPowerFactor: 0
+                      reactiveFixPowerFactorQuad: Source
+                      generatorRampRate: Enabled
+                      powerRampGradient: 0
+                      frequencySensitiveMode: Enabled
+                      frequencyDeadband: 0
+                      frequencyDroop: 0
+                      manufacturerOther: true
+                      modelOther: true
+                      inverterSeriesOther: true
+                    devices:
+                    - deviceId: 0
+                      nspDeviceId: string
+                      recordCreationDate: string
+                      recordCommissioningDate: string
+                      recordConfirmedDate: string
+                      recordEndDate: string
+                      cecDeviceId: string
+                      type: string
+                      subType: string
+                      count: 0
+                      status: Inactive
+                      installationStage: Initial
+                      details:
+                        typeOther: true
+                        subTypeOther: true
+                        manufacturerOther: true
+                        manufacturerName: string
+                        modelOther: true
+                        modelNumber: string
+                        nominalRatedCapacity: 0
+                        nominalStorageCapacity: 0
+                  exceptions:
+                  - exceptionId: 0
+                    code: 0
+                    name: string
+                    affectedAttributes:
+                    - string
+                    details: string
+                    status: Open
+                    deviceId: 0
+                    connectionId: 0
+                    nspAcknowledged: 'Yes'
+                  receipt:
+                    nmi: string
+                    jobNumber: string
+                    disclaimer: string
+                    derJobCompleteDate: string
+                    installerId: string
+                    approvedCapacity: 0
+                    confirmationLengthTime: 0
+                    centralProtectionControl: 'Yes'
+                    acConnections:
+                    - connectionId: 0
+                      equipmentType: Inverter
+                      installedCapacity: 0
+                      manufacturerName: string
+                      modelNumber: string
+                    devices:
+                    - deviceId: 0
+                      type: string
+                      installedCapacity: 0
+                      manufacturerName: string
+                      modelNumber: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorised
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /submitDERUI:
+    post:
+      operationId: submitDERUI
+      summary: Submit DER UI
+      tags:
+      - DER Registration For Account Holders
+      description: Submit DER UI
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /submitPreferences:
+    post:
+      operationId: submitPreferences
+      summary: Submit Preferences
+      tags:
+      - DER Registration For Account Holders
+      description: This API is used by participants to submit preferences for contact details, inverter
+        settings, and notifications based on approved capacity.
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      requestBody:
+        content:
+          application/json:
+            example:
+              data:
+                contactRole: string
+                emailAddress: string
+                phoneNumber: string
+                notifications:
+                - minApprovedCapacity: 0
+                  maxApprovedCapacity: 0
+                  approvalRequired: true
+                inverterSettings:
+                - minimumCapacity: 0
+                  maximumCapacity: 0
+                  details:
+                    sustainOpOvervoltLimit: 0
+                    stopAtOverFrequency: 0
+                    stopAtUnderFrequency: 0
+                    inverterVoltWattResponseMode: string
+                    inverterWattResponseV1: 0
+                    inverterWattResponseV2: 0
+                    inverterWattResponseV3: 0
+                    inverterWattResponseV4: 0
+                    inverterWattResponsePatV1: 0
+                    inverterWattResponsePatV2: 0
+                    inverterWattResponsePatV3: 0
+                    inverterWattResponsePatV4: 0
+                    inverterVoltVarResponseMode: string
+                    inverterVarResponseV1: 0
+                    inverterVarResponseV2: 0
+                    inverterVarResponseV3: 0
+                    inverterVarResponseV4: 0
+                    inverterVarResponseQatV1: 0
+                    inverterVarResponseQatV2: 0
+                    inverterVarResponseQatV3: 0
+                    inverterVarResponseQatV4: 0
+                    inverterReactivePowerMode: string
+                    inverterFixedReactivePower: 0
+                    fixedPowerFactorMode: string
+                    fixedPowerFactor: 0
+                    fixedPowerFactorQuadrant: string
+                    powerResponseMode: string
+                    referencePointP1: 0
+                    referencePointP2: 0
+                    powerFactorAtP1: 0
+                    powerFactorQuadrantAtP1: string
+                    powerFactorAtP2: 0
+                    powerFactorQuadrantAtP2: string
+                    powerRateLimitMode: string
+                    powerRampRate: 0
+        description: Submit preferences.
+      responses:
+        '200':
+          description: Added preferences - Success
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '405':
+          description: Method Not Allowed
+        '422':
+          description: Business validation failure
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                  code: string
+                  title: string
+                  detail: string
+                  source: string
+  /validateDER:
+    post:
+      operationId: validateDER
+      summary: Validate DER
+      tags:
+      - DER Registration For Account Holders
+      description: Validate DER
+      parameters:
+      - name: x-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+        description: bearer token
+      responses:
+        '200':
+          description: 'null'
+  /verifyUserClaims:
+    get:
+      operationId: verifyUserClaims
+      summary: verify User Claims
+      tags:
+      - DER Registration For Account Holders
+      description: verify User Claims
+      responses:
+        '200':
+          description: 'null'
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +1962,9 @@ components:
       name: clientId
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: DER Registration For Account Holders
+  description: Introduction

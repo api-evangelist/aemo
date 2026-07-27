@@ -2,9 +2,952 @@ openapi: 3.0.1
 info:
   title: LFAS Submission v2
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/lfas-submission-v2/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/WEM/lfas/submissions/v2
-paths: { }
+- url: https://api-prd.aemo.local/WEM/lfas/submissions/v2
+paths:
+  /?soapAction=uploadLoadFollowingStandingSubmission:
+    post:
+      operationId: uploadLoadFollowingStandingSubmission
+      summary: uploadLoadFollowingStandingSubmission
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadLoadFollowingStandingSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadLoadFollowingStandingSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Object>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" effectiveTradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"0\" startInterval=\"1\" endHour=\"0\"\
+              \ endInterval=\"1\">\r\n            <band price=\"1\" size=\"-999999.999\" />\r\n      \
+              \      <band price=\"-79228162514264337593543950335\" size=\"999999.999\" />\r\n       \
+              \     <band price=\"79228162514264337593543950335\" size=\"-999999.899\" />\r\n        \
+              \    <band price=\"0.9\" size=\"999999.899\" />\r\n            <band price=\"1.1\" size=\"\
+              -999999.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              23\" startInterval=\"2\" endHour=\"23\" endInterval=\"2\">\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.799\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.699\" />\r\n            <band price=\"0.8\" size=\"999999.699\" />\r\n\
+              \            <band price=\"1.2\" size=\"-999999.599\" />\r\n            <band price=\"-79228162514264337593543950335\"\
+              \ size=\"999999.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <band\
+              \ price=\"79228162514264337593543950335\" size=\"-999999.499\" />\r\n            <band price=\"\
+              0.7\" size=\"999999.499\" />\r\n            <band price=\"1.3\" size=\"-999999.399\" />\r\
+              \n            <band price=\"-79228162514264337593543950335\" size=\"999999.399\" />\r\n\
+              \            <band price=\"79228162514264337593543950335\" size=\"-999999.299\" />\r\n \
+              \         </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"22\" startInterval=\"\
+              1\" endHour=\"22\" endInterval=\"1\">\r\n            <band price=\"0.6\" size=\"999999.299\"\
+              \ />\r\n            <band price=\"1.4\" size=\"-999999.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.199\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.099\" />\r\n            <band price=\"0.5\" size=\"999999.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"2\" startInterval=\"\
+              2\" endHour=\"2\" endInterval=\"2\">\r\n            <band price=\"1.5\" size=\"-999998.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999998.899\" />\r\n\
+              \            <band price=\"0.4\" size=\"999998.899\" />\r\n            <band price=\"1.6\"\
+              \ size=\"-999998.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \     <resourceSubmission resourceName=\"resourceName2\" action=\"CANCEL\" effectiveTradingDate=\"\
+              0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"21\" startInterval=\"1\" endHour=\"21\" endInterval=\"1\">\r\n   \
+              \         <band price=\"-79228162514264337593543950334\" size=\"999998.799\" />\r\n    \
+              \        <band price=\"79228162514264337593543950334\" size=\"-999998.699\" />\r\n     \
+              \       <band price=\"0.3\" size=\"999998.699\" />\r\n            <band price=\"1.7\" size=\"\
+              -999998.599\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.599\"\
+              \ />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"3\" startInterval=\"\
+              2\" endHour=\"3\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999998.499\" />\r\n            <band price=\"0.2\" size=\"999998.499\" />\r\n\
+              \            <band price=\"1.8\" size=\"-999998.399\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999998.399\" />\r\n            <band price=\"79228162514264337593543950334\" size=\"\
+              -999998.299\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"\
+              20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n            <band price=\"\
+              0.1\" size=\"999998.299\" />\r\n            <band price=\"1.9\" size=\"-999998.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950334\" size=\"999998.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950334\" size=\"-999998.099\" />\r\n \
+              \           <band price=\"0.0\" size=\"999998.099\" />\r\n          </offer>\r\n       \
+              \   <offer type=\"BACKUP_LFAS_DN\" startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"\
+              2\">\r\n            <band price=\"2.0\" size=\"-999997.999\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.999\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.899\" />\r\n            <band price=\"-0.1\" size=\"999997.899\" />\r\n\
+              \            <band price=\"2.1\" size=\"-999997.799\" />\r\n          </offer>\r\n     \
+              \     <offer type=\"CANCEL\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.799\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999997.699\" />\r\n\
+              \            <band price=\"-0.2\" size=\"999997.699\" />\r\n            <band price=\"2.2\"\
+              \ size=\"-999997.599\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999997.599\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n    \
+              \    <resourceSubmission resourceName=\"resourceName3\" action=\"SUBMIT\" effectiveTradingDate=\"\
+              9999-12-31\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"5\" startInterval=\"2\" endHour=\"5\" endInterval=\"2\">\r\n     \
+              \       <band price=\"79228162514264337593543950334\" size=\"-999997.499\" />\r\n      \
+              \      <band price=\"-0.3\" size=\"999997.499\" />\r\n            <band price=\"2.3\" size=\"\
+              -999997.399\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.399\"\
+              \ />\r\n            <band price=\"79228162514264337593543950334\" size=\"-999997.299\" />\r\
+              \n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"18\" startInterval=\"\
+              1\" endHour=\"18\" endInterval=\"1\">\r\n            <band price=\"-0.4\" size=\"999997.299\"\
+              \ />\r\n            <band price=\"2.4\" size=\"-999997.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.199\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.099\" />\r\n            <band price=\"-0.5\" size=\"999997.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"6\" startInterval=\"\
+              2\" endHour=\"6\" endInterval=\"2\">\r\n            <band price=\"2.5\" size=\"-999996.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999996.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999996.899\" />\r\n\
+              \            <band price=\"-0.6\" size=\"999996.899\" />\r\n            <band price=\"2.6\"\
+              \ size=\"-999996.799\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\"\
+              \ startHour=\"17\" startInterval=\"1\" endHour=\"17\" endInterval=\"1\">\r\n           \
+              \ <band price=\"-79228162514264337593543950333\" size=\"999996.799\" />\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999996.699\" />\r\n            <band price=\"\
+              -0.7\" size=\"999996.699\" />\r\n            <band price=\"2.7\" size=\"-999996.599\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999996.599\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"7\" startInterval=\"\
+              2\" endHour=\"7\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999996.499\" />\r\n            <band price=\"-0.8\" size=\"999996.499\" />\r\n\
+              \            <band price=\"2.8\" size=\"-999996.399\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999996.399\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999996.299\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" effectiveTradingDate=\"1899-11-30\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"LFAS_UP\" startHour=\"\
+              16\" startInterval=\"1\" endHour=\"16\" endInterval=\"1\">\r\n            <band price=\"\
+              -0.9\" size=\"999996.299\" />\r\n            <band price=\"2.9\" size=\"-999996.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999996.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950333\" size=\"-999996.099\" />\r\n \
+              \           <band price=\"-1.0\" size=\"999996.099\" />\r\n          </offer>\r\n      \
+              \    <offer type=\"LFAS_DN\" startHour=\"8\" startInterval=\"2\" endHour=\"8\" endInterval=\"\
+              2\">\r\n            <band price=\"3.0\" size=\"-999995.999\" />\r\n            <band price=\"\
+              -79228162514264337593543950333\" size=\"999995.999\" />\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999995.899\" />\r\n            <band price=\"-1.1\" size=\"999995.899\" />\r\n\
+              \            <band price=\"3.1\" size=\"-999995.799\" />\r\n          </offer>\r\n     \
+              \     <offer type=\"BACKUP_LFAS_UP\" startHour=\"15\" startInterval=\"1\" endHour=\"15\"\
+              \ endInterval=\"1\">\r\n            <band price=\"-79228162514264337593543950333\" size=\"\
+              999995.799\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"-999995.699\"\
+              \ />\r\n            <band price=\"-1.2\" size=\"999995.699\" />\r\n            <band price=\"\
+              3.2\" size=\"-999995.599\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999995.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\"\
+              \ startHour=\"9\" startInterval=\"2\" endHour=\"9\" endInterval=\"2\">\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999995.499\" />\r\n            <band price=\"\
+              -1.3\" size=\"999995.499\" />\r\n            <band price=\"3.3\" size=\"-999995.399\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999995.399\" />\r\n\
+              \            <band price=\"79228162514264337593543950333\" size=\"-999995.299\" />\r\n \
+              \         </offer>\r\n          <offer type=\"CANCEL\" startHour=\"14\" startInterval=\"\
+              1\" endHour=\"14\" endInterval=\"1\">\r\n            <band price=\"-1.4\" size=\"999995.299\"\
+              \ />\r\n            <band price=\"3.4\" size=\"-999995.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950333\" size=\"999995.199\" />\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999995.099\" />\r\n            <band price=\"-1.5\" size=\"999995.099\" />\r\n\
+              \          </offer>\r\n        </resourceSubmission>\r\n        <resourceSubmission resourceName=\"\
+              resourceName5\" action=\"SUBMIT\" effectiveTradingDate=\"1900-02-02\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"10\" startInterval=\"2\" endHour=\"10\"\
+              \ endInterval=\"2\">\r\n            <band price=\"3.5\" size=\"-999994.999\" />\r\n    \
+              \        <band price=\"-79228162514264337593543950332\" size=\"999994.999\" />\r\n     \
+              \       <band price=\"79228162514264337593543950332\" size=\"-999994.899\" />\r\n      \
+              \      <band price=\"-1.6\" size=\"999994.899\" />\r\n            <band price=\"3.6\" size=\"\
+              -999994.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              13\" startInterval=\"1\" endHour=\"13\" endInterval=\"1\">\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.799\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.699\" />\r\n            <band price=\"-1.7\" size=\"999994.699\" />\r\n\
+              \            <band price=\"3.7\" size=\"-999994.599\" />\r\n            <band price=\"-79228162514264337593543950332\"\
+              \ size=\"999994.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"11\" startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n           \
+              \ <band price=\"79228162514264337593543950332\" size=\"-999994.499\" />\r\n            <band\
+              \ price=\"-1.8\" size=\"999994.499\" />\r\n            <band price=\"3.8\" size=\"-999994.399\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999994.399\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999994.299\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"12\" startInterval=\"\
+              1\" endHour=\"12\" endInterval=\"1\">\r\n            <band price=\"-1.9\" size=\"999994.299\"\
+              \ />\r\n            <band price=\"3.9\" size=\"-999994.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.199\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.099\" />\r\n            <band price=\"-2.0\" size=\"999994.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"12\" startInterval=\"\
+              2\" endHour=\"12\" endInterval=\"2\">\r\n            <band price=\"4.0\" size=\"-999993.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999993.999\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999993.899\" />\r\n\
+              \            <band price=\"-2.1\" size=\"999993.899\" />\r\n            <band price=\"4.1\"\
+              \ size=\"-999993.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \   </Submission_Object>\r\n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n\
+              \    </uploadLoadFollowingStandingSubmission>\r\n  </Body>\r\n</Envelope>"
+        description: uploadLoadFollowingStandingSubmission
+      responses:
+        '200':
+          description: uploadLoadFollowingStandingSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadLoadFollowingStandingSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <return documentCollectionStatus=\"\
+                INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n        <validationDocumentTags\
+                \ message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\" messageCode=\"messageCode2\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\" xpath=\"xpath3\" messageCode=\"\
+                messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message4\" tagType=\"ERROR\" xpath=\"xpath4\" messageCode=\"messageCode4\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message5\" tagType=\"FATAL\" xpath=\"xpath5\" messageCode=\"messageCode5\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n      </return>\r\n    </uploadLoadFollowingStandingSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=uploadLoadFollowingStandingSubmissionDocuments:
+    post:
+      operationId: uploadLoadFollowingStandingSubmissionDocuments
+      summary: uploadLoadFollowingStandingSubmissionDocuments
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadLoadFollowingStandingSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadLoadFollowingStandingSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Documents>Submission_Documents1</Submission_Documents>\r\n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\
+              \n    </uploadLoadFollowingStandingSubmissionDocuments>\r\n  </Body>\r\n</Envelope>"
+        description: uploadLoadFollowingStandingSubmissionDocuments
+      responses:
+        '200':
+          description: uploadLoadFollowingStandingSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadLoadFollowingStandingSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\"\
+                >\r\n      <return documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\"\
+                >\r\n        <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </return>\r\n    </uploadLoadFollowingStandingSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=uploadLoadFollowingVariationSubmission:
+    post:
+      operationId: uploadLoadFollowingVariationSubmission
+      summary: uploadLoadFollowingVariationSubmission
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadLoadFollowingVariationSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadLoadFollowingVariationSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Object>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" tradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"0\" startInterval=\"1\" endHour=\"0\"\
+              \ endInterval=\"1\">\r\n            <band price=\"1\" size=\"-999999.999\" />\r\n      \
+              \      <band price=\"-79228162514264337593543950335\" size=\"999999.999\" />\r\n       \
+              \     <band price=\"79228162514264337593543950335\" size=\"-999999.899\" />\r\n        \
+              \    <band price=\"0.9\" size=\"999999.899\" />\r\n            <band price=\"1.1\" size=\"\
+              -999999.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              23\" startInterval=\"2\" endHour=\"23\" endInterval=\"2\">\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.799\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.699\" />\r\n            <band price=\"0.8\" size=\"999999.699\" />\r\n\
+              \            <band price=\"1.2\" size=\"-999999.599\" />\r\n            <band price=\"-79228162514264337593543950335\"\
+              \ size=\"999999.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <band\
+              \ price=\"79228162514264337593543950335\" size=\"-999999.499\" />\r\n            <band price=\"\
+              0.7\" size=\"999999.499\" />\r\n            <band price=\"1.3\" size=\"-999999.399\" />\r\
+              \n            <band price=\"-79228162514264337593543950335\" size=\"999999.399\" />\r\n\
+              \            <band price=\"79228162514264337593543950335\" size=\"-999999.299\" />\r\n \
+              \         </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"22\" startInterval=\"\
+              1\" endHour=\"22\" endInterval=\"1\">\r\n            <band price=\"0.6\" size=\"999999.299\"\
+              \ />\r\n            <band price=\"1.4\" size=\"-999999.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.199\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.099\" />\r\n            <band price=\"0.5\" size=\"999999.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"2\" startInterval=\"\
+              2\" endHour=\"2\" endInterval=\"2\">\r\n            <band price=\"1.5\" size=\"-999998.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999998.899\" />\r\n\
+              \            <band price=\"0.4\" size=\"999998.899\" />\r\n            <band price=\"1.6\"\
+              \ size=\"-999998.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \     <resourceSubmission resourceName=\"resourceName2\" action=\"CANCEL\" tradingDate=\"\
+              0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"21\" startInterval=\"1\" endHour=\"21\" endInterval=\"1\">\r\n   \
+              \         <band price=\"-79228162514264337593543950334\" size=\"999998.799\" />\r\n    \
+              \        <band price=\"79228162514264337593543950334\" size=\"-999998.699\" />\r\n     \
+              \       <band price=\"0.3\" size=\"999998.699\" />\r\n            <band price=\"1.7\" size=\"\
+              -999998.599\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.599\"\
+              \ />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"3\" startInterval=\"\
+              2\" endHour=\"3\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999998.499\" />\r\n            <band price=\"0.2\" size=\"999998.499\" />\r\n\
+              \            <band price=\"1.8\" size=\"-999998.399\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999998.399\" />\r\n            <band price=\"79228162514264337593543950334\" size=\"\
+              -999998.299\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"\
+              20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n            <band price=\"\
+              0.1\" size=\"999998.299\" />\r\n            <band price=\"1.9\" size=\"-999998.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950334\" size=\"999998.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950334\" size=\"-999998.099\" />\r\n \
+              \           <band price=\"0.0\" size=\"999998.099\" />\r\n          </offer>\r\n       \
+              \   <offer type=\"BACKUP_LFAS_DN\" startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"\
+              2\">\r\n            <band price=\"2.0\" size=\"-999997.999\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.999\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.899\" />\r\n            <band price=\"-0.1\" size=\"999997.899\" />\r\n\
+              \            <band price=\"2.1\" size=\"-999997.799\" />\r\n          </offer>\r\n     \
+              \     <offer type=\"CANCEL\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.799\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999997.699\" />\r\n\
+              \            <band price=\"-0.2\" size=\"999997.699\" />\r\n            <band price=\"2.2\"\
+              \ size=\"-999997.599\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999997.599\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n    \
+              \    <resourceSubmission resourceName=\"resourceName3\" action=\"SUBMIT\" tradingDate=\"\
+              9999-12-31\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"5\" startInterval=\"2\" endHour=\"5\" endInterval=\"2\">\r\n     \
+              \       <band price=\"79228162514264337593543950334\" size=\"-999997.499\" />\r\n      \
+              \      <band price=\"-0.3\" size=\"999997.499\" />\r\n            <band price=\"2.3\" size=\"\
+              -999997.399\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.399\"\
+              \ />\r\n            <band price=\"79228162514264337593543950334\" size=\"-999997.299\" />\r\
+              \n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"18\" startInterval=\"\
+              1\" endHour=\"18\" endInterval=\"1\">\r\n            <band price=\"-0.4\" size=\"999997.299\"\
+              \ />\r\n            <band price=\"2.4\" size=\"-999997.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.199\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.099\" />\r\n            <band price=\"-0.5\" size=\"999997.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"6\" startInterval=\"\
+              2\" endHour=\"6\" endInterval=\"2\">\r\n            <band price=\"2.5\" size=\"-999996.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999996.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999996.899\" />\r\n\
+              \            <band price=\"-0.6\" size=\"999996.899\" />\r\n            <band price=\"2.6\"\
+              \ size=\"-999996.799\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\"\
+              \ startHour=\"17\" startInterval=\"1\" endHour=\"17\" endInterval=\"1\">\r\n           \
+              \ <band price=\"-79228162514264337593543950333\" size=\"999996.799\" />\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999996.699\" />\r\n            <band price=\"\
+              -0.7\" size=\"999996.699\" />\r\n            <band price=\"2.7\" size=\"-999996.599\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999996.599\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"7\" startInterval=\"\
+              2\" endHour=\"7\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999996.499\" />\r\n            <band price=\"-0.8\" size=\"999996.499\" />\r\n\
+              \            <band price=\"2.8\" size=\"-999996.399\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999996.399\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999996.299\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" tradingDate=\"1899-11-30\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"16\" startInterval=\"1\" endHour=\"16\"\
+              \ endInterval=\"1\">\r\n            <band price=\"-0.9\" size=\"999996.299\" />\r\n    \
+              \        <band price=\"2.9\" size=\"-999996.199\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999996.199\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999996.099\" />\r\n            <band price=\"-1.0\" size=\"999996.099\" />\r\n        \
+              \  </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"8\" startInterval=\"2\" endHour=\"\
+              8\" endInterval=\"2\">\r\n            <band price=\"3.0\" size=\"-999995.999\" />\r\n  \
+              \          <band price=\"-79228162514264337593543950333\" size=\"999995.999\" />\r\n   \
+              \         <band price=\"79228162514264337593543950333\" size=\"-999995.899\" />\r\n    \
+              \        <band price=\"-1.1\" size=\"999995.899\" />\r\n            <band price=\"3.1\"\
+              \ size=\"-999995.799\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"15\" startInterval=\"1\" endHour=\"15\" endInterval=\"1\">\r\n           \
+              \ <band price=\"-79228162514264337593543950333\" size=\"999995.799\" />\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999995.699\" />\r\n            <band price=\"\
+              -1.2\" size=\"999995.699\" />\r\n            <band price=\"3.2\" size=\"-999995.599\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999995.599\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"9\" startInterval=\"\
+              2\" endHour=\"9\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999995.499\" />\r\n            <band price=\"-1.3\" size=\"999995.499\" />\r\n\
+              \            <band price=\"3.3\" size=\"-999995.399\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999995.399\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999995.299\" />\r\n          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"\
+              14\" startInterval=\"1\" endHour=\"14\" endInterval=\"1\">\r\n            <band price=\"\
+              -1.4\" size=\"999995.299\" />\r\n            <band price=\"3.4\" size=\"-999995.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999995.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950333\" size=\"-999995.099\" />\r\n \
+              \           <band price=\"-1.5\" size=\"999995.099\" />\r\n          </offer>\r\n      \
+              \  </resourceSubmission>\r\n        <resourceSubmission resourceName=\"resourceName5\" action=\"\
+              SUBMIT\" tradingDate=\"1900-02-02\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\
+              \n          <offer type=\"LFAS_UP\" startHour=\"10\" startInterval=\"2\" endHour=\"10\"\
+              \ endInterval=\"2\">\r\n            <band price=\"3.5\" size=\"-999994.999\" />\r\n    \
+              \        <band price=\"-79228162514264337593543950332\" size=\"999994.999\" />\r\n     \
+              \       <band price=\"79228162514264337593543950332\" size=\"-999994.899\" />\r\n      \
+              \      <band price=\"-1.6\" size=\"999994.899\" />\r\n            <band price=\"3.6\" size=\"\
+              -999994.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              13\" startInterval=\"1\" endHour=\"13\" endInterval=\"1\">\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.799\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.699\" />\r\n            <band price=\"-1.7\" size=\"999994.699\" />\r\n\
+              \            <band price=\"3.7\" size=\"-999994.599\" />\r\n            <band price=\"-79228162514264337593543950332\"\
+              \ size=\"999994.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"11\" startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n           \
+              \ <band price=\"79228162514264337593543950332\" size=\"-999994.499\" />\r\n            <band\
+              \ price=\"-1.8\" size=\"999994.499\" />\r\n            <band price=\"3.8\" size=\"-999994.399\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999994.399\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999994.299\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"12\" startInterval=\"\
+              1\" endHour=\"12\" endInterval=\"1\">\r\n            <band price=\"-1.9\" size=\"999994.299\"\
+              \ />\r\n            <band price=\"3.9\" size=\"-999994.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.199\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.099\" />\r\n            <band price=\"-2.0\" size=\"999994.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"12\" startInterval=\"\
+              2\" endHour=\"12\" endInterval=\"2\">\r\n            <band price=\"4.0\" size=\"-999993.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999993.999\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999993.899\" />\r\n\
+              \            <band price=\"-2.1\" size=\"999993.899\" />\r\n            <band price=\"4.1\"\
+              \ size=\"-999993.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \   </Submission_Object>\r\n      <Allow_Gate_Closure_Violation>true</Allow_Gate_Closure_Violation>\r\
+              \n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n    </uploadLoadFollowingVariationSubmission>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: uploadLoadFollowingVariationSubmission
+      responses:
+        '200':
+          description: uploadLoadFollowingVariationSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadLoadFollowingVariationSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <return documentCollectionStatus=\"\
+                INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n        <validationDocumentTags\
+                \ message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\" messageCode=\"messageCode2\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\" xpath=\"xpath3\" messageCode=\"\
+                messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message4\" tagType=\"ERROR\" xpath=\"xpath4\" messageCode=\"messageCode4\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message5\" tagType=\"FATAL\" xpath=\"xpath5\" messageCode=\"messageCode5\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n      </return>\r\n    </uploadLoadFollowingVariationSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=uploadLoadFollowingVariationSubmissionDocuments:
+    post:
+      operationId: uploadLoadFollowingVariationSubmissionDocuments
+      summary: uploadLoadFollowingVariationSubmissionDocuments
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - uploadLoadFollowingVariationSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <uploadLoadFollowingVariationSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Documents>Submission_Documents1</Submission_Documents>\r\n      <Allow_Gate_Closure_Violation>true</Allow_Gate_Closure_Violation>\r\
+              \n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n    </uploadLoadFollowingVariationSubmissionDocuments>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: uploadLoadFollowingVariationSubmissionDocuments
+      responses:
+        '200':
+          description: uploadLoadFollowingVariationSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <uploadLoadFollowingVariationSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\"\
+                >\r\n      <return documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\"\
+                >\r\n        <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </return>\r\n    </uploadLoadFollowingVariationSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateLoadFollowingStandingSubmission:
+    post:
+      operationId: validateLoadFollowingStandingSubmission
+      summary: validateLoadFollowingStandingSubmission
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateLoadFollowingStandingSubmission
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateLoadFollowingStandingSubmission xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Object>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" effectiveTradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"0\" startInterval=\"1\" endHour=\"0\"\
+              \ endInterval=\"1\">\r\n            <band price=\"1\" size=\"-999999.999\" />\r\n      \
+              \      <band price=\"-79228162514264337593543950335\" size=\"999999.999\" />\r\n       \
+              \     <band price=\"79228162514264337593543950335\" size=\"-999999.899\" />\r\n        \
+              \    <band price=\"0.9\" size=\"999999.899\" />\r\n            <band price=\"1.1\" size=\"\
+              -999999.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              23\" startInterval=\"2\" endHour=\"23\" endInterval=\"2\">\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.799\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.699\" />\r\n            <band price=\"0.8\" size=\"999999.699\" />\r\n\
+              \            <band price=\"1.2\" size=\"-999999.599\" />\r\n            <band price=\"-79228162514264337593543950335\"\
+              \ size=\"999999.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <band\
+              \ price=\"79228162514264337593543950335\" size=\"-999999.499\" />\r\n            <band price=\"\
+              0.7\" size=\"999999.499\" />\r\n            <band price=\"1.3\" size=\"-999999.399\" />\r\
+              \n            <band price=\"-79228162514264337593543950335\" size=\"999999.399\" />\r\n\
+              \            <band price=\"79228162514264337593543950335\" size=\"-999999.299\" />\r\n \
+              \         </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"22\" startInterval=\"\
+              1\" endHour=\"22\" endInterval=\"1\">\r\n            <band price=\"0.6\" size=\"999999.299\"\
+              \ />\r\n            <band price=\"1.4\" size=\"-999999.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.199\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.099\" />\r\n            <band price=\"0.5\" size=\"999999.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"2\" startInterval=\"\
+              2\" endHour=\"2\" endInterval=\"2\">\r\n            <band price=\"1.5\" size=\"-999998.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999998.899\" />\r\n\
+              \            <band price=\"0.4\" size=\"999998.899\" />\r\n            <band price=\"1.6\"\
+              \ size=\"-999998.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \     <resourceSubmission resourceName=\"resourceName2\" action=\"CANCEL\" effectiveTradingDate=\"\
+              0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"21\" startInterval=\"1\" endHour=\"21\" endInterval=\"1\">\r\n   \
+              \         <band price=\"-79228162514264337593543950334\" size=\"999998.799\" />\r\n    \
+              \        <band price=\"79228162514264337593543950334\" size=\"-999998.699\" />\r\n     \
+              \       <band price=\"0.3\" size=\"999998.699\" />\r\n            <band price=\"1.7\" size=\"\
+              -999998.599\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.599\"\
+              \ />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"3\" startInterval=\"\
+              2\" endHour=\"3\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999998.499\" />\r\n            <band price=\"0.2\" size=\"999998.499\" />\r\n\
+              \            <band price=\"1.8\" size=\"-999998.399\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999998.399\" />\r\n            <band price=\"79228162514264337593543950334\" size=\"\
+              -999998.299\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"\
+              20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n            <band price=\"\
+              0.1\" size=\"999998.299\" />\r\n            <band price=\"1.9\" size=\"-999998.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950334\" size=\"999998.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950334\" size=\"-999998.099\" />\r\n \
+              \           <band price=\"0.0\" size=\"999998.099\" />\r\n          </offer>\r\n       \
+              \   <offer type=\"BACKUP_LFAS_DN\" startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"\
+              2\">\r\n            <band price=\"2.0\" size=\"-999997.999\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.999\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.899\" />\r\n            <band price=\"-0.1\" size=\"999997.899\" />\r\n\
+              \            <band price=\"2.1\" size=\"-999997.799\" />\r\n          </offer>\r\n     \
+              \     <offer type=\"CANCEL\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.799\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999997.699\" />\r\n\
+              \            <band price=\"-0.2\" size=\"999997.699\" />\r\n            <band price=\"2.2\"\
+              \ size=\"-999997.599\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999997.599\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n    \
+              \    <resourceSubmission resourceName=\"resourceName3\" action=\"SUBMIT\" effectiveTradingDate=\"\
+              9999-12-31\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"5\" startInterval=\"2\" endHour=\"5\" endInterval=\"2\">\r\n     \
+              \       <band price=\"79228162514264337593543950334\" size=\"-999997.499\" />\r\n      \
+              \      <band price=\"-0.3\" size=\"999997.499\" />\r\n            <band price=\"2.3\" size=\"\
+              -999997.399\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.399\"\
+              \ />\r\n            <band price=\"79228162514264337593543950334\" size=\"-999997.299\" />\r\
+              \n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"18\" startInterval=\"\
+              1\" endHour=\"18\" endInterval=\"1\">\r\n            <band price=\"-0.4\" size=\"999997.299\"\
+              \ />\r\n            <band price=\"2.4\" size=\"-999997.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.199\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.099\" />\r\n            <band price=\"-0.5\" size=\"999997.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"6\" startInterval=\"\
+              2\" endHour=\"6\" endInterval=\"2\">\r\n            <band price=\"2.5\" size=\"-999996.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999996.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999996.899\" />\r\n\
+              \            <band price=\"-0.6\" size=\"999996.899\" />\r\n            <band price=\"2.6\"\
+              \ size=\"-999996.799\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\"\
+              \ startHour=\"17\" startInterval=\"1\" endHour=\"17\" endInterval=\"1\">\r\n           \
+              \ <band price=\"-79228162514264337593543950333\" size=\"999996.799\" />\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999996.699\" />\r\n            <band price=\"\
+              -0.7\" size=\"999996.699\" />\r\n            <band price=\"2.7\" size=\"-999996.599\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999996.599\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"7\" startInterval=\"\
+              2\" endHour=\"7\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999996.499\" />\r\n            <band price=\"-0.8\" size=\"999996.499\" />\r\n\
+              \            <band price=\"2.8\" size=\"-999996.399\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999996.399\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999996.299\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" effectiveTradingDate=\"1899-11-30\" xmlns=\"\
+              http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"LFAS_UP\" startHour=\"\
+              16\" startInterval=\"1\" endHour=\"16\" endInterval=\"1\">\r\n            <band price=\"\
+              -0.9\" size=\"999996.299\" />\r\n            <band price=\"2.9\" size=\"-999996.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999996.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950333\" size=\"-999996.099\" />\r\n \
+              \           <band price=\"-1.0\" size=\"999996.099\" />\r\n          </offer>\r\n      \
+              \    <offer type=\"LFAS_DN\" startHour=\"8\" startInterval=\"2\" endHour=\"8\" endInterval=\"\
+              2\">\r\n            <band price=\"3.0\" size=\"-999995.999\" />\r\n            <band price=\"\
+              -79228162514264337593543950333\" size=\"999995.999\" />\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999995.899\" />\r\n            <band price=\"-1.1\" size=\"999995.899\" />\r\n\
+              \            <band price=\"3.1\" size=\"-999995.799\" />\r\n          </offer>\r\n     \
+              \     <offer type=\"BACKUP_LFAS_UP\" startHour=\"15\" startInterval=\"1\" endHour=\"15\"\
+              \ endInterval=\"1\">\r\n            <band price=\"-79228162514264337593543950333\" size=\"\
+              999995.799\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"-999995.699\"\
+              \ />\r\n            <band price=\"-1.2\" size=\"999995.699\" />\r\n            <band price=\"\
+              3.2\" size=\"-999995.599\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999995.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\"\
+              \ startHour=\"9\" startInterval=\"2\" endHour=\"9\" endInterval=\"2\">\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999995.499\" />\r\n            <band price=\"\
+              -1.3\" size=\"999995.499\" />\r\n            <band price=\"3.3\" size=\"-999995.399\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999995.399\" />\r\n\
+              \            <band price=\"79228162514264337593543950333\" size=\"-999995.299\" />\r\n \
+              \         </offer>\r\n          <offer type=\"CANCEL\" startHour=\"14\" startInterval=\"\
+              1\" endHour=\"14\" endInterval=\"1\">\r\n            <band price=\"-1.4\" size=\"999995.299\"\
+              \ />\r\n            <band price=\"3.4\" size=\"-999995.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950333\" size=\"999995.199\" />\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999995.099\" />\r\n            <band price=\"-1.5\" size=\"999995.099\" />\r\n\
+              \          </offer>\r\n        </resourceSubmission>\r\n        <resourceSubmission resourceName=\"\
+              resourceName5\" action=\"SUBMIT\" effectiveTradingDate=\"1900-02-02\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"10\" startInterval=\"2\" endHour=\"10\"\
+              \ endInterval=\"2\">\r\n            <band price=\"3.5\" size=\"-999994.999\" />\r\n    \
+              \        <band price=\"-79228162514264337593543950332\" size=\"999994.999\" />\r\n     \
+              \       <band price=\"79228162514264337593543950332\" size=\"-999994.899\" />\r\n      \
+              \      <band price=\"-1.6\" size=\"999994.899\" />\r\n            <band price=\"3.6\" size=\"\
+              -999994.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              13\" startInterval=\"1\" endHour=\"13\" endInterval=\"1\">\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.799\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.699\" />\r\n            <band price=\"-1.7\" size=\"999994.699\" />\r\n\
+              \            <band price=\"3.7\" size=\"-999994.599\" />\r\n            <band price=\"-79228162514264337593543950332\"\
+              \ size=\"999994.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"11\" startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n           \
+              \ <band price=\"79228162514264337593543950332\" size=\"-999994.499\" />\r\n            <band\
+              \ price=\"-1.8\" size=\"999994.499\" />\r\n            <band price=\"3.8\" size=\"-999994.399\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999994.399\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999994.299\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"12\" startInterval=\"\
+              1\" endHour=\"12\" endInterval=\"1\">\r\n            <band price=\"-1.9\" size=\"999994.299\"\
+              \ />\r\n            <band price=\"3.9\" size=\"-999994.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.199\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.099\" />\r\n            <band price=\"-2.0\" size=\"999994.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"12\" startInterval=\"\
+              2\" endHour=\"12\" endInterval=\"2\">\r\n            <band price=\"4.0\" size=\"-999993.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999993.999\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999993.899\" />\r\n\
+              \            <band price=\"-2.1\" size=\"999993.899\" />\r\n            <band price=\"4.1\"\
+              \ size=\"-999993.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \   </Submission_Object>\r\n      <Allow_Gate_Closure_Violation>true</Allow_Gate_Closure_Violation>\r\
+              \n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n    </validateLoadFollowingStandingSubmission>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: validateLoadFollowingStandingSubmission
+      responses:
+        '200':
+          description: validateLoadFollowingStandingSubmissionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateLoadFollowingStandingSubmissionResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <return documentCollectionStatus=\"\
+                INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n        <validationDocumentTags\
+                \ message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\" messageCode=\"messageCode2\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\" xpath=\"xpath3\" messageCode=\"\
+                messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message4\" tagType=\"ERROR\" xpath=\"xpath4\" messageCode=\"messageCode4\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message5\" tagType=\"FATAL\" xpath=\"xpath5\" messageCode=\"messageCode5\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n      </return>\r\n    </validateLoadFollowingStandingSubmissionResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateLoadFollowingStandingSubmissionDocuments:
+    post:
+      operationId: validateLoadFollowingStandingSubmissionDocuments
+      summary: validateLoadFollowingStandingSubmissionDocuments
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateLoadFollowingStandingSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateLoadFollowingStandingSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Documents>Submission_Documents1</Submission_Documents>\r\n      <Allow_Gate_Closure_Violation>true</Allow_Gate_Closure_Violation>\r\
+              \n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n    </validateLoadFollowingStandingSubmissionDocuments>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: validateLoadFollowingStandingSubmissionDocuments
+      responses:
+        '200':
+          description: validateLoadFollowingStandingSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateLoadFollowingStandingSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\"\
+                >\r\n      <return documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\"\
+                >\r\n        <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </return>\r\n    </validateLoadFollowingStandingSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateLoadFollowingVariation:
+    post:
+      operationId: validateLoadFollowingVariation
+      summary: validateLoadFollowingVariation
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateLoadFollowingVariation
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateLoadFollowingVariation xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Object>\r\n        <resourceSubmission resourceName=\"resourceName1\"\
+              \ action=\"SUBMIT\" tradingDate=\"1900-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"0\" startInterval=\"1\" endHour=\"0\"\
+              \ endInterval=\"1\">\r\n            <band price=\"1\" size=\"-999999.999\" />\r\n      \
+              \      <band price=\"-79228162514264337593543950335\" size=\"999999.999\" />\r\n       \
+              \     <band price=\"79228162514264337593543950335\" size=\"-999999.899\" />\r\n        \
+              \    <band price=\"0.9\" size=\"999999.899\" />\r\n            <band price=\"1.1\" size=\"\
+              -999999.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              23\" startInterval=\"2\" endHour=\"23\" endInterval=\"2\">\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.799\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.699\" />\r\n            <band price=\"0.8\" size=\"999999.699\" />\r\n\
+              \            <band price=\"1.2\" size=\"-999999.599\" />\r\n            <band price=\"-79228162514264337593543950335\"\
+              \ size=\"999999.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"1\" startInterval=\"2\" endHour=\"1\" endInterval=\"2\">\r\n            <band\
+              \ price=\"79228162514264337593543950335\" size=\"-999999.499\" />\r\n            <band price=\"\
+              0.7\" size=\"999999.499\" />\r\n            <band price=\"1.3\" size=\"-999999.399\" />\r\
+              \n            <band price=\"-79228162514264337593543950335\" size=\"999999.399\" />\r\n\
+              \            <band price=\"79228162514264337593543950335\" size=\"-999999.299\" />\r\n \
+              \         </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"22\" startInterval=\"\
+              1\" endHour=\"22\" endInterval=\"1\">\r\n            <band price=\"0.6\" size=\"999999.299\"\
+              \ />\r\n            <band price=\"1.4\" size=\"-999999.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950335\" size=\"999999.199\" />\r\n            <band price=\"79228162514264337593543950335\"\
+              \ size=\"-999999.099\" />\r\n            <band price=\"0.5\" size=\"999999.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"2\" startInterval=\"\
+              2\" endHour=\"2\" endInterval=\"2\">\r\n            <band price=\"1.5\" size=\"-999998.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999998.899\" />\r\n\
+              \            <band price=\"0.4\" size=\"999998.899\" />\r\n            <band price=\"1.6\"\
+              \ size=\"-999998.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \     <resourceSubmission resourceName=\"resourceName2\" action=\"CANCEL\" tradingDate=\"\
+              0001-01-01\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"21\" startInterval=\"1\" endHour=\"21\" endInterval=\"1\">\r\n   \
+              \         <band price=\"-79228162514264337593543950334\" size=\"999998.799\" />\r\n    \
+              \        <band price=\"79228162514264337593543950334\" size=\"-999998.699\" />\r\n     \
+              \       <band price=\"0.3\" size=\"999998.699\" />\r\n            <band price=\"1.7\" size=\"\
+              -999998.599\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999998.599\"\
+              \ />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"3\" startInterval=\"\
+              2\" endHour=\"3\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999998.499\" />\r\n            <band price=\"0.2\" size=\"999998.499\" />\r\n\
+              \            <band price=\"1.8\" size=\"-999998.399\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999998.399\" />\r\n            <band price=\"79228162514264337593543950334\" size=\"\
+              -999998.299\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"\
+              20\" startInterval=\"1\" endHour=\"20\" endInterval=\"1\">\r\n            <band price=\"\
+              0.1\" size=\"999998.299\" />\r\n            <band price=\"1.9\" size=\"-999998.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950334\" size=\"999998.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950334\" size=\"-999998.099\" />\r\n \
+              \           <band price=\"0.0\" size=\"999998.099\" />\r\n          </offer>\r\n       \
+              \   <offer type=\"BACKUP_LFAS_DN\" startHour=\"4\" startInterval=\"2\" endHour=\"4\" endInterval=\"\
+              2\">\r\n            <band price=\"2.0\" size=\"-999997.999\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.999\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.899\" />\r\n            <band price=\"-0.1\" size=\"999997.899\" />\r\n\
+              \            <band price=\"2.1\" size=\"-999997.799\" />\r\n          </offer>\r\n     \
+              \     <offer type=\"CANCEL\" startHour=\"19\" startInterval=\"1\" endHour=\"19\" endInterval=\"\
+              1\">\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.799\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999997.699\" />\r\n\
+              \            <band price=\"-0.2\" size=\"999997.699\" />\r\n            <band price=\"2.2\"\
+              \ size=\"-999997.599\" />\r\n            <band price=\"-79228162514264337593543950334\"\
+              \ size=\"999997.599\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n    \
+              \    <resourceSubmission resourceName=\"resourceName3\" action=\"SUBMIT\" tradingDate=\"\
+              9999-12-31\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\n          <offer type=\"\
+              LFAS_UP\" startHour=\"5\" startInterval=\"2\" endHour=\"5\" endInterval=\"2\">\r\n     \
+              \       <band price=\"79228162514264337593543950334\" size=\"-999997.499\" />\r\n      \
+              \      <band price=\"-0.3\" size=\"999997.499\" />\r\n            <band price=\"2.3\" size=\"\
+              -999997.399\" />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999997.399\"\
+              \ />\r\n            <band price=\"79228162514264337593543950334\" size=\"-999997.299\" />\r\
+              \n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"18\" startInterval=\"\
+              1\" endHour=\"18\" endInterval=\"1\">\r\n            <band price=\"-0.4\" size=\"999997.299\"\
+              \ />\r\n            <band price=\"2.4\" size=\"-999997.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950334\" size=\"999997.199\" />\r\n            <band price=\"79228162514264337593543950334\"\
+              \ size=\"-999997.099\" />\r\n            <band price=\"-0.5\" size=\"999997.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\" startHour=\"6\" startInterval=\"\
+              2\" endHour=\"6\" endInterval=\"2\">\r\n            <band price=\"2.5\" size=\"-999996.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950334\" size=\"999996.999\" />\r\
+              \n            <band price=\"79228162514264337593543950334\" size=\"-999996.899\" />\r\n\
+              \            <band price=\"-0.6\" size=\"999996.899\" />\r\n            <band price=\"2.6\"\
+              \ size=\"-999996.799\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\"\
+              \ startHour=\"17\" startInterval=\"1\" endHour=\"17\" endInterval=\"1\">\r\n           \
+              \ <band price=\"-79228162514264337593543950333\" size=\"999996.799\" />\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999996.699\" />\r\n            <band price=\"\
+              -0.7\" size=\"999996.699\" />\r\n            <band price=\"2.7\" size=\"-999996.599\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999996.599\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"7\" startInterval=\"\
+              2\" endHour=\"7\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999996.499\" />\r\n            <band price=\"-0.8\" size=\"999996.499\" />\r\n\
+              \            <band price=\"2.8\" size=\"-999996.399\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999996.399\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999996.299\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n        <resourceSubmission\
+              \ resourceName=\"resourceName4\" action=\"CANCEL\" tradingDate=\"1899-11-30\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+              >\r\n          <offer type=\"LFAS_UP\" startHour=\"16\" startInterval=\"1\" endHour=\"16\"\
+              \ endInterval=\"1\">\r\n            <band price=\"-0.9\" size=\"999996.299\" />\r\n    \
+              \        <band price=\"2.9\" size=\"-999996.199\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999996.199\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999996.099\" />\r\n            <band price=\"-1.0\" size=\"999996.099\" />\r\n        \
+              \  </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"8\" startInterval=\"2\" endHour=\"\
+              8\" endInterval=\"2\">\r\n            <band price=\"3.0\" size=\"-999995.999\" />\r\n  \
+              \          <band price=\"-79228162514264337593543950333\" size=\"999995.999\" />\r\n   \
+              \         <band price=\"79228162514264337593543950333\" size=\"-999995.899\" />\r\n    \
+              \        <band price=\"-1.1\" size=\"999995.899\" />\r\n            <band price=\"3.1\"\
+              \ size=\"-999995.799\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"15\" startInterval=\"1\" endHour=\"15\" endInterval=\"1\">\r\n           \
+              \ <band price=\"-79228162514264337593543950333\" size=\"999995.799\" />\r\n            <band\
+              \ price=\"79228162514264337593543950333\" size=\"-999995.699\" />\r\n            <band price=\"\
+              -1.2\" size=\"999995.699\" />\r\n            <band price=\"3.2\" size=\"-999995.599\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999995.599\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"9\" startInterval=\"\
+              2\" endHour=\"9\" endInterval=\"2\">\r\n            <band price=\"79228162514264337593543950333\"\
+              \ size=\"-999995.499\" />\r\n            <band price=\"-1.3\" size=\"999995.499\" />\r\n\
+              \            <band price=\"3.3\" size=\"-999995.399\" />\r\n            <band price=\"-79228162514264337593543950333\"\
+              \ size=\"999995.399\" />\r\n            <band price=\"79228162514264337593543950333\" size=\"\
+              -999995.299\" />\r\n          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"\
+              14\" startInterval=\"1\" endHour=\"14\" endInterval=\"1\">\r\n            <band price=\"\
+              -1.4\" size=\"999995.299\" />\r\n            <band price=\"3.4\" size=\"-999995.199\" />\r\
+              \n            <band price=\"-79228162514264337593543950333\" size=\"999995.199\" />\r\n\
+              \            <band price=\"79228162514264337593543950333\" size=\"-999995.099\" />\r\n \
+              \           <band price=\"-1.5\" size=\"999995.099\" />\r\n          </offer>\r\n      \
+              \  </resourceSubmission>\r\n        <resourceSubmission resourceName=\"resourceName5\" action=\"\
+              SUBMIT\" tradingDate=\"1900-02-02\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\r\
+              \n          <offer type=\"LFAS_UP\" startHour=\"10\" startInterval=\"2\" endHour=\"10\"\
+              \ endInterval=\"2\">\r\n            <band price=\"3.5\" size=\"-999994.999\" />\r\n    \
+              \        <band price=\"-79228162514264337593543950332\" size=\"999994.999\" />\r\n     \
+              \       <band price=\"79228162514264337593543950332\" size=\"-999994.899\" />\r\n      \
+              \      <band price=\"-1.6\" size=\"999994.899\" />\r\n            <band price=\"3.6\" size=\"\
+              -999994.799\" />\r\n          </offer>\r\n          <offer type=\"LFAS_DN\" startHour=\"\
+              13\" startInterval=\"1\" endHour=\"13\" endInterval=\"1\">\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.799\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.699\" />\r\n            <band price=\"-1.7\" size=\"999994.699\" />\r\n\
+              \            <band price=\"3.7\" size=\"-999994.599\" />\r\n            <band price=\"-79228162514264337593543950332\"\
+              \ size=\"999994.599\" />\r\n          </offer>\r\n          <offer type=\"BACKUP_LFAS_UP\"\
+              \ startHour=\"11\" startInterval=\"2\" endHour=\"11\" endInterval=\"2\">\r\n           \
+              \ <band price=\"79228162514264337593543950332\" size=\"-999994.499\" />\r\n            <band\
+              \ price=\"-1.8\" size=\"999994.499\" />\r\n            <band price=\"3.8\" size=\"-999994.399\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999994.399\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999994.299\" />\r\n\
+              \          </offer>\r\n          <offer type=\"BACKUP_LFAS_DN\" startHour=\"12\" startInterval=\"\
+              1\" endHour=\"12\" endInterval=\"1\">\r\n            <band price=\"-1.9\" size=\"999994.299\"\
+              \ />\r\n            <band price=\"3.9\" size=\"-999994.199\" />\r\n            <band price=\"\
+              -79228162514264337593543950332\" size=\"999994.199\" />\r\n            <band price=\"79228162514264337593543950332\"\
+              \ size=\"-999994.099\" />\r\n            <band price=\"-2.0\" size=\"999994.099\" />\r\n\
+              \          </offer>\r\n          <offer type=\"CANCEL\" startHour=\"12\" startInterval=\"\
+              2\" endHour=\"12\" endInterval=\"2\">\r\n            <band price=\"4.0\" size=\"-999993.999\"\
+              \ />\r\n            <band price=\"-79228162514264337593543950332\" size=\"999993.999\" />\r\
+              \n            <band price=\"79228162514264337593543950332\" size=\"-999993.899\" />\r\n\
+              \            <band price=\"-2.1\" size=\"999993.899\" />\r\n            <band price=\"4.1\"\
+              \ size=\"-999993.799\" />\r\n          </offer>\r\n        </resourceSubmission>\r\n   \
+              \   </Submission_Object>\r\n      <Allow_Gate_Closure_Violation>true</Allow_Gate_Closure_Violation>\r\
+              \n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n    </validateLoadFollowingVariation>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: validateLoadFollowingVariation
+      responses:
+        '200':
+          description: validateLoadFollowingVariationResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateLoadFollowingVariationResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <return documentCollectionStatus=\"\
+                INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\">\r\n        <validationDocumentTags\
+                \ message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\" messageCode=\"messageCode1\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\" messageCode=\"messageCode2\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\" xpath=\"xpath3\" messageCode=\"\
+                messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message4\" tagType=\"ERROR\" xpath=\"xpath4\" messageCode=\"messageCode4\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n        <validationDocumentTags\
+                \ message=\"message5\" tagType=\"FATAL\" xpath=\"xpath5\" messageCode=\"messageCode5\"\
+                \ xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\n      </return>\r\n    </validateLoadFollowingVariationResponse>\r\
+                \n  </Body>\r\n</Envelope>"
+  /?soapAction=validateLoadFollowingVariationSubmissionDocuments:
+    post:
+      operationId: validateLoadFollowingVariationSubmissionDocuments
+      summary: validateLoadFollowingVariationSubmissionDocuments
+      tags:
+      - LFAS Submission v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - validateLoadFollowingVariationSubmissionDocuments
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+              >\r\n  <Body>\r\n    <validateLoadFollowingVariationSubmissionDocuments xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\
+              \ xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\">\r\n      <Submission_Name>Submission_Name1</Submission_Name>\r\
+              \n      <Submission_Documents>Submission_Documents1</Submission_Documents>\r\n      <Allow_Gate_Closure_Violation>true</Allow_Gate_Closure_Violation>\r\
+              \n      <Discard_File_On_Error>true</Discard_File_On_Error>\r\n    </validateLoadFollowingVariationSubmissionDocuments>\r\
+              \n  </Body>\r\n</Envelope>"
+        description: validateLoadFollowingVariationSubmissionDocuments
+      responses:
+        '200':
+          description: validateLoadFollowingVariationSubmissionDocumentsResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\"\
+                >\r\n  <Body>\r\n    <validateLoadFollowingVariationSubmissionDocumentsResponse xmlns:xsi=\"\
+                http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/lfas/2.0\"\
+                >\r\n      <return documentCollectionStatus=\"INTERNAL_ERROR\" timeStamp=\"1900-01-01T01:01:01\"\
+                >\r\n        <validationDocumentTags message=\"message1\" tagType=\"INFO\" xpath=\"xpath1\"\
+                \ messageCode=\"messageCode1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message2\" tagType=\"WARNING\" xpath=\"xpath2\"\
+                \ messageCode=\"messageCode2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\" />\r\
+                \n        <validationDocumentTags message=\"message3\" tagType=\"GATE_CLOSURE_VIOLATION\"\
+                \ xpath=\"xpath3\" messageCode=\"messageCode3\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message4\" tagType=\"ERROR\" xpath=\"\
+                xpath4\" messageCode=\"messageCode4\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n        <validationDocumentTags message=\"message5\" tagType=\"FATAL\" xpath=\"\
+                xpath5\" messageCode=\"messageCode5\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\"\
+                \ />\r\n      </return>\r\n    </validateLoadFollowingVariationSubmissionDocumentsResponse>\r\
+                \n  </Body>\r\n</Envelope>"
 components:
   securitySchemes:
     apiKeyHeader:
@@ -16,6 +959,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: LFAS Submission v2
+  description: LFAS Submission v2

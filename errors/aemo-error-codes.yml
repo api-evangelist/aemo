@@ -1,0 +1,697 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/ — every 4xx and 5xx response declared across 76 documents / 798 operations
+format: none
+description: AEMO publishes no single error reference page, but its OpenAPI documents declare rich 4xx/5xx responses.
+  This catalogue is the deduplicated union of every documented failure response across the whole AEMO API estate,
+  ordered by status code then by how many operations declare it. AEMO does not use RFC 9457 application/problem+json
+  anywhere. The Consumer Data Right energy APIs carry the Consumer Data Standards Australia error object (errors[]
+  of code/title/detail/meta) with mandated CDS error codes; the e-Hub participant APIs return a JSON body with a
+  transactionId and per-status prose; the WEM SOAP operations return SOAP faults inside the aseXML envelope.
+envelopes:
+- family: Consumer Data Right energy APIs
+  shape: errors[] of {code, title, detail, meta}
+  standard: Consumer Data Standards Australia
+  docs: https://consumerdatastandardsaustralia.github.io/standards/
+  specs:
+  - openapi/aemo-cds-energy-api-openapi.yml
+  - openapi/aemo-cds-common-api-openapi.yml
+  - openapi/aemo-cdr-openapi.yml
+  - openapi/aemo-cdr-common-openapi.yml
+- family: e-Hub participant APIs
+  shape: JSON object with transactionId and per-status description
+  standard: null
+- family: WEM SOAP / aseXML operations
+  shape: SOAP fault inside the aseXML envelope
+  standard: null
+problem_count: 128
+problems:
+- status: 400
+  title: The service cannot be found for the endpoint reference (EPR)
+  occurrences: 100
+  api_count: 5
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 400
+  title: Bad Request
+  occurrences: 70
+  api_count: 10
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getDERRecordHistory
+- status: 400
+  title: Bad request
+  occurrences: 64
+  api_count: 14
+  example_operation: aemo-outage-management-external-v1-openapi.yml#createANewGeneratorOutageInOutageManagementSystem
+- status: 400
+  title: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+  occurrences: 33
+  api_count: 4
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC1Report
+- status: 400
+  title: This response is provided when the submitted payload cannot be passed successfully.
+  occurrences: 13
+  api_count: 7
+  example_operation: aemo-b2bmessaging-async-v1-openapi.yml#determineWhatMessagesAreInTheEHubQueue
+- status: 400
+  title: Api failure response
+  occurrences: 13
+  api_count: 1
+  example_operation: aemo-reallocations-v1-openapi.yml#authoriseReallocation
+- status: 400
+  title: This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.
+  occurrences: 11
+  api_count: 4
+  example_operation: aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+- status: 400
+  title: 'The following error codes **MUST** be supported: [400 - Invalid Field](#error-400-field-invalid) [400
+    - Missing Required Field](#error-400-field-missing) [400 - Invalid Version](#error-400-header-invalid-version)'
+  occurrences: 11
+  api_count: 2
+  example_operation: aemo-cds-common-api-openapi.yml#getCustomer
+- status: 400
+  title: 'The following error codes **MUST** be supported: [400 - Invalid Field](#error-400-field-invalid) [400
+    - Missing Required Field](#error-400-field-missing) [400 - Invalid Date](#error-400-field-invalid-date-time)
+    [400 - Invalid Page Size](#error-400-field-invalid-page-size) [400 - Invalid Version](#er'
+  occurrences: 10
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#listEnergyPlans
+- status: 400
+  title: For 4XX error codes, Refer to the Data Standards for the full list of HTTP response and error codes that
+    may be returned for this API. https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cdr-openapi.yml#getDERForServicePoint
+- status: 400
+  title: 'The following error codes **MUST** be supported: [400 - Invalid Field](#error-400-field-invalid) [400
+    - Missing Required Field](#error-400-field-missing) [400 - Invalid Page Size](#error-400-field-invalid-page-size)
+    [400 - Invalid Version](#error-400-header-invalid-version)'
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#listElectricityServicePoints
+- status: 400
+  title: This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response payload.
+  occurrences: 5
+  api_count: 1
+  example_operation: aemo-bidding-v1-openapi.yml#getBid
+- status: 400
+  title: '400'
+  occurrences: 2
+  api_count: 2
+  example_operation: aemo-capacityAuction-v1-openapi.yml#submitFutureTradeData
+- status: 400
+  title: 'The following error codes MUST be supported: [400 - Invalid Field](#error-400-field-invalid) [400 - Missing
+    Field](#error-400-field-missing) [400 - Invalid Version](#error-400-header-invalid-version)'
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-cdr-common-openapi.yml#getOutages
+- status: 400
+  title: This response is provided when the submitted payload cannot be parsed successfully.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+- status: 400
+  title: The service cannot be found for the endpoint reference (EPR) URI.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 401
+  title: Unauthorized
+  occurrences: 114
+  api_count: 21
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getDERRecordHistory
+- status: 401
+  title: This response is provided when "Authorisation" is missing from the header OR user/password is incorrect/not
+    provided OR user account is locked out.
+  occurrences: 100
+  api_count: 5
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 401
+  title: Unauthorized. No response payload.
+  occurrences: 33
+  api_count: 4
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC1Report
+- status: 401
+  title: Unauthorized:Invalid UserName or Password
+  occurrences: 13
+  api_count: 1
+  example_operation: aemo-reallocations-v1-openapi.yml#authoriseReallocation
+- status: 401
+  title: This response is provided when Authorisation is missing from the header OR user/password is incorrect OR
+    user account is locked out. No response paylaod.
+  occurrences: 11
+  api_count: 4
+  example_operation: aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+- status: 401
+  title: API Authentication failure
+  occurrences: 11
+  api_count: 4
+  example_operation: aemo-enablementinstruction-v1-openapi.yml#thisIsToViewTheInstructionsSentOutToTheParticipants
+- status: 401
+  title: Unauthorised
+  occurrences: 10
+  api_count: 3
+  example_operation: aemo-der-business-registration-v1-openapi.yml#submitASingleDERRecord
+- status: 401
+  title: Expected error encountered
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cdr-openapi.yml#getDERForServicePoint
+- status: 401
+  title: This response is provided when Authorisation is missing from the header OR user/password is incorrect OR
+    user account is locked out. No response payload.
+  occurrences: 5
+  api_count: 1
+  example_operation: aemo-bidding-v1-openapi.yml#getBid
+- status: 401
+  title: This response is provided when "Authorisation" is missing from the header OR user/password is incorrect
+    OR user account is locked out.
+  occurrences: 5
+  api_count: 3
+  example_operation: aemo-ee-simulation-status-update-v1-openapi.yml#submitSimulationStatusUpdateForOperationalNonOperationalModelFromEEEnergyExemplar
+- status: 401
+  title: API Authentication Failure
+  occurrences: 3
+  api_count: 1
+  example_operation: aemo-rtms-external-v1-openapi.yml#createANewSubmissionByEmbeddedTheSubmissionJSONInTheRequestAndWaitForTheValidationToCompleteBlockingCall
+- status: 401
+  title: This response is provided when "Authorization" is missing from the header OR user/password is incorrect/not
+    provided OR user account is locked out.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-capacityAuction-v1-openapi.yml#submitFutureTradeData
+- status: 401
+  title: This response is provided when Authorisation is missing from the header OR user/password is incorrect OR
+    user account is locked out.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 401
+  title: API Authentication Failed
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-rtms-external-v1-openapi.yml#createANewDSPSubmissionByEmbeddedTheDSPSubmissionJSONInTheRequestAndWaitForTheValidationToCompleteBlockingCall
+- status: 401
+  title: API Authentication failure.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-rtms-external-v1-openapi.yml#getTheStatusForAGivenSubmission
+- status: 401
+  title: Authorisation credentials, username, or password is invalid.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 403
+  title: This response is provided when there is an invalid Role i.e. user does not have permission to submit this
+    request.
+  occurrences: 102
+  api_count: 6
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 403
+  title: Forbidden
+  occurrences: 102
+  api_count: 16
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getDERRecordHistory
+- status: 403
+  title: Insufficient Privileges
+  occurrences: 8
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 403
+  title: Expected error encountered
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cdr-openapi.yml#getDERForServicePoint
+- status: 403
+  title: This response is provided when privileges are insufficient.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 403
+  title: This response is provided when a resource missing from URL or incorrect URL.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-opsforecasting-intermittentgen-v1-openapi.yml#submitIntermittentGenerationAvailabilityForMTPASA
+- status: 403
+  title: Invalid role. The user does not have permission to submit this request.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 404
+  title: Not Found
+  occurrences: 136
+  api_count: 22
+  example_operation: aemo-attributes-report-external-v1-openapi.yml#getAListOfAttributesByDate
+- status: 404
+  title: This response is provided when the resource missing from URL or incorrect.
+  occurrences: 88
+  api_count: 4
+  example_operation: aemo-capacityAuction-v1-openapi.yml#getGSHFutureData
+- status: 404
+  title: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.
+  occurrences: 33
+  api_count: 4
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC1Report
+- status: 404
+  title: This response is provided when the resource is missing from the URL or the URL is incorrect.
+  occurrences: 13
+  api_count: 1
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 404
+  title: This response is provided when the resource name missing from URL or is invalid.
+  occurrences: 11
+  api_count: 5
+  example_operation: aemo-b2bmessaging-async-v1-openapi.yml#determineWhatMessagesAreInTheEHubQueue
+- status: 404
+  title: This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.
+  occurrences: 11
+  api_count: 4
+  example_operation: aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+- status: 404
+  title: 'The following error codes **MUST** be supported: [404 - Unavailable Energy Account](#error-404-unavailable-energy-account)
+    [404 - Invalid Energy Account](#error-404-invalid-energy-account)'
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#getEnergyAccountDetail
+- status: 404
+  title: This response is provided when the requested resource for the endpoint URI is not found. No response payload.
+  occurrences: 5
+  api_count: 1
+  example_operation: aemo-bidding-v1-openapi.yml#getBid
+- status: 404
+  title: This response is provided when a resource missing from URL or incorrect URL.
+  occurrences: 4
+  api_count: 3
+  example_operation: aemo-ee-simulation-status-update-v1-openapi.yml#submitSimulationStatusUpdateForOperationalNonOperationalModelFromEEEnergyExemplar
+- status: 404
+  title: 'The following error codes **MUST** be supported: [404 - Unavailable Service Point](#error-404-unavailable-service-point)
+    [404 - Invalid Service Point](#error-404-invalid-service-point)'
+  occurrences: 3
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#getElectricityServicePointDetail
+- status: 404
+  title: No records found matching the criteria.
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-rtms-external-v1-openapi.yml#getTheDataForASubmissionAsReceivedFromTheParticipant
+- status: 404
+  title: Not found
+  occurrences: 2
+  api_count: 2
+  example_operation: aemo-wemde-dispatchsolution-external-v2-openapi.yml#retrievesTheSolutionDataForPreDispatchRun
+- status: 404
+  title: 'The following error codes **MUST** be supported: [404 - Invalid Resource](#error-404-resource-invalid)'
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#getEnergyPlanDetail
+- status: 404
+  title: No records found matching the criteria
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-rtms-external-v1-openapi.yml#getTheDetailsForAGivenSubmission
+- status: 404
+  title: This response is provided when the resource "SubmitDispatchForecast" missing from URL or incorrect.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+- status: 404
+  title: This response is provided when the resource "Submit5minPDForecast" missing from URL or incorrect.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitPreDispatchForecast
+- status: 404
+  title: Resource for the endpoint URI not found.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 405
+  title: Method not allowed
+  occurrences: 106
+  api_count: 18
+  example_operation: aemo-attributes-report-external-v1-openapi.yml#getAListOfAttributesByDate
+- status: 405
+  title: Invalid Method used (e.g. GET used instead of POST)
+  occurrences: 101
+  api_count: 5
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 405
+  title: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response
+    payload.
+  occurrences: 33
+  api_count: 4
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC1Report
+- status: 405
+  title: Method Not Allowed
+  occurrences: 26
+  api_count: 6
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getDERRecordHistory
+- status: 405
+  title: This response is provided when the requested method/verb on a resource is invalid. No response paylaod.
+  occurrences: 11
+  api_count: 4
+  example_operation: aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+- status: 405
+  title: This response is provided when the method is not POST
+  occurrences: 9
+  api_count: 4
+  example_operation: aemo-b2bmessaging-async-v1-openapi.yml#determineWhatMessagesAreInTheEHubQueue
+- status: 405
+  title: Invalid Method
+  occurrences: 8
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 405
+  title: Expected error encountered
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cdr-openapi.yml#getDERForServicePoint
+- status: 405
+  title: This response is provided when the requested method/verb on a resource is invalid. No response payload.
+  occurrences: 5
+  api_count: 1
+  example_operation: aemo-bidding-v1-openapi.yml#getBid
+- status: 405
+  title: This response is provided when the method is not GET
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-hubmsgmgt-v1-openapi.yml#getAlert
+- status: 405
+  title: This response is provided when the method is not correct.
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-opsforecasting-intermittentgen-v1-openapi.yml#submitIntermittentGenerationAvailabilityForMTPASA
+- status: 405
+  title: This response is provided when the method is not POST.
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+- status: 405
+  title: This response is provided when a resource missing from URL or incorrect URL.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 405
+  title: The request method is invalid.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 406
+  title: 'The following error codes **MUST** be supported: [406 - Unsupported Version](#error-406-header-unsupported-version)'
+  occurrences: 27
+  api_count: 2
+  example_operation: aemo-cds-common-api-openapi.yml#getCustomer
+- status: 406
+  title: 'The following error codes MUST be supported: [406 - Unsupported Version](#error-406-header-unsupported-version)'
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-cdr-common-openapi.yml#getOutages
+- status: 411
+  title: This response is provided when "Content-Length" is missing from the Header
+  occurrences: 101
+  api_count: 5
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 411
+  title: This response is provided when "Content-Length" is missing from the Header.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+- status: 411
+  title: Content-Length is missing from the header.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 413
+  title: Payload Too Large
+  occurrences: 102
+  api_count: 16
+  example_operation: aemo-attributes-report-external-v1-openapi.yml#getAListOfAttributesByDate
+- status: 413
+  title: Content Too Large
+  occurrences: 4
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 413
+  title: Payload too large
+  occurrences: 4
+  api_count: 2
+  example_operation: aemo-wemde-dispatchsolution-external-v2-openapi.yml#retrievesTheSolutionDataForDispatchRun
+- status: 422
+  title: This response is provided when any there are any Business validation failures, then entire submission is
+    rejected.
+  occurrences: 101
+  api_count: 5
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 422
+  title: Client Error
+  occurrences: 39
+  api_count: 10
+  example_operation: aemo-rcm-ops-external-v1-openapi.yml#retrievesAFlexibleCCAStandingSubmissionListForACapacityYear
+- status: 422
+  title: Business validation failure
+  occurrences: 15
+  api_count: 3
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getOfAllReceiptsAssociatedWithSingleOrMultipleDERRecords
+- status: 422
+  title: 'The following error codes **MUST** be supported: [422 - Invalid Page](#error-422-field-invalid-page)'
+  occurrences: 11
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#listEnergyPlans
+- status: 422
+  title: Error Response
+  occurrences: 4
+  api_count: 1
+  example_operation: aemo-reallocations-v1-openapi.yml#authoriseReallocation
+- status: 422
+  title: Client error
+  occurrences: 4
+  api_count: 2
+  example_operation: aemo-wemde-dispatchsolution-external-v2-openapi.yml#retrievesTheSolutionDataForDispatchRun
+- status: 422
+  title: 'The following error codes **MUST** be supported: [422 - Invalid Page](#error-422-field-invalid-page) [422
+    - Unavailable Energy Account](#error-422-unavailable-energy-account) [422 - Invalid Energy Account](#error-422-invalid-energy-account)'
+  occurrences: 3
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#listEnergyAccountBalancesSpecificAccounts
+- status: 422
+  title: Unprocessable Content
+  occurrences: 3
+  api_count: 2
+  example_operation: aemo-enablementinstruction-v1-openapi.yml#thisIsToViewTheInstructionsSentOutToTheParticipants
+- status: 422
+  title: This response is provided when the method is not correct.
+  occurrences: 3
+  api_count: 2
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 422
+  title: 'The following error codes **MUST** be supported: [422 - Invalid Page](#error-422-field-invalid-page) [422
+    - Unavailable Service Point](#error-422-unavailable-service-point) [422 - Invalid Service Point](#error-422-invalid-service-point)'
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-cds-energy-api-openapi.yml#listElectricityUsageForServicePoints
+- status: 422
+  title: This response is provided when there are no bids found.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-bidding-v1-openapi.yml#getBid
+- status: 422
+  title: This response is provided when any of the submitted forecasts fail business validation (for example submitting
+    a forecast with the same DUID and forecast priority in the same second). If any forecast submitted fails validation,
+    then entire submission is rejected.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+- status: 422
+  title: The submission is rejected because of business validation failure.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-submission-v1-openapi.yml#provideGasBlendAndGasBlendCurtailmentData
+- status: 422
+  title: Too Many Requests
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 429
+  title: This response is provided when the throttling limits are reached.
+  occurrences: 107
+  api_count: 9
+  example_operation: aemo-b2bmessaging-async-v1-openapi.yml#determineWhatMessagesAreInTheEHubQueue
+- status: 429
+  title: Too many request
+  occurrences: 102
+  api_count: 16
+  example_operation: aemo-attributes-report-external-v1-openapi.yml#getAListOfAttributesByDate
+- status: 429
+  title: Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response
+    payload.
+  occurrences: 33
+  api_count: 4
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC1Report
+- status: 429
+  title: Too many requests
+  occurrences: 20
+  api_count: 5
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getDERRecordHistory
+- status: 429
+  title: This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.
+  occurrences: 11
+  api_count: 4
+  example_operation: aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+- status: 429
+  title: Too Many Requests
+  occurrences: 8
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 429
+  title: Expected error encountered
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cdr-openapi.yml#getDERForServicePoint
+- status: 429
+  title: This response is provided when number of inbound requests exceeded the throttling limits. No response payload.
+  occurrences: 5
+  api_count: 1
+  example_operation: aemo-bidding-v1-openapi.yml#getBid
+- status: 429
+  title: Too Many Requests - The Quota/Spike arrest limits have been exceeded
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-opsforecasting-intermittentgen-v1-openapi.yml#submitIntermittentGenerationAvailabilityForMTPASA
+- status: 429
+  title: Too Many Requests - The Quota/Spike arrest limits have been exceeded.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 429
+  title: This response is provided when the throttling limits are reached (40 requests per minute per ParticipantID).
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+- status: 500
+  title: e-Hub is operational but downstream systems are not available.
+  occurrences: 99
+  api_count: 5
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 500
+  title: Application unavailable
+  occurrences: 61
+  api_count: 4
+  example_operation: aemo-attributes-report-external-v1-openapi.yml#getAListOfAttributesByDate
+- status: 500
+  title: Internal Server Error
+  occurrences: 53
+  api_count: 11
+  example_operation: aemo-der-business-registration-v1-openapi.yml#getDERRecordHistory
+- status: 500
+  title: Internal Server Error. Exception from backend system. No response payload.
+  occurrences: 32
+  api_count: 4
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC4Report
+- status: 500
+  title: Server error or application unavailable
+  occurrences: 21
+  api_count: 7
+  example_operation: aemo-wemde-dispatchcase-external-v1-openapi.yml#retrievesCaseDataFromTheCentralDispatchProcessThroughARangeOfPastPrimaryDispatchIntervals
+- status: 500
+  title: This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match
+    or incorrect or downstream service is not available.
+  occurrences: 16
+  api_count: 5
+  example_operation: aemo-b2mmessaging-async-v1-openapi.yml#getQueueMetaData
+- status: 500
+  title: This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match
+    or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
+  occurrences: 13
+  api_count: 7
+  example_operation: aemo-b2bmessaging-async-v1-openapi.yml#determineWhatMessagesAreInTheEHubQueue
+- status: 500
+  title: Api failure response
+  occurrences: 13
+  api_count: 1
+  example_operation: aemo-reallocations-v1-openapi.yml#authoriseReallocation
+- status: 500
+  title: Application unavailable or server error
+  occurrences: 7
+  api_count: 3
+  example_operation: aemo-wemde-dispatchsummary-external-v1-openapi.yml#retrievesDispatchSummaryDataFromTheCentralDispatchProcessThroughARangeOfPastPrimaryDispatchIntervals
+- status: 500
+  title: 'The following error codes MUST be supported: 500 - Service Unavailable'
+  occurrences: 6
+  api_count: 1
+  example_operation: aemo-cdr-openapi.yml#getDERForServicePoint
+- status: 500
+  title: APIM is operational but downstream systems are not available.
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-capacityAuction-v1-openapi.yml#getGSHFutureData
+- status: 500
+  title: Internal Server Error. Exception from backend system. No response payload.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-b2mmessaging-sync-v1-openapi.yml#generateC1Report
+- status: 500
+  title: This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match
+    or incorrect or API/downstream service is not available or Malformed payload.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-ee-simulation-status-update-v1-openapi.yml#submitSimulationStatusUpdateForOperationalNonOperationalModelFromEEEnergyExemplar
+- status: 500
+  title: Core e-Hub application(s) is unavailable
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-hubmsgmgt-v1-openapi.yml#getStatusOfCoreEHubApplications
+- status: 500
+  title: This response is provided when any unforeseen error is encountered.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 500
+  title: Application Unavailable or Server Error
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-wemde-dispatchinstruction-external-v1-openapi.yml#retrievesTheRecentDispatchInstructionForEachParticipant
+- status: 502
+  title: Bad Gateway
+  occurrences: 8
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 502
+  title: Bad Gateway error
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-opsforecasting-intermittentgen-v1-openapi.yml#submitIntermittentGenerationAvailabilityForMTPASA
+- status: 502
+  title: Bad Gateway error.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 503
+  title: e-Hub is operational but downstream systems are not available.
+  occurrences: 83
+  api_count: 3
+  example_operation: aemo-gasbb-reporting-public-data-openapi.yml#adhocReportForLinepackCapacityAdequacy
+- status: 503
+  title: Exceeds throttling limits OR SSL Certificate authentication validation failed
+  occurrences: 18
+  api_count: 2
+  example_operation: aemo-capacity-v1-openapi.yml#getAListOfAllTheServicePointsZonesAndPipelineSegments
+- status: 503
+  title: Service Unavailable
+  occurrences: 8
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+- status: 503
+  title: Service temporarily unavailable
+  occurrences: 2
+  api_count: 1
+  example_operation: aemo-opsforecasting-intermittentgen-v1-openapi.yml#submitIntermittentGenerationAvailabilityForMTPASA
+- status: 503
+  title: Service temporarily unavailable.
+  occurrences: 1
+  api_count: 1
+  example_operation: aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+- status: 504
+  title: Gateway Timeout
+  occurrences: 8
+  api_count: 1
+  example_operation: aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+cross_references:
+  conventions: conventions/aemo-conventions.yml
+  rate_limits: rate-limits/aemo-rate-limits.yml

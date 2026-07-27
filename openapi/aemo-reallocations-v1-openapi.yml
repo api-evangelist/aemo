@@ -1,11 +1,1110 @@
 openapi: 3.0.1
 info:
   title: Reallocations
-  description: "## Introduction\nThe Reallocation API allow you to create, authorise, cancel reallocations. You can also search and retrieve reallocations, calendars, participants, profile types, agreement types, and market price cap\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '## Introduction
+
+    The Reallocation API allow you to create, authorise, cancel reallocations. You can also search and
+    retrieve reallocations, calendars, participants, profile types, agreement types, and market price
+    cap
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/reallocations-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/NEMWholesale/reallocations
-paths: { }
+- url: https://api-prd.aemo.local/ws/NEMWholesale/reallocations
+paths:
+  /authoriseReallocation:
+    put:
+      operationId: authoriseReallocation
+      summary: AuthoriseReallocation
+      tags:
+      - Reallocations
+      description: The authoriseReallocation API sets the state of the reallocation to AUTHORISE, signalling
+        that both parties have agreed to the reallocation.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              reallocationId: 20190820.RS0001
+              counterpartyReference: ReallocRef
+        description: Body Payload
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  responseAppStatus: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '422':
+          description: Error Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  responseAppStatus: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+  /cancelReallocation:
+    put:
+      operationId: cancelReallocation
+      summary: cancelReallocation
+      tags:
+      - Reallocations
+      description: The cancelReallocation API sets the state of a reallocation to CANCEL, signalling to
+        the Prudential system to exclude the reallocation from processing further.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              reallocationId: 20190820.RS0001
+              counterpartyReference: ReallocRef
+        description: Body Payload
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  responseAppStatus: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '422':
+          description: Error Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  responseAppStatus: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+  /getAgreementTypes:
+    get:
+      operationId: getAgreementTypes
+      summary: getAgreementTypes
+      tags:
+      - Reallocations
+      description: 'The getAgreementTypes API retrieves a list of reallocation agreement types and associated
+        descriptions. Possible values are -
+
+        - $ - Dollar offset, a set dollar value for each interval.
+
+        - MWh – Energy Offset, a set energy quantity for each interval, values at that interval’s RRP.
+
+        - Swap – Swap offset, a quantity and price.
+
+        - Cap – Cap offset, a quantity and price.
+
+        - Floor – Floor offset, a quantity and price.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  AgreementTypes:
+                  - agreementTypeId: string
+                    description: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+  /getCalendar:
+    get:
+      operationId: getcalendar
+      summary: getcalendar
+      tags:
+      - Reallocations
+      description: Weekends are implicitly assumed to be non-business days and are not explicitly included
+        in the calendar information returned. The getCalendar API retrieves a list of public holidays
+        from a given calendar. The calendar non-business days are taken from the NEM database.
+      parameters:
+      - name: calendarId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique identifier of the calendar
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  calendars:
+                    calendarId: SETT_REGIONAL
+                    regions:
+                    - regionId: string
+                      nonBusinessdays:
+                      - '2011-01-03T00:00:00Z'
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+  /getCalendars:
+    get:
+      operationId: getCalendars
+      summary: getCalendars
+      tags:
+      - Reallocations
+      description: 'The getCalendars API retrieves a list of Calendar IDs and associated descriptive names
+        fulfilling the following criteria-
+
+        - The Calendar is configured for reallocations.
+
+        - If the regionId filter parameter is in the request, there must be at least one calendar entry
+        matching the given region.
+
+        - If the startDate filter parameter is in the request, there must be at least one calendar entry
+        with a calendar date greater than or equal to the start date.
+
+        - If the endDate filter parameter is in the request, there must be at least one calendar entry
+        with a calendar date less than or equal to the end date.
+
+
+        The filter criteria are additive, that is they collectively represent a series of AND operations
+        on the filter.'
+      parameters:
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339). Start date of the reallocation
+      - name: regionId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"Calendars\": [\r\
+                \n      {\r\n        \"calendarId\": \"SETT_REGIONAL\",\r\n        \"description\": \"\
+                string\"\r\n      }\r\n    ]\r\n  },\r\n  \"errors\": [\r\n    {\r\n      \"code\": \"\
+                string\",\r\n      \"title\": \"string\",\r\n      \"detail\": \"string\",\r\n      \"\
+                source\": \"string\"\r\n    }\r\n  ]\r\n}"
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+  /getMarketPriceCap:
+    get:
+      operationId: getMarketPriceCap
+      summary: getMarketPriceCap
+      tags:
+      - Reallocations
+      description: 'The getMarketPriceCap API retrieves the VOLL (Value of Lost Load) price at the given
+        effective date in the request. The specific value retrieved is the one that-
+
+        - Has an effectiveDate value that is the greatest effectiveDate value, less than or equal to the
+        supplied effective date in the request, where the record is authorised.
+
+        - Has a versionNo value that is greater than the versionNo value, for the corresponding effectiveDate
+        value, where the record is authorised.'
+      parameters:
+      - name: effectiveDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\r\n  \"data\"\
+                : {\r\n    \"vollPrice\": 13800\r\n  },\r\n  \"errors\": {}\r\n}"
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+  /getParticipants:
+    get:
+      operationId: getParticipants
+      summary: getParticipants
+      tags:
+      - Reallocations
+      description: 'The getParticipants API retrieves a list of NEM Participant IDs and associated descriptive
+        names fulfilling the following criteria-
+
+        - Have a participant class of Market Participant.
+
+        - Participants cannot create reallocation requests between participant IDs owned by the same Company
+        ID.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  participants:
+                  - participantId: ENERGYCO1
+                    name: Energy Corp
+                    enable_Derivatives: false
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+  /getProfileTypes:
+    get:
+      operationId: getProfileTypes
+      summary: getProfileTypes
+      tags:
+      - Reallocations
+      description: 'The getProfileTypes API retrieves a list of reallocation Day Types and associated
+        descriptions. Possible values are-
+
+        - Flat – everyday including Business and Non-Business days.
+
+        - Business – Business days do not include weekends or public holidays (based on the chosen PH
+        calendar).
+
+        - Non-business – Any day that is not a business day.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  ProfileTypes:
+                  - profileTypeId: BUSINESS
+                    description: Apply to profile to business days only
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+  /getReallocation:
+    get:
+      operationId: getReallocation
+      summary: getReallocation
+      tags:
+      - Reallocations
+      description: Retrieves a single reallocation along with its associated properties and reallocation
+        profile data. The reallocationId request parameter is used to retrieve the reallocation matching
+        the supplied ID.
+      parameters:
+      - name: reallocationId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\r\n  \"errors\"\
+                : [\r\n    {\r\n      \"code\": \"string\",\r\n      \"title\": \"string\",\r\n      \"\
+                detail\": \"string\",\r\n      \"source\": \"string\"\r\n    }\r\n  ],\r\n  \"data\":\
+                \ {\r\n    \"reallocation\": {\r\n      \"startDate\": \"2000-12-31T00:00:00+00:00\",\r\
+                \n      \"endDate\": \"2020-12-31T00:00:00+00:00\",\r\n      \"submittingParticipantId\"\
+                : \"AEMO\",\r\n      \"counterPartyParticipantId\": \"AEMO\",\r\n      \"agreementTypeId\"\
+                : \"DOLLAR\",\r\n      \"profileTypeId\": \"BUSINESS\",\r\n      \"regionId\": \"QLD1\"\
+                ,\r\n      \"creditDebitIndicator\": \"C\",\r\n      \"submittingParticipantReference\"\
+                : \"REALLOC1\",\r\n      \"intervalLength\": 30,\r\n      \"reallocationProfile\": [\r\
+                \n        {\r\n          \"periodId\": 36,\r\n          \"reallocationValue\": 30,\r\n\
+                \          \"nrp\": 500\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}"
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+  /getReallocations:
+    get:
+      operationId: getReallocations
+      summary: getReallocations
+      tags:
+      - Reallocations
+      description: "The getReallocations API retrieves a list of reallocations and associated properties\
+        \ that fulfil the following criteria-\n  - Either the submittingParticipantId or counterpartyParticipantId\
+        \ property of the reallocation must match the ID of the request participantId.\n  \n  - If the\
+        \ regionId filter parameter is in the request, the regionId property of the reallocation must\
+        \ match the value.\n  \n  - If the startDate filter parameter is in the request, the endDate property\
+        \ of the reallocation must be greater than or equal to the value.\n  \n  - If the endDate filter\
+        \ parameter is in the request, the startDate property of the reallocation must be less than or\
+        \ equal to the value.\n  \n  - If the agreementType filter parameter is in the request, the agreementType\
+        \ property of the reallocation must match one of the comma-separated values.\n  \n  - If the steps\
+        \ filter parameter is in the request, the current_StepId property of the reallocation must match\
+        \ one of the comma-separated values.\n  \n  - If the lastChangedGreaterThan parameter is present\
+        \ in the request, the lastChanged property of the reallocation must be greater than or equal to\
+        \ the value.\n  \n  - If the expiringWithinDays parameter is present in the request, the exPostDueDate\
+        \ property of the reallocation must be greater than or equal to the current system date plus the\
+        \ number of days equal to the parameter value.\n  \n  The filter criteria are additive, that is\
+        \ they collectively represent a series of AND operations on the filter."
+      parameters:
+      - name: calendarId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique identifier of the calendar
+      - name: expiringWithinDays
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Expiring within X days parameter of the reallocation filter.
+      - name: regionId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Region ID parameter of the reallocation filter.
+      - name: lastChangedGreaterThan
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Last changed greater than X parameter of the reallocation filter.
+      - name: exPostDueDateStart
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: steps
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Steps parameter of the reallocation filter, containing a comma-separated list of
+          reallocation step IDs.
+      - name: agreementTypes
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Agreement types parameter of the reallocation filter, containing a comma-separate
+          listed of agreement type IDs.
+      - name: startDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Format - date-time (as date-time in RFC3339). Start date of the reallocation
+      - name: endDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: exPostDueDateEnd
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '422':
+          description: Error Response
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example: "{\r\n  \"ResponseStatus\": {\r\n    \"errorCode\": \"string\",\r\n    \"message\"\
+                : \"string\",\r\n    \"stackTrace\": {},\r\n    \"errors\": [\r\n      {\r\n        \"\
+                errorCode\": \"string\",\r\n        \"fieldName\": \"string\",\r\n        \"message\"\
+                : \"string\",\r\n        \"meta\": {}\r\n      }\r\n    ],\r\n    \"meta\": {}\r\n  }\r\
+                \n}"
+  /getReallocationSteps:
+    get:
+      operationId: getReallocationSteps
+      summary: getReallocationSteps
+      tags:
+      - Reallocations
+      description: The getReallocationSteps API retrieves a list of reallocation step IDs and associated
+        descriptions.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  regions:
+                  - stepId: AUTHORISE
+                    description: Authorised
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+  /getRegions:
+    get:
+      operationId: getRegions
+      summary: getRegions
+      tags:
+      - Reallocations
+      description: 'The getRegions API retrieves a list of regions and associated descriptive names.        Possible
+        values are as follows-
+
+        - New South Wales
+
+        - Queensland
+
+        - South Australia
+
+        - Tasmania
+
+        - Victoria'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  regions:
+                  - regionId: NSW1
+                    name: New South Wales
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
+          content:
+            application/json:
+              example:
+                ResponseStatus:
+                  errorCode: string
+                  message: string
+                  stackTrace: {}
+                  errors:
+                  - errorCode: string
+                    fieldName: string
+                    message: string
+                    meta: {}
+                  meta: {}
+  /submitReallocation:
+    post:
+      operationId: submitReallocation
+      summary: submitReallocation
+      tags:
+      - Reallocations
+      description: "Creates a reallocation and sets the status to SUBMIT. The API creates an ID in the\
+        \ format “<YYYYMMDD>.RS<NNNN>“ where-\n- <YYYYMMDD> is the current system date \n- <NNNN> is the\
+        \ consistently increasing sequence number for reallocations created on the specific date including\
+        \ leading zeros."
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+            - reallocation:
+              - startDate: '2000-12-31T00:00:00Z'
+                endDate: '2020-12-31T00:00:00Z'
+                submittingParticipantId: AEMO
+                counterPartyParticipantId: AEMO
+                agreementTypeId: DOLLAR
+                profileTypeId: BUSINESS
+                regionId: QLD1
+                creditDebitIndicator: C
+                submittingParticipantReference: REALLOC1
+                intervalLength: 30
+                reallocationProfile:
+                - periodId: 36
+                  reallocationValue: 30
+                  nrp: 500
+        description: Payload in the body
+      responses:
+        '200':
+          description: Success Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  reallocationId: 20200210.RS002
+                  reallocationSuccessful: true
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '400':
+          description: Api failure response
+        '401':
+          description: Unauthorized:Invalid UserName or Password
+        '422':
+          description: Error Response
+          content:
+            application/json:
+              example:
+                transactionId: 733d2d32-ad4b-4ce7-823c-dbf756075c11
+                data:
+                  reallocations:
+                  - startDate: '2000-12-31T00:00:00Z'
+                    endDate: '2020-12-31T00:00:00Z'
+                    submittingParticipantId: AEMO
+                    counterPartyParticipantId: AEMO
+                    agreementTypeId: DOLLAR
+                    profileTypeId: BUSINESS
+                    regionId: QLD1
+                    creditDebitIndicator: C
+                    submittingParticipantReference: REALLOC1
+                    intervalLength: 30
+                    reallocationProfile:
+                    - periodId: 36
+                      reallocationValue: 30
+                      nrp: 500
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: Api failure response
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +1116,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Reallocations
+  description: Introduction

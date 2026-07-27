@@ -1,11 +1,334 @@
 openapi: 3.0.1
 info:
   title: WEM DER NMI
-  description: "## Introduction\nUsing the WEM DER Registration APIs, consumers can Create, update and retrieve NMI details"
+  description: '## Introduction
+
+    Using the WEM DER Registration APIs, consumers can Create, update and retrieve NMI details'
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/der-register-nmi-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/wem/v1/der-register
-paths: { }
+- url: https://api-prd.aemo.local/wem/v1/der-register
+paths:
+  /nmi-details:
+    post:
+      operationId: createsANewNMIRecord
+      summary: Creates a new NMI record.
+      tags:
+      - WEM DER NMI
+      description: Creates a new NMI record
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      requestBody:
+        content:
+          application/json:
+            example:
+              nmi: string
+              substation: string
+              postCode: string
+              tni: string
+              status: string
+        description: Create NMI record
+      responses:
+        '200':
+          description: Create NMI record - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '429':
+          description: Too many requests
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
+  /nmi-details/{nmi}:
+    get:
+      operationId: returnsTheCurrentNMIDetails
+      summary: Returns the current NMI details
+      tags:
+      - WEM DER NMI
+      description: Returns the current NMI details
+      parameters:
+      - name: nmi
+        in: path
+        required: true
+        schema:
+          type: string
+        description: NMI to get
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJhcGk6Ly81YWNlOWE0Ni00MWI0LTRiNjAtOGRmNC0xOWEzMDI4MDgwOWIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zMjBjOTk5ZS0zODc2LTRhZDAtYjQwMS1kMjQxMDY4ZTllNjAvIiwiaWF0IjoxNjM2NDM4MDQ0LCJuYmYiOjE2MzY0MzgwNDQsImV4cCI6MTYzNjQ0MTk0NCwiYWlvIjoiRTJaZ1lQREtpWnhpMkRseHZjV1RpZDFYV2VybEFBPT0iLCJhcHBpZCI6ImMzMWVhNjJlLWM3NTMtNDBjZi1hNDkzLWI5Y2U5OTYzNmVlMSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzMyMGM5OTllLTM4NzYtNGFkMC1iNDAxLWQyNDEwNjhlOWU2MC8iLCJvaWQiOiJhYmY5ZjRlOC04OGY3LTQ2MWItOTg2MC1mMTk2ZGM0ZjI2YmUiLCJyaCI6IjAuQVVJQW5wa01Nblk0MEVxMEFkSkJCbzZlWUM2bUhzTlR4ODlBcEpPNXpwbGpidUZDQUFBLiIsInJvbGVzIjpbIkRlcnIuUmVxdWVzdCJdLCJzdWIiOiJhYmY5ZjRlOC04OGY3LTQ2MWItOTg2MC1mMTk2ZGM0ZjI2YmUiLCJ0aWQiOiIzMjBjOTk5ZS0zODc2LTRhZDAtYjQwMS1kMjQxMDY4ZTllNjAiLCJ1dGkiOiJVRUFoVVNCQlpFLU16bEc2czhKakFBIiwidmVyIjoiMS4wIn0.TO06Jtlg7EUXVmDZVCXSPvvQscR6wE8kYDDkm0zrlykg9IVQnjhvYicVpq60gj50ZfcHmqsyVS7hg0mEa46EKpgI6YDbs-KLA5RIGmqhrLrk7ZEutwZNNBRMKq7zolYdvLFLykK3gpXQ4aHhyOOFgyj43RXujqtRy74-AWhoMZ60L7FzLgGwYsaF6lKlB52SA-1EePAVLSAIYQZ7C7z2hRQVL5ZfUMFMOV_PoYHkxiDUxaNJJwUpFCY--Fuz_1-dVMjUBXlHAZLeyWw58tLJpa3m-gqdjd2afvAw7ElL60VB3X98In6HUDD16ZZ38a7hb_mYaAd-7hmNpBdCXx6YGw
+          default: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCIsImtpZCI6Imwzc1EtNTBjQ0g0eEJWWkxIVEd3blNSNzY4MCJ9.eyJhdWQiOiJhcGk6Ly81YWNlOWE0Ni00MWI0LTRiNjAtOGRmNC0xOWEzMDI4MDgwOWIiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8zMjBjOTk5ZS0zODc2LTRhZDAtYjQwMS1kMjQxMDY4ZTllNjAvIiwiaWF0IjoxNjM2NDM4MDQ0LCJuYmYiOjE2MzY0MzgwNDQsImV4cCI6MTYzNjQ0MTk0NCwiYWlvIjoiRTJaZ1lQREtpWnhpMkRseHZjV1RpZDFYV2VybEFBPT0iLCJhcHBpZCI6ImMzMWVhNjJlLWM3NTMtNDBjZi1hNDkzLWI5Y2U5OTYzNmVlMSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzMyMGM5OTllLTM4NzYtNGFkMC1iNDAxLWQyNDEwNjhlOWU2MC8iLCJvaWQiOiJhYmY5ZjRlOC04OGY3LTQ2MWItOTg2MC1mMTk2ZGM0ZjI2YmUiLCJyaCI6IjAuQVVJQW5wa01Nblk0MEVxMEFkSkJCbzZlWUM2bUhzTlR4ODlBcEpPNXpwbGpidUZDQUFBLiIsInJvbGVzIjpbIkRlcnIuUmVxdWVzdCJdLCJzdWIiOiJhYmY5ZjRlOC04OGY3LTQ2MWItOTg2MC1mMTk2ZGM0ZjI2YmUiLCJ0aWQiOiIzMjBjOTk5ZS0zODc2LTRhZDAtYjQwMS1kMjQxMDY4ZTllNjAiLCJ1dGkiOiJVRUFoVVNCQlpFLU16bEc2czhKakFBIiwidmVyIjoiMS4wIn0.TO06Jtlg7EUXVmDZVCXSPvvQscR6wE8kYDDkm0zrlykg9IVQnjhvYicVpq60gj50ZfcHmqsyVS7hg0mEa46EKpgI6YDbs-KLA5RIGmqhrLrk7ZEutwZNNBRMKq7zolYdvLFLykK3gpXQ4aHhyOOFgyj43RXujqtRy74-AWhoMZ60L7FzLgGwYsaF6lKlB52SA-1EePAVLSAIYQZ7C7z2hRQVL5ZfUMFMOV_PoYHkxiDUxaNJJwUpFCY--Fuz_1-dVMjUBXlHAZLeyWw58tLJpa3m-gqdjd2afvAw7ElL60VB3X98In6HUDD16ZZ38a7hb_mYaAd-7hmNpBdCXx6YGw
+      responses:
+        '200':
+          description: Return NMI details - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  nmi: string
+                  substation: string
+                  postCode: string
+                  tni: string
+                  status: string
+                  recordCreationDate: string
+                  recordUpdateDate: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '429':
+          description: Too many requests
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
+    put:
+      operationId: updatesANMIRecord
+      summary: Updates a NMI record
+      tags:
+      - WEM DER NMI
+      description: Updates a NMI record
+      parameters:
+      - name: nmi
+        in: path
+        required: true
+        schema:
+          type: string
+        description: NMI to update
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The participant ID who the request is from.
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market the request is for.
+      requestBody:
+        content:
+          application/json:
+            example:
+              nmi: string
+              substation: string
+              postCode: string
+              tni: string
+              status: string
+        description: Update NMI record
+      responses:
+        '200':
+          description: Update NMI record - Success
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '400'
+                  title: <Error title>
+                  detail: <Details of the error>
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '401'
+                  title: Unauthorised
+                  detail: Authorization failed
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '403'
+                  title: Forbidden
+                  detail: Insufficient privileges
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '404'
+                  title: Not found
+                  detail: ID not found
+        '405':
+          description: Method Not Allowed
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '405'
+                  title: Method Not Allowed
+                  detail: Invalid method <request method> for path <request path>
+        '429':
+          description: Too many requests
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              example:
+                transactionId: string
+                errors:
+                - code: '500'
+                  title: Internal Server error
+                  detail: Internal Server error
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +340,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: WEM DER NMI
+  description: Introduction

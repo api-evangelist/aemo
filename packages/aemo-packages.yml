@@ -1,0 +1,97 @@
+generated: '2026-07-27'
+method: searched
+source: >-
+  npm registry search, PyPI, CRAN, and the AEMO developer portal
+  (https://dev.aemo.com.au/working-with-aemo-apis)
+description: >-
+  AEMO publishes NO first-party client libraries or SDKs in any language. Its developer portal ships
+  OpenAPI documents, a Postman collection and TLS certificate self-service, and nothing else — there
+  is no aemo package on npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist or
+  crates.io, and no AEMO GitHub organisation was found. What does exist is a mature ecosystem of
+  third-party, mostly academic, libraries for AEMO's PUBLIC data (NEMWeb and the MMSDM archive) —
+  none of which touch the authenticated e-Hub participant APIs. They are catalogued here, marked
+  official: false, because they are how most people actually consume AEMO data.
+official_sdks_published: false
+packages:
+  - language: python
+    registry: pypi
+    name: nemosis
+    url: https://pypi.org/project/nemosis/
+    install: pip install nemosis
+    official: false
+    maintainer: UNSW Collaboration on Energy and Environmental Markets (Nicholas Gorman, Abhijith Prakash)
+    source_code: https://github.com/UNSW-CEEM/NEMOSIS
+    covers: NEMWeb / MMSDM historical data downloads
+    description: >-
+      Python package for downloading historical data published by the Australian Energy Market
+      Operator (AEMO).
+  - language: python
+    registry: pypi
+    name: nemseer
+    url: https://pypi.org/project/nemseer/
+    install: pip install nemseer
+    official: false
+    maintainer: Abhijith Prakash (UNSW CEEM)
+    covers: AEMO NEM forecast/pre-dispatch data
+    description: Python package for downloading and handling AEMO NEM forecast data.
+  - language: python
+    registry: pypi
+    name: nempy
+    url: https://pypi.org/project/nempy/
+    install: pip install nempy
+    official: false
+    maintainer: Nicholas Gorman (UNSW CEEM)
+    source_code: https://github.com/UNSW-CEEM/nempy
+    covers: NEM dispatch/market simulation using AEMO data
+    description: Python package for modelling the Australian National Electricity Market dispatch procedure.
+  - language: python
+    registry: pypi
+    name: opennem
+    url: https://pypi.org/project/opennem/
+    official: false
+    maintainer: OpenNEM / Open Electricity
+    status: inactive
+    covers: Aggregated NEM data derived from AEMO public feeds
+  - language: r
+    registry: cran
+    name: aemo
+    url: https://cran.r-project.org/web/packages/aemo/index.html
+    install: install.packages("aemo")
+    official: false
+    version_seen: 0.4.1
+    covers: >-
+      NEMWeb public data and the Market Management System Data Model (MMSDM) historical archive —
+      5- and 30-minute prices, regional demand, dispatch-unit output, interconnector flows, rooftop
+      PV, generator bids, pre-dispatch forecasts, FCAS and gas market data.
+registries_checked:
+  - registry: npm
+    result: no first-party AEMO package
+  - registry: pypi
+    result: no first-party AEMO package (aemo, aemo-api both 404)
+  - registry: cran
+    result: third-party `aemo` package only
+  - registry: maven-central
+    result: no first-party AEMO package
+  - registry: nuget
+    result: no first-party AEMO package
+  - registry: pkg.go.dev
+    result: no first-party AEMO package
+  - registry: rubygems
+    result: no first-party AEMO package
+  - registry: packagist
+    result: no first-party AEMO package
+  - registry: crates.io
+    result: no first-party AEMO package
+github_organization:
+  found: false
+  note: >-
+    github.com/AEMO resolves to an unrelated personal account (login `aeMo`). No Australian Energy
+    Market Operator GitHub organisation was found.
+first_party_tooling:
+  - name: Postman collection
+    url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+    type: collection
+  - name: OpenAPI documents
+    url: https://dev.aemo.com.au/api-docs
+    type: specification
+    note: Downloadable per API from the developer portal (openapi-link export).

@@ -1,0 +1,458 @@
+generated: '2026-07-27'
+method: derived
+source: mcp/aemo-mcp.yml + openapi/ (76 documents, 798 operations)
+description: 'Crosswalk binding AEMO''s candidate MCP tool set to the OpenAPI operations that back it. AEMO publishes
+  no MCP server and no GraphQL endpoint, so there are no mcp_only rows: every tool here is derived from — and therefore
+  fully bound to — a real operationId that exists verbatim in openapi/. The rest_only section records the very large
+  remainder of the AEMO surface that a 28-tool server would not expose, grouped by specification.'
+surfaces:
+  openapi:
+    path: openapi/
+    documents: 76
+    operations: 798
+    source: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
+    gated: false
+    note: Anonymously downloadable from the developer portal; calling the APIs is gated.
+  graphql:
+    endpoint: null
+    note: No GraphQL endpoint found on any AEMO host.
+  mcp:
+    url: null
+    status: not-published
+    note: No AEMO MCP server exists; tools/list could not be probed.
+coverage:
+  tools_named: 28
+  tools_bound_to_rest: 28
+  mcp_only: 0
+  rest_operations_total: 798
+  rest_operations_with_a_tool: 28
+  rest_operations_without_a_tool: 770
+crosswalk:
+- tool: get_bid
+  category: NEMDispatchBidding
+  rest:
+  - getBid
+  spec: openapi/aemo-bidding-v1-openapi.yml
+  http: GET /getBid
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: list_bids
+  category: NEMDispatchBidding
+  rest:
+  - getBids
+  spec: openapi/aemo-bidding-v1-openapi.yml
+  http: GET /getBids
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_bid_submission
+  category: NEMDispatchBidding
+  rest:
+  - getSubmission
+  spec: openapi/aemo-bidding-v1-openapi.yml
+  http: GET /getSubmission
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: list_bid_submissions
+  category: NEMDispatchBidding
+  rest:
+  - getSubmissions
+  spec: openapi/aemo-bidding-v1-openapi.yml
+  http: GET /getSubmissions
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: submit_bids
+  category: NEMDispatchBidding
+  rest:
+  - submitBids
+  spec: openapi/aemo-bidding-v1-openapi.yml
+  http: POST /submitBids
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: submit_dispatch_self_forecast
+  category: SelfForecast
+  rest:
+  - submitDispatchForecast
+  spec: openapi/aemo-selfForecast-v1-openapi.yml
+  http: POST /SubmitDispatchForecast
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: submit_predispatch_self_forecast
+  category: SelfForecast
+  rest:
+  - submitPreDispatchForecast
+  spec: openapi/aemo-selfForecast-v1-openapi.yml
+  http: POST /Submit5minPDForecast
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: submit_mtpasa_offers
+  category: MT PASA Offers
+  rest:
+  - submitOneOrMoreMTPASAOffers
+  spec: openapi/aemo-mtpasaoffers-v1-openapi.yml
+  http: POST /submission
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: list_outages
+  category: Outage Management
+  rest:
+  - retrieveOutageFromOutageManagement
+  spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  http: GET /outageData
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_outage
+  category: Outage Management
+  rest:
+  - getParticularOutage
+  spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  http: GET /outageData/{outageNumber}
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_outage_status
+  category: Outage Management
+  rest:
+  - retrieveLatestOutageStatusForNetworkOperator
+  spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  http: GET /outageData/status
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: create_network_outage
+  category: Outage Management
+  rest:
+  - createANewNetworkOutageInOutageManagementSystem
+  spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  http: POST /outageData/networkOutages
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: create_generator_outage
+  category: Outage Management
+  rest:
+  - createANewGeneratorOutageInOutageManagementSystem
+  spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  http: POST /outageData/generatorOutages
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: withdraw_network_outage
+  category: Outage Management
+  rest:
+  - withdrawExistingNetworkOutageInOutageManagementSystem
+  spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  http: PUT /outageData/networkOutages/{outageNumber}/withdraw
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_der_installation
+  category: WEM DER Installation V2
+  rest:
+  - retrieveDERInstallationRecord
+  spec: openapi/aemo-der-register-installation-v2-openapi.yml
+  http: GET /installation/{nmi}
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: list_der_installations
+  category: WEM DER Installation V2
+  rest:
+  - retrieveDERInstallationRecords
+  spec: openapi/aemo-der-register-installation-v2-openapi.yml
+  http: GET /installation
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_der_installation_history
+  category: WEM DER Installation V2
+  rest:
+  - retrieveDERInstallationHistory
+  spec: openapi/aemo-der-register-installation-v2-openapi.yml
+  http: GET /installation/{nmi}/history
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: create_der_installation
+  category: WEM DER Installation V2
+  rest:
+  - createDERInstallationRecord
+  spec: openapi/aemo-der-register-installation-v2-openapi.yml
+  http: POST /installation
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_nmi_details
+  category: WEM DER NMI
+  rest:
+  - returnsTheCurrentNMIDetails
+  spec: openapi/aemo-der-register-nmi-v1-openapi.yml
+  http: GET /nmi-details/{nmi}
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_prudential_company_summary
+  category: Prudentials
+  rest:
+  - getPrudentialCompanySummary
+  spec: openapi/aemo-prudentials-v1-openapi.yml
+  http: GET /getPrudentialCompanySummary
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_bank_guarantees
+  category: Prudentials
+  rest:
+  - getBankGuarantees
+  spec: openapi/aemo-prudentials-v1-openapi.yml
+  http: GET /getBankGuarantees
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_prudential_calendar
+  category: Prudentials
+  rest:
+  - getPrudentialCalendar
+  spec: openapi/aemo-prudentials-v1-openapi.yml
+  http: GET /getPrudentialCalendar
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: list_tls_certificate_orders
+  category: TLS Certificate Mgmt v1
+  rest:
+  - getAllCertificateOrders
+  spec: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+  http: GET /orders
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: create_tls_certificate
+  category: TLS Certificate Mgmt v1
+  rest:
+  - createANewCertificate
+  spec: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+  http: POST /certificates
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: revoke_tls_certificate
+  category: TLS Certificate Mgmt v1
+  rest:
+  - revokeACertificate
+  spec: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+  http: POST /certificates/{certificate-id}/revoke
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_cdr_energy_plans
+  category: Energy Plans
+  rest:
+  - listEnergyPlans
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  http: GET /energy/plans
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_cdr_service_point_usage
+  category: Electricity Usage
+  rest:
+  - getElectricityServicePointUsage
+  spec: openapi/aemo-cds-energy-api-openapi.yml
+  http: GET /energy/electricity/servicepoints/{servicePointId}/usage
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+- tool: get_cdr_status
+  category: Data Holder Operations
+  rest:
+  - getStatus
+  spec: openapi/aemo-cds-common-api-openapi.yml
+  http: GET /discovery/status
+  binding: rest
+  confidence: high
+  note: Candidate tool derived directly from this operation; inherits its parameters and requestBody as its input
+    schema.
+mcp_only: []
+rest_only:
+- spec: openapi/aemo-pre-balancing-reports-v8-openapi.yml
+  operations_without_tool: 73
+- spec: openapi/aemo-pre-balancing-reports-v7-1-openapi.yml
+  operations_without_tool: 71
+- spec: openapi/aemo-pre-balancing-reports-v7-openapi.yml
+  operations_without_tool: 71
+- spec: openapi/aemo-pre-balancing-reports-v6-openapi.yml
+  operations_without_tool: 70
+- spec: openapi/aemo-rcm-ops-external-v1-openapi.yml
+  operations_without_tool: 50
+- spec: openapi/aemo-submission-v1-openapi.yml
+  operations_without_tool: 37
+- spec: openapi/aemo-der-consumer-registration-v1-openapi.yml
+  operations_without_tool: 31
+- spec: openapi/aemo-gasbb-reporting-public-data-openapi.yml
+  operations_without_tool: 29
+- spec: openapi/aemo-report-v1-openapi.yml
+  operations_without_tool: 22
+- spec: openapi/aemo-cds-energy-api-openapi.yml
+  operations_without_tool: 21
+- spec: openapi/aemo-rtms-external-v1-openapi.yml
+  operations_without_tool: 15
+- spec: openapi/aemo-capacity-v1-openapi.yml
+  operations_without_tool: 13
+- spec: openapi/aemo-reallocations-v1-openapi.yml
+  operations_without_tool: 13
+- spec: openapi/aemo-settlementDirect-v1-openapi.yml
+  operations_without_tool: 13
+- spec: openapi/aemo-system-management-reports-v2-2-openapi.yml
+  operations_without_tool: 10
+- spec: openapi/aemo-system-management-reports-v2-3-openapi.yml
+  operations_without_tool: 10
+- spec: openapi/aemo-system-management-reports-v2-4-openapi.yml
+  operations_without_tool: 10
+- spec: openapi/aemo-system-management-reports-v2-5-openapi.yml
+  operations_without_tool: 10
+- spec: openapi/aemo-system-management-reports-v2-6-openapi.yml
+  operations_without_tool: 10
+- spec: openapi/aemo-system-management-reports-v2-1-openapi.yml
+  operations_without_tool: 9
+- spec: openapi/aemo-balancing-submission-v2-openapi.yml
+  operations_without_tool: 8
+- spec: openapi/aemo-der-business-registration-v1-openapi.yml
+  operations_without_tool: 8
+- spec: openapi/aemo-lfas-submission-v2-openapi.yml
+  operations_without_tool: 8
+- spec: openapi/aemo-b2mmessaging-sync-v1-openapi.yml
+  operations_without_tool: 7
+- spec: openapi/aemo-balancing-reports-v2-5-openapi.yml
+  operations_without_tool: 7
+- spec: openapi/aemo-prudentials-v1-openapi.yml
+  operations_without_tool: 7
+- spec: openapi/aemo-system-management-reports-v2-openapi.yml
+  operations_without_tool: 7
+- spec: openapi/aemo-balancing-reports-v2-2-openapi.yml
+  operations_without_tool: 6
+- spec: openapi/aemo-balancing-reports-v2-3-openapi.yml
+  operations_without_tool: 6
+- spec: openapi/aemo-balancing-reports-v2-4-openapi.yml
+  operations_without_tool: 6
+- spec: openapi/aemo-cdr-openapi.yml
+  operations_without_tool: 6
+- spec: openapi/aemo-balancing-reports-v2-1-openapi.yml
+  operations_without_tool: 5
+- spec: openapi/aemo-balancing-reports-v2-openapi.yml
+  operations_without_tool: 5
+- spec: openapi/aemo-capacityAuction-v1-openapi.yml
+  operations_without_tool: 5
+- spec: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+  operations_without_tool: 5
+- spec: openapi/aemo-wemde-dspdispatchinstruction-external-v1-openapi.yml
+  operations_without_tool: 5
+- spec: openapi/aemo-b2bmessaging-pull-v1-openapi.yml
+  operations_without_tool: 4
+- spec: openapi/aemo-b2mmessaging-pull-v1-openapi.yml
+  operations_without_tool: 4
+- spec: openapi/aemo-lfas-reports-v2-openapi.yml
+  operations_without_tool: 4
+- spec: openapi/aemo-wemde-dispatchcase-external-v1-openapi.yml
+  operations_without_tool: 4
+- spec: openapi/aemo-wemde-dispatchsolution-external-v1-openapi.yml
+  operations_without_tool: 4
+- spec: openapi/aemo-wemde-dispatchsummary-external-v1-openapi.yml
+  operations_without_tool: 4
+- spec: openapi/aemo-b2bmessaging-async-v1-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-b2mmessaging-async-v1-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-blindupdate-v1-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-cds-common-api-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-generatorRecall-v1-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-meterexemption-external-v1-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-wemde-dispatchcase-external-v2-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-wemde-dispatchsolution-external-v2-openapi.yml
+  operations_without_tool: 3
+- spec: openapi/aemo-attributes-report-external-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-bilateral-stem-submission-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-cdr-common-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-der-register-nmi-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-ee-simulation-status-update-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-hubmsgmgt-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-opsforecasting-intermittentgen-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-outage-management-external-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-variableparameter-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-wemde-ncess-external-v1-openapi.yml
+  operations_without_tool: 2
+- spec: openapi/aemo-b2bmessaging-sync-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-der-register-installation-v2-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-enablementinstruction-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-hubmsgmgt-v2-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-identityService-v2-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-market-reports-v2-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-oauth-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-oip-external-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-p2pmessaging-sync-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-wemde-dispatchinstruction-external-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-wemde-notinservicecapacity-external-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-wemde-referencetradingprice-external-v1-openapi.yml
+  operations_without_tool: 1
+- spec: openapi/aemo-wemde-tradingdayreport-external-v1-openapi.yml
+  operations_without_tool: 1

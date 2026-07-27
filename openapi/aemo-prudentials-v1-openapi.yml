@@ -3,9 +3,823 @@ info:
   title: Prudentials
   description: This API supports the various operations performed on Prudentials dashboard
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/prudentials-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMWholesale/Prudentials
-paths: { }
+- url: https://api-prd.aemo.local/NEMWholesale/Prudentials
+paths:
+  /getBankGuarantees:
+    get:
+      operationId: getBankGuarantees
+      summary: getBankGuarantees
+      tags:
+      - Prudentials
+      description: getBankGuarantees
+      parameters:
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"companyName\"\
+                : \"string\",\r\n    \"companyId\": \"string\",\r\n    \"bankGuarantees\": [\r\n     \
+                \ {\r\n        \"guaranteeId\": \"string\",\r\n        \"creditProviderId\": \"string\"\
+                ,\r\n        \"creditProviderName\": \"string\",\r\n        \"commencementDate\": \"string\"\
+                ,\r\n        \"terminationDate\": \"string\",\r\n        \"returnDate\": \"string\",\r\
+                \n        \"lastChanged\": \"string\",\r\n        \"guaranteeAmount\": 0\r\n      }\r\n\
+                \    ]\r\n  },\r\n  \"errors\": [\r\n    {\r\n      \"code\": \"string\",\r\n      \"\
+                title\": \"string\",\r\n      \"detail\": \"string\",\r\n      \"source\": \"string\"\r\
+                \n    }\r\n  ],\r\n  \"warnings\": [\r\n    \"string\"\r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getCumulativePrice:
+    get:
+      operationId: getCumulativePrice
+      summary: getCumulativePrice
+      tags:
+      - Prudentials
+      description: getCumulativePrice
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  cumulativePrices:
+                  - regionId: string
+                    cumulativePrice: 0
+                    averagePrice: 0
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getForecastCompanySummary:
+    get:
+      operationId: getForecastCompanySummary
+      summary: getForecastCompanySummary
+      tags:
+      - Prudentials
+      description: getForecastCompanySummary
+      parameters:
+      - name: forecastDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: forecastRunNo
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"companyId\": \"\
+                TEST\",\r\n    \"companyName\": \"TEST\",\r\n    \"currentTradingMargin\": 3015609.47153,\r\
+                \n    \"currentOustandings\": -7944609.47153,\r\n    \"poe10TradingMargin\": 3253272.27005786,\r\
+                \n    \"poe10Outstandings\": -8182272.27005786,\r\n    \"poe50TradingMargin\": 3224503.41462999,\r\
+                \n    \"poe50Outstandings\": -8153503.41462999,\r\n    \"poe90TradingMargin\": 3208560.76105293,\r\
+                \n    \"poe90Outstandings\": -8137560.76105293\r\n  },\r\n  \"errors\": [\r\n    {\r\n\
+                \      \"code\": \"string\",\r\n      \"title\": \"string\",\r\n      \"detail\": \"string\"\
+                ,\r\n      \"source\": \"string\"\r\n    }\r\n  ],\r\n  \"warnings\": [\r\n    \"string\"\
+                \r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getForecastRegionalPrice:
+    get:
+      operationId: getForecastRegionalPrice
+      summary: getForecastRegionalPrice
+      tags:
+      - Prudentials
+      description: getForecastRegionalPrice
+      parameters:
+      - name: forecastDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: forecastRunNo
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"string\",\r\n  \"data\": {\r\n    \"regions\": [\r\
+                \n      {\r\n        \"highestPriceInterval\": \"string\",\r\n        \"highestRRP\":\
+                \ 0,\r\n        \"cumulativeRRP\": 0,\r\n        \"totalCurrentCumulativeDemand\": 0,\r\
+                \n        \"totalPOE10ForecastDemand\": 0,\r\n        \"totalPOE50ForecastDemand\": 0,\r\
+                \n        \"totalPOE90ForecastDemand\": 0,\r\n        \"regionId\": \"string\",\r\n  \
+                \      \"intervals\": [\r\n          {\r\n            \"intervalDateTime\": \"2020-01-13T00:00:00+00:00\"\
+                ,\r\n            \"forecastDemand\": 6509.71,\r\n            \"forecastRRP\": 39.36\r\n\
+                \          }\r\n        ]\r\n      }\r\n    ]\r\n  },\r\n  \"errors\": [\r\n    {\r\n\
+                \      \"code\": \"string\",\r\n      \"title\": \"string\",\r\n      \"detail\": \"string\"\
+                ,\r\n      \"source\": \"string\"\r\n    }\r\n  ],\r\n  \"warnings\": [\r\n    \"string\"\
+                \r\n  ]\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getForecastRevenue:
+    get:
+      operationId: getForecastRevenue
+      summary: getForecastRevenue
+      tags:
+      - Prudentials
+      description: getForecastRevenue
+      parameters:
+      - name: forecastDate
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: forecastRunNo
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example: "{\r\n  \"transactionId\": \"510ee0ba-7981-4027-be56-c9fde8f1105c\",\r\n  \"data\"\
+                : {\r\n    \"revenueSinceMidnight\": -13164147.9206525,\r\n    \"revenueLastHour\": -1334346.27053747,\r\
+                \n    \"revenueForecastForToday\": -31460699.0432076\r\n  },\r\n  \"errors\": [],\r\n\
+                \  \"warnings\": []\r\n}"
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getForecastRunVersion:
+    get:
+      operationId: getForecastRunVersion
+      summary: getForecastRunVersion
+      tags:
+      - Prudentials
+      description: getForecastRunVersion
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  forecastDate: string
+                  forecastRunNo: 0
+                  prudentialDate: string
+                  forecastRunDateTime: string
+                  prudentialRunDateTime: string
+                  forecastTradingStartInterval: string
+                  forecastTradingEndInterval: string
+                  forecastDispatchInterval: string
+                  forecastP5MinStartInterval: string
+                  forecastP5MinEndInterval: string
+                  forecastPDStartInterval: string
+                  forecastPDEndInterval: string
+                  forecastPDSensStartInterval: string
+                  forecastPDSensEndInterval: string
+                  nextStatementDate: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPrudentialCalendar:
+    get:
+      operationId: getPrudentialCalendar
+      summary: getPrudentialCalendar
+      tags:
+      - Prudentials
+      description: getPrudentialCalendar
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  calendarEntries:
+                  - billingPeriodId: string
+                    contractYear: 0
+                    weekNo: 0
+                    nextDate: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPrudentialCompanyAttributes:
+    get:
+      operationId: getPrudentialCompanyAttributes
+      summary: getPrudentialCompanyAttributes
+      tags:
+      - Prudentials
+      description: getPrudentialCompanyAttributes
+      parameters:
+      - name: fromDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: toDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  companyId: string
+                  effectiveDates:
+                  - effectiveDate: string
+                    calculatedMcl: 0
+                    dailyTypicalAccrual: 0
+                    prudentialMargin: 0
+                    lastChanged: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPrudentialCompanySummary:
+    get:
+      operationId: getPrudentialCompanySummary
+      summary: getPrudentialCompanySummary
+      tags:
+      - Prudentials
+      description: getPrudentialCompanySummary
+      parameters:
+      - name: prudentialDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: prudentialRunNo
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  prudentialDate: string
+                  prudentialRunNo: 0
+                  lastChanged: string
+                  companySummary:
+                    companyId: string
+                    todayOutstandingsPercent: 0
+                    maximumCreditLimit: 0
+                    prudentialMargin: 0
+                    tradingLimit: 0
+                    tradingMargin: 0
+                    outstandings: 0
+                    typicalAccrual: 0
+                    creditSupport: 0
+                    expostReallocBalance: 0
+                    securityDepositProvision: 0
+                    securityDepositOffset: 0
+                    securityDepositBalance: 0
+                    outstandingsReallocations: 0
+                    prudentialException: true
+                    historicDays:
+                    - calendarDate: string
+                      runDateTime: string
+                      historicOutstandings: 0
+                      historicCreditSupport: 0
+                      historicTradingLimit: 0
+                    securityDeposits:
+                    - securityDepositId: string
+                      participantId: string
+                      lodgeDate: string
+                      maturityDate: string
+                      interestRate: 0
+                      interestAcctId: string
+                      interestCalcType: string
+                      amount: 0
+                    reallocations:
+                    - reallocationId: string
+                      participantId: string
+                      counterPartyId: string
+                      startDate: string
+                      endDate: string
+                      reportStartDate: string
+                      reportEndDate: string
+                      amount: 0
+                    outstandingsWeeks:
+                    - contractYear: 0
+                      weekNo: 0
+                      billRunNo: string
+                      runType: string
+                      companyOutstandingsAmount: 0
+                      participants:
+                      - participantId: string
+                        participantOutstandingsAmount: 0
+                    earlyPaymentNominations:
+                    - string
+                    earlyPaymentAmount:
+                    - string
+                    sdaFloatingInterestRates:
+                    - participantId: string
+                      interestAcctId: string
+                      effectiveDate: string
+                      interestRate: 0
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
+  /getPrudentialRunVersion:
+    get:
+      operationId: getPrudentialRunVersion
+      summary: getPrudentialRunVersion
+      tags:
+      - Prudentials
+      description: getPrudentialRunVersion
+      parameters:
+      - name: X-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              example:
+                transactionId: string
+                data:
+                  prudentialDate: string
+                  prudentialRunNo: 0
+                  latestTradingInterval: string
+                  lastChanged: string
+                errors:
+                - code: string
+                  title: string
+                  detail: string
+                  source: string
+                warnings:
+                - string
+        '400':
+          description: Mandatory HTTP header {missing Header Name} is missing. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '401':
+          description: Unauthorized. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}.
+            No response payload.
+          content:
+            application/json:
+              schema: {}
+        '405':
+          description: Method Not Allowed. Input request HTTP method {requested verb} is not allowed for
+            this resource. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '429':
+          description: Too Many Requests. Number of inbound requests exceeded the throttling limits; try
+            after sometime. No response payload.
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal Server Error. Exception from backend system. No response payload.
+          content:
+            application/json:
+              schema: {}
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +831,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Prudentials
+  description: This API supports the various operations performed on Prudentials dashboard

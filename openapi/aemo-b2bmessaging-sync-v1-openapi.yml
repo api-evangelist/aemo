@@ -1,11 +1,57 @@
 openapi: 3.0.1
 info:
   title: B2BMessagingSync
-  description: "## Introduction\nThe B2BMessagingSync API is a B2B SMP APIs used to send and receive B2B messages between the participants in a synchronous fashion. \n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: "## Introduction\nThe B2BMessagingSync API is a B2B SMP APIs used to send and receive B2B\
+    \ messages between the participants in a synchronous fashion. \n\nFor details on how to get access\
+    \ and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\"\
+    \ alt=\"View API Docs\" /></a>"
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/b2bmessaging-sync-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/B2BMessagingSync
-paths: { }
+- url: https://api-prd.aemo.local/ws/B2BMessagingSync
+paths:
+  /messages:
+    post:
+      operationId: submitAB2BMessage
+      summary: Submit a B2B message
+      tags:
+      - B2BMessagingSync
+      description: Submit a B2B message.
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: "Message ID defined by the Participant. \nThe messageContextID is used in the following\
+          \ ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the\
+          \ contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient\
+          \ is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files\
+          \ is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned\
+          \ where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat\
+          \ of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10}\
+          \ + \"_\" + [0-9_a-z]{1,18} </b>"
+      responses:
+        '200':
+          description: aseXML hub Acknowledgement (status = ‘Accept’) will be sent
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when the submitted payload cannot be passed successfully.
+        '404':
+          description: This response is provided when the resource name missing from URL or is invalid.
+        '405':
+          description: This response is provided when the method is not POST
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: This response is provided when any unforeseen error is encountered, such as; Certificate/key
+            do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +63,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: B2BMessagingSync
+  description: Introduction

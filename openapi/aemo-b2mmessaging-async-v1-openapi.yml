@@ -1,11 +1,231 @@
 openapi: 3.0.1
 info:
   title: B2MMessagingAsync
-  description: "## Introduction\n The B2MMessagingAsync push-push API supports inbound submitMessages, submitMessageAcknowledgements, and getQueueMetaData endpoints and suits a high volume exchange of messages. \n Participants push their outgoing message to the e-Hub and the e-Hub pushes the message to the Participants Gateway. The message delivery occurs  asynchronously, where the initiator sends the message to the e-Hub and expects the outcome (such as MACKs, TACKs, or responses) in a different API call. The response, sent later, is sent to the Participants Gateway."
+  description: "## Introduction\n The B2MMessagingAsync push-push API supports inbound submitMessages,\
+    \ submitMessageAcknowledgements, and getQueueMetaData endpoints and suits a high volume exchange of\
+    \ messages. \n Participants push their outgoing message to the e-Hub and the e-Hub pushes the message\
+    \ to the Participants Gateway. The message delivery occurs  asynchronously, where the initiator sends\
+    \ the message to the e-Hub and expects the outcome (such as MACKs, TACKs, or responses) in a different\
+    \ API call. The response, sent later, is sent to the Participants Gateway."
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/b2mmessaging-async-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/NEMRetail/B2MMessagingAsync
-paths: { }
+- url: https://api-prd.aemo.local/NEMRetail/B2MMessagingAsync
+paths:
+  /getQueueMetaData:
+    get:
+      operationId: getQueueMetaData
+      summary: Get Queue MetaData
+      tags:
+      - B2MMessagingAsync
+      description: Retrieve details of messages queued in the Participant Hub Queue
+      parameters:
+      - name: transactionGroup
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Transaction Group
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submitMessageAcknowledgements:
+    post:
+      operationId: submitMessageAcknowledgements
+      summary: Submit Message Acknowledgements
+      tags:
+      - B2MMessagingAsync
+      description: Submit messages acknowledgements to AEMO’s market systems
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + "_"+[FromParticipantID]{1,10}
+          + "_" + [0-9_a-z]{1,18}.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      requestBody:
+        content:
+          application/xml:
+            example: <?xml version="1.0"?> <ase:aseXML xmlns:ase="urn:aseXML:r38" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="urn:aseXML:r38 http://www.nemmco.com.au/aseXML/schemas/r38/aseXML_r38.xsd">
+              <Header> <From description="National Electricity Market Management Company">NEMMCO</From>
+              <To description="Energex - LNSP">ENERGEXP</To> <MessageID>NEMMCO-MSG-2875769</MessageID>
+              <MessageDate>2001-10-31T13:20:10.100+10:00</MessageDate> <TransactionGroup>CATS</TransactionGroup>
+              <Priority>Low</Priority> <SecurityContext>zz023</SecurityContext> <Market>NEM</Market> </Header>
+              <Acknowledgements> <MessageAcknowledgement initiatingMessageID="ENERGEX-MSG-11234569" receiptID="NEMMCO-MSGR-1234342"
+              receiptDate="2001-10-31T13:20:10.050+10:00" status="Accept"/> </Acknowledgements> </ase:aseXML>
+        description: Payload
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
+  /submitMessages:
+    post:
+      operationId: submitMessages
+      summary: Submit Messages
+      tags:
+      - B2MMessagingAsync
+      description: Submit messages and transaction acknowledgements to AEMO’s market systems
+      parameters:
+      - name: messageContextID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + "_"+[FromParticipantID]{1,10}
+          + "_" + [0-9_a-z]{1,18}.
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Market
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Requird response format
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - ''
+      requestBody:
+        content:
+          application/xml:
+            example: <?xml version="1.0"?> <ase:aseXML xmlns:ase="urn:aseXML:r38" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="urn:aseXML:r38 http://www.nemmco.com.au/aseXML/schemas/r38/aseXML_r38.xsd
+              "> <Header> <From>MDA1</From> <To>NEMMCO</To> <MessageID>MDA1-MSG-34567856</MessageID> <MessageDate>2001-10-31T13:20:10.100+10:00</MessageDate>
+              <TransactionGroup>MDMT</TransactionGroup> <Priority>Low</Priority> <SecurityContext>zz023</SecurityContext>
+              <Market>NEM</Market> </Header> <Transactions> <Transaction transactionID="MDA1-TNS-12343456"
+              transactionDate="2001-10-31T13:20:10.090+10:00"> <MeterDataNotification version="r25"> <CSVConsumptionData>
+              NMI,Suffix,MDPVersionDate,FromDate,ToDate,Status,Reading 1234567890,A1,20011010143542,20010415,20010714,E,3.245
+              1234567890,A2,20011010143542,20010415,20010714,A,.446 </CSVConsumptionData> </MeterDataNotification>
+              </Transaction> </Transactions> </ase:aseXML>
+        description: Payload
+      responses:
+        '200':
+          description: Success response with aseXml response payload
+          content:
+            application/xml:
+              example: <_x0032_00APIResponseResponse-xml></_x0032_00APIResponseResponse-xml>
+        '400':
+          description: This response is provided when Mandatory HTTP header {missing Header Name} is missing.
+            No response paylaod.
+        '401':
+          description: This response is provided when Authorisation is missing from the header OR user/password
+            is incorrect OR user account is locked out. No response paylaod.
+        '404':
+          description: This response is provided when the requested resource for the endpoint URI is not
+            found. No response paylaod.
+        '405':
+          description: This response is provided when the requested method/verb on a resource is invalid.
+            No response paylaod.
+        '429':
+          description: This response is provided when number of inbound requests exceeded the throttling
+            limits. No response paylaod.
+        '500':
+          description: This response is provided when any unforeseen error is encountered,such as; Certificate/key
+            do not match or incorrect or downstream service is not available.
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +237,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: B2MMessagingAsync
+  description: Introduction

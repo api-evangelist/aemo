@@ -1,11 +1,4123 @@
 openapi: 3.0.1
 info:
   title: Submission
-  description: "\n## Introduction\nThe submission API allows participants to submit data to the Gas Bulletin Board (BB).\nData submission from BB reporting entities to the BB are divided into two key areas-\n- Data transfer formats which includes the form, validation rules, and timing of submissions.\n- Data submission methods to the BB, and how the success and failure of those submissions is communicated back to the submitter.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>"
+  description: '
+
+    ## Introduction
+
+    The submission API allows participants to submit data to the Gas Bulletin Board (BB).
+
+    Data submission from BB reporting entities to the BB are divided into two key areas-
+
+    - Data transfer formats which includes the form, validation rules, and timing of submissions.
+
+    - Data submission methods to the BB, and how the success and failure of those submissions is communicated
+    back to the submitter.
+
+
+    For details on how to get access and business rules for this API:
+
+
+    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
   version: v1
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/submission-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-prd.aemo.local/ws/gbb/submission
-paths: { }
+- url: https://api-prd.aemo.local/ws/gbb/submission
+paths:
+  /connectionPointNameplateRating:
+    post:
+      operationId: addNewConnectionPointNameplateRating
+      summary: Add new Connection Point Nameplate Rating
+      tags:
+      - Submission
+      description: "Provide nameplate ratings-\n  - For each connection point owned, controlled, or operated\
+        \ by the BB pipeline operator and connected to each of its BB pipelines.\n  - For each connection\
+        \ point owned, controlled, or operated by the Part 24 facility operator and connected to each\
+        \ of its transitional compression facilities.\n  - For each connection point connected to each\
+        \ of its pipelines which is not owned, controlled, or operated by the BB pipeline operator, where\
+        \ the connection point nameplate rating has been provided to the BB pipeline operator by the facility\
+        \ who owns, controls, or operates the connection point."
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              ConnectionPointId: 1301002
+              CapacityQuantity: 201.65
+              EffectiveDate: '2018-08-06'
+              Description: This is some comments
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: ac4fd4dd-aff5-49e7-b292-84a377889f72
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /dailyProductionAndFlow:
+    post:
+      operationId: addNewDailyProductionAndFlow
+      summary: Add new daily Production And Flow
+      tags:
+      - Submission
+      description: Provide on each gas day D, the BB facility operator’s daily gas flow data for receipts
+        and deliveries and transitional compression facility operator’s daily gas compression
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              GasDate: '2018-09-23'
+              FacilityId: 520001
+              ConnectionPointId: 1301002
+              FlowDirection: RECEIPT
+              ActualQuantity: 32.232
+              Quality: OK
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: db793cdd-48bf-417a-a86c-e05942a035b1
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /dailyStorage:
+    post:
+      operationId: addNewDailyStorage
+      summary: Add new daily storage
+      tags:
+      - Submission
+      description: Provide on each gas day D, the actual quantity of natural gas held in each storage
+        facility at the end of the gas day D.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              GasDate: '2018-09-23'
+              FacilityId: 520001
+              ActualQuantity: 32.232
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 659ca3c9-0161-4b2f-ab0d-63f3e2243d0a
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /DomesticSupplyForecast:
+    post:
+      operationId: addNewDomesticSupplyForecast
+      summary: Add new Domestic Supply Forecast
+      tags:
+      - Submission
+      description: To provide information on Domestic Supply Forecast
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 530038
+              Year: 2023
+              Month: 6
+              DomesticGas: 101.111
+      responses:
+        '200':
+          description: Successful request.
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 200
+                  title: Month
+                  detail: Month value 13 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /ExpectedDailyGasDemand:
+    post:
+      operationId: addNewExpectedDailyGasDemand
+      summary: Add new Expected Daily Gas Demand
+      tags:
+      - Submission
+      description: To provide information on ExpectedDailyGasDemand
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              GasDate: '2023-04-29'
+              FacilityId: 530038
+              ForecastQuantity: 100.5
+              DemandZoneId: SESA-DE-01
+              PurchasesGSA: 20.1
+              PurchasesGSH: 30.2
+              GSHLocation: 1
+              PurchasesMKtSameZone: 40.1
+              PurchasesMKtDiffZone: 40.1
+              Description: This is sample Description
+      responses:
+        '200':
+          description: Successful request.
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 192
+                  title: PurchasesGSA
+                  detail: PurchasesGSA value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /ExportForecast:
+    post:
+      operationId: addNewExportForecast
+      summary: Add new Export Forecast
+      tags:
+      - Submission
+      description: To provide information on Export Forecast
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 530038
+              Year: 2023
+              Month: 6
+              ExportGas: 101.111
+      responses:
+        '200':
+          description: Successful request.
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 200
+                  title: Month
+                  detail: Month value 13 not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /facilityDevelopment:
+    post:
+      operationId: addNewFacilityDevelopment
+      summary: Add new Facility Development
+      tags:
+      - Submission
+      description: To provide information on facility development projects
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              DevFacilityID: '2022-11-25'
+              EffectiveDate: 530038
+              ProposedName: Sample Name
+              CapacityFrom: 500.365
+              CapacityTo: 600.365
+              PlannedCommissionFrom: '2023-12-01'
+              PlannedCommissionTo: '2024-03-01'
+              DevelopmentStage: PROPOSED
+              Location: Sydney
+              Comments: Backhaul capacity will be 24TJ/day
+              RelatedFacilityIds: 520051,530041
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 0d12a80b-336f-4646-969e-1c13373def26
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /gasFieldInterest:
+    post:
+      operationId: addNewGasFieldInterest
+      summary: Add new Gas Field Interest
+      tags:
+      - Submission
+      description: To provide reserve and resource information about a BB field interest
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FieldInterestId: 123456
+              EffectiveDate: '2018-08-06'
+              DevelopedReserve1P: 123.456
+              DevelopedReserve2P: 123.456
+              DevelopedReserve3P: 123.456
+              UndevelopedReserve1P: 123.456
+              UndevelopedReserve2P: 123.456
+              UndevelopedReserve3P: 123.456
+              Resources2C: 123.456
+              ProductionChangeReserve2P: -123.456
+              ProvedAreaExtensionReserve2P: 123.456
+              PercentageChangeReserve2P: 123.456
+              UpwardRevisionFrom3PReserveTo2P: 123.456
+              DownwardRevisionFrom2PReserveTo3P: 123.456
+              OtherRevisionsReserve2P: 123.456
+              MaturitySubClass2P: 'Eg: On production, Approved for development, Justified for development'
+              MaturitySubClass2C: 'Eg: Development pending, Development on hold, Development unclarified,
+                Development not viable'
+              MinDate2P: '2022-10-01'
+              MaxDate2P: '2022-12-01'
+              MinDate2C: '2022-10-01'
+              MaxDate2C: '2022-12-01'
+              ExpectedBarriers2C: Price Forecast
+              IncreaseReserveEstimatePrice2P: 1.234
+              DecreaseReserveEstimatePrice2P: -1.234
+              ResourcesEstimateMethod: 'Eg: Deterministic, Geostatistical and probabilistic'
+              ConversionFactorQtyTCFToPJ: 909
+              EconomicAssumption: Gas price of $10
+              UpdateReason: Annual Update
+              PreparedBy: Joe Brown
+              PreparationIndependenceStatement: YES; NO
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: fdff34ab-db48-4ca5-b65f-69d9e5e43af6
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /gasFieldInterestDetail:
+    post:
+      operationId: addNewGasFieldInterestDetail
+      summary: Add new Gas Field Interest Detail
+      tags:
+      - Submission
+      description: To provide information about a BB field interest
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FieldInterestId: 123456
+              EffectiveDate: '2022-06-23'
+              PetroleumTenements: Petroleum Tenement 3A
+              ProcessingFacilities: Existing Facilities
+              ResourceClassification: Conventional / Unconventional
+              ResourceSubClassification: 'Eg: Coalbed methane, basin-centered gas, tight gas, tight oil,
+                gas hydrates, natural bitumen, oil shale'
+              NatureofGas: 'Eg: Dry gas, gas condensate or gas found in conjunction with oil'
+              TenementShare: 50.544
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 67a1fcb5-e3c2-4d98-bf3a-0a12c8bbe46f
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /linepackCapacityAdequacy:
+    post:
+      operationId: addNewLinepackCapacityAdequacy
+      summary: Add new linepack Capacity Adequacy
+      tags:
+      - Submission
+      description: Provide a Linepack Capacity Adequacy (LCA) report that indicates (flags) the status
+        for each pipeline and transitional compression facility for a three-day outlook period. The flags
+        are traffic light colours (Green, Amber, Red) indicates the LCA status for each pipeline.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              GasDate: '2018-09-23'
+              FacilityId: 520001
+              Flag: GREEN
+              Description: This is some comments
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: c68d5068-f0fd-41b8-8f98-feb91d900079
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /LinepackForecast:
+    post:
+      operationId: addNewLinepackForecasts
+      summary: Add new Linepack Forecasts
+      tags:
+      - Submission
+      description: To provide information on Linepack Forecasts
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 530038
+              GasDate: '2023-04-29'
+              LinepackZoneId: SESA-LP-01
+              LinepackType: Operational
+              ForecastQuantity: 52349.522
+              Description: This is sample Description
+      responses:
+        '200':
+          description: Successful request.
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 192
+                  title: LinepackType
+                  detail: LinepackType value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /LNGShipment:
+    post:
+      operationId: addNewLNGShipment
+      summary: Add new LNG Shipment
+      tags:
+      - Submission
+      description: 'Provides information on: LNG Import and Export Shipments'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 520001
+              TransactionId: LNG_SHIP_123456
+              ShipmentDate: '2022-12-10'
+              VolumePJ: 3.564
+              Cancelled: 0
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: f1ed483d-928c-4a70-93ec-c26d07ec7390
+                data:
+                  TransactionIdList:
+                  - TransactionId: LNG_SHIP_1073
+                    FacilityId: 590002
+                    VersionDateTime: '2023-02-03T06:40:20Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /LNGTransaction:
+    post:
+      operationId: addNewLNGTransaction
+      summary: Add new LNG Transaction
+      tags:
+      - Submission
+      description: 'Provides information on: Short term LNG Export transactions'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              TransactionId: ''
+              FacilityId: 520001
+              TradeDate: '2022-04-01'
+              VolumePJ: 2.333
+              SellingParties: Star Energy
+              BuyingParties: Purple Energy
+              SupplyPeriodStart: '2022-04-03'
+              SupplyPeriodEnd: '2022-05-31'
+              FOBPrice: 12.321
+              PriceStructure: Variable
+              Description: Sample
+              Cancelled: 0
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: e1a0687b-ad1b-4405-aeb0-1406335b1ce9
+                data:
+                  TransactionIdList:
+                  - TransactionId: LNG_TRAN_1076
+                    FacilityId: 544160
+                    TradeDate: '2023-07-01T12:00:00Z'
+                    VolumePJ: 4
+                    SellingParties: seller Energy
+                    BuyingParties: buyer Energy
+                    SupplyPeriodStart: '2022-07-01T12:00:00Z'
+                    SupplyPeriodEnd: '2022-07-31T12:00:00Z'
+                    FOBPrice: 35
+                    PriceStructure: fixed
+                    Description: check
+                    Cancelled: 0
+                  - TransactionId: LNG_TRAN_1081
+                    FacilityId: 544160
+                    TradeDate: '2022-08-01T12:00:00Z'
+                    VolumePJ: 5
+                    SellingParties: seller Energy
+                    BuyingParties: buyer Energy1
+                    SupplyPeriodStart: '2022-07-15T12:00:00Z'
+                    SupplyPeriodEnd: '2022-07-31T12:00:00Z'
+                    FOBPrice: 45
+                    PriceStructure: fixed
+                    Description: check1
+                    Cancelled: 0
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /mediumTermCapacityOutlook:
+    post:
+      operationId: addNewMediumTermCapacityOutlook
+      summary: Add new medium Term Capacity Outlook
+      tags:
+      - Submission
+      description: Provide details of any activity expected to affect the daily capacity of a BB pipeline,
+        BB production, or BB storage facility in the next 36 months.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 520001
+              FromGasDate: '2018-03-10'
+              ToGasDate: '2018-03-20'
+              CapacityType: STORAGE
+              OutlookQuantity: 200.531
+              FlowDirection: RECEIPT
+              CapacityDescription: This transmission capacity is the amount of gas that the Culcairn delivery
+                point is able to withdraw from this pipeline facility. This capacity is dependent on the
+                forecast DTS demand and the availability of key assets on this pipeline facility
+              ReceiptLocation: 1200001
+              DeliveryLocation: 1300056
+              Description: This is some comments
+              RecallTime: 1000
+              RecallDescription: sample
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: fecb269d-e8d1-4077-bf12-21ab7944cacd
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /nameplateRating:
+    post:
+      operationId: addNewNameplateRating
+      summary: Add new nameplate Rating
+      tags:
+      - Submission
+      description: Provide the nameplate rating of each facility or information about any planned permanent
+        capacity reduction or expansion due to modification of the facility.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 520001
+              CapacityType: STORAGE
+              CapacityQuantity: 201.65
+              FlowDirection: RECEIPT
+              CapacityDescription: This is some comments
+              ReceiptLocation: 1200001
+              DeliveryLocation: 1300056
+              EffectiveDate: '2018-08-06'
+              Description: This is some comments
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: e2858267-2be8-422f-8bef-7faa134f8fe0
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /registeredParticipantCode:
+    post:
+      operationId: addNewParticipantCode
+      summary: Add new participant code
+      tags:
+      - Submission
+      description: Register participants code
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      responses:
+        '200':
+          description: Successful request.
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+    get:
+      operationId: getParticipantCode
+      summary: Get participant code
+      tags:
+      - Submission
+      description: Get participant code
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: registeredParticipantCode
+          content:
+            application/json:
+              example:
+                transactionId: 93bb0986-1c5c-42a4-bcf6-62ace5f46cff
+                data:
+                  CompanyCode: SANTOS
+                  CompanyName: Santos Limited
+                errors: []
+                warnings: []
+  /shipperList:
+    post:
+      operationId: addNewShipper
+      summary: Add new Shipper
+      tags:
+      - Submission
+      description: Provides details on the BB shippers who have contracted primary firm capacity on the
+        BB facility
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              EffectiveDate: '2021-11-25'
+              FacilityId: 530038
+              ShipperName: Shipper1
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 7e9eedbf-16e9-4cef-95e1-a353110cd700
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /shortTermCapacityOutlook:
+    post:
+      operationId: addNewShortTermCapacityOutlook
+      summary: Add new short Term Capacity Outlook
+      tags:
+      - Submission
+      description: Provide on each gas day D, the BB facility operator’s good faith estimate of the daily
+        capacity of the BB Facility for gas days D+1 to D+7.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              GasDate: '2018-09-23'
+              FacilityId: 520001
+              CapacityType: STORAGE
+              OutlookQuantity: 200.531
+              FlowDirection: RECEIPT
+              CapacityDescription: This is some comments
+              ReceiptLocation: 1200001
+              DeliveryLocation: 1300056
+              Description: This is some comments
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 312bebb5-a97b-4916-86a5-952e44e04230
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /shortTermTransaction:
+    post:
+      operationId: addNewShortTermTransaction
+      summary: Add new Short Term Transaction
+      tags:
+      - Submission
+      description: 'Provides information on: Short term gas transactions, excluding those concluded through
+        the gas trading exchange'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              TransactionId: ''
+              TradeDate: '2022-01-01'
+              FromGasDate: '2022-07-01'
+              ToGasDate: '2022-12-31'
+              BuyerName: Star Energy
+              SellerName: Purple Energy
+              State: VIC
+              Location: Delivered at Horsley Park – 1202003
+              TransactionType: Supply
+              TransactionQuantity: 10000.555
+              MaximumDailyQuantity: 0.555
+              TakeOrPayQuantity: 5000.111
+              Price: 10.45
+              PriceStructure: ''
+              PriceEscalationMechanism: ''
+              Description: Star Energy TN#364
+              Cancelled: '0'
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 5edc3d5e-644c-4a55-9a75-e8fbdb151958
+                data:
+                  TransactionIdList:
+                  - TransactionId: 1590
+                    TradeDate: '2021-10-21T12:00:00Z'
+                    FromGasDate: '2021-10-23T12:00:00Z'
+                    ToGasDate: '2021-10-24T12:00:00Z'
+                    BuyerName: 1111Conventional buyer
+                    SellerName: 111subclass seller
+                    State: VIC
+                    Location: Melbourne
+                    TransactionType: Supply
+                    TransactionQuantity: 120
+                    MaximumDailyQuantity: 212
+                    TakeOrPayQuantity: 25
+                    Price: 129
+                    PriceStructure: Fixed
+                    PriceEscalationMechanism: call
+                    Description: xyz
+                    Cancelled: 1
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /storageCapacity:
+    post:
+      operationId: addNewStorageCapacity
+      summary: Add new Storage Capacity
+      tags:
+      - Submission
+      description: 'Provides information on: Storage capacity transactions'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              TradeId: ''
+              TradeDate: '2021-03-01'
+              FromGasDate: '2021-04-01'
+              ToGasDate: '2021-05-01'
+              BuyerName: Star Energy
+              SellerName: Purple Energy
+              FacilityId: 520001
+              Priority: Secondary firm
+              MaximumStorageQuantity: 345.678
+              InjectionCapacity: 4.333
+              WithdrawalCapacity: 5.676
+              Price: 4.2
+              PriceStructure: Variable
+              PriceEscalationMechanism: ''
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 703a9771-680c-4a9d-9c39-adec9032abb1
+                data:
+                  TradeIdList:
+                  - TradeId: 1075
+                    VersionDateTime: '2023-02-03T06:42:44Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /uncontractedCapacityOutlook:
+    post:
+      operationId: addNewUncontractedCapacityOutlook
+      summary: Add new uncontracted Capacity Outlook
+      tags:
+      - Submission
+      description: 'Provides information on -
+
+        - Uncontracted primary pipeline capacity on BB pipelines for the next 36 months. Note- This does
+        not include BB pipelines in the Declared Transmission System.
+
+        - Uncontracted storage capacity on BB storage facilities for the next 36 months.
+
+        - Uncontracted primary compression capacity on transitional compression facilities for the next
+        36 months.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: 520001
+              OutlookMonth: 4
+              OutlookYear: 2018
+              CapacityType: STORAGE
+              OutlookQuantity: 200.531
+              FlowDirection: RECEIPT
+              CapacityDescription: This is some comments
+              ReceiptLocation: 1200001
+              DeliveryLocation: 1300056
+              Description: This is some comments
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: b3a85795-3da1-4a09-84f8-e0afc9ea404a
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /BBCapacityTransactionReport:
+    get:
+      operationId: getCapacityTransactionDeclarationsThroughTheBulletinBoard
+      summary: Get capacity transaction declarations through the Bulletin Board
+      tags:
+      - Submission
+      description: Provides information on BB Capacity Transactions, excluding those concluded through
+        the gas trading exchange.
+      parameters:
+      - name: 'FromTradeDate '
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with BBCapacityTransactionDataList
+          content:
+            application/json:
+              example:
+                transactionId: b4d657d3-fe83-457b-950a-0927dd8b8a5c
+                data:
+                  BBCapacityTransactionDataList:
+                  - TradeId: 1001
+                    VersionDateTime: '2019-08-15T03:49:57Z'
+                    CompanyId: 92
+                    TradeDate: '2019-04-18T12:00:00Z'
+                    FromGasDate: '2019-04-19T12:00:00Z'
+                    ToGasDate: '2019-12-31T12:00:00Z'
+                    BuyerName: Santos Direct Pty Ltd
+                    SellerName: OneSteel Manufacturing Pty Limited
+                    FacilityId: 550054
+                    FacilityName: ''
+                    FlowDirection: ''
+                    StandardOTSA: 'NO'
+                    BBTransportationServiceType: FORWARD_HAUL
+                    Priority: High
+                    ReceiptPointId: 1505013
+                    DeliveryPointId: 1505037
+                    ParkLoanPointId: ''
+                    Quantity: 3500
+                    MHQ: 168
+                    Price: 0.98
+                    PriceStructure: escalating annually
+                    PriceEscalationMechanism: cpi
+                    LastChanged: '2019-08-15T03:49:57Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /DomesticSupplyReport:
+    get:
+      operationId: getDomesticSupplyForecastReport
+      summary: Get Domestic Supply Forecast Report
+      tags:
+      - Submission
+      description: Get Domestic Supply Forecast Report
+      parameters:
+      - name: FacilityIds
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated facility Ids
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with DomesticSupplyDataList
+          content:
+            application/json:
+              example:
+                transactionId: 84e3623f-6012-427a-be0c-d41235aff4f0
+                data:
+                  DomesticSupplyDataList:
+                  - FacilityName: Facility1 Test
+                    VersionDateTime: '2021-12-16T10:51:50Z'
+                    FacilityId: 544271
+                    Year: 2023
+                    Month: 12
+                    DomesticGas: 99
+                  - FacilityName: Facility2 Test
+                    VersionDateTime: '2021-12-16T10:51:50Z'
+                    FacilityId: 544412
+                    Year: 2023
+                    Month: 11
+                    DomesticGas: 99
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 32
+                  title: CompanyNotAssignedToFacility
+                  detail: CompanyNotAssignedToFacility
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /ExpectedDailyGasDemandReport:
+    get:
+      operationId: getExpectedDailyGasDemandReport
+      summary: Get Expected Daily Gas Demand Report
+      tags:
+      - Submission
+      description: Get Expected Daily Gas Demand Report
+      parameters:
+      - name: FacilityIds
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated facility Ids
+      - name: DemandZoneId
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated Demand Zone Ids
+      - name: MinFromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: IsFetchLimitedData
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: If true, the result would be limited to 2000 records only. If false or null, it will
+          return all records
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with ExpectedDailyGasDemandDataList
+          content:
+            application/json:
+              example:
+                transactionId: 84e3623f-6012-427a-be0c-d41235aff4f0
+                data:
+                  RowCountEDGD: 1000
+                  ExpectedDailyGasDemandDataList:
+                  - FacilityName: ''
+                    VersionDateTime: '2023-06-20T04:40:33Z'
+                    FacilityIdForReport: ''
+                    CompanyId: 345
+                    FacilityId: -1
+                    GasDate: '2026-01-29T12:00:00Z'
+                    ForecastQuantity: 100.5
+                    DemandZoneId: SESA-DE-01
+                    PurchasesGsa: 20.1
+                    PurchasesGsh: 30.2
+                    GshLocation: ADP
+                    PurchasesMktSameZone: 40.1
+                    PurchasesMktDiffZone: 10.1
+                    Description: sample description
+                  - FacilityName: Facility1 test
+                    VersionDateTime: '2023-06-20T04:40:33Z'
+                    FacilityIdForReport: 553344
+                    CompanyId: 345
+                    FacilityId: 553344
+                    GasDate: '2026-01-29T12:00:00Z'
+                    ForecastQuantity: 100.5
+                    DemandZoneId: '-1'
+                    PurchasesGsa: 20.1
+                    PurchasesGsh: 30.2
+                    GshLocation: ADP
+                    PurchasesMktSameZone: 40.1
+                    PurchasesMktDiffZone: 10.1
+                    Description: sample description
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 32
+                  title: CompanyNotAssignedToFacility
+                  detail: CompanyNotAssignedToFacility
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /ExportForecastReport:
+    get:
+      operationId: getExportForecastReport
+      summary: Get Export Forecast Report
+      tags:
+      - Submission
+      description: Get Export Forecast Report
+      parameters:
+      - name: FacilityIds
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated facility Ids
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with ExportForecastDataList
+          content:
+            application/json:
+              example:
+                transactionId: 84e3623f-6012-427a-be0c-d41235aff4f0
+                data:
+                  ExportForecastDataList:
+                  - FacilityName: Facility1 Test
+                    VersionDateTime: '2021-12-16T10:51:50Z'
+                    FacilityId: 544271
+                    Year: 2023
+                    Month: 12
+                    ExportGas: 99
+                  - FacilityName: Facility2 Test
+                    VersionDateTime: '2021-12-16T10:51:50Z'
+                    FacilityId: 544412
+                    Year: 2023
+                    Month: 11
+                    ExportGas: 99
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 32
+                  title: CompanyNotAssignedToFacility
+                  detail: CompanyNotAssignedToFacility
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /fieldInterestReport:
+    get:
+      operationId: getFieldInterestReport
+      summary: Get Field Interest Report
+      tags:
+      - Submission
+      description: Get Field Interest Report
+      parameters:
+      - name: FromEffectiveDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with FieldInterestDataList
+          content:
+            application/json:
+              example:
+                transactionId: 5e35aac1-a429-41a5-8c29-eca4442a29aa
+                data:
+                  FieldInterestDataList:
+                  - VersionDateTime: '2022-06-15T12:00:00Z'
+                    FieldInterestId: 61
+                    EffectiveDate: '2022-06-15T12:00:00Z'
+                    DevelopedReserve1P: 11
+                    DevelopedReserve2P: 12
+                    DevelopedReserve3P: 13
+                    UndevelopedReserve1P: 14
+                    UndevelopedReserve2P: 15
+                    UndevelopedReserve3P: 23
+                    Resources2C: 21
+                    ProductionChangeReserve2P: -2
+                    ProvedAreaExtensionReserve2P: 21
+                    PercentageChangeReserve2P: 12
+                    UpwardRevisionFrom3PReserveTo2P: 31
+                    DownwardRevisionFrom2PReserveTo3P: -1
+                    OtherRevisionsReserve2P: 1
+                    MaturitySubClass2P: MaturitySubClass2P
+                    MaturitySubClass2C: MaturitySubClass2C
+                    MinDate2P: '2022-06-15T12:00:00Z'
+                    MaxDate2P: '2022-07-31T12:00:00Z'
+                    MinDate2C: '2022-06-15T12:00:00Z'
+                    MaxDate2C: '2022-07-31T12:00:00Z'
+                    ExpectedBarriers2C: ExpectedBarriers2C
+                    IncreaseReserveEstimatePrice2P: 29
+                    DecreaseReserveEstimatePrice2P: 15
+                    ResourcesEstimateMethod: ResourcesEstimateMethod
+                    ConversionFactorQtyTCFtoPJ: 2
+                    EconomicAssumption: EconomicAssumption
+                    PreparedBy: URAO
+                    PreparationIndependenceStatement: 'YES'
+                    UpdateReason: UpdateReason
+                  - VersionDateTime: '2022-06-22T12:00:00Z'
+                    FieldInterestId: 61
+                    EffectiveDate: '2022-06-22T12:00:00Z'
+                    DevelopedReserve1P: 11
+                    DevelopedReserve2P: 12
+                    DevelopedReserve3P: 13
+                    UndevelopedReserve1P: 14
+                    UndevelopedReserve2P: 15
+                    UndevelopedReserve3P: 23
+                    Resources2C: 21
+                    ProductionChangeReserve2P: -2
+                    ProvedAreaExtensionReserve2P: 22
+                    PercentageChangeReserve2P: 13
+                    UpwardRevisionFrom3PReserveTo2P: 33
+                    DownwardRevisionFrom2PReserveTo3P: -1
+                    OtherRevisionsReserve2P: 1
+                    MaturitySubClass2P: MaturitySubClass2P
+                    MaturitySubClass2C: MaturitySubClass2C
+                    MinDate2P: '2022-06-15T12:00:00Z'
+                    MaxDate2P: '2022-07-31T12:00:00Z'
+                    MinDate2C: '2022-06-15T12:00:00Z'
+                    MaxDate2C: '2022-07-31T12:00:00Z'
+                    ExpectedBarriers2C: ExpectedBarriers2C
+                    IncreaseReserveEstimatePrice2P: 33
+                    DecreaseReserveEstimatePrice2P: 14
+                    ResourcesEstimateMethod: ResourcesEstimateMethod
+                    ConversionFactorQtyTCFtoPJ: 2
+                    EconomicAssumption: EconomicAssumption
+                    PreparedBy: URAO
+                    PreparationIndependenceStatement: 'YES'
+                    UpdateReason: UpdateReason
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /LinepackForecastReport:
+    get:
+      operationId: getLinepackForecastReport
+      summary: Get Linepack Forecast Report
+      tags:
+      - Submission
+      description: Get Linepack Forecast Report
+      parameters:
+      - name: MinFromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: FacilityIds
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated facility Ids
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with LinepackForecastDataList
+          content:
+            application/json:
+              example:
+                transactionId: 84e3623f-6012-427a-be2c-d41235aff4f0
+                data:
+                  LinepackForecastDataList:
+                  - FacilityName: Facility1 Test
+                    FacilityId: 544271
+                    GasDate: '2022-12-16T10:51:50Z'
+                    VersionDateTime: '2022-12-16T10:51:50Z'
+                    LinepackZoneId: SESA-LP-01
+                    LinepackType: OPERATIONAL
+                    ForecastQuantity: 9912
+                    Description: sample description
+                  - FacilityName: Facility2 Test
+                    FacilityId: 544123
+                    GasDate: '2022-12-16T10:51:50Z'
+                    VersionDateTime: '2022-12-16T10:51:50Z'
+                    LinepackZoneId: SESA-LP-02
+                    LinepackType: OPERATIONAL
+                    ForecastQuantity: 9913
+                    Description: sample description
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 32
+                  title: CompanyNotAssignedToFacility
+                  detail: CompanyNotAssignedToFacility
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /LNGShipmentReport:
+    get:
+      operationId: getLNGShipmentReport
+      summary: Get LNG Shipment Report
+      tags:
+      - Submission
+      description: Get LNG Shipment Report
+      parameters:
+      - name: FromShipmentDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with LNGShipmentDataList
+          content:
+            application/json:
+              example:
+                transactionId: 84e3623f-6012-427a-be0c-d66725aff4f0
+                data:
+                  LNGShipmentDataList:
+                  - TransactionId: LNG_SHIP_1070
+                    FacilityId: 544271
+                    FacilityName: GTM LNG IMPORT Test
+                    VolumePJ: 19.999
+                    ShipmentDate: '2021-12-16T12:00:00Z'
+                    VersionDateTime: '2021-12-16T10:51:50Z'
+                  - TransactionId: LNG_SHIP_1069
+                    FacilityId: 544271
+                    FacilityName: GTM LNG IMPORT Test
+                    VolumePJ: 15
+                    ShipmentDate: '2021-11-29T12:00:00Z'
+                    VersionDateTime: '2021-12-16T10:51:50Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /LNGTransactionReport:
+    get:
+      operationId: getLNGTransactionReport
+      summary: Get LNG Transaction Report
+      tags:
+      - Submission
+      description: Get LNG Transaction Report
+      parameters:
+      - name: 'FromTradeDate '
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with LNGTransactionDataList
+          content:
+            application/json:
+              example:
+                transactionId: 402dfe6f-ac16-4504-b446-d1683b377cd7
+                data:
+                  LNGTransactionDataList:
+                  - TransactionId: LNG_TRAN_1071
+                    FacilityId: 544160
+                    TradeDate: '2022-08-31T12:00:00Z'
+                    VolumePJ: 100
+                    SellingParties: test
+                    BuyingParties: test
+                    SupplyPeriodStart: '2022-08-31T12:00:00Z'
+                    SupplyPeriodEnd: '2022-09-01T12:00:00Z'
+                    FOBPrice: 12
+                    PriceStructure: '11'
+                    Cancelled: false
+                    VersionDateTime: '2022-09-06T04:14:56Z'
+                  - TransactionId: LNG_TRAN_1074
+                    FacilityId: 544160
+                    TradeDate: '2022-04-01T12:00:00Z'
+                    VolumePJ: 2.333
+                    SellingParties: Star Energy
+                    BuyingParties: Purple Energy
+                    SupplyPeriodStart: '2022-04-03T12:00:00Z'
+                    SupplyPeriodEnd: '2022-05-31T12:00:00Z'
+                    FOBPrice: 12.321
+                    PriceStructure: Variable
+                    Cancelled: false
+                    VersionDateTime: '2023-02-03T05:41:15Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /MediumTermCapacityOutlookReport:
+    get:
+      operationId: getMediumTermCapacityOutlookReport
+      summary: Get Medium Term Capacity Outlook Report
+      tags:
+      - Submission
+      description: Get Medium Term Capacity Outlook Report
+      parameters:
+      - name: FacilityIds
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma separated facility Ids
+      - name: MinFromGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: From Gas Date
+      - name: ToGasDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+        description: To Gas Date
+      - name: IsFetchLimitedData
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: If true, the result would be limited to 2000 records only. If false or null, it will
+          return all records
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with MediumTermCapacityOutlookDataList
+          content:
+            application/json:
+              example:
+                transactionId: 84e3643f-6012-427a-be0c-d41235aff4f0
+                data:
+                  RowCountMTCO: 1000
+                  MediumTermCapacityOutlookDataList:
+                  - FacilityName: Facility1 test
+                    FromGasDate: '2021-01-29T12:00:00Z'
+                    ToGasDate: '2022-01-29T12:00:00Z'
+                    VersionDateTime: '2023-06-20T04:40:33Z'
+                    DisabledDateTime: '2023-06-21T04:40:33Z'
+                    OutlookQuantity: 400
+                    ActiveFlag: 0
+                    DeleteFlag: 0
+                    RecallTime: 30
+                    RecallDescription: sample description
+                    FacilityId: 123456
+                    CapacityType: MDQ
+                    FlowDirection: RECEIPT
+                    CapacityDescription: sample description
+                    ReceiptLocation: 2902045
+                    DeliveryLocation: 2902046
+                    Description: sample description
+                  - FacilityName: facility1 test
+                    FromGasDate: '2021-01-29T12:00:00Z'
+                    ToGasDate: '2022-01-29T12:00:00Z'
+                    VersionDateTime: '2023-06-20T04:40:33Z'
+                    DisabledDateTime: '2023-06-21T04:40:33Z'
+                    OutlookQuantity: 400
+                    ActiveFlag: 0
+                    DeleteFlag: 0
+                    RecallTime: 30
+                    RecallDescription: sample description
+                    FacilityId: 123456
+                    CapacityType: MDQ
+                    FlowDirection: DELIVERY
+                    CapacityDescription: sample description
+                    ReceiptLocation: 2902046
+                    DeliveryLocation: 2902045
+                    Description: sample description
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 32
+                  title: CompanyNotAssignedToFacility
+                  detail: CompanyNotAssignedToFacility
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /nominationsAndForecastsNonAggregate:
+    get:
+      operationId: getNominationsAndForecasts
+      summary: Get Nominations and forecasts
+      tags:
+      - Submission
+      description: Get Nominations and forecasts
+      parameters:
+      - name: FacilityIds
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: GasDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Resonse with NominationsAndForecastsList
+          content:
+            application/json:
+              example:
+                transactionId: e7dc7627-21c6-45db-8e93-d12f4c378c19
+                data:
+                  NominationsAndForecastsList:
+                  - ConnectionPointId: 1303206
+                    ConnectionPointName: TGP Withdrawal
+                    FacilityId: 530110
+                    FacilityName: Victorian Transmission System
+                    FlowDirection: DELIVERY
+                    NominationQuantity: 0
+                    GasDate: '2020-02-01T12:00:00Z'
+                    LastUpdated: '2020-02-01T10:00:06Z'
+                  - ConnectionPointId: 1303200
+                    ConnectionPointName: M139 SEA GAS WITHDRAWAL
+                    FacilityId: 530110
+                    FacilityName: Victorian Transmission System
+                    FlowDirection: DELIVERY
+                    NominationQuantity: 0
+                    GasDate: '2020-02-01T12:00:00Z'
+                    LastUpdated: '2020-02-01T10:00:06Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /shortTermTransactionReport:
+    get:
+      operationId: getShortTermTransactionReport
+      summary: Get Short Term Transaction Report
+      tags:
+      - Submission
+      description: Get Short Term Transaction Report
+      parameters:
+      - name: FromTradeDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with ShortTermTransactionDataList
+          content:
+            application/json:
+              example:
+                transactionId: a029be0a-7676-461a-b45d-e041d2240aff
+                data:
+                  ShortTermTransactionDataList:
+                  - TransactionId: 1051
+                    CompanyId: 94
+                    CompanyName: ''
+                    TradeDate: '2022-08-31T12:00:00Z'
+                    FromGasDate: '2022-09-23T12:00:00Z'
+                    ToGasDate: '2022-09-28T12:00:00Z'
+                    BuyerName: testbuyer
+                    SellerName: testseller
+                    State: NSW
+                    Location: xx
+                    TransactionType: Supply
+                    TransactionQuantity: 100
+                    MaximumDailyQuantity: 1000
+                    TakeOrPayQuantity: 120
+                    Price: 0
+                    PriceStructure: Fixed
+                    PriceEscalationMechanism: call
+                    Cancelled: false
+                    Description: Deal 1
+                    VersionDateTime: '2023-01-25T03:47:35Z'
+                    LastChanged: '2023-01-25T03:47:35Z'
+                  - TransactionId: 1060
+                    CompanyId: 94
+                    CompanyName: ''
+                    TradeDate: '2022-10-21T12:00:00Z'
+                    FromGasDate: '2022-10-23T12:00:00Z'
+                    ToGasDate: '2022-10-24T12:00:00Z'
+                    BuyerName: 1111Conventional buyer 2
+                    SellerName: 111subclass seller 2
+                    State: VIC
+                    Location: Melbourne
+                    TransactionType: Supply
+                    TransactionQuantity: 120
+                    MaximumDailyQuantity: 212
+                    TakeOrPayQuantity: 25
+                    Price: 128
+                    PriceStructure: Fixed
+                    PriceEscalationMechanism: call
+                    Cancelled: false
+                    Description: ''
+                    VersionDateTime: '2023-02-02T12:22:50Z'
+                    LastChanged: '2023-02-02T12:22:50Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /storageCapacityTransactionReport:
+    get:
+      operationId: getStorageCapacityTransactionReport
+      summary: Get Storage Capacity Transaction Report
+      tags:
+      - Submission
+      description: Get Storage Capacity Transaction Report
+      parameters:
+      - name: FromTradeDate
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful Response with StorageCapacityTransactionDataList
+          content:
+            application/json:
+              example:
+                transactionId: cd997e29-d114-4694-9623-c21462c33bd2
+                data:
+                  StorageCapacityTransactionDataList:
+                  - TradeId: 1037
+                    CompanyId: 13
+                    CompanyName: Australian Energy Market Operator Ltd
+                    TradeDate: '2021-09-02T12:00:00Z'
+                    FromGasDate: '2021-08-23T12:00:00Z'
+                    ToGasDate: '2021-08-31T12:00:00Z'
+                    BuyerName: ' Buyer6 Gas '
+                    SellerName: ' Seller6 Gas'
+                    FacilityId: 530038
+                    Priority: Priority2
+                    MaximumStorageQuantity: 20
+                    InjectionCapacity: 34
+                    WithdrawalCapacity: 1
+                    Price: 10.34
+                    PriceStructure: Fixed
+                    PriceEscalationMechanism: ''
+                    Cancelled: ''
+                    VersionDateTime: '2021-09-02T02:11:41Z'
+                    LastChanged: '2021-09-02T02:11:41Z'
+                  - TradeId: 1036
+                    CompanyId: 13
+                    CompanyName: Australian Energy Market Operator Ltd
+                    TradeDate: '2021-09-01T12:00:00Z'
+                    FromGasDate: '2021-08-20T12:00:00Z'
+                    ToGasDate: '2021-08-22T12:00:00Z'
+                    BuyerName: Buyer5 Gas name
+                    SellerName: ' Seller5 Gas name'
+                    FacilityId: 540040
+                    Priority: Priority1
+                    MaximumStorageQuantity: 44
+                    InjectionCapacity: 10
+                    WithdrawalCapacity: 1
+                    Price: 8.22
+                    PriceStructure: Variable
+                    PriceEscalationMechanism: ''
+                    Cancelled: ''
+                    VersionDateTime: '2021-09-02T02:11:41Z'
+                    LastChanged: '2021-09-02T02:11:41Z'
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /blendCurtailment:
+    post:
+      operationId: provideGasBlendAndGasBlendCurtailmentData
+      summary: Provide gas blend and gas blend curtailment data
+      tags:
+      - Submission
+      description: Provide by the fifth gas day each month, the gas blend and gas blend curtailment information
+        for the previous month.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - '44'
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - GAS
+        description: The market type that the request applies
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              FacilityId: '55555'
+              Year: '2024'
+              Month: '12'
+              GasType: Hydrogen
+              GasBlendCurtailEvent: '3'
+              GasBlendCurtailQty: '34.111'
+              GasBlendLimit: '98.111'
+              GasBlendHigh: '0121-12-01'
+              MaxGasDate: '2024-10-12'
+              GasBlendLow: '23.2'
+              MinGasDate: '2023-10-01'
+              GasBlendAvg: '23'
+              ConnectionPointId: '123455'
+              FlowDirection: RECEIPT
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: db793cdd-48bf-417a-a86c-e05942a035b1
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) URI.
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: Authorisation credentials, username, or password is invalid.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: Invalid role. The user does not have permission to submit this request.
+        '404':
+          description: Resource for the endpoint URI not found.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: The request method is invalid.
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: Content-Length is missing from the header.
+        '422':
+          description: The submission is rejected because of business validation failure.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+  /nominationsAndForecasts:
+    post:
+      operationId: provideNominationsAndForecasts
+      summary: Provide nominations and forecasts
+      tags:
+      - Submission
+      description: 'For BB pipelines forming part of a Declared Transmission System, provide on each gas
+        day the aggregated scheduled injections and aggregated scheduled withdrawals at each controllable
+        system point for gas day D to D+2.
+
+        For all other BB facility operators, provide on each gas day D the aggregated nominated and forecast
+        injections and aggregated nominated and forecast withdrawals for gas day D to D+6.'
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              GasDate: '2018-09-23'
+              FacilityId: 520001
+              ConnectionPointId: 1301002
+              FlowDirection: RECEIPT
+              NominationQuantity: 32.561
+      responses:
+        '200':
+          description: Successful request.
+          content:
+            application/json:
+              example:
+                transactionId: 817a76fd-c770-43a6-a378-88c1d7f4a0e1
+                data: {}
+                errors: []
+                warnings: []
+        '400':
+          description: The service cannot be found for the endpoint reference (EPR) <URI>
+          content:
+            application/json:
+              example:
+                Fault: <SystemMessageExceptionDump>
+        '401':
+          description: This response is provided when "Authorisation" is missing from the header OR user/password
+            is incorrect/not provided OR user account is locked out.
+          content:
+            application/json:
+              example:
+                Exception: Unauthorized:Invalid UserName or Password
+        '403':
+          description: This response is provided when there is an invalid Role i.e. user does not have
+            permission to submit this request.
+        '404':
+          description: This response is provided when the resource missing from URL or incorrect.
+          content:
+            application/json:
+              example:
+                Exception: 'Resources for the endpoint URI not found. Endpoint URI: <Resource>'
+        '405':
+          description: Invalid Method used (e.g. GET used instead of POST)
+          content:
+            application/json:
+              example:
+                Exception: 'Input request HTTP method is <Invalid Method passed> but operation <Resource
+                  Name> accepts only: [<Valid Method>]'
+        '411':
+          description: This response is provided when "Content-Length" is missing from the Header
+        '422':
+          description: This response is provided when any there are any Business validation failures,
+            then entire submission is rejected.
+          content:
+            application/json:
+              example:
+                data: {}
+                errors:
+                - code: 73
+                  title: InvalidBuySell
+                  detail: BuySell value 24.1 is not valid
+                  source: ''
+        '429':
+          description: This response is provided when the throttling limits are reached.
+        '500':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+        '503':
+          description: e-Hub is operational but downstream systems are not available.
+          content:
+            application/json:
+              example:
+                Exception: Application Unavailable
+  /BBCapacityTransaction:
+    post:
+      operationId: submitCapacityTransactionDeclarationsThroughToTheBulletinBoard
+      summary: Submit capacity transaction declarations through to the Bulletin Board
+      tags:
+      - Submission
+      description: Provides information on BB Capacity Transactions, excluding those concluded through
+        the gas trading exchange.
+      parameters:
+      - name: X-initiatingParticipantID
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the Initiating Participant
+      - name: X-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The market type that the request applies.
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              TradeId: 123456
+              TradeDate: '2018-03-01'
+              FromGasDate: '2018-03-10'
+              ToGasDate: '2018-03-20'
+              BuyerName: Star Energy
+              SellerName: ENERGYCO1
+              FacilityId: 520001
+              FacilityName: Tamworth pipeline
+              FlowDirection: NORTH
+              StandardOTSA: 'true'
+              BBTransportationServiceType: FORWARD_HAUL
+              Priority: Secondary firm
+              ReceiptPointId: 3001
+              Quantity: 240
+              MHQ: 10
+              Price: 4.2
+              PriceStructure: Variable
+              PriceEscalationMechanism: 10% per annum
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                transactionId: f1ed483d-928c-4a70-93ec-c26d07ec7391
+                data:
+                  TradeIdList:
+                  - TradeId: 1234
+                    VersionDateTime: '2023-02-03T06:40:20Z'
+                errors: []
+                warnings: []
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +4129,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Submission
+  description: Submission

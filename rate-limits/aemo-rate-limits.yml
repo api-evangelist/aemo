@@ -1,0 +1,40 @@
+generated: '2026-07-27'
+method: derived
+source: openapi/ (798 operations across 76 documents)
+description: >-
+  AEMO throttles its API gateway and documents the throttled response, but publishes no numeric
+  quota anywhere on the developer portal or in the OpenAPI documents. This artifact records the
+  throttling contract that IS published — the 429 responses and their wording — and records the
+  absence of published limits as a fact rather than inventing values.
+published_numeric_limits: false
+enforcement: Azure API Management gateway (dev.aemo.com.au / api.aemo.com.au)
+limits: []
+signals:
+  - status: 429
+    occurrences: 243
+    descriptions:
+      - This response is provided when the throttling limits are reached.
+      - Too many request
+      - Too Many Requests. Number of inbound requests exceeded the throttle limit.
+    response_headers_documented: []
+    note: >-
+      No Retry-After and no X-RateLimit-Limit / X-RateLimit-Remaining / X-RateLimit-Reset headers
+      are documented on any 429 response.
+  - status: 413
+    occurrences: 102
+    descriptions:
+      - Payload Too Large
+    note: Payload-size ceiling is enforced but the maximum size is not published.
+related_limits:
+  - name: getMSATSLimits
+    api: openapi/aemo-b2mmessaging-sync-v1-openapi.yml
+    note: >-
+      A business-level operation that returns MSATS transaction limits for the participant. It is
+      a market-data limit, not an HTTP rate limit, and does not describe gateway throttling.
+gaps:
+  - No published request quota per participant, product or API.
+  - No documented rate-limit response headers or Retry-After guidance.
+  - No documented burst vs sustained policy.
+cross_references:
+  conventions: conventions/aemo-conventions.yml
+  errors: errors/aemo-error-codes.yml

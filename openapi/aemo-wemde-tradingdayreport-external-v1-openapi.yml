@@ -2,10 +2,319 @@ openapi: 3.0.1
 info:
   title: WEMDE TradingDayReport
   version: '1.0'
+  x-origin:
+  - format: openapi
+    version: '3.0'
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/wemde-tradingdayreport-external-v1/operations?api-version=2022-04-01-preview
 servers:
-  - url: https://api-gwy-prd.aemo.local/WEM/v1/tradingDayReport
-  - url: https://api-gwy-prd.aemo.local/WEM/v1/tradingDayReport
-paths: { }
+- url: https://api-gwy-prd.aemo.local/WEM/v1/tradingDayReport
+- url: https://api-gwy-prd.aemo.local/WEM/v1/tradingDayReport
+paths:
+  /tradingDayReport:
+    get:
+      operationId: retrievesTheTradingDayReport
+      summary: Retrieves the Trading Day Report
+      tags:
+      - WEMDE TradingDayReport
+      description: Retrieves the Trading Day Report
+      parameters:
+      - name: tradingDay
+        in: query
+        required: true
+        schema:
+          type: string
+        description: 'Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00
+          is optional. The API treats incoming times as +08:00 by default.'
+      - name: x-initiatingParticipantId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the initiating Participant
+      - name: x-market
+        in: header
+        required: true
+        schema:
+          type: string
+        description: The ID of the market
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                data:
+                  tradingDay: string
+                  dspReductionInstructions:
+                  - tradingInterval: string
+                    requestedReductions:
+                    - facilityCode: string
+                      requestedReductionValue: 0
+                  congestionRentalCalculations:
+                  - dispatchInterval: string
+                    congestionRentals:
+                    - facilityCode: string
+                      congestionRentalValue: 0
+                  facilityRiskCalculations:
+                  - dispatchInterval: string
+                    facilityRisks:
+                    - facilityCode: string
+                      facilityRiskValue: 0
+                  facilityLowerRiskCalculations:
+                  - dispatchInterval: string
+                    facilityLowerRisks:
+                    - facilityCode: string
+                      facilityLowerRiskValue: 0
+                  networkRiskCalculations:
+                  - dispatchInterval: string
+                    networkRisks:
+                    - networkContingency: string
+                      networkRiskValue: 0
+                      associatedFacilityCodes:
+                      - string
+                  networkLowerRiskCalculations:
+                  - dispatchInterval: string
+                    networkLowerRisks:
+                    - networkLowerContingency: string
+                      networkLowerRiskValue: 0
+                      associatedFacilityCodes:
+                      - string
+                  energyUpliftPricesAndUpliftPaymentMispricingTriggers:
+                  - dispatchInterval: string
+                    facilities:
+                    - facilityCode: string
+                      energyUpliftPrice: 0
+                      upliftMispricingTrigger: 0
+                transactionId: string
+            text/json:
+              example:
+                data:
+                  tradingDay: string
+                  dspReductionInstructions:
+                  - tradingInterval: string
+                    requestedReductions:
+                    - facilityCode: string
+                      requestedReductionValue: 0
+                  congestionRentalCalculations:
+                  - dispatchInterval: string
+                    congestionRentals:
+                    - facilityCode: string
+                      congestionRentalValue: 0
+                  facilityRiskCalculations:
+                  - dispatchInterval: string
+                    facilityRisks:
+                    - facilityCode: string
+                      facilityRiskValue: 0
+                  facilityLowerRiskCalculations:
+                  - dispatchInterval: string
+                    facilityLowerRisks:
+                    - facilityCode: string
+                      facilityLowerRiskValue: 0
+                  networkRiskCalculations:
+                  - dispatchInterval: string
+                    networkRisks:
+                    - networkContingency: string
+                      networkRiskValue: 0
+                      associatedFacilityCodes:
+                      - string
+                  networkLowerRiskCalculations:
+                  - dispatchInterval: string
+                    networkLowerRisks:
+                    - networkLowerContingency: string
+                      networkLowerRiskValue: 0
+                      associatedFacilityCodes:
+                      - string
+                  energyUpliftPricesAndUpliftPaymentMispricingTriggers:
+                  - dispatchInterval: string
+                    facilities:
+                    - facilityCode: string
+                      energyUpliftPrice: 0
+                      upliftMispricingTrigger: 0
+                transactionId: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              examples:
+                missingHeader:
+                  summary: Missing mandatory HTTP header parameter
+                  value:
+                    transactionId: 61361d96-f20d-43a7-bkdf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '400'
+                      title: Missing mandatory HTTP header parameter
+                      detail: Mandatory HTTP header <headerName> is missing
+                      source: ''
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Unauthorized
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-b075-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: Unauthorized
+                      source: ''
+                initiatingParticipantIdMismatch:
+                  summary: x-initiatingParticipantId does not match the participant ID associated with
+                    the certificate
+                  value:
+                    transactionId: 9a8e902a-ed40-45f3-u475-7a644b12947f
+                    data: {}
+                    errors:
+                    - code: '401'
+                      title: Unauthorized
+                      detail: x-initiatingParticipantId does not match the participant ID associated with
+                        the certificate
+                      source: ''
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '404':
+          description: Not found
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              examples:
+                resourceNotFound:
+                  summary: Resource not found
+                  value:
+                    transactionId: 61361d96-f09d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '404'
+                      title: Not found
+                      detail: 'Resource not found for endpoint URI: <URI>'
+                      source: ''
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              examples:
+                methodNotAllowed:
+                  summary: Method not allowed
+                  value:
+                    transactionId: 61361d96-z20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '405'
+                      title: Method not allowed
+                      detail: 'Input HTTP method is <invokedMethod>. Operation <operationURI> accepts
+                        only: [<operationMethod>].'
+                      source: ''
+        '413':
+          description: Payload too large
+          content:
+            application/json:
+              examples:
+                payloadTooLarge:
+                  summary: Payload too large
+                  value:
+                    transactionId: dc6826bc-1c0d-498b-b474-2b231910860c
+                    data: {}
+                    errors:
+                    - code: '413'
+                      title: Payload too large
+                      detail: Maximum allowed size for the <request/response> body is <payload size limit>
+                        bytes (<size limit> MB). This <request/response> size is <number of bytes> bytes
+                      source: ''
+        '422':
+          description: Client error
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
+        '429':
+          description: Too many requests
+          content:
+            application/json:
+              examples:
+                tooManyRequests:
+                  summary: Too many requests
+                  value:
+                    transactionId: 63361d96-f20d-43a7-babf-59b35fab9b13
+                    data: {}
+                    errors:
+                    - code: '429'
+                      title: Too many requests
+                      detail: The number of inbound requests has exceeded throttling limits. Try again
+                        later.
+                      source: ''
+        '500':
+          description: Application unavailable or server error
+          content:
+            text/plain:
+              example: ''
+            application/json:
+              examples:
+                applicationUnavailable:
+                  summary: Application unavailable
+                  value: ''
+            text/json:
+              example:
+                transactionId: string
+                data: {}
+                errors:
+                - code: 0
+                  title: string
+                  detail: string
+                  source: string
 components:
   securitySchemes:
     apiKeyHeader:
@@ -17,6 +326,9 @@ components:
       name: subscription-key
       in: query
 security:
-  - { }
-  - apiKeyHeader: [ ]
-  - apiKeyQuery: [ ]
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: WEMDE TradingDayReport
+  description: WEMDE TradingDayReport
