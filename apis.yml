@@ -45,17 +45,18 @@ specificationVersion: '0.19'
 apis:
 - aid: aemo:aemo-nem-data-dashboard-api
   name: AEMO NEM Data Dashboard API
-  description: 'The JSON API behind AEMO''s public National Electricity Market data dashboard, and the
-    closest thing AEMO operates to an open real-time market API. Confirmed live and fully anonymous on
-    2026-07-27: GET /aemo/apps/api/report/ELEC_NEM_SUMMARY returned HTTP 200 with five-minute regional
-    records for NSW1, QLD1, SA1, TAS1 and VIC1 — settlement date, spot price and price status, total demand,
-    net interconnector interchange, scheduled and semi-scheduled generation, administered-price and market-suspension
-    flags, per-interconnector flows with export and import limits — plus a full FCAS price set (raise/lower
-    regulation and 1s, 6s, 60s and 5min contingency) and the ten most recent AEMO electricity market notices.
-    POST /aemo/apps/api/report/5MIN with body {"timeScale":["5MIN"]} returned HTTP 200 with a rolling
-    five-minute regional price and demand series. No API key, no account, no licence, no rate-limit challenge.
-    It is also entirely undocumented — AEMO publishes no reference, no schema and no terms for it, so
-    it is recorded here as a verified public endpoint rather than as a supported product.'
+  description: >-
+    The JSON API behind AEMO's public National Electricity Market data dashboard, and the closest thing
+    AEMO operates to an open real-time market API. Confirmed live and fully anonymous on 2026-07-27: GET
+    /aemo/apps/api/report/ELEC_NEM_SUMMARY returned HTTP 200 with five-minute regional records for NSW1,
+    QLD1, SA1, TAS1 and VIC1 — settlement date, spot price and price status, total demand, net interconnector
+    interchange, scheduled and semi-scheduled generation, administered-price and market-suspension flags,
+    per-interconnector flows with export and import limits — plus a full FCAS price set (raise/lower regulation
+    and 1s, 6s, 60s and 5min contingency) and the ten most recent AEMO electricity market notices. POST
+    /aemo/apps/api/report/5MIN with body {"timeScale":["5MIN"]} returned HTTP 200 with a rolling five-minute
+    regional price and demand series. No API key, no account, no licence, no rate-limit challenge. It
+    is also entirely undocumented — AEMO publishes no reference, no schema and no terms for it, so it
+    is recorded here as a verified public endpoint rather than as a supported product.
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
   baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
@@ -76,8 +77,9 @@ apis:
     url: https://visualisations.aemo.com.au/
 - aid: aemo:aemo-nemweb-public-data-feed
   name: AEMO NEMWeb Public Data Feed
-  description: 'NEMWeb is AEMO''s open bulk-data channel for the National Electricity Market and the single
-    largest genuinely open energy dataset in Australia. It is not a REST API — it is an anonymously browsable
+  description: >-
+    NEMWeb is AEMO's open bulk-data channel for the National Electricity Market and the single largest
+    genuinely open energy dataset in Australia. It is not a REST API — it is an anonymously browsable
     HTTP directory tree of zipped CSV reports, refreshed on dispatch, daily and settlement cycles, and
     it is how the entire Australian energy analytics industry gets its data. Confirmed on 2026-07-27:
     GET https://nemweb.com.au/Reports/Current/ returned HTTP 200 listing 103 report directories — Dispatch_Reports,
@@ -85,7 +87,7 @@ apis:
     Medium_Term_PASA_Reports, Next_Day_*, Network, ROOFTOP_PV, TradingIS_Reports and more — and GET /Reports/Archive/
     returned HTTP 200 with a further 68 archive directories. A sample file, /Reports/CURRENT/DispatchIS_Reports/PUBLIC_DISPATCHIS_202607252230_0000000529244762.zip,
     downloaded with HTTP 200 and 18,252 bytes of application/x-zip-compressed with no credential of any
-    kind. The MMS Data Model that describes the CSV schemas is published separately at /Reports/Current/MMSDataModelReport.'
+    kind. The MMS Data Model that describes the CSV schemas is published separately at /Reports/Current/MMSDataModelReport.
   humanURL: https://nemweb.com.au/Reports/Current/
   baseURL: https://nemweb.com.au/Reports
   tags:
@@ -107,13 +109,14 @@ apis:
     url: https://nemweb.com.au/Reports/Archive/
 - aid: aemo:aemo-wa-market-data-public-feed
   name: AEMO WA Market Data Public Feed
-  description: 'The Western Australian equivalent of NEMWeb, covering the Wholesale Electricity Market
-    that AEMO operates separately from the NEM. Confirmed anonymous and live on 2026-07-27: GET https://data.wa.aemo.com.au/public/
+  description: >-
+    The Western Australian equivalent of NEMWeb, covering the Wholesale Electricity Market that AEMO operates
+    separately from the NEM. Confirmed anonymous and live on 2026-07-27: GET https://data.wa.aemo.com.au/public/
     returned HTTP 200 with directory listings for market-data, public-data, outages, advisories, infographic
     and INF, and GET /public/market-data/ returned HTTP 200 exposing capo, dsp, mt-pasa, outages, st-pasa
     and wemde subdirectories — the WEM Dispatch Engine outputs, short and medium term PASA, demand side
     programme and capacity data. Like NEMWeb it is an open HTTP file tree rather than a REST API, and
-    like NEMWeb it needs no key, account or licence.'
+    like NEMWeb it needs no key, account or licence.
   humanURL: https://data.wa.aemo.com.au/public/
   baseURL: https://data.wa.aemo.com.au/public
   tags:
@@ -132,451 +135,17 @@ apis:
     url: https://data.wa.aemo.com.au/public/public-data/
   - type: DataFeed
     url: https://data.wa.aemo.com.au/public/outages/
-- aid: aemo:aemo-b2bmessagingasync
-  name: AEMO B2BMessagingAsync
-  description: 'The B2BMessagingAsync API is a B2B SMP APIs used to send and recieve B2B messages between
-    the participants in an asynchronous fashion. AEMO''s public API catalogue lists 3 operation(s) for
-    this API, gateway-routed under the path prefix /ws/B2BMessagingAsync. AEMO''s own openapi-link export
-    for this API is a shell — it declares paths: {} with zero operations and names an internal host —
-    so the 3 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal operations
-    endpoints (https://dev.aemo.com.au/developer/apis/b2bmessaging-async-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-b2bmessaging-async-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/b2bmessaging-async-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-b2bmessaging-async-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/B2BMessagingAsync
-- aid: aemo:aemo-b2bmessagingpull
-  name: AEMO B2BMessagingPull
-  description: 'The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between
-    the participants in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving
-    participant can poll the e-Hub, ‘pull’ and process the messages that are queued. AEMO''s public API
-    catalogue lists 4 operation(s) for this API, gateway-routed under the path prefix /ws/B2BMessagingPull.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 4 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/b2bmessaging-pull-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-b2bmessaging-pull-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/b2bmessaging-pull-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-b2bmessaging-pull-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/B2BMessagingPull
-- aid: aemo:aemo-b2bmessagingsync
-  name: AEMO B2BMessagingSync
-  description: 'The B2BMessagingSync API is a B2B SMP APIs used to send and receive B2B messages between
-    the participants in a synchronous fashion. AEMO''s public API catalogue lists 1 operation(s) for this
-    API, gateway-routed under the path prefix /ws/B2BMessagingSync. AEMO''s own openapi-link export for
-    this API is a shell — it declares paths: {} with zero operations and names an internal host — so the
-    1 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal operations
-    endpoints (https://dev.aemo.com.au/developer/apis/b2bmessaging-sync-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-b2bmessaging-sync-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/b2bmessaging-sync-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-b2bmessaging-sync-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/B2BMessagingSync
-- aid: aemo:aemo-b2mmessagingasync
-  name: AEMO B2MMessagingAsync
-  description: 'The B2MMessagingAsync push-push API supports inbound submitMessages, submitMessageAcknowledgements,
-    and getQueueMetaData endpoints and suits a high volume exchange of messages. Participants push their
-    outgoing message to the e-Hub and the e-Hub pushes the message to the Participants Gateway. AEMO''s
-    public API catalogue lists 3 operation(s) for this API, gateway-routed under the path prefix /NEMRetail/B2MMessagingAsync.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 3 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/b2mmessaging-async-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Retail
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-b2mmessaging-async-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/b2mmessaging-async-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-b2mmessaging-async-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMRetail/B2MMessagingAsync
-- aid: aemo:aemo-b2mmessagingpull
-  name: AEMO B2MMessagingPull
-  description: 'The B2MMessagingPull push-pull API supports inbound submitMessages, submitMessageAcknowledgements,
-    getMessages, and getQueueMetaData endpoints and suits low volume exchange of messages. Participants
-    using B2MMessagingPull are responsible for implementing the polling logic to poll their Participant
-    Hub Queue to retrieve new messages, similar to batch programs used to poll their outbox using FTP.
-    AEMO''s public API catalogue lists 4 operation(s) for this API, gateway-routed under the path prefix
-    /NEMRetail/B2MMessagingPull. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 4 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/b2mmessaging-pull-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Retail
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-b2mmessaging-pull-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/b2mmessaging-pull-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-b2mmessaging-pull-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMRetail/B2MMessagingPull
-- aid: aemo:aemo-b2mmessagingsync
-  name: AEMO B2MMessagingSync
-  description: 'The B2MMessagingSync API supports generateC1Report, generateC4Report, getMSATSLimits,NMIDiscovery,
-    getNMIDetail, getParticipantSystemStatus, and getMeterData endpoints.The API participant pushes their
-    outgoing message to the e-Hub and the e-Hub pushes the message to the API recipient.The message delivery
-    occurs synchronously where the participant sends the message to the e-Hub and AEMO immediately AEMO''s
-    public API catalogue lists 7 operation(s) for this API, gateway-routed under the path prefix /NEMRetail/B2MMessagingSync.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 7 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/b2mmessaging-sync-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Retail
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-b2mmessaging-sync-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/b2mmessaging-sync-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-b2mmessaging-sync-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMRetail/B2MMessagingSync
-- aid: aemo:aemo-balancing-reports-v2
-  name: AEMO Balancing Reports v2
-  description: 'AEMO''s public API catalogue lists 5 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 5 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-reports-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-reports-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-reports-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing
-- aid: aemo:aemo-balancing-reports-v2-1
-  name: AEMO Balancing Reports v2.1
-  description: 'AEMO''s public API catalogue lists 5 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 5 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-reports-v2-1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-reports-v2-1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-reports-v2-1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing
-- aid: aemo:aemo-balancing-reports-v2-2
-  name: AEMO Balancing Reports v2.2
-  description: 'AEMO''s public API catalogue lists 6 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 6 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-reports-v2-2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-reports-v2-2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-reports-v2-2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing
-- aid: aemo:aemo-balancing-reports-v2-3
-  name: AEMO Balancing Reports v2.3
-  description: 'AEMO''s public API catalogue lists 6 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 6 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-reports-v2-3/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-reports-v2-3-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-3?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-reports-v2-3-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing
-- aid: aemo:aemo-balancing-reports-v2-4
-  name: AEMO Balancing Reports v2.4
-  description: 'AEMO''s public API catalogue lists 6 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 6 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-reports-v2-4/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-reports-v2-4-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-4?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-reports-v2-4-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing
-- aid: aemo:aemo-balancing-reports-v2-5
-  name: AEMO Balancing Reports v2.5
-  description: 'AEMO''s public API catalogue lists 7 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 7 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-reports-v2-5/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-reports-v2-5-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-reports-v2-5?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-reports-v2-5-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing
-- aid: aemo:aemo-balancing-submission-v2
-  name: AEMO Balancing Submission v2
-  description: 'AEMO''s public API catalogue lists 8 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/balancing/submissions. AEMO''s own openapi-link export for this API is a shell —
-    it declares paths: {} with zero operations and names an internal host — so the 8 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/balancing-submission-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-balancing-submission-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/balancing-submission-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-balancing-submission-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/balancing/submissions
-- aid: aemo:aemo-bilateral-stem-submission-v1
-  name: AEMO Bilateral/Stem Submission v1
-  description: 'AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/trading. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 2 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/bilateral-stem-submission-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-bilateral-stem-submission-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/bilateral-stem-submission-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-bilateral-stem-submission-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/trading
-- aid: aemo:aemo-blindupdate
-  name: AEMO BlindUpdate
-  description: 'The BlindUpdateTool API supports Upload of blind update Data by participants facing API''s
-    to backend MSATS systems , Download processed Blind Update file, List of all the Blind Update files
-    uploaded by the Participants. Participants will access the BlindUpdateTool tab from the Browser which
-    invokes the respective process in the API Management. AEMO''s public API catalogue lists 3 operation(s)
-    for this API, gateway-routed under the path prefix /NEMRetail/BlindUpdate. AEMO''s own openapi-link
-    export for this API is a shell — it declares paths: {} with zero operations and names an internal
-    host — so the 3 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal
-    operations endpoints (https://dev.aemo.com.au/developer/apis/blindupdate-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Retail
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-blindupdate-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/blindupdate-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-blindupdate-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMRetail/BlindUpdate
-- aid: aemo:aemo-capacity
-  name: AEMO Capacity
-  description: 'The Capacity API is used by facility operators and trading participants to submit and
-    receive data relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform
-    (CTP) and Day-Ahead Auction (DAA) market systems. AEMO''s public API catalogue lists 13 operation(s)
-    for this API, gateway-routed under the path prefix /ws/gsh/capacity. AEMO''s own openapi-link export
-    for this API is a shell — it declares paths: {} with zero operations and names an internal host —
-    so the 13 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal operations
-    endpoints (https://dev.aemo.com.au/developer/apis/capacity-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Gas Supply Hub
-  - Gas
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-capacity-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/capacity-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-capacity-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/gsh/capacity
-- aid: aemo:aemo-capacityauction
-  name: AEMO CapacityAuction
-  description: 'The Capacity Auction API is used by facility operators and trading participants to submit
-    and receive data relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform
-    (CTP) and Day-Ahead Auction (DAA) market systems. AEMO''s public API catalogue lists 5 operation(s)
-    for this API, gateway-routed under the path prefix /ws/gsh/capacityAuction. AEMO''s own openapi-link
-    export for this API is a shell — it declares paths: {} with zero operations and names an internal
-    host — so the 5 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal
-    operations endpoints (https://dev.aemo.com.au/developer/apis/capacityAuction-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Gas Supply Hub
-  - Gas
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-capacityAuction-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/capacityAuction-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-capacityAuction-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/gsh/capacityAuction
 - aid: aemo:aemo-cdr
   name: AEMO CDR
-  description: 'The Consumer Data Right (CDR) APIs allow Registered Financially Responsible Market Participants
-    (FRMPs) to service API requests for AEMO data from Accredited Data Recipients. AEMO''s public API
-    catalogue lists 6 operation(s) for this API, gateway-routed under the path prefix /NEMRetail/cds-au/v1/secondary/energy.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
+  description: >-
+    The Consumer Data Right (CDR) APIs allow Registered Financially Responsible Market Participants (FRMPs)
+    to service API requests for AEMO data from Accredited Data Recipients. AEMO's public API catalogue
+    lists 6 operation(s) for this API, gateway-routed under the path prefix /NEMRetail/cds-au/v1/secondary/energy.
+    AEMO's own openapi-link export for this API is a shell — it declares paths: {} with zero operations
     and names an internal host — so the 6 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/cdr/operations?api-version=2022-04-01-preview),
+    AEMO's developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/cdr/operations?api-version=2022-04-01-preview),
     complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
+    200).
   humanURL: https://dev.aemo.com.au/api-docs
   tags:
   - Consumer Data Right
@@ -603,12 +172,13 @@ apis:
   baseURL: https://apis.prod.aemo.com.au:9319/NEMRetail/cds-au/v1/secondary/energy
 - aid: aemo:aemo-cdr-common
   name: AEMO CDR Common
-  description: 'AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed under the
-    path prefix /NEMRetail/cds-au/v1/discovery. AEMO''s own openapi-link export for this API is a shell
-    — it declares paths: {} with zero operations and names an internal host — so the 2 operation(s) in
-    the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/cdr-common/operations?api-version=2022-04-01-preview),
+  description: >-
+    AEMO's public API catalogue lists 2 operation(s) for this API, gateway-routed under the path prefix
+    /NEMRetail/cds-au/v1/discovery. AEMO's own openapi-link export for this API is a shell — it declares
+    paths: {} with zero operations and names an internal host — so the 2 operation(s) in the OpenAPI captured
+    here were harvested from AEMO's developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/cdr-common/operations?api-version=2022-04-01-preview),
     complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
+    200).
   humanURL: https://dev.aemo.com.au/api-docs
   tags:
   - Consumer Data Right
@@ -633,1371 +203,583 @@ apis:
   - type: Overlay
     url: overlays/aemo-cds-common-api-overlay.yaml
   baseURL: https://apis.prod.aemo.com.au:9319/NEMRetail/cds-au/v1/discovery
-- aid: aemo:aemo-der-registration-for-account-holders
-  name: AEMO DER Registration For Account Holders
-  description: 'Using the DER Registration APIs, Account Holders can • Submit DER Connection Agreement
-    data. • Provide AC Connections, and Device details in the same submission AEMO''s public API catalogue
-    lists 31 operation(s) for this API, gateway-routed under the path prefix /NEMWholesale/DER/consumer/registration.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 31 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/der-consumer-registration-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Distributed Energy Resources
-  - DER
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-der-consumer-registration-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/der-consumer-registration-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-der-consumer-registration-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMWholesale/DER/consumer/registration
-- aid: aemo:aemo-der-registration-for-nsps
-  name: AEMO DER Registration for NSPs
-  description: 'Using the DER Registration APIs, NSPs can • Submit DER Connection Agreement data. • Provide
-    AC Connections, and Device details in the same submission AEMO''s public API catalogue lists 8 operation(s)
-    for this API, gateway-routed under the path prefix /NEMWholesale/DER/registration. AEMO''s own openapi-link
-    export for this API is a shell — it declares paths: {} with zero operations and names an internal
-    host — so the 8 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal
-    operations endpoints (https://dev.aemo.com.au/developer/apis/der-business-registration-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Distributed Energy Resources
-  - DER
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-der-business-registration-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/der-business-registration-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-der-business-registration-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMWholesale/DER/registration
-- aid: aemo:aemo-ee-simulation-status-update
-  name: AEMO EE Simulation Status Update
-  description: 'EE Simulation Status Update APIs are used by EE to submit the simulation status update
-    AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed under the path prefix
-    /ee-simulation-status-update. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 2 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/ee-simulation-status-update-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-ee-simulation-status-update-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/ee-simulation-status-update-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-ee-simulation-status-update-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ee-simulation-status-update
-- aid: aemo:aemo-enablementinstruction
-  name: AEMO EnablementInstruction
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /NEM/v1/ISF-External/enablementInstruction. AEMO''s own openapi-link export for this API
-    is a shell — it declares paths: {} with zero operations and names an internal host — so the 1 operation(s)
-    in the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/enablementinstruction-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-enablementinstruction-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/enablementinstruction-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-enablementinstruction-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEM/v1/ISF-External/enablementInstruction
-- aid: aemo:aemo-gasbb-reporting-public-data
-  name: AEMO GasBB Reporting Public Data
-  description: 'This API is intended for AEMO''s use only, used by AEMO web pages and is not supported
-    for any other use. It can change at any time. See https://dev.aemo.com.au/ for information on using
-    AEMO APIs. AEMO''s public API catalogue lists 29 operation(s) for this API, gateway-routed under the
-    path prefix /gasbb-reporting-data. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 29 operation(s) in the OpenAPI
-    captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/gasbb-reporting-public-data/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Gas Bulletin Board
-  - Gas
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-gasbb-reporting-public-data-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/gasbb-reporting-public-data?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-gasbb-reporting-public-data-overlay.yaml
-  baseURL: https://api.aemo.com.au/gasbb-reporting-data
-- aid: aemo:aemo-generatorrecall
-  name: AEMO GeneratorRecall
-  description: 'The Generator Recall API is used by generators to send information about recall times
-    into the Generator Recall web-based interface in the EMMS Markets Portal. The system will then transfer
-    the information to a central AEMO database for viewing and reporting by AEMO operators. AEMO''s public
-    API catalogue lists 3 operation(s) for this API, gateway-routed under the path prefix /ws/GeneratorRecall.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 3 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/generatorRecall-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-generatorRecall-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/generatorRecall-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-generatorRecall-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/GeneratorRecall
-- aid: aemo:aemo-hubmessagemanagement
-  name: AEMO HubMessageManagement
-  description: 'The HubMessageManagement API is a B2B SMP APIs used retrieve the current list of stop
-    files for all participants or for a specific participant (using alerts) resource. Participants can
-    use this resource to: 1. Ensure technical requirements required to connect to e-Hub are validated
-    (for example, appropriate network ports are open). AEMO''s public API catalogue lists 2 operation(s)
-    for this API, gateway-routed under the path prefix /ws/HubMessageManagement. AEMO''s own openapi-link
-    export for this API is a shell — it declares paths: {} with zero operations and names an internal
-    host — so the 2 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal
-    operations endpoints (https://dev.aemo.com.au/developer/apis/hubmsgmgt-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-hubmsgmgt-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/hubmsgmgt-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-hubmsgmgt-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/HubMessageManagement
-- aid: aemo:aemo-hubmessagemanagementv2
-  name: AEMO HubMessageManagementV2
-  description: 'The HubMessageManagement push API retrieves the current list of B2B and B2M stop files.
-    Business transactions are sent as aseXML documents carried as payloads inside the API message and
-    transmitted over HTTPS. Participants can also use this API to: 1. Ensure technical requirements required
-    to connect to the e-Hub are validated (for example, appropriate network ports are open). 2. AEMO''s
-    public API catalogue lists 1 operation(s) for this API, gateway-routed under the path prefix /HubMessageManagement.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 1 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/hubmsgmgt-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-hubmsgmgt-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/hubmsgmgt-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-hubmsgmgt-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/HubMessageManagement
-- aid: aemo:aemo-identityservice-v2
-  name: AEMO IdentityService(v2)
-  description: 'This API is used by a Participant to update their password for MSATs. AEMO''s public API
-    catalogue lists 1 operation(s) for this API, gateway-routed under the path prefix /ws/Common/identityService.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 1 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/identityService-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Authentication
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-identityService-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/identityService-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-identityService-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/Common/identityService
-- aid: aemo:aemo-intermittent-generation-availability-submissions
-  name: AEMO Intermittent Generation Availability Submissions
-  description: 'This API is used for intermittent generation availability submissions. AEMO''s public
-    API catalogue lists 2 operation(s) for this API, gateway-routed under the path prefix /v1/IntermittentGen.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 2 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/opsforecasting-intermittentgen-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-opsforecasting-intermittentgen-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/opsforecasting-intermittentgen-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-opsforecasting-intermittentgen-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/v1/IntermittentGen
-- aid: aemo:aemo-lfas-reports-v2
-  name: AEMO LFAS Reports v2
-  description: 'AEMO''s public API catalogue lists 4 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/lfas/v2. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 4 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/lfas-reports-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-lfas-reports-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/lfas-reports-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-lfas-reports-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/lfas/v2
-- aid: aemo:aemo-lfas-submission-v2
-  name: AEMO LFAS Submission v2
-  description: 'AEMO''s public API catalogue lists 8 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/lfas/submissions/v2. AEMO''s own openapi-link export for this API is a shell — it
-    declares paths: {} with zero operations and names an internal host — so the 8 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/lfas-submission-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-lfas-submission-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/lfas-submission-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-lfas-submission-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/lfas/submissions/v2
-- aid: aemo:aemo-market-reports-v2
-  name: AEMO Market Reports v2
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/market. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 1 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/market-reports-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-market-reports-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/market-reports-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-market-reports-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/market
-- aid: aemo:aemo-meterexemption
-  name: AEMO MeterExemption
-  description: 'The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and
-    manage metering exemptions within MSATS. AEMO''s public API catalogue lists 3 operation(s) for this
-    API, gateway-routed under the path prefix /NEMRetail/v1/meterExemption. AEMO''s own openapi-link export
-    for this API is a shell — it declares paths: {} with zero operations and names an internal host —
-    so the 3 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal operations
-    endpoints (https://dev.aemo.com.au/developer/apis/meterexemption-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Retail
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-meterexemption-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/meterexemption-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-meterexemption-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMRetail/v1/meterExemption
-- aid: aemo:aemo-mt-pasa-offers
-  name: AEMO MT PASA Offers
-  description: 'The MT PASA Offers API allows Scheduled Generators, Market Customers, Market Network Service
-    Providers, and Integrated Resource Providers to submit their MT PASA Offers for Bi-directional Units
-    (BDU), Scheduled Generation Units (SGU), Scheduled Load Units (SLU), and Scheduled Network Services
-    (SNS). MT PASA Offers are input into the MT PASA process. AEMO''s public API catalogue lists 1 operation(s)
-    for this API, gateway-routed under the path prefix /NEMWholesale/v1/mtpasaoffers. AEMO''s own openapi-link
-    export for this API is a shell — it declares paths: {} with zero operations and names an internal
-    host — so the 1 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal
-    operations endpoints (https://dev.aemo.com.au/developer/apis/mtpasaoffers-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-mtpasaoffers-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/mtpasaoffers-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-mtpasaoffers-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMWholesale/v1/mtpasaoffers
-- aid: aemo:aemo-nemdispatchbidding
-  name: AEMO NEMDispatchBidding
-  description: 'Bidding Service Open API specification AEMO''s public API catalogue lists 5 operation(s)
-    for this API, gateway-routed under the path prefix /NEMWholesale/bidding. AEMO''s own openapi-link
-    export for this API is a shell — it declares paths: {} with zero operations and names an internal
-    host — so the 5 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal
-    operations endpoints (https://dev.aemo.com.au/developer/apis/bidding-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-bidding-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/bidding-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-bidding-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMWholesale/bidding
-- aid: aemo:aemo-oauth-v1
-  name: AEMO oauth-v1
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /oauth/v1. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 1 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/oauth-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Authentication
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-oauth-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/oauth-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-oauth-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/oauth/v1
-- aid: aemo:aemo-oip
-  name: AEMO OIP
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/outageIntentionPlan. AEMO''s own openapi-link export for this API is a shell —
-    it declares paths: {} with zero operations and names an internal host — so the 1 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/oip-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-oip-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/oip-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-oip-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/outageIntentionPlan
-- aid: aemo:aemo-outage-management
-  name: AEMO Outage Management
-  description: 'AEMO''s public API catalogue lists 8 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/outageManagement. AEMO''s own openapi-link export for this API is a shell — it
-    declares paths: {} with zero operations and names an internal host — so the 8 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/outage-management-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-outage-management-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/outage-management-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-outage-management-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/outageManagement
-- aid: aemo:aemo-p2pmessagingsync
-  name: AEMO P2PMessagingSync
-  description: 'The P2PMessagingSync API is a B2B SMP APIs used to exchange the following Peer-to-Peer
-    information via the e-Hub: - Free-form information - Documents (also called Attachments). The P2PMessagingSync
-    API supports exchange of the following attachment types (configurable): pdf, csv, jpeg, jpe, jpg,
-    gif, zip & txt. In future, this API will support additional attachment types. AEMO''s public API catalogue
-    lists 1 operation(s) for this API, gateway-routed under the path prefix /ws/P2PMessagingSync. AEMO''s
-    own openapi-link export for this API is a shell — it declares paths: {} with zero operations and names
-    an internal host — so the 1 operation(s) in the OpenAPI captured here were harvested from AEMO''s
-    developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/p2pmessaging-sync-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-p2pmessaging-sync-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/p2pmessaging-sync-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-p2pmessaging-sync-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/P2PMessagingSync
-- aid: aemo:aemo-pre-balancing-reports-v6
-  name: AEMO Pre-Balancing Reports v6
-  description: 'AEMO''s public API catalogue lists 70 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/reports. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 70 operation(s) in the OpenAPI
-    captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v6/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-pre-balancing-reports-v6-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v6?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-pre-balancing-reports-v6-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/reports
-- aid: aemo:aemo-pre-balancing-reports-v7
-  name: AEMO Pre-Balancing Reports v7
-  description: 'AEMO''s public API catalogue lists 71 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/reports. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 71 operation(s) in the OpenAPI
-    captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v7/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-pre-balancing-reports-v7-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v7?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-pre-balancing-reports-v7-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/reports
-- aid: aemo:aemo-pre-balancing-reports-v7-1
-  name: AEMO Pre-Balancing Reports v7.1
-  description: 'AEMO''s public API catalogue lists 71 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/reports. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 71 operation(s) in the OpenAPI
-    captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v7-1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-pre-balancing-reports-v7-1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v7-1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-pre-balancing-reports-v7-1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/reports
-- aid: aemo:aemo-pre-balancing-reports-v8
-  name: AEMO Pre-Balancing Reports v8
-  description: 'AEMO''s public API catalogue lists 73 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/reports. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 73 operation(s) in the OpenAPI
-    captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v8/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-pre-balancing-reports-v8-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/pre-balancing-reports-v8?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-pre-balancing-reports-v8-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/reports
-- aid: aemo:aemo-prudentials
-  name: AEMO Prudentials
-  description: 'This API supports the various operations performed on Prudentials dashboard AEMO''s public
-    API catalogue lists 10 operation(s) for this API, gateway-routed under the path prefix /NEMWholesale/Prudentials.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 10 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/prudentials-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-prudentials-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/prudentials-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-prudentials-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMWholesale/Prudentials
-- aid: aemo:aemo-rcm-operations
-  name: AEMO RCM Operations
-  description: 'AEMO''s public API catalogue lists 50 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/RCM. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 50 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/rcm-ops-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-rcm-ops-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/rcm-ops-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-rcm-ops-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/RCM
-- aid: aemo:aemo-reallocations
-  name: AEMO Reallocations
-  description: 'The Reallocation API allow you to create, authorise, cancel reallocations. You can also
-    search and retrieve reallocations, calendars, participants, profile types, agreement types, and market
-    price cap AEMO''s public API catalogue lists 13 operation(s) for this API, gateway-routed under the
-    path prefix /ws/NEMWholesale/reallocations. AEMO''s own openapi-link export for this API is a shell
-    — it declares paths: {} with zero operations and names an internal host — so the 13 operation(s) in
-    the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/reallocations-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-reallocations-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/reallocations-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-reallocations-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/NEMWholesale/reallocations
-- aid: aemo:aemo-report
-  name: AEMO Report
-  description: 'The report API allows participants to retrieve data from the Gas Bulletin Board (BB).
-    AEMO''s public API catalogue lists 22 operation(s) for this API, gateway-routed under the path prefix
-    /ws/gbb/report. AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with
-    zero operations and names an internal host — so the 22 operation(s) in the OpenAPI captured here were
-    harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/report-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Gas Bulletin Board
-  - Gas
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-report-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/report-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-report-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/gbb/report
-- aid: aemo:aemo-rtms
-  name: AEMO RTMS
-  description: 'The WEM-Reform API for Real-Time Market submissions available to all Market Participants.
-    AEMO''s public API catalogue lists 15 operation(s) for this API, gateway-routed under the path prefix
-    /WEM/v1/realTimeMarketSubmission. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 15 operation(s) in the OpenAPI
-    captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/rtms-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-rtms-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/rtms-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-rtms-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/realTimeMarketSubmission
-- aid: aemo:aemo-selfforecast
-  name: AEMO SelfForecast
-  description: 'The Self forecasting API is used by participants who wish to submit their Solar or Wind
-    Forecasts for a DUID to AEMO. AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed
-    under the path prefix /ws/NEMWholesale/selfForecast. AEMO''s own openapi-link export for this API
-    is a shell — it declares paths: {} with zero operations and names an internal host — so the 2 operation(s)
-    in the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/selfForecast-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-selfForecast-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/selfForecast-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-selfForecast-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/NEMWholesale/selfForecast
-- aid: aemo:aemo-settlement-direct
-  name: AEMO Settlement Direct
-  description: 'This API supports the various operations performed in Settlement Direct API AEMO''s public
-    API catalogue lists 13 operation(s) for this API, gateway-routed under the path prefix /NEMWholesale/PublishingDirect.
-    AEMO''s own openapi-link export for this API is a shell — it declares paths: {} with zero operations
-    and names an internal host — so the 13 operation(s) in the OpenAPI captured here were harvested from
-    AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/settlementDirect-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-settlementDirect-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/settlementDirect-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-settlementDirect-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEMWholesale/PublishingDirect
-- aid: aemo:aemo-submission
-  name: AEMO Submission
-  description: 'The submission API allows participants to submit data to the Gas Bulletin Board (BB).
-    Data submission from BB reporting entities to the BB are divided into two key areas- - Data transfer
-    formats which includes the form, validation rules, and timing of submissions. - Data submission methods
-    to the BB, and how the success and failure of those submissions is communicated back to the submitter.
-    AEMO''s public API catalogue lists 37 operation(s) for this API, gateway-routed under the path prefix
-    /ws/gbb/submission. AEMO''s own openapi-link export for this API is a shell — it declares paths: {}
-    with zero operations and names an internal host — so the 37 operation(s) in the OpenAPI captured here
-    were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/submission-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Gas Bulletin Board
-  - Gas
-  - e-Hub
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-submission-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/submission-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-submission-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/ws/gbb/submission
-- aid: aemo:aemo-system-management-reports-v2
-  name: AEMO System Management Reports v2
-  description: 'AEMO''s public API catalogue lists 7 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 7 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-system-management-reports-v2-1
-  name: AEMO System Management Reports v2.1
-  description: 'AEMO''s public API catalogue lists 9 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 9 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2-1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2-1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-system-management-reports-v2-2
-  name: AEMO System Management Reports v2.2
-  description: 'AEMO''s public API catalogue lists 10 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 10 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2-2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2-2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-system-management-reports-v2-3
-  name: AEMO System Management Reports v2.3
-  description: 'AEMO''s public API catalogue lists 10 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 10 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2-3/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-3-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2-3?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-3-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-system-management-reports-v2-4
-  name: AEMO System Management Reports v2.4
-  description: 'AEMO''s public API catalogue lists 10 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 10 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2-4/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-4-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2-4?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-4-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-system-management-reports-v2-5
-  name: AEMO System Management Reports v2.5
-  description: 'AEMO''s public API catalogue lists 10 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 10 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2-5/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-5-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2-5?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-5-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-system-management-reports-v2-6
-  name: AEMO System Management Reports v2.6
-  description: 'AEMO''s public API catalogue lists 10 operation(s) for this API, gateway-routed under
-    the path prefix /WEM/sm. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 10 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/system-management-reports-v2-6/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-system-management-reports-v2-6-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/system-management-reports-v2-6?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-system-management-reports-v2-6-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/sm
-- aid: aemo:aemo-tls-certificate-mgmt-v1
-  name: AEMO TLS Certificate Mgmt v1
-  description: 'The TLS Certificate Management API allows authorised participants to self-manage their
-    AEMO-signed TLS certificates. AEMO''s public API catalogue lists 8 operation(s) for this API, gateway-routed
-    under the path prefix /v1/TlsCertificateMgmt. AEMO''s own openapi-link export for this API is a shell
-    — it declares paths: {} with zero operations and names an internal host — so the 8 operation(s) in
-    the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/tls-certificate-mgmt-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Authentication
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/tls-certificate-mgmt-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-tls-certificate-mgmt-v1-overlay.yaml
-  baseURL: https://partner.api.aemo.com.au/v1/TLSCertificateManagement
-- aid: aemo:aemo-variableparameter
-  name: AEMO VariableParameter
-  description: 'AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed under the
-    path prefix /NEM/v1/ISF-External/variableParameter. AEMO''s own openapi-link export for this API is
-    a shell — it declares paths: {} with zero operations and names an internal host — so the 2 operation(s)
-    in the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/variableparameter-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - National Electricity Market
-  - Wholesale
-  - Energy
-  - Australia
-  properties:
-  - type: OpenAPI
-    url: openapi/aemo-variableparameter-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/variableparameter-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-variableparameter-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/NEM/v1/ISF-External/variableParameter
-- aid: aemo:aemo-wem-attributes-report
+- aid: aemo:aemo-attributes-report-external-v1-openapi
   name: AEMO WEM Attributes Report
-  description: 'AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/attributes. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 2 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/attributes-report-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEM Attributes Report from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-attributes-report-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/attributes-report-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-attributes-report-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/attributes
-- aid: aemo:aemo-wem-der-installation-v2
+- aid: aemo:aemo-b2bmessaging-async-v1-openapi
+  name: AEMO B2BMessagingAsync
+  description: AEMO B2BMessagingAsync from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-b2bmessaging-async-v1-openapi.yml
+- aid: aemo:aemo-b2bmessaging-pull-v1-openapi
+  name: AEMO B2BMessagingPull
+  description: AEMO B2BMessagingPull from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-b2bmessaging-pull-v1-openapi.yml
+- aid: aemo:aemo-b2bmessaging-sync-v1-openapi
+  name: AEMO B2BMessagingSync
+  description: AEMO B2BMessagingSync from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-b2bmessaging-sync-v1-openapi.yml
+- aid: aemo:aemo-b2mmessaging-async-v1-openapi
+  name: AEMO B2MMessagingAsync
+  description: AEMO B2MMessagingAsync from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-b2mmessaging-async-v1-openapi.yml
+- aid: aemo:aemo-b2mmessaging-pull-v1-openapi
+  name: AEMO B2MMessagingPull
+  description: AEMO B2MMessagingPull from AEMO — 4 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-b2mmessaging-pull-v1-openapi.yml
+- aid: aemo:aemo-b2mmessaging-sync-v1-openapi
+  name: AEMO B2MMessagingSync
+  description: AEMO B2MMessagingSync from AEMO — 7 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-b2mmessaging-sync-v1-openapi.yml
+- aid: aemo:aemo-balancing-reports-v2-1-openapi
+  name: AEMO Balancing Reports v2.1
+  description: AEMO Balancing Reports v2.1 from AEMO — 5 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-reports-v2-1-openapi.yml
+- aid: aemo:aemo-balancing-reports-v2-2-openapi
+  name: AEMO Balancing Reports v2.2
+  description: AEMO Balancing Reports v2.2 from AEMO — 6 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-reports-v2-2-openapi.yml
+- aid: aemo:aemo-balancing-reports-v2-3-openapi
+  name: AEMO Balancing Reports v2.3
+  description: AEMO Balancing Reports v2.3 from AEMO — 6 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-reports-v2-3-openapi.yml
+- aid: aemo:aemo-balancing-reports-v2-4-openapi
+  name: AEMO Balancing Reports v2.4
+  description: AEMO Balancing Reports v2.4 from AEMO — 6 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-reports-v2-4-openapi.yml
+- aid: aemo:aemo-balancing-reports-v2-5-openapi
+  name: AEMO Balancing Reports v2.5
+  description: AEMO Balancing Reports v2.5 from AEMO — 7 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-reports-v2-5-openapi.yml
+- aid: aemo:aemo-balancing-reports-v2-openapi
+  name: AEMO Balancing Reports v2
+  description: AEMO Balancing Reports v2 from AEMO — 5 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-reports-v2-openapi.yml
+- aid: aemo:aemo-balancing-submission-v2-openapi
+  name: AEMO Balancing Submission v2
+  description: AEMO Balancing Submission v2 from AEMO — 8 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-balancing-submission-v2-openapi.yml
+- aid: aemo:aemo-bidding-v1-openapi
+  name: AEMO NEMDispatchBidding
+  description: AEMO NEMDispatchBidding from AEMO — 5 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-bidding-v1-openapi.yml
+- aid: aemo:aemo-bilateral-stem-submission-v1-openapi
+  name: AEMO Bilateral/Stem Submission v1
+  description: AEMO Bilateral/Stem Submission v1 from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-bilateral-stem-submission-v1-openapi.yml
+- aid: aemo:aemo-blindupdate-v1-openapi
+  name: AEMO BlindUpdate
+  description: AEMO BlindUpdate from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-blindupdate-v1-openapi.yml
+- aid: aemo:aemo-capacity-v1-openapi
+  name: AEMO Capacity
+  description: AEMO Capacity from AEMO — 13 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-capacity-v1-openapi.yml
+- aid: aemo:aemo-capacityauction-v1-openapi
+  name: AEMO CapacityAuction
+  description: AEMO CapacityAuction from AEMO — 5 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-capacityAuction-v1-openapi.yml
+- aid: aemo:aemo-der-business-registration-v1-openapi
+  name: AEMO DER Registration for NSPs
+  description: AEMO DER Registration for NSPs from AEMO — 8 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-der-business-registration-v1-openapi.yml
+- aid: aemo:aemo-der-consumer-registration-v1-openapi
+  name: AEMO DER Registration For Account Holders
+  description: AEMO DER Registration For Account Holders from AEMO — 31 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-der-consumer-registration-v1-openapi.yml
+- aid: aemo:aemo-der-register-installation-v2-openapi
   name: AEMO WEM DER Installation V2
-  description: 'WEM DER Installation API enables the Network Operator to create, update, and retrieve
-    the DER Register information details for the DER installations they have submitted to the DER Register
-    database and to view and resolve associated exceptions AEMO''s public API catalogue lists 5 operation(s)
-    for this API, gateway-routed under the path prefix /v2/der-register. AEMO''s own openapi-link export
-    for this API is a shell — it declares paths: {} with zero operations and names an internal host —
-    so the 5 operation(s) in the OpenAPI captured here were harvested from AEMO''s developer-portal operations
-    endpoints (https://dev.aemo.com.au/developer/apis/der-register-installation-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Distributed Energy Resources
-  - DER
-  - Energy
-  - Australia
+  description: AEMO WEM DER Installation V2 from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-der-register-installation-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/der-register-installation-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-der-register-installation-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/v2/der-register
-- aid: aemo:aemo-wem-der-nmi
+- aid: aemo:aemo-der-register-nmi-v1-openapi
   name: AEMO WEM DER NMI
-  description: 'Using the WEM DER Registration APIs, consumers can Create, update and retrieve NMI details
-    AEMO''s public API catalogue lists 3 operation(s) for this API, gateway-routed under the path prefix
-    /wem/v1/der-register. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 3 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/der-register-nmi-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Distributed Energy Resources
-  - DER
-  - Energy
-  - Australia
+  description: AEMO WEM DER NMI from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-der-register-nmi-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/der-register-nmi-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-der-register-nmi-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/wem/v1/der-register
-- aid: aemo:aemo-wemde-dispatchcase
+- aid: aemo:aemo-ee-simulation-status-update-v1-openapi
+  name: AEMO EE Simulation Status Update
+  description: AEMO EE Simulation Status Update from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-ee-simulation-status-update-v1-openapi.yml
+- aid: aemo:aemo-enablementinstruction-v1-openapi
+  name: AEMO EnablementInstruction
+  description: AEMO EnablementInstruction from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-enablementinstruction-v1-openapi.yml
+- aid: aemo:aemo-gasbb-reporting-public-data-openapi
+  name: AEMO GasBB Reporting Public Data
+  description: AEMO GasBB Reporting Public Data from AEMO — 28 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-gasbb-reporting-public-data-openapi.yml
+- aid: aemo:aemo-generatorrecall-v1-openapi
+  name: AEMO GeneratorRecall
+  description: AEMO GeneratorRecall from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-generatorRecall-v1-openapi.yml
+- aid: aemo:aemo-hubmsgmgt-v1-openapi
+  name: AEMO HubMessageManagement
+  description: AEMO HubMessageManagement from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-hubmsgmgt-v1-openapi.yml
+- aid: aemo:aemo-hubmsgmgt-v2-openapi
+  name: AEMO HubMessageManagementV2
+  description: AEMO HubMessageManagementV2 from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-hubmsgmgt-v2-openapi.yml
+- aid: aemo:aemo-identityservice-v2-openapi
+  name: AEMO IdentityService(v2)
+  description: AEMO IdentityService(v2) from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-identityService-v2-openapi.yml
+- aid: aemo:aemo-lfas-reports-v2-openapi
+  name: AEMO LFAS Reports v2
+  description: AEMO LFAS Reports v2 from AEMO — 4 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-lfas-reports-v2-openapi.yml
+- aid: aemo:aemo-lfas-submission-v2-openapi
+  name: AEMO LFAS Submission v2
+  description: AEMO LFAS Submission v2 from AEMO — 8 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-lfas-submission-v2-openapi.yml
+- aid: aemo:aemo-market-reports-v2-openapi
+  name: AEMO Market Reports v2
+  description: AEMO Market Reports v2 from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-market-reports-v2-openapi.yml
+- aid: aemo:aemo-meterexemption-external-v1-openapi
+  name: AEMO MeterExemption
+  description: AEMO MeterExemption from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-meterexemption-external-v1-openapi.yml
+- aid: aemo:aemo-mtpasaoffers-v1-openapi
+  name: AEMO MT PASA Offers
+  description: AEMO MT PASA Offers from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-mtpasaoffers-v1-openapi.yml
+- aid: aemo:aemo-oauth-v1-openapi
+  name: AEMO Oauth-v1
+  description: AEMO Oauth-v1 from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-oauth-v1-openapi.yml
+- aid: aemo:aemo-oip-external-v1-openapi
+  name: AEMO OIP
+  description: AEMO OIP from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-oip-external-v1-openapi.yml
+- aid: aemo:aemo-opsforecasting-intermittentgen-v1-openapi
+  name: AEMO Intermittent Generation Availability Submissions
+  description: >-
+    AEMO Intermittent Generation Availability Submissions from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-opsforecasting-intermittentgen-v1-openapi.yml
+- aid: aemo:aemo-outage-management-external-v1-openapi
+  name: AEMO Outage Management
+  description: AEMO Outage Management from AEMO — 8 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-outage-management-external-v1-openapi.yml
+- aid: aemo:aemo-p2pmessaging-sync-v1-openapi
+  name: AEMO P2PMessagingSync
+  description: AEMO P2PMessagingSync from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-p2pmessaging-sync-v1-openapi.yml
+- aid: aemo:aemo-pre-balancing-reports-v6-openapi
+  name: AEMO Pre-Balancing Reports v6
+  description: AEMO Pre-Balancing Reports v6 from AEMO — 70 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-pre-balancing-reports-v6-openapi.yml
+- aid: aemo:aemo-pre-balancing-reports-v7-1-openapi
+  name: AEMO Pre-Balancing Reports v7.1
+  description: AEMO Pre-Balancing Reports v7.1 from AEMO — 71 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-pre-balancing-reports-v7-1-openapi.yml
+- aid: aemo:aemo-pre-balancing-reports-v7-openapi
+  name: AEMO Pre-Balancing Reports v7
+  description: AEMO Pre-Balancing Reports v7 from AEMO — 71 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-pre-balancing-reports-v7-openapi.yml
+- aid: aemo:aemo-pre-balancing-reports-v8-openapi
+  name: AEMO Pre-Balancing Reports v8
+  description: AEMO Pre-Balancing Reports v8 from AEMO — 73 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-pre-balancing-reports-v8-openapi.yml
+- aid: aemo:aemo-prudentials-v1-openapi
+  name: AEMO Prudentials
+  description: AEMO Prudentials from AEMO — 10 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-prudentials-v1-openapi.yml
+- aid: aemo:aemo-rcm-ops-external-v1-openapi
+  name: AEMO RCM Operations
+  description: AEMO RCM Operations from AEMO — 47 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-rcm-ops-external-v1-openapi.yml
+- aid: aemo:aemo-reallocations-v1-openapi
+  name: AEMO Reallocations
+  description: AEMO Reallocations from AEMO — 13 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-reallocations-v1-openapi.yml
+- aid: aemo:aemo-report-v1-openapi
+  name: AEMO Report
+  description: AEMO Report from AEMO — 22 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-report-v1-openapi.yml
+- aid: aemo:aemo-rtms-external-v1-openapi
+  name: AEMO RTMS
+  description: AEMO RTMS from AEMO — 14 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-rtms-external-v1-openapi.yml
+- aid: aemo:aemo-selfforecast-v1-openapi
+  name: AEMO SelfForecast
+  description: AEMO SelfForecast from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-selfForecast-v1-openapi.yml
+- aid: aemo:aemo-settlementdirect-v1-openapi
+  name: AEMO Settlement Direct
+  description: AEMO Settlement Direct from AEMO — 13 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-settlementDirect-v1-openapi.yml
+- aid: aemo:aemo-submission-v1-openapi
+  name: AEMO Submission
+  description: AEMO Submission from AEMO — 36 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-submission-v1-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-1-openapi
+  name: AEMO System Management Reports v2.1
+  description: AEMO System Management Reports v2.1 from AEMO — 9 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-1-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-2-openapi
+  name: AEMO System Management Reports v2.2
+  description: AEMO System Management Reports v2.2 from AEMO — 10 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-2-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-3-openapi
+  name: AEMO System Management Reports v2.3
+  description: AEMO System Management Reports v2.3 from AEMO — 10 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-3-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-4-openapi
+  name: AEMO System Management Reports v2.4
+  description: AEMO System Management Reports v2.4 from AEMO — 10 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-4-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-5-openapi
+  name: AEMO System Management Reports v2.5
+  description: AEMO System Management Reports v2.5 from AEMO — 10 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-5-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-6-openapi
+  name: AEMO System Management Reports v2.6
+  description: AEMO System Management Reports v2.6 from AEMO — 10 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-6-openapi.yml
+- aid: aemo:aemo-system-management-reports-v2-openapi
+  name: AEMO System Management Reports v2
+  description: AEMO System Management Reports v2 from AEMO — 7 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-system-management-reports-v2-openapi.yml
+- aid: aemo:aemo-tls-certificate-mgmt-v1-openapi
+  name: AEMO TLS Certificate Mgmt v1
+  description: AEMO TLS Certificate Mgmt v1 from AEMO — 8 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+- aid: aemo:aemo-variableparameter-v1-openapi
+  name: AEMO VariableParameter
+  description: AEMO VariableParameter from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  properties:
+  - type: OpenAPI
+    url: openapi/aemo-variableparameter-v1-openapi.yml
+- aid: aemo:aemo-wemde-dispatchcase-external-v1-openapi
   name: AEMO WEMDE DispatchCase
-  description: 'AEMO''s public API catalogue lists 4 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/dispatchCase. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 4 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dispatchcase-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DispatchCase from AEMO — 4 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dispatchcase-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dispatchcase-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dispatchcase-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/dispatchCase
-- aid: aemo:aemo-wemde-dispatchcase-v2
+- aid: aemo:aemo-wemde-dispatchcase-external-v2-openapi
   name: AEMO WEMDE DispatchCase V2
-  description: 'AEMO''s public API catalogue lists 3 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v2/dispatchCase. AEMO''s own openapi-link export for this API is a shell — it declares
-    paths: {} with zero operations and names an internal host — so the 3 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dispatchcase-external-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DispatchCase V2 from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dispatchcase-external-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dispatchcase-external-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dispatchcase-external-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v2/dispatchCase
-- aid: aemo:aemo-wemde-dispatchinstruction
+- aid: aemo:aemo-wemde-dispatchinstruction-external-v1-openapi
   name: AEMO WEMDE DispatchInstruction
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/dispatchInstruction. AEMO''s own openapi-link export for this API is a shell —
-    it declares paths: {} with zero operations and names an internal host — so the 1 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dispatchinstruction-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DispatchInstruction from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dispatchinstruction-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dispatchinstruction-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dispatchinstruction-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/dispatchInstruction
-- aid: aemo:aemo-wemde-dispatchsolution
+- aid: aemo:aemo-wemde-dispatchsolution-external-v1-openapi
   name: AEMO WEMDE DispatchSolution
-  description: 'AEMO''s public API catalogue lists 4 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/dispatchSolution. AEMO''s own openapi-link export for this API is a shell — it
-    declares paths: {} with zero operations and names an internal host — so the 4 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dispatchsolution-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DispatchSolution from AEMO — 4 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dispatchsolution-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dispatchsolution-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dispatchsolution-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/dispatchSolution
-- aid: aemo:aemo-wemde-dispatchsolution-v2
+- aid: aemo:aemo-wemde-dispatchsolution-external-v2-openapi
   name: AEMO WEMDE DispatchSolution V2
-  description: 'AEMO''s public API catalogue lists 3 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v2/dispatchSolution. AEMO''s own openapi-link export for this API is a shell — it
-    declares paths: {} with zero operations and names an internal host — so the 3 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dispatchsolution-external-v2/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DispatchSolution V2 from AEMO — 3 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dispatchsolution-external-v2-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dispatchsolution-external-v2?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dispatchsolution-external-v2-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v2/dispatchSolution
-- aid: aemo:aemo-wemde-dispatchsummary
+- aid: aemo:aemo-wemde-dispatchsummary-external-v1-openapi
   name: AEMO WEMDE DispatchSummary
-  description: 'AEMO''s public API catalogue lists 4 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/dispatchSummary. AEMO''s own openapi-link export for this API is a shell — it
-    declares paths: {} with zero operations and names an internal host — so the 4 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dispatchsummary-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DispatchSummary from AEMO — 4 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dispatchsummary-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dispatchsummary-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dispatchsummary-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/dispatchSummary
-- aid: aemo:aemo-wemde-dspdispatchinstruction
+- aid: aemo:aemo-wemde-dspdispatchinstruction-external-v1-openapi
   name: AEMO WEMDE DSPDispatchInstruction
-  description: 'AEMO''s public API catalogue lists 5 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/DSPDispatchInstruction. AEMO''s own openapi-link export for this API is a shell
-    — it declares paths: {} with zero operations and names an internal host — so the 5 operation(s) in
-    the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-dspdispatchinstruction-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE DSPDispatchInstruction from AEMO — 5 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-dspdispatchinstruction-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-dspdispatchinstruction-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-dspdispatchinstruction-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/DSPDispatchInstruction
-- aid: aemo:aemo-wemde-ncess
+- aid: aemo:aemo-wemde-ncess-external-v1-openapi
   name: AEMO WEMDE NCESS
-  description: 'AEMO''s public API catalogue lists 2 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/Ncess. AEMO''s own openapi-link export for this API is a shell — it declares paths:
-    {} with zero operations and names an internal host — so the 2 operation(s) in the OpenAPI captured
-    here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-ncess-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE NCESS from AEMO — 2 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-ncess-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-ncess-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-ncess-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/Ncess
-- aid: aemo:aemo-wemde-notinservicecapacity
+- aid: aemo:aemo-wemde-notinservicecapacity-external-v1-openapi
   name: AEMO WEMDE NotInServiceCapacity
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/notInServiceCapacity. AEMO''s own openapi-link export for this API is a shell
-    — it declares paths: {} with zero operations and names an internal host — so the 1 operation(s) in
-    the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-notinservicecapacity-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE NotInServiceCapacity from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-notinservicecapacity-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-notinservicecapacity-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-notinservicecapacity-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/notInServiceCapacity
-- aid: aemo:aemo-wemde-referencetradingprice
+- aid: aemo:aemo-wemde-referencetradingprice-external-v1-openapi
   name: AEMO WEMDE ReferenceTradingPrice
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/referenceTradingPrice. AEMO''s own openapi-link export for this API is a shell
-    — it declares paths: {} with zero operations and names an internal host — so the 1 operation(s) in
-    the OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-referencetradingprice-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE ReferenceTradingPrice from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-referencetradingprice-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-referencetradingprice-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-referencetradingprice-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/referenceTradingPrice
-- aid: aemo:aemo-wemde-tradingdayreport
+- aid: aemo:aemo-wemde-tradingdayreport-external-v1-openapi
   name: AEMO WEMDE TradingDayReport
-  description: 'AEMO''s public API catalogue lists 1 operation(s) for this API, gateway-routed under the
-    path prefix /WEM/v1/tradingDayReport. AEMO''s own openapi-link export for this API is a shell — it
-    declares paths: {} with zero operations and names an internal host — so the 1 operation(s) in the
-    OpenAPI captured here were harvested from AEMO''s developer-portal operations endpoints (https://dev.aemo.com.au/developer/apis/wemde-tradingdayreport-external-v1/operations?api-version=2022-04-01-preview),
-    complete with parameters, headers, response codes and response examples. Harvested 2026-07-27 (HTTP
-    200).'
-  humanURL: https://dev.aemo.com.au/api-docs
-  tags:
-  - Wholesale Electricity Market
-  - Western Australia
-  - Energy
-  - Australia
+  description: AEMO WEMDE TradingDayReport from AEMO — 1 path(s) described in OpenAPI.
+  humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   properties:
   - type: OpenAPI
     url: openapi/aemo-wemde-tradingdayreport-external-v1-openapi.yml
-  - type: APIReference
-    url: https://dev.aemo.com.au/developer/apis/wemde-tradingdayreport-external-v1?api-version=2022-04-01-preview
-  - type: Documentation
-    url: https://dev.aemo.com.au/api-docs
-  - type: Overlay
-    url: overlays/aemo-wemde-tradingdayreport-external-v1-overlay.yaml
-  baseURL: https://api.aemo.com.au/WEM/v1/tradingDayReport
 common:
 - type: AgenticAccess
   url: agentic-access/aemo-agentic-access.yml
