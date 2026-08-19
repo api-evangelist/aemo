@@ -1,0 +1,1778 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "RCM Operations",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RCM Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/{tradingDay} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339)."
+              },
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/{tradingDay} - GET"
+        },
+        {
+          "info": {
+            "name": "A list of two hundred hours with the highest generation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/RelevantDemand/:capacityYearId/TwoHundredPeakHours",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. ID of the capacity year to query (eg 2017)"
+              }
+            ]
+          },
+          "docs": "This returns a CSV with a header and two hundred subsequent rows, representing the intervals of the highest periods of generation in the capacity market and the corresponding generation quantity (in MW). Eg:\r\n           \r\n           \r\n           Hour Interval,Value\r\n           12/01/2016 14:30,35037.00\r\n           15/01/2016 13:00,35033.00\r\n           ..."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Flexible CCA Standing Submission List for a Capacity Year.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/flexible/:capacityYear/standing",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The Capacity Year associated with the request (Format: YYYY, e.g. 2027)"
+              },
+              {
+                "name": "participantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the Market Participant associated with the request"
+              }
+            ]
+          },
+          "docs": "This method allows a Market Participant to retrieve their Flexible Capacity Credit Allocation Standing Submission List for the given Capacity Year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2027."
+        },
+        {
+          "info": {
+            "name": "Submits a Flexible CCA Standing Submission List for a Capacity Year.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/flexible/:capacityYear/standing",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The Capacity Year associated with the request (Format: YYYY, e.g. 2027)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows a Market Participant to submit a Flexible Capacity Credit Allocation Standing Submission for a Capacity Year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2027."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of approved Flexible CCAs received by a Market Participant for a range of Trading Days.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/flexible/received",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDayFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the start of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2027-10-01)"
+              },
+              {
+                "name": "tradingDayTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the end of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2027-10-31)"
+              },
+              {
+                "name": "participantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the Market Participant associated with the request"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Flexible Capacity Credit Allocation received by a Market Participant for a range of Trading Days.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2027."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of approved Peak CCAs received by a Market Participant for a range of Trading Days.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/peak/received",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDayFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the start of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2026-10-01)"
+              },
+              {
+                "name": "tradingDayTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the end of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2026-10-31)"
+              },
+              {
+                "name": "participantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the Market Participant associated with the request"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Peak Capacity Credit Allocation received by a Market Participant for a range of Trading Days. \r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of capacity allocation amendment requests for existing Capacity Credit Allocations the Capacity Year and Trading Month",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityAllocations/Amendments/:tradingMonth",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the amendment requests (format: \"MMM\" e.g.'OCT', 'AUG')"
+              }
+            ]
+          },
+          "docs": "This method returns a list of Capacity Credit Allocations that are required to be amended. Only the amendment requests relating to that Market Generator are returned.\r\n<br />\r\nNote:\r\nProvides a list of Capacity Credit Allocations that are required to be amended and the corresponding Facilities\r\nassociated with those Capacity Credit Allocations. Only the amendment requests relating to that Market Participant\r\nthat submitted the Capacity Credit Allocation are returned.\r\n<br /><br />\r\nNote: This me"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Capacity Credit Allocation transactions for the Trading Month",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityAllocations/Transactions/:tradingMonth",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the capacity allocation transactions (format: \"MMM\" eg:'OCT', 'AUG')"
+              }
+            ]
+          },
+          "docs": "Provides a list of transactions related to Capacity Credit Allocations submitted or received for a\r\nTrading Month and the corresponding Facilities assocaited with those Capacity Credit Allocations.\r\nOnly the transactions relating to that Market Participant are returned.\r\n<br /><br />\r\nNote: This method is only available from Trading Month June 2019 (with the implementation of Rule ChangeRC_2017_06.\r\n<br />\r\nNote: From Capacity Year 2023 onwards, this API is no longer available.\r\n<br />\r\nThe sour"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of capacity credit allocations received by a market participant for a range of trading days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/Received",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "dateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the start of the request e.g. 2023-10-01"
+              },
+              {
+                "name": "dateTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the end of the request e.g. 2023-11-01"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Capacity Credit Allocation Submissions received by a market participant for a range of trading days within the capacity year.\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of capacity credit allocations received by a market participant for a trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/:tradingDay/Received",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the capacity credit allocation submission e.g. 2023-10-01"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Capacity Credit Allocation Submissions received by a market participant for a trading day within the capacity year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of capacity credit allocations submitted by a market participant for a range of trading days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/Submitted",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "dateFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the start of the request e.g. 2023-10-01"
+              },
+              {
+                "name": "dateTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the end of the request e.g. 2023-11-01"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Capacity Credit Allocation Submissions submitted by a market participant for a range of trading days within the capacity year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of capacity credit allocations submitted by a market participant for a trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/:tradingDay/Submitted",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the capacity credit allocation submission e.g. 2023-10-01"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Capacity Credit Allocation Submissions submitted by a market participant for a trading day within the capacity year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Submits a capacity credit allocation in respect of a facility for a trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/:tradingDay/Submitted",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the capacity credit allocation submission e.g. 2023-10-01"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows a market participant to submit a Capacity Credit Allocation Submission in respect of a facility for a trading day within the capacity year, when the window is open.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Flexible CCAs submitted by a Market Participant for a range of Trading Days.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/flexible/submitted",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDayFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the start of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2027-10-01)"
+              },
+              {
+                "name": "tradingDayTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the end of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2027-10-31)"
+              },
+              {
+                "name": "participantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the Market Participant associated with the request"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Flexible Capacity Credit Allocation Submissions submitted by a Market Participant for a range of Trading Days.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2027."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Peak CCAs submitted by a Market Participant for a range of Trading Days.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/peak/submitted",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDayFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the start of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2026-10-01)"
+              },
+              {
+                "name": "tradingDayTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day at the end of the range in the request (inclusive) (Format: YYYY-MM-DD, e.g. 2026-10-31)"
+              },
+              {
+                "name": "participantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the Market Participant associated with the request"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of Peak Capacity Credit Allocation Submissions submitted by a Market Participant for a range of Trading Days.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of trading days for which the capacity credit allocation window is open",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/OpenTradingDays",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the trading days (e.g. 2023)."
+              },
+              {
+                "name": "asAt",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The timestamp associated with the request (e.g. 2022-02-28T17:00:59)"
+              }
+            ]
+          },
+          "docs": "This method retrieves a list of trading days for which the Capacity Credit Allocation Window is open, in relation to the timestamp.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Trading Days for which the CCA window is open in respect of the asAt.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/:capacityYear/openTradingDays",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The Capacity Year associated with the request (Format: YYYY, e.g. 2026)"
+              },
+              {
+                "name": "asAt",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The as at timestamp associated with the request (Format: YYYY-MM-DDTHH:mm:ss, e.g. 2026-07-22T16:26:00)"
+              }
+            ]
+          },
+          "docs": "This method returns a list of Trading Days for which the CCA Window is open, calculated using the CCA Window Length.\r\n<br></br>\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Peak CCA Standing Submission List for a Capacity Year.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/peak/:capacityYear/standing",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The Capacity Year associated with the request (Format: YYYY, e.g. 2026)"
+              },
+              {
+                "name": "participantCode",
+                "value": "",
+                "type": "query",
+                "description": "The code of the Market Participant associated with the request"
+              }
+            ]
+          },
+          "docs": "This method allows a Market Participant to retrieve their Peak Capacity Credit Allocation Standing Submission List for the given Capacity Year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "Submits a Peak CCA Standing Submission List for a Capacity Year.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/peak/:capacityYear/standing",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The Capacity Year associated with the request (Format: YYYY, e.g. 2026)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows a Market Participant to submit a Peak Capacity Credit Allocation Standing Submission for a Capacity Year.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "Retrieves cutoff dates relating to Capacity Credit Allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityAllocationMonths",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              }
+            ]
+          },
+          "docs": "This method returns the start and end dates for the Capacity Credit Allocation windows for a given capacity year.\r\n<br /><br />\r\nNote: From Trading Month June 2019 (with the implementation of Rule Change RC_2017_06), the Allocation window\r\nand the Acceptance window open/close at the same time.\r\n<br />\r\nNote: From Capacity Year 2023 onwards, this API is no longer available."
+        },
+        {
+          "info": {
+            "name": "Retrieves IRCR LOG report data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/Ircr/:tradingMonth/Files/Log",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the amendment requests (format: \"MMM\" e.g.'OCT', 'AUG')"
+              },
+              {
+                "name": "ircrType",
+                "value": "",
+                "type": "query",
+                "description": "(required)<br /><b>The Ircr Run Type ie. 'Indicative', 'Initial', 'Adjustment1', 'Adjustment2', 'Adjustment3'</b>"
+              }
+            ]
+          },
+          "docs": "This method returns published IRCR LOG report data in csv format. Only data relating to the requesting Market Participant are returned.\r\n<br /><br />\r\nNote: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06)."
+        },
+        {
+          "info": {
+            "name": "Retrieves IRCR LOG report data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/Ircr/:tradingMonth/Log",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the amendment requests (format: \"MMM\" e.g.'OCT', 'AUG')"
+              },
+              {
+                "name": "ircrType",
+                "value": "",
+                "type": "query",
+                "description": "(required)<br /><b>The Ircr Run Type ie. 'Indicative', 'Initial', 'Adjustment1', 'Adjustment2', 'Adjustment3'</b>"
+              }
+            ]
+          },
+          "docs": "This method returns published IRCR LOG report data. Only data relating to the requesting Market Participant are returned.\r\n<br /><br />\r\nNote: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06)."
+        },
+        {
+          "info": {
+            "name": "Retrieves IRCR PIR report data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/Ircr/:tradingMonth/Files/Pir",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the amendment requests (format: \"MMM\" e.g.'OCT', 'AUG')"
+              },
+              {
+                "name": "ircrType",
+                "value": "",
+                "type": "query",
+                "description": "(required)<br /><b>The Ircr Run Type ie. 'Indicative', 'Initial', 'Adjustment1', 'Adjustment2', 'Adjustment3'</b>"
+              }
+            ]
+          },
+          "docs": "This method returns published IRCR PIR report data in csv format. Only data relating to the requesting Market Participant are returned.\r\n<br /><br />\r\nNote: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06)."
+        },
+        {
+          "info": {
+            "name": "Retrieves IRCR PIR report data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/Ircr/:tradingMonth/Pir",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the amendment requests (format: \"MMM\" e.g.'OCT', 'AUG')"
+              },
+              {
+                "name": "ircrType",
+                "value": "",
+                "type": "query",
+                "description": "(required)<br /><b>The Ircr Run Type ie. 'Indicative', 'Initial', 'Adjustment1', 'Adjustment2', 'Adjustment3'</b>"
+              }
+            ]
+          },
+          "docs": "This method returns published IRCR PIR report data. Only data relating to the requesting Market Participant are returned.\r\n<br /><br />\r\nNote: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06)."
+        },
+        {
+          "info": {
+            "name": "Retrieves the adjusted required values effective on the provided trading day.\r\nIf no values exist for the trading day, but underlying capacity year data exists, the adjusted values will be calculated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/RequiredLevel/Adjusted/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day (e.g. 2024-01-01)"
+              },
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "query",
+                "description": "The participant (e.g. GRIFFINP)"
+              }
+            ]
+          },
+          "docs": "Retrieves the adjusted required values effective on the provided trading day.\r\nIf no values exist for the trading day, but underlying capacity year data exists, the adjusted values will be calculated."
+        },
+        {
+          "info": {
+            "name": "Retrieves the Capacity Credit Allocation position for the Trading Month",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityAllocations/:tradingMonth/Position",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The month for the capacity allocations (format: \"MMM\" eg:'OCT', 'AUG')"
+              }
+            ]
+          },
+          "docs": "The position indicates the participant's tradeable Capacity Credits (in the event of a Market Generator) and/or the participant's IRCR (in the event of a Market Customer). \r\n<br /><br />\r\nNote: From Capacity Year 2023 onwards, this API is no longer available."
+        },
+        {
+          "info": {
+            "name": "Retrieves the Capacity Credit Allocation positions for the Trading Month against each Facility",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v2/CapacityYears/:capacityYearId/CapacityAllocations/:tradingMonth/Position",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2021)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The month for the capacity allocations (format: \"MMM\" eg:'OCT', 'AUG')"
+              }
+            ]
+          },
+          "docs": "This API provides a Participant’s overall allocatableCapacityCredits  and a break down by Facility for that\r\nParticipant of each Facilities’ respective bilaterally tradeable Capacity Credits. For a Market Customer it\r\nalso provides a Participant’s IRCR \r\n<br /><br />\r\nNote: This method is only available for Capacity Allocations for Trading Month October 2021 onwards arising\r\nfrom the Wholesale Electricity Market Amendment(Reserve Capacity Pricing Reforms) Rules 2019. For calls for\r\nTrading Month"
+        },
+        {
+          "info": {
+            "name": "Retrieves the capacity credit allocation window for a trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/Window/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the capacity credit allocation submission e.g. 2023-10-01"
+              }
+            ]
+          },
+          "docs": "This method returns the Capacity Credit Allocation Window for a trading day in which participants may submit or withdraw a capacity credit allocation submission.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Retrieves the CCA Window for a Trading Day.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/window/:tradingDay",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day associated with the request (Format: YYYY-MM-DD, e.g. 2026-10-01)"
+              }
+            ]
+          },
+          "docs": "This method returns the Capacity Credit Allocation Window for a Trading Day in which Market Participants may submit or withdraw Capacity Credit Allocation Submission.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "Retrieves the complete list of Capacity Credit Allocations for the Capacity Year",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityAllocations",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              }
+            ]
+          },
+          "docs": "This method returns all allocations made (if participant is a Market Generator), all allocations received (if participant is a Market Customer), or both (if participant is both a Market Generator and a Market Customer) for the specified Capacity Year.\r\n<br /><br />\r\nNote: From Trading Month June 2019 (with the implementation of Rule Change RC_2017_06), this method will not return any information as it has been removed.\r\n<br />\r\nNote: From Capacity Year 2023 onwards, this API is no longer availab"
+        },
+        {
+          "info": {
+            "name": "Retrieves the complete list of Capacity Credit Allocations for the Capacity Year and Trading Month",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityAllocations/:tradingMonth",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2017)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The trading month for the allocation (format: \"MMM\" eg:'OCT', 'AUG')"
+              }
+            ]
+          },
+          "docs": "This method returns a list of all Capacity Credit Allocations made by a Participant, all Capacity Credit\r\nAllocations received (if the Participant is a Market Customer), or both (if the Participant is both a\r\nMarket Generator and a Market Customer) and the corresponding Facility from which the Capacity Credit\r\nAllocation was made for the specified Capacity Year and Trading Month.\r\n<br /><br />\r\nNote: This method is only available from Trading Month June 2019 (with the implementation of Rule Chan"
+        },
+        {
+          "info": {
+            "name": "Retrieves the complete list of Capacity Credit Allocations for the Capacity Year, Trading Month and FacilityId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v2/CapacityYears/:capacityYearId/CapacityAllocations/:tradingMonth/:facilityId",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year id (e.g. 2021)"
+              },
+              {
+                "name": "tradingMonth",
+                "value": "",
+                "type": "path",
+                "description": "The calendar month for the allocation (format: \"MMM\" eg:'OCT', 'AUG')"
+              },
+              {
+                "name": "facilityId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the source facility"
+              }
+            ]
+          },
+          "docs": "This method returns all Capacity Credit Allocations made from the specified Facility.\r\n<br /><br />\r\nNote: This method is only available from Trading Month October 2021 (with the implementation of Rule Change RC_2019). \r\n<br />\r\nNote: From Capacity Year 2023 onwards, this API is no longer available."
+        },
+        {
+          "info": {
+            "name": "Retrieves the information for a specific capacity year",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The ID of the capacity year to retrieve (eg 2017)"
+              }
+            ]
+          },
+          "docs": "This contains the capacity year configuration parameters and important dates for the specified capacity year"
+        },
+        {
+          "info": {
+            "name": "Retrieves the information for all capacity year cycles configured in the RCM system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This is the full list of configuration parameters and important dates for all capacity years that have been configured in RCM"
+        },
+        {
+          "info": {
+            "name": "Retrieves the information for all capacity year cycles configured in the RCM system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/CapacityYearsWithFacilityPrice",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "showUnpublished",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "This is the full list of configuration parameters and important dates for all capacity years that have been configured in RCM"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of capacity credits for all participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityCredits/History",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. ID of the capacity year to query (eg 2017)"
+              }
+            ]
+          },
+          "docs": "Shows the historical Capacity Credits for all Facilities from Market Participants for the given Capacity Year. Note this report includes any previous changes to Capacity Credits up to and including today"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of capacity credits for the participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/CapacityCredits",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. ID of the capacity year to query (eg 2017)"
+              }
+            ]
+          },
+          "docs": "Shows the historic view of the capacity credits for all facilities for the given capacity year"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of published 12 Peak SWIS Trading Intervals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/TwelvePeaks/Published",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This retrieves the full list of Published 12 Peak SWIS Trading Intervals since Market Start"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of published 4 Peak SWIS Trading Intervals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/FourPeaks/Published",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This retrieves the full list of Published 4 Peak SWIS Trading Intervals since Market Start"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of RCOQs for a specified time range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/RCOQ",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The start of the interval being queried, for example 2017-01-01T08:00"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). The end of the interval being queried, for example 2017-01-02T08:00"
+              }
+            ]
+          },
+          "docs": "This retrieves the full list of Reserve Capacity Obligation Quantities for each facility for the provided time period, as calculated by MR 4.12. The from and to date values must be specified as query parameters"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of RCOQs for components at trading interval for the specified trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/Rcoq/Components/DispatchInterval/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339)."
+              },
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of RCOQs for components at trading interval for the specified trading day"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of RCOQs for facilities at trading interval for the specified trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/Rcoq/Facilities/TradingInterval/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339)."
+              },
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of RCOQs for facilities at trading interval for the specified trading day"
+        },
+        {
+          "info": {
+            "name": "Retrieves the trading days on which ESROI is applicable for the capacity year for the given date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/Esroi/TradingInterval/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). requested date in YYYY-MM-DD format"
+              }
+            ]
+          },
+          "docs": "This method returns the trading days for which esroi data based on the date variable only.eg. 10/01/2018 --> trading day 10/01/2018."
+        },
+        {
+          "info": {
+            "name": "Shows the view of the capacity credits for all facilities and components for a given Trading Day from Capacity Years 2023 onward",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/CapacityCreditsWithComponents/:tradingDay",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339)."
+              },
+              {
+                "name": "participantId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Shows the view of the capacity credits for all facilities and components for a given Trading Day from Capacity Years 2023 onward"
+        },
+        {
+          "info": {
+            "name": "Submits a Flexible CCA Submission in respect of a Facility or SCC for a Trading Day, when the CCA Window is open.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/flexible/:tradingDay/submit",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day associated with the request (Format: YYYY-MM-DD, e.g. 2027-10-01)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows a Market Participant to submit a Flexible Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2027."
+        },
+        {
+          "info": {
+            "name": "Submits a Peak CCA Submission in respect of a Facility or SCC for a Trading Day, when the CCA Window is open.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/peak/:tradingDay/submit",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The Trading Day associated with the request (Format: YYYY-MM-DD, e.g. 2026-10-01)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This method allows a Market Participant to submit a Peak Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2026."
+        },
+        {
+          "info": {
+            "name": "The summary of facilities for a given capacity year for the participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v1/CapacityYears/:capacityYearId/Facilities",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYearId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The ID of the capacity year (eg 2017)"
+              }
+            ]
+          },
+          "docs": "This provides a summary of all of the facilities for the participant for the given capacity year, showing the same information as the Market Participant dashboard in RCM"
+        },
+        {
+          "info": {
+            "name": "Withdraw a capacity credit allocation submission in respect of a facility for a trading day",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v3/CapacityYears/:capacityYear/CapacityAllocations/:tradingDay/:ccaId/withdraw",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "capacityYear",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The capacity year associated with the capacity credit allocation submission (e.g. 2023)"
+              },
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339). The trading day associated with the capacity credit allocation submission e.g. 2023-10-01"
+              },
+              {
+                "name": "ccaId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The id of the capacity credit allocation submission"
+              }
+            ]
+          },
+          "docs": "This method allows a market participant to withdraw a Capacity Credit Allocation Submission in respect of a facility for a trading day within the capacity year, when the window is open.\r\n<br /><br />\r\nNote: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).\r\n<br /><br />\r\nNote: From Capacity Year 2026 onwards, this API is no longer available.\r\n<br />"
+        },
+        {
+          "info": {
+            "name": "Withdraws an approved Flexible CCA.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/flexible/:ccaId/withdraw",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ccaId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The id of the Flexible Capacity Credit Allocation Submission"
+              }
+            ]
+          },
+          "docs": "This method allows a Market Participant to withdraw a Flexible Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.\r\n<br></br>\r\nNote: This method is only available from Capacity Year 2027."
+        },
+        {
+          "info": {
+            "name": "Withdraws an approved Peak CCA.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/WEM/RCM/api/v4/capacityCreditAllocations/peak/:ccaId/withdraw",
+            "headers": [
+              {
+                "name": "X-transactionId",
+                "value": ""
+              },
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ccaId",
+                "value": "",
+                "type": "path",
+                "description": "Format - int32. The id of the Peak Capacity Credit Allocation Submission"
+              }
+            ]
+          },
+          "docs": "This method allows a Market Participant to withdraw a Peak Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.\r\n<br></br>\r\nNote: This method is only available from Capacity Year 2026."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

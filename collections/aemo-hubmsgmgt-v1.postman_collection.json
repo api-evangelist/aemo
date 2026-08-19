@@ -1,0 +1,599 @@
+{
+  "item": [
+    {
+      "id": "b13991a1-c494-4abb-b4f0-9c46eb2dedf6",
+      "name": "HubMessageManagement",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d1131319-87d5-4d5f-a7e9-29bf6d43ace1",
+          "name": "Get Alert",
+          "request": {
+            "name": "Get Alert",
+            "description": {
+              "content": "Return Participants that have a B2B Stop file. Returns stop file details for all participants or the requested ParticipantID. Note- This API & resource will be enhanced in future to return the list of B2M stop files",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "initiatingParticipantID",
+                  "value": "<string>",
+                  "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception"
+                },
+                {
+                  "disabled": false,
+                  "key": "alertType",
+                  "value": "<string>",
+                  "description": "If the value is set to ‘B2BStopFile’, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to ‘B2BStopFile’."
+                },
+                {
+                  "disabled": false,
+                  "key": "queryParticipantID",
+                  "value": "<string>",
+                  "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8828ba89-61e1-4b16-8217-d0e8557f7221",
+              "name": "aseXML hub Acknowledgement (status = ‘Accept’) will be sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "a6c490f7-578c-4c79-9767-1f8db56c756e",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f3b2c87-0b99-4de6-9bc9-cfd5186e8c05",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2eeaed4e-f248-4052-8732-8bd41ecf1aa8",
+              "name": "This response is provided when the method is not GET",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f480ba7-84e4-4fd3-8c99-4cc2bee1660c",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8ad9153-2e23-4193-973d-47522a23a923",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb521ee9-90a0-4de7-b2fc-3aa6974d9a99",
+          "name": "Get status of core e-Hub applications",
+          "request": {
+            "name": "Get status of core e-Hub applications",
+            "description": {
+              "content": "Returns response code to state if the core e-Hub applications are available / operational. This API/resource will be used by the Participants to\n-  Test if the Participant application / gateway is able to establish connectivity with the e-Hub and/or\n- Validate if the SSL configuration / certificates are valid and/or\n- Check if the core e-Hub applications are available",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "initiatingParticipantID",
+                  "value": "<string>",
+                  "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4e3f994-1bd9-40ae-b77e-0cc1a804f46f",
+              "name": "Successful Ping i.e. Participant is able to connect to e-Hub, authentication & authorisation is valid and the e-Hub is operational.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "6b60fc1c-9095-4afb-82c7-0adc426bef2a",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23ca8e1b-5d06-4101-9e8b-cc17c1b555d1",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2154ed0b-6399-4b6e-bec6-9bea99f39bb4",
+              "name": "This response is provided when the method is not GET",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7955da22-8b80-45e2-830a-50d60378376a",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4450dd49-8c3d-4e1d-ab0b-8df643b0b1f8",
+              "name": "Core e-Hub application(s) is unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/ws/HubMessageManagement",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "cc992a06-0260-40c3-9c31-4ccb0315ad5f",
+    "name": "HubMessageManagement",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nThe HubMessageManagement API is a B2B SMP APIs used retrieve the current list of stop files for all participants or for a specific participant (using alerts) resource. \n\nParticipants can use this resource to: \n1. Ensure technical requirements required to connect to e-Hub are validated (for example, appropriate network ports are open). Participants can utilise this function to ensure their systems can connect to e-Hub using their SSL certificates and API keys.\n2. Determine if the e-Hub system is operational (ping-pong test).\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>",
+      "type": "text/plain"
+    }
+  }
+}

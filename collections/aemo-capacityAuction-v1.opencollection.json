@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CapacityAuction",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CapacityAuction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get GSH future data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacityAuction/GasFuture",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Allows auction participants to retrieve GSH Physical Gas Future Data"
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific bid profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacityAuction/bidProfile",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "GasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request date"
+              },
+              {
+                "name": "SubmittedAt",
+                "value": "",
+                "type": "query",
+                "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned."
+              }
+            ]
+          },
+          "docs": "Allows auction participants to retrieve a specific bid profile for a given gas date"
+        },
+        {
+          "info": {
+            "name": "Retrieve bid submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacityAuction/bidSubmissionHistory",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request date"
+              }
+            ]
+          },
+          "docs": "Allows auction participants to retrieve metadata for all successful bid submissions for a given gas date range."
+        },
+        {
+          "info": {
+            "name": "Submit bids for the Day Ahead Auction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacityAuction/bidProfileSubmission",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows auction participants to submit bids for the Day Ahead Auction.\nMultiple bids may be submitted in a single bid profile. However, all bids must pass validation otherwise the entire transaction will be rejected.\nThe latest bid profile submission will be used as the overall current bidding position for the specified date range.\n\n  A previously submitted bid can be cancelled by submitting an empty bid profile for the same gas day."
+        },
+        {
+          "info": {
+            "name": "Submit future trade data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacityAuction/GasFutureUpload",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows auction participants to submit the GSH Physical Gas Future Data"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

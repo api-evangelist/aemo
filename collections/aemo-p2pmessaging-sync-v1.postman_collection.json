@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "05bf7891-cf07-41c2-9b73-e0d8a0f113af",
+      "name": "P2PMessagingSync",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a181020-23c5-4758-9b78-4f89ccff4b9c",
+          "name": "Used to exchange free-form data and/or attachments",
+          "request": {
+            "name": "Used to exchange free-form data and/or attachments",
+            "description": {
+              "content": "Used to exchange free-form data and/or attachments",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                "key": "messageContextID.",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69fc4465-f79e-4c99-8759-0d6558dcea70",
+              "name": "aseXML hub Acknowledgement (status = ‘Accept’) will be sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                    "key": "messageContextID.",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "3a75a202-a250-481d-b423-43cd8c1520d3",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                    "key": "messageContextID.",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b59777d9-ba9a-48d0-94c4-8ddb5319ce3b",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                    "key": "messageContextID.",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "86f9b2d7-2ebb-41fe-969e-e5b433742d8e",
+              "name": "This response is provided when the method is not POST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                    "key": "messageContextID.",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c82c58e0-5610-4c29-93c7-9922bcda2493",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                    "key": "messageContextID.",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7ee3f31f-04ad-41c8-923a-3c32153ac012",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>\n\n<b>NOTE: Transaction Group ‘PTPE’ will be used to exchange free form information and/or attachments between the participants</b>",
+                    "key": "messageContextID.",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/ws/P2PMessagingSync",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "3c02833e-7b82-42c0-a5dd-a19ebe6e6020",
+    "name": "P2PMessagingSync",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nThe P2PMessagingSync API is a B2B SMP APIs used to exchange the following Peer-to-Peer information via the e-Hub:\n- Free-form information\n- Documents (also called Attachments). The P2PMessagingSync API supports exchange of the following attachment types (configurable): pdf, csv, jpeg, jpe, jpg, gif, zip & txt. In future, this API will support additional attachment types.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>",
+      "type": "text/plain"
+    }
+  }
+}

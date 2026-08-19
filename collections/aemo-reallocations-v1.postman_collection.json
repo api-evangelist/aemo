@@ -1,0 +1,4836 @@
+{
+  "item": [
+    {
+      "id": "8d6867a3-5e66-43fa-b8b1-d3e5677fd79e",
+      "name": "Reallocations",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccd04459-cb2b-45cf-9c4b-1266a8f5a8e7",
+          "name": "AuthoriseReallocation",
+          "request": {
+            "name": "AuthoriseReallocation",
+            "description": {
+              "content": "The authoriseReallocation API sets the state of the reallocation to AUTHORISE, signalling that both parties have agreed to the reallocation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authoriseReallocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9d5fe47-7fda-4a7b-a8e0-330717cca53f",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authoriseReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"responseAppStatus\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd2900f3-6115-424f-9398-84234d25dd43",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authoriseReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4395f864-d39a-4d7c-aaff-1629f1ec03f4",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authoriseReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f9c6faa-fc6f-4c82-83bd-0114f6b1c059",
+              "name": "Error Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authoriseReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"responseAppStatus\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37d45e33-c97f-4de4-86e9-9738431508cb",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authoriseReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f80a4d2-d327-467a-8991-cbf0de0e089c",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authoriseReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac471dc9-3deb-42e6-be35-09070a5235f6",
+          "name": "cancelReallocation",
+          "request": {
+            "name": "cancelReallocation",
+            "description": {
+              "content": "The cancelReallocation API sets the state of a reallocation to CANCEL, signalling to the Prudential system to exclude the reallocation from processing further.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cancelReallocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c0204ad-451a-4d02-b40a-b5392e3cff2b",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"responseAppStatus\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1481b673-86ee-4981-bc0d-f87423914338",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9a91ccb9-c0b8-48e0-a01c-c3cf9f403635",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dddfda4a-5d0a-4ab8-a69c-2afa7bf6839b",
+              "name": "Error Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"responseAppStatus\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32a98f8c-0a05-4f63-9c85-242840a87ba7",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82dfebca-5428-4b4a-bbcd-6095fd59ce50",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cancelReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reallocationId\": \"20190820.RS0001\",\n  \"counterpartyReference\": \"ReallocRef\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0cded92-8235-49cb-88b3-45e0e008f941",
+          "name": "getAgreementTypes",
+          "request": {
+            "name": "getAgreementTypes",
+            "description": {
+              "content": "The getAgreementTypes API retrieves a list of reallocation agreement types and associated descriptions. Possible values are -\n- $ - Dollar offset, a set dollar value for each interval.\n- MWh – Energy Offset, a set energy quantity for each interval, values at that interval’s RRP.\n- Swap – Swap offset, a quantity and price.\n- Cap – Cap offset, a quantity and price.\n- Floor – Floor offset, a quantity and price.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getAgreementTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05f10d14-4bf7-4d30-9789-ac1161c57852",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAgreementTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"AgreementTypes\": [\n      {\n        \"agreementTypeId\": \"string\",\n        \"description\": \"string\"\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d0770fe-d9be-4966-bbd9-b4409fd1b8f6",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAgreementTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da3c2e40-b06f-43ab-9398-c2ed67210c73",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAgreementTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6efaa1b9-c34d-4af0-b9a9-0b7dc425ad25",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAgreementTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f4afa48-9dc8-4b45-95f1-404a04582d36",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAgreementTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2ad3600-ce8a-4f08-bbd3-21904f43621e",
+          "name": "getcalendar",
+          "request": {
+            "name": "getcalendar",
+            "description": {
+              "content": "Weekends are implicitly assumed to be non-business days and are not explicitly included in the calendar information returned. The getCalendar API retrieves a list of public holidays from a given calendar. The calendar non-business days are taken from the NEM database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getCalendar"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calendarId",
+                  "value": "<string>",
+                  "description": "Unique identifier of the calendar"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4df3c28-0389-4fc8-b342-b0bb7f1ef4e7",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"calendars\": {\n      \"calendarId\": \"SETT_REGIONAL\",\n      \"regions\": [\n        {\n          \"regionId\": \"string\",\n          \"nonBusinessdays\": [\n            \"2011-01-03T00:00:00Z\"\n          ]\n        }\n      ]\n    }\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6411b8cc-a6b9-4572-afe1-d778c7b5a9c5",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3d54d35-d6de-4daf-b7bf-41cf8ab6efbd",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "67ac7592-c0a7-4f18-ba95-17f2d73f6b6a",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6bb03b0-e6c4-4a3c-94ae-ae2e37708560",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendar"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd0a5e36-58e1-41e4-995d-70b6dd806cc8",
+          "name": "getCalendars",
+          "request": {
+            "name": "getCalendars",
+            "description": {
+              "content": "The getCalendars API retrieves a list of Calendar IDs and associated descriptive names fulfilling the following criteria-\n- The Calendar is configured for reallocations.\n- If the regionId filter parameter is in the request, there must be at least one calendar entry matching the given region.\n- If the startDate filter parameter is in the request, there must be at least one calendar entry with a calendar date greater than or equal to the start date.\n- If the endDate filter parameter is in the request, there must be at least one calendar entry with a calendar date less than or equal to the end date.\n\nThe filter criteria are additive, that is they collectively represent a series of AND operations on the filter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getCalendars"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Format - date-time (as date-time in RFC3339). Start date of the reallocation"
+                },
+                {
+                  "disabled": false,
+                  "key": "regionId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "50d3b6af-31cc-474e-98d1-06300ba1c656",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"transactionId\\\": \\\"string\\\",\\r\\n  \\\"data\\\": {\\r\\n    \\\"Calendars\\\": [\\r\\n      {\\r\\n        \\\"calendarId\\\": \\\"SETT_REGIONAL\\\",\\r\\n        \\\"description\\\": \\\"string\\\"\\r\\n      }\\r\\n    ]\\r\\n  },\\r\\n  \\\"errors\\\": [\\r\\n    {\\r\\n      \\\"code\\\": \\\"string\\\",\\r\\n      \\\"title\\\": \\\"string\\\",\\r\\n      \\\"detail\\\": \\\"string\\\",\\r\\n      \\\"source\\\": \\\"string\\\"\\r\\n    }\\r\\n  ]\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f2f5dbb-1b60-49e5-a880-043987a6f9bf",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "227d023f-b87c-44a6-b310-51b3fd5c1bb9",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "809c4334-672b-41c8-b449-adb1d204a06e",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2035f15a-46bf-4a07-9741-ca1f65444741",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getCalendars"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2fce8b43-f6ec-41e7-955e-7a9407b9d7e5",
+          "name": "getMarketPriceCap",
+          "request": {
+            "name": "getMarketPriceCap",
+            "description": {
+              "content": "The getMarketPriceCap API retrieves the VOLL (Value of Lost Load) price at the given effective date in the request. The specific value retrieved is the one that-\n- Has an effectiveDate value that is the greatest effectiveDate value, less than or equal to the supplied effective date in the request, where the record is authorised.\n- Has a versionNo value that is greater than the versionNo value, for the corresponding effectiveDate value, where the record is authorised.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getMarketPriceCap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "effectiveDate",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64e1fb3a-3649-4eec-bdbb-de6dc774e5e0",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getMarketPriceCap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effectiveDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"transactionId\\\": \\\"733d2d32-ad4b-4ce7-823c-dbf756075c11\\\",\\r\\n  \\\"data\\\": {\\r\\n    \\\"vollPrice\\\": 13800\\r\\n  },\\r\\n  \\\"errors\\\": {}\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c4968ff-167f-4cb8-abcd-22374a6339b7",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getMarketPriceCap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effectiveDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0cc8840-d38a-45ab-8428-006598655b2a",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getMarketPriceCap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effectiveDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1f1ad440-aa5b-49e9-be83-8c723ea463f8",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getMarketPriceCap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effectiveDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edf7244f-5dd3-4443-80b7-f2de4a3a0a90",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getMarketPriceCap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "effectiveDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73132222-1d91-4038-b154-eba23d04ed92",
+          "name": "getParticipants",
+          "request": {
+            "name": "getParticipants",
+            "description": {
+              "content": "The getParticipants API retrieves a list of NEM Participant IDs and associated descriptive names fulfilling the following criteria-\n- Have a participant class of Market Participant.\n- Participants cannot create reallocation requests between participant IDs owned by the same Company ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getParticipants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d76897b9-a5d2-4f63-b498-41450018ab08",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getParticipants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"participants\": [\n      {\n        \"participantId\": \"ENERGYCO1\",\n        \"name\": \"Energy Corp\",\n        \"enable_Derivatives\": false\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3afe1b4c-9941-4c31-bc25-00ec6f16052c",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getParticipants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f679481-1e97-436e-944c-6512db5cfa36",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getParticipants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebee6cab-4108-426b-9c38-cb79e7f718b6",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getParticipants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "328e47ff-7abe-4d01-bb48-f08e9ef1eb05",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getParticipants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e3320f3-2374-4be9-a229-39f47e30e76e",
+          "name": "getProfileTypes",
+          "request": {
+            "name": "getProfileTypes",
+            "description": {
+              "content": "The getProfileTypes API retrieves a list of reallocation Day Types and associated descriptions. Possible values are-\n- Flat – everyday including Business and Non-Business days.\n- Business – Business days do not include weekends or public holidays (based on the chosen PH calendar).\n- Non-business – Any day that is not a business day.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getProfileTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3823a4c4-6fee-4acc-9bf8-6bf9aea29028",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getProfileTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"ProfileTypes\": [\n      {\n        \"profileTypeId\": \"BUSINESS\",\n        \"description\": \"Apply to profile to business days only\"\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f97fab56-afda-42df-87b2-fc4baaf414e7",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getProfileTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37fdf621-5c02-4a3a-a9d9-37e5ee186c35",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getProfileTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "396b70a8-1ede-4d00-b300-f6ad74159ca3",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getProfileTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df066d24-84b5-40e7-94dd-f2dd28e93479",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getProfileTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b2969c2-c2a4-47c8-9af4-09f8f7bd3a43",
+          "name": "getReallocation",
+          "request": {
+            "name": "getReallocation",
+            "description": {
+              "content": "Retrieves a single reallocation along with its associated properties and reallocation profile data. The reallocationId request parameter is used to retrieve the reallocation matching the supplied ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getReallocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reallocationId",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6570a13c-566a-4bfa-8fe9-9d24d4233f3f",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reallocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"transactionId\\\": \\\"733d2d32-ad4b-4ce7-823c-dbf756075c11\\\",\\r\\n  \\\"errors\\\": [\\r\\n    {\\r\\n      \\\"code\\\": \\\"string\\\",\\r\\n      \\\"title\\\": \\\"string\\\",\\r\\n      \\\"detail\\\": \\\"string\\\",\\r\\n      \\\"source\\\": \\\"string\\\"\\r\\n    }\\r\\n  ],\\r\\n  \\\"data\\\": {\\r\\n    \\\"reallocation\\\": {\\r\\n      \\\"startDate\\\": \\\"2000-12-31T00:00:00+00:00\\\",\\r\\n      \\\"endDate\\\": \\\"2020-12-31T00:00:00+00:00\\\",\\r\\n      \\\"submittingParticipantId\\\": \\\"AEMO\\\",\\r\\n      \\\"counterPartyParticipantId\\\": \\\"AEMO\\\",\\r\\n      \\\"agreementTypeId\\\": \\\"DOLLAR\\\",\\r\\n      \\\"profileTypeId\\\": \\\"BUSINESS\\\",\\r\\n      \\\"regionId\\\": \\\"QLD1\\\",\\r\\n      \\\"creditDebitIndicator\\\": \\\"C\\\",\\r\\n      \\\"submittingParticipantReference\\\": \\\"REALLOC1\\\",\\r\\n      \\\"intervalLength\\\": 30,\\r\\n      \\\"reallocationProfile\\\": [\\r\\n        {\\r\\n          \\\"periodId\\\": 36,\\r\\n          \\\"reallocationValue\\\": 30,\\r\\n          \\\"nrp\\\": 500\\r\\n        }\\r\\n      ]\\r\\n    }\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2405f5f7-e388-4cd4-9163-319b1070a9dc",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reallocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d784595-9729-4c89-b76b-5fff481979f2",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reallocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d966913f-79ab-45d0-888f-39a993f6b8cd",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reallocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5f9bc3c3-07ab-45e5-b5e9-0ae245d3617c",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reallocationId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56435f1c-4b78-425e-ac0c-f6b2e029fdd4",
+          "name": "getReallocations",
+          "request": {
+            "name": "getReallocations",
+            "description": {
+              "content": "The getReallocations API retrieves a list of reallocations and associated properties that fulfil the following criteria-\n  - Either the submittingParticipantId or counterpartyParticipantId property of the reallocation must match the ID of the request participantId.\n  \n  - If the regionId filter parameter is in the request, the regionId property of the reallocation must match the value.\n  \n  - If the startDate filter parameter is in the request, the endDate property of the reallocation must be greater than or equal to the value.\n  \n  - If the endDate filter parameter is in the request, the startDate property of the reallocation must be less than or equal to the value.\n  \n  - If the agreementType filter parameter is in the request, the agreementType property of the reallocation must match one of the comma-separated values.\n  \n  - If the steps filter parameter is in the request, the current_StepId property of the reallocation must match one of the comma-separated values.\n  \n  - If the lastChangedGreaterThan parameter is present in the request, the lastChanged property of the reallocation must be greater than or equal to the value.\n  \n  - If the expiringWithinDays parameter is present in the request, the exPostDueDate property of the reallocation must be greater than or equal to the current system date plus the number of days equal to the parameter value.\n  \n  The filter criteria are additive, that is they collectively represent a series of AND operations on the filter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getReallocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "calendarId",
+                  "value": "<string>",
+                  "description": "Unique identifier of the calendar"
+                },
+                {
+                  "disabled": false,
+                  "key": "expiringWithinDays",
+                  "value": "<integer>",
+                  "description": "Expiring within X days parameter of the reallocation filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "regionId",
+                  "value": "<string>",
+                  "description": "Region ID parameter of the reallocation filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastChangedGreaterThan",
+                  "value": "<string>",
+                  "description": "Last changed greater than X parameter of the reallocation filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "exPostDueDateStart",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "steps",
+                  "value": "<string>",
+                  "description": "Steps parameter of the reallocation filter, containing a comma-separated list of reallocation step IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "agreementTypes",
+                  "value": "<string>",
+                  "description": "Agreement types parameter of the reallocation filter, containing a comma-separate listed of agreement type IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Format - date-time (as date-time in RFC3339). Start date of the reallocation"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "exPostDueDateEnd",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c1540ec-68b7-4092-8fad-237ca68ff71c",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringWithinDays",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastChangedGreaterThan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreementTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5610451-e1c7-49e2-b981-60e7966b09fd",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringWithinDays",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastChangedGreaterThan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreementTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04d7d8f9-3bb7-4bd4-9bcf-fb35d32bab4f",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringWithinDays",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastChangedGreaterThan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreementTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39b5467d-8d01-4ccf-9f8f-eebb5d147146",
+              "name": "Error Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringWithinDays",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastChangedGreaterThan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreementTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "337d9607-813d-4d38-aa68-7fc7934933a7",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringWithinDays",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastChangedGreaterThan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreementTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a2a1c8cb-5346-4964-bcd1-bf2ebecdf4ba",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "calendarId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expiringWithinDays",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastChangedGreaterThan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateStart",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "agreementTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exPostDueDateEnd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\r\\n  \\\"ResponseStatus\\\": {\\r\\n    \\\"errorCode\\\": \\\"string\\\",\\r\\n    \\\"message\\\": \\\"string\\\",\\r\\n    \\\"stackTrace\\\": {},\\r\\n    \\\"errors\\\": [\\r\\n      {\\r\\n        \\\"errorCode\\\": \\\"string\\\",\\r\\n        \\\"fieldName\\\": \\\"string\\\",\\r\\n        \\\"message\\\": \\\"string\\\",\\r\\n        \\\"meta\\\": {}\\r\\n      }\\r\\n    ],\\r\\n    \\\"meta\\\": {}\\r\\n  }\\r\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98ca6855-1e6b-4b13-af27-f5681a63455b",
+          "name": "getReallocationSteps",
+          "request": {
+            "name": "getReallocationSteps",
+            "description": {
+              "content": "The getReallocationSteps API retrieves a list of reallocation step IDs and associated descriptions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getReallocationSteps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f21ae93d-6db5-4069-8405-ddfa4ea43811",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocationSteps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"regions\": [\n      {\n        \"stepId\": \"AUTHORISE\",\n        \"description\": \"Authorised\"\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31d13662-248c-4ad3-9a2f-cce7c54f6f40",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocationSteps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0727592-4f64-4e46-b41c-939496ef7aad",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocationSteps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44b6607c-fddb-479f-83c3-b3b15d47b632",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocationSteps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a537e80f-2c8d-4f84-8f4d-f1a1e1d48508",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getReallocationSteps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2be988ab-13f2-44bc-84c1-dcd2034abf76",
+          "name": "getRegions",
+          "request": {
+            "name": "getRegions",
+            "description": {
+              "content": "The getRegions API retrieves a list of regions and associated descriptive names.        Possible values are as follows-\n- New South Wales\n- Queensland\n- South Australia\n- Tasmania\n- Victoria",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getRegions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd9081a5-d64f-4b4d-89b4-094abf958d72",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getRegions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"regions\": [\n      {\n        \"regionId\": \"NSW1\",\n        \"name\": \"New South Wales\"\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19d77ba5-9e45-4fb2-a7d3-0706b3b2d052",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getRegions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6e263fe-5de0-4756-9058-dd43ac4752be",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getRegions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5ac484a4-905a-410f-a514-784e89d716a5",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getRegions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6459a071-dc0a-487e-bad8-e63c608d916f",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getRegions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ResponseStatus\": {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"stackTrace\": {},\n    \"errors\": [\n      {\n        \"errorCode\": \"string\",\n        \"fieldName\": \"string\",\n        \"message\": \"string\",\n        \"meta\": {}\n      }\n    ],\n    \"meta\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3533089-55f5-46b3-b3c1-88894691db48",
+          "name": "submitReallocation",
+          "request": {
+            "name": "submitReallocation",
+            "description": {
+              "content": "Creates a reallocation and sets the status to SUBMIT. The API creates an ID in the format “<YYYYMMDD>.RS<NNNN>“ where-\n- <YYYYMMDD> is the current system date \n- <NNNN> is the consistently increasing sequence number for reallocations created on the specific date including leading zeros.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submitReallocation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bc9adb5-d2e5-4976-8c09-fb711fa21f84",
+              "name": "Success Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"reallocationId\": \"20200210.RS002\",\n    \"reallocationSuccessful\": true\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b2947e3-56a9-4cf7-b958-216b91ab711b",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d84100b7-62b0-40d5-93e8-4887e1b084ef",
+              "name": "Unauthorized:Invalid UserName or Password",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9655137-c42b-4760-b13e-0c71fbf60fe7",
+              "name": "Error Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"733d2d32-ad4b-4ce7-823c-dbf756075c11\",\n  \"data\": {\n    \"reallocations\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f503bc7d-f04f-476d-b953-f3e9e1f97fca",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93591405-6ce6-4cac-946a-f729a3869529",
+              "name": "Api failure response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitReallocation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"reallocation\": [\n      {\n        \"startDate\": \"2000-12-31T00:00:00Z\",\n        \"endDate\": \"2020-12-31T00:00:00Z\",\n        \"submittingParticipantId\": \"AEMO\",\n        \"counterPartyParticipantId\": \"AEMO\",\n        \"agreementTypeId\": \"DOLLAR\",\n        \"profileTypeId\": \"BUSINESS\",\n        \"regionId\": \"QLD1\",\n        \"creditDebitIndicator\": \"C\",\n        \"submittingParticipantReference\": \"REALLOC1\",\n        \"intervalLength\": 30,\n        \"reallocationProfile\": [\n          {\n            \"periodId\": 36,\n            \"reallocationValue\": 30,\n            \"nrp\": 500\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "39018a5d-efa8-4654-b4f9-8db088a34832",
+    "name": "Reallocations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nThe Reallocation API allow you to create, authorise, cancel reallocations. You can also search and retrieve reallocations, calendars, participants, profile types, agreement types, and market price cap\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EE Simulation Status Update",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EE Simulation Status Update",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ee-simulation-status-update/token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query",
+                "description": "Should always be 'client_credentials'"
+              }
+            ]
+          },
+          "docs": "Request for a New Token.  This request uses API Key Details as BasicAuth as the Authentication Method."
+        },
+        {
+          "info": {
+            "name": "Submit Simulation Status Update for operational/non-operational model from EE (EnergyExemplar)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ee-simulation-status-update/postSimulationData",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "EE is required to send the simulation status update as a response for the simulations submitted from AEMO."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

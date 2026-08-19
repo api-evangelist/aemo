@@ -1,0 +1,267 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NEMDispatchBidding",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NEMDispatchBidding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getBid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/bidding/getBid",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "offerTimeStamp",
+                "value": "",
+                "type": "query",
+                "description": "Bid/Offer date and time"
+              },
+              {
+                "name": "tradingDate",
+                "value": "",
+                "type": "query",
+                "description": "The trading day of the Bid/Offer"
+              },
+              {
+                "name": "duid",
+                "value": "",
+                "type": "query",
+                "description": "The Unit or MNSP interconnectorId. A successful MNSP getBid response returns Link IDs in the DUID objects, not Interconnector IDs"
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The Bid/Offer service type, one of, ENERGY, MNSP, RAISE1SEC, RAISE6SEC, RAISE60SEC, RAISE5MIN, RAISEREG, LOWER6SEC, LOWER1SEC, LOWER60SEC, LOWER5MIN, LOWERREG"
+              }
+            ]
+          },
+          "docs": "Returns an Energy, FCAS, or MNSP bid. It provides details for a specific Bid/Offer, including the interval, day, and submission information. If the parameters match, the specific Bid/Offer details return, otherwise an error displays.\n\nThis endpoint only has query parameters."
+        },
+        {
+          "info": {
+            "name": "getBids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/bidding/getBids",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fromTradingDate",
+                "value": "",
+                "type": "query",
+                "description": "From Trading Day (inclusive), default is current trading day. Format - date-time (as date-time in RFC3339)"
+              },
+              {
+                "name": "toTradingDate",
+                "value": "",
+                "type": "query",
+                "description": "Default is fromTradingDate + 7 days. A seven day range is returned. If you need a greater range, submit the getBids endpoint multiple times. For the selected date range when there is no explicit Bid/Offer, the last valid Bid/Offer displays. Format - date-time (as date-time in RFC3339)"
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "The Bid/Offer service type, one of, ENERGY, MNSP, RAISE1SEC, RAISE6SEC, RAISE60SEC, RAISE5MIN, RAISEREG, LOWER1SEC, LOWER6SEC, LOWER60SEC, LOWER5MIN, LOWERREG"
+              },
+              {
+                "name": "includeSuperseded",
+                "value": "",
+                "type": "query",
+                "description": "Specifies offers have to be retrieved. FALSE returns current effective bids, TRUE return all versions of bids/offers"
+              },
+              {
+                "name": "duid",
+                "value": "",
+                "type": "query",
+                "description": "Dispatchable Unit identifier recorded in AEMO's systems. Must be upper case, maxLength: 10"
+              }
+            ]
+          },
+          "docs": "Returns one or more Energy, FCAS, or MNSP Bid/Offers (not including interval data). <br>\nUse the following optional query parameters to search for a specific bid or offer:\n- fromTradingDate\n- toTradingDate\n- duid or interconnectorId <br>\n- service\n- includeSuperseded"
+        },
+        {
+          "info": {
+            "name": "getSubmission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/bidding/getSubmission",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "query",
+                "description": "The bid submission's reference identifier. You must provide at least one query parameter in an API call"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "The bid submission's transaction identifier. You must provide at least one query parameter in an API call"
+              }
+            ]
+          },
+          "docs": "Retrieves a previous submission where the requesting participantId is the submitting participantId.<br>\nProvide at least one of the following query parameters, otherwise no results return: <br>\n- transactionId\n- referenceId <br>\n\nThis endpoint only has query parameters."
+        },
+        {
+          "info": {
+            "name": "getSubmissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/bidding/getSubmissions",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fromTradingDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339)"
+              },
+              {
+                "name": "toTradingDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339)"
+              },
+              {
+                "name": "fromOfferTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339)"
+              },
+              {
+                "name": "toOfferTimestamp",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339)"
+              },
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier for a specific bid or offer submission"
+              },
+              {
+                "name": "comments",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Unique transaction identifier"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of accepted submissions where the requesting participantId is the submitting participantId.\n\nUse the following optional query parameters to search for specific submissions: <br>\n- fromTradingDate\n- toTradingDate\n- transactionId\n- fromOfferTimeStamp\n- toOfferTimeStamp\n- referenceId\n- comments \n<br>\nThis endpoint has query parameters only (no payload parameters)."
+        },
+        {
+          "info": {
+            "name": "submitBids",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/bidding/submitBids",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit one or more Energy, FCAS, or MNSP Bids. It supports: <br>\n- Bids and Offers for multiple Trading Days, DUIDs (Dispatchable Unit or MSNP Interconnector ID), and FCAS Service Type.\n- Provision of Energy, FCAS, and MNSP bids/offers in the same submission.\n- Separate formats for Energy, FCAS, or MNSP bids/offers so you don't need to include unrequired fields.\n<br>\nYou provide the Bid/Offer details in the energyBids, fcasBids, or mnspBids arrays in the JSON schema.<br> \nThis endpoint has paylo"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

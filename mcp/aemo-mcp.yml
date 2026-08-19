@@ -2,135 +2,136 @@ generated: '2026-07-27'
 method: derived
 status: candidate
 source: openapi/ (76 documents, 798 operations) — derived, not published by AEMO
-description: >-
-  AEMO publishes NO Model Context Protocol server. A search of AEMO's developer portal, the public
-  MCP registries and npm found nothing first-party, and no /mcp or /sse endpoint answered on any
-  AEMO host. This file is a CANDIDATE tool design derived from AEMO's own OpenAPI documents: a
-  curated set of tools across the marquee products, each bound to a real operationId that exists
-  verbatim in openapi/. It is a proposal for AEMO (or an integrator), not a description of
-  something AEMO runs. Every tool's real input contract is the parameters + requestBody of its
-  backing operation.
+description: 'AEMO publishes NO Model Context Protocol server. A search of AEMO''s developer portal, the
+  public MCP registries and npm found nothing first-party, and no /mcp or /sse endpoint answered on any
+  AEMO host. This file is a CANDIDATE tool design derived from AEMO''s own OpenAPI documents: a curated
+  set of tools across the marquee products, each bound to a real operationId that exists verbatim in openapi/.
+  It is a proposal for AEMO (or an integrator), not a description of something AEMO runs. Every tool''s
+  real input contract is the parameters + requestBody of its backing operation.'
 searched:
-  - target: https://dev.aemo.com.au (developer portal, catalogue + docs)
-    result: no MCP server referenced
-  - target: npm (@modelcontextprotocol, aemo, nem)
-    result: no first-party AEMO MCP package
-  - target: MCP registries
-    result: no AEMO entry
+- target: https://dev.aemo.com.au (developer portal, catalogue + docs)
+  result: no MCP server referenced
+- target: npm (@modelcontextprotocol, aemo, nem)
+  result: no first-party AEMO MCP package
+- target: MCP registries
+  result: no AEMO entry
 server:
   name: aemo
   transport: http
   url: null
   status: not-published
 scope:
-  note: >-
-    The full AEMO surface is 798 operations across 76 documents — far too many to expose as tools
-    one-for-one. The candidate set below covers the products an agent would realistically drive.
-    The complete operation inventory stays authoritative in openapi/ and
-    mcp/aemo-tool-crosswalk.yml records what is not covered.
+  note: The full AEMO surface is 798 operations across 76 documents — far too many to expose as tools
+    one-for-one. The candidate set below covers the products an agent would realistically drive. The complete
+    operation inventory stays authoritative in openapi/ and mcp/aemo-tool-crosswalk.yml records what is
+    not covered.
   full_operation_count: 798
   candidate_tool_count: 28
-authentication_note: >-
-  Every tool below except the public-data ones would require an APIM subscription key, an
-  AEMO-signed TLS client certificate, and a URM or OAuth 2.0 caller identity — see
-  authentication/aemo-authentication.yml. An MCP server for AEMO is therefore a
-  participant-deployed server, not a public one.
+authentication_note: Every tool below except the public-data ones would require an APIM subscription key,
+  an AEMO-signed TLS client certificate, and a URM or OAuth 2.0 caller identity — see authentication/aemo-authentication.yml.
+  An MCP server for AEMO is therefore a participant-deployed server, not a public one.
 tools:
-  - name: get_bid
-    description: Retrieve a specific Energy, FCAS or MNSP bid/offer for a trading date and DUID.
-    source_operation: openapi/aemo-bidding-v1-openapi.yml#getBid
-  - name: list_bids
-    description: List Energy, FCAS or MNSP bids and offers over a trading-date range.
-    source_operation: openapi/aemo-bidding-v1-openapi.yml#getBids
-  - name: get_bid_submission
-    description: Retrieve a single NEM dispatch bid submission.
-    source_operation: openapi/aemo-bidding-v1-openapi.yml#getSubmission
-  - name: list_bid_submissions
-    description: List NEM dispatch bid submissions.
-    source_operation: openapi/aemo-bidding-v1-openapi.yml#getSubmissions
-  - name: submit_bids
-    description: Submit Energy, FCAS or MNSP bids and offers to NEM dispatch.
-    source_operation: openapi/aemo-bidding-v1-openapi.yml#submitBids
-    write: true
-  - name: submit_dispatch_self_forecast
-    description: Submit a semi-scheduled unit dispatch self-forecast.
-    source_operation: openapi/aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
-    write: true
-  - name: submit_predispatch_self_forecast
-    description: Submit a 5-minute pre-dispatch self-forecast.
-    source_operation: openapi/aemo-selfForecast-v1-openapi.yml#submitPreDispatchForecast
-    write: true
-  - name: submit_mtpasa_offers
-    description: Submit one or more MT PASA offers.
-    source_operation: openapi/aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
-    write: true
-  - name: list_outages
-    description: Retrieve outages from the AEMO Outage Management System.
-    source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#retrieveOutageFromOutageManagement
-  - name: get_outage
-    description: Retrieve a particular outage by outage number.
-    source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#getParticularOutage
-  - name: get_outage_status
-    description: Retrieve the latest outage status for a network operator.
-    source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#retrieveLatestOutageStatusForNetworkOperator
-  - name: create_network_outage
-    description: Create a new network outage in the Outage Management System.
-    source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#createANewNetworkOutageInOutageManagementSystem
-    write: true
-  - name: create_generator_outage
-    description: Create a new generator outage in the Outage Management System.
-    source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#createANewGeneratorOutageInOutageManagementSystem
-    write: true
-  - name: withdraw_network_outage
-    description: Withdraw an existing network outage.
-    source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#withdrawExistingNetworkOutageInOutageManagementSystem
-    write: true
-  - name: get_der_installation
-    description: Retrieve a DER installation record for a NMI from the DER Register.
-    source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#retrieveDERInstallationRecord
-  - name: list_der_installations
-    description: Retrieve DER installation records from the DER Register.
-    source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#retrieveDERInstallationRecords
-  - name: get_der_installation_history
-    description: Retrieve the change history of a NMI's DER installation record.
-    source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#retrieveDERInstallationHistory
-  - name: create_der_installation
-    description: Create a DER installation record.
-    source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#createDERInstallationRecord
-    write: true
-  - name: get_nmi_details
-    description: Return the current NMI details held in the WEM DER Register.
-    source_operation: openapi/aemo-der-register-nmi-v1-openapi.yml#returnsTheCurrentNMIDetails
-  - name: get_prudential_company_summary
-    description: Retrieve the prudential summary for a company.
-    source_operation: openapi/aemo-prudentials-v1-openapi.yml#getPrudentialCompanySummary
-  - name: get_bank_guarantees
-    description: Retrieve the bank guarantees lodged for a participant.
-    source_operation: openapi/aemo-prudentials-v1-openapi.yml#getBankGuarantees
-  - name: get_prudential_calendar
-    description: Retrieve the prudential calendar.
-    source_operation: openapi/aemo-prudentials-v1-openapi.yml#getPrudentialCalendar
-  - name: list_tls_certificate_orders
-    description: List a participant's AEMO-signed TLS certificate orders.
-    source_operation: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml#getAllCertificateOrders
-  - name: create_tls_certificate
-    description: Generate a new AEMO-signed TLS certificate.
-    source_operation: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
-    write: true
-  - name: revoke_tls_certificate
-    description: Revoke an AEMO-signed TLS certificate.
-    source_operation: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml#revokeACertificate
-    write: true
-  - name: get_cdr_energy_plans
-    description: List generic energy plans published under the Consumer Data Right.
-    source_operation: openapi/aemo-cds-energy-api-openapi.yml#listEnergyPlans
-  - name: get_cdr_service_point_usage
-    description: Retrieve electricity usage for a CDR service point.
-    source_operation: openapi/aemo-cds-energy-api-openapi.yml#getElectricityServicePointUsage
-  - name: get_cdr_status
-    description: Health-check status for the AEMO Consumer Data Right APIs.
-    source_operation: openapi/aemo-cds-common-api-openapi.yml#getStatus
+- name: get_bid
+  description: Retrieve a specific Energy, FCAS or MNSP bid/offer for a trading date and DUID.
+  source_operation: openapi/aemo-bidding-v1-openapi.yml#getBid
+- name: list_bids
+  description: List Energy, FCAS or MNSP bids and offers over a trading-date range.
+  source_operation: openapi/aemo-bidding-v1-openapi.yml#getBids
+- name: get_bid_submission
+  description: Retrieve a single NEM dispatch bid submission.
+  source_operation: openapi/aemo-bidding-v1-openapi.yml#getSubmission
+- name: list_bid_submissions
+  description: List NEM dispatch bid submissions.
+  source_operation: openapi/aemo-bidding-v1-openapi.yml#getSubmissions
+- name: submit_bids
+  description: Submit Energy, FCAS or MNSP bids and offers to NEM dispatch.
+  source_operation: openapi/aemo-bidding-v1-openapi.yml#submitBids
+  write: true
+- name: submit_dispatch_self_forecast
+  description: Submit a semi-scheduled unit dispatch self-forecast.
+  source_operation: openapi/aemo-selfForecast-v1-openapi.yml#submitDispatchForecast
+  write: true
+- name: submit_predispatch_self_forecast
+  description: Submit a 5-minute pre-dispatch self-forecast.
+  source_operation: openapi/aemo-selfForecast-v1-openapi.yml#submitPreDispatchForecast
+  write: true
+- name: submit_mtpasa_offers
+  description: Submit one or more MT PASA offers.
+  source_operation: openapi/aemo-mtpasaoffers-v1-openapi.yml#submitOneOrMoreMTPASAOffers
+  write: true
+- name: list_outages
+  description: Retrieve outages from the AEMO Outage Management System.
+  source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#retrieveOutageFromOutageManagement
+- name: get_outage
+  description: Retrieve a particular outage by outage number.
+  source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#getParticularOutage
+- name: get_outage_status
+  description: Retrieve the latest outage status for a network operator.
+  source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#retrieveLatestOutageStatusForNetworkOperator
+- name: create_network_outage
+  description: Create a new network outage in the Outage Management System.
+  source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#createANewNetworkOutageInOutageManagementSystem
+  write: true
+- name: create_generator_outage
+  description: Create a new generator outage in the Outage Management System.
+  source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#createANewGeneratorOutageInOutageManagementSystem
+  write: true
+- name: withdraw_network_outage
+  description: Withdraw an existing network outage.
+  source_operation: openapi/aemo-outage-management-external-v1-openapi.yml#withdrawExistingNetworkOutageInOutageManagementSystem
+  write: true
+- name: get_der_installation
+  description: Retrieve a DER installation record for a NMI from the DER Register.
+  source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#retrieveDERInstallationRecord
+- name: list_der_installations
+  description: Retrieve DER installation records from the DER Register.
+  source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#retrieveDERInstallationRecords
+- name: get_der_installation_history
+  description: Retrieve the change history of a NMI's DER installation record.
+  source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#retrieveDERInstallationHistory
+- name: create_der_installation
+  description: Create a DER installation record.
+  source_operation: openapi/aemo-der-register-installation-v2-openapi.yml#createDERInstallationRecord
+  write: true
+- name: get_nmi_details
+  description: Return the current NMI details held in the WEM DER Register.
+  source_operation: openapi/aemo-der-register-nmi-v1-openapi.yml#returnsTheCurrentNMIDetails
+- name: get_prudential_company_summary
+  description: Retrieve the prudential summary for a company.
+  source_operation: openapi/aemo-prudentials-v1-openapi.yml#getPrudentialCompanySummary
+- name: get_bank_guarantees
+  description: Retrieve the bank guarantees lodged for a participant.
+  source_operation: openapi/aemo-prudentials-v1-openapi.yml#getBankGuarantees
+- name: get_prudential_calendar
+  description: Retrieve the prudential calendar.
+  source_operation: openapi/aemo-prudentials-v1-openapi.yml#getPrudentialCalendar
+- name: list_tls_certificate_orders
+  description: List a participant's AEMO-signed TLS certificate orders.
+  source_operation: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml#getAllCertificateOrders
+- name: create_tls_certificate
+  description: Generate a new AEMO-signed TLS certificate.
+  source_operation: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml#createANewCertificate
+  write: true
+- name: revoke_tls_certificate
+  description: Revoke an AEMO-signed TLS certificate.
+  source_operation: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml#revokeACertificate
+  write: true
+- name: get_cdr_energy_plans
+  description: List generic energy plans published under the Consumer Data Right.
+  source_operation: openapi/aemo-cds-energy-api-openapi.yml#listEnergyPlans
+- name: get_cdr_service_point_usage
+  description: Retrieve electricity usage for a CDR service point.
+  source_operation: openapi/aemo-cds-energy-api-openapi.yml#getElectricityServicePointUsage
+- name: get_cdr_status
+  description: Health-check status for the AEMO Consumer Data Right APIs.
+  source_operation: openapi/aemo-cds-common-api-openapi.yml#getStatus
 cross_references:
   crosswalk: mcp/aemo-tool-crosswalk.yml
   authentication: authentication/aemo-authentication.yml
   agentic_access: agentic-access/aemo-agentic-access.yml
+deployment:
+  mode: none
+  verified: derived
+  tools: 28
+  checked: '2026-08-12'
+  source: catalog MCP census

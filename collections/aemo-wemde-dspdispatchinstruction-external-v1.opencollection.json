@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WEMDE DSPDispatchInstruction",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WEMDE DSPDispatchInstruction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Acknowledge the Dispatch Instruction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/DSPDispatchInstruction/dispatchInstructionAck/:dispatchInstructionId",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispatchInstructionId",
+                "value": "",
+                "type": "path",
+                "description": "Format - uuid."
+              }
+            ]
+          },
+          "docs": "Acknowledge the Dispatch Instruction"
+        },
+        {
+          "info": {
+            "name": "Pre-Dispatch DSP Schedule information for the a specified interval (for Pre-Dispatch 2 days between start and end dates of the request)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/DSPDispatchInstruction/preDispatchData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "primaryDispatchInterval",
+                "value": "",
+                "type": "query",
+                "description": "primary dispatch interval"
+              },
+              {
+                "name": "dispatchIntervalStartDate",
+                "value": "",
+                "type": "query",
+                "description": "dispatch interval start date"
+              },
+              {
+                "name": "dispatchIntervalEndDate",
+                "value": "",
+                "type": "query",
+                "description": "dispatch interval end date"
+              }
+            ]
+          },
+          "docs": "Pre-Dispatch DSP Schedule information for the a specified interval (for Pre-Dispatch 2 days between start and end dates of the request)"
+        },
+        {
+          "info": {
+            "name": "Retrieves Participant wise DSP dispatch instruction for each participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/DSPDispatchInstruction/DSPDispatchInstructionParticipantWise",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispatchIntervalFrom",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "facilityCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves Participant wise DSP dispatch instruction for each participant"
+        },
+        {
+          "info": {
+            "name": "Retrieves the DSP dispatch instruction for all participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/DSPDispatchInstruction/DSPDispatchInstructions",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "facilityCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "intervalFrom",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "intervalTo",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              }
+            ]
+          },
+          "docs": "Retrieves the DSP dispatch instruction for all participants"
+        },
+        {
+          "info": {
+            "name": "Week-Ahead Dispatch DSP Schedule information for the a specified interval (7 days between start and end dates for week ahead)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/DSPDispatchInstruction/weekAheadDispatchData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "primaryDispatchInterval",
+                "value": "",
+                "type": "query",
+                "description": "primary dispatch interval"
+              },
+              {
+                "name": "dispatchIntervalStartDate",
+                "value": "",
+                "type": "query",
+                "description": "dispatch interval start date"
+              },
+              {
+                "name": "dispatchIntervalEndDate",
+                "value": "",
+                "type": "query",
+                "description": "dispatch interval end date"
+              }
+            ]
+          },
+          "docs": "Week-Ahead Dispatch DSP Schedule information for the a specified interval (7 days between start and end dates for week ahead)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

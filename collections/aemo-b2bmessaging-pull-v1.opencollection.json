@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "B2BMessagingPull",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "B2BMessagingPull",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Message Acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingPull/messageAcknowledgements",
+            "headers": [
+              {
+                "name": "messageContextID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Purpose - Acknowledge a received message. Detail - For every message, a message acknowledgment is generated (with the exception of messages containing message acknowledgements). A BusinessReceipt has two possible implementations -\n  • MessageAcknowledgement.\n  • Event, errors are reported via Event elements.\n  \n  \nIf a message is rejected, no receipt identifier is required with the acknowledgement.\n\nThis resource will be used when Participants are required to send Message Acknowledgement in the "
+        },
+        {
+          "info": {
+            "name": "Delete Message Acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingPull/messageAcknowledgements",
+            "params": [
+              {
+                "name": "initiatingParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "ParticipantID of the Participant invoking the API"
+              },
+              {
+                "name": "messageContextID",
+                "value": "",
+                "type": "query",
+                "description": "This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue."
+              }
+            ]
+          },
+          "docs": "Participants opting-in for Pull API are required to notify the e-Hub that the message acknowledgement was successfully received and processed. This notification will delete the message acknowledgement message in the e-Hub queue."
+        },
+        {
+          "info": {
+            "name": "Returns the meta-data of messages in the e-Hub queue (or) the aseXML messages queued awaiting delivery to the Recipient (initiator of this API).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingPull/queues",
+            "params": [
+              {
+                "name": "messageContextID",
+                "value": "",
+                "type": "query",
+                "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist."
+              },
+              {
+                "name": "transactionGroup",
+                "value": "",
+                "type": "query",
+                "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid"
+              },
+              {
+                "name": "priority",
+                "value": "",
+                "type": "query",
+                "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid"
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The ‘/queues’ resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue."
+              },
+              {
+                "name": "initiatingParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "ParticipantID of the Participant invoking the API"
+              }
+            ]
+          },
+          "docs": "Returns meta-data of messages in e-Hub queue for the participant initiating the API request."
+        },
+        {
+          "info": {
+            "name": "Submit a B2B message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingPull/messages",
+            "headers": [
+              {
+                "name": "messageContextID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Submit a B2B message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TLS Certificate Mgmt v1",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TLS Certificate Mgmt v1",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/certificates",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new certificate and a new order by providing a valid Certificate Signing Request (CSR) and an environment (`non-prod` or `production`) in the request body. This certificate is created under your Participant ID.\n        \nGenerating the CSR depends on your server and operating system. For more information, see [CSR requirements](https://portal.aemo.com.au/help/Content/TLSCertificateManagement/CSR%20requirements.html)."
+        },
+        {
+          "info": {
+            "name": "Download a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/certificates/:certificate-id/download",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "certificate-id",
+                "value": "",
+                "type": "path",
+                "description": "The specific ID of a Certificate"
+              }
+            ]
+          },
+          "docs": "Download a certificate, and the certificate chain, returned in PEM format."
+        },
+        {
+          "info": {
+            "name": "Get all certificate orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/orders",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get all the certificate orders for a particular participant ID."
+        },
+        {
+          "info": {
+            "name": "Get details on a certificate order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/orders/:order-id",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order-id",
+                "value": "",
+                "type": "path",
+                "description": "The specific order ID of a Certificate"
+              }
+            ]
+          },
+          "docs": "Get all the certificates (including expired, revoked, renewed and reissued certificates) associated with a particular order for a Participant ID."
+        },
+        {
+          "info": {
+            "name": "Get the scope for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/scope",
+            "headers": [
+              {
+                "name": "X-SS-ID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a users scope from their given SessionID. This will provide basic information on whether the user has the TLS_CERTIFICATE_MANAGEMENT entity assigned, the specific ParticipantID associated with that entity, and the rights the user has for that entity (e.g. RUCD)"
+        },
+        {
+          "info": {
+            "name": "Reissue a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/orders/:order-id/reissue",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order-id",
+                "value": "",
+                "type": "path",
+                "description": "The specific order ID of a Certificate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reissue a certificate. A certificate reissue creates a new certificate with a new CSR. By providing a CSR, a reissued certificate uses the private key for that CSR.\n        \nTo reissue a certificate, you must provide a `csr` and `certificateCommonName` in the request body, where the `certificateCommonName` is associated with the order-id in the request path.\n        \nThe reissued certificate is the primary certificate on the order (certificate renewals use the primary certificate for renewal). I"
+        },
+        {
+          "info": {
+            "name": "Renew a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/orders/:order-id/renewal",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order-id",
+                "value": "",
+                "type": "path",
+                "description": "The specific order ID of a Certificate"
+              }
+            ]
+          },
+          "docs": "Renew a certificate under an existing order. A renewed certificate will use the CSR for the newest (primary) certificate that was issued under that order. You can only renew a certificate within it's renewal period, which is within 90-days of the certificate expiry.\n        \nIf you need to renew a certificate using a new CSR, make a `/renewal` API call first, then a `/reissue` API call with your new CSR."
+        },
+        {
+          "info": {
+            "name": "Revoke a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/v1/TlsCertificateMgmt/certificates/:certificate-id/revoke",
+            "headers": [
+              {
+                "name": "X-InitiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "certificate-id",
+                "value": "",
+                "type": "path",
+                "description": "The specific ID of a Certificate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke an existing TLS certificate if it�s no longer required or that the certificate�s private key has been compromised. Once revoked, it cannot be used to access AEMO systems.\n        \nTo revoke a certificate, you must provide an `orderId` and `certificateCommonName` in the request body that is associated with the certificate-id in the request path."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SelfForecast",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SelfForecast",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Dispatch Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/selfForecast/SubmitDispatchForecast",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use to submit a dispatch self-forecast. AEMO will use the latest of the highest priority number, unsuppressed submissions as an input to dispatch."
+        },
+        {
+          "info": {
+            "name": "Submit Pre-dispatch Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/selfForecast/Submit5minPDForecast",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Submit Pre-dispatch Forecast"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

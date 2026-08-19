@@ -1,0 +1,609 @@
+{
+  "item": [
+    {
+      "id": "0c18fce6-680b-4b20-b18d-af71e049953c",
+      "name": "WEMDE TradingDayReport",
+      "description": {
+        "content": "WEMDE TradingDayReport",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab4f493c-4380-4c0e-a01a-dbe30e9f5963",
+          "name": "Retrieves the Trading Day Report",
+          "request": {
+            "name": "Retrieves the Trading Day Report",
+            "description": {
+              "content": "Retrieves the Trading Day Report",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tradingDayReport"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tradingDay",
+                  "value": "<string>",
+                  "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb14470d-c61a-455d-a6a6-6a242b54c202",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"tradingDay\": \"string\",\n    \"dspReductionInstructions\": [\n      {\n        \"tradingInterval\": \"string\",\n        \"requestedReductions\": [\n          {\n            \"facilityCode\": \"string\",\n            \"requestedReductionValue\": 0\n          }\n        ]\n      }\n    ],\n    \"congestionRentalCalculations\": [\n      {\n        \"dispatchInterval\": \"string\",\n        \"congestionRentals\": [\n          {\n            \"facilityCode\": \"string\",\n            \"congestionRentalValue\": 0\n          }\n        ]\n      }\n    ],\n    \"facilityRiskCalculations\": [\n      {\n        \"dispatchInterval\": \"string\",\n        \"facilityRisks\": [\n          {\n            \"facilityCode\": \"string\",\n            \"facilityRiskValue\": 0\n          }\n        ]\n      }\n    ],\n    \"facilityLowerRiskCalculations\": [\n      {\n        \"dispatchInterval\": \"string\",\n        \"facilityLowerRisks\": [\n          {\n            \"facilityCode\": \"string\",\n            \"facilityLowerRiskValue\": 0\n          }\n        ]\n      }\n    ],\n    \"networkRiskCalculations\": [\n      {\n        \"dispatchInterval\": \"string\",\n        \"networkRisks\": [\n          {\n            \"networkContingency\": \"string\",\n            \"networkRiskValue\": 0,\n            \"associatedFacilityCodes\": [\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ],\n    \"networkLowerRiskCalculations\": [\n      {\n        \"dispatchInterval\": \"string\",\n        \"networkLowerRisks\": [\n          {\n            \"networkLowerContingency\": \"string\",\n            \"networkLowerRiskValue\": 0,\n            \"associatedFacilityCodes\": [\n              \"string\"\n            ]\n          }\n        ]\n      }\n    ],\n    \"energyUpliftPricesAndUpliftPaymentMispricingTriggers\": [\n      {\n        \"dispatchInterval\": \"string\",\n        \"facilities\": [\n          {\n            \"facilityCode\": \"string\",\n            \"energyUpliftPrice\": 0,\n            \"upliftMispricingTrigger\": 0\n          }\n        ]\n      }\n    ]\n  },\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26ea2457-97c9-4423-b399-983a82687e23",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dd51d32-a55a-4e9f-a4e8-d84d04559f63",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ffa6117-d672-47d5-ba2f-64078fd092b5",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "241f9528-52e5-4980-876a-f3f5b2d00a49",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not found\",\n      \"detail\": \"Resource not found for endpoint URI: <URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15b897b6-da01-40be-af7a-fe735951de01",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method not allowed\",\n      \"detail\": \"Input HTTP method is <invokedMethod>. Operation <operationURI> accepts only: [<operationMethod>].\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eee9faa5-d692-47cd-86db-a2fd224a50fd",
+              "name": "Payload too large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload too large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> size is <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5d228cd-fabc-4f02-98b9-ccd166f684b0",
+              "name": "Client error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2217a28-8736-4822-9ed4-0a03bac28d50",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too many requests\",\n      \"detail\": \"The number of inbound requests has exceeded throttling limits. Try again later.\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a779357c-18f3-44da-a982-44d0eff39b58",
+              "name": "Application unavailable or server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-gwy-prd.aemo.local/WEM/v1/tradingDayReport",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "338b8c78-8a12-4c95-b4bb-2fecf3982eab",
+    "name": "WEMDE TradingDayReport",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

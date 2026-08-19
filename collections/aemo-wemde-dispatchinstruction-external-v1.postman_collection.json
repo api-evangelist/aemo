@@ -1,0 +1,653 @@
+{
+  "item": [
+    {
+      "id": "7f451e21-2db5-4371-966e-ef599ee066c7",
+      "name": "WEMDE DispatchInstruction",
+      "description": {
+        "content": "WEMDE DispatchInstruction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "850a0d31-a65a-4bd6-8912-76833c624259",
+          "name": "Retrieves the recent dispatch instruction for each participant",
+          "request": {
+            "name": "Retrieves the recent dispatch instruction for each participant",
+            "description": {
+              "content": "Retrieves the recent dispatch instruction for each participant",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dispatchInstruction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "facilityCode",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "updatedRecordsOnly",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0925f32e-9a31-4c62-b633-24ccc4cd01a3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"dispatchInstructionId\": \"string\",\n    \"dispatchInterval\": \"string\",\n    \"issuedTime\": \"string\",\n    \"data\": [\n      {\n        \"facilityCode\": \"string\",\n        \"sentOut\": {\n          \"dispatchTarget\": 0,\n          \"dispatchCap\": 0\n        },\n        \"asGenerated\": {\n          \"dispatchTarget\": 0,\n          \"dispatchCap\": 0\n        },\n        \"rampRate\": 0,\n        \"regulationRaiseEnablementQuantity\": 0,\n        \"regulationLowerEnablementQuantity\": 0,\n        \"contingencyRaiseEnablementQuantity\": 0,\n        \"contingencyLowerEnablementQuantity\": 0,\n        \"rocofEnablementQuantity\": 0\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8a9bd38-e9bf-41d2-9d40-35f259ce83ad",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5dec9206-4fab-4928-95f8-36a5a5b5da41",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2727bef-6bf5-4db5-8610-fcccc1a7f8fa",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "541d78e5-a186-480a-9420-f8eb0c167f22",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef52db01-fa8b-4e4f-8f56-2c082e1a6a7a",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b83bc4d5-f040-466d-8c89-d0a67c48f345",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e09d21f9-09a5-4c13-8aca-101b8f8982ea",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0bcf347-4262-4d45-b68a-2e605d04cc72",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a24a993-f164-40af-8702-1d49c9bcb0a0",
+              "name": "Application Unavailable or Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchInstruction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "updatedRecordsOnly",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchInstruction",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "f1204817-5004-4e5f-828d-08c7856ee252",
+    "name": "WEMDE DispatchInstruction",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

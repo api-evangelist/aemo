@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "f4979830-58e0-41e2-aa77-796f8882d8ee",
+      "name": "B2BMessagingSync",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "35953c90-0b5b-436d-942e-fcd8c87940b4",
+          "name": "Submit a B2B message",
+          "request": {
+            "name": "Submit a B2B message",
+            "description": {
+              "content": "Submit a B2B message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                "key": "messageContextID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d6ae19a-00e0-4669-9eab-155891ba3b29",
+              "name": "aseXML hub Acknowledgement (status = ‘Accept’) will be sent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "330019d3-21c3-4f0e-9197-f66c8eb45d8f",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c4d58b9b-5977-4be0-8a07-366122322a84",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "366a9b02-3e72-4f98-a829-45f0818e0167",
+              "name": "This response is provided when the method is not POST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8830d0f0-812f-4fcf-9d26-afc46bae2213",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7df68992-331e-47ee-99b8-aeff192d4090",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/ws/B2BMessagingSync",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "215a98b0-bf31-4215-827a-9dcaca3cc9ed",
+    "name": "B2BMessagingSync",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nThe B2BMessagingSync API is a B2B SMP APIs used to send and receive B2B messages between the participants in a synchronous fashion. \n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>",
+      "type": "text/plain"
+    }
+  }
+}

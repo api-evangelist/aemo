@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HubMessageManagementV2",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HubMessageManagementV2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/HubMessageManagement/getAlerts",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-transactionID",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "alertType",
+                "value": "",
+                "type": "query",
+                "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'"
+              },
+              {
+                "name": "queryParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts."
+              }
+            ]
+          },
+          "docs": "Receive B2B and B2M stop file alerts"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

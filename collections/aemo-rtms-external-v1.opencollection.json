@@ -1,0 +1,530 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "RTMS",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RTMS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "API endpoint that handles retrieving batched consolidated dispatch intervals for multiple facilities, markets and Trading Days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/consolidated",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "TradingDayFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339). From Trading Day (YYYY-MM-DD) inclusive"
+              },
+              {
+                "name": "TradingDayTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339). To Trading Day (YYYY-MM-DD) inclusive"
+              },
+              {
+                "name": "Facilities",
+                "value": "",
+                "type": "query",
+                "description": "Comma Separated Values (CSV) list of facilitie(s)"
+              }
+            ]
+          },
+          "docs": "Retrieves the consolidated view of submissions for all or specific facilities within a date range (not greater than 10 days)."
+        },
+        {
+          "info": {
+            "name": "API endpoint that handles searching the DSP consolidated dispatch intervals using the provided search criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/consolidated/dsp",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "TradingDay",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339). Returns the consolidated view of submissions made for the specified Trading Day (YYYY-MM-DD). The Trading Day can be in the past or in the future. Future dates are limited to the Acceptance Horizon window."
+              },
+              {
+                "name": "Facility",
+                "value": "",
+                "type": "query",
+                "description": "Returns the consolidated view of submissions made for the specified Facility. Facility must be a DSP Facility"
+              },
+              {
+                "name": "MarketService",
+                "value": "",
+                "type": "query",
+                "description": "This parameter must be set to 'Energy'. Returns the consolidated view of submissions made for the Energy Market Service."
+              }
+            ]
+          },
+          "docs": "Retrieves the consolidated view of submissions for a specific Trading Day, Market Service and Facility. This endpoint is limited to the Energy Market Service and DSP Facilities."
+        },
+        {
+          "info": {
+            "name": "API endpoint that handles searching the Energy consolidated dispatch intervals using the provided search criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/consolidated/energy",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "TradingDay",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339). Returns the consolidated view of submissions made for the specified Trading Day (YYYY-MM-DD). The Trading Day can be in the past or in the future. Future dates are limited to the Acceptance Horizon window."
+              },
+              {
+                "name": "Facility",
+                "value": "",
+                "type": "query",
+                "description": "Returns the consolidated view of submissions made for the specified Facility. Facility must be a non-DSP Facility"
+              },
+              {
+                "name": "MarketService",
+                "value": "",
+                "type": "query",
+                "description": "This parameter must be set to 'Energy'. Returns the consolidated view of submissions made for the Energy Market Service."
+              }
+            ]
+          },
+          "docs": "Retrieves the consolidated view of submissions for a specific Trading Day, Market Service and Facility. This endpoint is limited to the Energy Market Service and non-DSP Facilities."
+        },
+        {
+          "info": {
+            "name": "API endpoint that handles searching the ESS consolidated dispatch intervals using the provided search criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/consolidated/ess",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "TradingDay",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339). Returns the consolidated view of submissions made for the specified Trading Day (YYYY-MM-DD). The Trading Day can be in the past or in the future. Future dates are limited to the Acceptance Horizon window."
+              },
+              {
+                "name": "Facility",
+                "value": "",
+                "type": "query",
+                "description": "Returns the consolidated view of submissions made for the specified Facility. Facility must be a non-DSP Facility"
+              },
+              {
+                "name": "MarketService",
+                "value": "",
+                "type": "query",
+                "description": "Returns the consolidated view of submissions made for the specified Market Service. Only ESS Market Services are accepted: 'regulationRaise', or 'regulationLower', or  'contingencyRaise', or 'contingencyLower', or 'rocof'"
+              }
+            ]
+          },
+          "docs": "Retrieves the consolidated view of submissions for a specific Trading Day, Market Service and Facility. This endpoint is limited to the ESS Market Services (Regulation Raise/Lower, Contingency Raise/Lower, RoCoF) and non-DSP Facilities."
+        },
+        {
+          "info": {
+            "name": "Create a new DSP submission by embedded the DSP submission JSON in the request and wait for the\r\nvalidation to complete (blocking call).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions/dsp/waitForResult",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits one RTM Submission for DSP facilities and wait for the validation response. \nThere is a timeout of 30 seconds applied to this endpoint. If the call times out before validation process is complete, a submission status of SUBMITTED is returned"
+        },
+        {
+          "info": {
+            "name": "Create a new submission by embedded the submission JSON in the request and wait for the\r\nvalidation to complete (blocking call).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions/waitForResult",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits one RTM Submission and wait for the validation response. \nThere is a timeout of 30 seconds applied to this endpoint. If the call times out before validation process is complete, a submission status of SUBMITTED is returned"
+        },
+        {
+          "info": {
+            "name": "Get a list of submissions (paged). Use the query parameters to refine and apply a search criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "submittedFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339)."
+              },
+              {
+                "name": "submittedTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339)."
+              },
+              {
+                "name": "submissionType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statusUpdatedSince",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339)."
+              },
+              {
+                "name": "facility",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "marketService",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tradingDay",
+                "value": "",
+                "type": "query",
+                "description": "Format - date (as full-date in RFC3339)."
+              },
+              {
+                "name": "hasGateClosureViolation",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "referenceId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "uploadedBy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves historical submissions based on various parameters. Results are paged with default page size of 500 unless specified otherwise. For data older than 35 days of the query date the following filters will not be available: GateClosureViolation, Facility, MarketService, TradingDay."
+        },
+        {
+          "info": {
+            "name": "Create a new submission by providing the submission data as a json embedded in the request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits one RTM Submission asynchronously."
+        },
+        {
+          "info": {
+            "name": "Create a new submission by providing the submission data as a json embedded in the request.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions/dsp",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits one RTM DSP Submission asynchronously."
+        },
+        {
+          "info": {
+            "name": "Get the basic health status of the API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/health/basic"
+          },
+          "docs": "Get the basic health status of the API"
+        },
+        {
+          "info": {
+            "name": "Get the data for a submission as received from the participant.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions/:submissionId/raw",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Format - uuid."
+              }
+            ]
+          },
+          "docs": "Retrieves the original submission sent by the Market Participant."
+        },
+        {
+          "info": {
+            "name": "Get the details for a given submission.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions/:submissionId",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Format - uuid."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific submission based on submissionId. Details of the requested submission are included in the response."
+        },
+        {
+          "info": {
+            "name": "Get the health status of the API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/health"
+          },
+          "docs": "Get the health status of the API"
+        },
+        {
+          "info": {
+            "name": "Get the status for a given submission.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/submissions/:submissionId/status",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "submissionId",
+                "value": "",
+                "type": "path",
+                "description": "Format - uuid."
+              }
+            ]
+          },
+          "docs": "Retrieves the submission status for a given submission. If the status is REJECTED or FAILED, a list of error messages and warnings is included in the response. Warnings, if any, are also included in the response when the submission status is VALID"
+        },
+        {
+          "info": {
+            "name": "This resource lists all the Dispatch Intervals submitted within Gate Closure. The data returned can be\r\nqueried based on criteria specified by one or more query parameters.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/realTimeMarketSubmission/gateClosureViolation",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "DateTimeFrom",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). Filter the Dispatch Intervals after the datetimeoffset (YYYY-MM-DDTHH:mm:ss+08:00) selected submitted within Gate Closure. Defaults to 24 hours in the past. Note that when offset is specified, the plus sign '+' must be URL encoded to '%2B'. If offset is not specified, it will be treated as +8."
+              },
+              {
+                "name": "DateTimeTo",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). Filter the Dispatch Intervals up until the datetimeoffset (YYYY-MM-DDTHH:mm:ss+08:00) selected submitted within Gate Closure. Defaults to now.\nIf specified, dateTimeTo must be greater than dateTimeFrom (date component limited to 30 days from dateTimeFrom). Note that when offset is specified, the plus sign '+' must be URL encoded to '%2B'. If offset is not specified, it will be treated as +8."
+              },
+              {
+                "name": "Facility",
+                "value": "",
+                "type": "query",
+                "description": "Filters Gate Closure Violations for the specified Registered Facility."
+              },
+              {
+                "name": "MarketService",
+                "value": "",
+                "type": "query",
+                "description": "Filters Gate Closure Violations for the specified Market Service: 'energy', 'regulationRaise', 'regulationLower', 'contingencyRaise', 'contingencyLower', or 'rocof'"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Dispatch Intervals submitted within Gate Closure."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

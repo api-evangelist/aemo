@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "B2BMessagingAsync",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "B2BMessagingAsync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Determine what messages are in the e-Hub queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingAsync/queues",
+            "params": [
+              {
+                "name": "initiatingParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "ParticipantID of the Participant invoking the API"
+              }
+            ]
+          },
+          "docs": "Returns meta-data of messages in e-Hub queue for the participant initiating the API request."
+        },
+        {
+          "info": {
+            "name": "Submit a B2B message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingAsync/messages",
+            "headers": [
+              {
+                "name": "messageContextID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Submit a B2B message."
+        },
+        {
+          "info": {
+            "name": "Submit Message Acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/B2BMessagingAsync/messageAcknowledgements",
+            "headers": [
+              {
+                "name": "messageContextID",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Purpose - Acknowledge a received message. Detail - For every message, a message acknowledgment is generated (with the exception of messages containing message acknowledgements). A BusinessReceipt has two possible implementations -\n\n  • MessageAcknowledgement.\n  \n  • Event, errors are reported via Event elements.\n  \n  \nIf a message is rejected, no receipt identifier is required with the acknowledgement.\n\nThis resource will be used when Participants are required to send Message Acknowledgement in "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

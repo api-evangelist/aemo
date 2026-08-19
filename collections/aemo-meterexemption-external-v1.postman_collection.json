@@ -1,0 +1,1876 @@
+{
+  "item": [
+    {
+      "id": "2c6cf51a-fd6f-40ba-b9aa-084d2ec0c035",
+      "name": "MeterExemption",
+      "description": {
+        "content": "The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage metering exemptions within MSATS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a20831d9-fea3-4c2b-ae56-58483dcac4ca",
+          "name": "Exemption Details",
+          "request": {
+            "name": "Exemption Details",
+            "description": {
+              "content": "Get meter exemption details for a specified meter exemption, including:<br>\n- Participant contact details \n- Meter exemption details \n- Meter exemption history \n- Meter exemption NMI list. \n If the NMI is not specified:\n    - In the csv file, it returns the whole NMI list.\n    - In json format, it returns up to 1000 NMIs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exemptionDetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "meterExemptionId",
+                  "value": "<string>",
+                  "description": "(Required) The meter exemption ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "NMI",
+                  "value": "<string>",
+                  "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the market. Set to NEM",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Unique identifier for each request",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e9c2102-4478-429f-b5c1-84f830aee27e",
+              "name": "Request processed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"12345-abcd-27\",\n  \"data\": {\n    \"participantContact\": {\n      \"contactName\": \"John Smith\",\n      \"phoneNumber\": 123456789,\n      \"email\": \"john.smith@company.com\"\n    },\n    \"meterExemption\": {\n      \"meterExemptionId\": \"123456789012345\",\n      \"participantId\": \"NEMMCO\",\n      \"startDate\": \"2023-07-25\",\n      \"endDate\": \"2024-02-29\",\n      \"status\": \"REVIEW\",\n      \"statusDate\": \"2023-07-25\",\n      \"exemptionDate\": \"2023-07-01\",\n      \"exemptionCategory\": \"MALFUNCTION\",\n      \"exemptionType\": \"DEFECTIVE\",\n      \"exemptionNature\": \"ACCESS\",\n      \"actionTaken\": \"Actions that were taken..\",\n      \"actionReason\": \"Reason for raising exemption and other relevant information....\",\n      \"docProvided\": \"Y\",\n      \"extendCount\": \"0\"\n    },\n    \"meterExemptionHistory\": [\n      {\n        \"status\": \"REVIEW\",\n        \"statusDate\": \"2023-07-25\"\n      }\n    ],\n    \"meterExemptionNMIs\": [\n      {\n        \"NMI\": \"1234567890\",\n        \"status\": \"NEW\",\n        \"planDate\": \"2023-12-22\",\n        \"substitutionReq\": \"Y\",\n        \"substitutionMethod\": 45\n      },\n      {\n        \"NMI\": \"1234567891\",\n        \"status\": \"NEW\",\n        \"planDate\": \"2023-12-22\",\n        \"substitutionReq\": \"Y\",\n        \"substitutionMethod\": 45\n      },\n      {\n        \"NMI\": \"1234567892\",\n        \"status\": \"NEW\",\n        \"planDate\": \"2023-12-22\",\n        \"substitutionReq\": \"Y\",\n        \"substitutionMethod\": 45\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53e79559-bb8e-4997-b08e-615759b1e40a",
+              "name": "Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfd8dd4f-8b07-4fa7-9e20-788d8f95e20c",
+              "name": "Unauthorized. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd04b3ca-3c6d-468a-a887-8aa13a4f68c8",
+              "name": "Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "828b076a-a1d2-46cd-9f57-8d64ce49aaa0",
+              "name": "Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48c503af-c7c6-4b87-8005-211a3734cc49",
+              "name": "Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99224edc-f9ae-44c7-ae20-043c12487843",
+              "name": "Internal Server Error. Exception from backend system. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d1ea321-2281-474a-adbe-a0681732fbc1",
+          "name": "Exemption List",
+          "request": {
+            "name": "Exemption List",
+            "description": {
+              "content": "Returns a list of meter exemptions based on the query parameters.The response format is defined in the Accept header.<br> When the content type is:<br> - application/json, up to 1000 meter exemptions records are returned <br>- text/csv, up to 75,000 meter exemption records are returned",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "exemptionList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW"
+                },
+                {
+                  "disabled": false,
+                  "key": "meterExemptionId",
+                  "value": "<string>",
+                  "description": "The meter exemption for the given ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "meterExemptionFromDate",
+                  "value": "<string>",
+                  "description": "The meter exemptions list from a given date. Format YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "meterExemptionToDate",
+                  "value": "<string>",
+                  "description": "The meter exemptions list to a given date. Format YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "NMI",
+                  "value": "<string>",
+                  "description": "Returns meter exemptions for the given NMI"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the market. Set to NEM",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Unique identifier for each request",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a83c69e7-2db8-4a4d-a48b-13d1e0ebf740",
+              "name": "Request processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"adb4g8ed0-bdf5-5574-ad41-a20d8f1b2503\",\n  \"data\": {\n    \"meterExemptions\": [\n      {\n        \"meterExemptionId\": \"123456789012345\",\n        \"exemptionDate\": \"2023-09-04\",\n        \"createDate\": \"2023-10-16\",\n        \"age\": \"0\",\n        \"endDate\": \"2026-08-11\",\n        \"status\": \"REJECTED\",\n        \"nmiQuantity\": \"3\",\n        \"participantId\": \"MYMC\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b881edf8-60ef-419f-9223-03164e832c05",
+              "name": "Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45663818-9caf-42f6-91ad-7cef58eaeb10",
+              "name": "Unauthorized. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26e7a2b8-b658-4f4f-bdb4-803d4d7ff140",
+              "name": "Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69358026-807e-47cc-a055-da82b489f45a",
+              "name": "Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fbb868f-d3a2-4a92-b5b8-650738617ca4",
+              "name": "Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d29b711-71b9-4257-b5f6-4a34e75b3545",
+              "name": "Internal Server Error. Exception from backend system. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Identifies content types accepted by the client. application/json (default) or text/csv",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65b7064c-0b4b-4a10-80fd-b5d191cb82bb",
+          "name": "submitExemption",
+          "request": {
+            "name": "submitExemption",
+            "description": {
+              "content": "Submits or updates a meter exemption. <br> A submission consists of two parts: <br> 1. Meter exemption details - JSON payload. <br> 2. NMI list – csv or JSON payload.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submitExemption"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE"
+                },
+                {
+                  "disabled": false,
+                  "key": "meterExemptionId",
+                  "value": "<string>",
+                  "description": "The meter exemption ID to update"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Identifies the market. Set to NEM",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Unique identifier for each request",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            }
+          },
+          "response": [
+            {
+              "id": "4317a9a4-99af-4566-8cb8-e5f94d3f993d",
+              "name": "Request processed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"meterExemptionId\": \"123456789012345\",\n    \"meterExemptionStatus\": \"REVIEW\",\n    \"payloadResponseStatus\": \"Accept\",\n    \"payloadResponseMessage\": \"NMIs submitted: 3 Total NMIs in the exemption: 3 Live NMIs in the exemption: 0\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb2191a5-96ee-405e-a96c-945b38043f2c",
+              "name": "Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b4a1e2b-10ed-462f-8fcc-88bc8ea9193f",
+              "name": "Unauthorized. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49cd96b1-2d99-4e1d-9f3d-55149e11a06a",
+              "name": "Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efad8974-3803-4f80-9d98-0cde128e43d8",
+              "name": "Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cc1252a-a30e-4800-810a-bdc33c775600",
+              "name": "Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97e7f57b-e4e2-4f73-bca6-627dc013051c",
+              "name": "Internal Server Error. Exception from backend system. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded Participant User username and password",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/NEMRetail/v1/meterExemption",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "390667aa-152c-4270-b09c-bbde50d33b15",
+    "name": "MeterExemption",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage metering exemptions within MSATS.",
+      "type": "text/plain"
+    }
+  }
+}

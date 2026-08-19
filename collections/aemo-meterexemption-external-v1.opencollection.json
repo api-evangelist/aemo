@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MeterExemption",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MeterExemption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Exemption Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/v1/meterExemption/exemptionDetails",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-transactionID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "meterExemptionId",
+                "value": "",
+                "type": "query",
+                "description": "The meter exemption ID"
+              },
+              {
+                "name": "NMI",
+                "value": "",
+                "type": "query",
+                "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption"
+              }
+            ]
+          },
+          "docs": "Get meter exemption details for a specified meter exemption, including:<br>\n- Participant contact details \n- Meter exemption details \n- Meter exemption history \n- Meter exemption NMI list. \n If the NMI is not specified:\n    - In the csv file, it returns the whole NMI list.\n    - In json format, it returns up to 1000 NMIs."
+        },
+        {
+          "info": {
+            "name": "Exemption List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/v1/meterExemption/exemptionList",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-transactionID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW"
+              },
+              {
+                "name": "meterExemptionId",
+                "value": "",
+                "type": "query",
+                "description": "The meter exemption for the given ID"
+              },
+              {
+                "name": "meterExemptionFromDate",
+                "value": "",
+                "type": "query",
+                "description": "The meter exemptions list from a given date. Format YYYY-MM-DD"
+              },
+              {
+                "name": "meterExemptionToDate",
+                "value": "",
+                "type": "query",
+                "description": "The meter exemptions list to a given date. Format YYYY-MM-DD"
+              },
+              {
+                "name": "NMI",
+                "value": "",
+                "type": "query",
+                "description": "Returns meter exemptions for the given NMI"
+              }
+            ]
+          },
+          "docs": "Returns a list of meter exemptions based on the query parameters.The response format is defined in the Accept header.<br> When the content type is:<br> - application/json, up to 1000 meter exemptions records are returned <br>- text/csv, up to 75,000 meter exemption records are returned"
+        },
+        {
+          "info": {
+            "name": "submitExemption",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMRetail/v1/meterExemption/submitExemption",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-transactionID",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE"
+              },
+              {
+                "name": "meterExemptionId",
+                "value": "",
+                "type": "query",
+                "description": "The meter exemption ID to update"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Submits or updates a meter exemption. <br> A submission consists of two parts: <br> 1. Meter exemption details - JSON payload. <br> 2. NMI list – csv or JSON payload."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

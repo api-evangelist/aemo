@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WEM Attributes Report",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WEM Attributes Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of attributes by date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/attributes/:tradingDate",
+            "params": [
+              {
+                "name": "tradingDate",
+                "value": "",
+                "type": "path",
+                "description": "Format - date-time (as date-time in RFC3339)."
+              }
+            ]
+          },
+          "docs": "Get a list of attributes by date"
+        },
+        {
+          "info": {
+            "name": "Get a list of attributes for today",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/attributes/current"
+          },
+          "docs": "Get a list of attributes for today"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

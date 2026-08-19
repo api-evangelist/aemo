@@ -1,0 +1,960 @@
+{
+  "item": [
+    {
+      "id": "bdd29775-7924-43d1-80f6-97731bb0c715",
+      "name": "SelfForecast",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6140fb01-c5af-41bc-ae78-64d374702bdb",
+          "name": "Submit Dispatch Forecast",
+          "request": {
+            "name": "Submit Dispatch Forecast",
+            "description": {
+              "content": "Use to submit a dispatch self-forecast. AEMO will use the latest of the highest priority number, unsuppressed submissions as an input to dispatch.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "SubmitDispatchForecast"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e88a1fc-9ffd-4277-ab75-e073ad43c745",
+              "name": "This response is provided when the submitted forecasts are validated and saved in the AEMO's systems.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"0283d8d0-32a6-45d8-949b-3aa7173ef1d7\",\n  \"data\": {\n    \"ResponseTimeStamp\": \"2018-07-09T00:23:42Z\",\n    \"ResponseText\": \"Forecasts saved successfully\"\n  },\n  \"errors\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72b3543f-0f1c-4fe7-beb4-144ac53a3841",
+              "name": "This response is provided when the submitted payload cannot be parsed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc743326-40e1-44b0-9c29-53c01cf21fa9",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect OR user account is locked out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e71a0f4-6756-4bdc-8361-e1350aaf40d7",
+              "name": "This response is provided when there is an invalid Role i.e. user does not have permission to submit this request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fe8f1a6-1e70-4cbf-8c3f-ad965967081f",
+              "name": "This response is provided when the resource \"SubmitDispatchForecast\" missing from URL or incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29f5a907-bf0b-418d-9052-a2eb60ca3491",
+              "name": "This response is provided when the method is not POST.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86219512-b533-4b63-9ba8-a840eb266a98",
+              "name": "This response is provided when \"Content-Length\" is missing from the Header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Length Required",
+              "code": 411,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b295ed1-e489-4278-a1bf-c8e74267b4f5",
+              "name": "This response is provided when any of the submitted forecasts fail business validation (for example submitting a forecast with the same DUID and forecast priority in the same second). If any forecast submitted fails validation, then entire submission is rejected.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"77b45bac-299f-41ac-a937-6797b17ebbbc\",\n  \"data\": {\n    \"ResponseTimeStamp\": \"2017-12-02T06:17:24Z\",\n    \"ResponseText\": \"Submitted request contained validation errors, please see details in the errors object\"\n  },\n  \"errors\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32c65b07-5d4d-440b-81d9-d300de57160d",
+              "name": "This response is provided when the throttling limits are reached (40 requests per minute per ParticipantID).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"b85a35f8-f741-40ac-a701-a8cfebb25669\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after some time\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f4457d7-7411-4f10-bc54-6a002477affc",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "SubmitDispatchForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"RunDateTime\": \"2017-12-01T12:05:00Z\",\n    \"AuthorisedBy\": \"Someone\",\n    \"Comments\": \"This is additional information for a dispatch forecast\",\n    \"Forecasts\": [\n      {\n        \"Duid\": \"DUID\",\n        \"ForecastPriority\": 324,\n        \"Model\": \"Model ABC\",\n        \"Suppressed\": false,\n        \"ParticipantTimeStamp\": \"2017-12-01T11:58:01Z\",\n        \"IntervalForecast\": [\n          {\n            \"IntervalDateTime\": \"2017-12-01T12:05:00Z\",\n            \"ForecastPoe50\": 3.349\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5ace7e3-66aa-4574-822d-eb53ab14a8b7",
+          "name": "Submit Pre-dispatch Forecast",
+          "request": {
+            "name": "Submit Pre-dispatch Forecast",
+            "description": {
+              "content": "Submit Pre-dispatch Forecast",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Submit5minPDForecast"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe919b83-800e-4d88-a674-ce3ea349e66d",
+              "name": "null",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Submit5minPDForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d5f46f6c-fb4c-4b86-892f-45d522d5a8e3",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect OR user account is locked out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Submit5minPDForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3139984-0952-40a4-aa9b-3825441de950",
+              "name": "This response is provided when the resource \"Submit5minPDForecast\" missing from URL or incorrect.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Submit5minPDForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df5454cb-83ac-4378-b487-d5c4519b137c",
+              "name": "This response is provided when the method is not POST.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Submit5minPDForecast"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/ws/NEMWholesale/selfForecast",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "48ac2b5d-83e4-4c91-9f72-ba93884eb8af",
+    "name": "SelfForecast",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nThe Self forecasting API is used by participants who wish to submit their Solar or Wind Forecasts for a DUID to AEMO.\n\nFor details on how to get access and business rules for this API:\n\n<a href=\"/api-docs\"><img src=\"./files/ViewAPIDocsButton.png\" alt=\"View API Docs\" /></a>",
+      "type": "text/plain"
+    }
+  }
+}

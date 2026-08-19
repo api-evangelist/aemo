@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "VariableParameter",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VariableParameter",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "View Asset Availability Search Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEM/v1/ISF-External/variableParameter/contractUnitAvailability",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "duid",
+                "value": "",
+                "type": "query",
+                "description": "Dispatchable unit ID"
+              },
+              {
+                "name": "contractId",
+                "value": "",
+                "type": "query",
+                "description": "Unique contract identifier"
+              },
+              {
+                "name": "availableFromDate",
+                "value": "",
+                "type": "query",
+                "description": "Effective start date of the contract"
+              },
+              {
+                "name": "availableToDate",
+                "value": "",
+                "type": "query",
+                "description": "Effective end date of the contract"
+              }
+            ]
+          },
+          "docs": "Fetches records from Contract_unit_availibility table based on search criteria."
+        },
+        {
+          "info": {
+            "name": "Edit Asset Availability and Operational Parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEM/v1/ISF-External/variableParameter/contractUnitAvailability",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates records in Contract_unit_availibility table based on input from the screen."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

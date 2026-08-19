@@ -1,0 +1,514 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "B2MMessagingSync",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "B2MMessagingSync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "generateC1Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/generateC1Report",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id"
+              },
+              {
+                "name": "tableName",
+                "value": "",
+                "type": "query",
+                "description": "Table Name"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - yyyy-MM-dd'T'hh-mm-ss+10:00. \nFrom Date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - yyyy-MM-dd'T'hh-mm-ss+10:00. \nTo Date"
+              },
+              {
+                "name": "lastSequenceNumber",
+                "value": "",
+                "type": "query",
+                "description": "Last Sequence Number"
+              },
+              {
+                "name": "maximumRows",
+                "value": "",
+                "type": "query",
+                "description": "Maximum Rows"
+              }
+            ]
+          },
+          "docs": "This resource provide C1 report for the requested table name"
+        },
+        {
+          "info": {
+            "name": "generateC4Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/generateC4Report",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id"
+              },
+              {
+                "name": "NMI",
+                "value": "",
+                "type": "query",
+                "description": "nmi number"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - YYYY-MM-DD. \nFrom Date"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - YYYY-MM-DD. \nTo Date"
+              },
+              {
+                "name": "asatDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - YYYY-MM-DD. \nAsat Date"
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "query",
+                "description": "Role Id"
+              },
+              {
+                "name": "inittransid",
+                "value": "",
+                "type": "query",
+                "description": "Init Trans id"
+              }
+            ]
+          },
+          "docs": "This resource provide Single NMI Master (C4) report"
+        },
+        {
+          "info": {
+            "name": "getMeterRead",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/getMeterRead",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "NMI",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - YYYY-MM-DD. Start Date of the meter data request period (inclusive)."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - YYYY-MM-DD. End Date of the meter data request period (inclusive)."
+              },
+              {
+                "name": "meterType",
+                "value": "",
+                "type": "query",
+                "description": "Allowed values are\t'I' - Interval , 'C' - Consumption (Basic)"
+              },
+              {
+                "name": "meterData",
+                "value": "",
+                "type": "query",
+                "description": "Allowed values are\t'AO' - Current readings, 'AH' - Current and historical readings"
+              },
+              {
+                "name": "asAtDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - YYYY-MM-DD hh:mi:ss:000. Provides the ability for the consumer to request metering data 'as at' a point in time."
+              },
+              {
+                "name": "intervalLength",
+                "value": "",
+                "type": "query",
+                "description": "Relevant only for interval data. Defines the resolution that the meter reads should be returned in. Possible values are '30' or 'SD'."
+              },
+              {
+                "name": "activeEnergy",
+                "value": "",
+                "type": "query",
+                "description": "Applicable to interval data only. Possible values are 'N' or 'Y'."
+              },
+              {
+                "name": "AEMOSubs",
+                "value": "",
+                "type": "query",
+                "description": "Applicable to interval data only. Possible values are 'N' or 'Y'."
+              }
+            ]
+          },
+          "docs": "This resource allow to search for and retrieve metering data loaded into the Enterprise MDM"
+        },
+        {
+          "info": {
+            "name": "getMSATSLimits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/getMSATSLimits",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id"
+              }
+            ]
+          },
+          "docs": "This resource provide the current status of MSATS Limits.If the participant is a member of a group then the limits are the group limits, otherwise they are the participant limits"
+        },
+        {
+          "info": {
+            "name": "getNMIDetail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/getNMIDetail",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "checksum",
+                "value": "",
+                "type": "query",
+                "description": "checksum"
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id"
+              },
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "query",
+                "description": "nmi number"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "type"
+              },
+              {
+                "name": "reason",
+                "value": "",
+                "type": "query",
+                "description": "reason"
+              }
+            ]
+          },
+          "docs": "This resource provide details of a specified NMI. Based on input parameters returns NMI Detail or Role Data"
+        },
+        {
+          "info": {
+            "name": "getParticipantSystemStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/getParticipantSystemStatus",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id"
+              }
+            ]
+          },
+          "docs": "This resource provide the current participant system status"
+        },
+        {
+          "info": {
+            "name": "NMIDiscovery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/B2MMessagingSync/NMIDiscovery",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction Id"
+              },
+              {
+                "name": "jurisdictionCode",
+                "value": "",
+                "type": "query",
+                "description": "Jurisdiction Code"
+              },
+              {
+                "name": "deliveryPointIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "Required if searching by DPID"
+              },
+              {
+                "name": "meterSerialNumber",
+                "value": "",
+                "type": "query",
+                "description": "Required if searching by meter serial number"
+              },
+              {
+                "name": "buildingOrPropertyName",
+                "value": "",
+                "type": "query",
+                "description": "Building Or Property Name"
+              },
+              {
+                "name": "locationDescriptor",
+                "value": "",
+                "type": "query",
+                "description": "Location Descriptor"
+              },
+              {
+                "name": "lotNumber",
+                "value": "",
+                "type": "query",
+                "description": "Lot Number"
+              },
+              {
+                "name": "flatOrUnitType",
+                "value": "",
+                "type": "query",
+                "description": "Flat Or Unit Type"
+              },
+              {
+                "name": "flatOrUnitNumber",
+                "value": "",
+                "type": "query",
+                "description": "Flat Or Unit Number"
+              },
+              {
+                "name": "floorOrLevelType",
+                "value": "",
+                "type": "query",
+                "description": "Floor Or Level Type"
+              },
+              {
+                "name": "floorOrLevelNumber",
+                "value": "",
+                "type": "query",
+                "description": "Floor Or Level Number"
+              },
+              {
+                "name": "houseNumber",
+                "value": "",
+                "type": "query",
+                "description": "House Number"
+              },
+              {
+                "name": "houseNumberSuffix",
+                "value": "",
+                "type": "query",
+                "description": "House Number Suffix"
+              },
+              {
+                "name": "streetName",
+                "value": "",
+                "type": "query",
+                "description": "Street Name"
+              },
+              {
+                "name": "streetSuffix",
+                "value": "",
+                "type": "query",
+                "description": "Street Suffix"
+              },
+              {
+                "name": "streetType",
+                "value": "",
+                "type": "query",
+                "description": "Street Type"
+              },
+              {
+                "name": "postcode",
+                "value": "",
+                "type": "query",
+                "description": "postcode"
+              },
+              {
+                "name": "stateOrTerritory",
+                "value": "",
+                "type": "query",
+                "description": "Required if searching by address"
+              },
+              {
+                "name": "suburbOrPlaceOrLocality",
+                "value": "",
+                "type": "query",
+                "description": "Suburb Or Place Or Locality"
+              }
+            ]
+          },
+          "docs": "This resource provide a list of NMIs matching the search criteria"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

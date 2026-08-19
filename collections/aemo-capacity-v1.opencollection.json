@@ -1,0 +1,506 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Capacity",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Capacity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all the service points, zones and pipeline segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportTransportationServicePointRegister",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ComponentType",
+                "value": "",
+                "type": "query",
+                "description": "Type of component"
+              }
+            ]
+          },
+          "docs": "The report contains list of all the service points (receipt and delivery points), zones and pipeline segments currently registered under Part 24 of the Rules, for the capacity transfer and day ahead auction."
+        },
+        {
+          "info": {
+            "name": "Get all participants currently registered in the GSH, CTP and DAA markets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportRegisteredParticipants",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "Markets",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The report contains the registration details of all participants currently registered in the GSH, CTP and DAA markets."
+        },
+        {
+          "info": {
+            "name": "Provide a list of valid shipper contracts for a facility.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/contractDetails",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Each submission must contain the full set of shipper contracts that are valid beyond the submission date in accordance with the Procedures.\nOn submission of this data, the system replaces all contract details previously submitted by the facility operator with the contents of the new submission.\nThis information is used by shippers to select an appropriate contract for a capacity product prior to trading.\nSTTM contract references must be firm i.e. must be a Priority 1 registered facility service."
+        },
+        {
+          "info": {
+            "name": "Provide a status of capacity transfer for each capacity transfer notice.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/capacityTransferStatus",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provide a status of capacity transfer for each capacity transfer notice.\n\nPartial submissions are accepted. This allows facility operators to submit interim PENDING statuses for transfers that have failed.\n\nFacility operators are responsible for pro-rating capacity quantities where applicable i.e. if there is a shipper capacity shortfall.\n\nFacility operators may continue to submit this transaction beyond the cut-off time for the purposes of updating the invalid quantity and reason.\n\nChanges to d"
+        },
+        {
+          "info": {
+            "name": "Provide AEMO with notice of an auction service curtailment on an auction facility during a gas day.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/auctionServiceCurtailmentNotice",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provide AEMO with notice of an auction service curtailment on an auction facility during a gas day."
+        },
+        {
+          "info": {
+            "name": "Provide AEMO with notice of curtailed shipper nominations against secondary firm rights.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/zoneCurtailmentInformation",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provide AEMO with notice of curtailed shipper nominations against secondary firm rights."
+        },
+        {
+          "info": {
+            "name": "Provide confirmation to facility operator that shipper is notified of a capacity transfer outcome.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportShipperCapacityTransferNotification",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request date"
+              },
+              {
+                "name": "ChangedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Changed After Date"
+              }
+            ]
+          },
+          "docs": "Provide confirmation to facility operator that shipper is notified of a capacity transfer outcome.\nFailed capacity transfer can be due to-\n\n- Facility operator system failure preventing the capacity transfer in their system.\n\n- Facility operator system rejects the capacity transfer due to an issue with the contract specified.\n\n- AEMO system failure preventing the capacity transfer in the STTM or DWGM system.\n\n- AEMO STTM or DWGM system rejects the capacity transfer due to an issue with the STTM "
+        },
+        {
+          "info": {
+            "name": "Provide the actual auction quantities and final nominations after the end of each gas day.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/auctionSettlementQuantities",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provide the actual auction quantities and final nominations after the end of each gas day.\nThis information is required by AEMO for settlement purposes.\n\nIf multiple submissions are received by AEMO, the data received in the latest submission prior to the cut-off time is used for indicative or final settlements.\n\nAuction quantity is used for settlements if data is not received by the cut-off time"
+        },
+        {
+          "info": {
+            "name": "Provide the auction quantities available for the day ahead auction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/auctionQuantities",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Provide the auction quantities available for the day ahead auction. A submission may include one or more facilities. A full set of product components must be provided for each facility included in a submission. For example, if two facilities are included in one submission, one facility has a full set of limits specified and the other does not, the entire submission will be rejected. If multiple submissions are received by AEMO, the data received in the latest submission for each facility prior t"
+        },
+        {
+          "info": {
+            "name": "Provide the capacity quantity won by shippers at auction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportAuctionResults",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FacilityId",
+                "value": "",
+                "type": "query",
+                "description": "The unique AEMO defined Facility identifier."
+              },
+              {
+                "name": "FromAuctionDate",
+                "value": "",
+                "type": "query",
+                "description": "From Auction Date"
+              },
+              {
+                "name": "ToAuctionDate",
+                "value": "",
+                "type": "query",
+                "description": "To Auction Date"
+              },
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request date"
+              }
+            ]
+          },
+          "docs": "Provide the capacity quantity won by shippers at auction.\n\nFacility operators use this data to assign capacity of auction services to shippers.\n\nFacility operators that have an active facility in the auction will receive this report, regardless of whether there is any auction quantity won on their facility.\n\nAuction participants that have an active bid in the auction will receive this report, regardless of whether they win any capacity in the auction."
+        },
+        {
+          "info": {
+            "name": "Provides the capacity quantity adjustment required for a shipper contract.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportCapacityTransferNotice",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FacilityId",
+                "value": "",
+                "type": "query",
+                "description": "The unique AEMO defined Facility identifier."
+              },
+              {
+                "name": "ChangedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Changed After Date"
+              },
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request date"
+              }
+            ]
+          },
+          "docs": "Provide the capacity quantity adjustment required for a shipper contract.\n\nFacility operators use this data to update the capacity quantity on the relevant shipper contracts in their own systems.\n\nEach published version of the data contains both the incremental adjustment quantity and the cumulative/overall adjustment quantity that must be applied to a shipper’s contracted capacity quantity, on the same day that this report is published.\n\nPark product transfers are identified by empty zone detai"
+        },
+        {
+          "info": {
+            "name": "The report contains a list of all the facilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportTransportationFacilityRegister",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "OperatorIds",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the Facility Operator that operates the facility."
+              },
+              {
+                "name": "FacilityId",
+                "value": "",
+                "type": "query",
+                "description": "The unique AEMO defined Facility identifier."
+              }
+            ]
+          },
+          "docs": "The report contains a list of all the facilities currently registered under Part 24 of the Rules, for the capacity transfer and day ahead auction."
+        },
+        {
+          "info": {
+            "name": "The report notifies participants when the market delay or cancellation process is triggered.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/gsh/capacity/reportCapacityTransferAndAuctionNotice",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "FacilityId",
+                "value": "",
+                "type": "query",
+                "description": "The unique AEMO defined Facility identifier."
+              },
+              {
+                "name": "Markets",
+                "value": "",
+                "type": "query",
+                "description": "The market that has triggered the notice, for example CTP or DAA."
+              },
+              {
+                "name": "ChangedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Changed After Date"
+              },
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request date"
+              }
+            ]
+          },
+          "docs": "The report notifies participants when the market delay or cancellation process is triggered."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

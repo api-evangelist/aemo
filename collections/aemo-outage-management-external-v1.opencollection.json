@@ -1,0 +1,308 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Outage Management",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Outage Management",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new Generator Outage in Outage Management System",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/generatorOutages",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit one Generator Outage synchronously"
+        },
+        {
+          "info": {
+            "name": "Create a new Network Outage in Outage Management System",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/networkOutages",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit one Network Outage synchronously"
+        },
+        {
+          "info": {
+            "name": "Get particular Outage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/:outageNumber",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "outageNumber",
+                "value": "",
+                "type": "path",
+                "description": "Format - int64. Outage Number required to be retrieved"
+              }
+            ]
+          },
+          "docs": "Get particular Outage"
+        },
+        {
+          "info": {
+            "name": "Retrieve Latest Outage Status for Network Operator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/status",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "lastModifiedDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Format - yyyy-MM-ddTHH:mm:ss+08:00."
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "Format - yyyy-MM-ddTHH:mm:ss+08:00."
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Format - int32."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Format - int32."
+              }
+            ]
+          },
+          "docs": "Search and Retrieve Latest Outage Status Update for Network Operator"
+        },
+        {
+          "info": {
+            "name": "Retrieve Outage from Outage Management",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "outageTypes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ParticipantCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "facilities",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "outageSource",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "outageStatuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "periodStart",
+                "value": "",
+                "type": "query",
+                "description": "Format - yyyy-MM-ddTHH:mm:ss+08:00."
+              },
+              {
+                "name": "periodEnd",
+                "value": "",
+                "type": "query",
+                "description": "Format - yyyy-MM-ddTHH:mm:ss+08:00."
+              },
+              {
+                "name": "outageNumbers",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNumber",
+                "value": "",
+                "type": "query",
+                "description": "Format - int32."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Format - int32."
+              }
+            ]
+          },
+          "docs": "Search and Retrieve Outage"
+        },
+        {
+          "info": {
+            "name": "Update existing Network Outage in Outage Management System",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/networkOutages/:outageNumber",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "outageNumber",
+                "value": "",
+                "type": "path",
+                "description": "Format - int64."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Network Outage synchronously"
+        },
+        {
+          "info": {
+            "name": "Withdraw existing Network Outage in Outage Management System",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/networkOutages/:outageNumber/withdraw",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "outageNumber",
+                "value": "",
+                "type": "path",
+                "description": "Format - int64. Outage Number identifying specific Outage"
+              }
+            ]
+          },
+          "docs": "Withdraw Network Outage Synchronously"
+        },
+        {
+          "info": {
+            "name": "Withdraw existing Network Outages in Outage Management System",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/WEM/v1/outageManagement/outageData/networkOutages/bulkWithdraw",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdraw Network Outages"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

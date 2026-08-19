@@ -1,0 +1,3105 @@
+{
+  "item": [
+    {
+      "id": "61b72ecb-93d5-435c-bfcb-f32857cb6f00",
+      "name": "WEMDE DispatchCase",
+      "description": {
+        "content": "WEMDE DispatchCase",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1aa509c7-59e9-4ff1-b0dc-620399d1daa5",
+          "name": "Retrieves Case Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+          "request": {
+            "name": "Retrieves Case Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+            "description": {
+              "content": "Retrieves Case Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dispatchDataOutcomes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "primaryDispatchIntervalFrom",
+                  "value": "{{primaryDispatchIntervalFrom}}"
+                },
+                {
+                  "key": "primaryDispatchIntervalTo",
+                  "value": "{{primaryDispatchIntervalTo}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible Values are parameters,constraintViolationParameters,scada,constraintLookUp,constraints,dfcmData,unconstrainedForecast,registrationData,facilityLossFactors,markets,rcmData,marketServicesPriceFlag"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d837732-e466-4b78-a9af-8e914e427394",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"dispatchDataIssueID\": \"string\",\n    \"caseData\": [\n      {\n        \"scenario\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"primaryDispatchInterval\": \"string\",\n        \"parameters\": [\n          {\n            \"name\": \"string\",\n            \"value\": 0\n          }\n        ],\n        \"constraintViolationParameters\": [\n          {\n            \"variable\": \"string\",\n            \"price\": 0\n          }\n        ],\n        \"scada\": [\n          {\n            \"tag\": \"string\",\n            \"value\": \"string\",\n            \"valueDataType\": \"string\",\n            \"qualityFlag\": \"string\",\n            \"dataSource\": \"string\",\n            \"asAtTimeStamp\": \"string\"\n          }\n        ],\n        \"constraintLookUp\": {\n          \"forecast.regionalForecast-southWestGreatSouthernRegionBaseLoad-expected\": 0,\n          \"forecast.regionalForecast-southWestGreatSouthernRegionLoad-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionLoad-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-low\": 0,\n          \"forecast.ess-regulationRaise-expected\": 0,\n          \"forecast.ess-regulationLower-expected\": 0,\n          \"forecast.ess-contingencyLower-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-high\": 0,\n          \"forecast.energy-forecastOperationalDemand-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-low\": 0,\n          \"forecast.regionalForecast-easternGoldfields-expected\": 0,\n          \"forecast.regionalForecast-northOfThreeSprings-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionBaseLoad-expected\": 0,\n          \"solver.minutesSincePrimary\": 0\n        },\n        \"constraints\": {\n          \"constraintSet\": [\n            {\n              \"id\": \"string\",\n              \"constraintEquations\": [\n                \"string\"\n              ],\n              \"version\": 0,\n              \"description\": \"string\",\n              \"comments\": \"string\"\n            }\n          ],\n          \"constraintEquations\": [\n            {\n              \"id\": \"string\",\n              \"description\": \"string\",\n              \"comments\": \"string\",\n              \"leftHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"operator\": \"string\",\n              \"rightHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"rightHandSideScript\": \"string\",\n              \"required\": true,\n              \"limitType\": \"string\",\n              \"limitAdviceId\": \"string\",\n              \"isInterventionEvent\": true,\n              \"constraintType\": \"string\",\n              \"defaultRHS\": 0,\n              \"violationPenalty\": 0,\n              \"contingency\": \"string\",\n              \"monitoredElement\": \"string\",\n              \"version\": 0,\n              \"systemConfiguration\": \"string\"\n            }\n          ]\n        },\n        \"dfcmData\": {\n          \"dfcmId\": \"string\",\n          \"dfcmSchemaVersion\": \"string\",\n          \"frequencyLimits\": {\n            \"rocofMax\": 0,\n            \"rocofMin\": 0,\n            \"fmin\": 0,\n            \"fmax\": 0,\n            \"fss\": 0\n          },\n          \"dfcmValidationDetails\": {\n            \"inertiaRangeMinimum\": 0,\n            \"inertiaRangeMaximum\": 0,\n            \"inertiaRangeStep\": 0,\n            \"largestContingencySizeMinimum\": 0,\n            \"largestContingencySizeMaximum\": 0,\n            \"largestContingencySizeStep\": 0\n          },\n          \"tauValuesforCRPerformanceFactors\": [\n            0\n          ]\n        },\n        \"registrationData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"nol\": true,\n            \"facilityStandingData\": {\n              \"facilityRegistrationStatus\": \"string\",\n              \"facilityClass\": \"string\",\n              \"storageConstraints\": true,\n              \"inertia\": 0,\n              \"tauFactor\": 0,\n              \"unconstrainedForecastSource\": \"scada\",\n              \"effectiveDispatchIntervalFrom\": \"string\"\n            }\n          }\n        ],\n        \"facilityLossFactors\": [\n          {\n            \"facilityCode\": \"string\",\n            \"transmissionLossFactor\": 0,\n            \"distributionLossFactor\": 0\n          }\n        ],\n        \"rcmData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"rcoq\": 0\n          }\n        ],\n        \"marketServicesPriceFlag\": {\n          \"energyPriceAtCap\": true,\n          \"regulationRaisePriceAtCap\": true,\n          \"regulationLowerPriceAtCap\": true,\n          \"contingencyLowerPriceAtCap\": true,\n          \"contingencyRaisePriceAtCap\": true,\n          \"rocofPriceAtCap\": true\n        },\n        \"markets\": {\n          \"energy\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"maxInjectionCapacity\": 0,\n                \"maxWithdrawalCapacity\": 0,\n                \"unconstrainedInjectionForecast\": 0,\n                \"unconstrainedWithdrawalForecast\": 0,\n                \"inflexibleFlag\": true,\n                \"maxUpwardRampRate\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"maxDownwardRampRate\": 0,\n                \"upwardsRampRateValueUsed\": 0,\n                \"fsip\": {\n                  \"t1\": 0,\n                  \"t2\": 0,\n                  \"t3\": 0,\n                  \"t4\": 0,\n                  \"minimumLoad\": 0\n                },\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ]\n              }\n            ]\n          },\n          \"regulationRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"regulationLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"rocof\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38c8faab-1dfe-4c01-80a9-a3d6e803243e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a01d3878-c205-4350-8969-45d991c69eb0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96326935-a208-4b13-8f2d-4124d1aa8924",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "147248cc-1d14-47e9-97d7-422bb1d1585a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c27f253a-83d6-4aff-b802-2ea2fbce237e",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26868c71-2008-484c-af3c-3366b0015062",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f7ddafc-abb2-42d7-b6de-d3e2bd825cc0",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e16e3ee-abc7-4200-b32c-306bda4f9be5",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "245e5fa7-b245-4087-afb7-9f574655a0d0",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a26b76e-b8a1-42b6-956a-0402efcbffd8",
+          "name": "Retrieves Case Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+          "request": {
+            "name": "Retrieves Case Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+            "description": {
+              "content": "Retrieves Case Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "preDispatchData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "primaryDispatchInterval",
+                  "value": "{{primaryDispatchInterval}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible Values are parameters,constraintViolationParameters,scada,constraintLookUp,constraints,dfcmData,unconstrainedForecast,registrationData,facilityLossFactors,markets,rcmData,marketServicesPriceFlag"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc69bdde-7b1b-4dde-bccf-c3d2d8f8987a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"primaryDispatchInterval\": \"string\",\n    \"dispatchDataIssueID\": \"string\",\n    \"caseData\": [\n      {\n        \"scenario\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"parameters\": [\n          {\n            \"name\": \"string\",\n            \"value\": 0\n          }\n        ],\n        \"constraintViolationParameters\": [\n          {\n            \"variable\": \"string\",\n            \"price\": 0\n          }\n        ],\n        \"scada\": [\n          {\n            \"tag\": \"string\",\n            \"value\": \"string\",\n            \"valueDataType\": \"string\",\n            \"qualityFlag\": \"string\",\n            \"dataSource\": \"string\",\n            \"asAtTimeStamp\": \"string\"\n          }\n        ],\n        \"constraintLookUp\": {\n          \"forecast.regionalForecast-southWestGreatSouthernRegionBaseLoad-expected\": 0,\n          \"forecast.regionalForecast-southWestGreatSouthernRegionLoad-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionLoad-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-low\": 0,\n          \"forecast.ess-regulationRaise-expected\": 0,\n          \"forecast.ess-regulationLower-expected\": 0,\n          \"forecast.ess-contingencyLower-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-high\": 0,\n          \"forecast.energy-forecastOperationalDemand-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-low\": 0,\n          \"forecast.regionalForecast-easternGoldfields-expected\": 0,\n          \"forecast.regionalForecast-northOfThreeSprings-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionBaseLoad-expected\": 0,\n          \"solver.minutesSincePrimary\": 0\n        },\n        \"constraints\": {\n          \"constraintSet\": [\n            {\n              \"id\": \"string\",\n              \"constraintEquations\": [\n                \"string\"\n              ],\n              \"version\": 0,\n              \"description\": \"string\",\n              \"comments\": \"string\"\n            }\n          ],\n          \"constraintEquations\": [\n            {\n              \"id\": \"string\",\n              \"description\": \"string\",\n              \"comments\": \"string\",\n              \"leftHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"operator\": \"string\",\n              \"rightHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"rightHandSideScript\": \"string\",\n              \"required\": true,\n              \"limitType\": \"string\",\n              \"limitAdviceId\": \"string\",\n              \"isInterventionEvent\": true,\n              \"constraintType\": \"string\",\n              \"defaultRHS\": 0,\n              \"violationPenalty\": 0,\n              \"contingency\": \"string\",\n              \"monitoredElement\": \"string\",\n              \"version\": 0,\n              \"systemConfiguration\": \"string\"\n            }\n          ]\n        },\n        \"dfcmData\": {\n          \"dfcmId\": \"string\",\n          \"dfcmSchemaVersion\": \"string\",\n          \"frequencyLimits\": {\n            \"rocofMax\": 0,\n            \"rocofMin\": 0,\n            \"fmin\": 0,\n            \"fmax\": 0,\n            \"fss\": 0\n          },\n          \"dfcmValidationDetails\": {\n            \"inertiaRangeMinimum\": 0,\n            \"inertiaRangeMaximum\": 0,\n            \"inertiaRangeStep\": 0,\n            \"largestContingencySizeMinimum\": 0,\n            \"largestContingencySizeMaximum\": 0,\n            \"largestContingencySizeStep\": 0\n          },\n          \"tauValuesforCRPerformanceFactors\": [\n            0\n          ]\n        },\n        \"unconstrainedForecast\": [\n          {\n            \"facilityCode\": \"string\",\n            \"unconstrainedInjectionForecastMw\": 0,\n            \"unconstrainedWithdrawalForecastMw\": 0\n          }\n        ],\n        \"registrationData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"nol\": true,\n            \"facilityStandingData\": {\n              \"facilityRegistrationStatus\": \"string\",\n              \"facilityClass\": \"string\",\n              \"storageConstraints\": true,\n              \"inertia\": 0,\n              \"tauFactor\": 0,\n              \"unconstrainedForecastSource\": \"scada\",\n              \"effectiveDispatchIntervalFrom\": \"string\"\n            }\n          }\n        ],\n        \"facilityLossFactors\": [\n          {\n            \"facilityCode\": \"string\",\n            \"transmissionLossFactor\": 0,\n            \"distributionLossFactor\": 0\n          }\n        ],\n        \"rcmData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"rcoq\": 0\n          }\n        ],\n        \"marketServicesPriceFlag\": {\n          \"energyPriceAtCap\": true,\n          \"regulationRaisePriceAtCap\": true,\n          \"regulationLowerPriceAtCap\": true,\n          \"contingencyLowerPriceAtCap\": true,\n          \"contingencyRaisePriceAtCap\": true,\n          \"rocofPriceAtCap\": true\n        },\n        \"markets\": {\n          \"energy\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"maxInjectionCapacity\": 0,\n                \"maxWithdrawalCapacity\": 0,\n                \"unconstrainedInjectionForecast\": 0,\n                \"unconstrainedWithdrawalForecast\": 0,\n                \"inflexibleFlag\": true,\n                \"maxUpwardRampRate\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"maxDownwardRampRate\": 0,\n                \"upwardsRampRateValueUsed\": 0,\n                \"fsip\": {\n                  \"t1\": 0,\n                  \"t2\": 0,\n                  \"t3\": 0,\n                  \"t4\": 0,\n                  \"minimumLoad\": 0\n                },\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ]\n              }\n            ]\n          },\n          \"regulationRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"regulationLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"rocof\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae3297ab-84d5-4f2c-aab4-dabc8fba0ea9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b293e83-0fd2-40cc-90ce-9527c89d27b6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c1044d1-a8a1-4fef-b263-2f0a98434a6c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ad14f1e-92ff-419f-bbec-4327785278b2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15914294-3ea5-4c75-9a9a-30f750b9b785",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8110a0b-f89b-4169-96ee-6d77ec28c000",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8439e4c-a58a-466c-8c5c-9ef0c3ef7304",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec73d524-41c6-4e3c-ba7b-7bd82e5b3d45",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70ea825e-a6bc-431a-bfed-16d5fa833b47",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fd5eb74-9a7e-49ee-8d34-a82092aeb0d6",
+          "name": "Retrieves the Case Data for Dispatch Run",
+          "request": {
+            "name": "Retrieves the Case Data for Dispatch Run",
+            "description": {
+              "content": "Retrieves the Case Data for Dispatch Run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dispatchData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "primaryDispatchInterval",
+                  "value": "{{primaryDispatchInterval}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible Values are parameters,constraintViolationParameters,scada,constraintLookUp,constraints,dfcmData,unconstrainedForecast,registrationData,facilityLossFactors,markets,rcmData,marketServicesPriceFlag"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e762921d-361f-43c7-9a89-87414905b70a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"primaryDispatchInterval\": \"string\",\n    \"dispatchDataIssueID\": \"string\",\n    \"caseData\": [\n      {\n        \"scenario\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"parameters\": [\n          {\n            \"name\": \"string\",\n            \"value\": 0\n          }\n        ],\n        \"constraintViolationParameters\": [\n          {\n            \"variable\": \"string\",\n            \"price\": 0\n          }\n        ],\n        \"scada\": [\n          {\n            \"tag\": \"string\",\n            \"value\": \"string\",\n            \"valueDataType\": \"string\",\n            \"qualityFlag\": \"string\",\n            \"dataSource\": \"string\",\n            \"asAtTimeStamp\": \"string\"\n          }\n        ],\n        \"constraintLookUp\": {\n          \"forecast.regionalForecast-southWestGreatSouthernRegionBaseLoad-expected\": 0,\n          \"forecast.regionalForecast-southWestGreatSouthernRegionLoad-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionLoad-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-low\": 0,\n          \"forecast.ess-regulationRaise-expected\": 0,\n          \"forecast.ess-regulationLower-expected\": 0,\n          \"forecast.ess-contingencyLower-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-high\": 0,\n          \"forecast.energy-forecastOperationalDemand-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-low\": 0,\n          \"forecast.regionalForecast-easternGoldfields-expected\": 0,\n          \"forecast.regionalForecast-northOfThreeSprings-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionBaseLoad-expected\": 0,\n          \"solver.minutesSincePrimary\": 0\n        },\n        \"constraints\": {\n          \"constraintSet\": [\n            {\n              \"id\": \"string\",\n              \"constraintEquations\": [\n                \"string\"\n              ],\n              \"version\": 0,\n              \"description\": \"string\",\n              \"comments\": \"string\"\n            }\n          ],\n          \"constraintEquations\": [\n            {\n              \"id\": \"string\",\n              \"description\": \"string\",\n              \"comments\": \"string\",\n              \"leftHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"operator\": \"string\",\n              \"rightHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"rightHandSideScript\": \"string\",\n              \"required\": true,\n              \"limitType\": \"string\",\n              \"limitAdviceId\": \"string\",\n              \"isInterventionEvent\": true,\n              \"constraintType\": \"string\",\n              \"defaultRHS\": 0,\n              \"violationPenalty\": 0,\n              \"contingency\": \"string\",\n              \"monitoredElement\": \"string\",\n              \"version\": 0,\n              \"systemConfiguration\": \"string\"\n            }\n          ]\n        },\n        \"dfcmData\": {\n          \"dfcmId\": \"string\",\n          \"dfcmSchemaVersion\": \"string\",\n          \"frequencyLimits\": {\n            \"rocofMax\": 0,\n            \"rocofMin\": 0,\n            \"fmin\": 0,\n            \"fmax\": 0,\n            \"fss\": 0\n          },\n          \"dfcmValidationDetails\": {\n            \"inertiaRangeMinimum\": 0,\n            \"inertiaRangeMaximum\": 0,\n            \"inertiaRangeStep\": 0,\n            \"largestContingencySizeMinimum\": 0,\n            \"largestContingencySizeMaximum\": 0,\n            \"largestContingencySizeStep\": 0\n          },\n          \"tauValuesforCRPerformanceFactors\": [\n            0\n          ]\n        },\n        \"unconstrainedForecast\": [\n          {\n            \"facilityCode\": \"string\",\n            \"unconstrainedInjectionForecastMw\": 0,\n            \"unconstrainedWithdrawalForecastMw\": 0\n          }\n        ],\n        \"registrationData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"nol\": true,\n            \"facilityStandingData\": {\n              \"facilityRegistrationStatus\": \"string\",\n              \"facilityClass\": \"string\",\n              \"storageConstraints\": true,\n              \"inertia\": 0,\n              \"tauFactor\": 0,\n              \"unconstrainedForecastSource\": \"scada\",\n              \"effectiveDispatchIntervalFrom\": \"string\"\n            }\n          }\n        ],\n        \"facilityLossFactors\": [\n          {\n            \"facilityCode\": \"string\",\n            \"transmissionLossFactor\": 0,\n            \"distributionLossFactor\": 0\n          }\n        ],\n        \"rcmData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"rcoq\": 0\n          }\n        ],\n        \"marketServicesPriceFlag\": {\n          \"energyPriceAtCap\": true,\n          \"regulationRaisePriceAtCap\": true,\n          \"regulationLowerPriceAtCap\": true,\n          \"contingencyLowerPriceAtCap\": true,\n          \"contingencyRaisePriceAtCap\": true,\n          \"rocofPriceAtCap\": true\n        },\n        \"markets\": {\n          \"energy\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"maxInjectionCapacity\": 0,\n                \"maxWithdrawalCapacity\": 0,\n                \"unconstrainedInjectionForecast\": 0,\n                \"unconstrainedWithdrawalForecast\": 0,\n                \"inflexibleFlag\": true,\n                \"maxUpwardRampRate\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"maxDownwardRampRate\": 0,\n                \"upwardsRampRateValueUsed\": 0,\n                \"fsip\": {\n                  \"t1\": 0,\n                  \"t2\": 0,\n                  \"t3\": 0,\n                  \"t4\": 0,\n                  \"minimumLoad\": 0\n                },\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ]\n              }\n            ]\n          },\n          \"regulationRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"regulationLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"rocof\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07909bbe-6a18-44ab-9b8d-561797d399f3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c741f677-4eb8-470e-9065-b95123f1d26f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7596a343-e9ff-4da7-8e1f-f3123d40be03",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc55c96-201a-4792-95c9-ea118bfeffa9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f950857-361c-40d6-8e6e-24a52b29d0e5",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8da9080e-391f-4a7f-a2e4-ad940c28fbc9",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec4a1f8d-b0dd-45a3-a20a-62a547472019",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02184561-8617-4224-a233-96ab7c5fa397",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31e774f2-6ca9-4006-a639-ddf2a520e0f1",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61298a32-b672-4cbc-a367-03d10d353d35",
+          "name": "Retrieves the Case Data for Week Ahead Dispatch Run",
+          "request": {
+            "name": "Retrieves the Case Data for Week Ahead Dispatch Run",
+            "description": {
+              "content": "Retrieves the Case Data for Week Ahead Dispatch Run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "weekAheadDispatchData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "primaryDispatchInterval",
+                  "value": "{{primaryDispatchInterval}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible Values are parameters,constraintViolationParameters,scada,constraintLookUp,constraints,dfcmData,unconstrainedForecast,registrationData,facilityLossFactors,markets,rcmData,marketServicesPriceFlag"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61115be5-022e-45ee-b4c7-8d8bfad3a7eb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"primaryDispatchInterval\": \"string\",\n    \"dispatchDataIssueID\": \"string\",\n    \"caseData\": [\n      {\n        \"scenario\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"parameters\": [\n          {\n            \"name\": \"string\",\n            \"value\": 0\n          }\n        ],\n        \"constraintViolationParameters\": [\n          {\n            \"variable\": \"string\",\n            \"price\": 0\n          }\n        ],\n        \"scada\": [\n          {\n            \"tag\": \"string\",\n            \"value\": \"string\",\n            \"valueDataType\": \"string\",\n            \"qualityFlag\": \"string\",\n            \"dataSource\": \"string\",\n            \"asAtTimeStamp\": \"string\"\n          }\n        ],\n        \"constraintLookUp\": {\n          \"forecast.regionalForecast-southWestGreatSouthernRegionBaseLoad-expected\": 0,\n          \"forecast.regionalForecast-southWestGreatSouthernRegionLoad-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionLoad-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomAccessA-low\": 0,\n          \"forecast.ess-regulationRaise-expected\": 0,\n          \"forecast.ess-regulationLower-expected\": 0,\n          \"forecast.ess-contingencyLower-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-expected\": 0,\n          \"forecast.energy-forecastOperationalDemand-high\": 0,\n          \"forecast.energy-forecastOperationalDemand-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-warradargeWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-walkawayWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-yandinWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-expected\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-high\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-high\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-albanyWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomAccessA-low\": 0,\n          \"forecast.nsgForecast-badgingarraWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-emuDownsWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-collgarWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-bomCombined-low\": 0,\n          \"forecast.nsgForecast-mumbidaWindFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-bom-low\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-low\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-expected\": 0,\n          \"forecast.nsgForecast-merredinSolarFarm-wz-high\": 0,\n          \"forecast.nsgForecast-mungaraSolarFarm-wz-low\": 0,\n          \"forecast.regionalForecast-easternGoldfields-expected\": 0,\n          \"forecast.regionalForecast-northOfThreeSprings-expected\": 0,\n          \"forecast.regionalForecast-northCountryRegionBaseLoad-expected\": 0,\n          \"solver.minutesSincePrimary\": 0\n        },\n        \"constraints\": {\n          \"constraintSet\": [\n            {\n              \"id\": \"string\",\n              \"constraintEquations\": [\n                \"string\"\n              ],\n              \"version\": 0,\n              \"description\": \"string\",\n              \"comments\": \"string\"\n            }\n          ],\n          \"constraintEquations\": [\n            {\n              \"id\": \"string\",\n              \"description\": \"string\",\n              \"comments\": \"string\",\n              \"leftHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"operator\": \"string\",\n              \"rightHandSide\": [\n                {\n                  \"term\": \"string\",\n                  \"coefficient\": 0,\n                  \"termType\": \"string\",\n                  \"index\": 0\n                }\n              ],\n              \"rightHandSideScript\": \"string\",\n              \"required\": true,\n              \"limitType\": \"string\",\n              \"limitAdviceId\": \"string\",\n              \"isInterventionEvent\": true,\n              \"constraintType\": \"string\",\n              \"defaultRHS\": 0,\n              \"violationPenalty\": 0,\n              \"contingency\": \"string\",\n              \"monitoredElement\": \"string\",\n              \"version\": 0,\n              \"systemConfiguration\": \"string\"\n            }\n          ]\n        },\n        \"dfcmData\": {\n          \"dfcmId\": \"string\",\n          \"dfcmSchemaVersion\": \"string\",\n          \"frequencyLimits\": {\n            \"rocofMax\": 0,\n            \"rocofMin\": 0,\n            \"fmin\": 0,\n            \"fmax\": 0,\n            \"fss\": 0\n          },\n          \"dfcmValidationDetails\": {\n            \"inertiaRangeMinimum\": 0,\n            \"inertiaRangeMaximum\": 0,\n            \"inertiaRangeStep\": 0,\n            \"largestContingencySizeMinimum\": 0,\n            \"largestContingencySizeMaximum\": 0,\n            \"largestContingencySizeStep\": 0\n          },\n          \"tauValuesforCRPerformanceFactors\": [\n            0\n          ]\n        },\n        \"unconstrainedForecast\": [\n          {\n            \"facilityCode\": \"string\",\n            \"unconstrainedInjectionForecastMw\": 0,\n            \"unconstrainedWithdrawalForecastMw\": 0\n          }\n        ],\n        \"registrationData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"nol\": true,\n            \"facilityStandingData\": {\n              \"facilityRegistrationStatus\": \"string\",\n              \"facilityClass\": \"string\",\n              \"storageConstraints\": true,\n              \"inertia\": 0,\n              \"tauFactor\": 0,\n              \"unconstrainedForecastSource\": \"scada\",\n              \"effectiveDispatchIntervalFrom\": \"string\"\n            }\n          }\n        ],\n        \"facilityLossFactors\": [\n          {\n            \"facilityCode\": \"string\",\n            \"transmissionLossFactor\": 0,\n            \"distributionLossFactor\": 0\n          }\n        ],\n        \"rcmData\": [\n          {\n            \"facilityCode\": \"string\",\n            \"rcoq\": 0\n          }\n        ],\n        \"marketServicesPriceFlag\": {\n          \"energyPriceAtCap\": true,\n          \"regulationRaisePriceAtCap\": true,\n          \"regulationLowerPriceAtCap\": true,\n          \"contingencyLowerPriceAtCap\": true,\n          \"contingencyRaisePriceAtCap\": true,\n          \"rocofPriceAtCap\": true\n        },\n        \"markets\": {\n          \"energy\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"maxInjectionCapacity\": 0,\n                \"maxWithdrawalCapacity\": 0,\n                \"unconstrainedInjectionForecast\": 0,\n                \"unconstrainedWithdrawalForecast\": 0,\n                \"inflexibleFlag\": true,\n                \"maxUpwardRampRate\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"maxDownwardRampRate\": 0,\n                \"upwardsRampRateValueUsed\": 0,\n                \"fsip\": {\n                  \"t1\": 0,\n                  \"t2\": 0,\n                  \"t3\": 0,\n                  \"t4\": 0,\n                  \"minimumLoad\": 0\n                },\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ]\n              }\n            ]\n          },\n          \"regulationRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"regulationLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyRaise\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"contingencyLower\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          },\n          \"rocof\": {\n            \"marketService\": \"string\",\n            \"baseForecastRequirement\": 0,\n            \"overrideForecastRequirement\": 0,\n            \"facilities\": [\n              {\n                \"dspUnconstrainedWithdrawalQuantity\": 0,\n                \"dspConstrainedWithdrawalQuantity\": 0,\n                \"facilityCode\": \"string\",\n                \"submissionId\": \"string\",\n                \"submissionCode\": \"string\",\n                \"tranches\": [\n                  {\n                    \"tranche\": 0,\n                    \"fuelType\": \"string\",\n                    \"quantity\": 0,\n                    \"submittedPrice\": 0,\n                    \"lfaPrice\": 0,\n                    \"capacityType\": \"string\",\n                    \"noticeTime\": 0\n                  }\n                ],\n                \"maximumCapacity\": 0,\n                \"enablementMinimum\": 0,\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpoint\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpoint\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximum\": 0,\n                \"enablementMaximumValueUsed\": 0\n              }\n            ]\n          }\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24fcbd7d-0e09-4aa8-8588-ed86802890c6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5f0ec33-ad2e-44f6-9092-ead823dc41c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e23049d-9b34-4027-a262-e126dc07b861",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "447d2ec4-ee72-4ea7-a1df-93e20565e916",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd0f6439-8f65-4748-8bfe-aeaca0115da5",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e055fbb1-ddd9-487a-a47c-6705adcfba1f",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d67945-6286-421d-b7c0-3a25d41364f5",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e94e21b7-2366-4878-9fab-75ecc0b0cc95",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f963fb1a-7a18-494e-88d5-09943014c7bc",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchCase",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "primaryDispatchIntervalFrom"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "primaryDispatchIntervalTo"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "primaryDispatchInterval"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "859a2ee1-467b-4905-abb0-d37b024b0d6d",
+    "name": "WEMDE DispatchCase",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

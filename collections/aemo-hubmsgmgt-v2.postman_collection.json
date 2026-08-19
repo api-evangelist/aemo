@@ -1,0 +1,505 @@
+{
+  "item": [
+    {
+      "id": "e5773ce1-4f03-4e95-a702-ff09d9873923",
+      "name": "HubMessageManagementV2",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "86fcd6b3-48bc-492c-8359-64d85f8e67eb",
+          "name": "Get Alerts",
+          "request": {
+            "name": "Get Alerts",
+            "description": {
+              "content": "Receive B2B and B2M stop file alerts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getAlerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alertType",
+                  "value": "B2BStopFile",
+                  "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'"
+                },
+                {
+                  "disabled": false,
+                  "key": "queryParticipantID",
+                  "value": "<string>",
+                  "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "unique ID for the transaction",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de190ac7-842e-4d3e-bbe9-320b44fd5780",
+              "name": "Success response with aseXml response payload",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "b5309f1b-3dc9-4e06-859a-d21d89cd5198",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a5732c8-9b1e-4eb7-9eaa-6fb531aaf4fc",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f305e74a-1ac4-4916-ba3c-af098ddf8f04",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6082c43f-a5f8-42f0-9195-665b7f9dcc01",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16434e88-65c3-49f1-b05c-40eda1b31bb0",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db48391a-7303-4a32-af98-aa9fab6ba38e",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The API requires the usage of HTTP Basic authentication header to allow access. This is your URM username and password.",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/HubMessageManagement",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "fce14287-4567-47f9-9640-6ef5f5c733a8",
+    "name": "HubMessageManagementV2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\n The HubMessageManagement push API retrieves the current list of B2B and B2M stop files. Business transactions are sent as aseXML documents carried as payloads inside the API message and transmitted over HTTPS. \n\nParticipants can also use this API to:\n1. Ensure technical requirements required to connect to the e-Hub are validated (for example, appropriate network ports are open).\n2. Ensure their systems can connect to the e-Hub using their SSL certificates and API keys.\n3. Determine if AEMO's e-Hub is operational (ping-pong test).",
+      "type": "text/plain"
+    }
+  }
+}

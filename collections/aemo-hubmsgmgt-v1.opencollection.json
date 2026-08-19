@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "HubMessageManagement",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HubMessageManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/HubMessageManagement/alerts",
+            "params": [
+              {
+                "name": "initiatingParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception"
+              },
+              {
+                "name": "alertType",
+                "value": "",
+                "type": "query",
+                "description": "If the value is set to ‘B2BStopFile’, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to ‘B2BStopFile’."
+              },
+              {
+                "name": "queryParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market."
+              }
+            ]
+          },
+          "docs": "Return Participants that have a B2B Stop file. Returns stop file details for all participants or the requested ParticipantID. Note- This API & resource will be enhanced in future to return the list of B2M stop files"
+        },
+        {
+          "info": {
+            "name": "Get status of core e-Hub applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/HubMessageManagement/ping",
+            "params": [
+              {
+                "name": "initiatingParticipantID",
+                "value": "",
+                "type": "query",
+                "description": "ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception"
+              }
+            ]
+          },
+          "docs": "Returns response code to state if the core e-Hub applications are available / operational. This API/resource will be used by the Participants to\n-  Test if the Participant application / gateway is able to establish connectivity with the e-Hub and/or\n- Validate if the SSL configuration / certificates are valid and/or\n- Check if the core e-Hub applications are available"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,454 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reallocations",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reallocations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AuthoriseReallocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/authoriseReallocation",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The authoriseReallocation API sets the state of the reallocation to AUTHORISE, signalling that both parties have agreed to the reallocation."
+        },
+        {
+          "info": {
+            "name": "cancelReallocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/cancelReallocation",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The cancelReallocation API sets the state of a reallocation to CANCEL, signalling to the Prudential system to exclude the reallocation from processing further."
+        },
+        {
+          "info": {
+            "name": "getAgreementTypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getAgreementTypes",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The getAgreementTypes API retrieves a list of reallocation agreement types and associated descriptions. Possible values are -\n- $ - Dollar offset, a set dollar value for each interval.\n- MWh – Energy Offset, a set energy quantity for each interval, values at that interval’s RRP.\n- Swap – Swap offset, a quantity and price.\n- Cap – Cap offset, a quantity and price.\n- Floor – Floor offset, a quantity and price."
+        },
+        {
+          "info": {
+            "name": "getcalendar",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getCalendar",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calendarId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the calendar"
+              }
+            ]
+          },
+          "docs": "Weekends are implicitly assumed to be non-business days and are not explicitly included in the calendar information returned. The getCalendar API retrieves a list of public holidays from a given calendar. The calendar non-business days are taken from the NEM database."
+        },
+        {
+          "info": {
+            "name": "getCalendars",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getCalendars",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). Start date of the reallocation"
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The getCalendars API retrieves a list of Calendar IDs and associated descriptive names fulfilling the following criteria-\n- The Calendar is configured for reallocations.\n- If the regionId filter parameter is in the request, there must be at least one calendar entry matching the given region.\n- If the startDate filter parameter is in the request, there must be at least one calendar entry with a calendar date greater than or equal to the start date.\n- If the endDate filter parameter is in the requ"
+        },
+        {
+          "info": {
+            "name": "getMarketPriceCap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getMarketPriceCap",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "effectiveDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The getMarketPriceCap API retrieves the VOLL (Value of Lost Load) price at the given effective date in the request. The specific value retrieved is the one that-\n- Has an effectiveDate value that is the greatest effectiveDate value, less than or equal to the supplied effective date in the request, where the record is authorised.\n- Has a versionNo value that is greater than the versionNo value, for the corresponding effectiveDate value, where the record is authorised."
+        },
+        {
+          "info": {
+            "name": "getParticipants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getParticipants",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The getParticipants API retrieves a list of NEM Participant IDs and associated descriptive names fulfilling the following criteria-\n- Have a participant class of Market Participant.\n- Participants cannot create reallocation requests between participant IDs owned by the same Company ID."
+        },
+        {
+          "info": {
+            "name": "getProfileTypes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getProfileTypes",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The getProfileTypes API retrieves a list of reallocation Day Types and associated descriptions. Possible values are-\n- Flat – everyday including Business and Non-Business days.\n- Business – Business days do not include weekends or public holidays (based on the chosen PH calendar).\n- Non-business – Any day that is not a business day."
+        },
+        {
+          "info": {
+            "name": "getReallocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getReallocation",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reallocationId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a single reallocation along with its associated properties and reallocation profile data. The reallocationId request parameter is used to retrieve the reallocation matching the supplied ID."
+        },
+        {
+          "info": {
+            "name": "getReallocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getReallocations",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "calendarId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the calendar"
+              },
+              {
+                "name": "expiringWithinDays",
+                "value": "",
+                "type": "query",
+                "description": "Expiring within X days parameter of the reallocation filter."
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "query",
+                "description": "Region ID parameter of the reallocation filter."
+              },
+              {
+                "name": "lastChangedGreaterThan",
+                "value": "",
+                "type": "query",
+                "description": "Last changed greater than X parameter of the reallocation filter."
+              },
+              {
+                "name": "exPostDueDateStart",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "steps",
+                "value": "",
+                "type": "query",
+                "description": "Steps parameter of the reallocation filter, containing a comma-separated list of reallocation step IDs."
+              },
+              {
+                "name": "agreementTypes",
+                "value": "",
+                "type": "query",
+                "description": "Agreement types parameter of the reallocation filter, containing a comma-separate listed of agreement type IDs."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Format - date-time (as date-time in RFC3339). Start date of the reallocation"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exPostDueDateEnd",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "The getReallocations API retrieves a list of reallocations and associated properties that fulfil the following criteria-\n  - Either the submittingParticipantId or counterpartyParticipantId property of the reallocation must match the ID of the request participantId.\n  \n  - If the regionId filter parameter is in the request, the regionId property of the reallocation must match the value.\n  \n  - If the startDate filter parameter is in the request, the endDate property of the reallocation must be gr"
+        },
+        {
+          "info": {
+            "name": "getReallocationSteps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getReallocationSteps",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The getReallocationSteps API retrieves a list of reallocation step IDs and associated descriptions."
+        },
+        {
+          "info": {
+            "name": "getRegions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/getRegions",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The getRegions API retrieves a list of regions and associated descriptive names.        Possible values are as follows-\n- New South Wales\n- Queensland\n- South Australia\n- Tasmania\n- Victoria"
+        },
+        {
+          "info": {
+            "name": "submitReallocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/ws/NEMWholesale/reallocations/submitReallocation",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a reallocation and sets the status to SUBMIT. The API creates an ID in the format “<YYYYMMDD>.RS<NNNN>“ where-\n- <YYYYMMDD> is the current system date \n- <NNNN> is the consistently increasing sequence number for reallocations created on the specific date including leading zeros."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

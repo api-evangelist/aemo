@@ -1,0 +1,701 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GasBB Reporting Public Data",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GasBB Reporting Public Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adhoc report for Linepack Capacity Adequacy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/linepackCapacityAdequacy",
+            "params": [
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "GasDate",
+                "value": "",
+                "type": "query",
+                "description": "Date of gas day. Timestamps are ignored. The gas day as defined in the pipeline contract or market rules."
+              }
+            ]
+          },
+          "docs": "Provides a report for the Linepack Capacity Adequacy for each Pipeline for the current and next 2 gas days (D to D+2). The report can be filtered to reduce data output."
+        },
+        {
+          "info": {
+            "name": "Adhoc report for nameplate rating for each connection point id in BB",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/connectionPointNameplateRating",
+            "params": [
+              {
+                "name": "EffectiveDate",
+                "value": "",
+                "type": "query",
+                "description": "Gas day date that corresponding record takes effect. Any time component supplied will be ignored."
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "ConnectionPointIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined connection point identifier."
+              }
+            ]
+          },
+          "docs": "This report displays the nameplate rating for each connection point id connected to a BB pipeline or transitional compression facility. This report will be a combination of all submissions for Gate Station Nameplate Rating and Connection Point Nameplate Rating"
+        },
+        {
+          "info": {
+            "name": "Adhoc report for nameplate rating, owner, and operator for each gate station connected to a BB pipeline.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/gateStationNameplateRating",
+            "params": [
+              {
+                "name": "ConnectionPointIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined connection point identifier."
+              },
+              {
+                "name": "EffectiveDate",
+                "value": "",
+                "type": "query",
+                "description": "Gas day date that corresponding record takes effect. Any time component supplied will be ignored."
+              }
+            ]
+          },
+          "docs": "This report displays the displays the nameplate rating, owner, and operator for each gate station connected to a BB pipeline."
+        },
+        {
+          "info": {
+            "name": "Adhoc report for registered contact details for each participant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/registeredContact"
+          },
+          "docs": "Provides a report of registered contact details for each participant."
+        },
+        {
+          "info": {
+            "name": "Adhoc report for standing nameplate capacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/nameplateRating",
+            "params": [
+              {
+                "name": "EffectiveDate",
+                "value": "",
+                "type": "query",
+                "description": "Gas day date that corresponding record takes effect. Any time component supplied will be ignored."
+              },
+              {
+                "name": "CapacityTypes",
+                "value": "",
+                "type": "query",
+                "description": "Capacity type values can be -\n\nSTORAGE — Holding capacity in storage; \n\nMDQ — Daily maximum firm capacity under the expected operating conditions."
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "FacilityTypes",
+                "value": "",
+                "type": "query",
+                "description": "Facility type associated with the Facility Id."
+              },
+              {
+                "name": "FlowDirections",
+                "value": "",
+                "type": "query",
+                "description": "Gas flow direction. Values can be either- \nRECEIPT — A flow of gas into the BB facility\n\nDELIVERY — A flow of gas out of the BB facility.\n\nNONE – will be displayed for all other BB facilities and transitional compression facilities."
+              }
+            ]
+          },
+          "docs": "This report displays the standing nameplate capacity of all BB facilities and transitional compression facility. Nameplate rating relates to maximum daily quantities in TJ under normal operating conditions."
+        },
+        {
+          "info": {
+            "name": "Adhoc report on states",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/states"
+          },
+          "docs": "This report displays states"
+        },
+        {
+          "info": {
+            "name": "Adhoc report on the daily nominations and forecasts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/stateNominationsAndForecasts",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              }
+            ]
+          },
+          "docs": "This report displays the daily nominations and forecasts"
+        },
+        {
+          "info": {
+            "name": "Adhoc report on the daily production and flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/stateDailyProductionAndFlow",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              }
+            ]
+          },
+          "docs": "This report displays the daily production and flow"
+        },
+        {
+          "info": {
+            "name": "Adhoc report on the daily storage of gas at each storage facility",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/shortTermCapacityOutlook",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "CapacityType",
+                "value": "",
+                "type": "query",
+                "description": "Capacity type values can be -\n\nSTORAGE — Holding capacity in storage; \n\nMDQ — Daily maximum firm capacity under the expected operating conditions."
+              },
+              {
+                "name": "FlowDirection",
+                "value": "",
+                "type": "query",
+                "description": "Gas flow direction. Values can be either- \nRECEIPT — A flow of gas into the BB facility\n\nDELIVERY — A flow of gas out of the BB facility.\n\nNONE – will be displayed for all other BB facilities and transitional compression facilities."
+              }
+            ]
+          },
+          "docs": "This report displays the daily storage of gas at each storage facility. The report can be filtered to reduce data output."
+        },
+        {
+          "info": {
+            "name": "Adhoc report on Uncontracted Capacity Outlook on pipelines and storage facilities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/uncontractedCapacityOutlook",
+            "params": [
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "OutlookMonths",
+                "value": "",
+                "type": "query",
+                "description": "Specify the number of months to display"
+              },
+              {
+                "name": "OutlookMonth",
+                "value": "",
+                "type": "query",
+                "description": "The month that the uncontracted capacity is available."
+              },
+              {
+                "name": "OutlookYear",
+                "value": "",
+                "type": "query",
+                "description": "The year that the uncontracted capacity is available."
+              },
+              {
+                "name": "CapacityTypes",
+                "value": "",
+                "type": "query",
+                "description": "Capacity type values can be -\n\nSTORAGE — Holding capacity in storage; \n\nMDQ — Daily maximum firm capacity under the expected operating conditions."
+              }
+            ]
+          },
+          "docs": "Provides a report of the Uncontracted Capacity Outlook on pipelines and storage facilities. The report can be filtered to reduce data output."
+        },
+        {
+          "info": {
+            "name": "Adhoc report pipeline Node Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/pipelineNodeTransfer",
+            "params": [
+              {
+                "name": "NodeId",
+                "value": "",
+                "type": "query",
+                "description": "Unique node identifier"
+              },
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              }
+            ]
+          },
+          "docs": "This report displays pipeline Node Transfer"
+        },
+        {
+          "info": {
+            "name": "Daily Facilities report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/facilities",
+            "params": [
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "FacilityTypes",
+                "value": "",
+                "type": "query",
+                "description": "Facility type associated with the Facility Id."
+              }
+            ]
+          },
+          "docs": "Provides a report for the details of all facilities and associated nodes and Connection Points."
+        },
+        {
+          "info": {
+            "name": "Daily Facilities report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/facilities",
+            "params": [
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "FacilityTypes",
+                "value": "",
+                "type": "query",
+                "description": "Facility type associated with the Facility Id."
+              }
+            ]
+          },
+          "docs": "Provides a report for the details of all facilities and associated nodes and Connection Points."
+        },
+        {
+          "info": {
+            "name": "Daily Production, Flow and Storage data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/locationDailyProductionAndFlow",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              }
+            ]
+          },
+          "docs": "The report shows Daily Production, Flow and Storage data aggregated by Location for a queried outlook period."
+        },
+        {
+          "info": {
+            "name": "Daily report for all production and demand locations in the BB",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/locationNominationsAndForecasts",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              }
+            ]
+          },
+          "docs": "This report lists all production and demand locations within the Bulletin Board system."
+        },
+        {
+          "info": {
+            "name": "Daily report for all production and demand locations in the BB",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/locations"
+          },
+          "docs": "This report lists all production and demand locations within the Bulletin Board system."
+        },
+        {
+          "info": {
+            "name": "Daily report for Capacity Outlook for the medium term",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/mediumTermCapacityOutlook",
+            "params": [
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              },
+              {
+                "name": "CapacityTypes",
+                "value": "",
+                "type": "query",
+                "description": "Capacity type values can be -\n\nSTORAGE — Holding capacity in storage; \n\nMDQ — Daily maximum firm capacity under the expected operating conditions."
+              }
+            ]
+          },
+          "docs": "Provides a report of the Capacity Outlook for the medium term to identify possible impact to future supply. The report can be filtered to reduce data output."
+        },
+        {
+          "info": {
+            "name": "Daily report for Nomination and Forecast data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/nominationsAndForecasts",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              }
+            ]
+          },
+          "docs": "The report shall return Nomination and Forecast data submitted to the market from the start of a queried outlook period where the outlook period can contain dates from D+0 to D+1, D+2, D+3, D+4, D+5, D+6. Nomination and Forecasts data shall be aggregated by BB facility."
+        },
+        {
+          "info": {
+            "name": "Daily report for production and usage at each Connection Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/pipelineConnectionPointFlow",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              }
+            ]
+          },
+          "docs": "Provides a report for the Daily production and usage at each Connection Point. The report only returns a maximum total of one calendar month of data for all facilities. The report can be filtered to reduce data output."
+        },
+        {
+          "info": {
+            "name": "Daily report for Production, Flow and Storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/dailyProductionAndFlow",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              }
+            ]
+          },
+          "docs": "The report shows Daily Production, Flow and Storage data aggregated by Facility Id for a queried outlook period. The report only returns a maximum total of one calendar month of data for all facilities. The report can be filtered to reduce data output."
+        },
+        {
+          "info": {
+            "name": "Daily report with list of registered participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/registeredParticipant",
+            "params": [
+              {
+                "name": "CompanyIds",
+                "value": "",
+                "type": "query",
+                "description": "Company identifier"
+              }
+            ]
+          },
+          "docs": "Provides a report of registered participants"
+        },
+        {
+          "info": {
+            "name": "DailyStorageActualAndForecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/dailyStorageActualAndForecast"
+          },
+          "docs": "DailyStorageActualAndForecast"
+        },
+        {
+          "info": {
+            "name": "gasGraph",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/gasGraph"
+          },
+          "docs": "gasGraph"
+        },
+        {
+          "info": {
+            "name": "mapExport",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/mapExport"
+          },
+          "docs": "mapExport"
+        },
+        {
+          "info": {
+            "name": "PipelineChartsActualFlowAndNominationWithCapacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/pipelineChartsActualFlowAndNominationWithCapacity"
+          },
+          "docs": "PipelineChartsActualFlowAndNominationWithCapacity"
+        },
+        {
+          "info": {
+            "name": "ProductionAndFlowActualAndNominationAndCapacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/productionAndFlowActualAndNominationAndCapacity"
+          },
+          "docs": "ProductionAndFlowActualAndNominationAndCapacity"
+        },
+        {
+          "info": {
+            "name": "ProductionChartsActualFlowAndNominationWithCapacity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/productionChartsActualFlowAndNominationWithCapacity"
+          },
+          "docs": "ProductionChartsActualFlowAndNominationWithCapacity"
+        },
+        {
+          "info": {
+            "name": "Weekly report on secondary pipeline capacity available for sale on BB pipelines",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/secondaryPipelineCapacityBidsOffers",
+            "params": [
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              },
+              {
+                "name": "Sides",
+                "value": "",
+                "type": "query",
+                "description": "BUY and/or SELL"
+              }
+            ]
+          },
+          "docs": "Provide information on secondary pipeline capacity available for sale on BB pipelines. This is limited to pipelines where the pipeline operator owns, controls, or operates a secondary pipeline capacity trading platform."
+        },
+        {
+          "info": {
+            "name": "Weekly report on secondary pipeline capacity trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/gasbb-reporting-data/secondaryPipelineCapacityTrades",
+            "params": [
+              {
+                "name": "FromGasDate",
+                "value": "",
+                "type": "query",
+                "description": "One calendar month from request date"
+              },
+              {
+                "name": "ToGasDate",
+                "value": "",
+                "type": "query",
+                "description": "Request Date"
+              },
+              {
+                "name": "FacilityIds",
+                "value": "",
+                "type": "query",
+                "description": "A unique AEMO defined Facility identifier"
+              }
+            ]
+          },
+          "docs": "Provide information on secondary pipeline capacity trades that have occurred. This is limited to BB pipelines where the pipeline operator owns, controls, or operates a secondary pipeline capacity trading platform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

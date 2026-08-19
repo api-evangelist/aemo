@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WEM DER NMI",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WEM DER NMI",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new NMI record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/wem/v1/der-register/nmi-details",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new NMI record"
+        },
+        {
+          "info": {
+            "name": "Returns the current NMI details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/wem/v1/der-register/nmi-details/:nmi",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "path",
+                "description": "NMI to get"
+              }
+            ]
+          },
+          "docs": "Returns the current NMI details"
+        },
+        {
+          "info": {
+            "name": "Updates a NMI record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/wem/v1/der-register/nmi-details/:nmi",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "path",
+                "description": "NMI to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a NMI record"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

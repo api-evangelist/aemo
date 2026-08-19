@@ -1,0 +1,805 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "DER Registration For Account Holders",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DER Registration For Account Holders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "authorize",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/authorize",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "authcode"
+              }
+            ]
+          },
+          "docs": "authorize"
+        },
+        {
+          "info": {
+            "name": "azure Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/azureLogout",
+            "params": [
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "logout redirect uri"
+              }
+            ]
+          },
+          "docs": "azure Logout"
+        },
+        {
+          "info": {
+            "name": "Generate token using client credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query",
+                "description": "grant type"
+              }
+            ]
+          },
+          "docs": "token"
+        },
+        {
+          "info": {
+            "name": "Get Access Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getAccessStatus",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Access Status"
+        },
+        {
+          "info": {
+            "name": "Get DER",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getDER",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used by participants to get a complete history of versions for a single DER Record. The returned file size is to be confirmed.."
+        },
+        {
+          "info": {
+            "name": "Get details of a single or multiple DER Records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getDERSummary",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used by participants to get a single or multiple DER Records along with their details based on the supplied filters."
+        },
+        {
+          "info": {
+            "name": "get Expiry Date Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getExpiryDateStatus",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "get Expiry Date Status"
+        },
+        {
+          "info": {
+            "name": "Get Inverter Preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getInverterPreference",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Inverter Preference"
+        },
+        {
+          "info": {
+            "name": "Get of all receipts associated with single or multiple DER Records.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getReceipts",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used by participants to get a list of all receipts associated with single or multiple DER Records based on the supplied filter(s)."
+        },
+        {
+          "info": {
+            "name": "Get Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getPreferences",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API is used by participants to get previously submitted preferences for contact details, Inverter Settings, and notifications based on approved capacity"
+        },
+        {
+          "info": {
+            "name": "Get Receipts UI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getReceiptsUI",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Receipts UI"
+        },
+        {
+          "info": {
+            "name": "Get Request Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/getRequestStatus",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get Request Status"
+        },
+        {
+          "info": {
+            "name": "Grant Job Access to Account holder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/grantJobAccess",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used by participants to grant/block job access to Account-holders."
+        },
+        {
+          "info": {
+            "name": "Inverter Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/InverterData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Inverter Data"
+        },
+        {
+          "info": {
+            "name": "list Device SubType",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listDeviceSubType/:deviceType",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "path",
+                "description": "deviceType"
+              }
+            ]
+          },
+          "docs": "list Device SubType"
+        },
+        {
+          "info": {
+            "name": "list Inverter Manufacture",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listInverterManufacture",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "list Inverter Manufacture"
+        },
+        {
+          "info": {
+            "name": "list Inverter Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listInverterModels",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "list Inverter Models"
+        },
+        {
+          "info": {
+            "name": "list Inverter Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listInverterSeries",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "list Inverter Series"
+        },
+        {
+          "info": {
+            "name": "List Manufacture Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listManufactureDetails",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List Manufacture Details"
+        },
+        {
+          "info": {
+            "name": "List Manufacture Models",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listManufactureModels",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List Manufacture Models"
+        },
+        {
+          "info": {
+            "name": "List of Device Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/listDeviceTypes",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "List of Device Types"
+        },
+        {
+          "info": {
+            "name": "Login API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/initiateLogin",
+            "params": [
+              {
+                "name": "scopes",
+                "value": "",
+                "type": "query",
+                "description": "Should always be 'DERR_INSTALLER'"
+              },
+              {
+                "name": "replyURL",
+                "value": "",
+                "type": "query",
+                "description": "URL where the user has to be redirected after successful login"
+              },
+              {
+                "name": "nonce",
+                "value": "",
+                "type": "query",
+                "description": "GUID generated by the application"
+              },
+              {
+                "name": "codeChallenge",
+                "value": "",
+                "type": "query",
+                "description": "Base64 URL-encoded SHA-256 hash of the code verifier"
+              }
+            ]
+          },
+          "docs": "This API will re-direct the user to the login page where the user can register or login(if already registered). After successful login the user will be re-directed to the ‘replyURL’ passed in the request with authorization code and nonce as query parameters."
+        },
+        {
+          "info": {
+            "name": "logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/logout"
+          },
+          "docs": "logout"
+        },
+        {
+          "info": {
+            "name": "Refresh Expired Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/refreshAccessToken",
+            "headers": [
+              {
+                "name": "grant_type",
+                "value": ""
+              },
+              {
+                "name": "refresh_token",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API is used by Account-holders to get a new access token when the existing access token has expired."
+        },
+        {
+          "info": {
+            "name": "Request access to a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/requestJobAccess",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used by Account-holders to request access to a job on the DER web interface, using the NMI as an identifier."
+        },
+        {
+          "info": {
+            "name": "Request Access Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/requestAccessToken",
+            "headers": [
+              {
+                "name": "grant_type",
+                "value": ""
+              },
+              {
+                "name": "redirect_uri",
+                "value": ""
+              },
+              {
+                "name": "nonce",
+                "value": ""
+              },
+              {
+                "name": "code",
+                "value": ""
+              },
+              {
+                "name": "code_verifier",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "This API will return access token, Id token and refresh token after successful authentication"
+        },
+        {
+          "info": {
+            "name": "Submit a Single DER Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/submitDER",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Participants can submit a single DER Record data at any stage of the process. They can also use this API to Submit Connection Agreement, Update an existing DER record and Resolve exceptions."
+        },
+        {
+          "info": {
+            "name": "Submit DER UI",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/submitDERUI",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Submit DER UI"
+        },
+        {
+          "info": {
+            "name": "Submit Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/submitPreferences",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This API is used by participants to submit preferences for contact details, inverter settings, and notifications based on approved capacity."
+        },
+        {
+          "info": {
+            "name": "Validate DER",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/validateDER",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate DER"
+        },
+        {
+          "info": {
+            "name": "verify User Claims",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMWholesale/DER/consumer/registration/verifyUserClaims"
+          },
+          "docs": "verify User Claims"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

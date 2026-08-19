@@ -1,0 +1,244 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WEMDE DispatchSummary",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WEMDE DispatchSummary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves Dispatch Summary Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchSummary/dispatchDataOutcomes?primaryDispatchIntervalFrom=:primaryDispatchIntervalFrom&primaryDispatchIntervalTo=:primaryDispatchIntervalTo",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "primaryDispatchIntervalFrom",
+                "value": "",
+                "type": "path",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "primaryDispatchIntervalTo",
+                "value": "",
+                "type": "path",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices"
+              },
+              {
+                "name": "dispatchScenario",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+              },
+              {
+                "name": "facilityCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves Dispatch Summary Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals"
+        },
+        {
+          "info": {
+            "name": "Retrieves the Dispatch Summary Data for Dispatch Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchSummary/dispatchData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices"
+              },
+              {
+                "name": "dispatchScenario",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+              },
+              {
+                "name": "dispatchIntervalStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "dispatchIntervalEndDate",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "primaryDispatchInterval",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "facilityCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the Dispatch Summary Data for Dispatch Run"
+        },
+        {
+          "info": {
+            "name": "Retrieves the Dispatch Summary Data for Pre-Dispatch Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchSummary/preDispatchData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices"
+              },
+              {
+                "name": "dispatchScenario",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+              },
+              {
+                "name": "dispatchIntervalStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "dispatchIntervalEndDate",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "primaryDispatchInterval",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "facilityCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the Dispatch Summary Data for Pre-Dispatch Run"
+        },
+        {
+          "info": {
+            "name": "Retrieves the Dispatch Summary Data for Week Ahead Dispatch Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchSummary/weekAheadDispatchData",
+            "headers": [
+              {
+                "name": "x-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices"
+              },
+              {
+                "name": "dispatchScenario",
+                "value": "",
+                "type": "query",
+                "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+              },
+              {
+                "name": "dispatchIntervalStartDate",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "dispatchIntervalEndDate",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "primaryDispatchInterval",
+                "value": "",
+                "type": "query",
+                "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+              },
+              {
+                "name": "facilityCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the Dispatch Summary Data for Week Ahead Dispatch Run"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

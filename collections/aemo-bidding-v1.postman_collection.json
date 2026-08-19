@@ -1,0 +1,2816 @@
+{
+  "item": [
+    {
+      "id": "adeece9f-6421-449a-83e1-802df690d99b",
+      "name": "NEMDispatchBidding",
+      "description": {
+        "content": "Bidding Service Open API specification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a87cba2b-fe60-40ec-80a9-6318a54535ec",
+          "name": "getBid",
+          "request": {
+            "name": "getBid",
+            "description": {
+              "content": "Returns an Energy, FCAS, or MNSP bid. It provides details for a specific Bid/Offer, including the interval, day, and submission information. If the parameters match, the specific Bid/Offer details return, otherwise an error displays.\n\nThis endpoint only has query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getBid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offerTimeStamp",
+                  "value": "<string>",
+                  "description": "(Required) Bid/Offer date and time"
+                },
+                {
+                  "disabled": false,
+                  "key": "tradingDate",
+                  "value": "<string>",
+                  "description": "(Required) The trading day of the Bid/Offer"
+                },
+                {
+                  "disabled": false,
+                  "key": "duid",
+                  "value": "<string>",
+                  "description": "(Required) The Unit or MNSP interconnectorId. A successful MNSP getBid response returns Link IDs in the DUID objects, not Interconnector IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "(Required) The Bid/Offer service type, one of, ENERGY, MNSP, RAISE1SEC, RAISE6SEC, RAISE60SEC, RAISE5MIN, RAISEREG, LOWER6SEC, LOWER1SEC, LOWER60SEC, LOWER5MIN, LOWERREG"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value ='P01'",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value ='NEM'",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a3e6e7c-469d-4255-87c3-d69dfc409b58",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"participantId\": \"string\",\n    \"offerTimeStamp\": \"string\",\n    \"transactionId\": \"string\",\n    \"referenceId\": \"string\",\n    \"comments\": \"string\",\n    \"filename\": \"string\",\n    \"authorisedBy\": \"string\",\n    \"status\": \"string\",\n    \"method\": \"string\",\n    \"energyBid\": {\n      \"tradingDate\": \"string\",\n      \"duid\": \"string\",\n      \"direction\": \"string\",\n      \"prices\": [\n        0\n      ],\n      \"fastStartProfile\": {\n        \"minimumLoad\": 0,\n        \"t1\": 0,\n        \"t2\": 0,\n        \"t3\": 0,\n        \"t4\": 0\n      },\n      \"dailyEnergyConstraint\": 0,\n      \"rebidExplanation\": {\n        \"reason\": \"string\",\n        \"eventTime\": \"string\",\n        \"awareTime\": \"string\",\n        \"decisionTime\": \"string\",\n        \"category\": \"string\"\n      },\n      \"energyPeriods\": [\n        {\n          \"periodId\": 0,\n          \"maxAvail\": 0,\n          \"rampUpRate\": 0,\n          \"rampDownRate\": 0,\n          \"recallPeriod\": 0,\n          \"bandAvail\": [\n            0\n          ],\n          \"pasaAvail\": 0,\n          \"fixedLoad\": 0\n        }\n      ]\n    },\n    \"fcasBid\": {\n      \"tradingDate\": \"string\",\n      \"duid\": \"string\",\n      \"direction\": \"string\",\n      \"prices\": [\n        0\n      ],\n      \"service\": \"RAISE6SEC\",\n      \"rebidExplanation\": {\n        \"reason\": \"string\",\n        \"eventTime\": \"string\",\n        \"awareTime\": \"string\",\n        \"decisionTime\": \"string\",\n        \"category\": \"string\"\n      },\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 0,\n          \"maxAvail\": 0,\n          \"bandAvail\": [\n            0\n          ],\n          \"enablementMin\": 0,\n          \"lowBreakPoint\": 0,\n          \"highBreakPoint\": 0,\n          \"enablementMax\": 0\n        }\n      ]\n    },\n    \"mnspBid\": {\n      \"interconnectorId\": \"string\",\n      \"tradingDate\": \"string\",\n      \"mnspBidImport\": {\n        \"linkId\": \"string\",\n        \"prices\": [\n          0\n        ],\n        \"mnspPeriods\": [\n          {\n            \"periodId\": 0,\n            \"maxAvail\": 0,\n            \"rampUpRate\": 0,\n            \"recallPeriod\": 0,\n            \"bandAvail\": [\n              0\n            ],\n            \"pasaAvail\": 0,\n            \"fixedLoad\": 0\n          }\n        ]\n      },\n      \"mnspBidExport\": {\n        \"linkId\": \"string\",\n        \"prices\": [\n          0\n        ],\n        \"mnspPeriods\": [\n          {\n            \"periodId\": 0,\n            \"maxAvail\": 0,\n            \"rampUpRate\": 0,\n            \"bandAvail\": [\n              0\n            ],\n            \"pasaAvail\": 0,\n            \"fixedLoad\": 0\n          }\n        ]\n      },\n      \"rebidExplanation\": {\n        \"reason\": \"string\",\n        \"eventTime\": \"string\",\n        \"awareTime\": \"string\",\n        \"decisionTime\": \"string\",\n        \"category\": \"string\"\n      }\n    }\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9d2d329-a73e-4cac-b1d6-de3f7c4205b1",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fa642739-74c4-470b-ad5d-4a04e3586855",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cba4828d-672d-4363-8bdc-a8b862495cbd",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e09e54f-ab9c-4664-ad88-4e40d9c0c157",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ef3eb4a-0f92-43da-aac7-116ad18adf1a",
+              "name": "This response is provided when there are no bids found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a45fcf84-220b-401f-b3dd-b24a18fccee3",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fc8d5dc0-69a9-4a52-af0a-4d3adcade29e",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offerTimeStamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae094bdc-cb8d-474d-a0bd-1d46ca1a19ad",
+          "name": "getBids",
+          "request": {
+            "name": "getBids",
+            "description": {
+              "content": "Returns one or more Energy, FCAS, or MNSP Bid/Offers (not including interval data). <br>\nUse the following optional query parameters to search for a specific bid or offer:\n- fromTradingDate\n- toTradingDate\n- duid or interconnectorId <br>\n- service\n- includeSuperseded",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getBids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromTradingDate",
+                  "value": "<string>",
+                  "description": "From Trading Day (inclusive), default is current trading day. Format - date-time (as date-time in RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTradingDate",
+                  "value": "<string>",
+                  "description": "Default is fromTradingDate + 7 days. A seven day range is returned. If you need a greater range, submit the getBids endpoint multiple times. For the selected date range when there is no explicit Bid/Offer, the last valid Bid/Offer displays. Format - date-time (as date-time in RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "The Bid/Offer service type, one of, ENERGY, MNSP, RAISE1SEC, RAISE6SEC, RAISE60SEC, RAISE5MIN, RAISEREG, LOWER1SEC, LOWER6SEC, LOWER60SEC, LOWER5MIN, LOWERREG"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeSuperseded",
+                  "value": "<string>",
+                  "description": "Specifies offers have to be retrieved. FALSE returns current effective bids, TRUE return all versions of bids/offers"
+                },
+                {
+                  "disabled": false,
+                  "key": "duid",
+                  "value": "<string>",
+                  "description": "Dispatchable Unit identifier recorded in AEMO's systems. Must be upper case, maxLength: 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value:'P01'",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value:'NEM'",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "56eaf0f3-1953-49b0-a1e0-11bd7114a3b5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"bids\": [\n      {\n        \"duid\": \"string\",\n        \"service\": \"string\",\n        \"tradingDate\": \"string\",\n        \"offerTimestamp\": \"string\",\n        \"entryType\": \"string\",\n        \"transactionId\": \"string\",\n        \"referenceId\": \"string\",\n        \"rebidExplanation\": {\n          \"reason\": \"string\",\n          \"eventTime\": \"string\",\n          \"awareTime\": \"string\",\n          \"decisionTime\": \"string\",\n          \"category\": \"string\"\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {\n      \"errorCode\": \"string\",\n      \"fieldName\": \"string\",\n      \"message\": \"string\",\n      \"meta\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a43ea687-1d71-42f1-a6d5-f9c01aad8d64",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ad9e04b-44cf-40fe-88d2-4f93e309a3ac",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9bd965b-4ecb-4ce3-aeef-e9286f8e4697",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c4fa773-6117-4be8-bbff-ed4aca82a0dc",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd32fcfb-df45-4638-9e6c-45a00bc8843c",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b62bf71-72ef-4382-bb4a-9cfa7ab785f1",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeSuperseded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "duid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "093b5155-e3f6-4bda-be5e-d03d193cec8f",
+          "name": "getSubmission",
+          "request": {
+            "name": "getSubmission",
+            "description": {
+              "content": "Retrieves a previous submission where the requesting participantId is the submitting participantId.<br>\nProvide at least one of the following query parameters, otherwise no results return: <br>\n- transactionId\n- referenceId <br>\n\nThis endpoint only has query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getSubmission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "referenceId",
+                  "value": "<string>",
+                  "description": "The bid submission's reference identifier. You must provide at least one query parameter in an API call"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "The bid submission's transaction identifier. You must provide at least one query parameter in an API call"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value ='P01'",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value ='NEM'",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7e06fee6-79ea-4249-8cce-e8c856c3c13b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"offerTimestamp\": \"string\",\n    \"transactionId\": \"string\",\n    \"referenceId\": \"string\",\n    \"submissionTimeStamp\": \"string\",\n    \"comments\": \"string\",\n    \"filename\": \"string\",\n    \"authorisedBy\": \"string\",\n    \"status\": \"string\",\n    \"method\": \"string\",\n    \"energyBids\": [\n      [\n        {\n          \"tradingDate\": \"string\",\n          \"duid\": \"string\",\n          \"direction\": \"string\",\n          \"prices\": [\n            0\n          ],\n          \"fastStartProfile\": {\n            \"minimumLoad\": 0,\n            \"t1\": 0,\n            \"t2\": 0,\n            \"t3\": 0,\n            \"t4\": 0\n          },\n          \"dailyEnergyConstraint\": 0,\n          \"rebidExplanation\": {\n            \"reason\": \"string\",\n            \"eventTime\": \"string\",\n            \"awareTime\": \"string\",\n            \"decisionTime\": \"string\",\n            \"category\": \"string\"\n          },\n          \"energyPeriods\": [\n            {\n              \"periodId\": 0,\n              \"maxAvail\": 0,\n              \"rampUpRate\": 0,\n              \"rampDownRate\": 0,\n              \"bandAvail\": [\n                0\n              ],\n              \"pasaAvail\": 0,\n              \"fixedLoad\": 0\n            }\n          ]\n        }\n      ]\n    ],\n    \"fcasBids\": [\n      [\n        {\n          \"tradingDate\": \"string\",\n          \"duid\": \"string\",\n          \"direction\": \"string\",\n          \"prices\": [\n            0\n          ],\n          \"service\": \"RAISE6SEC\",\n          \"rebidExplanation\": {\n            \"reason\": \"string\",\n            \"eventTime\": \"string\",\n            \"awareTime\": \"string\",\n            \"decisionTime\": \"string\",\n            \"category\": \"string\"\n          },\n          \"fcasPeriods\": [\n            {\n              \"periodId\": 0,\n              \"maxAvail\": 0,\n              \"bandAvail\": [\n                0\n              ],\n              \"enablementMin\": 0,\n              \"lowBreakPoint\": 0,\n              \"highBreakPoint\": 0,\n              \"enablementMax\": 0\n            }\n          ]\n        }\n      ]\n    ],\n    \"mnspBids\": [\n      [\n        {\n          \"interconnectorId\": \"string\",\n          \"tradingDate\": \"string\",\n          \"mnspBidImport\": {\n            \"linkId\": \"string\",\n            \"prices\": [\n              0\n            ],\n            \"mnspPeriods\": [\n              {\n                \"periodId\": 0,\n                \"maxAvail\": 0,\n                \"rampUpRate\": 0,\n                \"bandAvail\": [\n                  0\n                ],\n                \"pasaAvail\": 0,\n                \"fixedLoad\": 0\n              }\n            ]\n          },\n          \"mnspBidExport\": {\n            \"linkId\": \"string\",\n            \"prices\": [\n              0\n            ],\n            \"mnspPeriods\": [\n              {\n                \"periodId\": 0,\n                \"maxAvail\": 0,\n                \"rampUpRate\": 0,\n                \"bandAvail\": [\n                  0\n                ],\n                \"pasaAvail\": 0,\n                \"fixedLoad\": 0\n              }\n            ]\n          },\n          \"rebidExplanation\": {\n            \"reason\": \"string\",\n            \"eventTime\": \"string\",\n            \"awareTime\": \"string\",\n            \"decisionTime\": \"string\",\n            \"category\": \"string\"\n          }\n        }\n      ]\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9459592d-f8b7-426e-a42d-e5262d9da3b2",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2208e817-10ca-4b02-8340-f7ff077d69fd",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "095279b2-cd20-407c-ab28-1127f75a858a",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac074769-c3df-4462-8f56-bdf0882e0718",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "683e2eb6-f312-458e-8bb3-6b6bfc305376",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "42ce60de-f256-4684-af8a-818bf9e04a1b",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78e67393-ff66-4d03-8c77-cba38d4a168d",
+          "name": "getSubmissions",
+          "request": {
+            "name": "getSubmissions",
+            "description": {
+              "content": "Retrieves a list of accepted submissions where the requesting participantId is the submitting participantId.\n\nUse the following optional query parameters to search for specific submissions: <br>\n- fromTradingDate\n- toTradingDate\n- transactionId\n- fromOfferTimeStamp\n- toOfferTimeStamp\n- referenceId\n- comments \n<br>\nThis endpoint has query parameters only (no payload parameters).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "getSubmissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fromTradingDate",
+                  "value": "<string>",
+                  "description": "Format - date-time (as date-time in RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toTradingDate",
+                  "value": "<string>",
+                  "description": "Format - date-time (as date-time in RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromOfferTimestamp",
+                  "value": "<string>",
+                  "description": "Format - date-time (as date-time in RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "toOfferTimestamp",
+                  "value": "<string>",
+                  "description": "Format - date-time (as date-time in RFC3339)"
+                },
+                {
+                  "disabled": false,
+                  "key": "referenceId",
+                  "value": "<string>",
+                  "description": "Identifier for a specific bid or offer submission"
+                },
+                {
+                  "disabled": false,
+                  "key": "comments",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "Unique transaction identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "method",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value ='P01'",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value ='NEM'",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c54309f-f796-4e90-b69f-0f8d13ceab47",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"submissions\": [\n    {\n      \"participantId\": \"string\",\n      \"offerTimeStamp\": \"string\",\n      \"transactionId\": \"string\",\n      \"referenceId\": \"string\",\n      \"submissionTimeStamp\": \"string\",\n      \"comments\": \"string\",\n      \"filename\": \"string\",\n      \"authorisedBy\": \"string\",\n      \"status\": \"string\",\n      \"method\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d32418df-99f3-4905-b65c-6b84a2e85365",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e659ba0d-e284-4fca-b5eb-5740fe00f7e6",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59c419fd-16af-4598-939c-de8002d0fa7b",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c705b77-fcfd-4607-92d8-c25e7f5db6c6",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdfbe238-dcfb-4d8e-ae37-9a64ed78de85",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e28d59bd-55b2-4822-903b-8903c566765c",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "getSubmissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toTradingDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fromOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "toOfferTimestamp",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "referenceId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "method",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value ='NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07ec62ff-0d65-4711-8e38-de4ce51f6706",
+          "name": "submitBids",
+          "request": {
+            "name": "submitBids",
+            "description": {
+              "content": "Submit one or more Energy, FCAS, or MNSP Bids. It supports: <br>\n- Bids and Offers for multiple Trading Days, DUIDs (Dispatchable Unit or MSNP Interconnector ID), and FCAS Service Type.\n- Provision of Energy, FCAS, and MNSP bids/offers in the same submission.\n- Separate formats for Energy, FCAS, or MNSP bids/offers so you don't need to include unrequired fields.\n<br>\nYou provide the Bid/Offer details in the energyBids, fcasBids, or mnspBids arrays in the JSON schema.<br> \nThis endpoint has payload parameters only (no query parameters).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submitBids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value:'P01'",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Generated header parameter. Example value:'NEM'",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7fd361db-17c5-4981-84cd-7e1b9b15cbdf",
+              "name": "Submit Bids Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {\n    \"participantId\": \"string\",\n    \"offerTimeStamp\": \"string\",\n    \"transactionId\": \"string\",\n    \"referenceId\": \"string\",\n    \"comments\": \"string\",\n    \"filename\": \"string\",\n    \"authorisedBy\": \"string\",\n    \"status\": \"string\",\n    \"method\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc9554bc-2f2b-4ede-91ce-4589d0000ca9",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "803c9cc4-6a7b-4ea9-84fb-ec372b738795",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f0fc55af-75c9-408b-85d6-1341b989b365",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7f1033f-c00e-45da-a8c7-6f2253edaa3b",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c240b58d-efac-4412-836e-5db22adaeb95",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response payload.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "435ab56f-0a49-48ec-84a7-886256b9214b",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submitBids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'P01'",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Generated header parameter. Example value:'NEM'",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Required Base64 encoding of your URM username and password, concatenated with a colon and a TLS Certificate",
+                    "key": "Authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referenceId\": \"rrt-123\",\n  \"comments\": \"TEST bid\",\n  \"authorisedBy\": \"TOM\",\n  \"energyBids\": [\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            10,\n            0,\n            0,\n            0,\n            0,\n            0,\n            20,\n            0,\n            0,\n            0\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-06-30\",\n      \"duid\": \"BDU_DG_TAS1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        -1000,\n        0,\n        1,\n        2,\n        4,\n        8,\n        16,\n        32,\n        64,\n        15000\n      ],\n      \"fastStartProfile\": true,\n      \"dailyEnergyConstraint\": 1234.65,\n      \"rebidExplanation\": \"RebidReason.Enum\",\n      \"energyPeriods\": [\n        {\n          \"periodId\": 1,\n          \"rampUpRate\": 100,\n          \"rampDownRate\": 100,\n          \"recallPeriod\": 0,\n          \"pasaAvail\": 0,\n          \"maxAvail\": 0,\n          \"fixedLoad\": 10,\n          \"energyLimit\": 2000,\n          \"bandAvail\": [\n            0,\n            0,\n            0,\n            0,\n            0,\n            0,\n            5,\n            5,\n            10,\n            10\n          ]\n        }\n      ]\n    }\n  ],\n  \"fcasBids\": [\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"LOAD\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": -66,\n          \"LowBreakPoint\": -66,\n          \"HighBreakPoint\": -130,\n          \"EnablementMax\": -130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"direction\": \"GEN\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISEREG\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    },\n    {\n      \"tradingDate\": \"2023-05-10\",\n      \"duid\": \"P01S01D1\",\n      \"prices\": [\n        10.1,\n        20.2,\n        30.3,\n        40.4,\n        50.5,\n        60.6,\n        70.7,\n        80.8,\n        90.9,\n        100.5\n      ],\n      \"service\": \"RAISE1SEC\",\n      \"fcasPeriods\": [\n        {\n          \"periodId\": 1,\n          \"EnablementMin\": 66,\n          \"LowBreakPoint\": 66,\n          \"HighBreakPoint\": 130,\n          \"EnablementMax\": 130,\n          \"MaxAvail\": 20,\n          \"BandAvail\": [\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            10,\n            11\n          ]\n        }\n      ]\n    }\n  ],\n  \"mnspBids\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/NEMWholesale/bidding",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "ecbeeca0-81c8-4dd0-b74c-2bfc9a3a8c57",
+    "name": "NEMDispatchBidding",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Bidding Service Open API specification",
+      "type": "text/plain"
+    }
+  }
+}

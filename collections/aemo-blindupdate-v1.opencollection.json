@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "BlindUpdate",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BlindUpdate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/BlindUpdate/downloadFile",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payloadResponseId",
+                "value": "",
+                "type": "query",
+                "description": "when present, it only lists blind update responses for the given payloadResponseId."
+              }
+            ]
+          },
+          "docs": "Download the selected procossed BlindUpdate CSV File"
+        },
+        {
+          "info": {
+            "name": "Submission List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/BlindUpdate/submissionList",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "when present, it only lists blind update responses for the given status."
+              },
+              {
+                "name": "submissionFromDate",
+                "value": "",
+                "type": "query",
+                "description": "when present, it only lists blind update responses from the given date.  submissionFromDate."
+              },
+              {
+                "name": "submissionToDate",
+                "value": "",
+                "type": "query",
+                "description": "when present, it only lists blind update responses to the given date. submissionToDate."
+              },
+              {
+                "name": "participantMessageId",
+                "value": "",
+                "type": "query",
+                "description": "when present, it only lists blind update responses for the given MessageId."
+              },
+              {
+                "name": "butRunId",
+                "value": "",
+                "type": "query",
+                "description": "when present, it only lists blind update responses for the given butRunId."
+              }
+            ]
+          },
+          "docs": "Retrieve the BlindUpdate files submitted list for the Participant"
+        },
+        {
+          "info": {
+            "name": "Upload CSV File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMRetail/BlindUpdate/submission",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Upload blind update CSV file to AEMO’s market systems"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

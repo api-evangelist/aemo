@@ -1,0 +1,426 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CDR",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CDR",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DER For Service Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy/electricity/servicepoints/:servicePointId/der",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-v",
+                "value": ""
+              },
+              {
+                "name": "x-min-v",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-cds-arrangement",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "servicePointId",
+                "value": "",
+                "type": "path",
+                "description": "nmi"
+              }
+            ]
+          },
+          "docs": "Obtain a list of DER data from a particular service point"
+        },
+        {
+          "info": {
+            "name": "Get DER For Specific Service Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy/electricity/servicepoints/der",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-v",
+                "value": ""
+              },
+              {
+                "name": "x-min-v",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-cds-arrangement",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page of results being requested (standard pagination)"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Page size. Default is 25 (standard pagination). Maximum page size of 1000 results."
+              },
+              {
+                "name": "continuation-token",
+                "value": "",
+                "type": "query",
+                "description": "For Internal AEMO pagination purpose"
+              }
+            ]
+          },
+          "docs": "Obtain DER data for a specific set of service points"
+        },
+        {
+          "info": {
+            "name": "Get Service Point Detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy/electricity/servicepoints/:servicePointId",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-v",
+                "value": ""
+              },
+              {
+                "name": "x-min-v",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-cds-arrangement",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "servicePointId",
+                "value": "",
+                "type": "path",
+                "description": "nmi"
+              }
+            ]
+          },
+          "docs": "Obtain standingData details for the requested Service point"
+        },
+        {
+          "info": {
+            "name": "Get Service Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy/electricity/servicepoints",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-v",
+                "value": ""
+              },
+              {
+                "name": "x-min-v",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-cds-arrangement",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page of results being requested (standard pagination)"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Page size. Default is 25 (standard pagination). Maximum page size of 1000 results."
+              },
+              {
+                "name": "continuation-token",
+                "value": "",
+                "type": "query",
+                "description": "For Internal AEMO pagination purpose"
+              }
+            ]
+          },
+          "docs": "Obtain StandigData details for the specific set of service points."
+        },
+        {
+          "info": {
+            "name": "Get Usage For Service Point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy/electricity/servicepoints/:servicePointId/usage",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-v",
+                "value": ""
+              },
+              {
+                "name": "x-min-v",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-cds-arrangement",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "servicePointId",
+                "value": "",
+                "type": "path",
+                "description": "nmi"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page of results being requested (standard pagination)"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Page size. Default is 25 (standard pagination). Maximum page size of 1000 results."
+              },
+              {
+                "name": "continuation-token",
+                "value": "",
+                "type": "query",
+                "description": "For Internal AEMO pagination purpose"
+              },
+              {
+                "name": "oldest-date",
+                "value": "",
+                "type": "query",
+                "description": "Oldest date data is to be returned for. Should be no earlier than current date minus 24 months. If not provided, current date minus 24 months is assumed."
+              },
+              {
+                "name": "newest-date",
+                "value": "",
+                "type": "query",
+                "description": "Newest date data is to be returned for. Must be greater than current date minus 24 months. If not provided, current date is assumed."
+              },
+              {
+                "name": "interval-reads",
+                "value": "",
+                "type": "query",
+                "description": "Interval read values,FULL or 30MIN.Default value is NONE if no value provided."
+              }
+            ]
+          },
+          "docs": "Obtain a list of electricity usage data from a particular service point."
+        },
+        {
+          "info": {
+            "name": "Get Usage For Specific Service Points",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/secondary/energy/electricity/servicepoints/usage",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "Accept-Encoding",
+                "value": ""
+              },
+              {
+                "name": "X-initiatingParticipantId",
+                "value": ""
+              },
+              {
+                "name": "x-v",
+                "value": ""
+              },
+              {
+                "name": "x-min-v",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-cds-arrangement",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page of results being requested (standard pagination)"
+              },
+              {
+                "name": "page-size",
+                "value": "",
+                "type": "query",
+                "description": "Page size. Default is 25 (standard pagination). Maximum page size of 1000 results."
+              },
+              {
+                "name": "continuation-token",
+                "value": "",
+                "type": "query",
+                "description": "For Internal AEMO pagination purpose"
+              },
+              {
+                "name": "oldest-date",
+                "value": "",
+                "type": "query",
+                "description": "Oldest date data is to be returned for. Should be no earlier than current date minus 24 months. If not provided, current date minus 24 months is assumed."
+              },
+              {
+                "name": "newest-date",
+                "value": "",
+                "type": "query",
+                "description": "Newest date data is to be returned for. Must be greater than current date minus 24 months. If not provided, current date is assumed."
+              },
+              {
+                "name": "interval-reads",
+                "value": "",
+                "type": "query",
+                "description": "Interval read values,FULL or 30MIN.Default value is NONE if no value provided."
+              }
+            ]
+          },
+          "docs": "Obtain the electricity usage data for a specific set of service points."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

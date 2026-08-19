@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WEM DER Installation V2",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WEM DER Installation V2",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve DER installation records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v2/der-register/installation",
+            "params": [
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of NMIs. Returns records for the specified NMIs"
+              },
+              {
+                "name": "installationStage",
+                "value": "",
+                "type": "query",
+                "description": "One of “Confirmed” or “Conditional”\n\nReturns records where the DER Record is:\nConfirmed – both the Connections and Devices are ‘Confirmed’.\nConditional – at least one Connection or Device is ‘Conditional’"
+              },
+              {
+                "name": "equipmentType",
+                "value": "",
+                "type": "query",
+                "description": "One of:\n-\tInverter\n-\tOther\n-\tBattery Storage Inverter\n-\tControllable Load\n-\tHybrid Inverter\n-\tEVSE V2G\n-\tEVSE no V2G\n-\tRotating Machine\n-\tSolar PV Inverter\n\nReturns records for the specified equipmentType \n\nNote: Unknown_equipment is not supported."
+              },
+              {
+                "name": "deviceType",
+                "value": "",
+                "type": "query",
+                "description": "One of:\n-\tSolar PV\n-\tStorage\n-\tControlled load\n-\tCo Tri-generation\n-\tFossil\n-\tLiquid fuel\n-\tOther\n-\tSmall hydro / Hydro\n-\tSmall wind / Wind\n-\tWaste to energy\n-\tUnknown_Device\n\nReturns records for the specified deviceType"
+              },
+              {
+                "name": "fromCommissioningDate",
+                "value": "",
+                "type": "query",
+                "description": "A date in the format: yyyy-mm-dd\n\nReturns records where the CommissioningDate is greater than or equal to this value"
+              },
+              {
+                "name": "toCommissioningDate",
+                "value": "",
+                "type": "query",
+                "description": "A date in the format: yyyy-mm-dd, must be\n\nReturns records where the CommissioningDate is less than or equal to this value"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A number between 1 and the total number of available pages.\n\nDetermines which page of records to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "One of: 25, 50 or 100\n\nDetermines how many records are returned in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve DER Installation records by parameter\n\nRetrieves the current versions of one or more DER records.\n\nAt least one query parameter must be provided as outlined in the WEM: Distributed Energy Resource (DER) Register Technical Specification (e.g. by NMI, installation stage, equipment type, device type etc)."
+        },
+        {
+          "info": {
+            "name": "Create DER installation record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/v2/der-register/installation",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a DER installation record in the DER Register for the first time, when an installation does not already exist for the respective NMI in the DER Register, which includes the information required at the installation, AC Connection and DER Device data levels."
+        },
+        {
+          "info": {
+            "name": "Retrieve DER installation history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v2/der-register/installation/:nmi/history",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "path",
+                "description": "NMI"
+              }
+            ]
+          },
+          "docs": "Retrieves the current and historical versions of a DER installation (for a single NMI) including the installation, AC Connection and Device details information. \n\nThe returned records have a recordStartDate and recordEndDate indicating when the record was current."
+        },
+        {
+          "info": {
+            "name": "Retrieve DER installation record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-prd.aemo.local/v2/der-register/installation/:nmi",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "path",
+                "description": "NMI"
+              }
+            ]
+          },
+          "docs": "Retrieves a single DER record for the specified NMI. The returned data is the latest version stored in DER Register"
+        },
+        {
+          "info": {
+            "name": "Update DER installation record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-prd.aemo.local/v2/der-register/installation/:nmi",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "nmi",
+                "value": "",
+                "type": "path",
+                "description": "NMI to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a DER Installation record already stored in the DER Register. This may be to:\n\n1.\tUpdate information previously submitted where a change has occurred, is identified as being incomplete, inaccurate or no longer accurate at the installation, AC connection and devices levels.\n\n2.\tTo add new AC connections and/or devices to an already existing DER installation record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

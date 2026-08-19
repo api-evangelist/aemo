@@ -1,0 +1,700 @@
+{
+  "item": [
+    {
+      "id": "8f197998-ebc5-472c-99e4-6cc87da74436",
+      "name": "MT PASA Offers",
+      "description": {
+        "content": "Introduction",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5db26493-eff6-40fd-81ca-636ae00da88c",
+          "name": "Submit one or more MTPASA Offers.",
+          "request": {
+            "name": "Submit one or more MTPASA Offers.",
+            "description": {
+              "content": "The submission endpoint allows participants to submit one or more MTPASA Offers. You provide the Offer details in the Offers array in the JSON schema. Every Submission must supply all required submission level information otherwise AEMO rejects the submission. This endpoint has payload parameters only (no query parameters).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "submission"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf7e75d2-6f88-4128-b880-de71b98ec77d",
+              "name": "This response is provided when the payload are validated and saved in the AEMO's systems.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"38ae4076-44fe-4467-95e1-c2aee8b69924\",\n  \"data\": {\n    \"isSuccessful\": true,\n    \"offerDateTime\": \"2023-08-11T02:24:02Z\",\n    \"offerErrorInfoList\": []\n  },\n  \"errors\": [],\n  \"warnings\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef822750-67e5-4fad-bec1-e24a0319ca92",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10938834-1\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"source\": \"API Gateway\",\n      \"title\": \"Bad Request\",\n      \"detail\": \"Regex threat/JSON threat detected in request\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fa7a5d5-233e-4689-80b1-7db1e0c1c48e",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"source\": \"API Gateway\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Authorization failed\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b270d794-7fb8-4548-930e-f9e4189eb4a8",
+              "name": "This response is provided when privileges are insufficient.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"403\",\n      \"source\": \"\",\n      \"title\": \"Forbidden\",\n      \"detail\": \"Insufficient privileges\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c28ea2e3-e595-4482-a3cf-9d42c43d6d61",
+              "name": "This response is provided when a resource missing from URL or incorrect URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"source\": \"\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resource not found.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6894a1ff-4993-44c8-a8dc-2d7bd2da581f",
+              "name": "This response is provided when a resource missing from URL or incorrect URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"source\": \"\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Invalid method.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d3915b-75ee-4b73-8211-9415e7c5c8ea",
+              "name": "This response is provided when the method is not correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"422\",\n      \"source\": \"\",\n      \"title\": \"Unprocessable Entity\",\n      \"detail\": \"Unprocessable Entity.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fb60f8b-2762-4a7a-a5cf-2f59c043a755",
+              "name": "Too Many Requests - The Quota/Spike arrest limits have been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"source\": \"\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"The Quota/Spike arrest limits have been exceeded\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02b3dcc7-a828-42c5-aa18-208b3ae2d465",
+              "name": "This response is provided when any unforeseen error is encountered.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"500\",\n      \"source\": \"\",\n      \"title\": \"InternalServerError\",\n      \"detail\": \"An unexpected error has occurred\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a56777ff-c89f-482c-b711-699e5ec222c8",
+              "name": "Bad Gateway error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"502\",\n      \"source\": \"\",\n      \"title\": \"Bad Gateway\",\n      \"detail\": \"Bad Gateway\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c4404b9-8999-4f7d-be41-8450c85bcc57",
+              "name": "Service temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "submission"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"MtpasaOfferFileTrk\": {\n    \"Offers\": [\n      {\n        \"UnitId\": \"ER01\",\n        \"EffectiveDate\": \"2023-08-20\",\n        \"EnergyLimit\": 5,\n        \"Capacity1\": 1,\n        \"unitState1\": \"Noderatings\",\n        \"Recalltime1\": \"\",\n        \"Capacity2\": 2,\n        \"unitState2\": \"Noderatings\",\n        \"Recalltime2\": \"\",\n        \"Capacity3\": 0,\n        \"unitState3\": \"mothballed\",\n        \"Recalltime3\": 3,\n        \"Capacity4\": 0,\n        \"unitState4\": \"outageplanbasic\",\n        \"Recalltime4\": 4,\n        \"Capacity5\": 5,\n        \"unitState5\": \"Noderatings\",\n        \"Recalltime5\": \"\",\n        \"Capacity6\": 6,\n        \"unitState6\": \"Noderatings\",\n        \"Recalltime6\": \"\",\n        \"Capacity7\": 7,\n        \"unitState7\": \"Noderatings\",\n        \"Recalltime7\": \"\",\n        \"LastChanged\": \"2023-06-20T01:00:00Z\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n  \"data\": \"\",\n  \"errors\": [\n    {\n      \"code\": \"503\",\n      \"source\": \"\",\n      \"title\": \"Service Unavailable\",\n      \"detail\": \"Service Unavailable\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-prd.aemo.local/NEMWholesale/v1/mtpasaoffers",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "a42e43ec-c5f8-4c09-92a4-d3d3f313287a",
+    "name": "MT PASA Offers",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "## Introduction\nThe MT PASA Offers API allows Scheduled Generators, Market Customers, Market Network Service Providers, and Integrated Resource Providers to submit their MT PASA Offers for Bi-directional Units (BDU), Scheduled Generation Units (SGU), Scheduled Load Units (SLU), and Scheduled Network Services (SNS). MT PASA Offers are input into the MT PASA process.",
+      "type": "text/plain"
+    }
+  }
+}

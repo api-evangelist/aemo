@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MT PASA Offers",
+    "version": "3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MT PASA Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit one or more MTPASA Offers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-prd.aemo.local/NEMWholesale/v1/mtpasaoffers/submission",
+            "headers": [
+              {
+                "name": "X-initiatingParticipantID",
+                "value": ""
+              },
+              {
+                "name": "X-market",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The submission endpoint allows participants to submit one or more MTPASA Offers. You provide the Offer details in the Offers array in the JSON schema. Every Submission must supply all required submission level information otherwise AEMO rejects the submission. This endpoint has payload parameters only (no query parameters)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

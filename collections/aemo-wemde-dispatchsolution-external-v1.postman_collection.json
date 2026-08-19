@@ -1,0 +1,3285 @@
+{
+  "item": [
+    {
+      "id": "3eb016ec-d691-4837-8e58-e5b4561fb841",
+      "name": "WEMDE DispatchSolution",
+      "description": {
+        "content": "WEMDE DispatchSolution",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "555296a3-c45e-4b6a-bc8d-43f89399b9af",
+          "name": "Retrieves Solution Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+          "request": {
+            "name": "Retrieves Solution Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+            "description": {
+              "content": "Retrieves Solution Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dispatchDataOutcomes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "primaryDispatchIntervalFrom",
+                  "value": "<string>",
+                  "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "primaryDispatchIntervalTo",
+                  "value": "<string>",
+                  "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible values are Schedule,DispatchCaps,TrapeziumAdjustments,FacilityScheduleDetails,DefinedContingency,Constraints,InServiceQuantities,AvailableQuantities,MarketShortfalls,Prices,DispatchTotal,RocofControlRequirements,ContingencySolution,PriceSetting,FcessMarketClearingPriceCeilings."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f46c3613-5d93-4a3b-9b9a-a42be6da7f45",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"dispatchDataIssueID\": \"string\",\n    \"solutionData\": [\n      {\n        \"categories\": \"string\",\n        \"primaryDispatchInterval\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"schedule\": [\n          {\n            \"marketService\": \"string\",\n            \"facilitySchedule\": [\n              {\n                \"facilityCode\": \"string\",\n                \"quantity\": 0,\n                \"essPreProcessingConditionFlag\": true\n              }\n            ]\n          }\n        ],\n        \"dispatchCaps\": [\n          {\n            \"facilityCode\": \"string\",\n            \"dispatchCap\": 0\n          }\n        ],\n        \"trapeziumAdjustments\": [\n          {\n            \"marketService\": \"string\",\n            \"trapeziumAdjustmentDetails\": [\n              {\n                \"facilityCode\": \"string\",\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximumValueUsed\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"upwardsRampRateValueUsed\": 0\n              }\n            ]\n          }\n        ],\n        \"facilityScheduleDetails\": [\n          {\n            \"facilityCode\": \"string\",\n            \"contingencyRaisePF\": 0,\n            \"contingencyLowerPF\": 0,\n            \"regulationRaisePF\": 0,\n            \"regulationLowerPF\": 0,\n            \"rocofPF\": 0,\n            \"dispatchBindingFlag\": true,\n            \"contingency\": 0,\n            \"initialMw\": 0,\n            \"fastStartFlag\": true,\n            \"fastStartInitialModeTime\": 0,\n            \"fastStartInitialMode\": 0,\n            \"whatIfInitialMw\": 0,\n            \"fastStartTargetMode\": 0,\n            \"fastStartTargetModeTime\": 0,\n            \"estimatedFcessUpliftPayment\": 0,\n            \"nolDemand\": 0,\n            \"congestionRental\": 0,\n            \"facilityRisk\": 0\n          }\n        ],\n        \"definedContingency\": [\n          {\n            \"id\": \"string\",\n            \"valueOfContingency\": 0\n          }\n        ],\n        \"constraints\": [\n          {\n            \"id\": \"string\",\n            \"description\": \"string\",\n            \"leftHandSideValue\": 0,\n            \"operator\": \"string\",\n            \"constraintType\": \"string\",\n            \"rightHandSideValue\": 0,\n            \"defaultRhs\": 0,\n            \"bindingConstraintFlag\": true,\n            \"nearBindingConstraintFlag\": true,\n            \"shadowPrice\": 0,\n            \"isInterventionEvent\": true,\n            \"slackVariables\": [\n              {\n                \"variable\": \"string\",\n                \"value\": 0\n              }\n            ]\n          }\n        ],\n        \"inServiceQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"availableQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"marketShortfalls\": {\n          \"energyDeficit\": 0,\n          \"regulationRaiseDeficit\": 0,\n          \"regulationLowerDeficit\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"contingencyLowerDeficit\": 0,\n          \"rocofDeficit\": 0\n        },\n        \"prices\": {\n          \"energy\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0,\n          \"contingencyRaise\": 0\n        },\n        \"dispatchTotal\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"rocofControlRequirements\": {\n          \"minimumRocofControlRequirement\": 0,\n          \"additionalRocofControlRequirement\": 0,\n          \"rocofControlRequirement\": 0\n        },\n        \"contingencySolution\": {\n          \"solvedInertia\": 0,\n          \"solvedContingency\": 0,\n          \"contingencyRaiseRequirement\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"demandLevel\": 0,\n          \"clearedContingencyRaise\": 0,\n          \"largestContingency\": 0,\n          \"contingencyRaiseOffset\": 0,\n          \"contingencyLowerOffset\": 0\n        },\n        \"priceSetting\": [\n          {\n            \"marketService\": \"string\",\n            \"isMarketServiceCapped\": true,\n            \"contributions\": [\n              {\n                \"contributingVariable\": \"string\",\n                \"byHowMuch\": 0,\n                \"objectiveCoefficient\": 0\n              }\n            ]\n          }\n        ],\n        \"fcessMarketClearingPriceCeilings\": [\n          {\n            \"fcessMarketService\": \"string\",\n            \"priceCeiling\": 0\n          }\n        ],\n        \"marketServiceRequirements\": {\n          \"energy\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"rocof\": 0\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13849a08-fe5f-4c87-a206-cc427bc80c3d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d620cb2-24bc-446c-9e4f-f307342edb42",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9faa7b52-cef8-4cb9-9437-5b5c3fdd2766",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "373adde5-239b-4963-807b-d6cb387c0389",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3143fa0-b60f-4134-b512-7c30ae3615fd",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b36882cd-fd32-40b6-8d85-e061c237f1e2",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76a790a1-3abf-4dd5-9f50-afa80fc8182e",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29baf4e0-b6b2-455a-8876-671fb6705c58",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb468f49-46a2-4065-b5a0-bff6b821a646",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "primaryDispatchIntervalFrom",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchIntervalTo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd683d96-56aa-437a-b037-f3966cbdc8a7",
+          "name": "Retrieves the Solution Data for Dispatch Run",
+          "request": {
+            "name": "Retrieves the Solution Data for Dispatch Run",
+            "description": {
+              "content": "Retrieves the Solution Data for Dispatch Run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dispatchData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible values are Schedule,DispatchCaps,TrapeziumAdjustments,FacilityScheduleDetails,DefinedContingency,Constraints,InServiceQuantities,AvailableQuantities,MarketShortfalls,Prices,DispatchTotal,RocofControlRequirements,ContingencySolution,PriceSetting,FcessMarketClearingPriceCeilings."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "primaryDispatchInterval",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9567a3a2-65bc-42f0-bdeb-58c18ec4e6cd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"primaryDispatchInterval\": \"string\",\n    \"dispatchDataIssueID\": \"string\",\n    \"dispatchScenario\": \"string\",\n    \"solutionData\": [\n      {\n        \"categories\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"schedule\": [\n          {\n            \"marketService\": \"string\",\n            \"facilitySchedule\": [\n              {\n                \"facilityCode\": \"string\",\n                \"quantity\": 0,\n                \"essPreProcessingConditionFlag\": true\n              }\n            ]\n          }\n        ],\n        \"dispatchCaps\": [\n          {\n            \"facilityCode\": \"string\",\n            \"dispatchCap\": 0\n          }\n        ],\n        \"trapeziumAdjustments\": [\n          {\n            \"marketService\": \"string\",\n            \"trapeziumAdjustmentDetails\": [\n              {\n                \"facilityCode\": \"string\",\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximumValueUsed\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"upwardsRampRateValueUsed\": 0\n              }\n            ]\n          }\n        ],\n        \"facilityScheduleDetails\": [\n          {\n            \"facilityCode\": \"string\",\n            \"contingencyRaisePF\": 0,\n            \"contingencyLowerPF\": 0,\n            \"regulationRaisePF\": 0,\n            \"regulationLowerPF\": 0,\n            \"rocofPF\": 0,\n            \"dispatchBindingFlag\": true,\n            \"contingency\": 0,\n            \"initialMw\": 0,\n            \"fastStartFlag\": true,\n            \"fastStartInitialModeTime\": 0,\n            \"fastStartInitialMode\": 0,\n            \"whatIfInitialMw\": 0,\n            \"fastStartTargetMode\": 0,\n            \"fastStartTargetModeTime\": 0,\n            \"estimatedFcessUpliftPayment\": 0,\n            \"nolDemand\": 0,\n            \"congestionRental\": 0,\n            \"facilityRisk\": 0\n          }\n        ],\n        \"definedContingency\": [\n          {\n            \"id\": \"string\",\n            \"valueOfContingency\": 0\n          }\n        ],\n        \"constraints\": [\n          {\n            \"id\": \"string\",\n            \"description\": \"string\",\n            \"leftHandSideValue\": 0,\n            \"operator\": \"string\",\n            \"constraintType\": \"string\",\n            \"rightHandSideValue\": 0,\n            \"defaultRhs\": 0,\n            \"bindingConstraintFlag\": true,\n            \"nearBindingConstraintFlag\": true,\n            \"shadowPrice\": 0,\n            \"isInterventionEvent\": true,\n            \"slackVariables\": [\n              {\n                \"variable\": \"string\",\n                \"value\": 0\n              }\n            ]\n          }\n        ],\n        \"inServiceQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"availableQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"marketShortfalls\": {\n          \"energyDeficit\": 0,\n          \"regulationRaiseDeficit\": 0,\n          \"regulationLowerDeficit\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"contingencyLowerDeficit\": 0,\n          \"rocofDeficit\": 0\n        },\n        \"prices\": {\n          \"energy\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0,\n          \"contingencyRaise\": 0\n        },\n        \"dispatchTotal\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"rocofControlRequirements\": {\n          \"minimumRocofControlRequirement\": 0,\n          \"additionalRocofControlRequirement\": 0,\n          \"rocofControlRequirement\": 0\n        },\n        \"contingencySolution\": {\n          \"solvedInertia\": 0,\n          \"solvedContingency\": 0,\n          \"contingencyRaiseRequirement\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"demandLevel\": 0,\n          \"clearedContingencyRaise\": 0,\n          \"largestContingency\": 0,\n          \"contingencyRaiseOffset\": 0,\n          \"contingencyLowerOffset\": 0\n        },\n        \"priceSetting\": [\n          {\n            \"marketService\": \"string\",\n            \"isMarketServiceCapped\": true,\n            \"contributions\": [\n              {\n                \"contributingVariable\": \"string\",\n                \"byHowMuch\": 0,\n                \"objectiveCoefficient\": 0\n              }\n            ]\n          }\n        ],\n        \"fcessMarketClearingPriceCeilings\": [\n          {\n            \"fcessMarketService\": \"string\",\n            \"priceCeiling\": 0\n          }\n        ],\n        \"marketServiceRequirements\": {\n          \"energy\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"rocof\": 0\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3987384d-05a9-4c72-a7d5-a333fd416a81",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d504acc-1e96-48f1-b530-a6bdcf9164fb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24165979-df59-4bd2-8fb8-e945250c1520",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d26c8280-af24-4924-b925-56bab289ee8b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86add834-b7f0-40cd-9e5b-0523a6549abc",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e219a5fc-090e-4641-8612-c362c3303631",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb78fcd2-2305-4200-96e7-e9af15bc60f2",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a81db2da-b115-43f5-b0c8-29bb28d8c345",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2941824-debb-4731-abfe-db4ffa6d4a88",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e0ed38b-8f95-427c-9410-3190de29a334",
+          "name": "Retrieves the Solution Data for Pre-Dispatch Run",
+          "request": {
+            "name": "Retrieves the Solution Data for Pre-Dispatch Run",
+            "description": {
+              "content": "Retrieves the Solution Data for Pre-Dispatch Run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "preDispatchData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible values are Schedule,DispatchCaps,TrapeziumAdjustments,FacilityScheduleDetails,DefinedContingency,Constraints,InServiceQuantities,AvailableQuantities,MarketShortfalls,Prices,DispatchTotal,RocofControlRequirements,ContingencySolution,PriceSetting,FcessMarketClearingPriceCeilings."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "primaryDispatchInterval",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecc74cb1-fc58-4cab-95b8-d7eb5f9ebe9a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"primaryDispatchInterval\": \"string\",\n    \"dispatchDataIssueID\": \"string\",\n    \"dispatchScenario\": \"string\",\n    \"solutionData\": [\n      {\n        \"categories\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"schedule\": [\n          {\n            \"marketService\": \"string\",\n            \"facilitySchedule\": [\n              {\n                \"facilityCode\": \"string\",\n                \"quantity\": 0,\n                \"essPreProcessingConditionFlag\": true\n              }\n            ]\n          }\n        ],\n        \"dispatchCaps\": [\n          {\n            \"facilityCode\": \"string\",\n            \"dispatchCap\": 0\n          }\n        ],\n        \"trapeziumAdjustments\": [\n          {\n            \"marketService\": \"string\",\n            \"trapeziumAdjustmentDetails\": [\n              {\n                \"facilityCode\": \"string\",\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximumValueUsed\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"upwardsRampRateValueUsed\": 0\n              }\n            ]\n          }\n        ],\n        \"facilityScheduleDetails\": [\n          {\n            \"facilityCode\": \"string\",\n            \"contingencyRaisePF\": 0,\n            \"contingencyLowerPF\": 0,\n            \"regulationRaisePF\": 0,\n            \"regulationLowerPF\": 0,\n            \"rocofPF\": 0,\n            \"dispatchBindingFlag\": true,\n            \"contingency\": 0,\n            \"initialMw\": 0,\n            \"fastStartFlag\": true,\n            \"fastStartInitialModeTime\": 0,\n            \"fastStartInitialMode\": 0,\n            \"whatIfInitialMw\": 0,\n            \"fastStartTargetMode\": 0,\n            \"fastStartTargetModeTime\": 0,\n            \"estimatedFcessUpliftPayment\": 0,\n            \"nolDemand\": 0,\n            \"congestionRental\": 0,\n            \"facilityRisk\": 0\n          }\n        ],\n        \"definedContingency\": [\n          {\n            \"id\": \"string\",\n            \"valueOfContingency\": 0\n          }\n        ],\n        \"constraints\": [\n          {\n            \"id\": \"string\",\n            \"description\": \"string\",\n            \"leftHandSideValue\": 0,\n            \"operator\": \"string\",\n            \"constraintType\": \"string\",\n            \"rightHandSideValue\": 0,\n            \"defaultRhs\": 0,\n            \"bindingConstraintFlag\": true,\n            \"nearBindingConstraintFlag\": true,\n            \"shadowPrice\": 0,\n            \"isInterventionEvent\": true,\n            \"slackVariables\": [\n              {\n                \"variable\": \"string\",\n                \"value\": 0\n              }\n            ]\n          }\n        ],\n        \"inServiceQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"availableQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"marketShortfalls\": {\n          \"energyDeficit\": 0,\n          \"regulationRaiseDeficit\": 0,\n          \"regulationLowerDeficit\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"contingencyLowerDeficit\": 0,\n          \"rocofDeficit\": 0\n        },\n        \"prices\": {\n          \"energy\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0,\n          \"contingencyRaise\": 0\n        },\n        \"dispatchTotal\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"rocofControlRequirements\": {\n          \"minimumRocofControlRequirement\": 0,\n          \"additionalRocofControlRequirement\": 0,\n          \"rocofControlRequirement\": 0\n        },\n        \"contingencySolution\": {\n          \"solvedInertia\": 0,\n          \"solvedContingency\": 0,\n          \"contingencyRaiseRequirement\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"demandLevel\": 0,\n          \"clearedContingencyRaise\": 0,\n          \"largestContingency\": 0,\n          \"contingencyRaiseOffset\": 0,\n          \"contingencyLowerOffset\": 0\n        },\n        \"priceSetting\": [\n          {\n            \"marketService\": \"string\",\n            \"isMarketServiceCapped\": true,\n            \"contributions\": [\n              {\n                \"contributingVariable\": \"string\",\n                \"byHowMuch\": 0,\n                \"objectiveCoefficient\": 0\n              }\n            ]\n          }\n        ],\n        \"fcessMarketClearingPriceCeilings\": [\n          {\n            \"fcessMarketService\": \"string\",\n            \"priceCeiling\": 0\n          }\n        ],\n        \"marketServiceRequirements\": {\n          \"energy\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"rocof\": 0\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e198cb28-09b2-4379-85e1-40d469546c5b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a023bc35-39e8-490a-bff5-5b49f6eb4689",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c845b4f-34f5-495c-a190-45e0dd7876f3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6491e5e9-e0c9-46cc-9788-6e2c8fef994c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4fdeaa8-a9cb-4c25-8c20-0a9c94f439a8",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2993b100-2ef5-440a-81bd-c471c7aa13ef",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe51475b-f346-44a7-ad6b-4f9aa18fc181",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2b81c59-ae55-41d6-be54-cc36e6c23d61",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf2074c3-c02b-444c-a87e-a64d538b6310",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be50bccc-5adb-4fa3-a8a2-ec2f9b53e318",
+          "name": "Retrieves the Solution Data for Week Ahead Dispatch Run",
+          "request": {
+            "name": "Retrieves the Solution Data for Week Ahead Dispatch Run",
+            "description": {
+              "content": "Retrieves the Solution Data for Week Ahead Dispatch Run",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "weekAheadDispatchData"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Possible values are Schedule,DispatchCaps,TrapeziumAdjustments,FacilityScheduleDetails,DefinedContingency,Constraints,InServiceQuantities,AvailableQuantities,MarketShortfalls,Prices,DispatchTotal,RocofControlRequirements,ContingencySolution,PriceSetting,FcessMarketClearingPriceCeilings."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchScenario",
+                  "value": "<string>",
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference."
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                },
+                {
+                  "disabled": false,
+                  "key": "primaryDispatchInterval",
+                  "value": "<string>",
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "accept-encoding",
+                "value": "gzip",
+                "description": ""
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf2088df-7863-4070-81bf-aafecb980c72",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"primaryDispatchInterval\": \"string\",\n    \"dispatchDataIssueID\": \"string\",\n    \"dispatchScenario\": \"string\",\n    \"solutionData\": [\n      {\n        \"categories\": \"string\",\n        \"dispatchInterval\": \"string\",\n        \"schedule\": [\n          {\n            \"marketService\": \"string\",\n            \"facilitySchedule\": [\n              {\n                \"facilityCode\": \"string\",\n                \"quantity\": 0,\n                \"essPreProcessingConditionFlag\": true\n              }\n            ]\n          }\n        ],\n        \"dispatchCaps\": [\n          {\n            \"facilityCode\": \"string\",\n            \"dispatchCap\": 0\n          }\n        ],\n        \"trapeziumAdjustments\": [\n          {\n            \"marketService\": \"string\",\n            \"trapeziumAdjustmentDetails\": [\n              {\n                \"facilityCode\": \"string\",\n                \"enablementMinimumValueUsed\": 0,\n                \"lowBreakpointValueUsed\": 0,\n                \"highBreakpointValueUsed\": 0,\n                \"enablementMaximumValueUsed\": 0,\n                \"downwardsRampRateValueUsed\": 0,\n                \"upwardsRampRateValueUsed\": 0\n              }\n            ]\n          }\n        ],\n        \"facilityScheduleDetails\": [\n          {\n            \"facilityCode\": \"string\",\n            \"contingencyRaisePF\": 0,\n            \"contingencyLowerPF\": 0,\n            \"regulationRaisePF\": 0,\n            \"regulationLowerPF\": 0,\n            \"rocofPF\": 0,\n            \"dispatchBindingFlag\": true,\n            \"contingency\": 0,\n            \"initialMw\": 0,\n            \"fastStartFlag\": true,\n            \"fastStartInitialModeTime\": 0,\n            \"fastStartInitialMode\": 0,\n            \"whatIfInitialMw\": 0,\n            \"fastStartTargetMode\": 0,\n            \"fastStartTargetModeTime\": 0,\n            \"estimatedFcessUpliftPayment\": 0,\n            \"nolDemand\": 0,\n            \"congestionRental\": 0,\n            \"facilityRisk\": 0\n          }\n        ],\n        \"definedContingency\": [\n          {\n            \"id\": \"string\",\n            \"valueOfContingency\": 0\n          }\n        ],\n        \"constraints\": [\n          {\n            \"id\": \"string\",\n            \"description\": \"string\",\n            \"leftHandSideValue\": 0,\n            \"operator\": \"string\",\n            \"constraintType\": \"string\",\n            \"rightHandSideValue\": 0,\n            \"defaultRhs\": 0,\n            \"bindingConstraintFlag\": true,\n            \"nearBindingConstraintFlag\": true,\n            \"shadowPrice\": 0,\n            \"isInterventionEvent\": true,\n            \"slackVariables\": [\n              {\n                \"variable\": \"string\",\n                \"value\": 0\n              }\n            ]\n          }\n        ],\n        \"inServiceQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"availableQuantities\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"marketShortfalls\": {\n          \"energyDeficit\": 0,\n          \"regulationRaiseDeficit\": 0,\n          \"regulationLowerDeficit\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"contingencyLowerDeficit\": 0,\n          \"rocofDeficit\": 0\n        },\n        \"prices\": {\n          \"energy\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0,\n          \"contingencyRaise\": 0\n        },\n        \"dispatchTotal\": {\n          \"energyInjectionCapacity\": 0,\n          \"energyWithdrawalCapacity\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"rocof\": 0\n        },\n        \"rocofControlRequirements\": {\n          \"minimumRocofControlRequirement\": 0,\n          \"additionalRocofControlRequirement\": 0,\n          \"rocofControlRequirement\": 0\n        },\n        \"contingencySolution\": {\n          \"solvedInertia\": 0,\n          \"solvedContingency\": 0,\n          \"contingencyRaiseRequirement\": 0,\n          \"contingencyRaiseDeficit\": 0,\n          \"demandLevel\": 0,\n          \"clearedContingencyRaise\": 0,\n          \"largestContingency\": 0,\n          \"contingencyRaiseOffset\": 0,\n          \"contingencyLowerOffset\": 0\n        },\n        \"priceSetting\": [\n          {\n            \"marketService\": \"string\",\n            \"isMarketServiceCapped\": true,\n            \"contributions\": [\n              {\n                \"contributingVariable\": \"string\",\n                \"byHowMuch\": 0,\n                \"objectiveCoefficient\": 0\n              }\n            ]\n          }\n        ],\n        \"fcessMarketClearingPriceCeilings\": [\n          {\n            \"fcessMarketService\": \"string\",\n            \"priceCeiling\": 0\n          }\n        ],\n        \"marketServiceRequirements\": {\n          \"energy\": 0,\n          \"regulationRaise\": 0,\n          \"regulationLower\": 0,\n          \"contingencyRaise\": 0,\n          \"contingencyLower\": 0,\n          \"rocof\": 0\n        }\n      }\n    ]\n  },\n  \"errors\": [\n    {}\n  ],\n  \"warnings\": [\n    {}\n  ],\n  \"infos\": [\n    {}\n  ],\n  \"transactionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42b211f8-c96f-4ca8-a890-4f8994c4796b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"400\",\n      \"title\": \"Missing mandatory HTTP header parameter\",\n      \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84a790ed-4475-4fb4-9ada-c921ebc5e34a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"401\",\n      \"title\": \"Unauthorized\",\n      \"detail\": \"Unauthorized\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9674c59f-41e4-46a9-b8a9-b1c26392dea8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "531a83f7-7d86-4c68-92cf-8f2d8fc12c68",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"404\",\n      \"title\": \"Not Found\",\n      \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4a7898d-83f0-4292-ace6-9866ef6d0a43",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"405\",\n      \"title\": \"Method Not Allowed\",\n      \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "780c595d-144c-4012-ac81-30eb0703eeb6",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"413\",\n      \"title\": \"Payload Too Large\",\n      \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d4c4282-aced-4bef-b5d3-157c2d4ad824",
+              "name": "Client Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": 0,\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50e03de2-3f27-4f9f-a680-251b1b47b3ab",
+              "name": "Too many request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n  \"data\": {},\n  \"errors\": [\n    {\n      \"code\": \"429\",\n      \"title\": \"Too Many Requests\",\n      \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n      \"source\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "880f27ea-9341-45da-89d4-7d72fd374c89",
+              "name": "Server error or application unavailable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "accept-encoding",
+                    "value": "gzip",
+                    "description": ""
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchSolution",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "info": {
+    "_postman_id": "4ea3ffd6-2dcf-4e45-9f23-ef309bbb60c6",
+    "name": "WEMDE DispatchSolution",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
