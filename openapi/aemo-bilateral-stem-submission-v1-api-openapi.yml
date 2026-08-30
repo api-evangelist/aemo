@@ -1,0 +1,81 @@
+openapi: 3.2.0
+info:
+  title: Bilateral/Stem Submission v1 API
+  version: '3.0'
+  x-origin:
+  - format: openapi
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/bilateral-stem-submission-v1/operations?api-version=2022-04-01-preview
+  description: Bilateral/Stem Submission v1
+servers:
+- url: https://api-prd.aemo.local/WEM/trading
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Bilateral/Stem Submission v1
+  description: Bilateral/Stem Submission v1
+paths:
+  /?soapAction=submitAction:
+    post:
+      operationId: submitAction
+      summary: submitAction
+      tags:
+      - Bilateral/Stem Submission v1
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - submitAction
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <Body>\n    <BidDataInput xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://mint.org/MintWebService/types\">BidDataInput1</BidDataInput>\n  </Body>\n</Envelope>"
+        description: submitAction
+      responses:
+        '200':
+          description: submitActionResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <Body>\n    <BidDataOutput xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://mint.org/MintWebService/types\">BidDataOutput1</BidDataOutput>\n  </Body>\n</Envelope>"
+  /?soapAction=submitActionBody:
+    post:
+      operationId: submitActionBody
+      summary: submitActionBody
+      tags:
+      - Bilateral/Stem Submission v1
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - submitActionBody
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <Body>\n    <BidDataInputInfo xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://mint.org/MintWebService/types\">\n      <BidDataInput xmlns=\"\">BidDataInput1</BidDataInput>\n    </BidDataInputInfo>\n  </Body>\n</Envelope>"
+        description: submitActionBody
+      responses:
+        '200':
+          description: submitActionBodyResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <Body>\n    <BidDataOutputInfo xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://mint.org/MintWebService/types\">\n      <BidDataOutput xmlns=\"\">BidDataOutput1</BidDataOutput>\n    </BidDataOutputInfo>\n  </Body>\n</Envelope>"
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query

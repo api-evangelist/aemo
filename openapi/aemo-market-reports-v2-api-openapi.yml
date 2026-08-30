@@ -1,0 +1,55 @@
+openapi: 3.2.0
+info:
+  title: Market Reports v2 API
+  version: '3.0'
+  x-origin:
+  - format: openapi
+    source: AEMO API Management developer portal
+    url: https://dev.aemo.com.au/developer/apis/market-reports-v2/operations?api-version=2022-04-01-preview
+  description: Market Reports v2
+servers:
+- url: https://api-prd.aemo.local/WEM/market
+security:
+- {}
+- apiKeyHeader: []
+- apiKeyQuery: []
+tags:
+- name: Market Reports v2
+  description: Market Reports v2
+paths:
+  /?soapAction=getMarketAdvisories:
+    post:
+      operationId: getMarketAdvisories
+      summary: getMarketAdvisories
+      tags:
+      - Market Reports v2
+      parameters:
+      - name: soapAction
+        in: query
+        required: true
+        description: SOAP action selector for this operation.
+        schema:
+          type: string
+          enum:
+          - getMarketAdvisories
+      requestBody:
+        content:
+          text/xml:
+            example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <Body>\n    <getMarketAdvisories xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/market/2.0\">\n      <trading_date_range>\n        <startDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</startDate>\n        <endDate xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01</endDate>\n      </trading_date_range>\n    </getMarketAdvisories>\n  </Body>\n</Envelope>"
+        description: getMarketAdvisories
+      responses:
+        '200':
+          description: getMarketAdvisoriesResponse
+          content:
+            text/xml:
+              example: "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Envelope xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <Body>\n    <getMarketAdvisoriesResponse xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://wems.imowa.com.au/xml/ns/market/2.0\">\n      <market_advisories_report>\n        <reportName xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">reportName1</reportName>\n        <published_date xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">1900-01-01T01:01:01</published_date>\n        <message xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">message1</message>\n        <message_tag xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">RE001</message_tag>\n        <reportArguments xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\n          <trading_date_range>\n            <startDate>1900-01-01</startDate>\n            <endDate>1900-01-01</endDate>\n          </trading_date_range>\n        </reportArguments>\n        <rows id=\"1\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\n          <vnetwork_action>vnetwork_action1</vnetwork_action>\n          <network_action>network_action1</network_action>\n          <vmp_action>vmp_action1</vmp_action>\n          <mp_action>mp_action1</mp_action>\n          <imo_action>imo_action1</imo_action>\n          <situation_details>situation_details1</situation_details>\n          <release_date>1900-01-01T01:01:01</release_date>\n          <market_advisory_type>market_advisory_type1</market_advisory_type>\n        </rows>\n        <rows id=\"-9223372036854775807\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\n          <vnetwork_action>vnetwork_action2</vnetwork_action>\n          <network_action>network_action2</network_action>\n          <vmp_action>vmp_action2</vmp_action>\n          <mp_action>mp_action2</mp_action>\n          <imo_action>imo_action2</imo_action>\n          <situation_details>situation_details2</situation_details>\n          <release_date>0001-01-01T00:00:00</release_date>\n          <market_advisory_type>market_advisory_type2</market_advisory_type>\n        </rows>\n        <rows id=\"9223372036854775807\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\n          <vnetwork_action>vnetwork_action3</vnetwork_action>\n          <network_action>network_action3</network_action>\n          <vmp_action>vmp_action3</vmp_action>\n          <mp_action>mp_action3</mp_action>\n          <imo_action>imo_action3</imo_action>\n          <situation_details>situation_details3</situation_details>\n          <release_date>9999-12-31T23:59:59.9999999</release_date>\n          <market_advisory_type>market_advisory_type3</market_advisory_type>\n        </rows>\n        <rows id=\"0\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\n          <vnetwork_action>vnetwork_action4</vnetwork_action>\n          <network_action>network_action4</network_action>\n          <vmp_action>vmp_action4</vmp_action>\n          <mp_action>mp_action4</mp_action>\n          <imo_action>imo_action4</imo_action>\n          <situation_details>situation_details4</situation_details>\n          <release_date>1899-11-30T01:01:01</release_date>\n          <market_advisory_type>market_advisory_type4</market_advisory_type>\n        </rows>\n        <rows id=\"2\" xmlns=\"http://wems.imowa.com.au/xml/ns/wems/1.0\">\n          <vnetwork_action>vnetwork_action5</vnetwork_action>\n          <network_action>network_action5</network_action>\n          <vmp_action>vmp_action5</vmp_action>\n          <mp_action>mp_action5</mp_action>\n          <imo_action>imo_action5</imo_action>\n          <situation_details>situation_details5</situation_details>\n          <release_date>1900-02-02T01:01:01</release_date>\n          <market_advisory_type>market_advisory_type5</market_advisory_type>\n        </rows>\n      </market_advisories_report>\n    </getMarketAdvisoriesResponse>\n  </Body>\n</Envelope>"
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Ocp-Apim-Subscription-Key
+      in: header
+    apiKeyQuery:
+      type: apiKey
+      name: subscription-key
+      in: query
