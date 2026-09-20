@@ -11,8 +11,215 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 20
 edges:
+- tag: WEM DER Installation V2
+  spec_file: aemo-wem-der-installation-v2-api-openapi.yml
+  capability_id: BC-3840.10
+  capability_id_l1: BC-3840
+  capability_name: DER Registration & Onboarding
+  confidence: 0.9
+  evidence: enables the Network Operator to create, update, and retrieve the DER Register information
+    details for the DER installations they have submitted to the DER Register database
+  reason: Explicit registration and record-keeping of distributed energy resource installations in the
+    DER Register — DER registration and onboarding.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: DER Registration For Account Holders
+  spec_file: aemo-der-registration-for-account-holders-api-openapi.yml
+  capability_id: BC-3840.10
+  capability_id_l1: BC-3840
+  capability_name: DER Registration & Onboarding
+  confidence: 0.82
+  evidence: '"Account Holders can • Submit DER Connection Agreement data. • Provide AC Connections, and
+    Device details in the same submission"; POST /getDERSummary Get details of a single or multiple DER
+    Records'
+  reason: The surface registers distributed energy resources — DER connection agreements, AC connections
+    and device details — and retrieves DER records and receipts, which is DER registration and connection
+    acceptance. Some operations are auth plumbing but the business core is DER onboarding.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: System Management Reports v2.2
+  spec_file: aemo-system-management-reports-v2-2-api-openapi.yml
+  capability_id: BC-3830
+  capability_id_l1: BC-3830
+  capability_name: Grid Control & Balancing Management
+  confidence: 0.82
+  evidence: getDispatchInstructions, getAncillaryServicesActivationInstructions, getRealTimeOutage
+  reason: 'Same system-operator surface: dispatch instructions, ancillary-service activation and real-time
+    outage data, i.e. grid control and balancing. Mixed sub-capabilities so only L1 asserted.'
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: TLS Certificate Mgmt v1
+  spec_file: aemo-tls-certificate-mgmt-v1-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.82
+  evidence: '"allows authorised participants to self-manage their AEMO-signed TLS certificates" — operations
+    "Create a new certificate", "Renew a certificate", "Revoke a certificate"'
+  reason: The operations perform PKI/TLS certificate issuance, renewal and revocation, a security control
+    capability under Cybersecurity Management. Left at L1 because certificate lifecycle sits ambiguously
+    between credential/identity management and security architecture, and the spec does not name a narrower
+    sub-capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: B2MMessagingSync
+  spec_file: aemo-b2mmessagingsync-api-openapi.yml
+  capability_id: BC-3910
+  capability_id_l1: BC-3910
+  capability_name: Utility Customer & Metering Management
+  confidence: 0.78
+  evidence: operations "getMeterRead", "getNMIDetail", "NMIDiscovery", "getMSATSLimits"
+  reason: 'Unlike the other messaging tags, this one exposes concrete MSATS retail-market operations:
+    NMI (supply-point identifier) discovery and standing-data retrieval plus meter read retrieval. That
+    is utility customer and metering data management; evidence spans both supply-point/account data and
+    meter reads, so no single L2 is named.'
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: RCM Operations
+  spec_file: aemo-rcm-operations-api-openapi.yml
+  capability_id: BC-3850.40
+  capability_id_l1: BC-3850
+  capability_name: Capacity Market Participation
+  confidence: 0.78
+  evidence: '"Retrieves a list of capacity credit allocations submitted by a market participant for a
+    range of trading days"; "Retrieves a Flexible CCA Standing Submission List for a Capacity Year"'
+  reason: 'Reserve Capacity Mechanism: capacity credits, certification of facility components, capacity
+    credit allocations and amendments — capacity-market qualification and participation.'
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: Electricity Service Points
+  spec_file: aemo-electricity-service-points-api-openapi.yml
+  capability_id: BC-3910.10
+  capability_id_l1: BC-3910
+  capability_name: Utility Customer Account Management
+  confidence: 0.75
+  evidence: '''Get Service Points'' / ''Get Service Point Detail'' with schemas EnergyServicePointId,
+    EnergyServicePointDetailV2_allOf_meters, EnergyServicePointDetailV2_allOf_registers, EnergyServicePointV2_consumerProfile'
+  reason: Exposes electricity supply-point (NMI-style) records including address, consumer profile, meters
+    and registers — the utility supply-point/customer account data layer described by BC-3910.10 'supply-point
+    identifiers'. Some overlap with Meter Asset Management, hence not higher confidence.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: IdentityService(v2)
+  spec_file: aemo-identityservice-v2-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: '"This API is used by a Participant to update their password for MSATs" — POST /ChangePassword'
+  reason: The single operation is a credential (password) change for a participant account, which is squarely
+    identity and access management. Confidence held at 0.75 because the surface is a single self-service
+    password endpoint, thin evidence for the full IAM sub-capability.
+  recovered_from: sweep-20260828T235257Z-edges.json
+- tag: LFAS Reports v2
+  spec_file: aemo-lfas-reports-v2-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.75
+  evidence: getLoadFollowingMeritOrders, getLoadFollowingPrices, getLoadFollowingQuantityPrices, getLoadFollowingSubmissions
+  reason: Load Following Ancillary Service merit orders, prices and submissions — the ancillary-services
+    procurement/activation surface of the market operator.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: LFAS Submission v2
+  spec_file: aemo-lfas-submission-v2-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.75
+  evidence: uploadLoadFollowingStandingSubmission, uploadLoadFollowingVariationSubmission, validateLoadFollowingStandingSubmission
+  reason: Submission and validation of Load Following Ancillary Service standing and variation offers
+    — ancillary-services (frequency regulation) market process.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: CDR
+  spec_file: aemo-cdr-api-openapi.yml
+  capability_id: BC-3910
+  capability_id_l1: BC-3910
+  capability_name: Utility Customer & Metering Management
+  confidence: 0.74
+  evidence: GET /electricity/servicepoints/{servicePointId} Get Service Point Detail; GET /electricity/servicepoints/{servicePointId}/usage
+    Get Usage For Service Point
+  reason: Exposes electricity service-point (supply point) details and consumption/usage data for those
+    service points to accredited data recipients — utility-specific customer and metering data. L1 Utility
+    Customer & Metering Management; split between account (service point) and meter-reading/usage sub-capabilities
+    so no L2.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: Balancing Reports v2.5
+  spec_file: aemo-balancing-reports-v2-5-api-openapi.yml
+  capability_id: BC-3830
+  capability_id_l1: BC-3830
+  capability_name: Grid Control & Balancing Management
+  confidence: 0.72
+  evidence: '"getBalancingLoadForecast", "getBalancingMeritOrders", "getBalancingPrices", "getTheoreticalEnergySchedule"'
+  reason: Adds a balancing load forecast to the merit-order/price/schedule reporting set — clearly system-operator
+    balancing and operational planning data. L1 grid control & balancing; the mix of forecast, merit order
+    and price prevents a confident L2.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: CapacityAuction
+  spec_file: aemo-capacityauction-api-openapi.yml
+  capability_id: BC-3850
+  capability_id_l1: BC-3850
+  capability_name: Energy Trading & Settlement Management
+  confidence: 0.72
+  evidence: POST /bidProfileSubmission submitBidsForTheDayAheadAuction; POST /GasFutureUpload submitFutureTradeData
+  reason: Bid submission and retrieval for the gas Day-Ahead Auction plus submission of future trade data
+    is wholesale energy/capacity market trading. L1 Energy Trading & Settlement Management; sub-capability
+    ambiguous between wholesale trading and capacity-market participation.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: Electricity Usage
+  spec_file: aemo-electricity-usage-api-openapi.yml
+  capability_id: BC-3910.40
+  capability_id_l1: BC-3910
+  capability_name: Meter Reading & Validation
+  confidence: 0.72
+  evidence: '''Get Usage For Service Point'' with schemas EnergyUsageRead_intervalRead, EnergyUsageRead_basicRead,
+    EnergyUsageRead_intervalRead_readQualities'
+  reason: Delivers meter consumption reads (basic and interval) with read-quality flags per service point
+    — meter reading and validated consumption data. Could arguably be AMI data acquisition, so confidence
+    moderated.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: Energy Accounts
+  spec_file: aemo-energy-accounts-api-openapi.yml
+  capability_id: BC-3910.10
+  capability_id_l1: BC-3910
+  capability_name: Utility Customer Account Management
+  confidence: 0.72
+  evidence: '''Get Energy Accounts'', ''Get Energy Account Detail'', ''Get Agreed Payment Schedule'',
+    ''Get Concessions'' with schemas EnergyAccountDetailV4_allOf_plans, EnergyPaymentSchedule'
+  reason: Retail energy customer account lifecycle data — account details, associated plans/tariffs, payment
+    schedules and concessions — matching utility customer account management.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: SelfForecast
+  spec_file: aemo-selfforecast-api-openapi.yml
+  capability_id: BC-3800.50
+  capability_id_l1: BC-3800
+  capability_name: Renewable Generation Operations
+  confidence: 0.72
+  evidence: '"used by participants who wish to submit their Solar or Wind Forecasts for a DUID to AEMO";
+    "Submit Pre-dispatch Forecast"'
+  reason: Submission of solar/wind generation forecasts for registered generating units — variable-renewable
+    generation forecasting, which BC-3800.50 explicitly covers (curtailment and forecasting for wind/solar
+    assets). Not DER forecasting since a DUID is a registered market generator.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: WEMDE NCESS
+  spec_file: aemo-wemde-ncess-api-openapi.yml
+  capability_id: BC-3830.40
+  capability_id_l1: BC-3830
+  capability_name: Reserves & Ancillary Services
+  confidence: 0.72
+  evidence: Retrieves Contractdetails for the AEMOProcured Participants; Retrieves Contractdetails for
+    the NetworkOperatorProcured Participants
+  reason: NCESS in the WEM is Non-Co-optimised Essential System Services; the operations expose contract
+    details for services procured by AEMO and network operators, which is procurement of operating reserves/ancillary
+    services by the system operator.
+  recovered_from: vertical-power-water-utilities-edges.json
+- tag: Distributed Energy Resources
+  spec_file: aemo-distributed-energy-resources-api-openapi.yml
+  capability_id: BC-3840
+  capability_id_l1: BC-3840
+  capability_name: Distributed Energy Resource Management
+  confidence: 0.7
+  evidence: GET /energy/electricity/servicepoints/{servicePointId}/der getElectricityDERForServicePoint;
+    schemas EnergyDerRecord_derDevices, EnergyDerRecord_acConnections
+  reason: Read access to DER records per electricity service point, including DER devices, AC connections
+    and protection mode — the DER register content for distributed energy resources. L1 Distributed Energy
+    Resource Management; read-only sharing rather than explicit registration workflow, so no L2.
+  recovered_from: vertical-power-water-utilities-edges.json
 - tag: Energy Account Billing
   spec_file: aemo-energy-account-billing-api-openapi.yml
   capability_id: BC-200.30
@@ -24,3 +231,13 @@ edges:
   reason: Customer invoices, usage charges and payment transactions on retail energy accounts — customer
     invoicing and cash-application data, which is Accounts Receivable Management. Not compressed higher
     because the API only discloses billing artefacts rather than executing invoicing.
+- tag: WEMDE DSPDispatchInstruction
+  spec_file: aemo-wemde-dspdispatchinstruction-api-openapi.yml
+  capability_id: BC-3840.30
+  capability_id_l1: BC-3840
+  capability_name: Demand Response Operations
+  confidence: 0.7
+  evidence: Retrieves the DSP dispatch instruction for all participants; Pre-Dispatch DSP Schedule information
+  reason: Dispatch instructions and schedules for Demand Side Programmes, i.e. dispatch of demand-side
+    response resources. Alternative reading as system-operator dispatch keeps confidence below 0.8.
+  recovered_from: vertical-power-water-utilities-edges.json
