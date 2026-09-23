@@ -1,17 +1,12 @@
 openapi: 3.2.0
 info:
   title: Capacity Auction API
-  description: '
-
-    ## Introduction
+  description: '## Introduction
 
     The Capacity Auction API is used by facility operators and trading participants to submit and receive data relating to capacity trades and day ahead auction for AEMO’s Capacity Transfer Platform (CTP) and Day-Ahead Auction (DAA) market systems.
 
 
-    For details on how to get access and business rules for this API:
-
-
-    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
+    For details on how to get access and business rules for this API:'
   version: '3.0'
   x-origin:
   - format: openapi
@@ -348,10 +343,17 @@ paths:
   /bidProfileSubmission:
     post:
       operationId: submitBidsForTheDayAheadAuction
-      summary: Submit bids for the Day Ahead Auction.
+      summary: Submit bids for the Day Ahead Auction
       tags:
       - CapacityAuction
-      description: "Allows auction participants to submit bids for the Day Ahead Auction.\nMultiple bids may be submitted in a single bid profile. However, all bids must pass validation otherwise the entire transaction will be rejected.\nThe latest bid profile submission will be used as the overall current bidding position for the specified date range.\n\n  A previously submitted bid can be cancelled by submitting an empty bid profile for the same gas day."
+      description: 'Allows auction participants to submit bids for the Day Ahead Auction.
+
+        Multiple bids may be submitted in a single bid profile. However, all bids must pass validation otherwise the entire transaction will be rejected.
+
+        The latest bid profile submission will be used as the overall current bidding position for the specified date range.
+
+
+        A previously submitted bid can be cancelled by submitting an empty bid profile for the same gas day.'
       parameters:
       - name: X-initiatingParticipantID
         in: header

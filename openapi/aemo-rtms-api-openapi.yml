@@ -23,7 +23,7 @@ paths:
   /consolidated:
     get:
       operationId: aPIEndpointThatHandlesRetrievingBatchedConsolidatedDispatchIntervalsForMultipleFacilitiesMarketsAndTradingDays
-      summary: API endpoint that handles retrieving batched consolidated dispatch intervals for multiple facilities, markets and Trading Days
+      summary: API endpoint that handles retrieving batched consolidated dispatch intervals…
       tags:
       - RTMS
       description: Retrieves the consolidated view of submissions for all or specific facilities within a date range (not greater than 10 days).
@@ -339,7 +339,7 @@ paths:
   /consolidated/dsp:
     get:
       operationId: aPIEndpointThatHandlesSearchingTheDSPConsolidatedDispatchIntervalsUsingTheProvidedSearchCriteria
-      summary: API endpoint that handles searching the DSP consolidated dispatch intervals using the provided search criteria.
+      summary: API endpoint that handles searching the DSP consolidated dispatch intervals…
       tags:
       - RTMS
       description: Retrieves the consolidated view of submissions for a specific Trading Day, Market Service and Facility. This endpoint is limited to the Energy Market Service and DSP Facilities.
@@ -618,7 +618,7 @@ paths:
   /consolidated/energy:
     get:
       operationId: aPIEndpointThatHandlesSearchingTheEnergyConsolidatedDispatchIntervalsUsingTheProvidedSearchCriteria
-      summary: API endpoint that handles searching the Energy consolidated dispatch intervals using the provided search criteria.
+      summary: API endpoint that handles searching the Energy consolidated dispatch intervals…
       tags:
       - RTMS
       description: Retrieves the consolidated view of submissions for a specific Trading Day, Market Service and Facility. This endpoint is limited to the Energy Market Service and non-DSP Facilities.
@@ -933,7 +933,7 @@ paths:
   /consolidated/ess:
     get:
       operationId: aPIEndpointThatHandlesSearchingTheESSConsolidatedDispatchIntervalsUsingTheProvidedSearchCriteria
-      summary: API endpoint that handles searching the ESS consolidated dispatch intervals using the provided search criteria.
+      summary: API endpoint that handles searching the ESS consolidated dispatch intervals…
       tags:
       - RTMS
       description: Retrieves the consolidated view of submissions for a specific Trading Day, Market Service and Facility. This endpoint is limited to the ESS Market Services (Regulation Raise/Lower, Contingency Raise/Lower, RoCoF) and non-DSP Facilities.
@@ -1246,12 +1246,12 @@ paths:
   /submissions/dsp/waitForResult:
     post:
       operationId: createANewDSPSubmissionByEmbeddedTheDSPSubmissionJSONInTheRequestAndWaitForTheValidationToCompleteBlockingCall
-      summary: 'Create a new DSP submission by embedded the DSP submission JSON in the request and wait for the
-
-        validation to complete (blocking call).'
+      summary: Create a new DSP submission by embedded the DSP submission JSON in the request…
       tags:
       - RTMS
-      description: "Submits one RTM Submission for DSP facilities and wait for the validation response. \nThere is a timeout of 30 seconds applied to this endpoint. If the call times out before validation process is complete, a submission status of SUBMITTED is returned"
+      description: 'Submits one RTM Submission for DSP facilities and wait for the validation response.
+
+        There is a timeout of 30 seconds applied to this endpoint. If the call times out before validation process is complete, a submission status of SUBMITTED is returned'
       parameters:
       - name: x-initiatingParticipantId
         in: header
@@ -1535,12 +1535,12 @@ paths:
   /submissions/waitForResult:
     post:
       operationId: createANewSubmissionByEmbeddedTheSubmissionJSONInTheRequestAndWaitForTheValidationToCompleteBlockingCall
-      summary: 'Create a new submission by embedded the submission JSON in the request and wait for the
-
-        validation to complete (blocking call).'
+      summary: Create a new submission by embedded the submission JSON in the request and wait…
       tags:
       - RTMS
-      description: "Submits one RTM Submission and wait for the validation response. \nThere is a timeout of 30 seconds applied to this endpoint. If the call times out before validation process is complete, a submission status of SUBMITTED is returned"
+      description: 'Submits one RTM Submission and wait for the validation response.
+
+        There is a timeout of 30 seconds applied to this endpoint. If the call times out before validation process is complete, a submission status of SUBMITTED is returned'
       parameters:
       - name: x-initiatingParticipantId
         in: header
@@ -2041,7 +2041,7 @@ paths:
   /submissions:
     post:
       operationId: createANewSubmissionByProvidingTheSubmissionDataAsAJsonEmbeddedInTheRequest
-      summary: Create a new submission by providing the submission data as a json embedded in the request.
+      summary: Create a new submission by providing the submission data as a json embedded in…
       tags:
       - RTMS
       description: Submits one RTM Submission asynchronously.
@@ -2488,7 +2488,7 @@ paths:
                   value: ''
     get:
       operationId: getAListOfSubmissionsPagedUseTheQueryParametersToRefineAndApplyASearchCriteria
-      summary: Get a list of submissions (paged). Use the query parameters to refine and apply a search criteria.
+      summary: Get a list of submissions (paged).
       tags:
       - RTMS
       description: 'Retrieves historical submissions based on various parameters. Results are paged with default page size of 500 unless specified otherwise. For data older than 35 days of the query date the following filters will not be available: GateClosureViolation, Facility, MarketService, TradingDay.'
@@ -2943,7 +2943,7 @@ paths:
   /submissions/dsp:
     post:
       operationId: createANewSubmissionByProvidingTheSubmissionDataAsAJsonEmbeddedInTheRequest2
-      summary: Create a new submission by providing the submission data as a json embedded in the request.
+      summary: Create a new submission by providing the submission data as a json embedded in…
       tags:
       - RTMS
       description: Submits one RTM DSP Submission asynchronously.
@@ -3174,14 +3174,13 @@ paths:
       summary: Get the basic health status of the API
       tags:
       - RTMS
-      description: Get the basic health status of the API
       responses:
         '200':
           description: '200'
   /submissions/{submissionId}/raw:
     get:
       operationId: getTheDataForASubmissionAsReceivedFromTheParticipant
-      summary: Get the data for a submission as received from the participant.
+      summary: Get the data for a submission as received from the participant
       tags:
       - RTMS
       description: Retrieves the original submission sent by the Market Participant.
@@ -3381,7 +3380,7 @@ paths:
   /submissions/{submissionId}:
     get:
       operationId: getTheDetailsForAGivenSubmission
-      summary: Get the details for a given submission.
+      summary: Get the details for a given submission
       tags:
       - RTMS
       description: Retrieves a specific submission based on submissionId. Details of the requested submission are included in the response.
@@ -3577,14 +3576,13 @@ paths:
       summary: Get the health status of the API
       tags:
       - RTMS
-      description: Get the health status of the API
       responses:
         '200':
           description: '200'
   /submissions/{submissionId}/status:
     get:
       operationId: getTheStatusForAGivenSubmission
-      summary: Get the status for a given submission.
+      summary: Get the status for a given submission
       tags:
       - RTMS
       description: Retrieves the submission status for a given submission. If the status is REJECTED or FAILED, a list of error messages and warnings is included in the response. Warnings, if any, are also included in the response when the submission status is VALID
@@ -3805,9 +3803,7 @@ paths:
   /gateClosureViolation:
     get:
       operationId: thisResourceListsAllTheDispatchIntervalsSubmittedWithinGateClosureTheDataReturnedCanBeQueriedBasedOnCriteriaSpecifiedByOneOrMoreQueryParameters
-      summary: 'This resource lists all the Dispatch Intervals submitted within Gate Closure. The data returned can be
-
-        queried based on criteria specified by one or more query parameters.'
+      summary: This resource lists all the Dispatch Intervals submitted within Gate Closure.
       tags:
       - RTMS
       description: Retrieves a list of Dispatch Intervals submitted within Gate Closure.

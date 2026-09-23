@@ -20,7 +20,7 @@ paths:
   /api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/{tradingDay}:
     get:
       operationId: apiV1CapacityYearsFacilitiesSeparatelyCertifiedComponentsTradingDayGET
-      summary: /api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/{tradingDay} - GET
+      summary: /api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/{tradingDay}…
       tags:
       - RCM Operations
       description: /api/v1/CapacityYears/Facilities/SeparatelyCertifiedComponents/{tradingDay} - GET
@@ -177,7 +177,16 @@ paths:
       summary: A list of two hundred hours with the highest generation
       tags:
       - RCM Operations
-      description: "This returns a CSV with a header and two hundred subsequent rows, representing the intervals of the highest periods of generation in the capacity market and the corresponding generation quantity (in MW). Eg:\n           \n           \n           Hour Interval,Value\n           12/01/2016 14:30,35037.00\n           15/01/2016 13:00,35033.00\n           ..."
+      description: 'This returns a CSV with a header and two hundred subsequent rows, representing the intervals of the highest periods of generation in the capacity market and the corresponding generation quantity (in MW). Eg:
+
+
+        Hour Interval,Value
+
+        12/01/2016 14:30,35037.00
+
+        15/01/2016 13:00,35033.00
+
+        ...'
       parameters:
       - name: capacityYearId
         in: path
@@ -311,12 +320,11 @@ paths:
   /api/v4/capacityCreditAllocations/flexible/{capacityYear}/standing:
     get:
       operationId: retrievesAFlexibleCCAStandingSubmissionListForACapacityYear
-      summary: Retrieves a Flexible CCA Standing Submission List for a Capacity Year.
+      summary: Retrieves a Flexible CCA Standing Submission List for a Capacity Year
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to retrieve their Flexible Capacity Credit Allocation Standing Submission List for the given Capacity Year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2027.'
       parameters:
@@ -546,12 +554,11 @@ paths:
                   value: ''
     post:
       operationId: submitsAFlexibleCCAStandingSubmissionListForACapacityYear
-      summary: Submits a Flexible CCA Standing Submission List for a Capacity Year.
+      summary: Submits a Flexible CCA Standing Submission List for a Capacity Year
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to submit a Flexible Capacity Credit Allocation Standing Submission for a Capacity Year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2027.'
       parameters:
@@ -782,12 +789,11 @@ paths:
   /api/v4/capacityCreditAllocations/flexible/received:
     get:
       operationId: retrievesAListOfApprovedFlexibleCCAsReceivedByAMarketParticipantForARangeOfTradingDays
-      summary: Retrieves a list of approved Flexible CCAs received by a Market Participant for a range of Trading Days.
+      summary: Retrieves a list of approved Flexible CCAs received by a Market Participant for…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Flexible Capacity Credit Allocation received by a Market Participant for a range of Trading Days.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2027.'
       parameters:
@@ -1005,10 +1011,13 @@ paths:
   /api/v4/capacityCreditAllocations/peak/received:
     get:
       operationId: retrievesAListOfApprovedPeakCCAsReceivedByAMarketParticipantForARangeOfTradingDays
-      summary: Retrieves a list of approved Peak CCAs received by a Market Participant for a range of Trading Days.
+      summary: Retrieves a list of approved Peak CCAs received by a Market Participant for a…
       tags:
       - RCM Operations
-      description: "This method retrieves a list of Peak Capacity Credit Allocation received by a Market Participant for a range of Trading Days. \n<br /><br />\nNote: This method is only available from Capacity Year 2026."
+      description: 'This method retrieves a list of Peak Capacity Credit Allocation received by a Market Participant for a range of Trading Days.
+
+
+        Note: This method is only available from Capacity Year 2026.'
       parameters:
       - name: tradingDayFrom
         in: query
@@ -1224,12 +1233,11 @@ paths:
   /api/v1/CapacityYears/{capacityYearId}/CapacityAllocations/Amendments/{tradingMonth}:
     get:
       operationId: retrievesAListOfCapacityAllocationAmendmentRequestsForExistingCapacityCreditAllocationsTheCapacityYearAndTradingMonth
-      summary: Retrieves a list of capacity allocation amendment requests for existing Capacity Credit Allocations the Capacity Year and Trading Month
+      summary: Retrieves a list of capacity allocation amendment requests for existing…
       tags:
       - RCM Operations
       description: 'This method returns a list of Capacity Credit Allocations that are required to be amended. Only the amendment requests relating to that Market Generator are returned.
 
-        <br />
 
         Note:
 
@@ -1239,15 +1247,12 @@ paths:
 
         that submitted the Capacity Credit Allocation are returned.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06).
 
-        <br />
 
         Note: From Capacity Year 2023 onwards, this API is no longer available.
 
-        <br />
 
         The breakdown of CCA IDs to be amended by Facility is only available for Capacity Allocations for Trading Month
 
@@ -1426,7 +1431,7 @@ paths:
   /api/v1/CapacityYears/{capacityYearId}/CapacityAllocations/Transactions/{tradingMonth}:
     get:
       operationId: retrievesAListOfCapacityCreditAllocationTransactionsForTheTradingMonth
-      summary: Retrieves a list of Capacity Credit Allocation transactions for the Trading Month
+      summary: Retrieves a list of Capacity Credit Allocation transactions for the Trading…
       tags:
       - RCM Operations
       description: 'Provides a list of transactions related to Capacity Credit Allocations submitted or received for a
@@ -1435,15 +1440,12 @@ paths:
 
         Only the transactions relating to that Market Participant are returned.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule ChangeRC_2017_06.
 
-        <br />
 
         Note: From Capacity Year 2023 onwards, this API is no longer available.
 
-        <br />
 
         The sourceFacilityId field is only available for Capacity Allocations for Trading Month October 2021 onwards
 
@@ -1634,18 +1636,15 @@ paths:
   /api/v3/CapacityYears/{capacityYear}/CapacityAllocations/Received:
     get:
       operationId: retrievesAListOfCapacityCreditAllocationsReceivedByAMarketParticipantForARangeOfTradingDays
-      summary: Retrieves a list of capacity credit allocations received by a market participant for a range of trading days
+      summary: Retrieves a list of capacity credit allocations received by a market…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Capacity Credit Allocation Submissions received by a market participant for a range of trading days within the capacity year.
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -1818,20 +1817,16 @@ paths:
   /api/v3/CapacityYears/{capacityYear}/CapacityAllocations/{tradingDay}/Received:
     get:
       operationId: retrievesAListOfCapacityCreditAllocationsReceivedByAMarketParticipantForATradingDay
-      summary: Retrieves a list of capacity credit allocations received by a market participant for a trading day
+      summary: Retrieves a list of capacity credit allocations received by a market…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Capacity Credit Allocation Submissions received by a market participant for a trading day within the capacity year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -1998,20 +1993,16 @@ paths:
   /api/v3/CapacityYears/{capacityYear}/CapacityAllocations/Submitted:
     get:
       operationId: retrievesAListOfCapacityCreditAllocationsSubmittedByAMarketParticipantForARangeOfTradingDays
-      summary: Retrieves a list of capacity credit allocations submitted by a market participant for a range of trading days
+      summary: Retrieves a list of capacity credit allocations submitted by a market…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Capacity Credit Allocation Submissions submitted by a market participant for a range of trading days within the capacity year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -2184,20 +2175,16 @@ paths:
   /api/v3/CapacityYears/{capacityYear}/CapacityAllocations/{tradingDay}/Submitted:
     get:
       operationId: retrievesAListOfCapacityCreditAllocationsSubmittedByAMarketParticipantForATradingDay
-      summary: Retrieves a list of capacity credit allocations submitted by a market participant for a trading day
+      summary: Retrieves a list of capacity credit allocations submitted by a market…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Capacity Credit Allocation Submissions submitted by a market participant for a trading day within the capacity year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -2368,15 +2355,11 @@ paths:
       - RCM Operations
       description: 'This method allows a market participant to submit a Capacity Credit Allocation Submission in respect of a facility for a trading day within the capacity year, when the window is open.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -2563,12 +2546,11 @@ paths:
   /api/v4/capacityCreditAllocations/flexible/submitted:
     get:
       operationId: retrievesAListOfFlexibleCCAsSubmittedByAMarketParticipantForARangeOfTradingDays
-      summary: Retrieves a list of Flexible CCAs submitted by a Market Participant for a range of Trading Days.
+      summary: Retrieves a list of Flexible CCAs submitted by a Market Participant for a range…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Flexible Capacity Credit Allocation Submissions submitted by a Market Participant for a range of Trading Days.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2027.'
       parameters:
@@ -2809,12 +2791,11 @@ paths:
   /api/v4/capacityCreditAllocations/peak/submitted:
     get:
       operationId: retrievesAListOfPeakCCAsSubmittedByAMarketParticipantForARangeOfTradingDays
-      summary: Retrieves a list of Peak CCAs submitted by a Market Participant for a range of Trading Days.
+      summary: Retrieves a list of Peak CCAs submitted by a Market Participant for a range of…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of Peak Capacity Credit Allocation Submissions submitted by a Market Participant for a range of Trading Days.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:
@@ -3055,20 +3036,16 @@ paths:
   /api/v3/CapacityYears/{capacityYear}/CapacityAllocations/OpenTradingDays:
     get:
       operationId: retrievesAListOfTradingDaysForWhichTheCapacityCreditAllocationWindowIsOpen
-      summary: Retrieves a list of trading days for which the capacity credit allocation window is open
+      summary: Retrieves a list of trading days for which the capacity credit allocation…
       tags:
       - RCM Operations
       description: 'This method retrieves a list of trading days for which the Capacity Credit Allocation Window is open, in relation to the timestamp.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -3221,12 +3198,11 @@ paths:
   /api/v4/capacityCreditAllocations/{capacityYear}/openTradingDays:
     get:
       operationId: retrievesAListOfTradingDaysForWhichTheCCAWindowIsOpenInRespectOfTheAsAt
-      summary: Retrieves a list of Trading Days for which the CCA window is open in respect of the asAt.
+      summary: Retrieves a list of Trading Days for which the CCA window is open in respect of…
       tags:
       - RCM Operations
       description: 'This method returns a list of Trading Days for which the CCA Window is open, calculated using the CCA Window Length.
 
-        <br></br>
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:
@@ -3420,12 +3396,11 @@ paths:
   /api/v4/capacityCreditAllocations/peak/{capacityYear}/standing:
     get:
       operationId: retrievesAPeakCCAStandingSubmissionListForACapacityYear
-      summary: Retrieves a Peak CCA Standing Submission List for a Capacity Year.
+      summary: Retrieves a Peak CCA Standing Submission List for a Capacity Year
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to retrieve their Peak Capacity Credit Allocation Standing Submission List for the given Capacity Year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:
@@ -3632,12 +3607,11 @@ paths:
                   value: ''
     post:
       operationId: submitsAPeakCCAStandingSubmissionListForACapacityYear
-      summary: Submits a Peak CCA Standing Submission List for a Capacity Year.
+      summary: Submits a Peak CCA Standing Submission List for a Capacity Year
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to submit a Peak Capacity Credit Allocation Standing Submission for a Capacity Year.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:
@@ -3873,13 +3847,11 @@ paths:
       - RCM Operations
       description: 'This method returns the start and end dates for the Capacity Credit Allocation windows for a given capacity year.
 
-        <br /><br />
 
         Note: From Trading Month June 2019 (with the implementation of Rule Change RC_2017_06), the Allocation window
 
         and the Acceptance window open/close at the same time.
 
-        <br />
 
         Note: From Capacity Year 2023 onwards, this API is no longer available.'
       parameters:
@@ -4043,7 +4015,6 @@ paths:
       - RCM Operations
       description: 'This method returns published IRCR LOG report data in csv format. Only data relating to the requesting Market Participant are returned.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06).'
       parameters:
@@ -4196,7 +4167,6 @@ paths:
       - RCM Operations
       description: 'This method returns published IRCR LOG report data. Only data relating to the requesting Market Participant are returned.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06).'
       parameters:
@@ -4382,7 +4352,6 @@ paths:
       - RCM Operations
       description: 'This method returns published IRCR PIR report data in csv format. Only data relating to the requesting Market Participant are returned.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06).'
       parameters:
@@ -4535,7 +4504,6 @@ paths:
       - RCM Operations
       description: 'This method returns published IRCR PIR report data. Only data relating to the requesting Market Participant are returned.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06).'
       parameters:
@@ -4716,9 +4684,7 @@ paths:
   /api/v1/RequiredLevel/Adjusted/{tradingDay}:
     get:
       operationId: retrievesTheAdjustedRequiredValuesEffectiveOnTheProvidedTradingDayIfNoValuesExistForTheTradingDayButUnderlyingCapacityYearDataExistsTheAdjustedValuesWillBeCalculated
-      summary: 'Retrieves the adjusted required values effective on the provided trading day.
-
-        If no values exist for the trading day, but underlying capacity year data exists, the adjusted values will be calculated.'
+      summary: Retrieves the adjusted required values effective on the provided trading day.
       tags:
       - RCM Operations
       description: 'Retrieves the adjusted required values effective on the provided trading day.
@@ -4891,7 +4857,10 @@ paths:
       summary: Retrieves the Capacity Credit Allocation position for the Trading Month
       tags:
       - RCM Operations
-      description: "The position indicates the participant's tradeable Capacity Credits (in the event of a Market Generator) and/or the participant's IRCR (in the event of a Market Customer). \n<br /><br />\nNote: From Capacity Year 2023 onwards, this API is no longer available."
+      description: 'The position indicates the participant''s tradeable Capacity Credits (in the event of a Market Generator) and/or the participant''s IRCR (in the event of a Market Customer).
+
+
+        Note: From Capacity Year 2023 onwards, this API is no longer available.'
       parameters:
       - name: capacityYearId
         in: path
@@ -5056,10 +5025,24 @@ paths:
   /api/v2/CapacityYears/{capacityYearId}/CapacityAllocations/{tradingMonth}/Position:
     get:
       operationId: retrievesTheCapacityCreditAllocationPositionsForTheTradingMonthAgainstEachFacility
-      summary: Retrieves the Capacity Credit Allocation positions for the Trading Month against each Facility
+      summary: Retrieves the Capacity Credit Allocation positions for the Trading Month…
       tags:
       - RCM Operations
-      description: "This API provides a Participant’s overall allocatableCapacityCredits  and a break down by Facility for that\nParticipant of each Facilities’ respective bilaterally tradeable Capacity Credits. For a Market Customer it\nalso provides a Participant’s IRCR \n<br /><br />\nNote: This method is only available for Capacity Allocations for Trading Month October 2021 onwards arising\nfrom the Wholesale Electricity Market Amendment(Reserve Capacity Pricing Reforms) Rules 2019. For calls for\nTrading Months before October 2021 this API will return forbidden.\n<br />\nNote: From Capacity Year 2023 onwards, this API is no longer available."
+      description: 'This API provides a Participant’s overall allocatableCapacityCredits and a break down by Facility for that
+
+        Participant of each Facilities’ respective bilaterally tradeable Capacity Credits. For a Market Customer it
+
+        also provides a Participant’s IRCR
+
+
+        Note: This method is only available for Capacity Allocations for Trading Month October 2021 onwards arising
+
+        from the Wholesale Electricity Market Amendment(Reserve Capacity Pricing Reforms) Rules 2019. For calls for
+
+        Trading Months before October 2021 this API will return forbidden.
+
+
+        Note: From Capacity Year 2023 onwards, this API is no longer available.'
       parameters:
       - name: capacityYearId
         in: path
@@ -5231,15 +5214,11 @@ paths:
       - RCM Operations
       description: 'This method returns the Capacity Credit Allocation Window for a trading day in which participants may submit or withdraw a capacity credit allocation submission.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -5396,12 +5375,11 @@ paths:
   /api/v4/capacityCreditAllocations/window/{tradingDay}:
     get:
       operationId: retrievesTheCCAWindowForATradingDay
-      summary: Retrieves the CCA Window for a Trading Day.
+      summary: Retrieves the CCA Window for a Trading Day
       tags:
       - RCM Operations
       description: 'This method returns the Capacity Credit Allocation Window for a Trading Day in which Market Participants may submit or withdraw Capacity Credit Allocation Submission.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:
@@ -5596,11 +5574,9 @@ paths:
       - RCM Operations
       description: 'This method returns all allocations made (if participant is a Market Generator), all allocations received (if participant is a Market Customer), or both (if participant is both a Market Generator and a Market Customer) for the specified Capacity Year.
 
-        <br /><br />
 
         Note: From Trading Month June 2019 (with the implementation of Rule Change RC_2017_06), this method will not return any information as it has been removed.
 
-        <br />
 
         Note: From Capacity Year 2023 onwards, this API is no longer available.'
       parameters:
@@ -5771,7 +5747,7 @@ paths:
   /api/v1/CapacityYears/{capacityYearId}/CapacityAllocations/{tradingMonth}:
     get:
       operationId: retrievesTheCompleteListOfCapacityCreditAllocationsForTheCapacityYearAndTradingMonth
-      summary: Retrieves the complete list of Capacity Credit Allocations for the Capacity Year and Trading Month
+      summary: Retrieves the complete list of Capacity Credit Allocations for the Capacity…
       tags:
       - RCM Operations
       description: 'This method returns a list of all Capacity Credit Allocations made by a Participant, all Capacity Credit
@@ -5782,15 +5758,12 @@ paths:
 
         Allocation was made for the specified Capacity Year and Trading Month.
 
-        <br /><br />
 
         Note: This method is only available from Trading Month June 2019 (with the implementation of Rule Change RC_2017_06).
 
-        <br />
 
         Note: From Capacity Year 2023 onwards, this API is no longer available.
 
-        <br />
 
         The sourceFacilityId field is only available for Capacity Allocations for Trading Month October 2021
 
@@ -5975,10 +5948,16 @@ paths:
   /api/v2/CapacityYears/{capacityYearId}/CapacityAllocations/{tradingMonth}/{facilityId}:
     get:
       operationId: retrievesTheCompleteListOfCapacityCreditAllocationsForTheCapacityYearTradingMonthAndFacilityId
-      summary: Retrieves the complete list of Capacity Credit Allocations for the Capacity Year, Trading Month and FacilityId
+      summary: Retrieves the complete list of Capacity Credit Allocations for the Capacity…
       tags:
       - RCM Operations
-      description: "This method returns all Capacity Credit Allocations made from the specified Facility.\n<br /><br />\nNote: This method is only available from Trading Month October 2021 (with the implementation of Rule Change RC_2019). \n<br />\nNote: From Capacity Year 2023 onwards, this API is no longer available."
+      description: 'This method returns all Capacity Credit Allocations made from the specified Facility.
+
+
+        Note: This method is only available from Trading Month October 2021 (with the implementation of Rule Change RC_2019).
+
+
+        Note: From Capacity Year 2023 onwards, this API is no longer available.'
       parameters:
       - name: capacityYearId
         in: path
@@ -6336,7 +6315,7 @@ paths:
   /api/v1/CapacityYears:
     get:
       operationId: retrievesTheInformationForAllCapacityYearCyclesConfiguredInTheRCMSystem
-      summary: Retrieves the information for all capacity year cycles configured in the RCM system
+      summary: Retrieves the information for all capacity year cycles configured in the RCM…
       tags:
       - RCM Operations
       description: This is the full list of configuration parameters and important dates for all capacity years that have been configured in RCM
@@ -6507,7 +6486,7 @@ paths:
   /api/v1/CapacityYears/CapacityYearsWithFacilityPrice:
     get:
       operationId: retrievesTheInformationForAllCapacityYearCyclesConfiguredInTheRCMSystem2
-      summary: Retrieves the information for all capacity year cycles configured in the RCM system
+      summary: Retrieves the information for all capacity year cycles configured in the RCM…
       tags:
       - RCM Operations
       description: This is the full list of configuration parameters and important dates for all capacity years that have been configured in RCM
@@ -6676,7 +6655,7 @@ paths:
       summary: Retrieves the list of capacity credits for all participants
       tags:
       - RCM Operations
-      description: Shows the historical Capacity Credits for all Facilities from Market Participants for the given Capacity Year. Note this report includes any previous changes to Capacity Credits up to and including today
+      description: Shows the historical Capacity Credits for all Facilities from Market Participants for the given Capacity Year. Note this report includes any previous changes to Capacity Credits up to and including today
       parameters:
       - name: capacityYearId
         in: path
@@ -7471,7 +7450,7 @@ paths:
   /api/v1/Rcoq/Components/DispatchInterval/{tradingDay}:
     get:
       operationId: retrievesTheListOfRCOQsForComponentsAtTradingIntervalForTheSpecifiedTradingDay
-      summary: Retrieves the list of RCOQs for components at trading interval for the specified trading day
+      summary: Retrieves the list of RCOQs for components at trading interval for the…
       tags:
       - RCM Operations
       description: Retrieves the list of RCOQs for components at trading interval for the specified trading day
@@ -7640,7 +7619,7 @@ paths:
   /api/v1/Rcoq/Facilities/TradingInterval/{tradingDay}:
     get:
       operationId: retrievesTheListOfRCOQsForFacilitiesAtTradingIntervalForTheSpecifiedTradingDay
-      summary: Retrieves the list of RCOQs for facilities at trading interval for the specified trading day
+      summary: Retrieves the list of RCOQs for facilities at trading interval for the…
       tags:
       - RCM Operations
       description: Retrieves the list of RCOQs for facilities at trading interval for the specified trading day
@@ -7809,7 +7788,7 @@ paths:
   /api/v1/Esroi/TradingInterval/{tradingDay}:
     get:
       operationId: retrievesTheTradingDaysOnWhichESROIIsApplicableForTheCapacityYearForTheGivenDate
-      summary: Retrieves the trading days on which ESROI is applicable for the capacity year for the given date
+      summary: Retrieves the trading days on which ESROI is applicable for the capacity year…
       tags:
       - RCM Operations
       description: This method returns the trading days for which esroi data based on the date variable only.eg. 10/01/2018 --> trading day 10/01/2018.
@@ -7955,7 +7934,7 @@ paths:
   /api/v1/CapacityYears/CapacityCreditsWithComponents/{tradingDay}:
     get:
       operationId: showsTheViewOfTheCapacityCreditsForAllFacilitiesAndComponentsForAGivenTradingDayFromCapacityYears2023Onward
-      summary: Shows the view of the capacity credits for all facilities and components for a given Trading Day from Capacity Years 2023 onward
+      summary: Shows the view of the capacity credits for all facilities and components for a…
       tags:
       - RCM Operations
       description: Shows the view of the capacity credits for all facilities and components for a given Trading Day from Capacity Years 2023 onward
@@ -8122,12 +8101,11 @@ paths:
   /api/v4/capacityCreditAllocations/flexible/{tradingDay}/submit:
     post:
       operationId: submitsAFlexibleCCASubmissionInRespectOfAFacilityOrSCCForATradingDayWhenTheCCAWindowIsOpen
-      summary: Submits a Flexible CCA Submission in respect of a Facility or SCC for a Trading Day, when the CCA Window is open.
+      summary: Submits a Flexible CCA Submission in respect of a Facility or SCC for a Trading…
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to submit a Flexible Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2027.'
       parameters:
@@ -8348,12 +8326,11 @@ paths:
   /api/v4/capacityCreditAllocations/peak/{tradingDay}/submit:
     post:
       operationId: submitsAPeakCCASubmissionInRespectOfAFacilityOrSCCForATradingDayWhenTheCCAWindowIsOpen
-      summary: Submits a Peak CCA Submission in respect of a Facility or SCC for a Trading Day, when the CCA Window is open.
+      summary: Submits a Peak CCA Submission in respect of a Facility or SCC for a Trading…
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to submit a Peak Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:
@@ -8863,20 +8840,16 @@ paths:
   /api/v3/CapacityYears/{capacityYear}/CapacityAllocations/{tradingDay}/{ccaId}/withdraw:
     put:
       operationId: withdrawACapacityCreditAllocationSubmissionInRespectOfAFacilityForATradingDay
-      summary: Withdraw a capacity credit allocation submission in respect of a facility for a trading day
+      summary: Withdraw a capacity credit allocation submission in respect of a facility for a…
       tags:
       - RCM Operations
       description: 'This method allows a market participant to withdraw a Capacity Credit Allocation Submission in respect of a facility for a trading day within the capacity year, when the window is open.
 
-        <br /><br />
 
         Note: This method is only available from Capacity Year 2023 (with the implementation of WEM Reform).
 
-        <br /><br />
 
-        Note: From Capacity Year 2026 onwards, this API is no longer available.
-
-        <br />'
+        Note: From Capacity Year 2026 onwards, this API is no longer available.'
       parameters:
       - name: capacityYear
         in: path
@@ -9035,12 +9008,11 @@ paths:
   /api/v4/capacityCreditAllocations/flexible/{ccaId}/withdraw:
     put:
       operationId: withdrawsAnApprovedFlexibleCCA
-      summary: Withdraws an approved Flexible CCA.
+      summary: Withdraws an approved Flexible CCA
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to withdraw a Flexible Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.
 
-        <br></br>
 
         Note: This method is only available from Capacity Year 2027.'
       parameters:
@@ -9247,12 +9219,11 @@ paths:
   /api/v4/capacityCreditAllocations/peak/{ccaId}/withdraw:
     put:
       operationId: withdrawsAnApprovedPeakCCA
-      summary: Withdraws an approved Peak CCA.
+      summary: Withdraws an approved Peak CCA
       tags:
       - RCM Operations
       description: 'This method allows a Market Participant to withdraw a Peak Capacity Credit Allocation Submission in respect of a Facility or SCC for a Trading Day within the Capacity Year, when the window is open.
 
-        <br></br>
 
         Note: This method is only available from Capacity Year 2026.'
       parameters:

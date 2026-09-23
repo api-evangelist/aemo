@@ -4,11 +4,7 @@ info:
   description: 'The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between the participants in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving participant can poll the e-Hub, ‘pull’ and process the messages that are queued.
 
 
-
-    For details on how to get access and business rules for this API:
-
-
-    <a href="/api-docs"><img src="./files/ViewAPIDocsButton.png" alt="View API Docs" /></a>'
+    For details on how to get access and business rules for this API:'
   version: '3.0'
   x-origin:
   - format: openapi
@@ -65,7 +61,23 @@ paths:
       summary: Submit Message Acknowledgement
       tags:
       - B2BMessagingPull
-      description: "Purpose - Acknowledge a received message. Detail - For every message, a message acknowledgment is generated (with the exception of messages containing message acknowledgements). A BusinessReceipt has two possible implementations -\n  • MessageAcknowledgement.\n  • Event, errors are reported via Event elements.\n  \n  \nIf a message is rejected, no receipt identifier is required with the acknowledgement.\n\nThis resource will be used when Participants are required to send Message Acknowledgement in the HTTP request. messageContextID should be set to the messageContextID of the original message that is to be acknowledged. \n\nIn order that the sender receive timely acknowledgement of message delivery, the receiver should respond immediately to each aseXML message with a message acknowledgement.\n\n<b> Note: If a Participant is required to send a transaction message or transaction acknowledgement message, ‘/messages’ resource is to be used. If a Participant is required to send ‘message acknowledgements’ in the request payload, then ‘/messageAcknowledgements’ resource is to be used.</b>"
+      description: 'Purpose - Acknowledge a received message. Detail - For every message, a message acknowledgment is generated (with the exception of messages containing message acknowledgements). A BusinessReceipt has two possible implementations -
+
+        • MessageAcknowledgement.
+
+        • Event, errors are reported via Event elements.
+
+
+        If a message is rejected, no receipt identifier is required with the acknowledgement.
+
+
+        This resource will be used when Participants are required to send Message Acknowledgement in the HTTP request. messageContextID should be set to the messageContextID of the original message that is to be acknowledged.
+
+
+        In order that the sender receive timely acknowledgement of message delivery, the receiver should respond immediately to each aseXML message with a message acknowledgement.
+
+
+        Note: If a Participant is required to send a transaction message or transaction acknowledgement message, ‘/messages’ resource is to be used. If a Participant is required to send ‘message acknowledgements’ in the request payload, then ‘/messageAcknowledgements’ resource is to be used.'
       parameters:
       - name: messageContextID
         in: header
@@ -97,7 +109,7 @@ paths:
   /queues:
     get:
       operationId: returnsTheMetaDataOfMessagesInTheEHubQueueOrTheAseXMLMessagesQueuedAwaitingDeliveryToTheRecipientInitiatorOfThisAPI
-      summary: Returns the meta-data of messages in the e-Hub queue (or) the aseXML messages queued awaiting delivery to the Recipient (initiator of this API).
+      summary: Returns the meta-data of messages in the e-Hub queue (or) the aseXML messages…
       tags:
       - B2BMessagingPull
       description: Returns meta-data of messages in e-Hub queue for the participant initiating the API request.
