@@ -365,7 +365,65 @@ paths:
       x-version: '1'
 components:
   schemas:
-    Meta:
+    EnergyDerRecord:
+      properties:
+        servicePointId:
+          allOf:
+          - $ref: '#/components/schemas/EnergyServicePointId'
+          description: Unique identifier for the service point.
+        approvedCapacity:
+          description: Approved small generating unit capacity as agreed with NSP in the connection agreement, expressed in kVA. Value of `0` indicates no DER record exists for the given _servicePointId_.
+          type: number
+        availablePhasesCount:
+          description: The number of phases available for the installation of DER. Acceptable values are `0`, `1`, `2` or `3`. Value of `0` indicates no DER record exists for the given _servicePointId_.
+          maximum: 3
+          minimum: 0
+          type: integer
+          x-cds-type: NaturalNumber
+        installedPhasesCount:
+          description: The number of phases that DER is connected to. Acceptable values are `0`, `1`, `2` or `3`. Value of `0` indicates no DER record exists for the given _servicePointId_.
+          maximum: 3
+          minimum: 0
+          type: integer
+          x-cds-type: NaturalNumber
+        islandableInstallation:
+          description: For identification of small generating units designed with the ability to operate in an islanded mode.
+          type: boolean
+        hasCentralProtectionControl:
+          default: false
+          description: For DER installations where NSPs specify the need for additional forms of protection above those inbuilt in an inverter. If absent then assumed to be `false`.
+          type: boolean
+        protectionMode:
+          $ref: '#/components/schemas/EnergyDerRecord_protectionMode'
+        acConnections:
+          items:
+            $ref: '#/components/schemas/EnergyDerRecord_acConnections'
+          type: array
+      required:
+      - acConnections
+      - approvedCapacity
+      - availablePhasesCount
+      - installedPhasesCount
+      - islandableInstallation
+      - servicePointId
+      type: object
+      x-conditional:
+      - protectionMode
+    PrimaryErrorV1_allOf:
+      properties:
+        isSecondaryDataHolderError:
+          default: false
+          description: Indicates the error was propagated from a designated secondary data holder.
+          type: boolean
+      type: object
+    RequestServicePointIdListV1:
+      properties:
+        data:
+          $ref: '#/components/schemas/RequestServicePointIdListV1_data'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
       type: object
     EnergyDerRecord_protectionMode:
       description: Required only when the _hasCentralProtectionControl_ flag is set to `true`. One or more of the object fields will be provided to describe the protection modes in place.
@@ -416,85 +474,17 @@ components:
           description: Trip voltage.
           type: number
       type: object
-    EnergyDerRecord_derDevices:
+    EnergyDerDetailResponse:
       properties:
-        deviceIdentifier:
-          description: Unique identifier for a single DER device or a group of DER devices with the same attributes. Does not align with CDR ID permanence standards.
-          type: number
-        count:
-          description: Number of devices in the group of DER devices.
-          type: integer
-          x-cds-type: PositiveInteger
-        manufacturer:
-          description: The name of the device manufacturer. If absent then assumed to be "unknown".
-          type: string
-        modelNumber:
-          description: The model number of the device. If absent then assumed to be "unknown".
-          type: string
-        status:
-          description: Code used to indicate the status of the device. This will be used to identify if an inverter is active or inactive or decommissioned.
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - DECOMMISSIONED
-          type: string
-        type:
-          description: Used to indicate the primary technology used in the DER device.
-          enum:
-          - FOSSIL
-          - HYDRO
-          - WIND
-          - SOLAR_PV
-          - RENEWABLE
-          - GEOTHERMAL
-          - STORAGE
-          - OTHER
-          type: string
-        subtype:
-          description: Used to indicate the primary technology used in the DER device. This field is also used to record for example the battery chemistry, or the type of PV panel. It is also used to record if a battery is contained in an electric vehicle connected in a vehicle-to-grid arrangement. If absent then assumed to be "other".
-          type: string
-        nominalRatedCapacity:
-          description: Maximum output in kVA that is listed in the product specification by the manufacturer. This refers to the capacity of each unit within the device group. Default is `0` if value not known.
-          type: number
-        nominalStorageCapacity:
-          description: Maximum storage capacity in kVAh. This refers to the capacity of each storage module within the device group. Mandatory if type is equal to `STORAGE`. Default is `0` if value not known.
-          type: number
+        data:
+          $ref: '#/components/schemas/EnergyDerRecord'
+        links:
+          $ref: '#/components/schemas/Links'
+        meta:
+          $ref: '#/components/schemas/Meta'
       required:
-      - count
-      - deviceIdentifier
-      - nominalRatedCapacity
-      - type
-      type: object
-      x-conditional:
-      - nominalStorageCapacity
-    MetaPaginated:
-      properties:
-        totalRecords:
-          description: The total number of records in the full set. See [pagination](#pagination).
-          type: integer
-          x-cds-type: NaturalNumber
-        totalPages:
-          description: The total number of pages in the full set. See [pagination](#pagination).
-          type: integer
-          x-cds-type: NaturalNumber
-      required:
-      - totalPages
-      - totalRecords
-      type: object
-    PrimaryErrorV1:
-      allOf:
-      - $ref: '#/components/schemas/PrimaryErrorV1_allOf'
-      - $ref: '#/components/schemas/ErrorV2'
-      type: object
-    PrimaryResponseErrorListV1:
-      properties:
-        errors:
-          description: List of errors.
-          items:
-            $ref: '#/components/schemas/PrimaryErrorV1'
-          type: array
-      required:
-      - errors
+      - data
+      - links
       type: object
     ErrorV2:
       properties:
@@ -516,97 +506,6 @@ components:
       type: object
       x-conditional:
       - meta
-    EnergyDerListResponse_data:
-      properties:
-        derRecords:
-          description: Array of meter reads.
-          items:
-            $ref: '#/components/schemas/EnergyDerRecord'
-          type: array
-      required:
-      - derRecords
-      type: object
-    ErrorV2_meta:
-      description: Additional data for customised error codes.
-      properties:
-        urn:
-          description: The CDR error code URN which the application-specific error code extends. Mandatory if the error _code_ is an application-specific error rather than a standardised error code.
-          type: string
-      type: object
-      x-conditional:
-      - urn
-    EnergyDerListResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/EnergyDerListResponse_data'
-        links:
-          $ref: '#/components/schemas/LinksPaginated'
-        meta:
-          $ref: '#/components/schemas/MetaPaginated'
-      required:
-      - data
-      - links
-      - meta
-      type: object
-    LinksPaginated:
-      properties:
-        self:
-          description: Fully qualified link that generated the current response document.
-          type: string
-          x-cds-type: URIString
-        first:
-          description: URI to the first page of this set. Mandatory if this response is not the first page.
-          type: string
-          x-cds-type: URIString
-        prev:
-          description: URI to the previous page of this set. Mandatory if this response is not the first page.
-          type: string
-          x-cds-type: URIString
-        next:
-          description: URI to the next page of this set. Mandatory if this response is not the last page.
-          type: string
-          x-cds-type: URIString
-        last:
-          description: URI to the last page of this set. Mandatory if this response is not the last page.
-          type: string
-          x-cds-type: URIString
-      required:
-      - self
-      type: object
-      x-conditional:
-      - first
-      - prev
-      - next
-      - last
-    PrimaryErrorV1_allOf:
-      properties:
-        isSecondaryDataHolderError:
-          default: false
-          description: Indicates the error was propagated from a designated secondary data holder.
-          type: boolean
-      type: object
-    Links:
-      properties:
-        self:
-          description: Fully qualified link that generated the current response document.
-          type: string
-          x-cds-type: URIString
-      required:
-      - self
-      type: object
-    EnergyServicePointId:
-      description: A unique identifier for an Energy service point, generated according to [CDR ID Permanence](#id-permanence) requirements.
-      type: string
-      x-cds-type: ASCIIString
-    RequestServicePointIdListV1:
-      properties:
-        data:
-          $ref: '#/components/schemas/RequestServicePointIdListV1_data'
-        meta:
-          $ref: '#/components/schemas/Meta'
-      required:
-      - data
-      type: object
     EnergyDerRecord_acConnections:
       properties:
         connectionIdentifier:
@@ -662,6 +561,159 @@ components:
       - inverterSeries
       - inverterModelNumber
       - inverterDeviceCapacity
+    PrimaryResponseErrorListV1:
+      properties:
+        errors:
+          description: List of errors.
+          items:
+            $ref: '#/components/schemas/PrimaryErrorV1'
+          type: array
+      required:
+      - errors
+      type: object
+    Links:
+      properties:
+        self:
+          description: Fully qualified link that generated the current response document.
+          type: string
+          x-cds-type: URIString
+      required:
+      - self
+      type: object
+    LinksPaginated:
+      properties:
+        self:
+          description: Fully qualified link that generated the current response document.
+          type: string
+          x-cds-type: URIString
+        first:
+          description: URI to the first page of this set. Mandatory if this response is not the first page.
+          type: string
+          x-cds-type: URIString
+        prev:
+          description: URI to the previous page of this set. Mandatory if this response is not the first page.
+          type: string
+          x-cds-type: URIString
+        next:
+          description: URI to the next page of this set. Mandatory if this response is not the last page.
+          type: string
+          x-cds-type: URIString
+        last:
+          description: URI to the last page of this set. Mandatory if this response is not the last page.
+          type: string
+          x-cds-type: URIString
+      required:
+      - self
+      type: object
+      x-conditional:
+      - first
+      - prev
+      - next
+      - last
+    ErrorV2_meta:
+      description: Additional data for customised error codes.
+      properties:
+        urn:
+          description: The CDR error code URN which the application-specific error code extends. Mandatory if the error _code_ is an application-specific error rather than a standardised error code.
+          type: string
+      type: object
+      x-conditional:
+      - urn
+    MetaPaginated:
+      properties:
+        totalRecords:
+          description: The total number of records in the full set. See [pagination](#pagination).
+          type: integer
+          x-cds-type: NaturalNumber
+        totalPages:
+          description: The total number of pages in the full set. See [pagination](#pagination).
+          type: integer
+          x-cds-type: NaturalNumber
+      required:
+      - totalPages
+      - totalRecords
+      type: object
+    PrimaryErrorV1:
+      allOf:
+      - $ref: '#/components/schemas/PrimaryErrorV1_allOf'
+      - $ref: '#/components/schemas/ErrorV2'
+      type: object
+    EnergyDerListResponse_data:
+      properties:
+        derRecords:
+          description: Array of meter reads.
+          items:
+            $ref: '#/components/schemas/EnergyDerRecord'
+          type: array
+      required:
+      - derRecords
+      type: object
+    EnergyDerRecord_derDevices:
+      properties:
+        deviceIdentifier:
+          description: Unique identifier for a single DER device or a group of DER devices with the same attributes. Does not align with CDR ID permanence standards.
+          type: number
+        count:
+          description: Number of devices in the group of DER devices.
+          type: integer
+          x-cds-type: PositiveInteger
+        manufacturer:
+          description: The name of the device manufacturer. If absent then assumed to be "unknown".
+          type: string
+        modelNumber:
+          description: The model number of the device. If absent then assumed to be "unknown".
+          type: string
+        status:
+          description: Code used to indicate the status of the device. This will be used to identify if an inverter is active or inactive or decommissioned.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DECOMMISSIONED
+          type: string
+        type:
+          description: Used to indicate the primary technology used in the DER device.
+          enum:
+          - FOSSIL
+          - HYDRO
+          - WIND
+          - SOLAR_PV
+          - RENEWABLE
+          - GEOTHERMAL
+          - STORAGE
+          - OTHER
+          type: string
+        subtype:
+          description: Used to indicate the primary technology used in the DER device. This field is also used to record for example the battery chemistry, or the type of PV panel. It is also used to record if a battery is contained in an electric vehicle connected in a vehicle-to-grid arrangement. If absent then assumed to be "other".
+          type: string
+        nominalRatedCapacity:
+          description: Maximum output in kVA that is listed in the product specification by the manufacturer. This refers to the capacity of each unit within the device group. Default is `0` if value not known.
+          type: number
+        nominalStorageCapacity:
+          description: Maximum storage capacity in kVAh. This refers to the capacity of each storage module within the device group. Mandatory if type is equal to `STORAGE`. Default is `0` if value not known.
+          type: number
+      required:
+      - count
+      - deviceIdentifier
+      - nominalRatedCapacity
+      - type
+      type: object
+      x-conditional:
+      - nominalStorageCapacity
+    Meta:
+      type: object
+    EnergyDerListResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/EnergyDerListResponse_data'
+        links:
+          $ref: '#/components/schemas/LinksPaginated'
+        meta:
+          $ref: '#/components/schemas/MetaPaginated'
+      required:
+      - data
+      - links
+      - meta
+      type: object
     RequestServicePointIdListV1_data:
       properties:
         servicePointIds:
@@ -672,77 +724,10 @@ components:
       required:
       - servicePointIds
       type: object
-    EnergyDerRecord:
-      properties:
-        servicePointId:
-          allOf:
-          - $ref: '#/components/schemas/EnergyServicePointId'
-          description: Unique identifier for the service point.
-        approvedCapacity:
-          description: Approved small generating unit capacity as agreed with NSP in the connection agreement, expressed in kVA. Value of `0` indicates no DER record exists for the given _servicePointId_.
-          type: number
-        availablePhasesCount:
-          description: The number of phases available for the installation of DER. Acceptable values are `0`, `1`, `2` or `3`. Value of `0` indicates no DER record exists for the given _servicePointId_.
-          maximum: 3
-          minimum: 0
-          type: integer
-          x-cds-type: NaturalNumber
-        installedPhasesCount:
-          description: The number of phases that DER is connected to. Acceptable values are `0`, `1`, `2` or `3`. Value of `0` indicates no DER record exists for the given _servicePointId_.
-          maximum: 3
-          minimum: 0
-          type: integer
-          x-cds-type: NaturalNumber
-        islandableInstallation:
-          description: For identification of small generating units designed with the ability to operate in an islanded mode.
-          type: boolean
-        hasCentralProtectionControl:
-          default: false
-          description: For DER installations where NSPs specify the need for additional forms of protection above those inbuilt in an inverter. If absent then assumed to be `false`.
-          type: boolean
-        protectionMode:
-          $ref: '#/components/schemas/EnergyDerRecord_protectionMode'
-        acConnections:
-          items:
-            $ref: '#/components/schemas/EnergyDerRecord_acConnections'
-          type: array
-      required:
-      - acConnections
-      - approvedCapacity
-      - availablePhasesCount
-      - installedPhasesCount
-      - islandableInstallation
-      - servicePointId
-      type: object
-      x-conditional:
-      - protectionMode
-    EnergyDerDetailResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/EnergyDerRecord'
-        links:
-          $ref: '#/components/schemas/Links'
-        meta:
-          $ref: '#/components/schemas/Meta'
-      required:
-      - data
-      - links
-      type: object
-  headers:
-    XV:
-      description: The [payload version](#response-headers) that the endpoint has responded with.
-      explode: false
-      required: true
-      schema:
-        type: string
-      style: simple
-    XFAPIInteractionId:
-      description: An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.
-      explode: false
-      required: true
-      schema:
-        type: string
-      style: simple
+    EnergyServicePointId:
+      description: A unique identifier for an Energy service point, generated according to [CDR ID Permanence](#id-permanence) requirements.
+      type: string
+      x-cds-type: ASCIIString
   requestBodies:
     RequestServicePointIds:
       content:
@@ -751,3 +736,18 @@ components:
             $ref: '#/components/schemas/RequestServicePointIdListV1'
       description: Request payload containing a list of _servicePointId_ values to obtain data for.
       required: true
+  headers:
+    XFAPIInteractionId:
+      description: An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.
+      explode: false
+      required: true
+      schema:
+        type: string
+      style: simple
+    XV:
+      description: The [payload version](#response-headers) that the endpoint has responded with.
+      explode: false
+      required: true
+      schema:
+        type: string
+      style: simple
