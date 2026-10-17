@@ -899,52 +899,6 @@ paths:
       x-version: '3'
 components:
   schemas:
-    Meta:
-      type: object
-    EnergyAccountId:
-      description: A unique identifier for an Energy account, generated according to [CDR ID Permanence](#id-permanence) requirements.
-      type: string
-      x-cds-type: ASCIIString
-    LinksPaginated:
-      properties:
-        self:
-          description: Fully qualified link that generated the current response document.
-          type: string
-          x-cds-type: URIString
-        first:
-          description: URI to the first page of this set. Mandatory if this response is not the first page.
-          type: string
-          x-cds-type: URIString
-        prev:
-          description: URI to the previous page of this set. Mandatory if this response is not the first page.
-          type: string
-          x-cds-type: URIString
-        next:
-          description: URI to the next page of this set. Mandatory if this response is not the last page.
-          type: string
-          x-cds-type: URIString
-        last:
-          description: URI to the last page of this set. Mandatory if this response is not the last page.
-          type: string
-          x-cds-type: URIString
-      required:
-      - self
-      type: object
-      x-conditional:
-      - first
-      - prev
-      - next
-      - last
-    ResponseErrorListV2:
-      properties:
-        errors:
-          description: List of errors.
-          items:
-            $ref: '#/components/schemas/ErrorV2'
-          type: array
-      required:
-      - errors
-      type: object
     ErrorV2_meta:
       description: Additional data for customised error codes.
       properties:
@@ -954,45 +908,7 @@ components:
       type: object
       x-conditional:
       - urn
-    EnergyInvoiceListResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/EnergyInvoiceListResponse_data'
-        links:
-          $ref: '#/components/schemas/LinksPaginated'
-        meta:
-          $ref: '#/components/schemas/MetaPaginated'
-      required:
-      - data
-      - links
-      - meta
-      type: object
-    EnergyInvoiceGasUsageCharges_otherCharges:
-      properties:
-        type:
-          default: OTHER
-          description: Type of charge. Assumed to be `OTHER` if absent.
-          enum:
-          - ENVIRONMENTAL
-          - REGULATED
-          - NETWORK
-          - METERING
-          - RETAIL_SERVICE
-          - RCTI
-          - OTHER
-          type: string
-        amount:
-          description: The aggregate total of charges for this item (exclusive of GST).
-          type: string
-          x-cds-type: AmountString
-        description:
-          description: A free text description of the type of charge.
-          type: string
-      required:
-      - amount
-      - description
-      type: object
-    EnergyInvoiceElectricityUsageCharges:
+    EnergyInvoiceGasUsageCharges:
       properties:
         totalUsageCharges:
           description: The aggregate total of usage charges for the period covered by the invoice (exclusive of GST).
@@ -1003,11 +919,11 @@ components:
           type: string
           x-cds-type: AmountString
         totalOnceOffCharges:
-          description: The aggregate total of any once off charges arising from electricity usage for the period covered by the invoice (exclusive of GST).
+          description: The aggregate total of any once off charges arising from gas usage for the period covered by the invoice (exclusive of GST).
           type: string
           x-cds-type: AmountString
         totalOnceOffDiscounts:
-          description: The aggregate total of any once off discounts or credits arising from electricity usage for the period covered by the invoice (exclusive of GST).
+          description: The aggregate total of any once off discounts or credits arising from gas usage for the period covered by the invoice (exclusive of GST).
           type: string
           x-cds-type: AmountString
         otherCharges:
@@ -1017,7 +933,7 @@ components:
           type: array
         totalGst:
           default: '0.00'
-          description: The total GST for all electricity usage charges. If absent then zero is assumed.
+          description: The total GST for all gas usage charges. If absent then zero is assumed.
           type: string
           x-cds-type: AmountString
       required:
@@ -1026,19 +942,6 @@ components:
       - totalOnceOffDiscounts
       - totalUsageCharges
       type: object
-    RequestAccountIdListV1:
-      properties:
-        data:
-          $ref: '#/components/schemas/RequestAccountIdListV1_data'
-        meta:
-          $ref: '#/components/schemas/Meta'
-      required:
-      - data
-      type: object
-    EnergyServicePointId:
-      description: A unique identifier for an Energy service point, generated according to [CDR ID Permanence](#id-permanence) requirements.
-      type: string
-      x-cds-type: ASCIIString
     EnergyBillingOtherTransaction:
       properties:
         servicePointId:
@@ -1089,6 +992,51 @@ components:
       - amount
       - description
       type: object
+    MeasureUnitEnum:
+      enum:
+      - KWH
+      - KVA
+      - KVAR
+      - KVARH
+      - KW
+      - DAYS
+      - METER
+      - MONTH
+      type: string
+    EnergyInvoiceElectricityUsageCharges:
+      properties:
+        totalUsageCharges:
+          description: The aggregate total of usage charges for the period covered by the invoice (exclusive of GST).
+          type: string
+          x-cds-type: AmountString
+        totalGenerationCredits:
+          description: The aggregate total of generation credits for the period covered by the invoice (exclusive of GST).
+          type: string
+          x-cds-type: AmountString
+        totalOnceOffCharges:
+          description: The aggregate total of any once off charges arising from electricity usage for the period covered by the invoice (exclusive of GST).
+          type: string
+          x-cds-type: AmountString
+        totalOnceOffDiscounts:
+          description: The aggregate total of any once off discounts or credits arising from electricity usage for the period covered by the invoice (exclusive of GST).
+          type: string
+          x-cds-type: AmountString
+        otherCharges:
+          description: Optional array of charges that may be part of the invoice (for e.g., environmental charges for C&I consumers) (exclusive of GST).
+          items:
+            $ref: '#/components/schemas/EnergyInvoiceGasUsageCharges_otherCharges'
+          type: array
+        totalGst:
+          default: '0.00'
+          description: The total GST for all electricity usage charges. If absent then zero is assumed.
+          type: string
+          x-cds-type: AmountString
+      required:
+      - totalGenerationCredits
+      - totalOnceOffCharges
+      - totalOnceOffDiscounts
+      - totalUsageCharges
+      type: object
     ErrorV2:
       properties:
         code:
@@ -1109,64 +1057,28 @@ components:
       type: object
       x-conditional:
       - meta
-    RequestAccountIdListV1_data:
+    EnergyInvoiceListResponse_data:
       properties:
-        accountIds:
-          description: Array of _accountId_ values to obtain data for.
+        invoices:
+          description: Array of invoices sorted by issue date in descending order.
           items:
-            $ref: '#/components/schemas/EnergyAccountId'
+            $ref: '#/components/schemas/EnergyInvoice'
           type: array
       required:
-      - accountIds
+      - invoices
       type: object
-    EnergyBillingUsageTransactionV2_calculationFactors:
+    EnergyBillingUsageTransactionV2_adjustments:
       properties:
-        value:
-          description: The value of the calculation factor.
-          type: number
-        type:
-          description: The type of the calculation factor.
-          enum:
-          - DLF
-          - MLF
+        amount:
+          description: The amount of the adjustment.
+          type: string
+          x-cds-type: AmountString
+        description:
+          description: A free text description of the adjustment.
           type: string
       required:
-      - type
-      - value
-      type: object
-    EnergyInvoiceGasUsageCharges:
-      properties:
-        totalUsageCharges:
-          description: The aggregate total of usage charges for the period covered by the invoice (exclusive of GST).
-          type: string
-          x-cds-type: AmountString
-        totalGenerationCredits:
-          description: The aggregate total of generation credits for the period covered by the invoice (exclusive of GST).
-          type: string
-          x-cds-type: AmountString
-        totalOnceOffCharges:
-          description: The aggregate total of any once off charges arising from gas usage for the period covered by the invoice (exclusive of GST).
-          type: string
-          x-cds-type: AmountString
-        totalOnceOffDiscounts:
-          description: The aggregate total of any once off discounts or credits arising from gas usage for the period covered by the invoice (exclusive of GST).
-          type: string
-          x-cds-type: AmountString
-        otherCharges:
-          description: Optional array of charges that may be part of the invoice (for e.g., environmental charges for C&I consumers) (exclusive of GST).
-          items:
-            $ref: '#/components/schemas/EnergyInvoiceGasUsageCharges_otherCharges'
-          type: array
-        totalGst:
-          default: '0.00'
-          description: The total GST for all gas usage charges. If absent then zero is assumed.
-          type: string
-          x-cds-type: AmountString
-      required:
-      - totalGenerationCredits
-      - totalOnceOffCharges
-      - totalOnceOffDiscounts
-      - totalUsageCharges
+      - amount
+      - description
       type: object
     EnergyBillingTransactionV3:
       properties:
@@ -1223,26 +1135,353 @@ components:
       - payment
       - demand
       - otherCharges
-    EnergyBillingPaymentTransaction:
+    EnergyInvoiceGasUsageCharges_otherCharges:
       properties:
+        type:
+          default: OTHER
+          description: Type of charge. Assumed to be `OTHER` if absent.
+          enum:
+          - ENVIRONMENTAL
+          - REGULATED
+          - NETWORK
+          - METERING
+          - RETAIL_SERVICE
+          - RCTI
+          - OTHER
+          type: string
         amount:
-          description: The amount paid.
+          description: The aggregate total of charges for this item (exclusive of GST).
           type: string
           x-cds-type: AmountString
-        method:
-          description: The method of payment.
-          enum:
-          - DIRECT_DEBIT
-          - CARD
-          - TRANSFER
-          - BPAY
-          - CASH
-          - CHEQUE
-          - OTHER
+        description:
+          description: A free text description of the type of charge.
           type: string
       required:
       - amount
-      - method
+      - description
+      type: object
+    RequestAccountIdListV1_data:
+      properties:
+        accountIds:
+          description: Array of _accountId_ values to obtain data for.
+          items:
+            $ref: '#/components/schemas/EnergyAccountId'
+          type: array
+      required:
+      - accountIds
+      type: object
+    EnergyBillingOnceOffTransaction:
+      properties:
+        servicePointId:
+          allOf:
+          - $ref: '#/components/schemas/EnergyServicePointId'
+          description: Unique identifier for the service point.
+        invoiceNumber:
+          description: The number of the invoice in which this transaction is included if it has been issued.
+          type: string
+        amount:
+          description: The amount of the charge or credit. A positive value indicates a charge and a negative value indicates a credit.
+          type: string
+          x-cds-type: AmountString
+        description:
+          description: A free text description of the item.
+          type: string
+      required:
+      - amount
+      - description
+      type: object
+    RequestAccountIdListV1:
+      properties:
+        data:
+          $ref: '#/components/schemas/RequestAccountIdListV1_data'
+        meta:
+          $ref: '#/components/schemas/Meta'
+      required:
+      - data
+      type: object
+    EnergyInvoice_payOnTimeDiscount:
+      description: A discount for on time payment.
+      properties:
+        discountAmount:
+          description: The amount that will be discounted if the invoice is paid by the date specified.
+          type: string
+          x-cds-type: AmountString
+        gstAmount:
+          default: '0.00'
+          description: The GST amount that will be discounted if the invoice is paid by the date specified. If absent then zero is assumed.
+          type: string
+          x-cds-type: AmountString
+        date:
+          description: The date by which the invoice must be paid to receive the pay on time discount.
+          type: string
+          x-cds-type: DateString
+      required:
+      - date
+      - discountAmount
+      type: object
+    EnergyAccountId:
+      description: A unique identifier for an Energy account, generated according to [CDR ID Permanence](#id-permanence) requirements.
+      type: string
+      x-cds-type: ASCIIString
+    EnergyBillingListResponseV3_data:
+      properties:
+        transactions:
+          description: Array of transactions sorted by date and time in descending order.
+          items:
+            $ref: '#/components/schemas/EnergyBillingTransactionV3'
+          type: array
+      required:
+      - transactions
+      type: object
+    MetaPaginated:
+      properties:
+        totalRecords:
+          description: The total number of records in the full set. See [pagination](#pagination).
+          type: integer
+          x-cds-type: NaturalNumber
+        totalPages:
+          description: The total number of pages in the full set. See [pagination](#pagination).
+          type: integer
+          x-cds-type: NaturalNumber
+      required:
+      - totalPages
+      - totalRecords
+      type: object
+    EnergyInvoice_period:
+      description: Object containing the start and end date for the period covered by the invoice. Mandatory if any usage or demand based charges are included in the invoice.
+      properties:
+        startDate:
+          description: The start date of the period covered by this invoice.
+          type: string
+          x-cds-type: DateString
+        endDate:
+          description: The end date of the period covered by this invoice.
+          type: string
+          x-cds-type: DateString
+      required:
+      - endDate
+      - startDate
+      type: object
+    EnergyBillingUsageTransactionV2:
+      properties:
+        servicePointId:
+          allOf:
+          - $ref: '#/components/schemas/EnergyServicePointId'
+          description: Unique identifier for the service point.
+        invoiceNumber:
+          description: The number of the invoice in which this transaction is included if it has been issued.
+          type: string
+        timeOfUseType:
+          description: The time of use type that the transaction applies to.
+          enum:
+          - PEAK
+          - OFF_PEAK
+          - OFF_PEAK_DEMAND_CHARGE
+          - SHOULDER
+          - SHOULDER1
+          - SHOULDER2
+          - CONTROLLED_LOAD
+          - SOLAR
+          - AGGREGATE
+          - ALL_DAY
+          type: string
+        description:
+          description: Optional description of the transaction that can be used for display purposes.
+          type: string
+        isEstimate:
+          default: false
+          description: Flag indicating if the usage is estimated or actual. `true` indicates estimate. `false` or absent indicates actual.
+          type: boolean
+        startDate:
+          description: Date and time when the usage period starts.
+          type: string
+          x-cds-type: DateTimeString
+        endDate:
+          description: Date and time when the usage period ends.
+          type: string
+          x-cds-type: DateTimeString
+        measureUnit:
+          allOf:
+          - $ref: '#/components/schemas/MeasureUnitEnum'
+          default: KWH
+          description: The measurement unit of rate. Assumed to be `KWH` if absent.
+          type: string
+        usage:
+          description: The usage for the period in measure unit. A negative value indicates power generated.
+          type: number
+        amount:
+          description: The amount charged or credited for this transaction prior to any adjustments being applied. A negative value indicates a credit.
+          type: string
+          x-cds-type: AmountString
+        calculationFactors:
+          description: Additional calculation factors that inform the transaction.
+          items:
+            $ref: '#/components/schemas/EnergyBillingUsageTransactionV2_calculationFactors'
+          type: array
+        adjustments:
+          description: Optional array of adjustments arising for this transaction.
+          items:
+            $ref: '#/components/schemas/EnergyBillingUsageTransactionV2_adjustments'
+          type: array
+      required:
+      - amount
+      - endDate
+      - startDate
+      - timeOfUseType
+      - usage
+      type: object
+    EnergyBillingUsageTransactionV2_calculationFactors:
+      properties:
+        value:
+          description: The value of the calculation factor.
+          type: number
+        type:
+          description: The type of the calculation factor.
+          enum:
+          - DLF
+          - MLF
+          type: string
+      required:
+      - type
+      - value
+      type: object
+    EnergyServicePointId:
+      description: A unique identifier for an Energy service point, generated according to [CDR ID Permanence](#id-permanence) requirements.
+      type: string
+      x-cds-type: ASCIIString
+    EnergyBillingListResponseV3:
+      properties:
+        data:
+          $ref: '#/components/schemas/EnergyBillingListResponseV3_data'
+        links:
+          $ref: '#/components/schemas/LinksPaginated'
+        meta:
+          $ref: '#/components/schemas/MetaPaginated'
+      required:
+      - data
+      - links
+      - meta
+      type: object
+    EnergyInvoice:
+      properties:
+        accountId:
+          allOf:
+          - $ref: '#/components/schemas/EnergyAccountId'
+          description: Unique identifier for the account.
+        invoiceNumber:
+          description: The number assigned to this invoice by the energy Retailer.
+          type: string
+        issueDate:
+          description: The date that the invoice was actually issued (as opposed to generated or calculated).
+          type: string
+          x-cds-type: DateString
+        dueDate:
+          description: The date that the invoice is due to be paid.
+          type: string
+          x-cds-type: DateString
+        period:
+          $ref: '#/components/schemas/EnergyInvoice_period'
+        invoiceAmount:
+          description: The net amount due for this invoice regardless of previous balance.
+          type: string
+          x-cds-type: AmountString
+        gstAmount:
+          default: '0.00'
+          description: The total GST amount for this invoice. If absent then zero is assumed.
+          type: string
+          x-cds-type: AmountString
+        payOnTimeDiscount:
+          $ref: '#/components/schemas/EnergyInvoice_payOnTimeDiscount'
+        balanceAtIssue:
+          description: The account balance at the time the invoice was issued.
+          type: string
+          x-cds-type: AmountString
+        servicePoints:
+          description: Array of service point IDs to which this invoice applies. May be empty if the invoice contains no electricity usage related charges.
+          items:
+            type: string
+          type: array
+        gas:
+          allOf:
+          - $ref: '#/components/schemas/EnergyInvoiceGasUsageCharges'
+          description: Object containing charges and credits related to gas usage.
+        electricity:
+          allOf:
+          - $ref: '#/components/schemas/EnergyInvoiceElectricityUsageCharges'
+          description: Object containing charges and credits related to electricity usage.
+        accountCharges:
+          $ref: '#/components/schemas/EnergyInvoiceAccountCharges'
+        paymentStatus:
+          description: Indicator of the payment status for the invoice.
+          enum:
+          - PAID
+          - PARTIALLY_PAID
+          - NOT_PAID
+          type: string
+      required:
+      - accountId
+      - balanceAtIssue
+      - invoiceNumber
+      - issueDate
+      - paymentStatus
+      - servicePoints
+      type: object
+      x-conditional:
+      - period
+    LinksPaginated:
+      properties:
+        self:
+          description: Fully qualified link that generated the current response document.
+          type: string
+          x-cds-type: URIString
+        first:
+          description: URI to the first page of this set. Mandatory if this response is not the first page.
+          type: string
+          x-cds-type: URIString
+        prev:
+          description: URI to the previous page of this set. Mandatory if this response is not the first page.
+          type: string
+          x-cds-type: URIString
+        next:
+          description: URI to the next page of this set. Mandatory if this response is not the last page.
+          type: string
+          x-cds-type: URIString
+        last:
+          description: URI to the last page of this set. Mandatory if this response is not the last page.
+          type: string
+          x-cds-type: URIString
+      required:
+      - self
+      type: object
+      x-conditional:
+      - first
+      - prev
+      - next
+      - last
+    EnergyInvoiceListResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/EnergyInvoiceListResponse_data'
+        links:
+          $ref: '#/components/schemas/LinksPaginated'
+        meta:
+          $ref: '#/components/schemas/MetaPaginated'
+      required:
+      - data
+      - links
+      - meta
+      type: object
+    Meta:
+      type: object
+    ResponseErrorListV2:
+      properties:
+        errors:
+          description: List of errors.
+          items:
+            $ref: '#/components/schemas/ErrorV2'
+          type: array
+      required:
+      - errors
       type: object
     EnergyBillingDemandTransactionV3:
       properties:
@@ -1313,69 +1552,6 @@ components:
       - startDate
       - timeOfUseType
       type: object
-    EnergyInvoiceListResponse_data:
-      properties:
-        invoices:
-          description: Array of invoices sorted by issue date in descending order.
-          items:
-            $ref: '#/components/schemas/EnergyInvoice'
-          type: array
-      required:
-      - invoices
-      type: object
-    EnergyInvoice_payOnTimeDiscount:
-      description: A discount for on time payment.
-      properties:
-        discountAmount:
-          description: The amount that will be discounted if the invoice is paid by the date specified.
-          type: string
-          x-cds-type: AmountString
-        gstAmount:
-          default: '0.00'
-          description: The GST amount that will be discounted if the invoice is paid by the date specified. If absent then zero is assumed.
-          type: string
-          x-cds-type: AmountString
-        date:
-          description: The date by which the invoice must be paid to receive the pay on time discount.
-          type: string
-          x-cds-type: DateString
-      required:
-      - date
-      - discountAmount
-      type: object
-    EnergyBillingListResponseV3:
-      properties:
-        data:
-          $ref: '#/components/schemas/EnergyBillingListResponseV3_data'
-        links:
-          $ref: '#/components/schemas/LinksPaginated'
-        meta:
-          $ref: '#/components/schemas/MetaPaginated'
-      required:
-      - data
-      - links
-      - meta
-      type: object
-    EnergyBillingOnceOffTransaction:
-      properties:
-        servicePointId:
-          allOf:
-          - $ref: '#/components/schemas/EnergyServicePointId'
-          description: Unique identifier for the service point.
-        invoiceNumber:
-          description: The number of the invoice in which this transaction is included if it has been issued.
-          type: string
-        amount:
-          description: The amount of the charge or credit. A positive value indicates a charge and a negative value indicates a credit.
-          type: string
-          x-cds-type: AmountString
-        description:
-          description: A free text description of the item.
-          type: string
-      required:
-      - amount
-      - description
-      type: object
     EnergyInvoiceAccountCharges:
       description: Object contains account level charges and credits related to electricity usage.
       properties:
@@ -1396,213 +1572,37 @@ components:
       - totalCharges
       - totalDiscounts
       type: object
-    MeasureUnitEnum:
-      enum:
-      - KWH
-      - KVA
-      - KVAR
-      - KVARH
-      - KW
-      - DAYS
-      - METER
-      - MONTH
-      type: string
-    MetaPaginated:
-      properties:
-        totalRecords:
-          description: The total number of records in the full set. See [pagination](#pagination).
-          type: integer
-          x-cds-type: NaturalNumber
-        totalPages:
-          description: The total number of pages in the full set. See [pagination](#pagination).
-          type: integer
-          x-cds-type: NaturalNumber
-      required:
-      - totalPages
-      - totalRecords
-      type: object
-    EnergyInvoice:
-      properties:
-        accountId:
-          allOf:
-          - $ref: '#/components/schemas/EnergyAccountId'
-          description: Unique identifier for the account.
-        invoiceNumber:
-          description: The number assigned to this invoice by the energy Retailer.
-          type: string
-        issueDate:
-          description: The date that the invoice was actually issued (as opposed to generated or calculated).
-          type: string
-          x-cds-type: DateString
-        dueDate:
-          description: The date that the invoice is due to be paid.
-          type: string
-          x-cds-type: DateString
-        period:
-          $ref: '#/components/schemas/EnergyInvoice_period'
-        invoiceAmount:
-          description: The net amount due for this invoice regardless of previous balance.
-          type: string
-          x-cds-type: AmountString
-        gstAmount:
-          default: '0.00'
-          description: The total GST amount for this invoice. If absent then zero is assumed.
-          type: string
-          x-cds-type: AmountString
-        payOnTimeDiscount:
-          $ref: '#/components/schemas/EnergyInvoice_payOnTimeDiscount'
-        balanceAtIssue:
-          description: The account balance at the time the invoice was issued.
-          type: string
-          x-cds-type: AmountString
-        servicePoints:
-          description: Array of service point IDs to which this invoice applies. May be empty if the invoice contains no electricity usage related charges.
-          items:
-            type: string
-          type: array
-        gas:
-          allOf:
-          - $ref: '#/components/schemas/EnergyInvoiceGasUsageCharges'
-          description: Object containing charges and credits related to gas usage.
-        electricity:
-          allOf:
-          - $ref: '#/components/schemas/EnergyInvoiceElectricityUsageCharges'
-          description: Object containing charges and credits related to electricity usage.
-        accountCharges:
-          $ref: '#/components/schemas/EnergyInvoiceAccountCharges'
-        paymentStatus:
-          description: Indicator of the payment status for the invoice.
-          enum:
-          - PAID
-          - PARTIALLY_PAID
-          - NOT_PAID
-          type: string
-      required:
-      - accountId
-      - balanceAtIssue
-      - invoiceNumber
-      - issueDate
-      - paymentStatus
-      - servicePoints
-      type: object
-      x-conditional:
-      - period
-    EnergyInvoice_period:
-      description: Object containing the start and end date for the period covered by the invoice. Mandatory if any usage or demand based charges are included in the invoice.
-      properties:
-        startDate:
-          description: The start date of the period covered by this invoice.
-          type: string
-          x-cds-type: DateString
-        endDate:
-          description: The end date of the period covered by this invoice.
-          type: string
-          x-cds-type: DateString
-      required:
-      - endDate
-      - startDate
-      type: object
-    EnergyBillingListResponseV3_data:
-      properties:
-        transactions:
-          description: Array of transactions sorted by date and time in descending order.
-          items:
-            $ref: '#/components/schemas/EnergyBillingTransactionV3'
-          type: array
-      required:
-      - transactions
-      type: object
-    EnergyBillingUsageTransactionV2_adjustments:
+    EnergyBillingPaymentTransaction:
       properties:
         amount:
-          description: The amount of the adjustment.
+          description: The amount paid.
           type: string
           x-cds-type: AmountString
-        description:
-          description: A free text description of the adjustment.
+        method:
+          description: The method of payment.
+          enum:
+          - DIRECT_DEBIT
+          - CARD
+          - TRANSFER
+          - BPAY
+          - CASH
+          - CHEQUE
+          - OTHER
           type: string
       required:
       - amount
-      - description
-      type: object
-    EnergyBillingUsageTransactionV2:
-      properties:
-        servicePointId:
-          allOf:
-          - $ref: '#/components/schemas/EnergyServicePointId'
-          description: Unique identifier for the service point.
-        invoiceNumber:
-          description: The number of the invoice in which this transaction is included if it has been issued.
-          type: string
-        timeOfUseType:
-          description: The time of use type that the transaction applies to.
-          enum:
-          - PEAK
-          - OFF_PEAK
-          - OFF_PEAK_DEMAND_CHARGE
-          - SHOULDER
-          - SHOULDER1
-          - SHOULDER2
-          - CONTROLLED_LOAD
-          - SOLAR
-          - AGGREGATE
-          - ALL_DAY
-          type: string
-        description:
-          description: Optional description of the transaction that can be used for display purposes.
-          type: string
-        isEstimate:
-          default: false
-          description: Flag indicating if the usage is estimated or actual. `true` indicates estimate. `false` or absent indicates actual.
-          type: boolean
-        startDate:
-          description: Date and time when the usage period starts.
-          type: string
-          x-cds-type: DateTimeString
-        endDate:
-          description: Date and time when the usage period ends.
-          type: string
-          x-cds-type: DateTimeString
-        measureUnit:
-          allOf:
-          - $ref: '#/components/schemas/MeasureUnitEnum'
-          default: KWH
-          description: The measurement unit of rate. Assumed to be `KWH` if absent.
-          type: string
-        usage:
-          description: The usage for the period in measure unit. A negative value indicates power generated.
-          type: number
-        amount:
-          description: The amount charged or credited for this transaction prior to any adjustments being applied. A negative value indicates a credit.
-          type: string
-          x-cds-type: AmountString
-        calculationFactors:
-          description: Additional calculation factors that inform the transaction.
-          items:
-            $ref: '#/components/schemas/EnergyBillingUsageTransactionV2_calculationFactors'
-          type: array
-        adjustments:
-          description: Optional array of adjustments arising for this transaction.
-          items:
-            $ref: '#/components/schemas/EnergyBillingUsageTransactionV2_adjustments'
-          type: array
-      required:
-      - amount
-      - endDate
-      - startDate
-      - timeOfUseType
-      - usage
+      - method
       type: object
   headers:
-    XFAPIInteractionId:
-      description: An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.
+    XV:
+      description: The [payload version](#response-headers) that the endpoint has responded with.
       explode: false
       required: true
       schema:
         type: string
       style: simple
-    XV:
-      description: The [payload version](#response-headers) that the endpoint has responded with.
+    XFAPIInteractionId:
+      description: An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.
       explode: false
       required: true
       schema:
