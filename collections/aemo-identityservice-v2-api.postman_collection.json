@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "167a773f-b7bf-460f-9b8a-7a572a68f97a",
+    "name": "IdentityService(v2) Identity Service(v2) API",
+    "description": "## Introduction\nThis API is used by a Participant to update their password for MSATs.\n\nFor details on how to get access and business rules for this API:",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:17:59.000Z",
+    "updatedAt": "2026-10-21T20:18:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-167a773f-b7bf-460f-9b8a-7a572a68f97a"
+  },
+  "item": [
+    {
+      "name": "ChangePassword",
+      "item": [
+        {
+          "name": "authPost",
+          "id": "546a2404-6e0b-4ce5-852a-376f2564a493",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Primary Market Participant ID",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"OldPassword\": \"TmVtbWNvMDI=\",\n    \"NewPassword\": \"TmVtbWNvMDE=\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ChangePassword",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ChangePassword"
+              ]
+            },
+            "description": "Use this resource to replace your Old MSATs Password with a New Password"
+          },
+          "response": [
+            {
+              "id": "daaecccb-62ce-4e22-945c-d095c81ba86a",
+              "name": "If success = true, password changed successfully.  If success = false, Failed changing password, please try again.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Primary Market Participant ID",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"OldPassword\": \"TmVtbWNvMDI=\",\n    \"NewPassword\": \"TmVtbWNvMDE=\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ChangePassword",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ChangePassword"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Success\": true,\n    \"Message\": \"Successfully changed password\"\n  }\n}",
+              "createdAt": "2026-10-21T20:18:00.000Z",
+              "updatedAt": "2026-10-21T20:18:00.000Z",
+              "uid": "35240-daaecccb-62ce-4e22-945c-d095c81ba86a"
+            },
+            {
+              "id": "89888259-bfa9-49bb-a535-5f9e13a109af",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Primary Market Participant ID",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"OldPassword\": \"TmVtbWNvMDI=\",\n    \"NewPassword\": \"TmVtbWNvMDE=\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ChangePassword",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ChangePassword"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"713b6588-61d9-4c97-af29-634f41de5deg\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"title\": \"Unauthorized\",\n        \"detail\": \"Invalid UserName or Password\",\n        \"source\": \"\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:00.000Z",
+              "updatedAt": "2026-10-21T20:18:00.000Z",
+              "uid": "35240-89888259-bfa9-49bb-a535-5f9e13a109af"
+            }
+          ],
+          "createdAt": "2026-10-21T20:18:00.000Z",
+          "updatedAt": "2026-10-21T20:18:00.000Z",
+          "uid": "35240-546a2404-6e0b-4ce5-852a-376f2564a493"
+        }
+      ],
+      "id": "5602b089-a9c2-420c-ab4f-8758fce25482",
+      "createdAt": "2026-10-21T20:18:00.000Z",
+      "updatedAt": "2026-10-21T20:18:00.000Z",
+      "uid": "35240-5602b089-a9c2-420c-ab4f-8758fce25482"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/ws/Common/identityService"
+    }
+  ]
+}

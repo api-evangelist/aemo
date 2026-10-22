@@ -1,14 +1,15 @@
 ---
-name: Manage AEMO-signed TLS client certificates
+name: aemo-tls-certificate-lifecycle
+title: "Manage AEMO-signed TLS client certificates"
 description: Self-manage the AEMO-signed TLS certificates a participant needs to connect to the e-Hub — list, download, generate, reissue, renew and revoke.
-api: openapi/aemo-tls-certificate-mgmt-v1-openapi.yml
+api: openapi/aemo-tls-certificate-mgmt-v1-api-openapi.yml
 operations: [getTheScopeForAUser, getAllCertificateOrders, getDetailsOnACertificateOrder, createANewCertificate, downloadACertificate, reissueACertificate, renewACertificate, revokeACertificate]
 ---
 
 # Manage AEMO-signed TLS client certificates
 
 Every authenticated AEMO e-Hub API call presents an AEMO-signed TLS client certificate. The TLS
-Certificate Management API (`openapi/aemo-tls-certificate-mgmt-v1-openapi.yml`) lets a participant
+Certificate Management API (`openapi/aemo-tls-certificate-mgmt-v1-api-openapi.yml`) lets a participant
 manage that certificate estate itself instead of raising a ticket. This API uses its own key header,
 `x-aemo-api-key`.
 

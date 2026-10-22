@@ -1,27 +1,26 @@
 aid: aemo
+
 url: https://raw.githubusercontent.com/api-evangelist/aemo/refs/heads/main/apis.yml
+
 name: AEMO
+
 kind: company
-description: 'AEMO, the Australian Energy Market Operator, is the independent system and market operator
-  for Australia''s electricity and gas systems — it dispatches and prices the National Electricity Market
-  across Queensland, New South Wales, Victoria, South Australia and Tasmania every five minutes, runs
-  the Wholesale Electricity Market and the Gas Bulletin Board in Western Australia, operates the Victorian
-  gas declared wholesale market and the Gas Supply Hubs, maintains the MSATS metering registry and the
-  national Distributed Energy Resources register, and publishes the Integrated System Plan. It sits at
-  the centre of the value chain: it does not generate, network or retail energy, it clears the market
-  and holds the settlement-grade metering data that every other participant depends on. Under the Consumer
-  Data Right extended to energy, AEMO is the designated SECONDARY data holder and gateway — retailers
-  are the primary data holders, and AEMO serves NMI standing data, distributed energy resource records
-  and up to twenty-four months of interval meter data through mandated Consumer Data Standards endpoints.
-  Its API posture splits cleanly in two, and the split is the whole story: the market-data half is genuinely,
-  radically open — 103 live NEMWeb report directories plus 68 archive directories of dispatch, price,
-  demand, bidding, constraint and settlement data downloadable by anyone with no key, no account and no
-  licence, alongside anonymous JSON endpoints behind the public NEM dashboard; the participant and consumer
-  half is completely closed — a public developer portal at dev.aemo.com.au catalogues 74 APIs and 771
-  operations that anyone may read, but every one of them requires registration as an AEMO market participant,
-  a Participant ID, MSATS user rights and an AEMO-signed mutual-TLS client certificate, and the OpenAPI
-  documents the portal exports publicly are empty shells that declare zero paths and point at internal
-  hostnames.'
+
+description: 'AEMO, the Australian Energy Market Operator, is the independent system and market operator for Australia''s electricity and gas
+  systems — it dispatches and prices the National Electricity Market across Queensland, New South Wales, Victoria, South Australia and Tasmania
+  every five minutes, runs the Wholesale Electricity Market and the Gas Bulletin Board in Western Australia, operates the Victorian gas declared
+  wholesale market and the Gas Supply Hubs, maintains the MSATS metering registry and the national Distributed Energy Resources register, and
+  publishes the Integrated System Plan. It sits at the centre of the value chain: it does not generate, network or retail energy, it clears the
+  market and holds the settlement-grade metering data that every other participant depends on. Under the Consumer Data Right extended to energy,
+  AEMO is the designated SECONDARY data holder and gateway — retailers are the primary data holders, and AEMO serves NMI standing data, distributed
+  energy resource records and up to twenty-four months of interval meter data through mandated Consumer Data Standards endpoints. Its API posture
+  splits cleanly in two, and the split is the whole story: the market-data half is genuinely, radically open — 103 live NEMWeb report directories
+  plus 68 archive directories of dispatch, price, demand, bidding, constraint and settlement data downloadable by anyone with no key, no account
+  and no licence, alongside anonymous JSON endpoints behind the public NEM dashboard; the participant and consumer half is completely closed —
+  a public developer portal at dev.aemo.com.au catalogues 74 APIs and 771 operations that anyone may read, but every one of them requires registration
+  as an AEMO market participant, a Participant ID, MSATS user rights and an AEMO-signed mutual-TLS client certificate, and the OpenAPI documents
+  the portal exports publicly are empty shells that declare zero paths and point at internal hostnames.'
+
 deliveryModel:
   model: saas
   open_source: false
@@ -34,6 +33,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: open
@@ -49,7 +49,9 @@ accessModel:
   - sandbox
   generated: '2026-09-02'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aemo.png
+
 tags:
 - Energy
 - Australia
@@ -66,24 +68,160 @@ tags:
 - Distributed Energy Resources
 - Renewables
 - Utilities
+
 created: '2026-07-27'
-modified: '2026-07-27'
+
+modified: '2026-10-21'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/aemo/overview
+- type: Spectral
+  url: rules/aemo-rules.yml
+- type: JSONLD
+  url: json-ld/aemo-context.jsonld
+- type: Vocabulary
+  url: vocabulary/aemo-vocabulary.yml
+- type: ErrorCatalog
+  url: errors/aemo-problem-types.yml
+- type: Hosts
+  url: hosts/aemo-hosts.yml
+- type: Vendors
+  url: vendors/aemo-vendors.yml
+- type: Newsroom
+  url: https://www.aemo.com.au/newsroom
+- type: CapabilityMap
+  url: capabilities/aemo-capability-edges.yml
+  name: AEMO Business Capability Map
+- type: Overlay
+  url: overlays/aemo-cds-energy-api-overlay.yaml
+- type: Overlay
+  url: overlays/aemo-cds-common-api-overlay.yaml
+- type: AgenticAccess
+  url: agentic-access/aemo-agentic-access.yml
+- type: DomainSecurity
+  url: security/aemo-domain-security.yml
+- type: Authentication
+  url: authentication/aemo-authentication.yml
+- type: Website
+  url: https://www.aemo.com.au/
+- type: DeveloperPortal
+  url: https://dev.aemo.com.au/
+- type: Documentation
+  url: https://dev.aemo.com.au/api-docs
+- type: APIReference
+  url: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
+- type: GettingStarted
+  url: https://dev.aemo.com.au/working-with-aemo-apis
+- type: SignUp
+  url: https://dev.aemo.com.au/signup
+- type: TermsOfService
+  url: https://dev.aemo.com.au/terms
+- type: Authentication
+  url: https://dev.aemo.com.au/urm-username-password
+- type: OAuth
+  url: https://dev.aemo.com.au/oauth
+- type: PostmanCollection
+  url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+- type: ConsumerDataRight
+  url: https://www.aemo.com.au/energy-systems/electricity/cdr-at-aemo
+- type: APIStandards
+  url: https://consumerdatastandardsaustralia.github.io/standards/
+- type: Regulator
+  url: https://www.cdr.gov.au/
+- type: DataFeed
+  url: https://nemweb.com.au/Reports/Current/
+- type: DataFeed
+  url: https://data.wa.aemo.com.au/public/
+- type: Dashboard
+  url: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
+- type: GasBulletinBoard
+  url: https://gbbwa.aemo.com.au/
+- type: MarketsPortalHelp
+  url: https://markets-portal-help.docs.public.aemo.com.au/Content/API_Reference/API_introduction.htm
+- type: Registration
+  url: https://www.aemo.com.au/energy-systems/registration
+- type: LinkedIn
+  url: https://au.linkedin.com/company/aemo
+- type: Support
+  url: https://dev.aemo.com.au/contact-us
+  name: AEMO Information and Support Hub
+- type: HelpCenter
+  url: https://dev.aemo.com.au/faqs
+  name: Developer portal FAQs
+- type: Blog
+  url: https://www.aemo.com.au/newsroom/news-updates
+  name: AEMO news updates
+- type: PrivacyPolicy
+  url: https://www.aemo.com.au/privacy-and-legal-notices/privacy-policy
+- type: StatusPage
+  url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
+  name: IT change and release management — forward change schedule and business service status history
+- type: Deprecation
+  url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
+  name: Change and retirement of market IT interfaces
+- type: Security
+  url: https://www.aemo.com.au/.well-known/security.txt
+  name: Report a security issue to AEMO Cyber Security
+- type: ChangeLog
+  url: https://aemo.com.au/market-notices?marketNoticeFacets=MARKET+SYSTEMS
+  name: Market Notices — MARKET SYSTEMS
+- type: Postman
+  url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+  name: AEMO Postman collection
+- type: OpenIDConnect
+  url: https://login.aemo.com.au/login.aemo.com.au/v2.0/.well-known/openid-configuration?p=B2C_1A_DERR_SIGNUPSIGNIN
+  name: DER Register consumer registration (Azure AD B2C)
+- type: OAuthScopes
+  url: scopes/aemo-scopes.yml
+- type: Conventions
+  url: conventions/aemo-conventions.yml
+- type: ErrorCatalog
+  url: errors/aemo-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/aemo-lifecycle.yml
+- type: Conformance
+  url: conformance/aemo-conformance.yml
+- type: Vocabulary
+  url: vocabulary/aemo-glossary.yml
+  name: AEMO Glossary and Rules Terms (1,151 terms)
+- type: DataModel
+  url: data-model/aemo-data-model.yml
+- type: Sandbox
+  url: sandbox/aemo-sandbox.yml
+- type: WellKnown
+  url: well-known/aemo-well-known.yml
+- type: SecurityTxt
+  url: well-known/aemo-security.txt
+- type: VulnerabilityDisclosure
+  url: security/aemo-vulnerability-disclosure.yml
+- type: Webhooks
+  url: asyncapi/aemo-ehub-events.yml
+  name: AEMO e-Hub asynchronous message delivery surface
+- type: AgentSkill
+  url: skills/_index.yml
+  name: Seven packaged Agent Skills grounded in verified operationIds
+- type: MCPCandidate
+  url: mcp/aemo-mcp.yml
+  name: Candidate MCP tool design derived from the OpenAPI — AEMO publishes no MCP server
+
 apis:
 - aid: aemo:aemo-nem-data-dashboard-api
   name: AEMO NEM Data Dashboard API
-  description: >-
-    The JSON API behind AEMO's public National Electricity Market data dashboard, and the closest thing
-    AEMO operates to an open real-time market API. Confirmed live and fully anonymous on 2026-07-27: GET
-    /aemo/apps/api/report/ELEC_NEM_SUMMARY returned HTTP 200 with five-minute regional records for NSW1,
-    QLD1, SA1, TAS1 and VIC1 — settlement date, spot price and price status, total demand, net interconnector
-    interchange, scheduled and semi-scheduled generation, administered-price and market-suspension flags,
-    per-interconnector flows with export and import limits — plus a full FCAS price set (raise/lower regulation
-    and 1s, 6s, 60s and 5min contingency) and the ten most recent AEMO electricity market notices. POST
-    /aemo/apps/api/report/5MIN with body {"timeScale":["5MIN"]} returned HTTP 200 with a rolling five-minute
-    regional price and demand series. No API key, no account, no licence, no rate-limit challenge. It
-    is also entirely undocumented — AEMO publishes no reference, no schema and no terms for it, so it
-    is recorded here as a verified public endpoint rather than as a supported product.
+  description: 'The JSON API behind AEMO''s public National Electricity Market data dashboard, and the closest thing AEMO operates to an open
+    real-time market API. Confirmed live and fully anonymous on 2026-07-27: GET /aemo/apps/api/report/ELEC_NEM_SUMMARY returned HTTP 200 with
+    five-minute regional records for NSW1, QLD1, SA1, TAS1 and VIC1 — settlement date, spot price and price status, total demand, net interconnector
+    interchange, scheduled and semi-scheduled generation, administered-price and market-suspension flags, per-interconnector flows with export
+    and import limits — plus a full FCAS price set (raise/lower regulation and 1s, 6s, 60s and 5min contingency) and the ten most recent AEMO
+    electricity market notices. POST /aemo/apps/api/report/5MIN with body {"timeScale":["5MIN"]} returned HTTP 200 with a rolling five-minute
+    regional price and demand series. No API key, no account, no licence, no rate-limit challenge. It is also entirely undocumented — AEMO publishes
+    no reference, no schema and no terms for it, so it is recorded here as a verified public endpoint rather than as a supported product.'
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
   baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
@@ -115,17 +253,14 @@ apis:
     url: https://visualisations.aemo.com.au/
 - aid: aemo:aemo-nemweb-public-data-feed
   name: AEMO NEMWeb Public Data Feed
-  description: >-
-    NEMWeb is AEMO's open bulk-data channel for the National Electricity Market and the single largest
-    genuinely open energy dataset in Australia. It is not a REST API — it is an anonymously browsable
-    HTTP directory tree of zipped CSV reports, refreshed on dispatch, daily and settlement cycles, and
-    it is how the entire Australian energy analytics industry gets its data. Confirmed on 2026-07-27:
-    GET https://nemweb.com.au/Reports/Current/ returned HTTP 200 listing 103 report directories — Dispatch_Reports,
-    DispatchIS_Reports, Dispatch_SCADA, Bidmove_Complete, Billing, Marginal_Loss_Factors, Market_Notice,
-    Medium_Term_PASA_Reports, Next_Day_*, Network, ROOFTOP_PV, TradingIS_Reports and more — and GET /Reports/Archive/
-    returned HTTP 200 with a further 68 archive directories. A sample file, /Reports/CURRENT/DispatchIS_Reports/PUBLIC_DISPATCHIS_202607252230_0000000529244762.zip,
-    downloaded with HTTP 200 and 18,252 bytes of application/x-zip-compressed with no credential of any
-    kind. The MMS Data Model that describes the CSV schemas is published separately at /Reports/Current/MMSDataModelReport.
+  description: 'NEMWeb is AEMO''s open bulk-data channel for the National Electricity Market and the single largest genuinely open energy dataset
+    in Australia. It is not a REST API — it is an anonymously browsable HTTP directory tree of zipped CSV reports, refreshed on dispatch, daily
+    and settlement cycles, and it is how the entire Australian energy analytics industry gets its data. Confirmed on 2026-07-27: GET https://nemweb.com.au/Reports/Current/
+    returned HTTP 200 listing 103 report directories — Dispatch_Reports, DispatchIS_Reports, Dispatch_SCADA, Bidmove_Complete, Billing, Marginal_Loss_Factors,
+    Market_Notice, Medium_Term_PASA_Reports, Next_Day_*, Network, ROOFTOP_PV, TradingIS_Reports and more — and GET /Reports/Archive/ returned
+    HTTP 200 with a further 68 archive directories. A sample file, /Reports/CURRENT/DispatchIS_Reports/PUBLIC_DISPATCHIS_202607252230_0000000529244762.zip,
+    downloaded with HTTP 200 and 18,252 bytes of application/x-zip-compressed with no credential of any kind. The MMS Data Model that describes
+    the CSV schemas is published separately at /Reports/Current/MMSDataModelReport.'
   humanURL: https://nemweb.com.au/Reports/Current/
   baseURL: https://nemweb.com.au/Reports
   tags:
@@ -157,14 +292,11 @@ apis:
     url: https://nemweb.com.au/Reports/Archive/
 - aid: aemo:aemo-wa-market-data-public-feed
   name: AEMO WA Market Data Public Feed
-  description: >-
-    The Western Australian equivalent of NEMWeb, covering the Wholesale Electricity Market that AEMO operates
-    separately from the NEM. Confirmed anonymous and live on 2026-07-27: GET https://data.wa.aemo.com.au/public/
-    returned HTTP 200 with directory listings for market-data, public-data, outages, advisories, infographic
-    and INF, and GET /public/market-data/ returned HTTP 200 exposing capo, dsp, mt-pasa, outages, st-pasa
-    and wemde subdirectories — the WEM Dispatch Engine outputs, short and medium term PASA, demand side
-    programme and capacity data. Like NEMWeb it is an open HTTP file tree rather than a REST API, and
-    like NEMWeb it needs no key, account or licence.
+  description: 'The Western Australian equivalent of NEMWeb, covering the Wholesale Electricity Market that AEMO operates separately from the
+    NEM. Confirmed anonymous and live on 2026-07-27: GET https://data.wa.aemo.com.au/public/ returned HTTP 200 with directory listings for market-data,
+    public-data, outages, advisories, infographic and INF, and GET /public/market-data/ returned HTTP 200 exposing capo, dsp, mt-pasa, outages,
+    st-pasa and wemde subdirectories — the WEM Dispatch Engine outputs, short and medium term PASA, demand side programme and capacity data. Like
+    NEMWeb it is an open HTTP file tree rather than a REST API, and like NEMWeb it needs no key, account or licence.'
   humanURL: https://data.wa.aemo.com.au/public/
   baseURL: https://data.wa.aemo.com.au/public
   tags:
@@ -185,12 +317,10 @@ apis:
     url: https://data.wa.aemo.com.au/public/outages/
 - aid: aemo:aemo-b2bmessagingpull-api
   name: AEMO B2 B Messaging Pull API
-  description: >-
-    The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between the participants
-    in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving participant
-    can poll the e-Hub, ‘pull’ and process the messages that are queued.
+  description: The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between the participants in a Pull messaging pattern.
+    The messages will be queued in the e-Hub and the receiving participant can poll the e-Hub, ‘pull’ and process the messages that are queued.
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - B2BMessagingPull
   properties:
@@ -214,7 +344,7 @@ apis:
   name: AEMO B2 M Messaging Pull API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - B2MMessagingPull
   properties:
@@ -238,7 +368,7 @@ apis:
   name: AEMO B2 M Messaging Sync API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - B2MMessagingSync
   properties:
@@ -262,7 +392,7 @@ apis:
   name: AEMO Balancing Reports v2.5 API
   description: Balancing Reports v2.5
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Balancing Reports v2.5
   properties:
@@ -286,7 +416,7 @@ apis:
   name: AEMO Balancing Submission v2 API
   description: Balancing Submission v2
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Balancing Submission v2
   properties:
@@ -310,7 +440,7 @@ apis:
   name: AEMO Bilateral/Stem Submission v1 API
   description: Bilateral/Stem Submission v1
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Bilateral/Stem Submission v1
   properties:
@@ -334,7 +464,7 @@ apis:
   name: AEMO Blind Update API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - BlindUpdate
   properties:
@@ -358,7 +488,7 @@ apis:
   name: AEMO Capacity API
   description: Capacity
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Capacity
   properties:
@@ -382,7 +512,7 @@ apis:
   name: AEMO Capacity Auction API
   description: CapacityAuction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - CapacityAuction
   properties:
@@ -406,7 +536,7 @@ apis:
   name: AEMO CDR API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - CDR
   properties:
@@ -430,7 +560,7 @@ apis:
   name: AEMO CDR Common API
   description: CDR Common
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - CDR Common
   properties:
@@ -454,7 +584,6 @@ apis:
   name: AEMO Data Holder Customers API
   description: Data Holder Customer endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Data Holder Customers
   properties:
@@ -474,11 +603,14 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-response-common-customer-detail-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-response-common-customer-schema.json
 - aid: aemo:aemo-data-holder-operations-api
   name: AEMO Data Holder Operations API
   description: Data Holder Operations endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Data Holder Operations
   properties:
@@ -498,11 +630,15 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-response-common-discovery-status-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-response-discovery-outages-list-schema.json
 - aid: aemo:aemo-der-registration-for-account-holders-api
   name: AEMO DER Registration For Account Holders API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - DER Registration For Account Holders
   properties:
@@ -526,7 +662,6 @@ apis:
   name: AEMO Distributed Energy Resources API
   description: Distributed Energy Resource endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Distributed Energy Resources
   properties:
@@ -546,11 +681,15 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-der-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-der-detail-response-schema.json
 - aid: aemo:aemo-ee-simulation-status-update-api
   name: AEMO EE Simulation Status Update API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - EE Simulation Status Update
   properties:
@@ -574,7 +713,6 @@ apis:
   name: AEMO Electricity Service Points API
   description: Electricity Service Point endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Electricity Service Points
   properties:
@@ -594,11 +732,14 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-service-point-list-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-service-point-detail-response-v2-schema.json
 - aid: aemo:aemo-electricity-usage-api
   name: AEMO Electricity Usage API
   description: Electricity Usage endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Electricity Usage
   properties:
@@ -618,11 +759,13 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-usage-list-response-schema.json
 - aid: aemo:aemo-enablementinstruction-api
   name: AEMO Enablement Instruction API
   description: EnablementInstruction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - EnablementInstruction
   properties:
@@ -646,7 +789,6 @@ apis:
   name: AEMO Energy Account Balances API
   description: Energy Account Balance endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Energy Account Balances
   properties:
@@ -666,11 +808,14 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-balance-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-balance-response-schema.json
 - aid: aemo:aemo-energy-account-billing-api
   name: AEMO Energy Account Billing API
   description: Energy Account Billing endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Energy Account Billing
   properties:
@@ -690,11 +835,14 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-billing-list-response-v3-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-invoice-list-response-schema.json
 - aid: aemo:aemo-energy-accounts-api
   name: AEMO Energy Accounts API
   description: Energy Account endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Energy Accounts
   properties:
@@ -714,11 +862,18 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-account-list-response-v2-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-payment-schedule-response-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-concessions-response-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-account-detail-response-v4-schema.json
 - aid: aemo:aemo-energy-plans-api
   name: AEMO Energy Plans API
   description: Energy Plan endpoints
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
   tags:
   - Energy Plans
   properties:
@@ -738,13 +893,16 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
+  - type: JSONSchema
+    url: json-schema/aemo-energy-plan-list-response-schema.json
+  - type: JSONSchema
+    url: json-schema/aemo-energy-plan-response-v3-schema.json
 - aid: aemo:aemo-gasbb-reporting-public-data-api
   name: AEMO GasBB Reporting Public Data API
-  description: >-
-    This API is intended for AEMO's use only, used by AEMO web pages and is not supported for any other
-    use. It can change at any time. See https://dev.aemo.com.au/ for information on using AEMO APIs.
+  description: This API is intended for AEMO's use only, used by AEMO web pages and is not supported for any other use. It can change at any time.
+    See https://dev.aemo.com.au/ for information on using AEMO APIs.
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - GasBB Reporting Public Data
   properties:
@@ -766,12 +924,10 @@ apis:
     url: https://dev.aemo.com.au/CDR-Common
 - aid: aemo:aemo-generatorrecall-api
   name: AEMO Generator Recall API
-  description: >-
-    The Generator Recall API is used by generators to send information about recall times into the Generator
-    Recall web-based interface in the EMMS Markets Portal. The system will then transfer the information
-    to a central AEMO database for viewing and reporting by AEMO operators.
+  description: The Generator Recall API is used by generators to send information about recall times into the Generator Recall web-based interface
+    in the EMMS Markets Portal. The system will then transfer the information to a central AEMO database for viewing and reporting by AEMO operators.
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - GeneratorRecall
   properties:
@@ -795,7 +951,7 @@ apis:
   name: AEMO Hub Message Management API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - HubMessageManagement
   properties:
@@ -819,7 +975,7 @@ apis:
   name: AEMO Hub Message Management V2 API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - HubMessageManagementV2
   properties:
@@ -843,7 +999,7 @@ apis:
   name: AEMO Identity Service(v2) API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - IdentityService(v2)
   properties:
@@ -867,7 +1023,7 @@ apis:
   name: AEMO Intermittent Generation Availability Submissions API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Intermittent Generation Availability Submissions
   properties:
@@ -891,7 +1047,7 @@ apis:
   name: AEMO LFAS Reports v2 API
   description: LFAS Reports v2
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - LFAS Reports v2
   properties:
@@ -915,7 +1071,7 @@ apis:
   name: AEMO LFAS Submission v2 API
   description: LFAS Submission v2
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - LFAS Submission v2
   properties:
@@ -939,7 +1095,7 @@ apis:
   name: AEMO Market Reports v2 API
   description: Market Reports v2
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Market Reports v2
   properties:
@@ -961,11 +1117,9 @@ apis:
     url: https://dev.aemo.com.au/CDR-Common
 - aid: aemo:aemo-meterexemption-api
   name: AEMO Meter Exemption API
-  description: >-
-    The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage metering
-    exemptions within MSATS.
+  description: The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage metering exemptions within MSATS.
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - MeterExemption
   properties:
@@ -989,7 +1143,7 @@ apis:
   name: AEMO NEM Dispatch Bidding API
   description: Bidding Service Open API specification
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - NEMDispatchBidding
   properties:
@@ -1013,7 +1167,7 @@ apis:
   name: AEMO OIP API
   description: OIP
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - OIP
   properties:
@@ -1037,7 +1191,7 @@ apis:
   name: AEMO Outage Management API
   description: Outage Management
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Outage Management
   properties:
@@ -1061,7 +1215,7 @@ apis:
   name: AEMO Pre-Balancing Reports v8 API
   description: Pre-Balancing Reports v8
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Pre-Balancing Reports v8
   properties:
@@ -1085,7 +1239,7 @@ apis:
   name: AEMO Prudentials API
   description: This API supports the various operations performed on Prudentials dashboard
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Prudentials
   properties:
@@ -1109,7 +1263,7 @@ apis:
   name: AEMO RCM Operations API
   description: RCM Operations
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - RCM Operations
   properties:
@@ -1133,7 +1287,7 @@ apis:
   name: AEMO Reallocations API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Reallocations
   properties:
@@ -1157,7 +1311,7 @@ apis:
   name: AEMO Report API
   description: Report
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Report
   properties:
@@ -1179,10 +1333,9 @@ apis:
     url: https://dev.aemo.com.au/CDR-Common
 - aid: aemo:aemo-rtms-api
   name: AEMO RTMS API
-  description: >-
-    The WEM-Reform API for Real-Time Market submissions available to all Market Participants.
+  description: The WEM-Reform API for Real-Time Market submissions available to all Market Participants.
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - RTMS
   properties:
@@ -1206,7 +1359,7 @@ apis:
   name: AEMO Self Forecast API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - SelfForecast
   properties:
@@ -1230,7 +1383,7 @@ apis:
   name: AEMO Settlement Direct API
   description: This API supports the various operations performed  in Settlement Direct API
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Settlement Direct
   properties:
@@ -1254,7 +1407,7 @@ apis:
   name: AEMO Submission API
   description: Submission
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - Submission
   properties:
@@ -1278,7 +1431,7 @@ apis:
   name: AEMO System Management Reports v2.2 API
   description: System Management Reports v2.2
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - System Management Reports v2.2
   properties:
@@ -1300,11 +1453,10 @@ apis:
     url: https://dev.aemo.com.au/CDR-Common
 - aid: aemo:aemo-tls-certificate-mgmt-v1-api
   name: AEMO TLS Certificate Mgmt v1 API
-  description: >-
-    The TLS Certificate Management API allows authorised participants to self-manage their AEMO-signed
-    TLS certificates. This API provides the following features:
+  description: 'The TLS Certificate Management API allows authorised participants to self-manage their AEMO-signed TLS certificates. This API
+    provides the following features:'
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - TLS Certificate Mgmt v1
   properties:
@@ -1328,7 +1480,7 @@ apis:
   name: AEMO Variable Parameter API
   description: VariableParameter
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - VariableParameter
   properties:
@@ -1352,7 +1504,7 @@ apis:
   name: AEMO WEM Attributes Report API
   description: WEM Attributes Report
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEM Attributes Report
   properties:
@@ -1376,7 +1528,7 @@ apis:
   name: AEMO WEM DER Installation V2 API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEM DER Installation V2
   properties:
@@ -1400,7 +1552,7 @@ apis:
   name: AEMO WEM DER NMI API
   description: Introduction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEM DER NMI
   properties:
@@ -1424,7 +1576,7 @@ apis:
   name: AEMO WEMDE DispatchCase API
   description: WEMDE DispatchCase
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE DispatchCase
   properties:
@@ -1448,7 +1600,7 @@ apis:
   name: AEMO WEMDE DispatchInstruction API
   description: WEMDE DispatchInstruction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE DispatchInstruction
   properties:
@@ -1472,7 +1624,7 @@ apis:
   name: AEMO WEMDE DispatchSolution API
   description: WEMDE DispatchSolution
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE DispatchSolution
   properties:
@@ -1496,7 +1648,7 @@ apis:
   name: AEMO WEMDE DispatchSummary API
   description: WEMDE DispatchSummary
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE DispatchSummary
   properties:
@@ -1520,7 +1672,7 @@ apis:
   name: AEMO WEMDE DSPDispatchInstruction API
   description: WEMDE DSPDispatchInstruction
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE DSPDispatchInstruction
   properties:
@@ -1544,7 +1696,7 @@ apis:
   name: AEMO WEMDE NCESS API
   description: WEMDE NCESS
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE NCESS
   properties:
@@ -1568,7 +1720,7 @@ apis:
   name: AEMO WEMDE NotInServiceCapacity API
   description: WEMDE NotInServiceCapacity
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE NotInServiceCapacity
   properties:
@@ -1592,7 +1744,7 @@ apis:
   name: AEMO WEMDE ReferenceTradingPrice API
   description: WEMDE ReferenceTradingPrice
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE ReferenceTradingPrice
   properties:
@@ -1616,7 +1768,7 @@ apis:
   name: AEMO WEMDE TradingDayReport API
   description: WEMDE TradingDayReport
   humanURL: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-  baseURL: https://visualisations.aemo.com.au/aemo/apps/api/report
+  baseURL: https://apis.prod.aemo.com.au:9319
   tags:
   - WEMDE TradingDayReport
   properties:
@@ -1636,131 +1788,50 @@ apis:
     url: https://consumerdatastandardsaustralia.github.io/standards/#discovery-apis
   - type: Documentation
     url: https://dev.aemo.com.au/CDR-Common
-common:
-- type: CapabilityMap
-  url: capabilities/aemo-capability-edges.yml
-  name: AEMO Business Capability Map
-- type: Overlay
-  url: overlays/aemo-cds-energy-api-overlay.yaml
-- type: Overlay
-  url: overlays/aemo-cds-common-api-overlay.yaml
-- type: AgenticAccess
-  url: agentic-access/aemo-agentic-access.yml
-- type: DomainSecurity
-  url: security/aemo-domain-security.yml
-- type: Authentication
-  url: authentication/aemo-authentication.yml
-- type: Website
-  url: https://aemo.com.au/
-- type: DeveloperPortal
-  url: https://dev.aemo.com.au/
-- type: Documentation
-  url: https://dev.aemo.com.au/api-docs
-- type: APIReference
-  url: https://dev.aemo.com.au/developer/apis?api-version=2022-04-01-preview
-- type: GettingStarted
-  url: https://dev.aemo.com.au/working-with-aemo-apis
-- type: SignUp
-  url: https://dev.aemo.com.au/signup
-- type: TermsOfService
-  url: https://dev.aemo.com.au/terms
-- type: Authentication
-  url: https://dev.aemo.com.au/urm-username-password
-- type: OAuth
-  url: https://dev.aemo.com.au/oauth
-- type: PostmanCollection
-  url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
-- type: ConsumerDataRight
-  url: https://aemo.com.au/initiatives/major-programs/cdr-at-aemo
-- type: APIStandards
-  url: https://consumerdatastandardsaustralia.github.io/standards/
-- type: Regulator
-  url: https://www.cdr.gov.au/
-- type: DataFeed
-  url: https://nemweb.com.au/Reports/Current/
-- type: DataFeed
-  url: https://data.wa.aemo.com.au/public/
-- type: Dashboard
-  url: https://visualisations.aemo.com.au/aemo/apps/visualisations/index.html
-- type: GasBulletinBoard
-  url: https://gbbwa.aemo.com.au/
-- type: MarketsPortalHelp
-  url: https://markets-portal-help.docs.public.aemo.com.au/Content/API_Reference/API_introduction.htm
-- type: Registration
-  url: https://www.aemo.com.au/energy-systems/registration
-- type: LinkedIn
-  url: https://au.linkedin.com/company/aemo
-- type: Support
-  url: https://dev.aemo.com.au/contact-us
-  name: AEMO Information and Support Hub
-- type: HelpCenter
-  url: https://dev.aemo.com.au/faqs
-  name: Developer portal FAQs
-- type: Blog
-  url: https://www.aemo.com.au/newsroom/news-updates
-  name: AEMO news updates
-- type: PrivacyPolicy
-  url: https://aemo.com.au/en/privacy-and-legal-notices/privacy-policy
-- type: StatusPage
-  url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
-  name: IT change and release management — forward change schedule and business service status history
-- type: Deprecation
-  url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
-  name: Change and retirement of market IT interfaces
-- type: Security
-  url: https://www.aemo.com.au/.well-known/security.txt
-  name: Report a security issue to AEMO Cyber Security
-- type: ChangeLog
-  url: https://aemo.com.au/market-notices?marketNoticeFacets=MARKET+SYSTEMS
-  name: Market Notices — MARKET SYSTEMS
-- type: Postman
-  url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
-  name: AEMO Postman collection
-- type: OpenIDConnect
-  url: https://login.aemo.com.au/login.aemo.com.au/v2.0/.well-known/openid-configuration?p=B2C_1A_DERR_SIGNUPSIGNIN
-  name: DER Register consumer registration (Azure AD B2C)
-- type: OAuthScopes
-  url: scopes/aemo-scopes.yml
-- type: Conventions
-  url: conventions/aemo-conventions.yml
-- type: ErrorCatalog
-  url: errors/aemo-error-codes.yml
-- type: RateLimits
-  url: rate-limits/aemo-rate-limits.yml
-- type: Lifecycle
-  url: lifecycle/aemo-lifecycle.yml
-- type: ChangeLog
-  url: changelog/aemo-changelog.yml
-- type: Conformance
-  url: conformance/aemo-conformance.yml
-- type: Vocabulary
-  url: vocabulary/aemo-glossary.yml
-  name: AEMO Glossary and Rules Terms (1,151 terms)
-- type: DataModel
-  url: data-model/aemo-data-model.yml
-- type: Sandbox
-  url: sandbox/aemo-sandbox.yml
-- type: Packages
-  url: packages/aemo-packages.yml
-- type: WellKnown
-  url: well-known/aemo-well-known.yml
-- type: SecurityTxt
-  url: well-known/aemo-security.txt
-- type: VulnerabilityDisclosure
-  url: security/aemo-vulnerability-disclosure.yml
-- type: LLMsTxt
-  url: llms/aemo-llms.txt
-- type: Webhooks
-  url: asyncapi/aemo-ehub-events.yml
-  name: AEMO e-Hub asynchronous message delivery surface
-- type: AgentSkill
-  url: skills/_index.yml
-  name: Seven packaged Agent Skills grounded in verified operationIds
-- type: MCPCandidate
-  url: mcp/aemo-mcp.yml
-  name: Candidate MCP tool design derived from the OpenAPI — AEMO publishes no MCP server
-- type: ToolCrosswalk
-  url: mcp/aemo-tool-crosswalk.yml
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: 'Identity pass 2026-10-21: www.aemo.com.au titles itself "AEMO | Australian Energy Market Operator" (plain GET via fetch-url.py 200;
+    curl without a browser session gets a Cloudflare 403 challenge, which is edge policy, not absence). All common[] link pointers re-verified;
+    aemo.com.au and the privacy URL redirect within the same domain, so the canonical final URLs are recorded. www.cdr.gov.au (Regulator) timed
+    out from this network and was left unchanged. github.com/AEMO is an unrelated account ("aeMo") and was not added.'
+  evidence:
+  - url: https://www.aemo.com.au/
+    status: 200
+  - url: https://dev.aemo.com.au/
+    status: 200
+  - url: https://dev.aemo.com.au/api-docs
+    status: 200
+  - url: https://dev.aemo.com.au/working-with-aemo-apis
+    status: 200
+  - url: https://dev.aemo.com.au/terms
+    status: 200
+  - url: https://dev.aemo.com.au/contact-us
+    status: 200
+  - url: https://dev.aemo.com.au/faqs
+    status: 200
+  - url: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+    status: 200
+  - url: https://www.aemo.com.au/newsroom/news-updates
+    status: 200
+  - url: https://www.aemo.com.au/privacy-and-legal-notices/privacy-policy
+    status: 200
+  - url: https://www.aemo.com.au/energy-systems/market-it-systems/it-change-and-release-management
+    status: 200
+  - url: https://www.aemo.com.au/.well-known/security.txt
+    status: 200
+  - url: https://www.aemo.com.au/energy-systems/electricity/cdr-at-aemo
+    status: 200
+  - url: https://nemweb.com.au/Reports/Current/
+    status: 200
+  - url: https://markets-portal-help.docs.public.aemo.com.au/Content/API_Reference/API_introduction.htm
+    status: 200
+  - url: https://github.com/aemo-au
+    status: 404
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 89
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

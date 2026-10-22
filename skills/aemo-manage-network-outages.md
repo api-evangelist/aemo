@@ -1,13 +1,14 @@
 ---
-name: Lodge and manage network and generator outages
+name: aemo-manage-network-outages
+title: "Lodge and manage network and generator outages"
 description: Create, inspect, update and withdraw outages in AEMO's Outage Management System from a network operator or generator perspective.
-api: openapi/aemo-outage-management-external-v1-openapi.yml
+api: openapi/aemo-outage-management-api-openapi.yml
 operations: [retrieveOutageFromOutageManagement, getParticularOutage, retrieveLatestOutageStatusForNetworkOperator, createANewNetworkOutageInOutageManagementSystem, createANewGeneratorOutageInOutageManagementSystem, updateExistingNetworkOutageInOutageManagementSystem, withdrawExistingNetworkOutageInOutageManagementSystem, withdrawExistingNetworkOutagesInOutageManagementSystem]
 ---
 
 # Lodge and manage network and generator outages
 
-Use the AEMO Outage Management API (`openapi/aemo-outage-management-external-v1-openapi.yml`) to
+Use the AEMO Outage Management API (`openapi/aemo-outage-management-api-openapi.yml`) to
 lodge and maintain planned outages. These are **safety-critical power-system operations** — an
 outage submission or withdrawal affects power-system security. Treat every write as
 human-in-the-loop: propose, show the exact payload, and only submit on explicit approval. See

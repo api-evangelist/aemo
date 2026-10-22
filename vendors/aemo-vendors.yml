@@ -1,0 +1,62 @@
+generated: '2026-10-21'
+method: probed
+source: pre-flight dossier (docs platform, portal detections) + CNAME chains and response headers of the hosts apis.yml names
+registry: all/0-working/vendors.yml
+areas_vocabulary:
+- documentation
+- developer-portal
+- api-gateway
+- cdn
+- hosting
+- sdk-generation
+- api-collections
+- status-page
+- support
+- community
+- identity
+- mcp-hosting
+vendors:
+- vendor: postman
+  name: Postman
+  area: api-collections
+  host: documenter.getpostman.com
+  evidence: https://documenter.getpostman.com/view/10032049/2s93CNNDaK
+  signal: url:postman.com
+  confidence: high
+  kin_score:
+  - postman_collection
+- vendor: cloudflare
+  name: Cloudflare
+  area: cdn
+  host: www.aemo.com.au
+  evidence: header:cf-ray
+  signal: header
+  confidence: high
+  kin_score:
+  - https_enforced
+  - hsts
+reliance:
+  areas_vendor_served:
+  - api-collections
+  - cdn
+  vendor_count: 2
+  areas_observed: 12
+  share_of_observable_areas: 0.167
+  note: areas where a third party was DETECTED serving this provider; an area absent here was either self-run or not observed, and this script
+    cannot tell those apart
+checked:
+- 'docs-platform: custom'
+- www.aemo.com.au (Website)
+- dev.aemo.com.au (DeveloperPortal)
+- dev.aemo.com.au (Documentation)
+- dev.aemo.com.au (APIReference)
+- dev.aemo.com.au (GettingStarted)
+- dev.aemo.com.au (SignUp)
+- dev.aemo.com.au (Support)
+- dev.aemo.com.au (HelpCenter)
+- www.aemo.com.au (StatusPage)
+- documenter.getpostman.com (Postman)
+- visualisations.aemo.com.au (baseURL)
+- nemweb.com.au (baseURL)
+- data.wa.aemo.com.au (baseURL)
+- apis.prod.aemo.com.au:9319 (baseURL)

@@ -1,0 +1,501 @@
+{
+  "info": {
+    "_postman_id": "2b143b4b-c3a2-4da3-9395-aceae4c79b3c",
+    "name": "EE Simulation Status Update API",
+    "description": "## Introduction\nEE Simulation Status Update APIs are used by EE to submit the simulation status update",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:16:50.000Z",
+    "updatedAt": "2026-10-21T20:16:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b143b4b-c3a2-4da3-9395-aceae4c79b3c"
+  },
+  "item": [
+    {
+      "name": "token",
+      "item": [
+        {
+          "name": "Request a Token",
+          "id": "6a82eb39-4bc9-4e68-b6dc-dc42023d7a18",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/token?grant_type=client_credentials",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "token"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Should always be 'client_credentials'",
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "description": "Request for a New Token. This request uses API Key Details as BasicAuth as the Authentication Method."
+          },
+          "response": [
+            {
+              "id": "7f9879cd-3a88-4616-93bb-3ce50c50aeee",
+              "name": "Succesfully generated token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/token?grant_type=client_credentials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Should always be 'client_credentials'",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": \"{\\n  \\\"transactionID\\\": \\\"b85a35f8-f741-40ac-a701-a8cfebb25669\\\",\\n  \\\"acess_token\\\": \\\"Gy3TJkeHAC3bDxO2YBp\\\",\\n  \\\"access_token_expires_in\\\": \\\"3599\\\"\\n}\"\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-7f9879cd-3a88-4616-93bb-3ce50c50aeee"
+            },
+            {
+              "id": "5e92f583-c432-490e-a9ac-574b94100864",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/token?grant_type=client_credentials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Should always be 'client_credentials'",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": \"{\\n  \\\"code\\\": 401,\\n  \\\"title\\\": \\\"Unauthorized\\\",\\n  \\\"detail\\\": \\\"Authorization failed\\\",\\n  \\\"source\\\": \\\"API Gateway\\\"\\n}\"\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-5e92f583-c432-490e-a9ac-574b94100864"
+            },
+            {
+              "id": "6349268d-4834-47d2-a800-d357b60eb296",
+              "name": "Method Not Allowed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/token?grant_type=client_credentials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Should always be 'client_credentials'",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": \"{\\n  \\\"code\\\": 405,\\n  \\\"title\\\": \\\"Method Not Allowed\\\",\\n  \\\"detail\\\": \\\"Input request HTTP method is <Invalid Method passed>, but operation accepts only [<Valid Method>]\\\",\\n  \\\"source\\\": \\\"\\\"\\n}\"\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-6349268d-4834-47d2-a800-d357b60eb296"
+            },
+            {
+              "id": "efe7e95c-8ca3-401f-b168-914e8b9d676b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/token?grant_type=client_credentials",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Should always be 'client_credentials'",
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": \"{\\n  \\\"code\\\": 500,\\n  \\\"title\\\": \\\"Internal Server Error\\\",\\n  \\\"detail\\\": \\\"Internal Server Error\\\",\\n  \\\"source\\\": \\\"\\\"\\n}\"\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-efe7e95c-8ca3-401f-b168-914e8b9d676b"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:50.000Z",
+          "updatedAt": "2026-10-21T20:16:50.000Z",
+          "uid": "35240-6a82eb39-4bc9-4e68-b6dc-dc42023d7a18"
+        }
+      ],
+      "id": "0ef5aae4-a4c7-4f45-a1a4-034b9f7022d2",
+      "createdAt": "2026-10-21T20:16:50.000Z",
+      "updatedAt": "2026-10-21T20:16:50.000Z",
+      "uid": "35240-0ef5aae4-a4c7-4f45-a1a4-034b9f7022d2"
+    },
+    {
+      "name": "postSimulationData",
+      "item": [
+        {
+          "name": "Submit Simulation Status Update for operational/non-operational model from EE\u2026",
+          "id": "fc3ae256-d1d0-4014-8d33-9398773d382c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"executionId\": \"f24566e1-7b2d-4396-a02e-20a79530d983\",\n    \"studyId\": \"7793747a-bc42-437c-ad48-1b4ed6eb308f\",\n    \"status\": \"CompletedSuccess\",\n    \"tags\": [\n      {\n        \"name\": \"runType\",\n        \"value\": \"NonOperational\"\n      }\n    ],\n    \"sentDate\": \"2020-09-14T19:24:33.5608098Z\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/postSimulationData",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "postSimulationData"
+              ]
+            },
+            "description": "EE is required to send the simulation status update as a response for the simulations submitted from AEMO."
+          },
+          "response": [
+            {
+              "id": "90513627-f18d-4e73-b7ae-1f420bc09cd7",
+              "name": "Submit simulation status update - Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"executionId\": \"f24566e1-7b2d-4396-a02e-20a79530d983\",\n    \"studyId\": \"7793747a-bc42-437c-ad48-1b4ed6eb308f\",\n    \"status\": \"CompletedSuccess\",\n    \"tags\": [\n      {\n        \"name\": \"runType\",\n        \"value\": \"NonOperational\"\n      }\n    ],\n    \"sentDate\": \"2020-09-14T19:24:33.5608098Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/postSimulationData",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postSimulationData"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"0283d8d0-32a6-45d8-949b-3aa7173ef1d7\",\n    \"data\": {\n      \"ResponseTimeStamp\": \"2018-07-09T00:23:42Z\",\n      \"ResponseText\": \"Submit simulation status update successful\"\n    },\n    \"errors\": []\n  }\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-90513627-f18d-4e73-b7ae-1f420bc09cd7"
+            },
+            {
+              "id": "61ce6291-f30c-40aa-9f86-d33a858bc13e",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"executionId\": \"f24566e1-7b2d-4396-a02e-20a79530d983\",\n    \"studyId\": \"7793747a-bc42-437c-ad48-1b4ed6eb308f\",\n    \"status\": \"CompletedSuccess\",\n    \"tags\": [\n      {\n        \"name\": \"runType\",\n        \"value\": \"NonOperational\"\n      }\n    ],\n    \"sentDate\": \"2020-09-14T19:24:33.5608098Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/postSimulationData",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postSimulationData"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"1234567890\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"title\": \"Unauthorized\",\n        \"detail\": \"Authorization failed\",\n        \"source\": \"API Gateway\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-61ce6291-f30c-40aa-9f86-d33a858bc13e"
+            },
+            {
+              "id": "c550518a-c528-48d2-aa1f-8ba2f9b450f1",
+              "name": "This response is provided when a resource missing from URL or incorrect URL.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"executionId\": \"f24566e1-7b2d-4396-a02e-20a79530d983\",\n    \"studyId\": \"7793747a-bc42-437c-ad48-1b4ed6eb308f\",\n    \"status\": \"CompletedSuccess\",\n    \"tags\": [\n      {\n        \"name\": \"runType\",\n        \"value\": \"NonOperational\"\n      }\n    ],\n    \"sentDate\": \"2020-09-14T19:24:33.5608098Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/postSimulationData",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postSimulationData"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"1234567890\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"404\",\n        \"title\": \"Not Found\",\n        \"detail\": \"Resource not found at wrong-resource\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-c550518a-c528-48d2-aa1f-8ba2f9b450f1"
+            },
+            {
+              "id": "15900a85-d5ec-44a9-88c5-26417155de4f",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"executionId\": \"f24566e1-7b2d-4396-a02e-20a79530d983\",\n    \"studyId\": \"7793747a-bc42-437c-ad48-1b4ed6eb308f\",\n    \"status\": \"CompletedSuccess\",\n    \"tags\": [\n      {\n        \"name\": \"runType\",\n        \"value\": \"NonOperational\"\n      }\n    ],\n    \"sentDate\": \"2020-09-14T19:24:33.5608098Z\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/postSimulationData",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postSimulationData"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"1234567890\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"500\",\n        \"title\": \"InternalServerError\",\n        \"detail\": \"An unexpected error has occurred\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:50.000Z",
+              "updatedAt": "2026-10-21T20:16:50.000Z",
+              "uid": "35240-15900a85-d5ec-44a9-88c5-26417155de4f"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:50.000Z",
+          "updatedAt": "2026-10-21T20:16:50.000Z",
+          "uid": "35240-fc3ae256-d1d0-4014-8d33-9398773d382c"
+        }
+      ],
+      "id": "3e2d8eff-2064-4c6b-9948-7a8d573340d3",
+      "createdAt": "2026-10-21T20:16:50.000Z",
+      "updatedAt": "2026-10-21T20:16:50.000Z",
+      "uid": "35240-3e2d8eff-2064-4c6b-9948-7a8d573340d3"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/ee-simulation-status-update"
+    }
+  ]
+}

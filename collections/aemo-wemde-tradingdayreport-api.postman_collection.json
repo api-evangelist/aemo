@@ -1,0 +1,616 @@
+{
+  "info": {
+    "_postman_id": "8d86d557-3d24-46e6-9237-90e0cf762390",
+    "name": "WEMDE TradingDayReport API",
+    "description": "WEMDE TradingDayReport",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:21:21.000Z",
+    "updatedAt": "2026-10-21T20:21:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8d86d557-3d24-46e6-9237-90e0cf762390"
+  },
+  "item": [
+    {
+      "name": "tradingDayReport",
+      "item": [
+        {
+          "name": "Retrieves the Trading Day Report",
+          "id": "36999a42-c9ce-4e8e-9199-989a6cb60e70",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tradingDayReport"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                  "key": "tradingDay",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "021f1959-76e0-4847-8bff-6154949ea786",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"data\": {\n      \"tradingDay\": \"string\",\n      \"dspReductionInstructions\": [\n        {\n          \"tradingInterval\": \"string\",\n          \"requestedReductions\": [\n            {\n              \"facilityCode\": \"string\",\n              \"requestedReductionValue\": 0\n            }\n          ]\n        }\n      ],\n      \"congestionRentalCalculations\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"congestionRentals\": [\n            {\n              \"facilityCode\": \"string\",\n              \"congestionRentalValue\": 0\n            }\n          ]\n        }\n      ],\n      \"facilityRiskCalculations\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"facilityRisks\": [\n            {\n              \"facilityCode\": \"string\",\n              \"facilityRiskValue\": 0\n            }\n          ]\n        }\n      ],\n      \"facilityLowerRiskCalculations\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"facilityLowerRisks\": [\n            {\n              \"facilityCode\": \"string\",\n              \"facilityLowerRiskValue\": 0\n            }\n          ]\n        }\n      ],\n      \"networkRiskCalculations\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"networkRisks\": [\n            {\n              \"networkContingency\": \"string\",\n              \"networkRiskValue\": 0,\n              \"associatedFacilityCodes\": [\n                \"string\"\n              ]\n            }\n          ]\n        }\n      ],\n      \"networkLowerRiskCalculations\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"networkLowerRisks\": [\n            {\n              \"networkLowerContingency\": \"string\",\n              \"networkLowerRiskValue\": 0,\n              \"associatedFacilityCodes\": [\n                \"string\"\n              ]\n            }\n          ]\n        }\n      ],\n      \"energyUpliftPricesAndUpliftPaymentMispricingTriggers\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"facilities\": [\n            {\n              \"facilityCode\": \"string\",\n              \"energyUpliftPrice\": 0,\n              \"upliftMispricingTrigger\": 0\n            }\n          ]\n        }\n      ]\n    },\n    \"transactionId\": \"string\"\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-021f1959-76e0-4847-8bff-6154949ea786"
+            },
+            {
+              "id": "9d793f3f-8620-47ae-9bc8-22e3b81aaa40",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"missingHeader\": {\n      \"summary\": \"Missing mandatory HTTP header parameter\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"400\",\n            \"title\": \"Missing mandatory HTTP header parameter\",\n            \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-9d793f3f-8620-47ae-9bc8-22e3b81aaa40"
+            },
+            {
+              "id": "c856778e-d581-44fa-88c2-149862294dbe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"unauthorized\": {\n      \"summary\": \"Unauthorized\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"Unauthorized\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    },\n    \"initiatingParticipantIdMismatch\": {\n      \"summary\": \"x-initiatingParticipantId does not match the participant ID associated with the certificate\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-u475-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"x-initiatingParticipantId does not match the participant ID associated with the certificate\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-c856778e-d581-44fa-88c2-149862294dbe"
+            },
+            {
+              "id": "e5a2cc06-fb90-4183-b200-084c4099c6d3",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-e5a2cc06-fb90-4183-b200-084c4099c6d3"
+            },
+            {
+              "id": "b5a944c8-f3d1-4031-9c75-3156f2b6a9f2",
+              "name": "Not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource not found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not found\",\n            \"detail\": \"Resource not found for endpoint URI: <URI>\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-b5a944c8-f3d1-4031-9c75-3156f2b6a9f2"
+            },
+            {
+              "id": "4017a32f-a866-49a9-9c75-b88702ce5c38",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method not allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method not allowed\",\n            \"detail\": \"Input HTTP method is <invokedMethod>. Operation <operationURI> accepts only: [<operationMethod>].\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-4017a32f-a866-49a9-9c75-b88702ce5c38"
+            },
+            {
+              "id": "83ab5e73-cd87-40f7-9321-36c92c6b4e95",
+              "name": "Payload too large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload too large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload too large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> size is <number of bytes> bytes\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-83ab5e73-cd87-40f7-9321-36c92c6b4e95"
+            },
+            {
+              "id": "68a53f6b-5991-47cb-a3fa-1f8a39c259b7",
+              "name": "Client error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-68a53f6b-5991-47cb-a3fa-1f8a39c259b7"
+            },
+            {
+              "id": "acdec8d1-eea7-4c65-8593-3676c21388ee",
+              "name": "Too many requests",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too many requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too many requests\",\n            \"detail\": \"The number of inbound requests has exceeded throttling limits. Try again later.\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-acdec8d1-eea7-4c65-8593-3676c21388ee"
+            },
+            {
+              "id": "bc749c20-02b8-402e-bade-2d93fde3459d",
+              "name": "Application unavailable or server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tradingDayReport?tradingDay=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tradingDayReport"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For requests, the offset +08:00 is optional. The API treats incoming times as +08:00 by default.",
+                      "key": "tradingDay",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:21:21.000Z",
+              "updatedAt": "2026-10-21T20:21:21.000Z",
+              "uid": "35240-bc749c20-02b8-402e-bade-2d93fde3459d"
+            }
+          ],
+          "createdAt": "2026-10-21T20:21:21.000Z",
+          "updatedAt": "2026-10-21T20:21:21.000Z",
+          "uid": "35240-36999a42-c9ce-4e8e-9199-989a6cb60e70"
+        }
+      ],
+      "id": "b68b39f1-f6e0-4682-af2d-60cb1b5de5c9",
+      "createdAt": "2026-10-21T20:21:21.000Z",
+      "updatedAt": "2026-10-21T20:21:21.000Z",
+      "uid": "35240-b68b39f1-f6e0-4682-af2d-60cb1b5de5c9"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-gwy-prd.aemo.local/WEM/v1/tradingDayReport"
+    }
+  ]
+}

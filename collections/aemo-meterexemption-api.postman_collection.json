@@ -1,0 +1,1749 @@
+{
+  "info": {
+    "_postman_id": "50acd7e4-3e8d-4841-97a9-71605320d211",
+    "name": "Meter Exemption API",
+    "description": "The Meter Exemptions API enables registered Metering Coordinators (MCs) to create and manage metering exemptions within MSATS.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:18:32.000Z",
+    "updatedAt": "2026-10-21T20:18:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-50acd7e4-3e8d-4841-97a9-71605320d211"
+  },
+  "item": [
+    {
+      "name": "exemptionDetails",
+      "item": [
+        {
+          "name": "Exemption Details",
+          "id": "a79b7028-fa8b-4319-b1f0-733e4ce109e2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) Identifies the market. Set to NEM",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "description": "Unique identifier for each request",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "exemptionDetails"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The meter exemption ID",
+                  "key": "meterExemptionId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                  "key": "NMI",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Get meter exemption details for a specified meter exemption, including:\n\n- Participant contact details\n- Meter exemption details\n- Meter exemption history\n- Meter exemption NMI list.\nIf the NMI is not specified:\n- In the csv file, it returns the whole NMI list.\n- In json format, it returns up to 1000 NMIs."
+          },
+          "response": [
+            {
+              "id": "6eea0093-913d-4436-8972-c42b25228174",
+              "name": "Request processed successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"12345-abcd-27\",\n    \"data\": {\n      \"participantContact\": {\n        \"contactName\": \"John Smith\",\n        \"phoneNumber\": 123456789,\n        \"email\": \"john.smith@company.com\"\n      },\n      \"meterExemption\": {\n        \"meterExemptionId\": \"123456789012345\",\n        \"participantId\": \"NEMMCO\",\n        \"startDate\": \"2023-07-25\",\n        \"endDate\": \"2024-02-29\",\n        \"status\": \"REVIEW\",\n        \"statusDate\": \"2023-07-25\",\n        \"exemptionDate\": \"2023-07-01\",\n        \"exemptionCategory\": \"MALFUNCTION\",\n        \"exemptionType\": \"DEFECTIVE\",\n        \"exemptionNature\": \"ACCESS\",\n        \"actionTaken\": \"Actions that were taken..\",\n        \"actionReason\": \"Reason for raising exemption and other relevant information....\",\n        \"docProvided\": \"Y\",\n        \"extendCount\": \"0\"\n      },\n      \"meterExemptionHistory\": [\n        {\n          \"status\": \"REVIEW\",\n          \"statusDate\": \"2023-07-25\"\n        }\n      ],\n      \"meterExemptionNMIs\": [\n        {\n          \"NMI\": \"1234567890\",\n          \"status\": \"NEW\",\n          \"planDate\": \"2023-12-22\",\n          \"substitutionReq\": \"Y\",\n          \"substitutionMethod\": 45\n        },\n        {\n          \"NMI\": \"1234567891\",\n          \"status\": \"NEW\",\n          \"planDate\": \"2023-12-22\",\n          \"substitutionReq\": \"Y\",\n          \"substitutionMethod\": 45\n        },\n        {\n          \"NMI\": \"1234567892\",\n          \"status\": \"NEW\",\n          \"planDate\": \"2023-12-22\",\n          \"substitutionReq\": \"Y\",\n          \"substitutionMethod\": 45\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-6eea0093-913d-4436-8972-c42b25228174"
+            },
+            {
+              "id": "4d1a0b4e-90fd-4722-af1c-098dd7c64011",
+              "name": "Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-4d1a0b4e-90fd-4722-af1c-098dd7c64011"
+            },
+            {
+              "id": "4e9eb0a1-099d-46a4-a23d-bd09ff1d8364",
+              "name": "Unauthorized. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-4e9eb0a1-099d-46a4-a23d-bd09ff1d8364"
+            },
+            {
+              "id": "7fbb3256-dc9b-4c03-8c92-341511cdd6b9",
+              "name": "Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-7fbb3256-dc9b-4c03-8c92-341511cdd6b9"
+            },
+            {
+              "id": "a002268d-5ab2-49d5-8420-7f07c5d5a2b5",
+              "name": "Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-a002268d-5ab2-49d5-8420-7f07c5d5a2b5"
+            },
+            {
+              "id": "7543b1c8-a6aa-454b-aa14-1b71aecbb13c",
+              "name": "Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-7543b1c8-a6aa-454b-aa14-1b71aecbb13c"
+            },
+            {
+              "id": "ab71e820-5512-48d8-a3f0-6b5f5cedab9e",
+              "name": "Internal Server Error. Exception from backend system. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionDetails?meterExemptionId=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionDetails"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The meter exemption ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The NMI to retrieve. The NMI must be part of the Meter Exemption",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-ab71e820-5512-48d8-a3f0-6b5f5cedab9e"
+            }
+          ],
+          "createdAt": "2026-10-21T20:18:33.000Z",
+          "updatedAt": "2026-10-21T20:18:33.000Z",
+          "uid": "35240-a79b7028-fa8b-4319-b1f0-733e4ce109e2"
+        }
+      ],
+      "id": "a826d257-1115-4b27-8936-2a382660959c",
+      "createdAt": "2026-10-21T20:18:33.000Z",
+      "updatedAt": "2026-10-21T20:18:33.000Z",
+      "uid": "35240-a826d257-1115-4b27-8936-2a382660959c"
+    },
+    {
+      "name": "exemptionList",
+      "item": [
+        {
+          "name": "Exemption List",
+          "id": "f6b7866d-9e1c-447a-8d2c-d14fe88e1cdc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) Identifies the market. Set to NEM",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "description": "Unique identifier for each request",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "exemptionList"
+              ],
+              "query": [
+                {
+                  "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The meter exemption for the given ID",
+                  "key": "meterExemptionId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                  "key": "meterExemptionFromDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                  "key": "meterExemptionToDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Returns meter exemptions for the given NMI",
+                  "key": "NMI",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of meter exemptions based on the query parameters.The response format is defined in the Accept header.\nWhen the content type is:\n- application/json, up to 1000 meter exemptions records are returned\n- text/csv, up to 75,000 meter exemption records are returned"
+          },
+          "response": [
+            {
+              "id": "c541bcfe-df76-49f3-a8ee-2be31ec33c36",
+              "name": "Request processed successfully",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"adb4g8ed0-bdf5-5574-ad41-a20d8f1b2503\",\n    \"data\": {\n      \"meterExemptions\": [\n        {\n          \"meterExemptionId\": \"123456789012345\",\n          \"exemptionDate\": \"2023-09-04\",\n          \"createDate\": \"2023-10-16\",\n          \"age\": \"0\",\n          \"endDate\": \"2026-08-11\",\n          \"status\": \"REJECTED\",\n          \"nmiQuantity\": \"3\",\n          \"participantId\": \"MYMC\"\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-c541bcfe-df76-49f3-a8ee-2be31ec33c36"
+            },
+            {
+              "id": "2d91f460-6c80-4732-bbb1-ec9ec9b58db5",
+              "name": "Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-2d91f460-6c80-4732-bbb1-ec9ec9b58db5"
+            },
+            {
+              "id": "b4cb36aa-b61d-4cd9-bd99-c22d0c6a6d7c",
+              "name": "Unauthorized. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-b4cb36aa-b61d-4cd9-bd99-c22d0c6a6d7c"
+            },
+            {
+              "id": "4f0755ad-aeee-47db-8915-75e5301b0297",
+              "name": "Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-4f0755ad-aeee-47db-8915-75e5301b0297"
+            },
+            {
+              "id": "4f7ca81c-ff37-40d8-ba67-63c2c36f128f",
+              "name": "Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-4f7ca81c-ff37-40d8-ba67-63c2c36f128f"
+            },
+            {
+              "id": "ee86d2bd-0804-4dd7-9625-67d021ab055c",
+              "name": "Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-ee86d2bd-0804-4dd7-9625-67d021ab055c"
+            },
+            {
+              "id": "7303275a-001c-4168-9194-67d6477c6d9c",
+              "name": "Internal Server Error. Exception from backend system. No response payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/exemptionList?status=<string>&meterExemptionId=<string>&meterExemptionFromDate=<string>&meterExemptionToDate=<string>&NMI=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "exemptionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "Retrieves a list of meter exemptions for a given status. There are two status values, one for exemptions and one for NMIs. Must be one of ACTIVE, CANCELLED, EXPIRED, MOREINFO, REJECTED, RESOLVED, REVIEW",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption for the given ID",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list from a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemptions list to a given date. Format YYYY-MM-DD",
+                      "key": "meterExemptionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Returns meter exemptions for the given NMI",
+                      "key": "NMI",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-7303275a-001c-4168-9194-67d6477c6d9c"
+            }
+          ],
+          "createdAt": "2026-10-21T20:18:33.000Z",
+          "updatedAt": "2026-10-21T20:18:33.000Z",
+          "uid": "35240-f6b7866d-9e1c-447a-8d2c-d14fe88e1cdc"
+        }
+      ],
+      "id": "143e36e8-39fd-4c49-93f0-19260969b09c",
+      "createdAt": "2026-10-21T20:18:33.000Z",
+      "updatedAt": "2026-10-21T20:18:33.000Z",
+      "uid": "35240-143e36e8-39fd-4c49-93f0-19260969b09c"
+    },
+    {
+      "name": "submitExemption",
+      "item": [
+        {
+          "name": "submitExemption",
+          "id": "b318ad16-ceb9-4835-a917-096223b6b99f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) Identifies the market. Set to NEM",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "description": "Unique identifier for each request",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submitExemption"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                  "key": "action",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The meter exemption ID to update",
+                  "key": "meterExemptionId",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Submits or updates a meter exemption.\nA submission consists of two parts:\n1. Meter exemption details - JSON payload.\n2. NMI list \u2013 csv or JSON payload."
+          },
+          "response": [
+            {
+              "id": "32aee5c0-6dcf-4ae9-bad5-31b3dbd8a1bc",
+              "name": "Request processed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {\n      \"meterExemptionId\": \"123456789012345\",\n      \"meterExemptionStatus\": \"REVIEW\",\n      \"payloadResponseStatus\": \"Accept\",\n      \"payloadResponseMessage\": \"NMIs submitted: 3 Total NMIs in the exemption: 3 Live NMIs in the exemption: 0\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-32aee5c0-6dcf-4ae9-bad5-31b3dbd8a1bc"
+            },
+            {
+              "id": "5716fbae-d986-449d-86a7-4da6498bcaee",
+              "name": "Mandatory HTTP header {missing Header Name} is missing. No response payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-5716fbae-d986-449d-86a7-4da6498bcaee"
+            },
+            {
+              "id": "a621800d-bf1f-42f9-b275-ab3e87d33a57",
+              "name": "Unauthorized. No response payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-a621800d-bf1f-42f9-b275-ab3e87d33a57"
+            },
+            {
+              "id": "f46b675e-1a93-45dc-9523-0c46e9338977",
+              "name": "Resources for the endpoint URI not found. Endpoint URI:{requested URI path suffix}. No response payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-f46b675e-1a93-45dc-9523-0c46e9338977"
+            },
+            {
+              "id": "c01bb1ca-79c3-436b-a28c-34976e6f803e",
+              "name": "Method Not Allowed. Input request HTTP method {requested verb} is not allowed for this resource. No response payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-c01bb1ca-79c3-436b-a28c-34976e6f803e"
+            },
+            {
+              "id": "3c0254e5-a017-47ff-91f9-e9936dfa17e5",
+              "name": "Too Many Requests. Number of inbound requests exceeded the throttling limits; try after sometime. No response payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-3c0254e5-a017-47ff-91f9-e9936dfa17e5"
+            },
+            {
+              "id": "e0a117f9-ad57-4df9-8a18-d1294487afce",
+              "name": "Internal Server Error. Exception from backend system. No response payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the initiating Participant. Example value = P01",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) Identifies the market. Set to NEM",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Unique identifier for each request",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitExemption?action=<string>&meterExemptionId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitExemption"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Action values can be NEW, UPDATE, CANCEL, REMOVE, or RESOLVE",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The meter exemption ID to update",
+                      "key": "meterExemptionId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {}\n}",
+              "createdAt": "2026-10-21T20:18:33.000Z",
+              "updatedAt": "2026-10-21T20:18:33.000Z",
+              "uid": "35240-e0a117f9-ad57-4df9-8a18-d1294487afce"
+            }
+          ],
+          "createdAt": "2026-10-21T20:18:33.000Z",
+          "updatedAt": "2026-10-21T20:18:33.000Z",
+          "uid": "35240-b318ad16-ceb9-4835-a917-096223b6b99f"
+        }
+      ],
+      "id": "8ae72729-8110-49a6-b92c-474dae962aa9",
+      "createdAt": "2026-10-21T20:18:33.000Z",
+      "updatedAt": "2026-10-21T20:18:33.000Z",
+      "uid": "35240-8ae72729-8110-49a6-b92c-474dae962aa9"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/NEMRetail/v1/meterExemption"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 ---
-name: Read Consumer Data Right energy data from AEMO
+name: aemo-cdr-energy-data-sharing
+title: "Read Consumer Data Right energy data from AEMO"
 description: Use AEMO's Consumer Data Right secondary data holder APIs to read energy plans, service points, usage, DER and account data under the Consumer Data Standards.
-api: openapi/aemo-cds-energy-api-openapi.yml
+api: openapi/_original/aemo-cds-energy-api-openapi.yml
 operations: [listEnergyPlans, getEnergyPlanDetail, listElectricityServicePoints, getElectricityServicePointDetail, getElectricityServicePointUsage, listElectricityUsageForServicePoints, getElectricityDERForServicePoint, listElectricityDERForSpecificServicePoints, listEnergyAccounts, getEnergyAccountDetail, getStatus, getOutages]
 ---
 
@@ -9,11 +10,11 @@ operations: [listEnergyPlans, getEnergyPlanDetail, listElectricityServicePoints,
 
 AEMO is the Consumer Data Right **secondary data holder** for energy. Two specs back this flow:
 
-- `openapi/aemo-cds-energy-api-openapi.yml` — the CDR Energy API (Consumer Data Standards v1.36.0).
-- `openapi/aemo-cds-common-api-openapi.yml` — Common (customer) plus the discovery endpoints.
+- `openapi/_original/aemo-cds-energy-api-openapi.yml` — the CDR Energy API (Consumer Data Standards v1.36.0).
+- `openapi/_original/aemo-cds-common-api-openapi.yml` — Common (customer) plus the discovery endpoints.
 
-The e-Hub-fronted variants are `openapi/aemo-cdr-openapi.yml` and
-`openapi/aemo-cdr-common-openapi.yml` at
+The e-Hub-fronted variants are `openapi/aemo-cdr-api-openapi.yml` and
+`openapi/aemo-cdr-common-api-openapi.yml` at
 `https://apis.prod.aemo.com.au:9319/NEMRetail/cds-au/v1/…`.
 
 ## Required headers

@@ -1,0 +1,3312 @@
+{
+  "info": {
+    "_postman_id": "2d760b66-cc1f-425b-8968-de9a34cf22b4",
+    "name": "WEMDE DispatchSummary API",
+    "description": "WEMDE DispatchSummary",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:20:56.000Z",
+    "updatedAt": "2026-10-21T20:20:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2d760b66-cc1f-425b-8968-de9a34cf22b4"
+  },
+  "item": [
+    {
+      "name": "dispatchDataOutcomes?primaryDispatchIntervalFrom={primaryDispatchIntervalFrom}&primaryDispatchIntervalTo={primaryDispatchIntervalTo}",
+      "item": [
+        {
+          "name": "Retrieves Dispatch Summary Data from the Central Dispatch Process through a\u2026",
+          "id": "87686602-fa84-470e-991a-2f70bc37e105",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dispatchDataOutcomes?primaryDispatchIntervalFrom={{primaryDispatchIntervalFrom}}&primaryDispatchIntervalTo={{primaryDispatchIntervalTo}}&categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dispatchDataOutcomes"
+              ],
+              "query": [
+                {
+                  "key": "primaryDispatchIntervalFrom",
+                  "value": "{{primaryDispatchIntervalFrom}}"
+                },
+                {
+                  "key": "primaryDispatchIntervalTo",
+                  "value": "{{primaryDispatchIntervalTo}}"
+                },
+                {
+                  "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                  "key": "categories",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                  "key": "dispatchScenario",
+                  "value": "<string>"
+                },
+                {
+                  "key": "facilityCode",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves Dispatch Summary Data from the Central Dispatch Process through a range of past Primary Dispatch Intervals"
+          },
+          "response": [
+            {
+              "id": "140f7f84-cd8b-4fd3-9ce3-aeeae8aae4a2",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {}\n    ],\n    \"warnings\": [\n      {}\n    ],\n    \"infos\": [\n      {}\n    ],\n    \"transactionId\": \"string\",\n    \"data\": {\n      \"dispatchDataIssueID\": \"string\",\n      \"dispatchSummaryData\": [\n        {\n          \"primaryDispatchInterval\": \"string\",\n          \"dispatchInterval\": \"string\",\n          \"markets\": {\n            \"energy\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"rocof\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            }\n          },\n          \"schedule\": [\n            {\n              \"marketService\": \"string\",\n              \"facilitySchedule\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"quantity\": 0,\n                  \"essPreProcessingConditionFlag\": true\n                }\n              ]\n            }\n          ],\n          \"facilityScheduleDetails\": [\n            {\n              \"facilityCode\": \"string\",\n              \"contingencyRaisePF\": 0,\n              \"contingencyLowerPF\": 0,\n              \"regulationRaisePF\": 0,\n              \"regulationLowerPF\": 0,\n              \"rocofPF\": 0,\n              \"dispatchBindingFlag\": true,\n              \"contingency\": 0,\n              \"initialMw\": 0,\n              \"fastStartFlag\": true,\n              \"fastStartInitialModeTime\": 0,\n              \"fastStartInitialMode\": 0,\n              \"whatIfInitialMw\": 0,\n              \"fastStartTargetMode\": 0,\n              \"fastStartTargetModeTime\": 0,\n              \"estimatedFcessUpliftPayment\": 0,\n              \"nolDemand\": 0,\n              \"congestionRental\": 0,\n              \"facilityRisk\": 0\n            }\n          ],\n          \"trapeziumAdjustments\": [\n            {\n              \"marketService\": \"string\",\n              \"trapeziumAdjustmentDetails\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"enablementMinimumValueUsed\": 0,\n                  \"lowBreakpointValueUsed\": 0,\n                  \"highBreakpointValueUsed\": 0,\n                  \"enablementMaximumValueUsed\": 0,\n                  \"downwardsRampRateValueUsed\": 0,\n                  \"upwardsRampRateValueUsed\": 0\n                }\n              ]\n            }\n          ],\n          \"prices\": {\n            \"energy\": 0,\n            \"contingencyLower\": 0,\n            \"regulationRaise\": 0,\n            \"regulationLower\": 0,\n            \"rocof\": 0,\n            \"contingencyRaise\": 0\n          }\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-140f7f84-cd8b-4fd3-9ce3-aeeae8aae4a2"
+            },
+            {
+              "id": "bd3a4c0a-4a53-4ddc-9af1-f4e41898e590",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"missingHeader\": {\n      \"summary\": \"Missing mandatory HTTP header parameter\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"400\",\n            \"title\": \"Missing mandatory HTTP header parameter\",\n            \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-bd3a4c0a-4a53-4ddc-9af1-f4e41898e590"
+            },
+            {
+              "id": "abb3b2f0-fab0-490c-be31-79b2cdc6dba5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"unauthorized\": {\n      \"summary\": \"Unauthorized\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"Unauthorized\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    },\n    \"initiatingParticipantIdMismatch\": {\n      \"summary\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-u475-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-abb3b2f0-fab0-490c-be31-79b2cdc6dba5"
+            },
+            {
+              "id": "54c3b7a0-cc7b-4659-8caf-9a85d7aef41f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-54c3b7a0-cc7b-4659-8caf-9a85d7aef41f"
+            },
+            {
+              "id": "e91b7176-d5f8-4b84-ab60-912de5b10986",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource Not Found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not Found\",\n            \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-e91b7176-d5f8-4b84-ab60-912de5b10986"
+            },
+            {
+              "id": "eef8b18e-ed76-4fd3-b45b-cd0be3ccbb7a",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method Not Allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method Not Allowed\",\n            \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-eef8b18e-ed76-4fd3-b45b-cd0be3ccbb7a"
+            },
+            {
+              "id": "1f2fac5e-a589-4fe9-a458-9dc61d43f8bb",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload Too Large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload Too Large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-1f2fac5e-a589-4fe9-a458-9dc61d43f8bb"
+            },
+            {
+              "id": "b2270a8e-f23c-4a46-a764-b3662971648b",
+              "name": "Client Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-b2270a8e-f23c-4a46-a764-b3662971648b"
+            },
+            {
+              "id": "b5d4a18c-e66e-498d-bcbe-d185a5d0adc8",
+              "name": "Too many request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too Many Requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too Many Requests\",\n            \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-b5d4a18c-e66e-498d-bcbe-d185a5d0adc8"
+            },
+            {
+              "id": "af771a73-f11b-42dc-b46a-89375b6c3f56",
+              "name": "Application unavailable or server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchDataOutcomes?categories=<string>&dispatchScenario=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchDataOutcomes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application Unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-af771a73-f11b-42dc-b46a-89375b6c3f56"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:57.000Z",
+          "updatedAt": "2026-10-21T20:20:57.000Z",
+          "uid": "35240-87686602-fa84-470e-991a-2f70bc37e105"
+        }
+      ],
+      "id": "fe8025f5-624f-40fd-a1a0-36db311f6af7",
+      "createdAt": "2026-10-21T20:20:56.000Z",
+      "updatedAt": "2026-10-21T20:20:56.000Z",
+      "uid": "35240-fe8025f5-624f-40fd-a1a0-36db311f6af7"
+    },
+    {
+      "name": "dispatchData",
+      "item": [
+        {
+          "name": "Retrieves the Dispatch Summary Data for Dispatch Run",
+          "id": "aab17442-0f89-474b-af89-fbf549f5bce6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dispatchData"
+              ],
+              "query": [
+                {
+                  "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                  "key": "categories",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                  "key": "dispatchScenario",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "primaryDispatchInterval",
+                  "value": "<string>"
+                },
+                {
+                  "key": "facilityCode",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a394b33b-6de1-4330-a694-56193d2bcce9",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {}\n    ],\n    \"warnings\": [\n      {}\n    ],\n    \"infos\": [\n      {}\n    ],\n    \"transactionId\": \"string\",\n    \"data\": {\n      \"primaryDispatchInterval\": \"string\",\n      \"dispatchDataIssueID\": \"string\",\n      \"dispatchSummaryData\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"markets\": {\n            \"energy\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"rocof\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            }\n          },\n          \"schedule\": [\n            {\n              \"marketService\": \"string\",\n              \"facilitySchedule\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"quantity\": 0,\n                  \"essPreProcessingConditionFlag\": true\n                }\n              ]\n            }\n          ],\n          \"facilityScheduleDetails\": [\n            {\n              \"facilityCode\": \"string\",\n              \"contingencyRaisePF\": 0,\n              \"contingencyLowerPF\": 0,\n              \"regulationRaisePF\": 0,\n              \"regulationLowerPF\": 0,\n              \"rocofPF\": 0,\n              \"dispatchBindingFlag\": true,\n              \"contingency\": 0,\n              \"initialMw\": 0,\n              \"fastStartFlag\": true,\n              \"fastStartInitialModeTime\": 0,\n              \"fastStartInitialMode\": 0,\n              \"whatIfInitialMw\": 0,\n              \"fastStartTargetMode\": 0,\n              \"fastStartTargetModeTime\": 0,\n              \"estimatedFcessUpliftPayment\": 0,\n              \"nolDemand\": 0,\n              \"congestionRental\": 0,\n              \"facilityRisk\": 0\n            }\n          ],\n          \"trapeziumAdjustments\": [\n            {\n              \"marketService\": \"string\",\n              \"trapeziumAdjustmentDetails\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"enablementMinimumValueUsed\": 0,\n                  \"lowBreakpointValueUsed\": 0,\n                  \"highBreakpointValueUsed\": 0,\n                  \"enablementMaximumValueUsed\": 0,\n                  \"downwardsRampRateValueUsed\": 0,\n                  \"upwardsRampRateValueUsed\": 0\n                }\n              ]\n            }\n          ],\n          \"prices\": {\n            \"energy\": 0,\n            \"contingencyLower\": 0,\n            \"regulationRaise\": 0,\n            \"regulationLower\": 0,\n            \"rocof\": 0,\n            \"contingencyRaise\": 0\n          }\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-a394b33b-6de1-4330-a694-56193d2bcce9"
+            },
+            {
+              "id": "23b65aab-2e0b-4526-ba4b-211f79d781bc",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"missingHeader\": {\n      \"summary\": \"Missing mandatory HTTP header parameter\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"400\",\n            \"title\": \"Missing mandatory HTTP header parameter\",\n            \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-23b65aab-2e0b-4526-ba4b-211f79d781bc"
+            },
+            {
+              "id": "724771ee-b775-4692-b779-5f1edd3a6993",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"unauthorized\": {\n      \"summary\": \"Unauthorized\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"Unauthorized\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    },\n    \"initiatingParticipantIdMismatch\": {\n      \"summary\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-u475-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-724771ee-b775-4692-b779-5f1edd3a6993"
+            },
+            {
+              "id": "7f0336fd-176d-40b1-803f-989752857730",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-7f0336fd-176d-40b1-803f-989752857730"
+            },
+            {
+              "id": "7ac9f54e-0197-46dd-8487-c45524316408",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource Not Found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not Found\",\n            \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-7ac9f54e-0197-46dd-8487-c45524316408"
+            },
+            {
+              "id": "22e1576c-4731-4dc0-8918-5866a2dad240",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method Not Allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method Not Allowed\",\n            \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-22e1576c-4731-4dc0-8918-5866a2dad240"
+            },
+            {
+              "id": "50acf852-8238-4cfa-b6ec-d27ba7cc3ea0",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload Too Large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload Too Large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-50acf852-8238-4cfa-b6ec-d27ba7cc3ea0"
+            },
+            {
+              "id": "b89e7c8a-eb9b-4b44-baeb-6cc261725619",
+              "name": "Client Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-b89e7c8a-eb9b-4b44-baeb-6cc261725619"
+            },
+            {
+              "id": "2ed94dce-afb8-4bd4-846e-e5b09b1d8980",
+              "name": "Too many request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too Many Requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too Many Requests\",\n            \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-2ed94dce-afb8-4bd4-846e-e5b09b1d8980"
+            },
+            {
+              "id": "4bf6b76c-bdba-42d6-a9b8-cf1b4a4372cd",
+              "name": "Application unavailable or server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application Unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-4bf6b76c-bdba-42d6-a9b8-cf1b4a4372cd"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:57.000Z",
+          "updatedAt": "2026-10-21T20:20:57.000Z",
+          "uid": "35240-aab17442-0f89-474b-af89-fbf549f5bce6"
+        }
+      ],
+      "id": "53dc495d-1515-4171-a187-8d74fbd6e3e5",
+      "createdAt": "2026-10-21T20:20:56.000Z",
+      "updatedAt": "2026-10-21T20:20:56.000Z",
+      "uid": "35240-53dc495d-1515-4171-a187-8d74fbd6e3e5"
+    },
+    {
+      "name": "preDispatchData",
+      "item": [
+        {
+          "name": "Retrieves the Dispatch Summary Data for Pre-Dispatch Run",
+          "id": "eb9b9ec3-3e4f-4890-a45d-e3ffa6c32118",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "preDispatchData"
+              ],
+              "query": [
+                {
+                  "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                  "key": "categories",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                  "key": "dispatchScenario",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "primaryDispatchInterval",
+                  "value": "<string>"
+                },
+                {
+                  "key": "facilityCode",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "08dd7a93-ac73-47a3-8952-fb343176bacb",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {}\n    ],\n    \"warnings\": [\n      {}\n    ],\n    \"infos\": [\n      {}\n    ],\n    \"transactionId\": \"string\",\n    \"data\": {\n      \"primaryDispatchInterval\": \"string\",\n      \"dispatchDataIssueID\": \"string\",\n      \"dispatchSummaryData\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"markets\": {\n            \"energy\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"rocof\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            }\n          },\n          \"schedule\": [\n            {\n              \"marketService\": \"string\",\n              \"facilitySchedule\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"quantity\": 0,\n                  \"essPreProcessingConditionFlag\": true\n                }\n              ]\n            }\n          ],\n          \"facilityScheduleDetails\": [\n            {\n              \"facilityCode\": \"string\",\n              \"contingencyRaisePF\": 0,\n              \"contingencyLowerPF\": 0,\n              \"regulationRaisePF\": 0,\n              \"regulationLowerPF\": 0,\n              \"rocofPF\": 0,\n              \"dispatchBindingFlag\": true,\n              \"contingency\": 0,\n              \"initialMw\": 0,\n              \"fastStartFlag\": true,\n              \"fastStartInitialModeTime\": 0,\n              \"fastStartInitialMode\": 0,\n              \"whatIfInitialMw\": 0,\n              \"fastStartTargetMode\": 0,\n              \"fastStartTargetModeTime\": 0,\n              \"estimatedFcessUpliftPayment\": 0,\n              \"nolDemand\": 0,\n              \"congestionRental\": 0,\n              \"facilityRisk\": 0\n            }\n          ],\n          \"trapeziumAdjustments\": [\n            {\n              \"marketService\": \"string\",\n              \"trapeziumAdjustmentDetails\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"enablementMinimumValueUsed\": 0,\n                  \"lowBreakpointValueUsed\": 0,\n                  \"highBreakpointValueUsed\": 0,\n                  \"enablementMaximumValueUsed\": 0,\n                  \"downwardsRampRateValueUsed\": 0,\n                  \"upwardsRampRateValueUsed\": 0\n                }\n              ]\n            }\n          ],\n          \"prices\": {\n            \"energy\": 0,\n            \"contingencyLower\": 0,\n            \"regulationRaise\": 0,\n            \"regulationLower\": 0,\n            \"rocof\": 0,\n            \"contingencyRaise\": 0\n          }\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-08dd7a93-ac73-47a3-8952-fb343176bacb"
+            },
+            {
+              "id": "31d8b0b3-fba1-4e4d-ad0a-b317c3dec8ee",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"missingHeader\": {\n      \"summary\": \"Missing mandatory HTTP header parameter\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"400\",\n            \"title\": \"Missing mandatory HTTP header parameter\",\n            \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-31d8b0b3-fba1-4e4d-ad0a-b317c3dec8ee"
+            },
+            {
+              "id": "945f8047-f66f-40ee-89bb-e88ca913ff99",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"unauthorized\": {\n      \"summary\": \"Unauthorized\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"Unauthorized\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    },\n    \"initiatingParticipantIdMismatch\": {\n      \"summary\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-u475-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-945f8047-f66f-40ee-89bb-e88ca913ff99"
+            },
+            {
+              "id": "5b35ba8b-6b5f-4bd8-9e96-8f221c7653c0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-5b35ba8b-6b5f-4bd8-9e96-8f221c7653c0"
+            },
+            {
+              "id": "fe82f79d-3c98-4b60-93b8-80117e7bebb8",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource Not Found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not Found\",\n            \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-fe82f79d-3c98-4b60-93b8-80117e7bebb8"
+            },
+            {
+              "id": "5349625a-5da1-409f-89da-c04d00f3cdd1",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method Not Allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method Not Allowed\",\n            \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-5349625a-5da1-409f-89da-c04d00f3cdd1"
+            },
+            {
+              "id": "2cbc8175-60ea-4bc8-8903-e62fc3247a87",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload Too Large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload Too Large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-2cbc8175-60ea-4bc8-8903-e62fc3247a87"
+            },
+            {
+              "id": "b615314f-3992-4226-b014-326dbbc9456b",
+              "name": "Client Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-b615314f-3992-4226-b014-326dbbc9456b"
+            },
+            {
+              "id": "5140c0c0-0a7e-4f7a-b7f3-b7da88957a27",
+              "name": "Too many request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too Many Requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too Many Requests\",\n            \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-5140c0c0-0a7e-4f7a-b7f3-b7da88957a27"
+            },
+            {
+              "id": "b78315e1-32b8-4718-9536-6f1fe12810b8",
+              "name": "Application unavailable or server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/preDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "preDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application Unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-b78315e1-32b8-4718-9536-6f1fe12810b8"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:57.000Z",
+          "updatedAt": "2026-10-21T20:20:57.000Z",
+          "uid": "35240-eb9b9ec3-3e4f-4890-a45d-e3ffa6c32118"
+        }
+      ],
+      "id": "b7924fa7-de74-4ad3-91a9-b74c32c961b5",
+      "createdAt": "2026-10-21T20:20:56.000Z",
+      "updatedAt": "2026-10-21T20:20:56.000Z",
+      "uid": "35240-b7924fa7-de74-4ad3-91a9-b74c32c961b5"
+    },
+    {
+      "name": "weekAheadDispatchData",
+      "item": [
+        {
+          "name": "Retrieves the Dispatch Summary Data for Week Ahead Dispatch Run",
+          "id": "bc5c3548-c1e5-4678-8a63-0a1467d64c66",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The id of the Initiating Participant",
+                "key": "x-initiatingParticipantId",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The id of the market",
+                "key": "x-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "weekAheadDispatchData"
+              ],
+              "query": [
+                {
+                  "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                  "key": "categories",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                  "key": "dispatchScenario",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "dispatchIntervalStartDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "dispatchIntervalEndDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                  "key": "primaryDispatchInterval",
+                  "value": "<string>"
+                },
+                {
+                  "key": "facilityCode",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04257ebd-05e2-4a3c-8275-fd058c9a14ee",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {}\n    ],\n    \"warnings\": [\n      {}\n    ],\n    \"infos\": [\n      {}\n    ],\n    \"transactionId\": \"string\",\n    \"data\": {\n      \"primaryDispatchInterval\": \"string\",\n      \"dispatchDataIssueID\": \"string\",\n      \"dispatchSummaryData\": [\n        {\n          \"dispatchInterval\": \"string\",\n          \"markets\": {\n            \"energy\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"regulationLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyRaise\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"contingencyLower\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            },\n            \"rocof\": {\n              \"marketService\": \"string\",\n              \"baseForecastRequirement\": 0,\n              \"overrideForecastRequirement\": 0\n            }\n          },\n          \"schedule\": [\n            {\n              \"marketService\": \"string\",\n              \"facilitySchedule\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"quantity\": 0,\n                  \"essPreProcessingConditionFlag\": true\n                }\n              ]\n            }\n          ],\n          \"facilityScheduleDetails\": [\n            {\n              \"facilityCode\": \"string\",\n              \"contingencyRaisePF\": 0,\n              \"contingencyLowerPF\": 0,\n              \"regulationRaisePF\": 0,\n              \"regulationLowerPF\": 0,\n              \"rocofPF\": 0,\n              \"dispatchBindingFlag\": true,\n              \"contingency\": 0,\n              \"initialMw\": 0,\n              \"fastStartFlag\": true,\n              \"fastStartInitialModeTime\": 0,\n              \"fastStartInitialMode\": 0,\n              \"whatIfInitialMw\": 0,\n              \"fastStartTargetMode\": 0,\n              \"fastStartTargetModeTime\": 0,\n              \"estimatedFcessUpliftPayment\": 0,\n              \"nolDemand\": 0,\n              \"congestionRental\": 0,\n              \"facilityRisk\": 0\n            }\n          ],\n          \"trapeziumAdjustments\": [\n            {\n              \"marketService\": \"string\",\n              \"trapeziumAdjustmentDetails\": [\n                {\n                  \"facilityCode\": \"string\",\n                  \"enablementMinimumValueUsed\": 0,\n                  \"lowBreakpointValueUsed\": 0,\n                  \"highBreakpointValueUsed\": 0,\n                  \"enablementMaximumValueUsed\": 0,\n                  \"downwardsRampRateValueUsed\": 0,\n                  \"upwardsRampRateValueUsed\": 0\n                }\n              ]\n            }\n          ],\n          \"prices\": {\n            \"energy\": 0,\n            \"contingencyLower\": 0,\n            \"regulationRaise\": 0,\n            \"regulationLower\": 0,\n            \"rocof\": 0,\n            \"contingencyRaise\": 0\n          }\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-04257ebd-05e2-4a3c-8275-fd058c9a14ee"
+            },
+            {
+              "id": "bea6e2c3-6e36-4719-82ed-306dd0dc4c25",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"missingHeader\": {\n      \"summary\": \"Missing mandatory HTTP header parameter\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f20d-43a7-bkdf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"400\",\n            \"title\": \"Missing mandatory HTTP header parameter\",\n            \"detail\": \"Mandatory HTTP header <headerName> is missing\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-bea6e2c3-6e36-4719-82ed-306dd0dc4c25"
+            },
+            {
+              "id": "8dc2feca-4cd9-4ec5-9520-49152b15e7d7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"unauthorized\": {\n      \"summary\": \"Unauthorized\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-b075-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"Unauthorized\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    },\n    \"initiatingParticipantIdMismatch\": {\n      \"summary\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n      \"value\": {\n        \"transactionId\": \"9a8e902a-ed40-45f3-u475-7a644b12947f\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"401\",\n            \"title\": \"Unauthorized\",\n            \"detail\": \"x-initiatingParticipantId does not match with participant id associated with certificate\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-8dc2feca-4cd9-4ec5-9520-49152b15e7d7"
+            },
+            {
+              "id": "6d3b13ba-6248-4e7e-b792-7414de68baef",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-6d3b13ba-6248-4e7e-b792-7414de68baef"
+            },
+            {
+              "id": "1658b7a9-c9c7-45c6-baf8-c9476309bd0b",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource Not Found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not Found\",\n            \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-1658b7a9-c9c7-45c6-baf8-c9476309bd0b"
+            },
+            {
+              "id": "7cb3289c-f4ca-4efd-b637-6dce3208e272",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method Not Allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method Not Allowed\",\n            \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-7cb3289c-f4ca-4efd-b637-6dce3208e272"
+            },
+            {
+              "id": "1b1f076b-435d-4ee8-82ea-2d80f501d59c",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload Too Large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload Too Large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-1b1f076b-435d-4ee8-82ea-2d80f501d59c"
+            },
+            {
+              "id": "90df6e52-9d5b-4c39-87aa-f4937f5beeb0",
+              "name": "Client Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {},\n    \"errors\": [\n      {\n        \"code\": 0,\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"source\": \"string\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-90df6e52-9d5b-4c39-87aa-f4937f5beeb0"
+            },
+            {
+              "id": "01f3e9ba-8a65-44d7-8e49-1101be1d3d72",
+              "name": "Too many request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too Many Requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too Many Requests\",\n            \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\",\n            \"source\": \"\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-01f3e9ba-8a65-44d7-8e49-1101be1d3d72"
+            },
+            {
+              "id": "52d92126-0e10-486f-9389-eedea9aa3ce6",
+              "name": "Application unavailable or server error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The id of the Initiating Participant",
+                    "key": "x-initiatingParticipantId",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The id of the market",
+                    "key": "x-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/weekAheadDispatchData?categories=<string>&dispatchScenario=<string>&dispatchIntervalStartDate=<string>&dispatchIntervalEndDate=<string>&primaryDispatchInterval=<string>&facilityCode=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "weekAheadDispatchData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Possible values are markets,schedule,facilityScheduleDetails,trapeziumAdjustments,prices",
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Possible values are Reference, ForecastHigh, ForecastLow, InServiceCapacityOnly, AvailableCapacity. Default value is Reference.",
+                      "key": "dispatchScenario",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalStartDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "dispatchIntervalEndDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Default date format: yyyy-MM-ddTHH:mm:ss+08:00. For request, the offset +08:00 is optional - api will by default treat incoming time as +08:00",
+                      "key": "primaryDispatchInterval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "facilityCode",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application Unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:57.000Z",
+              "updatedAt": "2026-10-21T20:20:57.000Z",
+              "uid": "35240-52d92126-0e10-486f-9389-eedea9aa3ce6"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:57.000Z",
+          "updatedAt": "2026-10-21T20:20:57.000Z",
+          "uid": "35240-bc5c3548-c1e5-4678-8a63-0a1467d64c66"
+        }
+      ],
+      "id": "74bd8fea-6ed8-4f83-8c6e-f66af09912f5",
+      "createdAt": "2026-10-21T20:20:56.000Z",
+      "updatedAt": "2026-10-21T20:20:56.000Z",
+      "uid": "35240-74bd8fea-6ed8-4f83-8c6e-f66af09912f5"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-gwy-prd.aemo.local/WEM/v1/dispatchSummary"
+    },
+    {
+      "key": "primaryDispatchIntervalFrom",
+      "value": "<string>"
+    },
+    {
+      "key": "primaryDispatchIntervalTo",
+      "value": "<string>"
+    }
+  ]
+}

@@ -1,7 +1,62 @@
 openapi: 3.2.0
 info:
   title: TLS Certificate Mgmt v1 API
-  description: The TLS Certificate Management API allows authorised participants to self-manage their AEMO-signed TLS certificates.
+  description: 'The TLS Certificate Management API allows authorised participants to self-manage their AEMO-signed TLS certificates. This API provides the following features:
+
+    - Retrieve a list of your AEMO-signed TLS certificates and orders
+
+    - Download a specific TLS certificate
+
+    - Generate a new TLS certificate
+
+    - Reissue a TLS certificate
+
+    - Renew a soon-to-expire TLS certificate
+
+    - Revoke a TLS certificate
+
+
+    # Status
+
+    This documentation presents the TLS Certificate Management API evolving design. It is updated as the technical requirements are streamlined. # Assumed knowledge
+
+    - RESTful API practices and JSON basics. # Prerequisites
+
+    Before you can use the TLS Certificate Management API you must:
+
+    1. Have a Participant ID. If your company is a Registered Participant, it is set up during the registration process. Have a Participant ID with an effective date of registration. 2. Have a user ID and password with access rights provided by your company''s participant administrator. For details, see user rights access below. 3. Have an AEMO-signed TLS certificate. If you need to get an AEMO-signed TLS certificate for the first time you can do this through the Markets Portal, or raise a request for a TLS certificate through the Participant Portal. # API portal and Open API Specification
+
+    TLS Certificate Management Open API Specification
+
+    # Authentication and Authorization methods
+
+    ## TLS Certificates
+
+    This API is protected by MTLS authentication. A valid AEMO-signed TLS certificate is required to access this API. See Prerequisites above on how to get an AEMO-signed TLS certificate for the first time. ## User rights access
+
+    Participant administrators provide access to the TLS Certificate Management API using the **TLS_CERTIFICATE_MANAGEMENT** entity. See the User Rights Management guide (URM) for details on managing URM functions. Users must be assigned rights that have access to the entity **TLS_CERTIFICATE_MANAGEMENT**. The API allows two privileges (access levels) of access rights for that entity:
+
+    - **Delete right** - all endpoints are available to users with the Delete right. - **Read right** - all GET endpoints are available to users under this right. Users with this right cannot create, revoke, reissue or renew TLS certificates. Rights created with Create and Update only have access to Read right features. When calling this API, your username must be subscribed to a valid right under the **TLS_CERTIFICATE_MANAGEMENT** entity. You authorize your identity using Base64 encoding of your username and password, separated by a colon, in the Basic Auth header. For example:
+
+
+    `Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==`
+
+    # Throttling and quotas
+
+    To control traffic, AEMO implements Throttling on all API Endpoint requests. Also, some endpoints have a specific quota of requests. If a Participant ID requests exceed the Throttling limit a HTTP 429 or 422 response returns. For more details, see the examples under each request. Endpoint
+
+    Limits
+
+
+    All endpoints
+
+    6 requests per minute per participantId. The participantId is identified from the X-InitiatingParticipantID request header parameter. The API has a general spike-arrest limit of 6 requests per minute per participantId. This is imposed across all endpoints of the API. POST `all endpoints`
+
+    10 requests per month per participantId. The participantId is identified from the X-InitiatingParticipantID request header parameter. For each participantId there are only 20 POST requests that can be made to the API per month. GET `all endpoints`
+
+    60 requests per month per participantId. The participantId is identified from the X-InitiatingParticipantID request header parameter. For each participantId there are only 60 GET requests that can be made to the API per month. POST `/certificates`
+
+    1 request per participantId per environment. The participantId is identified from the `X-InitiatingParticipantID` request header parameter. The environment is identified from the value of the environment key in the request body.'
   termsOfService: https://dev.aemo.com.au/terms
   version: '3.0'
   x-origin:

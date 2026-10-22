@@ -1,0 +1,441 @@
+{
+  "info": {
+    "_postman_id": "c60a6913-83a0-4b06-9740-742a5937b409",
+    "name": "Hub Message Management V2 API",
+    "description": "## Introduction\nThe HubMessageManagement push API retrieves the current list of B2B and B2M stop files. Business transactions are sent as aseXML documents carried as payloads inside the API message and transmitted over HTTPS.\n\nParticipants can also use this API to:\n1. Ensure technical requirements required to connect to the e-Hub are validated (for example, appropriate network ports are open).\n2. Ensure their systems can connect to the e-Hub using their SSL certificates and API keys.\n3. Determine if AEMO's e-Hub is operational (ping-pong test).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:17:54.000Z",
+    "updatedAt": "2026-10-21T20:17:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c60a6913-83a0-4b06-9740-742a5937b409"
+  },
+  "item": [
+    {
+      "name": "getAlerts",
+      "item": [
+        {
+          "name": "Get Alerts",
+          "id": "a0afd7f3-5fe9-401e-add0-ac5e385a8e8f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "unique ID for the transaction",
+                "key": "X-transactionID",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getAlerts"
+              ],
+              "query": [
+                {
+                  "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                  "key": "alertType",
+                  "value": "B2BStopFile"
+                },
+                {
+                  "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                  "key": "queryParticipantID",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Receive B2B and B2M stop file alerts"
+          },
+          "response": [
+            {
+              "id": "ef99d949-bd98-4d08-bebf-729984912350",
+              "name": "Success response with aseXml response payload",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-ef99d949-bd98-4d08-bebf-729984912350"
+            },
+            {
+              "id": "e98129d6-e845-4928-8f24-4377cfa201af",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-e98129d6-e845-4928-8f24-4377cfa201af"
+            },
+            {
+              "id": "77528860-09b7-42a7-ae48-3b78d7ef271b",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-77528860-09b7-42a7-ae48-3b78d7ef271b"
+            },
+            {
+              "id": "8d87259e-a56c-4b06-b9e4-59447e750b43",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-8d87259e-a56c-4b06-b9e4-59447e750b43"
+            },
+            {
+              "id": "4b352b6a-a8fb-4f68-a689-d1da2f08aa41",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-4b352b6a-a8fb-4f68-a689-d1da2f08aa41"
+            },
+            {
+              "id": "5c388cc3-9dc3-4ab4-a4ba-304404d0ccc3",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-5c388cc3-9dc3-4ab4-a4ba-304404d0ccc3"
+            },
+            {
+              "id": "24c4a067-3b66-4c80-906a-7c6875825c06",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "unique ID for the transaction",
+                    "key": "X-transactionID",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getAlerts?alertType=B2BStopFile&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getAlerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "'B2BStopFile' or 'B2MStopFile'. If not provided, default to 'B2BStopFile'",
+                      "key": "alertType",
+                      "value": "B2BStopFile"
+                    },
+                    {
+                      "description": "Used for B2B alerts only. If provided, the alerts for that particular participant is returned. This value is ignored for B2M alerts.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:55.000Z",
+              "updatedAt": "2026-10-21T20:17:55.000Z",
+              "uid": "35240-24c4a067-3b66-4c80-906a-7c6875825c06"
+            }
+          ],
+          "createdAt": "2026-10-21T20:17:55.000Z",
+          "updatedAt": "2026-10-21T20:17:55.000Z",
+          "uid": "35240-a0afd7f3-5fe9-401e-add0-ac5e385a8e8f"
+        }
+      ],
+      "id": "46deecaa-65c7-4ba4-8545-7a00691de730",
+      "createdAt": "2026-10-21T20:17:55.000Z",
+      "updatedAt": "2026-10-21T20:17:55.000Z",
+      "uid": "35240-46deecaa-65c7-4ba4-8545-7a00691de730"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/HubMessageManagement"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+generated: '2026-10-21'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/aemo-b2bmessagingpull-api-openapi.yml
+- openapi/aemo-b2mmessagingpull-api-openapi.yml
+- openapi/aemo-b2mmessagingsync-api-openapi.yml
+- openapi/aemo-balancing-reports-v2-5-api-openapi.yml
+- openapi/aemo-balancing-submission-v2-api-openapi.yml
+- openapi/aemo-bilateral-stem-submission-v1-api-openapi.yml
+- openapi/aemo-blindupdate-api-openapi.yml
+- openapi/aemo-capacity-api-openapi.yml
+- openapi/aemo-capacityauction-api-openapi.yml
+- openapi/aemo-cdr-api-openapi.yml
+- openapi/aemo-cdr-common-api-openapi.yml
+- openapi/aemo-data-holder-customers-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ResponseErrorListV2
+coverage:
+  operations: 478
+  statuses_declared: 14
+problems:
+- status: 400
+  title: Bad Request
+  description: The service cannot be found for the endpoint reference (EPR) <URI>
+  operations: 326
+  media_types:
+  - application/json
+  - text/plain
+  - text/json
+  schema: ResponseErrorListV2
+- status: 401
+  title: Unauthorized
+  description: This response is provided when "Authorisation" is missing from the header OR user/password is incorrect/not
+    provided OR user account is lock
+  operations: 297
+  media_types:
+  - application/json
+  - application/octet-stream
+  schema: null
+- status: 403
+  title: Forbidden
+  description: This response is provided when there is an invalid Role i.e. user does not have permission to submit
+    this request.
+  operations: 206
+  media_types:
+  - application/json
+  - text/plain
+  - text/json
+  schema: null
+- status: 404
+  title: Not Found
+  description: Not Found
+  operations: 296
+  media_types:
+  - application/json
+  - text/plain
+  - text/json
+  schema: ResponseErrorListV2
+- status: 405
+  title: Method Not Allowed
+  description: Invalid Method used (e.g. GET used instead of POST)
+  operations: 289
+  media_types:
+  - application/json
+  - application/octet-stream
+  schema: null
+- status: 406
+  title: Not Acceptable
+  description: The following error codes **MUST** be supported:<br/><ul class="error-code-list"><li>[406 - Unsupported
+    Version](#error-406-header-unsupport
+  operations: 29
+  media_types:
+  - application/json
+  schema: ResponseErrorListV2
+- status: 411
+  title: Length Required
+  description: This response is provided when "Content-Length" is missing from the Header
+  operations: 103
+  media_types:
+  - application/json
+  schema: null
+- status: 413
+  title: Content Too Large
+  description: Payload Too Large
+  operations: 104
+  media_types:
+  - application/json
+  schema: null
+- status: 422
+  title: Unprocessable Content
+  description: This response is provided when any there are any Business validation failures, then entire submission
+    is rejected.
+  operations: 177
+  media_types:
+  - application/json
+  - text/plain
+  - text/json
+  schema: ResponseErrorListV2
+- status: 429
+  title: Too Many Requests
+  description: This response is provided when the throttling limits are reached.
+  operations: 273
+  media_types:
+  - application/json
+  - application/octet-stream
+  schema: null
+- status: 500
+  title: Internal Server Error
+  description: e-Hub is operational but downstream systems are not available.
+  operations: 304
+  media_types:
+  - application/json
+  - text/plain
+  - text/json
+  schema: null
+- status: 502
+  title: Bad Gateway
+  description: Bad Gateway
+  operations: 10
+  media_types:
+  - application/json
+  schema: null
+- status: 503
+  title: Service Unavailable
+  description: e-Hub is operational but downstream systems are not available.
+  operations: 111
+  media_types:
+  - application/json
+  schema: null
+- status: 504
+  title: Gateway Timeout
+  description: Gateway Timeout
+  operations: 8
+  media_types:
+  - application/json
+  schema: null

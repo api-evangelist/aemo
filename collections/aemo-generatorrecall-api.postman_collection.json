@@ -1,0 +1,395 @@
+{
+  "info": {
+    "_postman_id": "ded31a70-d5e9-4952-b7e5-c1553304b37c",
+    "name": "Generator Recall API",
+    "description": "The Generator Recall API is used by generators to send information about recall times into the Generator Recall web-based interface in the EMMS Markets Portal. The system will then transfer the information to a central AEMO database for viewing and reporting by AEMO operators.\n\nFor details on how to get access and business rules for this API:",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:17:46.000Z",
+    "updatedAt": "2026-10-21T20:17:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ded31a70-d5e9-4952-b7e5-c1553304b37c"
+  },
+  "item": [
+    {
+      "name": "getRecallPlan",
+      "item": [
+        {
+          "name": "Get Recall Plan",
+          "id": "42ffe9c3-3c83-4413-a289-b7ad49bde32b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"ParticipantId\": \"SNOWY\",\n    \"DUID\": \"BLOWERNG\",\n    \"OutagePlanId\": \"MMS_GEN_OUT1\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/getRecallPlan",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getRecallPlan"
+              ]
+            },
+            "description": "Retrieve the latest version of a specified recall plan"
+          },
+          "response": [
+            {
+              "id": "21dbcc67-c647-4cc7-b45a-39755f33be82",
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ParticipantId\": \"SNOWY\",\n    \"DUID\": \"BLOWERNG\",\n    \"OutagePlanId\": \"MMS_GEN_OUT1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/getRecallPlan",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getRecallPlan"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"data\": {\n      \"OutagePlanId\": \"MMS_GEN_OUT1\",\n      \"DUID\": \"BLOWERNG\",\n      \"SuccessFlag\": true,\n      \"ResponseMessage\": \"Get Recall Plan Entry List action succeeded\",\n      \"RecallEntries\": [\n        {\n          \"StartDate\": \"2017-10-31T14:00:00Z\",\n          \"EndDate\": \"2017-11-01T14:00:00Z\",\n          \"Stage1RecallMinutesStart\": 14400,\n          \"Stage1RecallMinutesEnd\": 18000,\n          \"Stage1MW\": 12,\n          \"Stage1RecallFlag\": \"IFO\",\n          \"Stage2RecallMinutesStart\": 21600,\n          \"Stage2RecallMinutesEnd\": 25200,\n          \"Stage2MW\": 10,\n          \"Stage2RecallFlag\": \"UNC\"\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:17:46.000Z",
+              "updatedAt": "2026-10-21T20:17:46.000Z",
+              "uid": "35240-21dbcc67-c647-4cc7-b45a-39755f33be82"
+            }
+          ],
+          "createdAt": "2026-10-21T20:17:46.000Z",
+          "updatedAt": "2026-10-21T20:17:46.000Z",
+          "uid": "35240-42ffe9c3-3c83-4413-a289-b7ad49bde32b"
+        }
+      ],
+      "id": "cd15a6df-2fa5-434f-83c8-1b9abd2227c6",
+      "createdAt": "2026-10-21T20:17:46.000Z",
+      "updatedAt": "2026-10-21T20:17:46.000Z",
+      "uid": "35240-cd15a6df-2fa5-434f-83c8-1b9abd2227c6"
+    },
+    {
+      "name": "listRecallPlans",
+      "item": [
+        {
+          "name": "List Recall Plans",
+          "id": "c6443c48-cde6-46b5-b2cd-f9123f834ba2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"ParticipantId\": \"SNOWY\",\n    \"StartDate\": \"2017-10-31T14:00:00Z\",\n    \"EndDate\": \"2017-11-01T14:00:00Z\",\n    \"StationId\": \"SNOWY6\",\n    \"DUID\": \"BLOWERNG\",\n    \"OutagePlanId\": \"MMS_GEN_OUT1\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/listRecallPlans",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "listRecallPlans"
+              ]
+            },
+            "description": "Retrieve a list of recall plans, subject to filter criteria"
+          },
+          "response": [
+            {
+              "id": "1c7150eb-1dd2-4d7a-a010-c37c0652c2b0",
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ParticipantId\": \"SNOWY\",\n    \"StartDate\": \"2017-10-31T14:00:00Z\",\n    \"EndDate\": \"2017-11-01T14:00:00Z\",\n    \"StationId\": \"SNOWY6\",\n    \"DUID\": \"BLOWERNG\",\n    \"OutagePlanId\": \"MMS_GEN_OUT1\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/listRecallPlans",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "listRecallPlans"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"data\": {\n      \"SuccessFlag\": true,\n      \"ResponseMessage\": \"Get Recall Plan action succeeded\",\n      \"RecallPlanList\": [\n        {\n          \"StationId\": \"SNOWY6\",\n          \"OutagePlanId\": \"MMS_GEN_OUT1\",\n          \"Stage1Description\": \"\u201c increased output could be maintained only for 12 hrs\",\n          \"Stage2Description\": \"\",\n          \"DUID\": \"BLOWERNG\",\n          \"MinimumStartDate\": \"2017-10-31T14:00:00Z\",\n          \"MaximumEndDate\": \"2017-11-01T14:00:00Z\",\n          \"VersionDateTime\": \"2017-11-21T07:14:34Z\",\n          \"Entries\": []\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:17:46.000Z",
+              "updatedAt": "2026-10-21T20:17:46.000Z",
+              "uid": "35240-1c7150eb-1dd2-4d7a-a010-c37c0652c2b0"
+            }
+          ],
+          "createdAt": "2026-10-21T20:17:46.000Z",
+          "updatedAt": "2026-10-21T20:17:46.000Z",
+          "uid": "35240-c6443c48-cde6-46b5-b2cd-f9123f834ba2"
+        }
+      ],
+      "id": "0da8e658-a754-494c-be53-b51772de292d",
+      "createdAt": "2026-10-21T20:17:46.000Z",
+      "updatedAt": "2026-10-21T20:17:46.000Z",
+      "uid": "35240-0da8e658-a754-494c-be53-b51772de292d"
+    },
+    {
+      "name": "submitRecallPlan",
+      "item": [
+        {
+          "name": "Submit Recall Plan",
+          "id": "05e99321-d829-4318-804c-4da8c43bf688",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"ParticipantId\": \"SNOWY\",\n    \"OutagePlanId\": \"MMS_GEN_OUT1\",\n    \"OutagePlanDescription\": \"string\",\n    \"DUID\": \"BLOWERNG\",\n    \"RecallPlanEntries\": [\n      {\n        \"StartDate\": \"2017-10-31T14:00:00Z\",\n        \"EndDate\": \"2017-11-01T14:00:00Z\",\n        \"Stage1RecallMinutesStart\": 14400,\n        \"Stage1RecallMinutesEnd\": 18000,\n        \"Stage1MW\": 12,\n        \"Stage1RecallFlag\": \"IFO\",\n        \"Stage2RecallMinutesStart\": 21600,\n        \"Stage2RecallMinutesEnd\": 25200,\n        \"Stage2MW\": 10,\n        \"Stage2RecallFlag\": \"UNC\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submitRecallPlan",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submitRecallPlan"
+              ]
+            },
+            "description": "Submit a new recall plan, or create a new version of an existing recall plan"
+          },
+          "response": [
+            {
+              "id": "125fb57a-1269-4c73-844f-de064b3888af",
+              "name": "Successful Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ParticipantId\": \"SNOWY\",\n    \"OutagePlanId\": \"MMS_GEN_OUT1\",\n    \"OutagePlanDescription\": \"string\",\n    \"DUID\": \"BLOWERNG\",\n    \"RecallPlanEntries\": [\n      {\n        \"StartDate\": \"2017-10-31T14:00:00Z\",\n        \"EndDate\": \"2017-11-01T14:00:00Z\",\n        \"Stage1RecallMinutesStart\": 14400,\n        \"Stage1RecallMinutesEnd\": 18000,\n        \"Stage1MW\": 12,\n        \"Stage1RecallFlag\": \"IFO\",\n        \"Stage2RecallMinutesStart\": 21600,\n        \"Stage2RecallMinutesEnd\": 25200,\n        \"Stage2MW\": 10,\n        \"Stage2RecallFlag\": \"UNC\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitRecallPlan",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitRecallPlan"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"data\": {\n      \"SuccessFlag\": [\n        \"boolean\"\n      ],\n      \"VersionDateTime\": [\n        \"datetime\"\n      ],\n      \"Errors\": [\n        {\n          \"ErrorMessage\": [\n            \"string\"\n          ],\n          \"EntryNumber\": [\n            \"number\"\n          ],\n          \"EntryField\": [\n            \"string\"\n          ]\n        },\n        {\n          \"ErrorMessage\": [\n            \"string\"\n          ],\n          \"EntryNumber\": [\n            \"number\"\n          ],\n          \"EntryField\": [\n            \"string\"\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:17:46.000Z",
+              "updatedAt": "2026-10-21T20:17:46.000Z",
+              "uid": "35240-125fb57a-1269-4c73-844f-de064b3888af"
+            }
+          ],
+          "createdAt": "2026-10-21T20:17:46.000Z",
+          "updatedAt": "2026-10-21T20:17:46.000Z",
+          "uid": "35240-05e99321-d829-4318-804c-4da8c43bf688"
+        }
+      ],
+      "id": "55b9f6b1-9616-4f2e-99e5-fa8005d3db3e",
+      "createdAt": "2026-10-21T20:17:46.000Z",
+      "updatedAt": "2026-10-21T20:17:46.000Z",
+      "uid": "35240-55b9f6b1-9616-4f2e-99e5-fa8005d3db3e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/ws/GeneratorRecall"
+    }
+  ]
+}

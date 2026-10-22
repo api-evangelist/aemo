@@ -1,0 +1,33 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for CDR Common Data Holder Customers API
+  version: 1.0.0
+extends: openapi/aemo-data-holder-customers-api-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the enrichment artifacts that describe this API.
+  update:
+    x-apievangelist-provider: aemo
+    x-apievangelist-enriched: '2026-07-27'
+    x-apievangelist-artifacts:
+      authentication: authentication/aemo-authentication.yml
+      conventions: conventions/aemo-conventions.yml
+      errors: errors/aemo-error-codes.yml
+      lifecycle: lifecycle/aemo-lifecycle.yml
+      rate_limits: rate-limits/aemo-rate-limits.yml
+      conformance: conformance/aemo-conformance.yml
+      vocabulary: vocabulary/aemo-glossary.yml
+      agentic_access: agentic-access/aemo-agentic-access.yml
+- target: $.info
+  description: Record which harvested source document this curated per-API file was split from, and the measured
+    contract shape of this file.
+  update:
+    x-apievangelist-derived-from: openapi/_original/aemo-cds-common-api-openapi.yml
+    x-apievangelist-contract:
+      operations: 2
+      operations_with_description: 2
+      operations_with_response_examples: 0
+      components_schemas: 22
+      idempotency_key: false
+    x-apievangelist-server-note: CDS publishes a placeholder data-holder host (mtls.dh.example.com); each accredited
+      data holder serves these endpoints from its own registered base URI. No AEMO-hosted server is substituted.

@@ -1,7 +1,8 @@
 ---
-name: Pull Gas Bulletin Board reports
+name: aemo-gas-bulletin-board-reports
+title: "Pull Gas Bulletin Board reports"
 description: Retrieve AEMO Gas Bulletin Board public reporting data — nominations, forecasts, production and flow, capacity outlooks and secondary capacity trades.
-api: openapi/aemo-report-v1-openapi.yml
+api: openapi/aemo-report-api-openapi.yml
 operations: [dailyFacilitiesReport, dailyReportForNominationAndForecastData, dailyReportForProductionFlowAndStorage, dailyReportForProductionAndUsageAtEachConnectionPoint, dailyReportForCapacityOutlookForTheMediumTerm, adhocReportOnStates, adhocReportForLinepackCapacityAdequacy, adhocReportForStandingNameplateCapacity, adhocReportOnUncontractedCapacityOutlookOnPipelinesAndStorageFacilities, adhocReportPipelineNodeTransfer, weeklyReportOnSecondaryPipelineCapacityAvailableForSaleOnBBPipelines, weeklyReportOnSecondaryPipelineCapacityTrades, dailyReportWithListOfRegisteredParticipants]
 ---
 
@@ -9,8 +10,8 @@ operations: [dailyFacilitiesReport, dailyReportForNominationAndForecastData, dai
 
 Two specifications expose the Gas Bulletin Board (GBB) reporting surface:
 
-- `openapi/aemo-report-v1-openapi.yml` — GET-based report endpoints.
-- `openapi/aemo-gasbb-reporting-public-data-openapi.yml` — the same report family exposed as POST
+- `openapi/aemo-report-api-openapi.yml` — GET-based report endpoints.
+- `openapi/aemo-gasbb-reporting-public-data-api-openapi.yml` — the same report family exposed as POST
   with a request body, plus chart/map exports (`gasGraph`, `mapExport`,
   `pipelineChartsActualFlowAndNominationWithCapacity`,
   `productionChartsActualFlowAndNominationWithCapacity`,

@@ -1,0 +1,612 @@
+{
+  "info": {
+    "_postman_id": "9fcae198-8f8b-40be-9597-5b3c4418a4c9",
+    "name": "Hub Message Management API",
+    "description": "## Introduction\nThe HubMessageManagement API is a B2B SMP APIs used retrieve the current list of stop files for all participants or for a specific participant (using alerts) resource.\n\nParticipants can use this resource to:\n1. Ensure technical requirements required to connect to e-Hub are validated (for example, appropriate network ports are open). Participants can utilise this function to ensure their systems can connect to e-Hub using their SSL certificates and API keys.\n2. Determine if the e-Hub system is operational (ping-pong test).\n\nFor details on how to get access and business rules for this API:",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:17:49.000Z",
+    "updatedAt": "2026-10-21T20:17:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9fcae198-8f8b-40be-9597-5b3c4418a4c9"
+  },
+  "item": [
+    {
+      "name": "alerts",
+      "item": [
+        {
+          "name": "Get Alert",
+          "id": "30827131-ef97-4a5a-9916-d8bc4ed78cb9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alerts"
+              ],
+              "query": [
+                {
+                  "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                  "key": "initiatingParticipantID",
+                  "value": "<string>"
+                },
+                {
+                  "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                  "key": "alertType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                  "key": "queryParticipantID",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Return Participants that have a B2B Stop file. Returns stop file details for all participants or the requested ParticipantID. Note- This API & resource will be enhanced in future to return the list of B2M stop files"
+          },
+          "response": [
+            {
+              "id": "33d1ad48-3897-4472-a34a-fe5c75e5365d",
+              "name": "aseXML hub Acknowledgement (status = \u2018Accept\u2019) will be sent",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-33d1ad48-3897-4472-a34a-fe5c75e5365d"
+            },
+            {
+              "id": "f583260e-a709-4660-967d-21f87583dfad",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-f583260e-a709-4660-967d-21f87583dfad"
+            },
+            {
+              "id": "b5b8607f-2628-4d3e-a8bb-c25935148ea6",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-b5b8607f-2628-4d3e-a8bb-c25935148ea6"
+            },
+            {
+              "id": "efc70d67-b99d-44ef-a793-68ab36117e0b",
+              "name": "This response is provided when the method is not GET",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-efc70d67-b99d-44ef-a793-68ab36117e0b"
+            },
+            {
+              "id": "5b813039-9051-4908-83c2-3291da5346bd",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-5b813039-9051-4908-83c2-3291da5346bd"
+            },
+            {
+              "id": "83d13d85-63fa-49d2-9b88-91571327c663",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?initiatingParticipantID=<string>&alertType=<string>&queryParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If the value is set to \u2018B2BStopFile\u2019, details related to B2B stop files will be sent. In future this parameter will be extended to support the retrieval of B2M stop files. If this parameter is not passed; the e-Hub will default the alertType to \u2018B2BStopFile\u2019.",
+                      "key": "alertType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If queryParticipantID is populated, e-Hub will retrieve the stop file for the queryParticipantID. The e-Hub will not validate if the queryParticipantID is valid. If an invalid queryParticipantID is sent, the e-Hub will send <ResultCount> = 0; meaning no stop file exists for the requested queryParticipantID. If queryParticipantID is not passed it will return the current list of stop files in the market.",
+                      "key": "queryParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-83d13d85-63fa-49d2-9b88-91571327c663"
+            }
+          ],
+          "createdAt": "2026-10-21T20:17:49.000Z",
+          "updatedAt": "2026-10-21T20:17:49.000Z",
+          "uid": "35240-30827131-ef97-4a5a-9916-d8bc4ed78cb9"
+        }
+      ],
+      "id": "f4947f63-aeb9-4e23-9fa9-cc5d570b761e",
+      "createdAt": "2026-10-21T20:17:49.000Z",
+      "updatedAt": "2026-10-21T20:17:49.000Z",
+      "uid": "35240-f4947f63-aeb9-4e23-9fa9-cc5d570b761e"
+    },
+    {
+      "name": "ping",
+      "item": [
+        {
+          "name": "Get status of core e-Hub applications",
+          "id": "470413da-5d0f-460a-a937-1469db143a8f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ping"
+              ],
+              "query": [
+                {
+                  "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                  "key": "initiatingParticipantID",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns response code to state if the core e-Hub applications are available / operational. This API/resource will be used by the Participants to\n- Test if the Participant application / gateway is able to establish connectivity with the e-Hub and/or\n- Validate if the SSL configuration / certificates are valid and/or\n- Check if the core e-Hub applications are available"
+          },
+          "response": [
+            {
+              "id": "7c7b5bc7-78cf-475b-8bad-a47411fe223a",
+              "name": "Successful Ping i.e. Participant is able to connect to e-Hub, authentication & authorisation is valid and the e-Hub is operational.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-7c7b5bc7-78cf-475b-8bad-a47411fe223a"
+            },
+            {
+              "id": "7cd2b57e-62b3-4b19-b032-5e0537eabe7e",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-7cd2b57e-62b3-4b19-b032-5e0537eabe7e"
+            },
+            {
+              "id": "3138bedb-2346-46f5-99b9-507a2d124b93",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-3138bedb-2346-46f5-99b9-507a2d124b93"
+            },
+            {
+              "id": "177249b2-07f8-42fe-9327-b88670669fd2",
+              "name": "This response is provided when the method is not GET",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-177249b2-07f8-42fe-9327-b88670669fd2"
+            },
+            {
+              "id": "e8fbafac-c616-48be-aab2-3be1342b0acd",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-e8fbafac-c616-48be-aab2-3be1342b0acd"
+            },
+            {
+              "id": "8300b19e-b1a4-476c-8255-3a589d7f6635",
+              "name": "Core e-Hub application(s) is unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping?initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API Note- If the API keys and certificates issued against the ParticipantID does not match with the ParticipantID passed in the query string, the system will send an exception",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:17:49.000Z",
+              "updatedAt": "2026-10-21T20:17:49.000Z",
+              "uid": "35240-8300b19e-b1a4-476c-8255-3a589d7f6635"
+            }
+          ],
+          "createdAt": "2026-10-21T20:17:49.000Z",
+          "updatedAt": "2026-10-21T20:17:49.000Z",
+          "uid": "35240-470413da-5d0f-460a-a937-1469db143a8f"
+        }
+      ],
+      "id": "6a755f2a-4f31-402a-b229-a39b17b108c3",
+      "createdAt": "2026-10-21T20:17:49.000Z",
+      "updatedAt": "2026-10-21T20:17:49.000Z",
+      "uid": "35240-6a755f2a-4f31-402a-b229-a39b17b108c3"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/ws/HubMessageManagement"
+    }
+  ]
+}

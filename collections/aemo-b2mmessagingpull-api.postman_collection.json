@@ -1,0 +1,1776 @@
+{
+  "info": {
+    "_postman_id": "b9076e2f-dcc0-4247-9ee2-fc2cfcbdf897",
+    "name": "B2M Messaging Pull API",
+    "description": "## Introduction\nThe B2MMessagingPull push-pull API supports inbound submitMessages, submitMessageAcknowledgements, getMessages, and getQueueMetaData endpoints and suits low volume exchange of messages.\n\nParticipants using B2MMessagingPull are responsible for implementing the polling logic to poll their Participant Hub Queue to retrieve new messages, similar to batch programs used to poll their outbox using FTP.\n\nImplementation of a Participant API Gateway is not required for B2MMessagingPull but the speed of message delivery is slower compared to the B2BMessagingAsync API.\n\nThe response is sent in the calling thread.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:15:21.000Z",
+    "updatedAt": "2026-10-21T20:15:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b9076e2f-dcc0-4247-9ee2-fc2cfcbdf897"
+  },
+  "item": [
+    {
+      "name": "getMessages",
+      "item": [
+        {
+          "name": "Get Messages",
+          "id": "3c173025-fdb1-41b0-98ae-4cf921e6fd85",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getMessages"
+              ],
+              "query": [
+                {
+                  "description": "(Required) message Context ID",
+                  "key": "messageContextID",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Transaction Group",
+                  "key": "transactionGroup",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve messages queued in the Participant Hub Queue"
+          },
+          "response": [
+            {
+              "id": "5a01981d-6193-43f3-84f2-ea0ae520df14",
+              "name": "Success response with aseXml response payload",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-5a01981d-6193-43f3-84f2-ea0ae520df14"
+            },
+            {
+              "id": "a14332b2-7f51-462c-99d9-98e927a737c4",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-a14332b2-7f51-462c-99d9-98e927a737c4"
+            },
+            {
+              "id": "cb93e6c9-0504-4681-af17-f1c0da4975ce",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-cb93e6c9-0504-4681-af17-f1c0da4975ce"
+            },
+            {
+              "id": "836db30e-066f-4923-a5b1-42da0f5e859b",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-836db30e-066f-4923-a5b1-42da0f5e859b"
+            },
+            {
+              "id": "7f55aaaa-149a-4225-9640-924349db567f",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-7f55aaaa-149a-4225-9640-924349db567f"
+            },
+            {
+              "id": "1dd4e41c-a704-47ff-a4b1-27d1687da5af",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-1dd4e41c-a704-47ff-a4b1-27d1687da5af"
+            },
+            {
+              "id": "911864f9-5bb2-42c0-9c76-c98271efb3fb",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getMessages?messageContextID=<string>&transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getMessages"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) message Context ID",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-911864f9-5bb2-42c0-9c76-c98271efb3fb"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:22.000Z",
+          "updatedAt": "2026-10-21T20:15:22.000Z",
+          "uid": "35240-3c173025-fdb1-41b0-98ae-4cf921e6fd85"
+        }
+      ],
+      "id": "7bc65878-5fb3-49b5-9289-47b291393b0d",
+      "createdAt": "2026-10-21T20:15:22.000Z",
+      "updatedAt": "2026-10-21T20:15:22.000Z",
+      "uid": "35240-7bc65878-5fb3-49b5-9289-47b291393b0d"
+    },
+    {
+      "name": "getQueueMetaData",
+      "item": [
+        {
+          "name": "Get Queue MetaData",
+          "id": "2c87f120-a856-447d-87cc-5a4c5ac9e4b3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "getQueueMetaData"
+              ],
+              "query": [
+                {
+                  "description": "Transaction Group",
+                  "key": "transactionGroup",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve details of messages queued in the Participant Hub Queue"
+          },
+          "response": [
+            {
+              "id": "81f8babc-2293-4336-804a-0de1b669d490",
+              "name": "Success response with aseXml response payload",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-81f8babc-2293-4336-804a-0de1b669d490"
+            },
+            {
+              "id": "fc98bdd0-2685-4c8b-af47-cc16dab65e87",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-fc98bdd0-2685-4c8b-af47-cc16dab65e87"
+            },
+            {
+              "id": "19d9426f-d036-4fac-aa90-894bf03f0fea",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-19d9426f-d036-4fac-aa90-894bf03f0fea"
+            },
+            {
+              "id": "25d887c3-812d-409e-81f5-686b95766d1d",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-25d887c3-812d-409e-81f5-686b95766d1d"
+            },
+            {
+              "id": "29e7f094-83d7-4151-907b-a88403314cf0",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-29e7f094-83d7-4151-907b-a88403314cf0"
+            },
+            {
+              "id": "f8eb3cc8-3ae8-4861-8f1f-5c7ec6f7277c",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-f8eb3cc8-3ae8-4861-8f1f-5c7ec6f7277c"
+            },
+            {
+              "id": "c0e82c57-7e2d-4500-94a8-46f4de049ad2",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/getQueueMetaData?transactionGroup=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "getQueueMetaData"
+                  ],
+                  "query": [
+                    {
+                      "description": "Transaction Group",
+                      "key": "transactionGroup",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-c0e82c57-7e2d-4500-94a8-46f4de049ad2"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:22.000Z",
+          "updatedAt": "2026-10-21T20:15:22.000Z",
+          "uid": "35240-2c87f120-a856-447d-87cc-5a4c5ac9e4b3"
+        }
+      ],
+      "id": "e74051d9-a8c0-4406-81e6-efb47f943d5d",
+      "createdAt": "2026-10-21T20:15:22.000Z",
+      "updatedAt": "2026-10-21T20:15:22.000Z",
+      "uid": "35240-e74051d9-a8c0-4406-81e6-efb47f943d5d"
+    },
+    {
+      "name": "submitMessageAcknowledgements",
+      "item": [
+        {
+          "name": "Submit Message Acknowledgements",
+          "id": "cbcc9809-1993-4072-847d-d734671e3782",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                "key": "messageContextID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submitMessageAcknowledgements"
+              ]
+            },
+            "description": "Submit messages acknowledgements to AEMO\u2019s market systems"
+          },
+          "response": [
+            {
+              "id": "c81a54c8-2bb6-4243-b254-1f613ae09fbd",
+              "name": "Success response with aseXml response payload",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-c81a54c8-2bb6-4243-b254-1f613ae09fbd"
+            },
+            {
+              "id": "67d021e1-f598-4418-a69c-d66afc7d92d6",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-67d021e1-f598-4418-a69c-d66afc7d92d6"
+            },
+            {
+              "id": "372148fb-26d4-4c75-a753-f8c53c2e76cf",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-372148fb-26d4-4c75-a753-f8c53c2e76cf"
+            },
+            {
+              "id": "e4b49b9e-cf51-48c8-9a8d-cf07f3a54df4",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-e4b49b9e-cf51-48c8-9a8d-cf07f3a54df4"
+            },
+            {
+              "id": "999454c6-c584-4b78-8fc3-4f1d0170ccd4",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-999454c6-c584-4b78-8fc3-4f1d0170ccd4"
+            },
+            {
+              "id": "629df911-ba62-470d-8554-5f849f263616",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-629df911-ba62-470d-8554-5f849f263616"
+            },
+            {
+              "id": "c5b35373-3686-409a-8784-d205791a6c64",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-c5b35373-3686-409a-8784-d205791a6c64"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:22.000Z",
+          "updatedAt": "2026-10-21T20:15:22.000Z",
+          "uid": "35240-cbcc9809-1993-4072-847d-d734671e3782"
+        }
+      ],
+      "id": "acb1ccfe-4fa3-4e4d-86dc-72e85292e377",
+      "createdAt": "2026-10-21T20:15:22.000Z",
+      "updatedAt": "2026-10-21T20:15:22.000Z",
+      "uid": "35240-acb1ccfe-4fa3-4e4d-86dc-72e85292e377"
+    },
+    {
+      "name": "submitMessages",
+      "item": [
+        {
+          "name": "Submit Messages",
+          "id": "37ebea14-be7c-4b25-8101-a847710682e7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                "key": "messageContextID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/submitMessages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submitMessages"
+              ]
+            },
+            "description": "Submit messages and transaction acknowledgements to AEMO\u2019s market systems"
+          },
+          "response": [
+            {
+              "id": "d20ac2a3-2fba-4c1c-a372-4826e0901813",
+              "name": "Success response with aseXml response payload",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-d20ac2a3-2fba-4c1c-a372-4826e0901813"
+            },
+            {
+              "id": "42376675-0155-4dd1-92a2-bf549be34ce7",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-42376675-0155-4dd1-92a2-bf549be34ce7"
+            },
+            {
+              "id": "65cd2f48-f4ce-47a3-a1f5-80da8275f32c",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-65cd2f48-f4ce-47a3-a1f5-80da8275f32c"
+            },
+            {
+              "id": "db6615ec-0cf8-4e1c-93a0-48e32780ffc2",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-db6615ec-0cf8-4e1c-93a0-48e32780ffc2"
+            },
+            {
+              "id": "3c225b88-1752-4177-9b14-a44ccb2c1f2e",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-3c225b88-1752-4177-9b14-a44ccb2c1f2e"
+            },
+            {
+              "id": "f2e63fbf-9f62-4d06-b9b0-7c55a099d110",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-f2e63fbf-9f62-4d06-b9b0-7c55a099d110"
+            },
+            {
+              "id": "60ae8b39-60a9-4c8d-b7a9-a515a9f073b9",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Format - [TransactionGroup 0-9_a-z]{1,4} +[Priority h|m|l] + \"_\"+[FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18}.",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/submitMessages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submitMessages"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:22.000Z",
+              "updatedAt": "2026-10-21T20:15:22.000Z",
+              "uid": "35240-60ae8b39-60a9-4c8d-b7a9-a515a9f073b9"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:22.000Z",
+          "updatedAt": "2026-10-21T20:15:22.000Z",
+          "uid": "35240-37ebea14-be7c-4b25-8101-a847710682e7"
+        }
+      ],
+      "id": "975c8c7e-ddec-4a05-9467-95413f17b57b",
+      "createdAt": "2026-10-21T20:15:22.000Z",
+      "updatedAt": "2026-10-21T20:15:22.000Z",
+      "uid": "35240-975c8c7e-ddec-4a05-9467-95413f17b57b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/NEMRetail/B2MMessagingPull"
+    }
+  ]
+}

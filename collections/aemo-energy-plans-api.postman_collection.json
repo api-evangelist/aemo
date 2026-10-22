@@ -1,0 +1,811 @@
+{
+  "info": {
+    "_postman_id": "07d4f0c1-b0aa-468e-8680-4050bc32b384",
+    "name": "CDR Energy Energy Plans API",
+    "description": "Specifications for resource endpoints applicable to data holders in the Energy sector.\n\nContact Support:\n Name: Data Standards Body\n Email: contact@dsb.gov.au",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:17:31.000Z",
+    "updatedAt": "2026-10-21T20:17:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-07d4f0c1-b0aa-468e-8680-4050bc32b384"
+  },
+  "item": [
+    {
+      "name": "energy",
+      "item": [
+        {
+          "name": "plans",
+          "item": [
+            {
+              "name": "{planId}",
+              "item": [
+                {
+                  "name": "Get Generic Plan Detail",
+                  "id": "9bafb642-4048-4533-91fc-c63180d6f407",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans/:planId",
+                      "protocol": "https",
+                      "host": [
+                        "tls",
+                        "dh",
+                        "example",
+                        "com"
+                      ],
+                      "path": [
+                        "cds-au",
+                        "v1",
+                        "energy",
+                        "plans",
+                        ":planId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e8c6be2a-42b5-4d10-be07-693909a52cd5",
+                          "key": "planId",
+                          "value": "<string>",
+                          "description": "(Required) ID of the specific plan requested."
+                        }
+                      ]
+                    },
+                    "description": "Obtain detailed information on a single energy plan offered openly to the market.\n\nOther Versions: v1, v2."
+                  },
+                  "response": [
+                    {
+                      "id": "a16c1022-4d73-4bce-a30a-5b7a0400d25d",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans/:planId",
+                          "protocol": "https",
+                          "host": [
+                            "tls",
+                            "dh",
+                            "example",
+                            "com"
+                          ],
+                          "path": [
+                            "cds-au",
+                            "v1",
+                            "energy",
+                            "plans",
+                            ":planId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "planId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-v",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"brand\": \"<string>\",\n    \"brandName\": \"<string>\",\n    \"fuelType\": \"ELECTRICITY\",\n    \"lastUpdated\": \"<string>\",\n    \"planId\": \"<string>\",\n    \"type\": \"STANDING\",\n    \"effectiveFrom\": \"<string>\",\n    \"effectiveTo\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"description\": \"<string>\",\n    \"applicationUri\": \"<string>\",\n    \"additionalInformation\": {\n      \"overviewUri\": \"<string>\",\n      \"termsUri\": \"<string>\",\n      \"eligibilityUri\": \"<string>\",\n      \"pricingUri\": \"<string>\",\n      \"bundleUri\": \"<string>\"\n    },\n    \"customerType\": \"BUSINESS\",\n    \"geography\": {\n      \"distributors\": [\n        \"<string>\"\n      ],\n      \"excludedPostcodes\": [\n        \"<string>\"\n      ],\n      \"includedPostcodes\": [\n        \"<string>\"\n      ]\n    },\n    \"meteringCharges\": [\n      {\n        \"displayName\": \"<string>\",\n        \"minimumValue\": \"<string>\",\n        \"description\": \"<string>\",\n        \"maximumValue\": \"<string>\",\n        \"period\": \"<string>\"\n      }\n    ],\n    \"gasContract\": {\n      \"billFrequency\": [\n        \"<string>\"\n      ],\n      \"isFixed\": \"<boolean>\",\n      \"paymentOption\": [\n        \"OTHER\"\n      ],\n      \"pricingModel\": \"SINGLE_RATE\",\n      \"tariffPeriod\": [\n        {\n          \"displayName\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"rateBlockUType\": \"demandCharges\",\n          \"startDate\": \"<string>\",\n          \"type\": \"OTHER\",\n          \"dailySupplyChargeType\": \"BAND\",\n          \"dailySupplyCharge\": \"<string>\",\n          \"bandedDailySupplyCharges\": [\n            {\n              \"unitPrice\": \"<string>\",\n              \"measureUnit\": \"DAYS\",\n              \"volume\": \"<number>\"\n            }\n          ],\n          \"timeZone\": \"LOCAL\",\n          \"singleRate\": {\n            \"displayName\": \"<string>\",\n            \"rates\": [\n              {\n                \"unitPrice\": \"<string>\",\n                \"measureUnit\": \"KWH\",\n                \"volume\": \"<number>\"\n              }\n            ],\n            \"description\": \"<string>\",\n            \"generalUnitPrice\": \"<string>\",\n            \"period\": \"<string>\"\n          },\n          \"timeOfUseRates\": [\n            {\n              \"displayName\": \"<string>\",\n              \"rates\": [\n                {\n                  \"unitPrice\": \"<string>\",\n                  \"measureUnit\": \"KWH\",\n                  \"volume\": \"<number>\"\n                }\n              ],\n              \"timeOfUse\": [\n                {\n                  \"days\": [\n                    \"WED\"\n                  ],\n                  \"endTime\": \"<string>\",\n                  \"startTime\": \"<string>\"\n                }\n              ],\n              \"type\": \"SHOULDER2\",\n              \"description\": \"<string>\",\n              \"period\": \"P1Y\"\n            }\n          ],\n          \"demandCharges\": [\n            {\n              \"amount\": \"<string>\",\n              \"chargePeriod\": \"TARIFF_PERIOD\",\n              \"displayName\": \"<string>\",\n              \"endTime\": \"<string>\",\n              \"measurementPeriod\": \"MONTH\",\n              \"startTime\": \"<string>\",\n              \"description\": \"<string>\",\n              \"measureUnit\": \"KWH\",\n              \"days\": [\n                \"MON\"\n              ],\n              \"minDemand\": \"0.00\",\n              \"maxDemand\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"additionalFeeInformation\": \"<string>\",\n      \"timeZone\": \"AEST\",\n      \"variation\": \"<string>\",\n      \"onExpiryDescription\": \"<string>\",\n      \"intrinsicGreenPower\": {\n        \"greenPercentage\": \"<string>\"\n      },\n      \"controlledLoad\": [\n        {\n          \"displayName\": \"<string>\",\n          \"rateBlockUType\": \"singleRate\",\n          \"startDate\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"singleRate\": {\n            \"displayName\": \"<string>\",\n            \"rates\": [\n              {\n                \"unitPrice\": \"<string>\",\n                \"measureUnit\": \"KWH\",\n                \"volume\": \"<number>\"\n              }\n            ],\n            \"description\": \"<string>\",\n            \"dailySupplyCharge\": \"<string>\",\n            \"period\": \"P1Y\"\n          },\n          \"timeOfUseRates\": [\n            {\n              \"displayName\": \"<string>\",\n              \"rates\": [\n                {\n                  \"unitPrice\": \"<string>\",\n                  \"measureUnit\": \"KWH\",\n                  \"volume\": \"<number>\"\n                }\n              ],\n              \"timeOfUse\": [\n                {\n                  \"days\": [\n                    \"WED\"\n                  ],\n                  \"startTime\": \"<string>\",\n                  \"endTime\": \"<string>\",\n                  \"additionalInfo\": \"<string>\",\n                  \"additionalInfoUri\": \"<string>\"\n                }\n              ],\n              \"type\": \"OFF_PEAK\",\n              \"description\": \"<string>\",\n              \"dailySupplyCharge\": \"<string>\",\n              \"period\": \"P1Y\"\n            }\n          ]\n        }\n      ],\n      \"incentives\": [\n        {\n          \"category\": \"GIFT\",\n          \"description\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"eligibility\": \"<string>\"\n        }\n      ],\n      \"discounts\": [\n        {\n          \"displayName\": \"<string>\",\n          \"methodUType\": \"percentOfUse\",\n          \"type\": \"OTHER\",\n          \"description\": \"<string>\",\n          \"category\": \"PAY_ON_TIME\",\n          \"endDate\": \"<string>\",\n          \"percentOfBill\": {\n            \"rate\": \"<string>\"\n          },\n          \"percentOfUse\": {\n            \"rate\": \"<string>\"\n          },\n          \"fixedAmount\": {\n            \"amount\": \"<string>\"\n          },\n          \"percentOverThreshold\": {\n            \"rate\": \"<string>\",\n            \"usageAmount\": \"<string>\"\n          }\n        }\n      ],\n      \"greenPowerCharges\": [\n        {\n          \"displayName\": \"<string>\",\n          \"scheme\": \"OTHER\",\n          \"tiers\": [\n            {\n              \"percentGreen\": \"<string>\",\n              \"rate\": \"<string>\",\n              \"amount\": \"<string>\"\n            }\n          ],\n          \"type\": \"FIXED_PER_DAY\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"eligibility\": [\n        {\n          \"information\": \"<string>\",\n          \"type\": \"NO_SOLAR_FIT\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"fees\": [\n        {\n          \"term\": \"VARIABLE\",\n          \"type\": \"CONTRIBUTION\",\n          \"amount\": \"<string>\",\n          \"rate\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"solarFeedInTariff\": [\n        {\n          \"displayName\": \"<string>\",\n          \"payerType\": \"GOVERNMENT\",\n          \"scheme\": \"CURRENT\",\n          \"tariffUType\": \"singleTariff\",\n          \"description\": \"<string>\",\n          \"startDate\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"singleTariff\": {\n            \"rates\": [\n              {\n                \"unitPrice\": \"<string>\",\n                \"measureUnit\": \"KWH\",\n                \"volume\": \"<number>\"\n              }\n            ],\n            \"period\": \"P1Y\"\n          },\n          \"timeVaryingTariffs\": [\n            {\n              \"displayName\": \"<string>\",\n              \"timeVariations\": [\n                {\n                  \"days\": [\n                    \"PUBLIC_HOLIDAYS\"\n                  ],\n                  \"startTime\": \"<string>\",\n                  \"endTime\": \"<string>\"\n                }\n              ],\n              \"type\": \"OFF_PEAK\",\n              \"rates\": [\n                {\n                  \"unitPrice\": \"<string>\",\n                  \"measureUnit\": \"KWH\",\n                  \"volume\": \"<number>\"\n                }\n              ],\n              \"period\": \"P1Y\"\n            }\n          ]\n        }\n      ],\n      \"termType\": \"ONGOING\",\n      \"benefitPeriod\": \"<string>\",\n      \"terms\": \"<string>\",\n      \"meterTypes\": [\n        \"<string>\"\n      ],\n      \"coolingOffDays\": \"<integer>\"\n    },\n    \"electricityContract\": {\n      \"billFrequency\": [\n        \"<string>\"\n      ],\n      \"isFixed\": \"<boolean>\",\n      \"paymentOption\": [\n        \"DIRECT_DEBIT\"\n      ],\n      \"pricingModel\": \"SINGLE_RATE\",\n      \"tariffPeriod\": [\n        {\n          \"displayName\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"rateBlockUType\": \"singleRate\",\n          \"startDate\": \"<string>\",\n          \"type\": \"OTHER\",\n          \"dailySupplyChargeType\": \"BAND\",\n          \"dailySupplyCharge\": \"<string>\",\n          \"bandedDailySupplyCharges\": [\n            {\n              \"unitPrice\": \"<string>\",\n              \"measureUnit\": \"DAYS\",\n              \"volume\": \"<number>\"\n            }\n          ],\n          \"timeZone\": \"LOCAL\",\n          \"singleRate\": {\n            \"displayName\": \"<string>\",\n            \"rates\": [\n              {\n                \"unitPrice\": \"<string>\",\n                \"measureUnit\": \"KWH\",\n                \"volume\": \"<number>\"\n              }\n            ],\n            \"description\": \"<string>\",\n            \"generalUnitPrice\": \"<string>\",\n            \"period\": \"<string>\"\n          },\n          \"timeOfUseRates\": [\n            {\n              \"displayName\": \"<string>\",\n              \"rates\": [\n                {\n                  \"unitPrice\": \"<string>\",\n                  \"measureUnit\": \"KWH\",\n                  \"volume\": \"<number>\"\n                }\n              ],\n              \"timeOfUse\": [\n                {\n                  \"days\": [\n                    \"SAT\"\n                  ],\n                  \"endTime\": \"<string>\",\n                  \"startTime\": \"<string>\"\n                }\n              ],\n              \"type\": \"OFF_PEAK\",\n              \"description\": \"<string>\",\n              \"period\": \"P1Y\"\n            }\n          ],\n          \"demandCharges\": [\n            {\n              \"amount\": \"<string>\",\n              \"chargePeriod\": \"MONTH\",\n              \"displayName\": \"<string>\",\n              \"endTime\": \"<string>\",\n              \"measurementPeriod\": \"MONTH\",\n              \"startTime\": \"<string>\",\n              \"description\": \"<string>\",\n              \"measureUnit\": \"KWH\",\n              \"days\": [\n                \"MON\"\n              ],\n              \"minDemand\": \"0.00\",\n              \"maxDemand\": \"<string>\"\n            }\n          ]\n        }\n      ],\n      \"additionalFeeInformation\": \"<string>\",\n      \"timeZone\": \"AEST\",\n      \"variation\": \"<string>\",\n      \"onExpiryDescription\": \"<string>\",\n      \"intrinsicGreenPower\": {\n        \"greenPercentage\": \"<string>\"\n      },\n      \"controlledLoad\": [\n        {\n          \"displayName\": \"<string>\",\n          \"rateBlockUType\": \"timeOfUseRates\",\n          \"startDate\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"singleRate\": {\n            \"displayName\": \"<string>\",\n            \"rates\": [\n              {\n                \"unitPrice\": \"<string>\",\n                \"measureUnit\": \"KWH\",\n                \"volume\": \"<number>\"\n              }\n            ],\n            \"description\": \"<string>\",\n            \"dailySupplyCharge\": \"<string>\",\n            \"period\": \"P1Y\"\n          },\n          \"timeOfUseRates\": [\n            {\n              \"displayName\": \"<string>\",\n              \"rates\": [\n                {\n                  \"unitPrice\": \"<string>\",\n                  \"measureUnit\": \"KWH\",\n                  \"volume\": \"<number>\"\n                }\n              ],\n              \"timeOfUse\": [\n                {\n                  \"days\": [\n                    \"PUBLIC_HOLIDAYS\"\n                  ],\n                  \"startTime\": \"<string>\",\n                  \"endTime\": \"<string>\",\n                  \"additionalInfo\": \"<string>\",\n                  \"additionalInfoUri\": \"<string>\"\n                }\n              ],\n              \"type\": \"SOLAR_SPONGE\",\n              \"description\": \"<string>\",\n              \"dailySupplyCharge\": \"<string>\",\n              \"period\": \"P1Y\"\n            }\n          ]\n        }\n      ],\n      \"incentives\": [\n        {\n          \"category\": \"OTHER\",\n          \"description\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"eligibility\": \"<string>\"\n        }\n      ],\n      \"discounts\": [\n        {\n          \"displayName\": \"<string>\",\n          \"methodUType\": \"fixedAmount\",\n          \"type\": \"OTHER\",\n          \"description\": \"<string>\",\n          \"category\": \"DIRECT_DEBIT\",\n          \"endDate\": \"<string>\",\n          \"percentOfBill\": {\n            \"rate\": \"<string>\"\n          },\n          \"percentOfUse\": {\n            \"rate\": \"<string>\"\n          },\n          \"fixedAmount\": {\n            \"amount\": \"<string>\"\n          },\n          \"percentOverThreshold\": {\n            \"rate\": \"<string>\",\n            \"usageAmount\": \"<string>\"\n          }\n        }\n      ],\n      \"greenPowerCharges\": [\n        {\n          \"displayName\": \"<string>\",\n          \"scheme\": \"GREENPOWER\",\n          \"tiers\": [\n            {\n              \"percentGreen\": \"<string>\",\n              \"rate\": \"<string>\",\n              \"amount\": \"<string>\"\n            }\n          ],\n          \"type\": \"FIXED_PER_WEEK\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"eligibility\": [\n        {\n          \"information\": \"<string>\",\n          \"type\": \"EXISTING_BATTERY\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"fees\": [\n        {\n          \"term\": \"4_YEAR\",\n          \"type\": \"CONNECTION\",\n          \"amount\": \"<string>\",\n          \"rate\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ],\n      \"solarFeedInTariff\": [\n        {\n          \"displayName\": \"<string>\",\n          \"payerType\": \"GOVERNMENT\",\n          \"scheme\": \"PREMIUM\",\n          \"tariffUType\": \"singleTariff\",\n          \"description\": \"<string>\",\n          \"startDate\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"singleTariff\": {\n            \"rates\": [\n              {\n                \"unitPrice\": \"<string>\",\n                \"measureUnit\": \"KWH\",\n                \"volume\": \"<number>\"\n              }\n            ],\n            \"period\": \"P1Y\"\n          },\n          \"timeVaryingTariffs\": [\n            {\n              \"displayName\": \"<string>\",\n              \"timeVariations\": [\n                {\n                  \"days\": [\n                    \"MON\"\n                  ],\n                  \"startTime\": \"<string>\",\n                  \"endTime\": \"<string>\"\n                }\n              ],\n              \"type\": \"PEAK\",\n              \"rates\": [\n                {\n                  \"unitPrice\": \"<string>\",\n                  \"measureUnit\": \"KWH\",\n                  \"volume\": \"<number>\"\n                }\n              ],\n              \"period\": \"P1Y\"\n            }\n          ]\n        }\n      ],\n      \"termType\": \"1_YEAR\",\n      \"benefitPeriod\": \"<string>\",\n      \"terms\": \"<string>\",\n      \"meterTypes\": [\n        \"<string>\"\n      ],\n      \"coolingOffDays\": \"<integer>\"\n    }\n  },\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"meta\": {}\n}",
+                      "createdAt": "2026-10-21T20:17:32.000Z",
+                      "updatedAt": "2026-10-21T20:17:32.000Z",
+                      "uid": "35240-a16c1022-4d73-4bce-a30a-5b7a0400d25d"
+                    },
+                    {
+                      "id": "8bff1f97-960a-4958-b2f3-cf96c83a9056",
+                      "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Required Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans/:planId",
+                          "protocol": "https",
+                          "host": [
+                            "tls",
+                            "dh",
+                            "example",
+                            "com"
+                          ],
+                          "path": [
+                            "cds-au",
+                            "v1",
+                            "energy",
+                            "plans",
+                            ":planId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "planId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:17:32.000Z",
+                      "updatedAt": "2026-10-21T20:17:32.000Z",
+                      "uid": "35240-8bff1f97-960a-4958-b2f3-cf96c83a9056"
+                    },
+                    {
+                      "id": "6ba6f491-f634-4e73-809c-2455d658d407",
+                      "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[404 - Invalid Resource](#error-404-resource-invalid)</li></ul>",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans/:planId",
+                          "protocol": "https",
+                          "host": [
+                            "tls",
+                            "dh",
+                            "example",
+                            "com"
+                          ],
+                          "path": [
+                            "cds-au",
+                            "v1",
+                            "energy",
+                            "plans",
+                            ":planId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "planId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:17:32.000Z",
+                      "updatedAt": "2026-10-21T20:17:32.000Z",
+                      "uid": "35240-6ba6f491-f634-4e73-809c-2455d658d407"
+                    },
+                    {
+                      "id": "ea846bfb-56a7-4909-b076-7bf1927888bd",
+                      "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans/:planId",
+                          "protocol": "https",
+                          "host": [
+                            "tls",
+                            "dh",
+                            "example",
+                            "com"
+                          ],
+                          "path": [
+                            "cds-au",
+                            "v1",
+                            "energy",
+                            "plans",
+                            ":planId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "planId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Acceptable",
+                      "code": 406,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:17:32.000Z",
+                      "updatedAt": "2026-10-21T20:17:32.000Z",
+                      "uid": "35240-ea846bfb-56a7-4909-b076-7bf1927888bd"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:17:32.000Z",
+                  "updatedAt": "2026-10-21T20:17:32.000Z",
+                  "uid": "35240-9bafb642-4048-4533-91fc-c63180d6f407"
+                }
+              ],
+              "id": "c0d12078-bf1c-4620-a178-a5b6c74fa8fe",
+              "createdAt": "2026-10-21T20:17:32.000Z",
+              "updatedAt": "2026-10-21T20:17:32.000Z",
+              "uid": "35240-c0d12078-bf1c-4620-a178-a5b6c74fa8fe"
+            },
+            {
+              "name": "Get Generic Plans",
+              "id": "40493b0c-ab6b-4f67-b5c9-b22f927d1ec8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans?type=ALL&fuelType=ALL&effective=CURRENT&updated-since=<string>&brand=<string>&page=<integer>&page-size=<integer>",
+                  "protocol": "https",
+                  "host": [
+                    "tls",
+                    "dh",
+                    "example",
+                    "com"
+                  ],
+                  "path": [
+                    "cds-au",
+                    "v1",
+                    "energy",
+                    "plans"
+                  ],
+                  "query": [
+                    {
+                      "description": "Used to filter results on the _type_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                      "key": "type",
+                      "value": "ALL"
+                    },
+                    {
+                      "description": "Used to filter results on the _fuelType_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                      "key": "fuelType",
+                      "value": "ALL"
+                    },
+                    {
+                      "description": "Allows for the filtering of plans based on whether the current time is within the period of time defined as effective by the _effectiveFrom_ and _effectiveTo_ fields. Valid values are `CURRENT`, `FUTURE` and `ALL`. If absent defaults to `CURRENT`.",
+                      "key": "effective",
+                      "value": "CURRENT"
+                    },
+                    {
+                      "description": "Only include plans that have been updated after the specified date and time. If absent defaults to include all plans.",
+                      "key": "updated-since",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Used to filter results on the _brand_ field. If absent defaults to include all plans.",
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Page of results to request (standard pagination).",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Page size to request. Default is 25 (standard pagination).",
+                      "key": "page-size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Obtain a list of energy plans that are currently offered to the market.\n\nNote that the results returned by this endpoint are expected to be ordered in descending order according to _lastUpdated_."
+              },
+              "response": [
+                {
+                  "id": "c7a2e952-a1cd-4deb-a5a6-bb2714611837",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans?type=ALL&fuelType=ALL&effective=CURRENT&updated-since=<string>&brand=<string>&page=<integer>&page-size=<integer>",
+                      "protocol": "https",
+                      "host": [
+                        "tls",
+                        "dh",
+                        "example",
+                        "com"
+                      ],
+                      "path": [
+                        "cds-au",
+                        "v1",
+                        "energy",
+                        "plans"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results on the _type_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "type",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Used to filter results on the _fuelType_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "fuelType",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Allows for the filtering of plans based on whether the current time is within the period of time defined as effective by the _effectiveFrom_ and _effectiveTo_ fields. Valid values are `CURRENT`, `FUTURE` and `ALL`. If absent defaults to `CURRENT`.",
+                          "key": "effective",
+                          "value": "CURRENT"
+                        },
+                        {
+                          "description": "Only include plans that have been updated after the specified date and time. If absent defaults to include all plans.",
+                          "key": "updated-since",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Used to filter results on the _brand_ field. If absent defaults to include all plans.",
+                          "key": "brand",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-v",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"plans\": [\n      {\n        \"brand\": \"<string>\",\n        \"brandName\": \"<string>\",\n        \"fuelType\": \"ELECTRICITY\",\n        \"lastUpdated\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"type\": \"REGULATED\",\n        \"effectiveFrom\": \"<string>\",\n        \"effectiveTo\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"applicationUri\": \"<string>\",\n        \"additionalInformation\": {\n          \"overviewUri\": \"<string>\",\n          \"termsUri\": \"<string>\",\n          \"eligibilityUri\": \"<string>\",\n          \"pricingUri\": \"<string>\",\n          \"bundleUri\": \"<string>\"\n        },\n        \"customerType\": \"RESIDENTIAL\",\n        \"geography\": {\n          \"distributors\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"excludedPostcodes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"includedPostcodes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      },\n      {\n        \"brand\": \"<string>\",\n        \"brandName\": \"<string>\",\n        \"fuelType\": \"ELECTRICITY\",\n        \"lastUpdated\": \"<string>\",\n        \"planId\": \"<string>\",\n        \"type\": \"MARKET\",\n        \"effectiveFrom\": \"<string>\",\n        \"effectiveTo\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"applicationUri\": \"<string>\",\n        \"additionalInformation\": {\n          \"overviewUri\": \"<string>\",\n          \"termsUri\": \"<string>\",\n          \"eligibilityUri\": \"<string>\",\n          \"pricingUri\": \"<string>\",\n          \"bundleUri\": \"<string>\"\n        },\n        \"customerType\": \"RESIDENTIAL\",\n        \"geography\": {\n          \"distributors\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"excludedPostcodes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"includedPostcodes\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      }\n    ]\n  },\n  \"links\": {\n    \"self\": \"<string>\",\n    \"first\": \"<string>\",\n    \"prev\": \"<string>\",\n    \"next\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"meta\": {\n    \"totalPages\": \"<integer>\",\n    \"totalRecords\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:17:32.000Z",
+                  "updatedAt": "2026-10-21T20:17:32.000Z",
+                  "uid": "35240-c7a2e952-a1cd-4deb-a5a6-bb2714611837"
+                },
+                {
+                  "id": "417c0400-621e-42a7-afdb-ecf60401dda7",
+                  "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Required Field](#error-400-field-missing)</li><li>[400 - Invalid Date](#error-400-field-invalid-dat",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans?type=ALL&fuelType=ALL&effective=CURRENT&updated-since=<string>&brand=<string>&page=<integer>&page-size=<integer>",
+                      "protocol": "https",
+                      "host": [
+                        "tls",
+                        "dh",
+                        "example",
+                        "com"
+                      ],
+                      "path": [
+                        "cds-au",
+                        "v1",
+                        "energy",
+                        "plans"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results on the _type_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "type",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Used to filter results on the _fuelType_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "fuelType",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Allows for the filtering of plans based on whether the current time is within the period of time defined as effective by the _effectiveFrom_ and _effectiveTo_ fields. Valid values are `CURRENT`, `FUTURE` and `ALL`. If absent defaults to `CURRENT`.",
+                          "key": "effective",
+                          "value": "CURRENT"
+                        },
+                        {
+                          "description": "Only include plans that have been updated after the specified date and time. If absent defaults to include all plans.",
+                          "key": "updated-since",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Used to filter results on the _brand_ field. If absent defaults to include all plans.",
+                          "key": "brand",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:17:32.000Z",
+                  "updatedAt": "2026-10-21T20:17:32.000Z",
+                  "uid": "35240-417c0400-621e-42a7-afdb-ecf60401dda7"
+                },
+                {
+                  "id": "1fb4f0b8-5d57-41c6-8f45-4c81c838b089",
+                  "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans?type=ALL&fuelType=ALL&effective=CURRENT&updated-since=<string>&brand=<string>&page=<integer>&page-size=<integer>",
+                      "protocol": "https",
+                      "host": [
+                        "tls",
+                        "dh",
+                        "example",
+                        "com"
+                      ],
+                      "path": [
+                        "cds-au",
+                        "v1",
+                        "energy",
+                        "plans"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results on the _type_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "type",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Used to filter results on the _fuelType_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "fuelType",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Allows for the filtering of plans based on whether the current time is within the period of time defined as effective by the _effectiveFrom_ and _effectiveTo_ fields. Valid values are `CURRENT`, `FUTURE` and `ALL`. If absent defaults to `CURRENT`.",
+                          "key": "effective",
+                          "value": "CURRENT"
+                        },
+                        {
+                          "description": "Only include plans that have been updated after the specified date and time. If absent defaults to include all plans.",
+                          "key": "updated-since",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Used to filter results on the _brand_ field. If absent defaults to include all plans.",
+                          "key": "brand",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:17:32.000Z",
+                  "updatedAt": "2026-10-21T20:17:32.000Z",
+                  "uid": "35240-1fb4f0b8-5d57-41c6-8f45-4c81c838b089"
+                },
+                {
+                  "id": "880053d1-4d58-4fc9-a865-2fb09084f61e",
+                  "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[422 - Invalid Page](#error-422-field-invalid-page)</li></ul>",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "https://tls.dh.example.com/cds-au/v1/energy/plans?type=ALL&fuelType=ALL&effective=CURRENT&updated-since=<string>&brand=<string>&page=<integer>&page-size=<integer>",
+                      "protocol": "https",
+                      "host": [
+                        "tls",
+                        "dh",
+                        "example",
+                        "com"
+                      ],
+                      "path": [
+                        "cds-au",
+                        "v1",
+                        "energy",
+                        "plans"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results on the _type_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "type",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Used to filter results on the _fuelType_ field. Any one of the valid values for this field can be supplied plus `ALL`. If absent defaults to `ALL`.",
+                          "key": "fuelType",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Allows for the filtering of plans based on whether the current time is within the period of time defined as effective by the _effectiveFrom_ and _effectiveTo_ fields. Valid values are `CURRENT`, `FUTURE` and `ALL`. If absent defaults to `CURRENT`.",
+                          "key": "effective",
+                          "value": "CURRENT"
+                        },
+                        {
+                          "description": "Only include plans that have been updated after the specified date and time. If absent defaults to include all plans.",
+                          "key": "updated-since",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Used to filter results on the _brand_ field. If absent defaults to include all plans.",
+                          "key": "brand",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:17:32.000Z",
+                  "updatedAt": "2026-10-21T20:17:32.000Z",
+                  "uid": "35240-880053d1-4d58-4fc9-a865-2fb09084f61e"
+                }
+              ],
+              "createdAt": "2026-10-21T20:17:32.000Z",
+              "updatedAt": "2026-10-21T20:17:32.000Z",
+              "uid": "35240-40493b0c-ab6b-4f67-b5c9-b22f927d1ec8"
+            }
+          ],
+          "id": "75b2c566-5268-4239-a1d2-0d54fafea08f",
+          "createdAt": "2026-10-21T20:17:32.000Z",
+          "updatedAt": "2026-10-21T20:17:32.000Z",
+          "uid": "35240-75b2c566-5268-4239-a1d2-0d54fafea08f"
+        }
+      ],
+      "id": "6a2d1e96-514f-4ed3-aec8-453a47a2b123",
+      "createdAt": "2026-10-21T20:17:32.000Z",
+      "updatedAt": "2026-10-21T20:17:32.000Z",
+      "uid": "35240-6a2d1e96-514f-4ed3-aec8-453a47a2b123"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://mtls.dh.example.com/cds-au/v1"
+    }
+  ]
+}

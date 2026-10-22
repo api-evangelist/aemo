@@ -1,0 +1,1429 @@
+{
+  "info": {
+    "_postman_id": "a8196962-e9b9-4283-9ccd-ec3375ffb7b2",
+    "name": "Intermittent Generation Availability Submissions API",
+    "description": "## Introduction\nThis API is used for intermittent generation availability submissions. For details on how to get access and business rules for this API:",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:18:05.000Z",
+    "updatedAt": "2026-10-21T20:18:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a8196962-e9b9-4283-9ccd-ec3375ffb7b2"
+  },
+  "item": [
+    {
+      "name": "MtPasaAvailability",
+      "item": [
+        {
+          "name": "Submit Intermittent Generation availability for MT PASA",
+          "id": "ad8b8ae5-dde0-4af7-b1b4-8c773fdfce20",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/MtPasaAvailability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "MtPasaAvailability"
+              ]
+            },
+            "description": "This API will allow submission of MTPASA Availability"
+          },
+          "response": [
+            {
+              "id": "8210d0e0-2da9-4a34-b453-d0b54ef2cf5e",
+              "name": "This response is provided when the payload are validated and saved in the AEMO's systems.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"bc1edb34-6b4c-4c65-b6ae-876e05ee545e\",\n    \"data\": {\n      \"responseTimeStamp\": \"2019-06-20T00:52:52Z\",\n      \"responseText\": \"Submission successful\"\n    },\n    \"errors\": [],\n    \"warnings\": []\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-8210d0e0-2da9-4a34-b453-d0b54ef2cf5e"
+            },
+            {
+              "id": "eaac00be-3668-46af-92db-c48df9902284",
+              "name": "400",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10938834-1\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"400\",\n        \"source\": \"API Gateway\",\n        \"title\": \"Bad Request\",\n        \"detail\": \"Regex threat/JSON threat detected in request\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-eaac00be-3668-46af-92db-c48df9902284"
+            },
+            {
+              "id": "9d7259f4-b197-4902-b4f7-08035690ee19",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"source\": \"API Gateway\",\n        \"title\": \"Unauthorized\",\n        \"detail\": \"Authorization failed\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-9d7259f4-b197-4902-b4f7-08035690ee19"
+            },
+            {
+              "id": "3e231611-4ccd-4a91-8d96-ec80249db079",
+              "name": "This response is provided when a resource missing from URL or incorrect URL.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"403\",\n        \"source\": \"\",\n        \"title\": \"Forbidden\",\n        \"detail\": \"Insufficient privileges\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-3e231611-4ccd-4a91-8d96-ec80249db079"
+            },
+            {
+              "id": "59b4a181-09a6-4209-a07f-a367bc6d0d46",
+              "name": "This response is provided when a resource missing from URL or incorrect URL.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"404\",\n        \"source\": \"\",\n        \"title\": \"Not Found\",\n        \"detail\": \"Resource not found at /guests/session\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-59b4a181-09a6-4209-a07f-a367bc6d0d46"
+            },
+            {
+              "id": "8907b5b3-c1f4-4ff0-ab67-7de0e3e8895b",
+              "name": "This response is provided when the method is not correct.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"405\",\n        \"source\": \"\",\n        \"title\": \"Method Not Allowed\",\n        \"detail\": \"Invalid method for path /guests/sessions\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-8907b5b3-c1f4-4ff0-ab67-7de0e3e8895b"
+            },
+            {
+              "id": "e5f58acd-4142-4e90-89d8-dbf329c715e7",
+              "name": "This response is provided when the method is not correct.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": {\n      \"responseTimeStamp\": \"2021-10-26T10:46:28Z\",\n      \"responseText\": \"Validation errors were found. Please see errors object for further details.\"\n    },\n    \"errors\": [\n      {\n        \"code\": \"Invalid-Cluster-Elements-Available\",\n        \"source\": \"$.clusterElements[?(@.duid == 'BALDHWF1' && @.clusterId == 'BALDHWF_C1' && @.date=='2021-11-01')]\",\n        \"title\": \"Cluster elements supplied is invalid\",\n        \"detail\": \"Cluster elements value supplied is invalid\"\n      }\n    ],\n    \"warnings\": []\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-e5f58acd-4142-4e90-89d8-dbf329c715e7"
+            },
+            {
+              "id": "8a85a5f5-656e-44ef-828a-9f040cd0c115",
+              "name": "Too Many Requests - The Quota/Spike arrest limits have been exceeded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"429\",\n        \"source\": \"\",\n        \"title\": \"Too Many Requests\",\n        \"detail\": \"The Quota/Spike arrest limits have been exceeded\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-8a85a5f5-656e-44ef-828a-9f040cd0c115"
+            },
+            {
+              "id": "53c213da-6a0e-40c5-929f-368d728e800d",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"500\",\n        \"source\": \"\",\n        \"title\": \"InternalServerError\",\n        \"detail\": \"An unexpected error has occurred\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-53c213da-6a0e-40c5-929f-368d728e800d"
+            },
+            {
+              "id": "90f4978a-311c-4cbf-a411-5f4dc7a5fbb7",
+              "name": "Bad Gateway error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"502\",\n        \"source\": \"\",\n        \"title\": \"Bad Gateway\",\n        \"detail\": \"Bad Gateway\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-90f4978a-311c-4cbf-a411-5f4dc7a5fbb7"
+            },
+            {
+              "id": "8fc13c0a-82b4-4575-b395-7f3d72774eca",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-01\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-02\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"date\": \"2020-12-05\",\n          \"mwLimit\": \"51\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-01\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid\": \"duid3\",\n          \"clusterID\": \"cluster1\",\n          \"date\": \"2020-12-02\",\n          \"elementsAvailable\": \"13\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/MtPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MtPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"503\",\n        \"source\": \"\",\n        \"title\": \"Service Unavailable\",\n        \"detail\": \"Service Unavailable\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-8fc13c0a-82b4-4575-b395-7f3d72774eca"
+            }
+          ],
+          "createdAt": "2026-10-21T20:18:06.000Z",
+          "updatedAt": "2026-10-21T20:18:06.000Z",
+          "uid": "35240-ad8b8ae5-dde0-4af7-b1b4-8c773fdfce20"
+        }
+      ],
+      "id": "f498b4c1-09ef-4091-a1c0-93942be5d716",
+      "createdAt": "2026-10-21T20:18:05.000Z",
+      "updatedAt": "2026-10-21T20:18:05.000Z",
+      "uid": "35240-f498b4c1-09ef-4091-a1c0-93942be5d716"
+    },
+    {
+      "name": "PdStPasaAvailability",
+      "item": [
+        {
+          "name": "Submit Intermittent Generation availability for PD ST PASA",
+          "id": "f716b556-863a-4b92-8184-c4a8f7723b69",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/PdStPasaAvailability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "PdStPasaAvailability"
+              ]
+            },
+            "description": "This API will accept submission of availability for 30-minute intervals, covering PD and STPASA time frames"
+          },
+          "response": [
+            {
+              "id": "2da5aa6f-cc4c-4a77-b1df-7a89c8712f38",
+              "name": "This response is provided when the payload are validated and saved in the AEMO's systems.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"bc1edb34-6b4c-4c65-b6ae-876e05ee545e\",\n    \"data\": {\n      \"responseTimeStamp\": \"2019-06-20T00:52:52Z\",\n      \"responseText\": \"Submission successful\"\n    },\n    \"errors\": [],\n    \"warnings\": []\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-2da5aa6f-cc4c-4a77-b1df-7a89c8712f38"
+            },
+            {
+              "id": "2757536d-8415-4936-a41b-f470d14471f9",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10938834-1\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"400\",\n        \"source\": \"API Gateway\",\n        \"title\": \"Bad Request\",\n        \"detail\": \"Regex threat/JSON threat detected in request\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-2757536d-8415-4936-a41b-f470d14471f9"
+            },
+            {
+              "id": "b0c485ac-09b4-48a2-aba9-8be60ddc9945",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"source\": \"API Gateway\",\n        \"title\": \"Unauthorized\",\n        \"detail\": \"Authorization failed\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-b0c485ac-09b4-48a2-aba9-8be60ddc9945"
+            },
+            {
+              "id": "e72f567d-a846-47d8-a14b-7103f83fd86d",
+              "name": "This response is provided when a resource missing from URL or incorrect URL.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"404\",\n        \"source\": \"\",\n        \"title\": \"Not Found\",\n        \"detail\": \"Resource not found at /guests/session\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-e72f567d-a846-47d8-a14b-7103f83fd86d"
+            },
+            {
+              "id": "6fc4f79e-9bdc-49ff-9ad2-5c3e0b67f674",
+              "name": "This response is provided when the method is not correct.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"405\",\n        \"source\": \"\",\n        \"title\": \"Method Not Allowed\",\n        \"detail\": \"Invalid method for path /guests/sessions\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-6fc4f79e-9bdc-49ff-9ad2-5c3e0b67f674"
+            },
+            {
+              "id": "04f8298a-f640-4090-90fe-fc416cd7ecff",
+              "name": "This response is provided when the method is not correct.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"Invalid-Mw-Limit\",\n        \"source\": \"$.mwLimits[?(@.duid == 'BALDHWF1' && @.intervalDateTime=='2022-09-01T05:00:00+10:00')]\",\n        \"title\": \"Mw value supplied is invalid\",\n        \"detail\": \"The Mw Limit value supplied is invalid\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-04f8298a-f640-4090-90fe-fc416cd7ecff"
+            },
+            {
+              "id": "603f46a9-eab5-401e-aef2-0ede57ff7574",
+              "name": "Too Many Requests - The Quota/Spike arrest limits have been exceeded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"429\",\n        \"source\": \"\",\n        \"title\": \"Too Many Requests\",\n        \"detail\": \"The Quota/Spike arrest limits have been exceeded\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-603f46a9-eab5-401e-aef2-0ede57ff7574"
+            },
+            {
+              "id": "1593b6e3-e793-478c-a1c4-7a3dd0882065",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"500\",\n        \"source\": \"\",\n        \"title\": \"InternalServerError\",\n        \"detail\": \"An unexpected error has occurred\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-1593b6e3-e793-478c-a1c4-7a3dd0882065"
+            },
+            {
+              "id": "e5b8c9d5-0f8e-4c80-80f4-6d8121b90ffe",
+              "name": "Bad Gateway error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"502\",\n        \"source\": \"\",\n        \"title\": \"Bad Gateway\",\n        \"detail\": \"Bad Gateway\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-e5b8c9d5-0f8e-4c80-80f4-6d8121b90ffe"
+            },
+            {
+              "id": "19c7ad6a-5c97-49f3-a4ff-191d9b6fa467",
+              "name": "Service temporarily unavailable",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"mwLimits\": [\n      [\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-01T11:30:00Z\",\n          \"mwLimit\": \"53\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        },\n        {\n          \"duid\": \"duid1\",\n          \"intervalDateTime\": \"2020-12-03T13:30:00Z\",\n          \"mwLimit\": \"51\"\n        },\n        {\n          \"duid\": \"duid2\",\n          \"intervalDateTime\": \"0020-12-02T12:30:00Z\",\n          \"mwLimit\": \"52\"\n        }\n      ]\n    ],\n    \"clusterElements\": [\n      [\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-01T12:30:00Z\",\n          \"elementsAvailable\": \"12\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T02:30:00Z\",\n          \"elementsAvailable\": \"13\"\n        },\n        {\n          \"duid1\": \"duid1\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        },\n        {\n          \"duid1\": \"duid3\",\n          \"clusterId\": \"cluster1\",\n          \"intervaleDateTime\": \"2020-12-02T05:30:00Z\",\n          \"elementsAvailable\": \"15\"\n        }\n      ]\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/PdStPasaAvailability",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "PdStPasaAvailability"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionID\": \"698547280293-a-gsy1-28693-10944574-2\",\n    \"data\": \"\",\n    \"errors\": [\n      {\n        \"code\": \"503\",\n        \"source\": \"\",\n        \"title\": \"Service Unavailable\",\n        \"detail\": \"Service Unavailable\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:18:06.000Z",
+              "updatedAt": "2026-10-21T20:18:06.000Z",
+              "uid": "35240-19c7ad6a-5c97-49f3-a4ff-191d9b6fa467"
+            }
+          ],
+          "createdAt": "2026-10-21T20:18:06.000Z",
+          "updatedAt": "2026-10-21T20:18:06.000Z",
+          "uid": "35240-f716b556-863a-4b92-8184-c4a8f7723b69"
+        }
+      ],
+      "id": "984ea013-638f-4a76-9c5d-ecfb9237424e",
+      "createdAt": "2026-10-21T20:18:05.000Z",
+      "updatedAt": "2026-10-21T20:18:05.000Z",
+      "uid": "35240-984ea013-638f-4a76-9c5d-ecfb9237424e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/v1/IntermittentGen"
+    }
+  ]
+}

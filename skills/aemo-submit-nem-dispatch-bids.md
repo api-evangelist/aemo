@@ -1,13 +1,14 @@
 ---
-name: Submit and verify NEM dispatch bids and offers
+name: aemo-submit-nem-dispatch-bids
+title: "Submit and verify NEM dispatch bids and offers"
 description: Submit Energy, FCAS or MNSP bids and offers into AEMO's National Electricity Market dispatch process, then read them back to confirm what AEMO holds.
-api: openapi/aemo-bidding-v1-openapi.yml
+api: openapi/aemo-nemdispatchbidding-api-openapi.yml
 operations: [submitBids, getBid, getBids, getSubmission, getSubmissions]
 ---
 
 # Submit and verify NEM dispatch bids and offers
 
-Use the AEMO `NEMDispatchBidding` API (`openapi/aemo-bidding-v1-openapi.yml`) to lodge bids and
+Use the AEMO `NEMDispatchBidding` API (`openapi/aemo-nemdispatchbidding-api-openapi.yml`) to lodge bids and
 offers and to confirm what AEMO holds after lodgement. This is a **market submission** flow — it
 changes a participant's dispatch position. Never submit without an explicit, current instruction
 from the participant.

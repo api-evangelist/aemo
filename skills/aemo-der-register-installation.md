@@ -1,7 +1,8 @@
 ---
-name: Maintain DER Register installation and NMI records
+name: aemo-der-register-installation
+title: "Maintain DER Register installation and NMI records"
 description: Create, read, update and audit distributed energy resource (DER) records against AEMO's DER Register for the NEM and the WEM.
-api: openapi/aemo-der-register-installation-v2-openapi.yml
+api: openapi/aemo-wem-der-installation-v2-api-openapi.yml
 operations: [retrieveDERInstallationRecords, retrieveDERInstallationRecord, retrieveDERInstallationHistory, createDERInstallationRecord, updateDERInstallationRecord, createsANewNMIRecord, returnsTheCurrentNMIDetails, updatesANMIRecord]
 ---
 
@@ -9,8 +10,8 @@ operations: [retrieveDERInstallationRecords, retrieveDERInstallationRecord, retr
 
 Two specifications back this flow:
 
-- `openapi/aemo-der-register-installation-v2-openapi.yml` — DER installation records keyed by NMI.
-- `openapi/aemo-der-register-nmi-v1-openapi.yml` — WEM DER NMI detail records.
+- `openapi/aemo-wem-der-installation-v2-api-openapi.yml` — DER installation records keyed by NMI.
+- `openapi/aemo-wem-der-nmi-api-openapi.yml` — WEM DER NMI detail records.
 
 DER Register records are a regulated obligation on network service providers and installers. Writes
 change a regulated register; propose, then write on explicit approval.
@@ -42,5 +43,5 @@ instead — see `well-known/aemo-derr-openid-configuration.json`.
 - Device reference data (manufacturer, series, model, device type) is available from the DER
   consumer registration API — `listInverterManufacture`, `listInverterSeries`,
   `listInverterModels`, `listOfDeviceTypes`, `listDeviceSubType` in
-  `openapi/aemo-der-consumer-registration-v1-openapi.yml`. Resolve device identifiers there before
+  `openapi/aemo-der-registration-for-account-holders-api-openapi.yml`. Resolve device identifiers there before
   writing a record.

@@ -1,0 +1,3057 @@
+{
+  "info": {
+    "_postman_id": "fe90a071-f43e-435d-a712-e30979167af8",
+    "name": "Capacity Auction API",
+    "description": "## Introduction\nThe Capacity Auction API is used by facility operators and trading participants to submit and receive data relating to capacity trades and day ahead auction for AEMO\u2019s Capacity Transfer Platform (CTP) and Day-Ahead Auction (DAA) market systems.\n\nFor details on how to get access and business rules for this API:",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:16:15.000Z",
+    "updatedAt": "2026-10-21T20:16:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fe90a071-f43e-435d-a712-e30979167af8"
+  },
+  "item": [
+    {
+      "name": "GasFuture",
+      "item": [
+        {
+          "name": "Get GSH future data",
+          "id": "26b9f6ea-93a1-47c4-8d5a-25139915ebee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/GasFuture",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GasFuture"
+              ]
+            },
+            "description": "Allows auction participants to retrieve GSH Physical Gas Future Data"
+          },
+          "response": [
+            {
+              "id": "65e1df50-0da7-4c96-a5ba-4c32cfe4d3cc",
+              "name": "Success response with future data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"296432aa-7cc6-43e5-b611-0c8cbd092748\",\n    \"data\": {\n      \"CallSuccessful\": true,\n      \"CallResponseMessage\": \"GSH Physical Gas Future Data Request completed.\",\n      \"ItemList\": [\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33983,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"PENDING\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-07T10:56:37Z\",\n          \"LastChanged\": \"2022-06-07T10:56:37Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33982,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"OVERRIDE\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-07T12:20:07Z\",\n          \"LastChanged\": \"2022-06-07T10:56:37Z\"\n        }\n      ]\n    },\n    \"errors\": []\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-65e1df50-0da7-4c96-a5ba-4c32cfe4d3cc"
+            },
+            {
+              "id": "47f42a44-d6f4-4047-aec3-9939b0e156b7",
+              "name": "The service cannot be found for the endpoint reference (EPR) <URI>",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Fault\": \"<SystemMessageExceptionDump>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-47f42a44-d6f4-4047-aec3-9939b0e156b7"
+            },
+            {
+              "id": "fdd18049-167b-453b-a3ee-8fe2c6d55132",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect/not provided OR user account is locked out.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Unauthorized:Invalid UserName or Password\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-fdd18049-167b-453b-a3ee-8fe2c6d55132"
+            },
+            {
+              "id": "47b404ce-acd1-4a96-a9e9-f99f01c61cfa",
+              "name": "This response is provided when there is an invalid Role i.e. user does not have permission to submit this request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-47b404ce-acd1-4a96-a9e9-f99f01c61cfa"
+            },
+            {
+              "id": "e8522b4c-1e92-4226-97ee-44daf5a412c4",
+              "name": "This response is provided when the resource missing from URL or incorrect.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Resources for the endpoint URI not found. Endpoint URI: <Resource>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-e8522b4c-1e92-4226-97ee-44daf5a412c4"
+            },
+            {
+              "id": "971e27b9-7705-438d-9bbb-271870929e19",
+              "name": "Invalid Method used (e.g. GET used instead of POST)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Input request HTTP method is <Invalid Method passed> but operation <Resource Name> accepts only: [<Valid Method>]\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-971e27b9-7705-438d-9bbb-271870929e19"
+            },
+            {
+              "id": "52435f5d-af41-4b31-846f-6d4510a43680",
+              "name": "This response is provided when \"Content-Length\" is missing from the Header",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Length Required",
+              "code": 411,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-52435f5d-af41-4b31-846f-6d4510a43680"
+            },
+            {
+              "id": "a6b0c03f-233c-472b-bc68-89d897fe0aaa",
+              "name": "This response is provided when any there are any Business validation failures, then entire submission is rejected.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-a6b0c03f-233c-472b-bc68-89d897fe0aaa"
+            },
+            {
+              "id": "77032841-d7ba-44b3-993f-eb059ddea5d3",
+              "name": "APIM is operational but downstream systems are not available.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Application Unavailable\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-77032841-d7ba-44b3-993f-eb059ddea5d3"
+            },
+            {
+              "id": "be368117-d1a4-4c35-97ab-2d078ecbd27b",
+              "name": "Exceeds throttling limits OR SSL Certificate authentication validation failed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/GasFuture",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFuture"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Service invocation for API was rejected based on policy violation OR Error message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-be368117-d1a4-4c35-97ab-2d078ecbd27b"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:16.000Z",
+          "updatedAt": "2026-10-21T20:16:16.000Z",
+          "uid": "35240-26b9f6ea-93a1-47c4-8d5a-25139915ebee"
+        }
+      ],
+      "id": "7914d534-713e-4226-b7f0-c5036414b684",
+      "createdAt": "2026-10-21T20:16:16.000Z",
+      "updatedAt": "2026-10-21T20:16:16.000Z",
+      "uid": "35240-7914d534-713e-4226-b7f0-c5036414b684"
+    },
+    {
+      "name": "bidProfile",
+      "item": [
+        {
+          "name": "Retrieve a specific bid profile",
+          "id": "59e6d4e9-e1c5-4bb7-a57e-01385328747d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bidProfile"
+              ],
+              "query": [
+                {
+                  "description": "Request date",
+                  "key": "GasDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                  "key": "SubmittedAt",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Allows auction participants to retrieve a specific bid profile for a given gas date"
+          },
+          "response": [
+            {
+              "id": "ecaf781d-600e-4d5e-97fe-3df2d4af88d8",
+              "name": "Success reponse with report data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"27d225a6-6c9a-4081-81dc-eb643fdd2a8f\",\n    \"data\": [\n      {\n        \"BidProfileList\": [\n          {\n            \"GasDate\": \"2018-05-01T12:00:00Z\",\n            \"SubmittedAt\": \"2018-05-02T12:00:00Z\",\n            \"Bids\": [\n              {\n                \"BidId\": \"2018-05-01T12:00:00Z\",\n                \"Products\": [\n                  {\n                    \"FacilityId\": 530001,\n                    \"FacilityName\": \"MAP\",\n                    \"FacilityDescription\": \"Moomba to Adelaide Pipeline System\",\n                    \"AuctionProductTypeId\": \"BACKHAUL\",\n                    \"ReceiptPointId\": 30001,\n                    \"ReceiptPointName\": \"RP 1\",\n                    \"ReceiptPointDWGMCompanyIdReference\": 123,\n                    \"ReceiptPointDWGMCompanyNameReference\": \"ABC Trading Pty Ltd\",\n                    \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n                    \"ReceiptPointDWGMDescriptionReference\": \"Connection between A and B\",\n                    \"DeliveryPointId\": 30002,\n                    \"DeliveryPointName\": \"DP 1\",\n                    \"DeliveryPointDWGMCompanyIdReference\": 123,\n                    \"DeliveryPointDWGMCompanyNameReference\": \"Clean Energy Pty Ltd\",\n                    \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n                    \"DeliveryPointDWGMDescriptionReference\": \"Connection between X and Y\",\n                    \"ServiceReference\": \"SR000001\"\n                  }\n                ],\n                \"Steps\": [\n                  {\n                    \"CumulativeStepQuantity\": 123,\n                    \"StepPrice\": \"2032-04-01\"\n                  }\n                ]\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-ecaf781d-600e-4d5e-97fe-3df2d4af88d8"
+            },
+            {
+              "id": "2abcfa29-ef58-49a8-aaac-4bee82000b92",
+              "name": "The service cannot be found for the endpoint reference (EPR) <URI>",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Fault\": \"<SystemMessageExceptionDump>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-2abcfa29-ef58-49a8-aaac-4bee82000b92"
+            },
+            {
+              "id": "af4fc810-a8eb-4d80-9bca-6717ec23b39a",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect/not provided OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Unauthorized:Invalid UserName or Password\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-af4fc810-a8eb-4d80-9bca-6717ec23b39a"
+            },
+            {
+              "id": "ebb9cecd-7d27-4ddf-99c2-ecb5f4e91023",
+              "name": "This response is provided when there is an invalid Role i.e. user does not have permission to submit this request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-ebb9cecd-7d27-4ddf-99c2-ecb5f4e91023"
+            },
+            {
+              "id": "e41d94a1-72d4-4b57-b468-990c88c925c6",
+              "name": "This response is provided when the resource missing from URL or incorrect.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Resources for the endpoint URI not found. Endpoint URI: <Resource>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-e41d94a1-72d4-4b57-b468-990c88c925c6"
+            },
+            {
+              "id": "f10093b1-f481-40ed-b5fb-69c959edcb4b",
+              "name": "Invalid Method used (e.g. GET used instead of POST)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Input request HTTP method is <Invalid Method passed> but operation <Resource Name> accepts only: [<Valid Method>]\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-f10093b1-f481-40ed-b5fb-69c959edcb4b"
+            },
+            {
+              "id": "a301efaf-854f-431f-9e8b-2ddd4a0b7e53",
+              "name": "This response is provided when \"Content-Length\" is missing from the Header",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Length Required",
+              "code": 411,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-a301efaf-854f-431f-9e8b-2ddd4a0b7e53"
+            },
+            {
+              "id": "0137eff8-e33f-4e30-9e88-4333a74ff796",
+              "name": "This response is provided when any there are any Business validation failures, then entire submission is rejected.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-0137eff8-e33f-4e30-9e88-4333a74ff796"
+            },
+            {
+              "id": "bc448535-ad26-46b2-9cd2-6ea838ba69a9",
+              "name": "e-Hub is operational but downstream systems are not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Application Unavailable\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-bc448535-ad26-46b2-9cd2-6ea838ba69a9"
+            },
+            {
+              "id": "30b3ed6e-0f94-4adf-9586-c17056778014",
+              "name": "Exceeds throttling limits OR SSL Certificate authentication validation failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfile?GasDate=<string>&SubmittedAt=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfile"
+                  ],
+                  "query": [
+                    {
+                      "description": "Request date",
+                      "key": "GasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If not supplied, then the latest successful bid submission for each gas date in a specified range is returned.",
+                      "key": "SubmittedAt",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Service invocation for API was rejected based on policy violation OR Error message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-30b3ed6e-0f94-4adf-9586-c17056778014"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:16.000Z",
+          "updatedAt": "2026-10-21T20:16:16.000Z",
+          "uid": "35240-59e6d4e9-e1c5-4bb7-a57e-01385328747d"
+        }
+      ],
+      "id": "bab43004-be47-4888-baf7-696287b1eebc",
+      "createdAt": "2026-10-21T20:16:16.000Z",
+      "updatedAt": "2026-10-21T20:16:16.000Z",
+      "uid": "35240-bab43004-be47-4888-baf7-696287b1eebc"
+    },
+    {
+      "name": "bidSubmissionHistory",
+      "item": [
+        {
+          "name": "Retrieve bid submissions",
+          "id": "c3c14c12-8568-47ff-b0e0-63e5debe0f05",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bidSubmissionHistory"
+              ],
+              "query": [
+                {
+                  "description": "(Required) One calendar month from request date",
+                  "key": "FromGasDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Request date",
+                  "key": "ToGasDate",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Allows auction participants to retrieve metadata for all successful bid submissions for a given gas date range."
+          },
+          "response": [
+            {
+              "id": "44a89607-6a22-4a4e-9f89-2ea713b14d88",
+              "name": "Success reponse with report data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"27d225a6-6c9a-4081-81dc-eb643fdd2a8f\",\n    \"data\": [\n      {\n        \"GasDays\": [\n          {\n            \"GasDate\": \"2018-05-09T02:00:00Z\",\n            \"Submissions\": [\n              {\n                \"SubmissionTime\": \"2018-02-23T02:34:45Z\",\n                \"SubmittingUserId\": \"jsmith\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-44a89607-6a22-4a4e-9f89-2ea713b14d88"
+            },
+            {
+              "id": "581a567a-95bc-42cd-86f5-fda2e28bd6e2",
+              "name": "The service cannot be found for the endpoint reference (EPR) <URI>",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Fault\": \"<SystemMessageExceptionDump>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-581a567a-95bc-42cd-86f5-fda2e28bd6e2"
+            },
+            {
+              "id": "fc17e34b-cb47-492b-97ec-9e08d7414144",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect/not provided OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Unauthorized:Invalid UserName or Password\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-fc17e34b-cb47-492b-97ec-9e08d7414144"
+            },
+            {
+              "id": "68683a00-a148-4f7d-a8b8-76cc45a21146",
+              "name": "This response is provided when there is an invalid Role i.e. user does not have permission to submit this request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-68683a00-a148-4f7d-a8b8-76cc45a21146"
+            },
+            {
+              "id": "dd29c5c0-20ec-45bf-8374-3f04e73f815e",
+              "name": "This response is provided when the resource missing from URL or incorrect.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Resources for the endpoint URI not found. Endpoint URI: <Resource>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-dd29c5c0-20ec-45bf-8374-3f04e73f815e"
+            },
+            {
+              "id": "af7b2031-597b-4249-a4f4-71971d3215e8",
+              "name": "Invalid Method used (e.g. GET used instead of POST)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Input request HTTP method is <Invalid Method passed> but operation <Resource Name> accepts only: [<Valid Method>]\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-af7b2031-597b-4249-a4f4-71971d3215e8"
+            },
+            {
+              "id": "d846a463-16c0-42ff-8dc6-16222aa72c6e",
+              "name": "This response is provided when \"Content-Length\" is missing from the Header",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Length Required",
+              "code": 411,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-d846a463-16c0-42ff-8dc6-16222aa72c6e"
+            },
+            {
+              "id": "f64df7d9-ed92-4560-8bf0-9cbedb55cfec",
+              "name": "This response is provided when any there are any Business validation failures, then entire submission is rejected.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-f64df7d9-ed92-4560-8bf0-9cbedb55cfec"
+            },
+            {
+              "id": "292d9047-f294-472c-b875-acbdd55cd2fe",
+              "name": "e-Hub is operational but downstream systems are not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Application Unavailable\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-292d9047-f294-472c-b875-acbdd55cd2fe"
+            },
+            {
+              "id": "565e7b58-2058-4fea-bcda-425e19c4a35e",
+              "name": "Exceeds throttling limits OR SSL Certificate authentication validation failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/bidSubmissionHistory?FromGasDate=<string>&ToGasDate=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidSubmissionHistory"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) One calendar month from request date",
+                      "key": "FromGasDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Request date",
+                      "key": "ToGasDate",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Service invocation for API was rejected based on policy violation OR Error message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-565e7b58-2058-4fea-bcda-425e19c4a35e"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:16.000Z",
+          "updatedAt": "2026-10-21T20:16:16.000Z",
+          "uid": "35240-c3c14c12-8568-47ff-b0e0-63e5debe0f05"
+        }
+      ],
+      "id": "a3c26f5d-e1b6-4dc2-becd-ed68f380f153",
+      "createdAt": "2026-10-21T20:16:16.000Z",
+      "updatedAt": "2026-10-21T20:16:16.000Z",
+      "uid": "35240-a3c26f5d-e1b6-4dc2-becd-ed68f380f153"
+    },
+    {
+      "name": "bidProfileSubmission",
+      "item": [
+        {
+          "name": "Submit bids for the Day Ahead Auction",
+          "id": "a4eda879-1a8e-457f-bde4-eeb43441bfd2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bidProfileSubmission",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "bidProfileSubmission"
+              ]
+            },
+            "description": "Allows auction participants to submit bids for the Day Ahead Auction.\nMultiple bids may be submitted in a single bid profile. However, all bids must pass validation otherwise the entire transaction will be rejected.\nThe latest bid profile submission will be used as the overall current bidding position for the specified date range.\n\nA previously submitted bid can be cancelled by submitting an empty bid profile for the same gas day."
+          },
+          "response": [
+            {
+              "id": "b17f4754-3356-4666-9a35-28e5521ce33a",
+              "name": "Successful reponse with Facilites report",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Successful reponse with Facilites report - MOCK\": \"\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-b17f4754-3356-4666-9a35-28e5521ce33a"
+            },
+            {
+              "id": "0679c46f-011e-4c76-9f9a-74a30ce3f66e",
+              "name": "The service cannot be found for the endpoint reference (EPR) <URI>",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Fault\": \"<SystemMessageExceptionDump>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-0679c46f-011e-4c76-9f9a-74a30ce3f66e"
+            },
+            {
+              "id": "a5eed6c1-b1e7-4a53-b34e-46a034649316",
+              "name": "This response is provided when \"Authorisation\" is missing from the header OR user/password is incorrect/not provided OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Unauthorized:Invalid UserName or Password\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-a5eed6c1-b1e7-4a53-b34e-46a034649316"
+            },
+            {
+              "id": "b6269465-8068-4ae9-be23-818e3bdbe9ee",
+              "name": "This response is provided when there is an invalid Role i.e. user does not have permission to submit this request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-b6269465-8068-4ae9-be23-818e3bdbe9ee"
+            },
+            {
+              "id": "195bee55-afac-4305-bb7e-c743b1e6898e",
+              "name": "This response is provided when the resource missing from URL or incorrect.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Resources for the endpoint URI not found. Endpoint URI: <Resource>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-195bee55-afac-4305-bb7e-c743b1e6898e"
+            },
+            {
+              "id": "805e17e5-e75a-47ad-8cfb-38c2b80d5e38",
+              "name": "Invalid Method used (e.g. GET used instead of POST)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Input request HTTP method is <Invalid Method passed> but operation <Resource Name> accepts only: [<Valid Method>]\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-805e17e5-e75a-47ad-8cfb-38c2b80d5e38"
+            },
+            {
+              "id": "c1490b26-2499-48dc-b91e-3ad4330c6a4b",
+              "name": "This response is provided when \"Content-Length\" is missing from the Header",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Length Required",
+              "code": 411,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-c1490b26-2499-48dc-b91e-3ad4330c6a4b"
+            },
+            {
+              "id": "637154a5-2562-4a24-800f-2946b5c823dc",
+              "name": "This response is provided when any there are any Business validation failures, then entire submission is rejected.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-637154a5-2562-4a24-800f-2946b5c823dc"
+            },
+            {
+              "id": "a2f270ce-33d1-4958-9f8f-2adf180b7769",
+              "name": "e-Hub is operational but downstream systems are not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Application Unavailable\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-a2f270ce-33d1-4958-9f8f-2adf180b7769"
+            },
+            {
+              "id": "55ca1173-d570-4303-ae7f-36675bd5287c",
+              "name": "Exceeds throttling limits OR SSL Certificate authentication validation failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": {\n      \"FromGasDate\": \"2018-05-01T12:00:00Z\",\n      \"ToGasDate\": \"2018-05-02T12:00:00Z\",\n      \"Bids\": [\n        {\n          \"BidId\": \"2018-05-01T12:00:00Z\",\n          \"Products\": [\n            {\n              \"FacilityId\": 530001,\n              \"AuctionProductTypeId\": \"BACKHAUL\",\n              \"ReceiptPointId\": 30001,\n              \"ReceiptPointDWGMCompanyIdReference\": 123,\n              \"ReceiptPointDWGMMIRNReference\": \"200001PC\",\n              \"DeliveryPointId\": 30002,\n              \"DeliveryPointDWGMCompanyIdReference\": 123,\n              \"DeliveryPointDWGMMIRNReference\": \"200002PC\",\n              \"ServiceReference\": \"SR000001\"\n            }\n          ],\n          \"Steps\": [\n            {\n              \"CumulativeStepQuantity\": 123,\n              \"StepPrice\": \"2032-04-01\"\n            }\n          ]\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/bidProfileSubmission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "bidProfileSubmission"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Service invocation for API was rejected based on policy violation OR Error message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-55ca1173-d570-4303-ae7f-36675bd5287c"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:16.000Z",
+          "updatedAt": "2026-10-21T20:16:16.000Z",
+          "uid": "35240-a4eda879-1a8e-457f-bde4-eeb43441bfd2"
+        }
+      ],
+      "id": "56c0a88d-db7e-4ed3-b4b4-80e0c96b716c",
+      "createdAt": "2026-10-21T20:16:16.000Z",
+      "updatedAt": "2026-10-21T20:16:16.000Z",
+      "uid": "35240-56c0a88d-db7e-4ed3-b4b4-80e0c96b716c"
+    },
+    {
+      "name": "GasFutureUpload",
+      "item": [
+        {
+          "name": "Submit future trade data",
+          "id": "6e2d9762-3792-424e-8f99-d66514a43db1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "The market type that the request applies.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/GasFutureUpload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "GasFutureUpload"
+              ]
+            },
+            "description": "Allows auction participants to submit the GSH Physical Gas Future Data"
+          },
+          "response": [
+            {
+              "id": "0fbcff53-3e42-4623-b401-a8098363042a",
+              "name": "Success response with future data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"1ff59f8a-4057-4644-9fec-7aea321c96ee\",\n    \"data\": {\n      \"CallSuccessful\": true,\n      \"CallResponseMessage\": \"GSH Physical Gas Future Data Request completed.\",\n      \"ItemList\": [\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33984,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"PENDING\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-08T12:00:29Z\",\n          \"LastChanged\": \"2022-06-08T12:00:29Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33983,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"OVERRIDE\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-07T10:56:37Z\",\n          \"LastChanged\": \"2022-06-08T12:00:29Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33982,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"OVERRIDE\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-07T12:20:07Z\",\n          \"LastChanged\": \"2022-06-07T10:56:37Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33981,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"SELL\",\n          \"Price\": 126,\n          \"Volume\": 126,\n          \"TradeValue\": 15876,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter Gas future ID for the final transfer\",\n          \"SubmittedTime\": \"2022-06-07T12:19:56Z\",\n          \"LastChanged\": \"2022-06-07T12:19:56Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33980,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"SELL\",\n          \"Price\": 125,\n          \"Volume\": 125,\n          \"TradeValue\": 15625,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter Gas future ID for the final transfer\",\n          \"SubmittedTime\": \"2022-06-07T12:18:37Z\",\n          \"LastChanged\": \"2022-06-07T12:18:37Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33979,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 123,\n          \"Volume\": 123,\n          \"TradeValue\": 15129,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter Gas future ID for the final transfer\",\n          \"SubmittedTime\": \"2022-06-07T12:15:27Z\",\n          \"LastChanged\": \"2022-06-07T12:15:27Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33978,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 33,\n          \"Volume\": 3333,\n          \"TradeValue\": 109989,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter Gas future ID for the final transfer\",\n          \"SubmittedTime\": \"2022-06-07T12:11:41Z\",\n          \"LastChanged\": \"2022-06-07T12:11:41Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33977,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-06-01T12:00:00Z\",\n          \"EndDate\": \"2022-06-30T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter a valid start date in the following format : YYYY/MM/DD. e.g: 2022/07/01\",\n          \"SubmittedTime\": \"2022-06-07T11:55:54Z\",\n          \"LastChanged\": \"2022-06-07T11:55:54Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33976,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-06-01T12:00:00Z\",\n          \"EndDate\": \"2022-06-30T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter a valid start date in the following format : YYYY/MM/DD. e.g: 2022/07/01\",\n          \"SubmittedTime\": \"2022-06-07T11:55:25Z\",\n          \"LastChanged\": \"2022-06-07T11:55:25Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33975,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-06-01T12:00:00Z\",\n          \"EndDate\": \"2022-06-30T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter a valid start date in the following format : YYYY/MM/DD. e.g: 2022/07/01\",\n          \"SubmittedTime\": \"2022-06-07T11:54:58Z\",\n          \"LastChanged\": \"2022-06-07T11:54:58Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33974,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 222,\n          \"Volume\": 222,\n          \"TradeValue\": 49284,\n          \"Status\": \"FAIL\",\n          \"ValidationMsg\": \"Enter Gas future ID for the final transfer\",\n          \"SubmittedTime\": \"2022-06-07T11:49:29Z\",\n          \"LastChanged\": \"2022-06-07T11:49:29Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33973,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 3,\n          \"Volume\": 4,\n          \"TradeValue\": 12,\n          \"Status\": \"OVERRIDE\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-07T11:30:04Z\",\n          \"LastChanged\": \"2022-06-07T12:20:07Z\"\n        },\n        {\n          \"MarketId\": \"GSH\",\n          \"RecordId\": 33963,\n          \"ParticipantId\": \"2012\",\n          \"GasFutureId\": \"ASX-AEMO-0012\",\n          \"ProductGroupCode\": \"GAS-WAL\",\n          \"ProductTypeCode\": \"Gas - NG Months\",\n          \"DeliveryPoint\": \"WAL HP Trade Point\",\n          \"StartDate\": \"2022-07-01T12:00:00Z\",\n          \"EndDate\": \"2022-07-31T12:00:00Z\",\n          \"TradeType\": \"BUY\",\n          \"Price\": 2,\n          \"Volume\": 2,\n          \"TradeValue\": 4,\n          \"Status\": \"PENDING\",\n          \"ValidationMsg\": \"\",\n          \"SubmittedTime\": \"2022-06-02T10:41:56Z\",\n          \"LastChanged\": \"2022-06-02T10:41:56Z\"\n        }\n      ]\n    },\n    \"errors\": []\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-0fbcff53-3e42-4623-b401-a8098363042a"
+            },
+            {
+              "id": "c6672441-30f7-4900-99ef-ed3fe8591a5f",
+              "name": "400",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Fault\": \"<SystemMessageExceptionDump>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-c6672441-30f7-4900-99ef-ed3fe8591a5f"
+            },
+            {
+              "id": "2bcaf094-1b30-4792-b8f5-b321f25b9ffb",
+              "name": "This response is provided when \"Authorization\" is missing from the header OR user/password is incorrect/not provided OR user account is locked out.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Unauthorized:Invalid UserName or Password\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-2bcaf094-1b30-4792-b8f5-b321f25b9ffb"
+            },
+            {
+              "id": "ccb6d002-5b48-4b28-bc6a-390d7724cfcb",
+              "name": "This response is provided when there is an invalid Role i.e. user does not have permission to submit this request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-ccb6d002-5b48-4b28-bc6a-390d7724cfcb"
+            },
+            {
+              "id": "0484fe12-eea1-4f15-a74e-3d09642db7c3",
+              "name": "This response is provided when the resource missing from URL or incorrect.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Resources for the endpoint URI not found. Endpoint URI: <Resource>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-0484fe12-eea1-4f15-a74e-3d09642db7c3"
+            },
+            {
+              "id": "3b2d8e41-61d5-4183-b70a-2bb1cef6a012",
+              "name": "Invalid Method used (e.g. GET used instead of POST)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Input request HTTP method is <Invalid Method passed> but operation <Resource Name> accepts only: [<Valid Method>]\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-3b2d8e41-61d5-4183-b70a-2bb1cef6a012"
+            },
+            {
+              "id": "fe7b0c82-8da3-4e2c-a20c-e703d8fd9dc3",
+              "name": "This response is provided when \"Content-Length\" is missing from the Header",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Length Required",
+              "code": 411,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-fe7b0c82-8da3-4e2c-a20c-e703d8fd9dc3"
+            },
+            {
+              "id": "a603fb6e-4843-4715-a764-3d7eead399c5",
+              "name": "This response is provided when any there are any Business validation failures, then entire submission is rejected.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-a603fb6e-4843-4715-a764-3d7eead399c5"
+            },
+            {
+              "id": "f58f7604-18dd-47d9-b124-b0a5ee447a56",
+              "name": "APIM is operational but downstream systems are not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Application Unavailable\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-f58f7604-18dd-47d9-b124-b0a5ee447a56"
+            },
+            {
+              "id": "4aa64678-ddcf-465c-a717-a0487fa973fa",
+              "name": "Exceeds throttling limits OR SSL Certificate authentication validation failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The market type that the request applies.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"ItemList\": [\n      {\n        \"GasFutureId\": \"ASX-AEMO-DEMO-344\",\n        \"StartDate\": \"2022-07-01\",\n        \"EndDate\": \"2022-07-31\",\n        \"TradeType\": \"BUY\",\n        \"Price\": \"3\",\n        \"Volume\": \"4\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/GasFutureUpload",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "GasFutureUpload"
+                  ]
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"Exception\": \"Service invocation for API was rejected based on policy violation OR Error message: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate\"\n  }\n}",
+              "createdAt": "2026-10-21T20:16:16.000Z",
+              "updatedAt": "2026-10-21T20:16:16.000Z",
+              "uid": "35240-4aa64678-ddcf-465c-a717-a0487fa973fa"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:16.000Z",
+          "updatedAt": "2026-10-21T20:16:16.000Z",
+          "uid": "35240-6e2d9762-3792-424e-8f99-d66514a43db1"
+        }
+      ],
+      "id": "e3ce9fd1-5b88-4bf9-93df-3d20d5880f28",
+      "createdAt": "2026-10-21T20:16:16.000Z",
+      "updatedAt": "2026-10-21T20:16:16.000Z",
+      "uid": "35240-e3ce9fd1-5b88-4bf9-93df-3d20d5880f28"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/ws/gsh/capacityAuction"
+    }
+  ]
+}

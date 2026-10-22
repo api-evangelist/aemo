@@ -1,0 +1,1228 @@
+{
+  "info": {
+    "_postman_id": "265f7ee6-6f74-4a3d-948a-078584d968e9",
+    "name": "Blind Update API",
+    "description": "## Introduction\nThe BlindUpdateTool API supports Upload of blind update Data by participants facing API's to backend MSATS systems , Download processed Blind Update file, List of all the Blind Update files uploaded by the Participants.\nParticipants will access the BlindUpdateTool tab from the Browser which invokes the respective process in the API Management. Uploading the Blind Update File happens which will receive a response from backend Native API after basic validation.Asynchronously, the uploaded file will be processed in the backend and listed with a status in the participants screen.Processed blindupdate files can be downloaded from the screen.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:15:58.000Z",
+    "updatedAt": "2026-10-21T20:15:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-265f7ee6-6f74-4a3d-948a-078584d968e9"
+  },
+  "item": [
+    {
+      "name": "downloadFile",
+      "item": [
+        {
+          "name": "Download File",
+          "id": "388ff205-975a-4354-8856-23167e5b7136",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "downloadFile"
+              ],
+              "query": [
+                {
+                  "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                  "key": "payloadResponseId",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Download the selected procossed BlindUpdate CSV File"
+          },
+          "response": [
+            {
+              "id": "a7a732f9-3acd-4bf0-a6b3-7f075b9fb979",
+              "name": "Download file response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-a7a732f9-3acd-4bf0-a6b3-7f075b9fb979"
+            },
+            {
+              "id": "551d182a-f8aa-4015-9352-7cb9c17d31fa",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-551d182a-f8aa-4015-9352-7cb9c17d31fa"
+            },
+            {
+              "id": "830deb39-eb73-4210-bd65-f7ef4d668794",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-830deb39-eb73-4210-bd65-f7ef4d668794"
+            },
+            {
+              "id": "b23ee00f-05c3-4525-9bf6-bf313cd2553b",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-b23ee00f-05c3-4525-9bf6-bf313cd2553b"
+            },
+            {
+              "id": "2a7a6fc5-238f-4595-856c-9c2afec66ff7",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-2a7a6fc5-238f-4595-856c-9c2afec66ff7"
+            },
+            {
+              "id": "15a0729b-b172-444d-9b0d-cce4eaa5561d",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-15a0729b-b172-444d-9b0d-cce4eaa5561d"
+            },
+            {
+              "id": "976612c9-f2e4-4bfe-8ac2-3cc7cf2a8128",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/downloadFile?payloadResponseId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "downloadFile"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given payloadResponseId.",
+                      "key": "payloadResponseId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-976612c9-f2e4-4bfe-8ac2-3cc7cf2a8128"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:58.000Z",
+          "updatedAt": "2026-10-21T20:15:58.000Z",
+          "uid": "35240-388ff205-975a-4354-8856-23167e5b7136"
+        }
+      ],
+      "id": "894611bf-8efd-4ed0-983e-ee22faa07243",
+      "createdAt": "2026-10-21T20:15:58.000Z",
+      "updatedAt": "2026-10-21T20:15:58.000Z",
+      "uid": "35240-894611bf-8efd-4ed0-983e-ee22faa07243"
+    },
+    {
+      "name": "submissionList",
+      "item": [
+        {
+          "name": "Submission List",
+          "id": "b3f5ea85-1658-4d36-8666-9a2133d39367",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submissionList"
+              ],
+              "query": [
+                {
+                  "description": "when present, it only lists blind update responses for the given status.",
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                  "key": "submissionFromDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                  "key": "submissionToDate",
+                  "value": "<string>"
+                },
+                {
+                  "description": "when present, it only lists blind update responses for the given MessageId.",
+                  "key": "participantMessageId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "when present, it only lists blind update responses for the given butRunId.",
+                  "key": "butRunId",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve the BlindUpdate files submitted list for the Participant"
+          },
+          "response": [
+            {
+              "id": "3e6b8c50-72be-4b39-9de9-df7b335a8341",
+              "name": "Get Submission Lists Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-3e6b8c50-72be-4b39-9de9-df7b335a8341"
+            },
+            {
+              "id": "9e0bba79-1dd4-4070-8ced-e184c3f160ff",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-9e0bba79-1dd4-4070-8ced-e184c3f160ff"
+            },
+            {
+              "id": "0f7bff16-f831-4c2c-a068-fe6f27ff13a4",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-0f7bff16-f831-4c2c-a068-fe6f27ff13a4"
+            },
+            {
+              "id": "aa4d3941-2be3-457c-936c-f0c5e4badd6c",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-aa4d3941-2be3-457c-936c-f0c5e4badd6c"
+            },
+            {
+              "id": "c881dd8f-d55a-4435-af63-ba445186b970",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-c881dd8f-d55a-4435-af63-ba445186b970"
+            },
+            {
+              "id": "6abd5ea0-e9b0-4e9b-b783-889e4cb434eb",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-6abd5ea0-e9b0-4e9b-b783-889e4cb434eb"
+            },
+            {
+              "id": "a98e87da-9ff2-4a4c-abde-f8302705afb7",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submissionList?status=<string>&submissionFromDate=<string>&submissionToDate=<string>&participantMessageId=<string>&butRunId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submissionList"
+                  ],
+                  "query": [
+                    {
+                      "description": "when present, it only lists blind update responses for the given status.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses from the given date.  submissionFromDate.",
+                      "key": "submissionFromDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses to the given date. submissionToDate.",
+                      "key": "submissionToDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given MessageId.",
+                      "key": "participantMessageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "when present, it only lists blind update responses for the given butRunId.",
+                      "key": "butRunId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-a98e87da-9ff2-4a4c-abde-f8302705afb7"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:58.000Z",
+          "updatedAt": "2026-10-21T20:15:58.000Z",
+          "uid": "35240-b3f5ea85-1658-4d36-8666-9a2133d39367"
+        }
+      ],
+      "id": "38abfa82-b170-4b61-a025-96b858d6d6e7",
+      "createdAt": "2026-10-21T20:15:58.000Z",
+      "updatedAt": "2026-10-21T20:15:58.000Z",
+      "uid": "35240-38abfa82-b170-4b61-a025-96b858d6d6e7"
+    },
+    {
+      "name": "submission",
+      "item": [
+        {
+          "name": "Upload CSV File",
+          "id": "0c594a73-8ce3-4f5f-b4eb-a3970d4392f8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ID of the Initiating Participant",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The ID of the Market",
+                "key": "X-market",
+                "value": "<string>"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/submission",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "submission"
+              ]
+            },
+            "description": "Upload blind update CSV file to AEMO\u2019s market systems"
+          },
+          "response": [
+            {
+              "id": "6d64d0ea-66c4-4cc2-9a1f-bed5190ffbcf",
+              "name": "File upload Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-6d64d0ea-66c4-4cc2-9a1f-bed5190ffbcf"
+            },
+            {
+              "id": "9b045b25-8f6f-45e4-9e76-f6ba255b7a42",
+              "name": "This response is provided when Mandatory HTTP header {missing Header Name} is missing. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-9b045b25-8f6f-45e4-9e76-f6ba255b7a42"
+            },
+            {
+              "id": "bf8e2e09-7820-495a-b757-16790a60976a",
+              "name": "This response is provided when Authorisation is missing from the header OR user/password is incorrect OR user account is locked out. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-bf8e2e09-7820-495a-b757-16790a60976a"
+            },
+            {
+              "id": "16d36664-221f-4076-98f3-50dcae4cca64",
+              "name": "This response is provided when the requested resource for the endpoint URI is not found. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-16d36664-221f-4076-98f3-50dcae4cca64"
+            },
+            {
+              "id": "2d17b472-3bc8-4efe-8b3f-820404cc1e18",
+              "name": "This response is provided when the requested method/verb on a resource is invalid. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-2d17b472-3bc8-4efe-8b3f-820404cc1e18"
+            },
+            {
+              "id": "86baf06e-e583-46fd-a50d-32c2ecc1570a",
+              "name": "This response is provided when number of inbound requests exceeded the throttling limits. No response paylaod.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-86baf06e-e583-46fd-a50d-32c2ecc1570a"
+            },
+            {
+              "id": "c98e00de-2e2f-4761-9d58-6d63eaac656c",
+              "name": "This response is provided when any unforeseen error is encountered,such as; Certificate/key do not match or incorrect or downstream service is not available.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ID of the Initiating Participant",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The ID of the Market",
+                    "key": "X-market",
+                    "value": "<string>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/submission",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "submission"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:58.000Z",
+              "updatedAt": "2026-10-21T20:15:58.000Z",
+              "uid": "35240-c98e00de-2e2f-4761-9d58-6d63eaac656c"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:58.000Z",
+          "updatedAt": "2026-10-21T20:15:58.000Z",
+          "uid": "35240-0c594a73-8ce3-4f5f-b4eb-a3970d4392f8"
+        }
+      ],
+      "id": "2a7f273f-05ea-4630-af20-4537136b4502",
+      "createdAt": "2026-10-21T20:15:58.000Z",
+      "updatedAt": "2026-10-21T20:15:58.000Z",
+      "uid": "35240-2a7f273f-05ea-4630-af20-4537136b4502"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/NEMRetail/BlindUpdate"
+    }
+  ]
+}

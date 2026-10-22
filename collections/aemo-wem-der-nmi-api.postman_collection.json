@@ -1,0 +1,1625 @@
+{
+  "info": {
+    "_postman_id": "1eddbe6a-f7bf-4f8f-9358-a1c26447e147",
+    "name": "WEM DER NMI API",
+    "description": "## Introduction\nUsing the WEM DER Registration APIs, consumers can Create, update and retrieve NMI details",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:20:39.000Z",
+    "updatedAt": "2026-10-21T20:20:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1eddbe6a-f7bf-4f8f-9358-a1c26447e147"
+  },
+  "item": [
+    {
+      "name": "nmi-details",
+      "item": [
+        {
+          "name": "{nmi}",
+          "item": [
+            {
+              "name": "Returns the current NMI details",
+              "id": "dad1833f-4c77-436a-bd76-da26a8d22409",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details/:nmi",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details",
+                    ":nmi"
+                  ],
+                  "variable": [
+                    {
+                      "id": "006b946e-f65c-4713-a2fd-cf713c748973",
+                      "key": "nmi",
+                      "value": "<string>",
+                      "description": "(Required) NMI to get"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c82b444c-9512-48fe-8b37-41094bafda88",
+                  "name": "Return NMI details - Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {\n      \"nmi\": \"string\",\n      \"substation\": \"string\",\n      \"postCode\": \"string\",\n      \"tni\": \"string\",\n      \"status\": \"string\",\n      \"recordCreationDate\": \"string\",\n      \"recordUpdateDate\": \"string\"\n    }\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-c82b444c-9512-48fe-8b37-41094bafda88"
+                },
+                {
+                  "id": "18692f64-4c43-4084-b0e9-cdc68ccd768a",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"400\",\n        \"title\": \"<Error title>\",\n        \"detail\": \"<Details of the error>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-18692f64-4c43-4084-b0e9-cdc68ccd768a"
+                },
+                {
+                  "id": "d5ab9843-3cd0-4a3c-8113-508c658a3214",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"title\": \"Unauthorised\",\n        \"detail\": \"Authorization failed\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-d5ab9843-3cd0-4a3c-8113-508c658a3214"
+                },
+                {
+                  "id": "b1a01619-d4e2-46fa-9758-fcdd0739b18a",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"403\",\n        \"title\": \"Forbidden\",\n        \"detail\": \"Insufficient privileges\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-b1a01619-d4e2-46fa-9758-fcdd0739b18a"
+                },
+                {
+                  "id": "cbd64b44-8e9d-4b19-9416-2934cb255c18",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"404\",\n        \"title\": \"Not found\",\n        \"detail\": \"ID not found\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-cbd64b44-8e9d-4b19-9416-2934cb255c18"
+                },
+                {
+                  "id": "9621f263-ad53-4255-946c-c50a3dadc6e5",
+                  "name": "Method Not Allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Method Not Allowed",
+                  "code": 405,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"405\",\n        \"title\": \"Method Not Allowed\",\n        \"detail\": \"Invalid method <request method> for path <request path>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-9621f263-ad53-4255-946c-c50a3dadc6e5"
+                },
+                {
+                  "id": "01581d86-fdae-4f6e-bbe1-e884c0b9ca4a",
+                  "name": "Too many requests",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-01581d86-fdae-4f6e-bbe1-e884c0b9ca4a"
+                },
+                {
+                  "id": "989cf1f9-7c2a-44cc-9531-9433bf9844a1",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"500\",\n        \"title\": \"Internal Server error\",\n        \"detail\": \"Internal Server error\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-989cf1f9-7c2a-44cc-9531-9433bf9844a1"
+                }
+              ],
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-dad1833f-4c77-436a-bd76-da26a8d22409"
+            },
+            {
+              "name": "Updates a NMI record",
+              "id": "3bc6829d-75d7-4230-89d8-b06544c2c066",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details/:nmi",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details",
+                    ":nmi"
+                  ],
+                  "variable": [
+                    {
+                      "id": "196443df-56bb-4ad0-8906-02d95dc028b0",
+                      "key": "nmi",
+                      "value": "<string>",
+                      "description": "(Required) NMI to update"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b2c5e6aa-ed83-4fda-aa5b-1a9100e9c48b",
+                  "name": "Update NMI record - Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {}\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-b2c5e6aa-ed83-4fda-aa5b-1a9100e9c48b"
+                },
+                {
+                  "id": "687f31d8-b6fe-4eb8-8816-eea178989f59",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"400\",\n        \"title\": \"<Error title>\",\n        \"detail\": \"<Details of the error>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-687f31d8-b6fe-4eb8-8816-eea178989f59"
+                },
+                {
+                  "id": "9ea1f643-15bc-451c-ae1a-e0911a497ab7",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"title\": \"Unauthorised\",\n        \"detail\": \"Authorization failed\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-9ea1f643-15bc-451c-ae1a-e0911a497ab7"
+                },
+                {
+                  "id": "c1d11c4d-1a01-421b-b411-ce1001f5a18b",
+                  "name": "Forbidden",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"403\",\n        \"title\": \"Forbidden\",\n        \"detail\": \"Insufficient privileges\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-c1d11c4d-1a01-421b-b411-ce1001f5a18b"
+                },
+                {
+                  "id": "b3c3d2cf-dcfd-4e84-aa46-39474025e141",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"404\",\n        \"title\": \"Not found\",\n        \"detail\": \"ID not found\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-b3c3d2cf-dcfd-4e84-aa46-39474025e141"
+                },
+                {
+                  "id": "5e880348-7a96-47e2-b47e-2a6caeb19355",
+                  "name": "Method Not Allowed",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Method Not Allowed",
+                  "code": 405,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"405\",\n        \"title\": \"Method Not Allowed\",\n        \"detail\": \"Invalid method <request method> for path <request path>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-5e880348-7a96-47e2-b47e-2a6caeb19355"
+                },
+                {
+                  "id": "b0de3ba6-65fb-4213-8dd4-06399e724cdb",
+                  "name": "Too many requests",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-b0de3ba6-65fb-4213-8dd4-06399e724cdb"
+                },
+                {
+                  "id": "b288d330-a732-4665-82a2-c8bed74b4085",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The participant ID who the request is from.",
+                        "key": "X-initiatingParticipantID",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "(Required) The market the request is for.",
+                        "key": "X-market",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/nmi-details/:nmi",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "nmi-details",
+                        ":nmi"
+                      ],
+                      "variable": [
+                        {
+                          "key": "nmi"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"500\",\n        \"title\": \"Internal Server error\",\n        \"detail\": \"Internal Server error\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:20:40.000Z",
+                  "updatedAt": "2026-10-21T20:20:40.000Z",
+                  "uid": "35240-b288d330-a732-4665-82a2-c8bed74b4085"
+                }
+              ],
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-3bc6829d-75d7-4230-89d8-b06544c2c066"
+            }
+          ],
+          "id": "529ee02d-0b4b-454d-aee3-f647a657888d",
+          "createdAt": "2026-10-21T20:20:40.000Z",
+          "updatedAt": "2026-10-21T20:20:40.000Z",
+          "uid": "35240-529ee02d-0b4b-454d-aee3-f647a657888d"
+        },
+        {
+          "name": "Creates a new NMI record",
+          "id": "feeac4e2-18af-48a0-914f-a663bcff5e2d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The participant ID who the request is from.",
+                "key": "X-initiatingParticipantID",
+                "value": "<string>"
+              },
+              {
+                "description": "(Required) The market the request is for.",
+                "key": "X-market",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/nmi-details",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "nmi-details"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "289ef2dd-935d-43b2-b47b-b8d0167c595b",
+              "name": "Create NMI record - Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"data\": {}\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-289ef2dd-935d-43b2-b47b-b8d0167c595b"
+            },
+            {
+              "id": "590a98cd-32f2-4b04-9c19-582b9eb49153",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"400\",\n        \"title\": \"<Error title>\",\n        \"detail\": \"<Details of the error>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-590a98cd-32f2-4b04-9c19-582b9eb49153"
+            },
+            {
+              "id": "16c63770-b1b5-4801-9aab-f76facd0552f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"401\",\n        \"title\": \"Unauthorised\",\n        \"detail\": \"Authorization failed\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-16c63770-b1b5-4801-9aab-f76facd0552f"
+            },
+            {
+              "id": "f8f8a2b2-4393-4f9d-a6b6-91bdca8efe62",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"403\",\n        \"title\": \"Forbidden\",\n        \"detail\": \"Insufficient privileges\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-f8f8a2b2-4393-4f9d-a6b6-91bdca8efe62"
+            },
+            {
+              "id": "18435347-2b46-4f29-b79c-1164dfd89cd4",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"404\",\n        \"title\": \"Not found\",\n        \"detail\": \"ID not found\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-18435347-2b46-4f29-b79c-1164dfd89cd4"
+            },
+            {
+              "id": "cc8d7797-a289-40b6-91c3-f4a0316900a3",
+              "name": "Method Not Allowed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"405\",\n        \"title\": \"Method Not Allowed\",\n        \"detail\": \"Invalid method <request method> for path <request path>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-cc8d7797-a289-40b6-91c3-f4a0316900a3"
+            },
+            {
+              "id": "f3f8eb33-2034-426d-875c-433cacfb17d2",
+              "name": "Too many requests",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-f3f8eb33-2034-426d-875c-433cacfb17d2"
+            },
+            {
+              "id": "b9c826b6-034f-428f-a126-2cbe37e080b4",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The participant ID who the request is from.",
+                    "key": "X-initiatingParticipantID",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "(Required) The market the request is for.",
+                    "key": "X-market",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"example\": {\n    \"nmi\": \"string\",\n    \"substation\": \"string\",\n    \"postCode\": \"string\",\n    \"tni\": \"string\",\n    \"status\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/nmi-details",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "nmi-details"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"transactionId\": \"string\",\n    \"errors\": [\n      {\n        \"code\": \"500\",\n        \"title\": \"Internal Server error\",\n        \"detail\": \"Internal Server error\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:20:40.000Z",
+              "updatedAt": "2026-10-21T20:20:40.000Z",
+              "uid": "35240-b9c826b6-034f-428f-a126-2cbe37e080b4"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:40.000Z",
+          "updatedAt": "2026-10-21T20:20:40.000Z",
+          "uid": "35240-feeac4e2-18af-48a0-914f-a663bcff5e2d"
+        }
+      ],
+      "id": "63efcac7-bb74-47ef-86e5-eb918615beb7",
+      "createdAt": "2026-10-21T20:20:40.000Z",
+      "updatedAt": "2026-10-21T20:20:40.000Z",
+      "uid": "35240-63efcac7-bb74-47ef-86e5-eb918615beb7"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/wem/v1/der-register"
+    }
+  ]
+}

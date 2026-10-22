@@ -1,0 +1,580 @@
+{
+  "info": {
+    "_postman_id": "8531a72b-6888-41e0-a00b-ef30bbb19c92",
+    "name": "WEM Attributes Report API",
+    "description": "WEM Attributes Report",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:20:28.000Z",
+    "updatedAt": "2026-10-21T20:20:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8531a72b-6888-41e0-a00b-ef30bbb19c92"
+  },
+  "item": [
+    {
+      "name": "{tradingDate}",
+      "item": [
+        {
+          "name": "Get a list of attributes by date",
+          "id": "36684ac0-63f0-4d66-99f0-3a20ddc9b804",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/:tradingDate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ":tradingDate"
+              ],
+              "variable": [
+                {
+                  "id": "a7f8b0c5-907e-4d57-ba7c-2ad09e5b1d05",
+                  "key": "tradingDate",
+                  "value": "<string>",
+                  "description": "(Required) Format - date-time (as date-time in RFC3339)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4fa1e5b0-848e-4313-bcbe-45b04d6fa930",
+              "name": "List of attributes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:tradingDate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":tradingDate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tradingDate"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"value\": 0,\n      \"unit\": \"string\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-4fa1e5b0-848e-4313-bcbe-45b04d6fa930"
+            },
+            {
+              "id": "8b312fc2-a50c-4f5d-9961-8e16ed377e0c",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:tradingDate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":tradingDate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tradingDate"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource Not Found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not Found\",\n            \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-8b312fc2-a50c-4f5d-9961-8e16ed377e0c"
+            },
+            {
+              "id": "6b6fa359-0401-42a2-be2a-2513320590d9",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:tradingDate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":tradingDate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tradingDate"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method Not Allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method Not Allowed\",\n            \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-6b6fa359-0401-42a2-be2a-2513320590d9"
+            },
+            {
+              "id": "556ee6b3-b17c-4cc6-a246-53f3d1c79850",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:tradingDate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":tradingDate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tradingDate"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload Too Large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload Too Large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-556ee6b3-b17c-4cc6-a246-53f3d1c79850"
+            },
+            {
+              "id": "3a5bcd71-0982-46ab-87bc-a5be96536763",
+              "name": "Too many request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:tradingDate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":tradingDate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tradingDate"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too Many Requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too Many Requests\",\n            \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-3a5bcd71-0982-46ab-87bc-a5be96536763"
+            },
+            {
+              "id": "64c34605-f583-4be5-a3ae-e03d135b8b8b",
+              "name": "Application unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:tradingDate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":tradingDate"
+                  ],
+                  "variable": [
+                    {
+                      "key": "tradingDate"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application Unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-64c34605-f583-4be5-a3ae-e03d135b8b8b"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:29.000Z",
+          "updatedAt": "2026-10-21T20:20:29.000Z",
+          "uid": "35240-36684ac0-63f0-4d66-99f0-3a20ddc9b804"
+        }
+      ],
+      "id": "4a0b1d07-b707-44b2-929b-feb0c2c7efd8",
+      "createdAt": "2026-10-21T20:20:29.000Z",
+      "updatedAt": "2026-10-21T20:20:29.000Z",
+      "uid": "35240-4a0b1d07-b707-44b2-929b-feb0c2c7efd8"
+    },
+    {
+      "name": "current",
+      "item": [
+        {
+          "name": "Get a list of attributes for today",
+          "id": "5af2497b-c898-4bec-a2d4-573490568652",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/current",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "current"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4e01ff13-a355-4c37-a6f3-70e2e86cf828",
+              "name": "List of attributes",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"value\": 0,\n      \"unit\": \"string\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-4e01ff13-a355-4c37-a6f3-70e2e86cf828"
+            },
+            {
+              "id": "7c6d2a61-c447-4055-9fbd-8be38cdbd0bd",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"resourceNotFound\": {\n      \"summary\": \"Resource Not Found\",\n      \"value\": {\n        \"transactionId\": \"61361d96-f09d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"404\",\n            \"title\": \"Not Found\",\n            \"detail\": \"Resources for the endpoint URI not found. Endpoint URI:<URI>\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-7c6d2a61-c447-4055-9fbd-8be38cdbd0bd"
+            },
+            {
+              "id": "58437953-30aa-44da-bb3e-12b127b1fdd4",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"methodNotAllowed\": {\n      \"summary\": \"Method Not Allowed\",\n      \"value\": {\n        \"transactionId\": \"61361d96-z20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"405\",\n            \"title\": \"Method Not Allowed\",\n            \"detail\": \"Input request HTTP method is <invokedMethod> but operation <operationURI> accepts only: [<operationMethod>]\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-58437953-30aa-44da-bb3e-12b127b1fdd4"
+            },
+            {
+              "id": "3a1c5ef6-f15a-45fa-ab71-b3847b2c11c4",
+              "name": "Payload Too Large",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current"
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"payloadTooLarge\": {\n      \"summary\": \"Payload Too Large\",\n      \"value\": {\n        \"transactionId\": \"dc6826bc-1c0d-498b-b474-2b231910860c\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"413\",\n            \"title\": \"Payload Too Large\",\n            \"detail\": \"Maximum allowed size for the <request/response> body is <payload size limit> bytes (<size limit> MB). This <request/response> has size of <number of bytes> bytes\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-3a1c5ef6-f15a-45fa-ab71-b3847b2c11c4"
+            },
+            {
+              "id": "ccdd06ea-fa7e-4c25-a052-a6f1832a58f9",
+              "name": "Too many request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"tooManyRequests\": {\n      \"summary\": \"Too Many Requests\",\n      \"value\": {\n        \"transactionId\": \"63361d96-f20d-43a7-babf-59b35fab9b13\",\n        \"data\": {},\n        \"errors\": [\n          {\n            \"code\": \"429\",\n            \"title\": \"Too Many Requests\",\n            \"detail\": \"Number of inbound requests exceeded the throttling limits; try after sometime\"\n          }\n        ]\n      }\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-ccdd06ea-fa7e-4c25-a052-a6f1832a58f9"
+            },
+            {
+              "id": "f0617454-3ff9-4d5b-b856-3925226f164f",
+              "name": "Application unavailable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/current",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "current"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"examples\": {\n    \"applicationUnavailable\": {\n      \"summary\": \"Application Unavailable\",\n      \"value\": \"\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:20:29.000Z",
+              "updatedAt": "2026-10-21T20:20:29.000Z",
+              "uid": "35240-f0617454-3ff9-4d5b-b856-3925226f164f"
+            }
+          ],
+          "createdAt": "2026-10-21T20:20:29.000Z",
+          "updatedAt": "2026-10-21T20:20:29.000Z",
+          "uid": "35240-5af2497b-c898-4bec-a2d4-573490568652"
+        }
+      ],
+      "id": "4acdd912-7362-44b2-8c19-0cf190e5302a",
+      "createdAt": "2026-10-21T20:20:29.000Z",
+      "updatedAt": "2026-10-21T20:20:29.000Z",
+      "uid": "35240-4acdd912-7362-44b2-8c19-0cf190e5302a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/WEM/v1/attributes"
+    }
+  ]
+}

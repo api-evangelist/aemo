@@ -1,0 +1,1775 @@
+{
+  "info": {
+    "_postman_id": "ccba9785-0f0c-4eea-a392-2561ffba1a77",
+    "name": "CDR Energy Energy Accounts API",
+    "description": "Specifications for resource endpoints applicable to data holders in the Energy sector.\n\nContact Support:\n Name: Data Standards Body\n Email: contact@dsb.gov.au",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:17:25.000Z",
+    "updatedAt": "2026-10-21T20:17:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ccba9785-0f0c-4eea-a392-2561ffba1a77"
+  },
+  "item": [
+    {
+      "name": "energy",
+      "item": [
+        {
+          "name": "accounts",
+          "item": [
+            {
+              "name": "{accountId}",
+              "item": [
+                {
+                  "name": "payment-schedule",
+                  "item": [
+                    {
+                      "name": "Get Agreed Payment Schedule",
+                      "id": "6fc0b4b8-8532-45e6-afec-1ba6f50fbb24",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                            "key": "x-fapi-interaction-id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                            "key": "x-fapi-auth-date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                            "key": "x-fapi-customer-ip-address",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                            "key": "x-cds-client-headers",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/energy/accounts/:accountId/payment-schedule",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "energy",
+                            "accounts",
+                            ":accountId",
+                            "payment-schedule"
+                          ],
+                          "variable": [
+                            {
+                              "id": "64cba665-70fe-4983-a5e3-21cf6f7c719a",
+                              "key": "accountId",
+                              "value": "<string>",
+                              "description": "(Required) The _accountId_ to obtain data for. _accountId_ values are returned by account list endpoints."
+                            }
+                          ]
+                        },
+                        "description": "Obtain the agreed payment schedule and details, if any, for a specific energy account.\n\nSome general notes about this endpoint:\n\nThis API describes how the consumer has elected to pay for their account\n\nPayments initiated by the consumer are classified as manual payments. The billing frequency is captured for manual payments. The consumer may choose to pay on a different schedule/frequency. The payment method and frequency is not captured for manual payments\n\nPayments that can be initiated by the retailer, based on a consumer's preferences and permission, include payments based on a direct debit, card debit or digital wallet setup. Each of these requires a payment frequency to be provided along with other relevant fields\n\nInformation about payment plans related to debt repayments or arrangements due to hardship is not captured within this API."
+                      },
+                      "response": [
+                        {
+                          "id": "6eff1608-90f5-423f-ab33-07aa3da1dc08",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/payment-schedule",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "payment-schedule"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-v",
+                              "value": ""
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"paymentSchedules\": [\n      {\n        \"paymentScheduleUType\": \"directDebit\",\n        \"amount\": \"<string>\",\n        \"cardDebit\": {\n          \"calculationType\": \"BALANCE\",\n          \"cardScheme\": \"AMEX\",\n          \"paymentFrequency\": \"<string>\"\n        },\n        \"directDebit\": {\n          \"calculationType\": \"CALCULATED\",\n          \"paymentFrequency\": \"<string>\",\n          \"isTokenised\": false,\n          \"bsb\": \"<string>\",\n          \"accountNumber\": \"<string>\"\n        },\n        \"digitalWallet\": {\n          \"calculationType\": \"CALCULATED\",\n          \"identifier\": \"<string>\",\n          \"name\": \"<string>\",\n          \"paymentFrequency\": \"<string>\",\n          \"provider\": \"OTHER\",\n          \"type\": \"EMAIL\"\n        },\n        \"manualPayment\": {\n          \"billFrequency\": \"<string>\"\n        }\n      },\n      {\n        \"paymentScheduleUType\": \"digitalWallet\",\n        \"amount\": \"<string>\",\n        \"cardDebit\": {\n          \"calculationType\": \"BALANCE\",\n          \"cardScheme\": \"MASTERCARD\",\n          \"paymentFrequency\": \"<string>\"\n        },\n        \"directDebit\": {\n          \"calculationType\": \"BALANCE\",\n          \"paymentFrequency\": \"<string>\",\n          \"isTokenised\": false,\n          \"bsb\": \"<string>\",\n          \"accountNumber\": \"<string>\"\n        },\n        \"digitalWallet\": {\n          \"calculationType\": \"STATIC\",\n          \"identifier\": \"<string>\",\n          \"name\": \"<string>\",\n          \"paymentFrequency\": \"<string>\",\n          \"provider\": \"OTHER\",\n          \"type\": \"EMAIL\"\n        },\n        \"manualPayment\": {\n          \"billFrequency\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"meta\": {}\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-6eff1608-90f5-423f-ab33-07aa3da1dc08"
+                        },
+                        {
+                          "id": "c568b7e0-a7c3-4923-b6d4-0c88fe7f9a2a",
+                          "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Required Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/payment-schedule",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "payment-schedule"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-c568b7e0-a7c3-4923-b6d4-0c88fe7f9a2a"
+                        },
+                        {
+                          "id": "575513a6-a1e9-4f9c-8058-c847c48f2b4a",
+                          "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[404 - Unavailable Energy Account](#error-404-unavailable-energy-account)</li><li>[404 - Invalid Energy Account](#error-404-invalid-energy-account)</li></ul>",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/payment-schedule",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "payment-schedule"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-575513a6-a1e9-4f9c-8058-c847c48f2b4a"
+                        },
+                        {
+                          "id": "e59349ca-e4d4-4219-982f-54fbd48d8ca7",
+                          "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/payment-schedule",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "payment-schedule"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Acceptable",
+                          "code": 406,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-e59349ca-e4d4-4219-982f-54fbd48d8ca7"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:17:25.000Z",
+                      "updatedAt": "2026-10-21T20:17:25.000Z",
+                      "uid": "35240-6fc0b4b8-8532-45e6-afec-1ba6f50fbb24"
+                    }
+                  ],
+                  "id": "fcd6ea06-82aa-4354-8a38-765141cf2343",
+                  "createdAt": "2026-10-21T20:17:25.000Z",
+                  "updatedAt": "2026-10-21T20:17:25.000Z",
+                  "uid": "35240-fcd6ea06-82aa-4354-8a38-765141cf2343"
+                },
+                {
+                  "name": "concessions",
+                  "item": [
+                    {
+                      "name": "Get Concessions",
+                      "id": "daae10fd-cfaf-401f-b17c-2fa3db7ff119",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                            "key": "x-fapi-interaction-id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                            "key": "x-fapi-auth-date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                            "key": "x-fapi-customer-ip-address",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                            "key": "x-cds-client-headers",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/energy/accounts/:accountId/concessions",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "energy",
+                            "accounts",
+                            ":accountId",
+                            "concessions"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ca1161eb-00e4-4949-b9e4-f45e1f2d2105",
+                              "key": "accountId",
+                              "value": "<string>",
+                              "description": "(Required) The _accountId_ to obtain data for. _accountId_ values are returned by account list endpoints."
+                            }
+                          ]
+                        },
+                        "description": "Obtain the details of any concessions or arrangements applied to a specific energy account."
+                      },
+                      "response": [
+                        {
+                          "id": "bb2c3df3-8e06-4dbf-b673-9d26d7dee2d4",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/concessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "concessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-v",
+                              "value": ""
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"concessions\": [\n      {\n        \"displayName\": \"<string>\",\n        \"type\": \"FIXED_AMOUNT\",\n        \"additionalInfo\": \"<string>\",\n        \"additionalInfoUri\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"endDate\": \"<string>\",\n        \"discountFrequency\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"percentage\": \"<string>\",\n        \"appliedTo\": [\n          \"USAGE\"\n        ]\n      },\n      {\n        \"displayName\": \"<string>\",\n        \"type\": \"FIXED_AMOUNT\",\n        \"additionalInfo\": \"<string>\",\n        \"additionalInfoUri\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"endDate\": \"<string>\",\n        \"discountFrequency\": \"<string>\",\n        \"amount\": \"<string>\",\n        \"percentage\": \"<string>\",\n        \"appliedTo\": [\n          \"USAGE\"\n        ]\n      }\n    ]\n  },\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"meta\": {}\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-bb2c3df3-8e06-4dbf-b673-9d26d7dee2d4"
+                        },
+                        {
+                          "id": "8176b6bd-5d3d-47ae-8c51-1b52f05b9901",
+                          "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Required Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/concessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "concessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-8176b6bd-5d3d-47ae-8c51-1b52f05b9901"
+                        },
+                        {
+                          "id": "2670a3e9-e8c8-460e-9e92-af8340ca4d82",
+                          "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[404 - Unavailable Energy Account](#error-404-unavailable-energy-account)</li><li>[404 - Invalid Energy Account](#error-404-invalid-energy-account)</li></ul>",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/concessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "concessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-2670a3e9-e8c8-460e-9e92-af8340ca4d82"
+                        },
+                        {
+                          "id": "22847102-bd96-4e43-9adc-284d7fb90c57",
+                          "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                                "key": "x-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                                "key": "x-min-v",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                                "key": "x-fapi-interaction-id",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                                "key": "x-fapi-auth-date",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                                "key": "x-fapi-customer-ip-address",
+                                "value": "<string>"
+                              },
+                              {
+                                "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                                "key": "x-cds-client-headers",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/energy/accounts/:accountId/concessions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "energy",
+                                "accounts",
+                                ":accountId",
+                                "concessions"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Acceptable",
+                          "code": 406,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            },
+                            {
+                              "disabled": false,
+                              "description": {
+                                "content": "",
+                                "type": "text/plain"
+                              },
+                              "key": "x-fapi-interaction-id",
+                              "value": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T20:17:26.000Z",
+                          "updatedAt": "2026-10-21T20:17:26.000Z",
+                          "uid": "35240-22847102-bd96-4e43-9adc-284d7fb90c57"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:17:25.000Z",
+                      "updatedAt": "2026-10-21T20:17:25.000Z",
+                      "uid": "35240-daae10fd-cfaf-401f-b17c-2fa3db7ff119"
+                    }
+                  ],
+                  "id": "1dd6f69b-3849-4e7e-81e1-5cbf7ed8f049",
+                  "createdAt": "2026-10-21T20:17:25.000Z",
+                  "updatedAt": "2026-10-21T20:17:25.000Z",
+                  "uid": "35240-1dd6f69b-3849-4e7e-81e1-5cbf7ed8f049"
+                },
+                {
+                  "name": "Get Energy Account Detail",
+                  "id": "4489e081-69d7-47c6-bfc8-1ec094c229ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                        "key": "x-fapi-interaction-id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                        "key": "x-fapi-auth-date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                        "key": "x-fapi-customer-ip-address",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                        "key": "x-cds-client-headers",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/energy/accounts/:accountId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "energy",
+                        "accounts",
+                        ":accountId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "415f62f8-35bc-4b22-a250-047af5b07a21",
+                          "key": "accountId",
+                          "value": "<string>",
+                          "description": "(Required) The _accountId_ to obtain data for. _accountId_ values are returned by account list endpoints."
+                        }
+                      ]
+                    },
+                    "description": "Obtain detailed information for a specific energy account.\n\nOther Versions: v1, v2, v3."
+                  },
+                  "response": [
+                    {
+                      "id": "9bbad023-76d1-47f7-ad1e-65801c49279e",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                            "key": "x-fapi-interaction-id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                            "key": "x-fapi-auth-date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                            "key": "x-fapi-customer-ip-address",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                            "key": "x-cds-client-headers",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/energy/accounts/:accountId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "energy",
+                            "accounts",
+                            ":accountId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "accountId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-v",
+                          "value": ""
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-fapi-interaction-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"accountId\": \"<string>\",\n    \"plans\": [\n      {\n        \"servicePointIds\": [\n          \"<string>\"\n        ],\n        \"nickname\": \"<string>\",\n        \"planOverview\": {\n          \"startDate\": \"<string>\",\n          \"displayName\": \"<string>\",\n          \"endDate\": \"<string>\"\n        },\n        \"planDetail\": {\n          \"fuelType\": \"GAS\",\n          \"isContingentPlan\": false,\n          \"meteringCharges\": [\n            {\n              \"displayName\": \"<string>\",\n              \"minimumValue\": \"<string>\",\n              \"description\": \"<string>\",\n              \"maximumValue\": \"<string>\",\n              \"period\": \"<string>\"\n            }\n          ],\n          \"gasContract\": {\n            \"isFixed\": \"<boolean>\",\n            \"paymentOption\": [\n              \"OTHER\"\n            ],\n            \"pricingModel\": \"TIME_OF_USE_CONT_LOAD\",\n            \"tariffPeriod\": [\n              {\n                \"displayName\": \"<string>\",\n                \"endDate\": \"<string>\",\n                \"rateBlockUType\": \"timeOfUseRates\",\n                \"startDate\": \"<string>\",\n                \"type\": \"OTHER\",\n                \"dailySupplyChargeType\": \"BAND\",\n                \"dailySupplyCharge\": \"<string>\",\n                \"bandedDailySupplyCharges\": [\n                  {\n                    \"unitPrice\": \"<string>\",\n                    \"measureUnit\": \"DAYS\",\n                    \"volume\": \"<number>\"\n                  }\n                ],\n                \"timeZone\": \"LOCAL\",\n                \"singleRate\": {\n                  \"displayName\": \"<string>\",\n                  \"rates\": [\n                    {\n                      \"unitPrice\": \"<string>\",\n                      \"measureUnit\": \"KWH\",\n                      \"volume\": \"<number>\"\n                    }\n                  ],\n                  \"description\": \"<string>\",\n                  \"generalUnitPrice\": \"<string>\",\n                  \"period\": \"<string>\"\n                },\n                \"timeOfUseRates\": [\n                  {\n                    \"displayName\": \"<string>\",\n                    \"rates\": [\n                      {\n                        \"unitPrice\": \"<string>\",\n                        \"measureUnit\": \"KWH\",\n                        \"volume\": \"<number>\"\n                      }\n                    ],\n                    \"timeOfUse\": [\n                      {\n                        \"days\": [\n                          \"SUN\"\n                        ],\n                        \"endTime\": \"<string>\",\n                        \"startTime\": \"<string>\"\n                      }\n                    ],\n                    \"type\": \"SHOULDER\",\n                    \"description\": \"<string>\",\n                    \"period\": \"P1Y\"\n                  }\n                ],\n                \"demandCharges\": [\n                  {\n                    \"amount\": \"<string>\",\n                    \"chargePeriod\": \"DAY\",\n                    \"displayName\": \"<string>\",\n                    \"endTime\": \"<string>\",\n                    \"measurementPeriod\": \"TARIFF_PERIOD\",\n                    \"startTime\": \"<string>\",\n                    \"description\": \"<string>\",\n                    \"measureUnit\": \"KWH\",\n                    \"days\": [\n                      \"SUN\"\n                    ],\n                    \"minDemand\": \"0.00\",\n                    \"maxDemand\": \"<string>\"\n                  }\n                ]\n              }\n            ],\n            \"additionalFeeInformation\": \"<string>\",\n            \"timeZone\": \"AEST\",\n            \"variation\": \"<string>\",\n            \"onExpiryDescription\": \"<string>\",\n            \"intrinsicGreenPower\": {\n              \"greenPercentage\": \"<string>\"\n            },\n            \"controlledLoad\": [\n              {\n                \"displayName\": \"<string>\",\n                \"rateBlockUType\": \"timeOfUseRates\",\n                \"startDate\": \"<string>\",\n                \"endDate\": \"<string>\",\n                \"singleRate\": {\n                  \"displayName\": \"<string>\",\n                  \"rates\": [\n                    {\n                      \"unitPrice\": \"<string>\",\n                      \"measureUnit\": \"KWH\",\n                      \"volume\": \"<number>\"\n                    }\n                  ],\n                  \"description\": \"<string>\",\n                  \"dailySupplyCharge\": \"<string>\",\n                  \"period\": \"P1Y\"\n                },\n                \"timeOfUseRates\": [\n                  {\n                    \"displayName\": \"<string>\",\n                    \"rates\": [\n                      {\n                        \"unitPrice\": \"<string>\",\n                        \"measureUnit\": \"KWH\",\n                        \"volume\": \"<number>\"\n                      }\n                    ],\n                    \"timeOfUse\": [\n                      {\n                        \"days\": [\n                          \"PUBLIC_HOLIDAYS\"\n                        ],\n                        \"startTime\": \"<string>\",\n                        \"endTime\": \"<string>\",\n                        \"additionalInfo\": \"<string>\",\n                        \"additionalInfoUri\": \"<string>\"\n                      }\n                    ],\n                    \"type\": \"OFF_PEAK\",\n                    \"description\": \"<string>\",\n                    \"dailySupplyCharge\": \"<string>\",\n                    \"period\": \"P1Y\"\n                  }\n                ]\n              }\n            ],\n            \"incentives\": [\n              {\n                \"category\": \"GIFT\",\n                \"description\": \"<string>\",\n                \"displayName\": \"<string>\",\n                \"eligibility\": \"<string>\"\n              }\n            ],\n            \"discounts\": [\n              {\n                \"displayName\": \"<string>\",\n                \"methodUType\": \"percentOfUse\",\n                \"type\": \"OTHER\",\n                \"description\": \"<string>\",\n                \"category\": \"OTHER\",\n                \"endDate\": \"<string>\",\n                \"percentOfBill\": {\n                  \"rate\": \"<string>\"\n                },\n                \"percentOfUse\": {\n                  \"rate\": \"<string>\"\n                },\n                \"fixedAmount\": {\n                  \"amount\": \"<string>\"\n                },\n                \"percentOverThreshold\": {\n                  \"rate\": \"<string>\",\n                  \"usageAmount\": \"<string>\"\n                }\n              }\n            ],\n            \"greenPowerCharges\": [\n              {\n                \"displayName\": \"<string>\",\n                \"scheme\": \"OTHER\",\n                \"tiers\": [\n                  {\n                    \"percentGreen\": \"<string>\",\n                    \"rate\": \"<string>\",\n                    \"amount\": \"<string>\"\n                  }\n                ],\n                \"type\": \"PERCENT_OF_USE\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"eligibility\": [\n              {\n                \"information\": \"<string>\",\n                \"type\": \"SMALL_BUSINESS\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"fees\": [\n              {\n                \"term\": \"3_YEAR\",\n                \"type\": \"DD_DISHONOUR\",\n                \"amount\": \"<string>\",\n                \"rate\": \"<string>\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"solarFeedInTariff\": [\n              {\n                \"displayName\": \"<string>\",\n                \"payerType\": \"GOVERNMENT\",\n                \"scheme\": \"VARIABLE\",\n                \"tariffUType\": \"timeVaryingTariffs\",\n                \"description\": \"<string>\",\n                \"startDate\": \"<string>\",\n                \"endDate\": \"<string>\",\n                \"singleTariff\": {\n                  \"rates\": [\n                    {\n                      \"unitPrice\": \"<string>\",\n                      \"measureUnit\": \"KWH\",\n                      \"volume\": \"<number>\"\n                    }\n                  ],\n                  \"period\": \"P1Y\"\n                },\n                \"timeVaryingTariffs\": [\n                  {\n                    \"displayName\": \"<string>\",\n                    \"timeVariations\": [\n                      {\n                        \"days\": [\n                          \"PUBLIC_HOLIDAYS\"\n                        ],\n                        \"startTime\": \"<string>\",\n                        \"endTime\": \"<string>\"\n                      }\n                    ],\n                    \"type\": \"PEAK\",\n                    \"rates\": [\n                      {\n                        \"unitPrice\": \"<string>\",\n                        \"measureUnit\": \"KWH\",\n                        \"volume\": \"<number>\"\n                      }\n                    ],\n                    \"period\": \"P1Y\"\n                  }\n                ]\n              }\n            ]\n          },\n          \"electricityContract\": {\n            \"isFixed\": \"<boolean>\",\n            \"paymentOption\": [\n              \"OTHER\"\n            ],\n            \"pricingModel\": \"FLEXIBLE\",\n            \"tariffPeriod\": [\n              {\n                \"displayName\": \"<string>\",\n                \"endDate\": \"<string>\",\n                \"rateBlockUType\": \"singleRate\",\n                \"startDate\": \"<string>\",\n                \"type\": \"OTHER\",\n                \"dailySupplyChargeType\": \"BAND\",\n                \"dailySupplyCharge\": \"<string>\",\n                \"bandedDailySupplyCharges\": [\n                  {\n                    \"unitPrice\": \"<string>\",\n                    \"measureUnit\": \"DAYS\",\n                    \"volume\": \"<number>\"\n                  }\n                ],\n                \"timeZone\": \"LOCAL\",\n                \"singleRate\": {\n                  \"displayName\": \"<string>\",\n                  \"rates\": [\n                    {\n                      \"unitPrice\": \"<string>\",\n                      \"measureUnit\": \"KWH\",\n                      \"volume\": \"<number>\"\n                    }\n                  ],\n                  \"description\": \"<string>\",\n                  \"generalUnitPrice\": \"<string>\",\n                  \"period\": \"<string>\"\n                },\n                \"timeOfUseRates\": [\n                  {\n                    \"displayName\": \"<string>\",\n                    \"rates\": [\n                      {\n                        \"unitPrice\": \"<string>\",\n                        \"measureUnit\": \"KWH\",\n                        \"volume\": \"<number>\"\n                      }\n                    ],\n                    \"timeOfUse\": [\n                      {\n                        \"days\": [\n                          \"THU\"\n                        ],\n                        \"endTime\": \"<string>\",\n                        \"startTime\": \"<string>\"\n                      }\n                    ],\n                    \"type\": \"OFF_PEAK\",\n                    \"description\": \"<string>\",\n                    \"period\": \"P1Y\"\n                  }\n                ],\n                \"demandCharges\": [\n                  {\n                    \"amount\": \"<string>\",\n                    \"chargePeriod\": \"MONTH\",\n                    \"displayName\": \"<string>\",\n                    \"endTime\": \"<string>\",\n                    \"measurementPeriod\": \"TARIFF_PERIOD\",\n                    \"startTime\": \"<string>\",\n                    \"description\": \"<string>\",\n                    \"measureUnit\": \"KWH\",\n                    \"days\": [\n                      \"SAT\"\n                    ],\n                    \"minDemand\": \"0.00\",\n                    \"maxDemand\": \"<string>\"\n                  }\n                ]\n              }\n            ],\n            \"additionalFeeInformation\": \"<string>\",\n            \"timeZone\": \"AEST\",\n            \"variation\": \"<string>\",\n            \"onExpiryDescription\": \"<string>\",\n            \"intrinsicGreenPower\": {\n              \"greenPercentage\": \"<string>\"\n            },\n            \"controlledLoad\": [\n              {\n                \"displayName\": \"<string>\",\n                \"rateBlockUType\": \"timeOfUseRates\",\n                \"startDate\": \"<string>\",\n                \"endDate\": \"<string>\",\n                \"singleRate\": {\n                  \"displayName\": \"<string>\",\n                  \"rates\": [\n                    {\n                      \"unitPrice\": \"<string>\",\n                      \"measureUnit\": \"KWH\",\n                      \"volume\": \"<number>\"\n                    }\n                  ],\n                  \"description\": \"<string>\",\n                  \"dailySupplyCharge\": \"<string>\",\n                  \"period\": \"P1Y\"\n                },\n                \"timeOfUseRates\": [\n                  {\n                    \"displayName\": \"<string>\",\n                    \"rates\": [\n                      {\n                        \"unitPrice\": \"<string>\",\n                        \"measureUnit\": \"KWH\",\n                        \"volume\": \"<number>\"\n                      }\n                    ],\n                    \"timeOfUse\": [\n                      {\n                        \"days\": [\n                          \"WED\"\n                        ],\n                        \"startTime\": \"<string>\",\n                        \"endTime\": \"<string>\",\n                        \"additionalInfo\": \"<string>\",\n                        \"additionalInfoUri\": \"<string>\"\n                      }\n                    ],\n                    \"type\": \"PEAK\",\n                    \"description\": \"<string>\",\n                    \"dailySupplyCharge\": \"<string>\",\n                    \"period\": \"P1Y\"\n                  }\n                ]\n              }\n            ],\n            \"incentives\": [\n              {\n                \"category\": \"OTHER\",\n                \"description\": \"<string>\",\n                \"displayName\": \"<string>\",\n                \"eligibility\": \"<string>\"\n              }\n            ],\n            \"discounts\": [\n              {\n                \"displayName\": \"<string>\",\n                \"methodUType\": \"percentOfBill\",\n                \"type\": \"OTHER\",\n                \"description\": \"<string>\",\n                \"category\": \"PAY_ON_TIME\",\n                \"endDate\": \"<string>\",\n                \"percentOfBill\": {\n                  \"rate\": \"<string>\"\n                },\n                \"percentOfUse\": {\n                  \"rate\": \"<string>\"\n                },\n                \"fixedAmount\": {\n                  \"amount\": \"<string>\"\n                },\n                \"percentOverThreshold\": {\n                  \"rate\": \"<string>\",\n                  \"usageAmount\": \"<string>\"\n                }\n              }\n            ],\n            \"greenPowerCharges\": [\n              {\n                \"displayName\": \"<string>\",\n                \"scheme\": \"OTHER\",\n                \"tiers\": [\n                  {\n                    \"percentGreen\": \"<string>\",\n                    \"rate\": \"<string>\",\n                    \"amount\": \"<string>\"\n                  }\n                ],\n                \"type\": \"PERCENT_OF_BILL\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"eligibility\": [\n              {\n                \"information\": \"<string>\",\n                \"type\": \"SENIOR_CARD\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"fees\": [\n              {\n                \"term\": \"MONTHLY\",\n                \"type\": \"MEMBERSHIP\",\n                \"amount\": \"<string>\",\n                \"rate\": \"<string>\",\n                \"description\": \"<string>\"\n              }\n            ],\n            \"solarFeedInTariff\": [\n              {\n                \"displayName\": \"<string>\",\n                \"payerType\": \"RETAILER\",\n                \"scheme\": \"OTHER\",\n                \"tariffUType\": \"singleTariff\",\n                \"description\": \"<string>\",\n                \"startDate\": \"<string>\",\n                \"endDate\": \"<string>\",\n                \"singleTariff\": {\n                  \"rates\": [\n                    {\n                      \"unitPrice\": \"<string>\",\n                      \"measureUnit\": \"KWH\",\n                      \"volume\": \"<number>\"\n                    }\n                  ],\n                  \"period\": \"P1Y\"\n                },\n                \"timeVaryingTariffs\": [\n                  {\n                    \"displayName\": \"<string>\",\n                    \"timeVariations\": [\n                      {\n                        \"days\": [\n                          \"MON\"\n                        ],\n                        \"startTime\": \"<string>\",\n                        \"endTime\": \"<string>\"\n                      }\n                    ],\n                    \"type\": \"OFF_PEAK\",\n                    \"rates\": [\n                      {\n                        \"unitPrice\": \"<string>\",\n                        \"measureUnit\": \"KWH\",\n                        \"volume\": \"<number>\"\n                      }\n                    ],\n                    \"period\": \"P1Y\"\n                  }\n                ]\n              }\n            ]\n          }\n        },\n        \"authorisedContacts\": [\n          {\n            \"lastName\": \"<string>\",\n            \"firstName\": \"<string>\",\n            \"middleNames\": [\n              \"<string>\"\n            ],\n            \"prefix\": \"<string>\",\n            \"suffix\": \"<string>\"\n          }\n        ]\n      }\n    ],\n    \"accountNumber\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"openStatus\": \"OPEN\",\n    \"creationDate\": \"<string>\"\n  },\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"meta\": {}\n}",
+                      "createdAt": "2026-10-21T20:17:26.000Z",
+                      "updatedAt": "2026-10-21T20:17:26.000Z",
+                      "uid": "35240-9bbad023-76d1-47f7-ad1e-65801c49279e"
+                    },
+                    {
+                      "id": "2c3dba80-0045-4f98-af2f-747a54d5e36c",
+                      "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Required Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                            "key": "x-fapi-interaction-id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                            "key": "x-fapi-auth-date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                            "key": "x-fapi-customer-ip-address",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                            "key": "x-cds-client-headers",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/energy/accounts/:accountId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "energy",
+                            "accounts",
+                            ":accountId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "accountId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-fapi-interaction-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:17:26.000Z",
+                      "updatedAt": "2026-10-21T20:17:26.000Z",
+                      "uid": "35240-2c3dba80-0045-4f98-af2f-747a54d5e36c"
+                    },
+                    {
+                      "id": "eab01393-e1f9-44ec-bbca-efdcd1410cbf",
+                      "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[404 - Unavailable Energy Account](#error-404-unavailable-energy-account)</li><li>[404 - Invalid Energy Account](#error-404-invalid-energy-account)</li></ul>",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                            "key": "x-fapi-interaction-id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                            "key": "x-fapi-auth-date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                            "key": "x-fapi-customer-ip-address",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                            "key": "x-cds-client-headers",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/energy/accounts/:accountId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "energy",
+                            "accounts",
+                            ":accountId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "accountId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-fapi-interaction-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:17:26.000Z",
+                      "updatedAt": "2026-10-21T20:17:26.000Z",
+                      "uid": "35240-eab01393-e1f9-44ec-bbca-efdcd1410cbf"
+                    },
+                    {
+                      "id": "6360ed19-763b-4c2f-94e9-8728f3956639",
+                      "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                            "key": "x-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                            "key": "x-min-v",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                            "key": "x-fapi-interaction-id",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                            "key": "x-fapi-auth-date",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                            "key": "x-fapi-customer-ip-address",
+                            "value": "<string>"
+                          },
+                          {
+                            "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                            "key": "x-cds-client-headers",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/energy/accounts/:accountId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "energy",
+                            "accounts",
+                            ":accountId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "accountId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Acceptable",
+                      "code": 406,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "",
+                            "type": "text/plain"
+                          },
+                          "key": "x-fapi-interaction-id",
+                          "value": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:17:26.000Z",
+                      "updatedAt": "2026-10-21T20:17:26.000Z",
+                      "uid": "35240-6360ed19-763b-4c2f-94e9-8728f3956639"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:17:25.000Z",
+                  "updatedAt": "2026-10-21T20:17:25.000Z",
+                  "uid": "35240-4489e081-69d7-47c6-bfc8-1ec094c229ea"
+                }
+              ],
+              "id": "7f467fab-5994-4c9f-a291-bd214c7e140d",
+              "createdAt": "2026-10-21T20:17:25.000Z",
+              "updatedAt": "2026-10-21T20:17:25.000Z",
+              "uid": "35240-7f467fab-5994-4c9f-a291-bd214c7e140d"
+            },
+            {
+              "name": "Get Energy Accounts",
+              "id": "071f74b5-5361-4eea-9404-22aa2f9a68a7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                    "key": "x-fapi-auth-date",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                    "key": "x-cds-client-headers",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/energy/accounts?open-status=ALL&page=<integer>&page-size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "energy",
+                    "accounts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Used to filter results according to open/closed status. Values can be `OPEN`, `CLOSED` or `ALL`. If absent then `ALL` is assumed.",
+                      "key": "open-status",
+                      "value": "ALL"
+                    },
+                    {
+                      "description": "Page of results to request (standard pagination).",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Page size to request. Default is 25 (standard pagination).",
+                      "key": "page-size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Obtain the list of energy accounts available under the authorised consent.\n\nOther Versions: v1."
+              },
+              "response": [
+                {
+                  "id": "da7f3eb0-3f8d-4ed1-ac12-89ffbfb93407",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                        "key": "x-fapi-interaction-id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                        "key": "x-fapi-auth-date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                        "key": "x-fapi-customer-ip-address",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                        "key": "x-cds-client-headers",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/energy/accounts?open-status=ALL&page=<integer>&page-size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "energy",
+                        "accounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results according to open/closed status. Values can be `OPEN`, `CLOSED` or `ALL`. If absent then `ALL` is assumed.",
+                          "key": "open-status",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-v",
+                      "value": ""
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-fapi-interaction-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"accounts\": [\n      {\n        \"accountId\": \"<string>\",\n        \"plans\": [\n          {\n            \"servicePointIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nickname\": \"<string>\",\n            \"planOverview\": {\n              \"startDate\": \"<string>\",\n              \"displayName\": \"<string>\",\n              \"endDate\": \"<string>\"\n            }\n          },\n          {\n            \"servicePointIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nickname\": \"<string>\",\n            \"planOverview\": {\n              \"startDate\": \"<string>\",\n              \"displayName\": \"<string>\",\n              \"endDate\": \"<string>\"\n            }\n          }\n        ],\n        \"accountNumber\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"openStatus\": \"OPEN\",\n        \"creationDate\": \"<string>\"\n      },\n      {\n        \"accountId\": \"<string>\",\n        \"plans\": [\n          {\n            \"servicePointIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nickname\": \"<string>\",\n            \"planOverview\": {\n              \"startDate\": \"<string>\",\n              \"displayName\": \"<string>\",\n              \"endDate\": \"<string>\"\n            }\n          },\n          {\n            \"servicePointIds\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"nickname\": \"<string>\",\n            \"planOverview\": {\n              \"startDate\": \"<string>\",\n              \"displayName\": \"<string>\",\n              \"endDate\": \"<string>\"\n            }\n          }\n        ],\n        \"accountNumber\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"openStatus\": \"OPEN\",\n        \"creationDate\": \"<string>\"\n      }\n    ]\n  },\n  \"links\": {\n    \"self\": \"<string>\",\n    \"first\": \"<string>\",\n    \"prev\": \"<string>\",\n    \"next\": \"<string>\",\n    \"last\": \"<string>\"\n  },\n  \"meta\": {\n    \"totalPages\": \"<integer>\",\n    \"totalRecords\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:17:26.000Z",
+                  "updatedAt": "2026-10-21T20:17:26.000Z",
+                  "uid": "35240-da7f3eb0-3f8d-4ed1-ac12-89ffbfb93407"
+                },
+                {
+                  "id": "9ba0e8cb-b99d-4c86-8209-119cf59d8c4d",
+                  "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Required Field](#error-400-field-missing)</li><li>[400 - Invalid Page Size](#error-400-field-invali",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                        "key": "x-fapi-interaction-id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                        "key": "x-fapi-auth-date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                        "key": "x-fapi-customer-ip-address",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                        "key": "x-cds-client-headers",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/energy/accounts?open-status=ALL&page=<integer>&page-size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "energy",
+                        "accounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results according to open/closed status. Values can be `OPEN`, `CLOSED` or `ALL`. If absent then `ALL` is assumed.",
+                          "key": "open-status",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-fapi-interaction-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:17:26.000Z",
+                  "updatedAt": "2026-10-21T20:17:26.000Z",
+                  "uid": "35240-9ba0e8cb-b99d-4c86-8209-119cf59d8c4d"
+                },
+                {
+                  "id": "4c9a68fe-d2e2-4a1c-8269-f2234f8adc0c",
+                  "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                        "key": "x-fapi-interaction-id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                        "key": "x-fapi-auth-date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                        "key": "x-fapi-customer-ip-address",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                        "key": "x-cds-client-headers",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/energy/accounts?open-status=ALL&page=<integer>&page-size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "energy",
+                        "accounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results according to open/closed status. Values can be `OPEN`, `CLOSED` or `ALL`. If absent then `ALL` is assumed.",
+                          "key": "open-status",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Acceptable",
+                  "code": 406,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-fapi-interaction-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:17:26.000Z",
+                  "updatedAt": "2026-10-21T20:17:26.000Z",
+                  "uid": "35240-4c9a68fe-d2e2-4a1c-8269-f2234f8adc0c"
+                },
+                {
+                  "id": "95fb50c3-762e-4e61-adb7-b333d3d3e675",
+                  "name": "The following error codes **MUST** be supported:<br/><ul class=\"error-code-list\"><li>[422 - Invalid Page](#error-422-field-invalid-page)</li></ul>",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) Version of the API endpoint requested by the client. Must be set to a positive integer. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If the value of [_x-min-v_](#request-headers) is equal to or higher than the value of [_x-v_](#request-headers) then the [_x-min-v_](#request-headers) header should be treated as absent. If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`. See [HTTP Headers](#request-headers).",
+                        "key": "x-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "Minimum version of the API endpoint requested by the client. Must be set to a positive integer if provided. The endpoint should respond with the highest supported version between [_x-min-v_](#request-headers) and [_x-v_](#request-headers). If all versions requested are not supported then the endpoint **MUST** respond with a `406 Not Acceptable`.",
+                        "key": "x-min-v",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "An **[[RFC4122]](#nref-RFC4122)** UUID used as a correlation id. If provided, the data holder **MUST** play back this value in the _x-fapi-interaction-id_ response header. If not provided a **[[RFC4122]](#nref-RFC4122)** UUID value is required to be provided in the response header to track the interaction.",
+                        "key": "x-fapi-interaction-id",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The time when the customer last logged in to the Data Recipient Software Product as described in **[[FAPI-1.0-Baseline]](#nref-FAPI-1-0-Baseline)**. Required for all resource calls (customer present and unattended). Not required for unauthenticated calls.",
+                        "key": "x-fapi-auth-date",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original IP address if the customer is currently logged in to the data recipient. The presence of this header indicates that the API is being called in a customer present context. Not to be included for unauthenticated calls.",
+                        "key": "x-fapi-customer-ip-address",
+                        "value": "<string>"
+                      },
+                      {
+                        "description": "The customer's original standard http headers [Base64](#common-field-types) encoded, including the original User-Agent header, if the customer is currently logged in to the data recipient. Mandatory for customer present calls. Not required for unattended or unauthenticated calls.",
+                        "key": "x-cds-client-headers",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/energy/accounts?open-status=ALL&page=<integer>&page-size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "energy",
+                        "accounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Used to filter results according to open/closed status. Values can be `OPEN`, `CLOSED` or `ALL`. If absent then `ALL` is assumed.",
+                          "key": "open-status",
+                          "value": "ALL"
+                        },
+                        {
+                          "description": "Page of results to request (standard pagination).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Page size to request. Default is 25 (standard pagination).",
+                          "key": "page-size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "x-fapi-interaction-id",
+                      "value": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\",\n      \"meta\": {\n        \"urn\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:17:26.000Z",
+                  "updatedAt": "2026-10-21T20:17:26.000Z",
+                  "uid": "35240-95fb50c3-762e-4e61-adb7-b333d3d3e675"
+                }
+              ],
+              "createdAt": "2026-10-21T20:17:25.000Z",
+              "updatedAt": "2026-10-21T20:17:25.000Z",
+              "uid": "35240-071f74b5-5361-4eea-9404-22aa2f9a68a7"
+            }
+          ],
+          "id": "fd5c6925-4b5f-46da-ac87-7f1266b76a5f",
+          "createdAt": "2026-10-21T20:17:25.000Z",
+          "updatedAt": "2026-10-21T20:17:25.000Z",
+          "uid": "35240-fd5c6925-4b5f-46da-ac87-7f1266b76a5f"
+        }
+      ],
+      "id": "4b5f3412-c75c-4755-adaf-ae0ad0d2e3cf",
+      "createdAt": "2026-10-21T20:17:25.000Z",
+      "updatedAt": "2026-10-21T20:17:25.000Z",
+      "uid": "35240-4b5f3412-c75c-4755-adaf-ae0ad0d2e3cf"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://mtls.dh.example.com/cds-au/v1"
+    }
+  ]
+}

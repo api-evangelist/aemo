@@ -1,0 +1,402 @@
+{
+  "info": {
+    "_postman_id": "f761febd-409a-4530-8b53-b7442cc869cd",
+    "name": "CDR Common API",
+    "description": "CDR Common",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:16:30.000Z",
+    "updatedAt": "2026-10-21T20:16:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f761febd-409a-4530-8b53-b7442cc869cd"
+  },
+  "item": [
+    {
+      "name": "outages",
+      "item": [
+        {
+          "name": "Get Outages",
+          "id": "762ce15f-4969-4695-aa22-ae4a3dd91dcb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                "key": "x-v",
+                "value": "<string>"
+              },
+              {
+                "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                "key": "x-min-v",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/outages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "outages"
+              ]
+            },
+            "description": "Obtain a list of scheduled outages for the implementation"
+          },
+          "response": [
+            {
+              "id": "c3597e0e-46e0-4a66-bc85-c079ef6c3d2b",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/outages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "outages"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"data\": {\n      \"outages\": [\n        {\n          \"duration\": \"duration\",\n          \"outageTime\": \"outageTime\",\n          \"isPartial\": true,\n          \"explanation\": \"explanation\"\n        },\n        {\n          \"duration\": \"duration\",\n          \"outageTime\": \"outageTime\",\n          \"isPartial\": true,\n          \"explanation\": \"explanation\"\n        }\n      ]\n    },\n    \"meta\": \"{}\",\n    \"links\": {\n      \"self\": \"self\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:16:31.000Z",
+              "updatedAt": "2026-10-21T20:16:31.000Z",
+              "uid": "35240-c3597e0e-46e0-4a66-bc85-c079ef6c3d2b"
+            },
+            {
+              "id": "c71a3be7-809d-45ef-8e0a-c0793c436942",
+              "name": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid-version)</li",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/outages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "outages"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"meta\": {\n          \"urn\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:31.000Z",
+              "updatedAt": "2026-10-21T20:16:31.000Z",
+              "uid": "35240-c71a3be7-809d-45ef-8e0a-c0793c436942"
+            },
+            {
+              "id": "7be5def2-8b85-41d2-a5e5-45b92f91560e",
+              "name": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/outages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "outages"
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"meta\": {\n          \"urn\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:31.000Z",
+              "updatedAt": "2026-10-21T20:16:31.000Z",
+              "uid": "35240-7be5def2-8b85-41d2-a5e5-45b92f91560e"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:31.000Z",
+          "updatedAt": "2026-10-21T20:16:31.000Z",
+          "uid": "35240-762ce15f-4969-4695-aa22-ae4a3dd91dcb"
+        }
+      ],
+      "id": "386cf1bf-dd51-4c93-844e-2def4529c8b5",
+      "createdAt": "2026-10-21T20:16:31.000Z",
+      "updatedAt": "2026-10-21T20:16:31.000Z",
+      "uid": "35240-386cf1bf-dd51-4c93-844e-2def4529c8b5"
+    },
+    {
+      "name": "status",
+      "item": [
+        {
+          "name": "Get Status",
+          "id": "db5c3cc1-182c-4b49-81a8-66e3e59cc9f1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                "key": "x-v",
+                "value": "<string>"
+              },
+              {
+                "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                "key": "x-min-v",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "status"
+              ]
+            },
+            "description": "Obtain a health check status for the implementation"
+          },
+          "response": [
+            {
+              "id": "6905fb48-dc7f-45b2-8446-4e78ffd63902",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"data\": {\n      \"updateTime\": \"updateTime\",\n      \"explanation\": \"explanation\",\n      \"expectedResolutionTime\": \"expectedResolutionTime\",\n      \"detectionTime\": \"detectionTime\",\n      \"status\": \"OK\"\n    },\n    \"meta\": \"{}\",\n    \"links\": {\n      \"self\": \"self\"\n    }\n  }\n}",
+              "createdAt": "2026-10-21T20:16:31.000Z",
+              "updatedAt": "2026-10-21T20:16:31.000Z",
+              "uid": "35240-6905fb48-dc7f-45b2-8446-4e78ffd63902"
+            },
+            {
+              "id": "115d02e0-b982-4299-ba7b-b7eb05dc50fd",
+              "name": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[400 - Invalid Field](#error-400-field-invalid)</li><li>[400 - Missing Field](#error-400-field-missing)</li><li>[400 - Invalid Version](#error-400-header-invalid-version)</li",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"meta\": {\n          \"urn\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:31.000Z",
+              "updatedAt": "2026-10-21T20:16:31.000Z",
+              "uid": "35240-115d02e0-b982-4299-ba7b-b7eb05dc50fd"
+            },
+            {
+              "id": "94b4596a-9ba9-4527-b2a4-747b2f6d1826",
+              "name": "The following error codes MUST be supported:<br/><ul class=\"error-code-list\"><li>[406 - Unsupported Version](#error-406-header-unsupported-version)</li></ul>",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) Version of the API end point requested by the client. Must be set to a positive integer. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If the value of [x-min-v](#request-headers) is equal to or higher than the value of [x-v](#request-headers) then the [x-min-v](#request-headers) header should be treated as absent. If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable. See [HTTP Headers](#request-headers)",
+                    "key": "x-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Minimum version of the API end point requested by the client. Must be set to a positive integer if provided. The data holder should respond with the highest supported version between [x-min-v](#request-headers) and [x-v](#request-headers). If all versions requested are not supported then the data holder must respond with a 406 Not Acceptable.",
+                    "key": "x-min-v",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "status"
+                  ]
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"example\": {\n    \"errors\": [\n      {\n        \"code\": \"string\",\n        \"title\": \"string\",\n        \"detail\": \"string\",\n        \"meta\": {\n          \"urn\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-10-21T20:16:31.000Z",
+              "updatedAt": "2026-10-21T20:16:31.000Z",
+              "uid": "35240-94b4596a-9ba9-4527-b2a4-747b2f6d1826"
+            }
+          ],
+          "createdAt": "2026-10-21T20:16:31.000Z",
+          "updatedAt": "2026-10-21T20:16:31.000Z",
+          "uid": "35240-db5c3cc1-182c-4b49-81a8-66e3e59cc9f1"
+        }
+      ],
+      "id": "7912bb1d-15aa-4064-aa1f-4e81ce929951",
+      "createdAt": "2026-10-21T20:16:31.000Z",
+      "updatedAt": "2026-10-21T20:16:31.000Z",
+      "uid": "35240-7912bb1d-15aa-4064-aa1f-4e81ce929951"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/NEMRetail/cds-au/v1/discovery"
+    }
+  ]
+}

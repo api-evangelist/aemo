@@ -1,0 +1,1408 @@
+{
+  "info": {
+    "_postman_id": "c1f09095-8861-4046-81ab-a6da6591e7f8",
+    "name": "B2B Messaging Pull API",
+    "description": "The B2BMessagingPull API is a B2B SMP API used to send and receive B2B messages between the participants in a Pull messaging pattern. The messages will be queued in the e-Hub and the receiving participant can poll the e-Hub, \u2018pull\u2019 and process the messages that are queued.\n\nFor details on how to get access and business rules for this API:",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:15:15.000Z",
+    "updatedAt": "2026-10-21T20:15:15.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c1f09095-8861-4046-81ab-a6da6591e7f8"
+  },
+  "item": [
+    {
+      "name": "messageAcknowledgements",
+      "item": [
+        {
+          "name": "Delete Message Acknowledgement",
+          "id": "8d1eb1e6-520b-49f4-aa27-37ba254bf8fb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messageAcknowledgements"
+              ],
+              "query": [
+                {
+                  "description": "(Required) ParticipantID of the Participant invoking the API",
+                  "key": "initiatingParticipantID",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                  "key": "messageContextID",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Participants opting-in for Pull API are required to notify the e-Hub that the message acknowledgement was successfully received and processed. This notification will delete the message acknowledgement message in the e-Hub queue."
+          },
+          "response": [
+            {
+              "id": "e6772fcd-53f1-42c5-bb59-0e32cdc11476",
+              "name": "aseXML hub Acknowledgement (status = \u2018Accept\u2019) will be sent",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-e6772fcd-53f1-42c5-bb59-0e32cdc11476"
+            },
+            {
+              "id": "0df6bee9-9ecb-4784-a32a-ced4056ce6e8",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-0df6bee9-9ecb-4784-a32a-ced4056ce6e8"
+            },
+            {
+              "id": "a8661838-0591-498b-8085-913d1efce6bb",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-a8661838-0591-498b-8085-913d1efce6bb"
+            },
+            {
+              "id": "984f7921-dac1-420f-9e25-f90540ea0e4d",
+              "name": "This response is provided when the method is not POST",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-984f7921-dac1-420f-9e25-f90540ea0e4d"
+            },
+            {
+              "id": "9b8a8f96-e894-4304-a4c2-67a4329546b8",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-9b8a8f96-e894-4304-a4c2-67a4329546b8"
+            },
+            {
+              "id": "e8e19e24-0efd-4b96-9acc-6bdfa46accb9",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements?initiatingParticipantID=<string>&messageContextID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) This should be set to the messageContextID of the message acknowledgement (MACK) that is being requested to be deleted from the e-Hub queue.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-e8e19e24-0efd-4b96-9acc-6bdfa46accb9"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:16.000Z",
+          "updatedAt": "2026-10-21T20:15:16.000Z",
+          "uid": "35240-8d1eb1e6-520b-49f4-aa27-37ba254bf8fb"
+        },
+        {
+          "name": "Submit Message Acknowledgement",
+          "id": "a4a424e1-efb5-431a-9181-21fac9545652",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                "key": "messageContextID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/messageAcknowledgements",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messageAcknowledgements"
+              ]
+            },
+            "description": "Purpose - Acknowledge a received message. Detail - For every message, a message acknowledgment is generated (with the exception of messages containing message acknowledgements). A BusinessReceipt has two possible implementations -\n\u2022 MessageAcknowledgement.\n\u2022 Event, errors are reported via Event elements.\n\nIf a message is rejected, no receipt identifier is required with the acknowledgement.\n\nThis resource will be used when Participants are required to send Message Acknowledgement in the HTTP request. messageContextID should be set to the messageContextID of the original message that is to be acknowledged.\n\nIn order that the sender receive timely acknowledgement of message delivery, the receiver should respond immediately to each aseXML message with a message acknowledgement.\n\nNote: If a Participant is required to send a transaction message or transaction acknowledgement message, \u2018/messages\u2019 resource is to be used. If a Participant is required to send \u2018message acknowledgements\u2019 in the request payload, then \u2018/messageAcknowledgements\u2019 resource is to be used."
+          },
+          "response": [
+            {
+              "id": "63ae9c07-a112-49ba-a832-cf8cf5a9e93e",
+              "name": "aseXML hub Acknowledgement (status = \u2018Accept\u2019) will be sent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-63ae9c07-a112-49ba-a832-cf8cf5a9e93e"
+            },
+            {
+              "id": "ee0a747f-22aa-4e99-bd9e-8ca527fa056f",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-ee0a747f-22aa-4e99-bd9e-8ca527fa056f"
+            },
+            {
+              "id": "2acdafe3-329f-4353-88d5-f8d5c195d901",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-2acdafe3-329f-4353-88d5-f8d5c195d901"
+            },
+            {
+              "id": "b00a9f72-f301-4063-a9ab-87bf0b3dfd50",
+              "name": "This response is provided when the method is not POST",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-b00a9f72-f301-4063-a9ab-87bf0b3dfd50"
+            },
+            {
+              "id": "565ff566-9de2-4554-a2a6-c627796f2ea9",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-565ff566-9de2-4554-a2a6-c627796f2ea9"
+            },
+            {
+              "id": "eaba396a-de00-4b67-b0d7-c480174247f5",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messageAcknowledgements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messageAcknowledgements"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-eaba396a-de00-4b67-b0d7-c480174247f5"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:16.000Z",
+          "updatedAt": "2026-10-21T20:15:16.000Z",
+          "uid": "35240-a4a424e1-efb5-431a-9181-21fac9545652"
+        }
+      ],
+      "id": "ab7343ec-8bb5-480d-b603-ad28a94518fa",
+      "createdAt": "2026-10-21T20:15:16.000Z",
+      "updatedAt": "2026-10-21T20:15:16.000Z",
+      "uid": "35240-ab7343ec-8bb5-480d-b603-ad28a94518fa"
+    },
+    {
+      "name": "queues",
+      "item": [
+        {
+          "name": "Returns the meta-data of messages in the e-Hub queue (or) the aseXML messages\u2026",
+          "id": "4ce97f81-32e7-4860-9f40-7fc57e30369a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "queues"
+              ],
+              "query": [
+                {
+                  "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                  "key": "messageContextID",
+                  "value": "<string>"
+                },
+                {
+                  "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                  "key": "transactionGroup",
+                  "value": "PTPE"
+                },
+                {
+                  "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                  "key": "priority",
+                  "value": "Medium"
+                },
+                {
+                  "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                  "key": "maxResults",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) ParticipantID of the Participant invoking the API",
+                  "key": "initiatingParticipantID",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns meta-data of messages in e-Hub queue for the participant initiating the API request."
+          },
+          "response": [
+            {
+              "id": "7b90e905-aa88-451d-b254-eea24d801e61",
+              "name": "aseXML message listing the messages & its meta data in the e-Hub queue.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "queues"
+                  ],
+                  "query": [
+                    {
+                      "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                      "key": "transactionGroup",
+                      "value": "PTPE"
+                    },
+                    {
+                      "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                      "key": "priority",
+                      "value": "Medium"
+                    },
+                    {
+                      "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                      "key": "maxResults",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-7b90e905-aa88-451d-b254-eea24d801e61"
+            },
+            {
+              "id": "809ff97c-7b8a-4d3f-a26c-a6b87ed34138",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "queues"
+                  ],
+                  "query": [
+                    {
+                      "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                      "key": "transactionGroup",
+                      "value": "PTPE"
+                    },
+                    {
+                      "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                      "key": "priority",
+                      "value": "Medium"
+                    },
+                    {
+                      "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                      "key": "maxResults",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-809ff97c-7b8a-4d3f-a26c-a6b87ed34138"
+            },
+            {
+              "id": "ecaf51a5-88b1-45a9-837e-75bc694fc25f",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "queues"
+                  ],
+                  "query": [
+                    {
+                      "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                      "key": "transactionGroup",
+                      "value": "PTPE"
+                    },
+                    {
+                      "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                      "key": "priority",
+                      "value": "Medium"
+                    },
+                    {
+                      "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                      "key": "maxResults",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-ecaf51a5-88b1-45a9-837e-75bc694fc25f"
+            },
+            {
+              "id": "0d1c2c8f-696f-415c-92b8-baf1920ee165",
+              "name": "This response is provided when the method is not POST",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "queues"
+                  ],
+                  "query": [
+                    {
+                      "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                      "key": "transactionGroup",
+                      "value": "PTPE"
+                    },
+                    {
+                      "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                      "key": "priority",
+                      "value": "Medium"
+                    },
+                    {
+                      "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                      "key": "maxResults",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-0d1c2c8f-696f-415c-92b8-baf1920ee165"
+            },
+            {
+              "id": "8bf76437-f8cd-472f-ae7a-0e59a1ff708b",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "queues"
+                  ],
+                  "query": [
+                    {
+                      "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                      "key": "transactionGroup",
+                      "value": "PTPE"
+                    },
+                    {
+                      "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                      "key": "priority",
+                      "value": "Medium"
+                    },
+                    {
+                      "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                      "key": "maxResults",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-8bf76437-f8cd-472f-ae7a-0e59a1ff708b"
+            },
+            {
+              "id": "724fa8ef-776f-4cb3-a532-63f648d03650",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/queues?messageContextID=<string>&transactionGroup=PTPE&priority=Medium&maxResults=<string>&initiatingParticipantID=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "queues"
+                  ],
+                  "query": [
+                    {
+                      "description": "If maxResults and messageContextID are passed, the API will attempt to retrieve (pull) the message matching the messageContextID. \n\nIf only messageContextID is passed, the API will retrieve the meta data of the message(s) matching the messageContextID. \n\nNote- If an invalid messageContextID is passed, the e-Hub will send HTTP response code of 404 stating that the requested resource does not exist.",
+                      "key": "messageContextID",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If maxResults & transactionGroup are populated API will pull the message(s) matching the transactionGroup; providing the oldest message in the e-Hub queue (FIFO) \n\nIf only transactionGroup is passed (no maxResults) API will retrieve the meta data of the message(s) matching the transactionGroup \n\nNote- If an invalid transactionGroup is passed, the e-Hub will send HTTP response code of 500 stating that transaction group is invalid",
+                      "key": "transactionGroup",
+                      "value": "PTPE"
+                    },
+                    {
+                      "description": "If maxResults & priority are populated API will pull the message(s) matching the priority; providing the oldest message in the e-Hub queue (FIFO) If only priority is passed (no maxResults) API will retrieve the meta data of message(s) matching the priority Note- If an invalid priority is passed, the e-Hub will send HTTP response code of 500 stating that priority is invalid",
+                      "key": "priority",
+                      "value": "Medium"
+                    },
+                    {
+                      "description": "The \u2018/queues\u2019 resource could be used in two ways\n-  To identify the meta data of messages (list of messages) in the e-Hub queue (or)\n-  To pull the messages from e-Hub queue If maxResults query string parameter is not passed, then the e-Hub will provide a list of messages in the e-Hub queue for the initiating Participant. \n\nIf maxResults is populated; the e-Hub will return messages in the e-Hub queue, providing the oldest message in the e-Hub queue (FIFO) if other parameters are not passed. The message that was pulled from the e-Hub queue will be deleted only when the Participant has successfully responded with a corresponding MACK.\n\nNote - If maxResults > 1; the e-Hub will default it to 1; i.e. the e-Hub will always retrieve only one message from the Hub queue. maxResults > 1 will be utilised in the future where Participants can specify the number of aseXML messages to pull from the e-Hub queue.",
+                      "key": "maxResults",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ParticipantID of the Participant invoking the API",
+                      "key": "initiatingParticipantID",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-724fa8ef-776f-4cb3-a532-63f648d03650"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:16.000Z",
+          "updatedAt": "2026-10-21T20:15:16.000Z",
+          "uid": "35240-4ce97f81-32e7-4860-9f40-7fc57e30369a"
+        }
+      ],
+      "id": "162bf375-d8ff-4763-b271-1cdee3be385f",
+      "createdAt": "2026-10-21T20:15:16.000Z",
+      "updatedAt": "2026-10-21T20:15:16.000Z",
+      "uid": "35240-162bf375-d8ff-4763-b271-1cdee3be385f"
+    },
+    {
+      "name": "messages",
+      "item": [
+        {
+          "name": "Submit a B2B message",
+          "id": "0224d001-d0a2-411c-80bf-7aee255dd27c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                "key": "messageContextID",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/messages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            },
+            "description": "Submit a B2B message."
+          },
+          "response": [
+            {
+              "id": "c74917ab-2556-47a9-930c-cbfca2755651",
+              "name": "aseXML hub Acknowledgement (status = \u2018Accept\u2019) will be sent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "xml",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "",
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-c74917ab-2556-47a9-930c-cbfca2755651"
+            },
+            {
+              "id": "86bbed23-81c1-49e5-a6ee-34c365228725",
+              "name": "This response is provided when the submitted payload cannot be passed successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-86bbed23-81c1-49e5-a6ee-34c365228725"
+            },
+            {
+              "id": "e3c11484-0b93-4d0d-986b-89c792e2dfd1",
+              "name": "This response is provided when the resource name missing from URL or is invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-e3c11484-0b93-4d0d-986b-89c792e2dfd1"
+            },
+            {
+              "id": "6582ea22-e820-45c9-9a2c-3cba240afe4d",
+              "name": "This response is provided when the method is not POST",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-6582ea22-e820-45c9-9a2c-3cba240afe4d"
+            },
+            {
+              "id": "00a2a55f-dbd0-4b9d-ba7b-70e8a4d8b9e0",
+              "name": "This response is provided when the throttling limits are reached.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-00a2a55f-dbd0-4b9d-ba7b-70e8a4d8b9e0"
+            },
+            {
+              "id": "5c7e4cd7-e4d2-492d-ba24-4a4b52ab358f",
+              "name": "This response is provided when any unforeseen error is encountered, such as; Certificate/key do not match or incorrect or e-Hub/API/downstream service is not available or Malformed payload.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Message ID defined by the Participant. \nThe messageContextID is used in the following ways:\n1. To provide a contextID for the message exchange. The participant/e-Hub uses the contextID of the original request when delivering its corresponding MACK(s).\n2. If the Recipient is on FTP, the filename is set to <messageContextID>.zip.\n3. The name of the archive files is set to <messageContextID>.zip.\n4. To provide context to the failure messages to be returned where the incoming payload is unreadable such as, the payload is schema invalid.\n\nFormat of is: <b> [TransactionGroup 0-9_a-z]{1,4} + [Priority h|m|l] + \"_\" + [FromParticipantID]{1,10} + \"_\" + [0-9_a-z]{1,18} </b>",
+                    "key": "messageContextID",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messages"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:15:16.000Z",
+              "updatedAt": "2026-10-21T20:15:16.000Z",
+              "uid": "35240-5c7e4cd7-e4d2-492d-ba24-4a4b52ab358f"
+            }
+          ],
+          "createdAt": "2026-10-21T20:15:16.000Z",
+          "updatedAt": "2026-10-21T20:15:16.000Z",
+          "uid": "35240-0224d001-d0a2-411c-80bf-7aee255dd27c"
+        }
+      ],
+      "id": "e78a0be7-8c4d-40b6-98a1-3ac3577dd8e2",
+      "createdAt": "2026-10-21T20:15:16.000Z",
+      "updatedAt": "2026-10-21T20:15:16.000Z",
+      "uid": "35240-e78a0be7-8c4d-40b6-98a1-3ac3577dd8e2"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api-prd.aemo.local/ws/B2BMessagingPull"
+    }
+  ]
+}
