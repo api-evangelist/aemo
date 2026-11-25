@@ -152,37 +152,37 @@ Event-driven and webhook contracts.
 
 Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Aemo Agentic Access](https://apis.io/agentic-access/aemo/aemo-agentic-access/)
+- [AEMO Agentic Access](https://apis.io/agentic-access/aemo/aemo-agentic-access/)
 
 #### JSON Schema (19)
 
 The data models the API reads and writes.
 
-- [EnergyAccountDetailResponseV4](https://apis.io/schemas/aemo/aemo-energy-account-detail-response-v4/)
-- [EnergyAccountListResponseV2](https://apis.io/schemas/aemo/aemo-energy-account-list-response-v2/)
-- [EnergyBalanceListResponse](https://apis.io/schemas/aemo/aemo-energy-balance-list-response/)
-- [EnergyBalanceResponse](https://apis.io/schemas/aemo/aemo-energy-balance-response/)
-- [EnergyBillingListResponseV3](https://apis.io/schemas/aemo/aemo-energy-billing-list-response-v3/)
-- [EnergyConcessionsResponse](https://apis.io/schemas/aemo/aemo-energy-concessions-response/)
-- [EnergyDerDetailResponse](https://apis.io/schemas/aemo/aemo-energy-der-detail-response/)
-- [EnergyDerListResponse](https://apis.io/schemas/aemo/aemo-energy-der-list-response/)
-- [EnergyInvoiceListResponse](https://apis.io/schemas/aemo/aemo-energy-invoice-list-response/)
-- [EnergyPaymentScheduleResponse](https://apis.io/schemas/aemo/aemo-energy-payment-schedule-response/)
-- [EnergyPlanListResponse](https://apis.io/schemas/aemo/aemo-energy-plan-list-response/)
-- [EnergyPlanResponseV3](https://apis.io/schemas/aemo/aemo-energy-plan-response-v3/)
-- [EnergyServicePointDetailResponseV2](https://apis.io/schemas/aemo/aemo-energy-service-point-detail-response-v2/)
-- [EnergyServicePointListResponseV2](https://apis.io/schemas/aemo/aemo-energy-service-point-list-response-v2/)
-- [EnergyUsageListResponse](https://apis.io/schemas/aemo/aemo-energy-usage-list-response/)
-- [ResponseCommonCustomer](https://apis.io/schemas/aemo/aemo-response-common-customer/)
-- [ResponseCommonCustomerDetailV2](https://apis.io/schemas/aemo/aemo-response-common-customer-detail-v2/)
-- [ResponseCommonDiscoveryStatus](https://apis.io/schemas/aemo/aemo-response-common-discovery-status/)
-- [ResponseDiscoveryOutagesList](https://apis.io/schemas/aemo/aemo-response-discovery-outages-list/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-account-detail-response-v4/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-account-list-response-v2/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-balance-list-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-balance-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-billing-list-response-v3/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-concessions-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-der-detail-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-der-list-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-invoice-list-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-payment-schedule-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-plan-list-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-plan-response-v3/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-service-point-detail-response-v2/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-service-point-list-response-v2/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-energy-usage-list-response/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-response-common-customer/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-response-common-customer-detail-v2/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-response-common-discovery-status/)
+- [Moved to /providers/aemo/](https://apis.io/schemas/aemo/aemo-response-discovery-outages-list/)
 
 #### JSON-LD (1)
 
 Linked-data contexts for the provider's vocabulary.
 
-- [Aemo Context](https://apis.io/jsonld/aemo/aemo-context/)
+- [Moved to /providers/aemo/](https://apis.io/jsonld/aemo/aemo-context/)
 
 #### Collections (76)
 
@@ -215,36 +215,36 @@ Postman and Open Collection request collections.
 - [DER Registration For Account Holders](https://apis.io/collections/aemo/open-aemo-der-consumer-registration-v1/)
 - …and 51 more published on APIs.io
 
-#### Overlays (136)
+#### Overlays (76)
 
 OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Aemo Attributes Report External V1 Overlay](https://apis.io/overlays/aemo/aemo-attributes-report-external-v1-overlay/)
-- [Aemo B2Bmessaging Async V1 Overlay](https://apis.io/overlays/aemo/aemo-b2bmessaging-async-v1-overlay/)
-- [Aemo B2Bmessaging Pull V1 Overlay](https://apis.io/overlays/aemo/aemo-b2bmessaging-pull-v1-overlay/)
-- [Aemo B2Bmessaging Sync V1 Overlay](https://apis.io/overlays/aemo/aemo-b2bmessaging-sync-v1-overlay/)
-- [Aemo B2Bmessagingpull Api Overlay](https://apis.io/overlays/aemo/aemo-b2bmessagingpull-api-overlay/)
-- [Aemo B2Mmessaging Async V1 Overlay](https://apis.io/overlays/aemo/aemo-b2mmessaging-async-v1-overlay/)
-- [Aemo B2Mmessaging Pull V1 Overlay](https://apis.io/overlays/aemo/aemo-b2mmessaging-pull-v1-overlay/)
-- [Aemo B2Mmessaging Sync V1 Overlay](https://apis.io/overlays/aemo/aemo-b2mmessaging-sync-v1-overlay/)
-- [Aemo B2Mmessagingpull Api Overlay](https://apis.io/overlays/aemo/aemo-b2mmessagingpull-api-overlay/)
-- [Aemo B2Mmessagingsync Api Overlay](https://apis.io/overlays/aemo/aemo-b2mmessagingsync-api-overlay/)
-- [Aemo Balancing Reports V2 1 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-1-overlay/)
-- [Aemo Balancing Reports V2 2 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-2-overlay/)
-- [Aemo Balancing Reports V2 3 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-3-overlay/)
-- [Aemo Balancing Reports V2 4 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-4-overlay/)
-- [Aemo Balancing Reports V2 5 Api Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-5-api-overlay/)
-- [Aemo Balancing Reports V2 5 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-5-overlay/)
-- [Aemo Balancing Reports V2 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-overlay/)
-- [Aemo Balancing Submission V2 Api Overlay](https://apis.io/overlays/aemo/aemo-balancing-submission-v2-api-overlay/)
-- [Aemo Balancing Submission V2 Overlay](https://apis.io/overlays/aemo/aemo-balancing-submission-v2-overlay/)
-- [Aemo Bidding V1 Overlay](https://apis.io/overlays/aemo/aemo-bidding-v1-overlay/)
-- [Aemo Bilateral Stem Submission V1 Api Overlay](https://apis.io/overlays/aemo/aemo-bilateral-stem-submission-v1-api-overlay/)
-- [Aemo Bilateral Stem Submission V1 Overlay](https://apis.io/overlays/aemo/aemo-bilateral-stem-submission-v1-overlay/)
-- [Aemo Blindupdate Api Overlay](https://apis.io/overlays/aemo/aemo-blindupdate-api-overlay/)
-- [Aemo Blindupdate V1 Overlay](https://apis.io/overlays/aemo/aemo-blindupdate-v1-overlay/)
-- [Aemo Capacity Api Overlay](https://apis.io/overlays/aemo/aemo-capacity-api-overlay/)
-- …and 111 more published on APIs.io
+- [AEMO Attributes Report External V1 Overlay](https://apis.io/overlays/aemo/aemo-attributes-report-external-v1-overlay/)
+- [AEMO B2Bmessaging Async V1 Overlay](https://apis.io/overlays/aemo/aemo-b2bmessaging-async-v1-overlay/)
+- [AEMO B2Bmessaging Pull V1 Overlay](https://apis.io/overlays/aemo/aemo-b2bmessaging-pull-v1-overlay/)
+- [AEMO B2Bmessaging Sync V1 Overlay](https://apis.io/overlays/aemo/aemo-b2bmessaging-sync-v1-overlay/)
+- [AEMO B2Mmessaging Async V1 Overlay](https://apis.io/overlays/aemo/aemo-b2mmessaging-async-v1-overlay/)
+- [AEMO B2Mmessaging Pull V1 Overlay](https://apis.io/overlays/aemo/aemo-b2mmessaging-pull-v1-overlay/)
+- [AEMO B2Mmessaging Sync V1 Overlay](https://apis.io/overlays/aemo/aemo-b2mmessaging-sync-v1-overlay/)
+- [AEMO Balancing Reports V2 1 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-1-overlay/)
+- [AEMO Balancing Reports V2 2 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-2-overlay/)
+- [AEMO Balancing Reports V2 3 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-3-overlay/)
+- [AEMO Balancing Reports V2 4 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-4-overlay/)
+- [AEMO Balancing Reports V2 5 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-5-overlay/)
+- [AEMO Balancing Reports V2 Overlay](https://apis.io/overlays/aemo/aemo-balancing-reports-v2-overlay/)
+- [AEMO Balancing Submission V2 Overlay](https://apis.io/overlays/aemo/aemo-balancing-submission-v2-overlay/)
+- [AEMO Bidding V1 Overlay](https://apis.io/overlays/aemo/aemo-bidding-v1-overlay/)
+- [AEMO Bilateral Stem Submission V1 Overlay](https://apis.io/overlays/aemo/aemo-bilateral-stem-submission-v1-overlay/)
+- [AEMO Blindupdate V1 Overlay](https://apis.io/overlays/aemo/aemo-blindupdate-v1-overlay/)
+- [AEMO Capacity V1 Overlay](https://apis.io/overlays/aemo/aemo-capacity-v1-overlay/)
+- [AEMO Capacityauction V1 Overlay](https://apis.io/overlays/aemo/aemo-capacityAuction-v1-overlay/)
+- [AEMO Cdr Common Overlay](https://apis.io/overlays/aemo/aemo-cdr-common-overlay/)
+- [AEMO Cdr Overlay](https://apis.io/overlays/aemo/aemo-cdr-overlay/)
+- [AEMO Cds Common Api Overlay](https://apis.io/overlays/aemo/aemo-cds-common-api-overlay/)
+- [AEMO Cds Energy Api Overlay](https://apis.io/overlays/aemo/aemo-cds-energy-api-overlay/)
+- [AEMO Der Business Registration V1 Overlay](https://apis.io/overlays/aemo/aemo-der-business-registration-v1-overlay/)
+- [AEMO Der Consumer Registration V1 Overlay](https://apis.io/overlays/aemo/aemo-der-consumer-registration-v1-overlay/)
+- …and 51 more published on APIs.io
 
 #### Governance rules (1)
 
@@ -256,27 +256,27 @@ Spectral rulesets for the provider's contracts.
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Aemo Authentication](https://apis.io/security/aemo/aemo-authentication/)
-- [Aemo Domain Security](https://apis.io/security/aemo/aemo-domain-security/)
-- [Aemo Vulnerability Disclosure](https://apis.io/security/aemo/aemo-vulnerability-disclosure/)
+- [AEMO Authentication](https://apis.io/security/aemo/aemo-authentication/)
+- [AEMO Domain Security](https://apis.io/security/aemo/aemo-domain-security/)
+- [AEMO Vulnerability Disclosure](https://apis.io/security/aemo/aemo-vulnerability-disclosure/)
 
 #### OAuth scopes (1)
 
 The permissions the API asks for.
 
-- [Aemo Scopes](https://apis.io/scopes/aemo/aemo-scopes/)
+- [AEMO Scopes](https://apis.io/scopes/aemo/aemo-scopes/)
 
 #### Plans and pricing (1)
 
 Published plans, tiers and prices.
 
-- [Aemo Plans Pricing](https://apis.io/plans/aemo/aemo-plans-pricing/)
+- [Moved to /providers/aemo/](https://apis.io/plans/aemo/aemo-plans-pricing/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [Aemo Rate Limits](https://apis.io/rate-limits/aemo/aemo-rate-limits/)
+- [AEMO Rate Limits](https://apis.io/rate-limits/aemo/aemo-rate-limits/)
 
 ## Where to find this API
 
@@ -297,18 +297,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 54.3** — strong · rubric 0.25.0 · scored 2026-10-23
+**Kin Score 54.8** — strong · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
 | Discoverability | 71.4 |
 | Contract quality | 50.5 |
-| Contract governance | 19.7 |
-| Operational transparency | 52.6 |
+| Contract governance | 33.3 |
+| Operational transparency | 47.6 |
 | Developer ergonomics | 70.8 |
-| Access clarity | 34.2 |
+| Access clarity | 31.9 |
 
-**Agent readiness 39.2** — agent-ready (gated down from agent-native)
+**Agent readiness 38.4** — agent-ready
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -333,6 +333,10 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Agentic Commerce | — |
 | Pagination Ratio | na |
 | Operation Distinctiveness | mostly (partial credit) |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
 **Regulatory alignment 39.3** — Energy & Utilities
 
